@@ -1,6 +1,5 @@
 Manor:
-- West dormers
 - Old manor building (Kitchen / Great Chamber / etc)
 - Tower
 - Roombrushes
-- Proper wall + floor textures
+- Proper wall + floor textures + carpets

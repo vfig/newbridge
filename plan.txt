@@ -1,5 +1,15 @@
 Manor:
-- Old manor building (Kitchen / Great Chamber / etc)
-- Tower
 - Roombrushes
-- Proper wall + floor textures + carpets
+- Basic lighting
+- Old manor balcony
+- Doors
+- Guards
+- Basic texturing everywhere
+
+Manor detailing:
+- Detailed, aligned textures
+- Windows and buttresses on tower
+- Roof beams
+- Dormer windows actually textured properly inside and out
+
+

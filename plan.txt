@@ -1,10 +1,9 @@
 Manor:
-- Roombrushes
 - Basic lighting
-- Old manor balcony
 - Doors
-- Guards
 - Basic texturing everywhere
+- Roombrushes
+- Guards
 
 Manor detailing:
 - Detailed, aligned textures

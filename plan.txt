@@ -1,6 +1,5 @@
 Manor:
 - Basic lighting
-- Doors
 - Basic texturing everywhere
 - Roombrushes
     - EAX
@@ -12,6 +11,5 @@ Manor detailing:
 - Windows
 - Buttresses on tower
 - Roof beams
-- Dormer windows actually textured properly inside and out
 
 

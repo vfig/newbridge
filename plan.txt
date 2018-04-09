@@ -7,7 +7,8 @@ Manor:
 
 Manor detailing:
 - Detailed, aligned textures
-- Windows and buttresses on tower
+- Windows
+- Buttresses on tower
 - Roof beams
 - Dormer windows actually textured properly inside and out
 

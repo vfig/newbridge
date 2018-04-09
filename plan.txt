@@ -3,10 +3,12 @@ Manor:
 - Doors
 - Basic texturing everywhere
 - Roombrushes
+    - EAX
 - Guards
 
 Manor detailing:
 - Detailed, aligned textures
+- Remove weird trim on entrance hall stairs, I don't like it
 - Windows
 - Buttresses on tower
 - Roof beams

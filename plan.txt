@@ -10,6 +10,10 @@ Manor detailing:
 - Ceilings (esp grand chamber, parlor, library, drawing room, bedrooms)
     - first four could have subtle fire/earth/wind/water theming, using lost city
         trim textures and opera wallpapers :)
+        grand chamber: fire (fireplace)
+        parlor: wind (breeze)
+        library: earth (pot plant?)
+        drawing room: water (?)
 - Make his secret stairs go to an underground pagan shrine
 - Remove weird trim on entrance hall stairs, I don't like it
 - Windows

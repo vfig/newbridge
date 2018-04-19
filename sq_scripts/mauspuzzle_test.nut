@@ -60,7 +60,7 @@ class MausPuzzle extends SqRootScript
     {
         DisableLevers();
         TurnOnTargets("Success");
-        Destroy(self);
+        Object.Destroy(self);
     }
 
     function ResetPuzzle(punish)

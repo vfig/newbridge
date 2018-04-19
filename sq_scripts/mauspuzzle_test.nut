@@ -1,50 +1,44 @@
 /* MausPuzzle: Mausoleum puzzle, that requires the player to frob several levers in the correct order.
 
     1. Create a TrigTrap and attach the MausPuzzle script.
-    2. Add a ScriptParams link from MausPuzzle to itself, and set the data to the magic word.
-    3. Create levers, and a ControlDevice link from each to the MausPuzzle.
-    4. Add a ScriptParams link from each lever to the MausPuzzle, and set the data to the letter associated with that lever.
-    5. Add a ControlDevice link from the MausPuzzle to whatever should be sent TurnOn when the player is successful.
+
+    2. Add a ScriptParams link, puzzle -> puzzle, data: the magic word.
+
+    3. Create on lever for each letter in the magic word.
+
+    4. With each lever:
+        a) Add a ControlDevice link, lever -> puzzle.
+        b) Add a ScriptParams link, lever -> puzzle, data: the letter for this lever.
+
+    5. Add a ScriptParams link, puzzle -> whatever, data: "Success"; whatever will be sent TurnOn when the player succeeds.
+    
+    6. Add a ScriptParams link, puzzle -> whatever, data: "Failure"; whatever will be sent TurnOn when the player fails.
 
 */
 
 class MausPuzzle extends SqRootScript
 {
-    solution = "";
-
-    function OnBeginScript()
-    {
-        local link = Link.GetOne(linkkind("ScriptParams"), self);
-        local data = LinkTools.LinkGetData(link, "");
-        solution = data.tostring();
-    }
+    // -- Messages
 
     function OnTurnOn()
     {
         local lever = message().from;
         local link = Link.GetOne(linkkind("ScriptParams"), lever, self);
         local data = LinkTools.LinkGetData(link, "").tostring();
-        EnableFrob(lever, false);
         AdvancePuzzle(data);
     }
 
-    function GetProgress()
+    function OnTurnOff()
     {
-        local progress = GetData("MausPuzzleProgress");
-        if (progress == null) {
-            progress = "";
-        }
-        return progress;
+        ResetPuzzle(false);
     }
 
-    function SetProgress(progress)
-    {
-        SetData("MausPuzzleProgress", progress);
-    }
+    // -- Puzzle logic
 
     function AdvancePuzzle(value)
     {
         local progress = GetProgress();
+        local solution = GetSolution();
 
         if (progress.len() < solution.len()) {
             // Advance the progress
@@ -56,7 +50,7 @@ class MausPuzzle extends SqRootScript
                 if (progress == solution) {
                     CompletePuzzle();
                 } else {
-                    ResetPuzzle();
+                    ResetPuzzle(true);
                 }
             }
         }
@@ -64,34 +58,38 @@ class MausPuzzle extends SqRootScript
 
     function CompletePuzzle()
     {
-        // Disable all linked levers
+        DisableLevers();
+        TurnOnTargets("Success");
+        Destroy(self);
+    }
+
+    function ResetPuzzle(punish)
+    {
+        SetProgress("");
+        TurnOffLevers();
+        if (punish) {
+            TurnOnTargets("Failure");
+        }
+    }
+
+    // -- Interaction with other objects
+
+    function TurnOffLevers()
+    {
+        local links = Link.GetAll(linkkind("~ControlDevice"), self);
+        foreach (link in links) {
+            local lever = LinkDest(link);
+            SendMessage(lever, "TurnOff");
+        }
+    }
+
+    function DisableLevers()
+    {
         local links = Link.GetAll(linkkind("~ControlDevice"), self);
         foreach (link in links) {
             local lever = LinkDest(link);
             EnableFrob(lever, false);
         }
-
-        // Turn on all ControlDevice links
-        local links = Link.GetAll(linkkind("ControlDevice"), self);
-        foreach (link in links) {
-            local target = LinkDest(link);
-            SendMessage(target, "TurnOn");
-        }
-    }
-
-    function ResetPuzzle()
-    {
-        SetProgress("");
-
-        // Turn off all linked levers
-        local links = Link.GetAll(linkkind("~ControlDevice"), self);
-        foreach (link in links) {
-            local lever = LinkDest(link);
-            EnableFrob(lever, true);
-            SendMessage(lever, "TurnOff");
-        }
-
-        PunishPlayer();
     }
 
     function EnableFrob(lever, enable)
@@ -105,26 +103,41 @@ class MausPuzzle extends SqRootScript
         }
     }
 
-    function PunishPlayer()
+    function TurnOnTargets(matching_data)
     {
-        // So: this works, but Garrett doesn't make a sound? What gives?
-        local player = ObjID("Player");
-        Damage.Damage(player, self, 2.0, ObjID("MagicZapStim"));
+        local links = Link.GetAll(linkkind("ScriptParams"), self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            if (data == matching_data) {
+                local target = LinkDest(link);
+                SendMessage(target, "TurnOn");
+            }
+        }
+    }
 
+    // -- Data management
 
-        //Damage.Damage(player, 0, 5.0, ObjID("MagicZapStim"));
-        //ActReact.BeginContact(self, player);
-        //ActReact.Stimulate(player, "MagicZapStim", 2.0);
-        //ActReact.EndContact(self, player);
-        //local link = Link.GetOne(linkkind("Weapon"), self);
-        //local weapon = LinkDest(link);
-        //Damage.Damage(player, weapon, 2.0);
+    function GetSolution()
+    {
+        local link = Link.GetOne(linkkind("ScriptParams"), self, self);
+        local data = LinkTools.LinkGetData(link, "");
+        if (data == null) {
+            data = "";
+        }
+        return data.tostring();
+    }
 
-        // This doesn't work cause the thing doesn't collied with the player
-        //local player = ObjID("Player");
-        //local playerLocation = Property.Get(player, "Position", "Location")
-        //local missile = Object.BeginCreate(ObjID("MagicMissile"));
-        //Property.Set(missile, "Position", "Location", playerLocation);
-        //Object.EndCreate(missile);
-   }
+    function GetProgress()
+    {
+        local progress = GetData("MausPuzzleProgress_" + self);
+        if (progress == null) {
+            progress = "";
+        }
+        return progress;
+    }
+
+    function SetProgress(progress)
+    {
+        SetData("MausPuzzleProgress_" + self, progress);
+    }
 }

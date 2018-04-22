@@ -10,32 +10,6 @@ function EnableFrob(obj, enable)
 }
 
 
-class MausDouse extends SqRootScript
-{
-    /* MausDouse: Douse a torch (i.e. TurnOff anything) when entering
-       a room for the first time.
-
-        1. Create a concrete room and attach the MausDouse script.
-
-        2. Add a ControlDevice link, room -> torch
-    */
-
-    // -- Messages
-
-    function OnPlayerRoomEnter()
-    {
-        // Turn off all targets
-        local links = Link.GetAll(linkkind("ControlDevice"), self);
-        foreach (link in links) {
-            local target = LinkDest(link);
-            SendMessage(target, "TurnOff");
-        }
-        // And never fire again
-        Object.Destroy(self);
-    }
-}
-
-
 class MausGateControl extends SqRootScript
 {
     /* MausGateControl: TurnOn doors and disable frobbing them when

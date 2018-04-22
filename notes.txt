@@ -1,0 +1,33 @@
+For sounds after pulling levers:
+
+	btrem*
+	airtone*
+	ffall*
+
+For mausoleum gates:
+
+	? cauldron
+
+For tunnels:
+
+	drumloop
+	fungus*
+	lo*
+	mgbab*
+	mgcha*
+	vcomher*
+	vforever
+	voceerie
+
+For torch going out:
+
+	mbreath1
+	mgair
+
+For first entry to plinth:
+
+	mbreath2
+	vbreath
+	whgasp
+
+

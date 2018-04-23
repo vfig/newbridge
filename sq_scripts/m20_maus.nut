@@ -9,6 +9,41 @@ function EnableFrob(obj, enable)
     }
 }
 
+enum eTweqAnimS {
+  kActive = 0x1
+  kReverse = 0x2
+}
+
+class MausLever extends SqRootScript
+{
+    // -- Messages
+
+    function OnFrobWorldEnd()
+    {
+        // Animate the rotate tweq to the opposite state
+        local AnimS = Property.Get(self, "StTweqRotate", "AnimS");
+        local isActive = ((AnimS & eTweqAnimS.kActive) != 0);
+        local isReverse = ((AnimS & eTweqAnimS.kReverse) != 0);
+        local shouldReverse = (isActive ? !isReverse : isReverse);
+        local newAnimS = eTweqAnimS.kActive | (shouldReverse ? eTweqAnimS.kReverse : 0);
+        Property.Set(self, "StTweqRotate", "AnimS", newAnimS);
+    }
+
+    function OnTweqComplete()
+    {
+        if (message().Type == eTweqType.kTweqTypeRotate) {
+            local isReverse = (message().Dir == eTweqDirection.kTweqDirReverse);
+            local newMessage = (isReverse ? "TurnOff" : "TurnOn");
+            Link.BroadcastOnAllLinks(self, newMessage, "ControlDevice");
+        }
+        // print("OnTweqComplete:");
+        // print("  Type: " + message().Type);
+        // print("  Op: " + message().Op);
+        // print("  Dir: " + message().Dir);
+        // local AnimS = Property.Get(self, "StTweqRotate", "AnimS");
+        // print("  & AnimS: " + AnimS);
+    }
+}
 
 class MausGateControl extends SqRootScript
 {

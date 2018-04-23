@@ -168,6 +168,8 @@ class MausPuzzle extends SqRootScript
                 } else {
                     ResetPuzzle(true);
                 }
+            } else {
+                UpdatePuzzleSounds();
             }
         }
     }
@@ -176,6 +178,7 @@ class MausPuzzle extends SqRootScript
     {
         TurnOffLevers();
         DisableLevers();
+        UpdatePuzzleSounds();
         TurnOnTargets("Success");
         Object.Destroy(self);
     }
@@ -184,9 +187,17 @@ class MausPuzzle extends SqRootScript
     {
         SetProgress("");
         TurnOffLevers();
+        UpdatePuzzleSounds();
         if (punish) {
             TurnOnTargets("Failure");
         }
+    }
+
+    function UpdatePuzzleSounds()
+    {
+        local progress = GetProgress();
+        local solution = GetSolution();
+        ActivateSounds(progress.len(), solution.len());
     }
 
     // -- Interaction with other objects
@@ -217,6 +228,19 @@ class MausPuzzle extends SqRootScript
             if (data == matching_data) {
                 local target = LinkDest(link);
                 SendMessage(target, "TurnOn");
+            }
+        }
+    }
+
+    function ActivateSounds(step, total)
+    {
+        local links = Link.GetAll(linkkind("ScriptParams"), self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            if (data.find("Sound") == 0) {
+                local target = LinkDest(link);
+                local message = ((data == "Sound" + step) ? "TurnOn" : "TurnOff");
+                SendMessage(target, message);
             }
         }
     }

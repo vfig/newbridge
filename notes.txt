@@ -1,8 +1,8 @@
 For sounds after pulling levers:
 
-	btrem*
-	airtone*
-	ffall*
+	btrem1-5
+	airtone1-6
+	ffall1-4
 
 For mausoleum gates:
 

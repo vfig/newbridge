@@ -1,3 +1,10 @@
+Bugs:
+
+- in Mausoleum, the sound extinguishing the torch isn't very audible from the floor below.
+- in Mausoleum, closing the sarcophagus doesn't block sound from the catacombs (esp. the haunt)
+- Not entirely happy that you could accidentally drop the prophet's hand in the catacombs and then be unable to get it back because of the prophet getting in your face
+
+
 Manor:
 - Basic lighting
 - Basic texturing everywhere

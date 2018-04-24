@@ -1,4 +1,11 @@
-// sound of wind dousing the torch
+// Catacombs ambience 1 (room tone)
+schema m20maustone
+archetype AMB_M20
+volume -500
+mono_loop 0 0
+subson1
+
+// Mausoleum wind dousing torch
 schema m20mausdous
 archetype AMB_M20
 volume -1
@@ -58,6 +65,13 @@ delay 500
 mono_loop 1000 3000
 airtone5
 
+// Mausoleum puzzle sound 7
+schema m20mauspuz7
+archetype AMB_M20
+volume -1
+delay 3250
+whgasp
+
 // Catacombs ambience 1 (room tone)
 schema m20catatone
 archetype AMB_M20
@@ -70,6 +84,7 @@ schema m20catavoice
 archetype AMB_M20
 volume -1
 mono_loop 10000 20000
+delay 5000
 no_repeat
 pan_range 3000
 mgbab1 mgbab2 mgbab3 mgbab4 mgbab5

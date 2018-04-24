@@ -95,3 +95,9 @@ volume -1500
 mono_loop 1000 3000
 no_repeat
 bells1 bells2 bells3 bells4
+
+// Catacombs bracelet sound
+schema m20catabrace
+archetype AMB_M20
+volume -1
+vbreath

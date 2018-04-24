@@ -10,12 +10,11 @@ For mausoleum gates:
 
 For tunnels:
 
-	drumloop
-	fungus*
-	lo*
-	mgbab*
-	mgcha*
-	vcomher*
+	fungus,fungus1
+	lo1-5
+	mgbab1-5
+	mgcha1-4
+	vcomher2,e
 	vforever
 	voceerie
 
@@ -33,3 +32,7 @@ For first entry to plinth:
 Garrett: "Damn, there has to be another way in"
 
 	garm0403
+
+For pagan ritual:
+
+	drumloop

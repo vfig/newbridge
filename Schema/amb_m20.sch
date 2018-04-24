@@ -87,3 +87,11 @@ archetype AMB_M20
 volume -100
 mono_loop 0 0
 loloop1a
+
+// Catacombs ambience 5 (bells)
+schema m20catabells
+archetype AMB_M20
+volume -1500
+mono_loop 1000 3000
+no_repeat
+bells1 bells2 bells3 bells4

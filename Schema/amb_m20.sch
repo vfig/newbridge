@@ -84,6 +84,6 @@ humfire
 // Catacombs ambience 4 (tension loop)
 schema m20cataloop2
 archetype AMB_M20
-volume -500
+volume -100
 mono_loop 0 0
 loloop1a

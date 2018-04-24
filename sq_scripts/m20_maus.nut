@@ -9,6 +9,45 @@ function EnableFrob(obj, enable)
     }
 }
 
+
+/* SendMessageTrap: a trap that does a buncha stuff.
+
+    When receiving a TurnOn message, it goes through all its ScriptParams
+    links in order, and, according to each one's data:
+
+        "TurnOn": sends the destination a "TurnOn" message.
+
+        "TurnOff": sends the destination a "TurnOff" message.
+
+        "Destroy": destroys the destination.
+*/
+class SendMessageTrap extends SqRootScript
+{
+    function OnTurnOn()
+    {
+        print("SendMessageTrap:");
+        local links = Link.GetAll(linkkind("ScriptParams"), self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            local target = LinkDest(link);
+            print("  preview: " + data + " -> " + Object.GetName(target) + " (" + target + ")");
+        }
+        local links = Link.GetAll(linkkind("ScriptParams"), self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            local target = LinkDest(link);
+            print("  send: " + data + " -> " + Object.GetName(target) + " (" + target + ")");
+            if (data == "TurnOn") {
+                SendMessage(target, "TurnOn");
+            } else if (data == "TurnOff") {
+                SendMessage(target, "TurnOff");
+            } else if (data == "Destroy") {
+                Object.Destroy(target);
+            }
+        }
+    }
+}
+
 /* RotateLever: a simple lever that rotates when frobbed.
 
     The lever will also respond to TurnOn/TurnOff messages, and will
@@ -269,5 +308,14 @@ class MausPuzzle extends SqRootScript
     function SetProgress(progress)
     {
         SetData("MausPuzzleProgress_" + self, progress);
+    }
+}
+
+class TheProphet extends SqRootScript
+{
+    function OnTurnOn()
+    {
+        // Wake the prophet up!
+        Object.RemoveMetaProperty(self, "M-InactiveProphet");
     }
 }

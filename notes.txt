@@ -29,9 +29,16 @@ For first entry to plinth:
 	vbreath
 	whgasp
 
-Garrett: "Damn, there has to be another way in"
+Garrett: 
 
-	garm0403
+	GARM0209 Here we go...
+	GARM0310 I have a bad feeling about this
+	GARM0313 This seems too easy
+	GARM0403 Damn, there has to be another way in
+	GARM1101 I don't like the looks of this
+	GARM1102 Uh oh
+	GARM1404 Let's not try that again
+	gar99103 Taffer?
 
 For pagan ritual:
 

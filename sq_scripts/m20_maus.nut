@@ -126,6 +126,35 @@ class RotateLever extends SqRootScript
     }
 }
 
+class MausDoorBoard extends SqRootScript
+{
+    /* Sends RevertToDoor to the mausoleum front doors, and opens them. */
+    function OnSlain()
+    {
+        Link.BroadcastOnAllLinks(self, "RevertToDoor", "ControlDevice");
+        Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+    }
+}
+
+class MausFrontDoor extends SqRootScript
+{
+    /* Makes the mausoleum doors play a different "locked" sound unil ReverToDoor received. */
+    function OnFrobWorldEnd()
+    {
+        Sound.PlaySchemaAtObject(self, "doormaus_locked", self);
+        // Send a ControlDevice onward only if the player frobbed us (for VO etc. that we don't want AI triggering)
+        if (Object.GetName(message().Frobber) == "Player") {
+            Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+        }
+    }
+
+    function OnRevertToDoor()
+    {
+        // Remove the scripts that are overriding StdDoor etc.
+        Property.Remove(self, "Scripts");
+    }
+}
+
 class MausGateControl extends SqRootScript
 {
     /* MausGateControl: TurnOn doors and disable frobbing them when

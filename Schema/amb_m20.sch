@@ -1,4 +1,9 @@
-// Catacombs ambience 1 (room tone)
+// Mausoleum door is locked
+schema doormaus_locked
+archetype DOORS
+hwoosto3
+
+// Mausoleum ambience 1 (room tone)
 schema m20maustone
 archetype AMB_M20
 volume -500

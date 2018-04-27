@@ -43,3 +43,6 @@ Garrett:
 For pagan ritual:
 
 	drumloop
+
+
+The Anax should probably be Hammer3--see the sound HM3A0MU2.

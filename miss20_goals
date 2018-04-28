@@ -1,0 +1,171 @@
+; Creates goals for Newbridge mission. Run this from Dromed: "run_cmd_script miss20_goals"
+
+; First make sure all goals are reset.
+run_cmd_script delete_goals
+
+; These are just here for easy copy and paste.
+;quest_create_mis goal_state_Z, 0
+;quest_create_mis goal_visible_Z, 0
+;quest_create_mis goal_reverse_Z, 0
+;quest_create_mis goal_type_Z, 0
+;quest_create_mis goal_target_Z, 0
+;quest_create_mis goal_irreversible_Z, 0
+;quest_create_mis goal_final_Z, 0
+;quest_create_mis goal_max_diff_Z, 0
+;quest_create_mis goal_min_diff_Z, 0
+;quest_create_mis goal_loot_Z, 0
+;quest_create_mis goal_gold_Z, 0
+;quest_create_mis goal_gems_Z, 0
+;quest_create_mis goal_goods_Z, 0
+;quest_create_mis goal_special_Z, 0
+
+
+; 0: Meet Argaux at the fountain.
+; Triggered by script on MeetArgauxObjectiveRoom
+quest_create_mis goal_state_0, 0
+quest_create_mis goal_visible_0, 1
+quest_create_mis goal_type_0, 0
+quest_create_mis goal_irreversible_0, 1
+
+; 1: Find out what Argaux was up to.
+; Made visible by script on MeetArgauxObjectiveRoom
+; Triggered by taking ArgauxsInstructions (41)
+quest_create_mis goal_state_1, 0
+quest_create_mis goal_visible_1, 0
+quest_create_mis goal_type_1, 1
+quest_create_mis goal_target_1, 41
+quest_create_mis goal_irreversible_1, 1
+
+; 5:
+;     Take the Anax of Easthart, undamaged, from the Hammer Sanctuary.
+;     goal_type: 1 (steal)
+;     goal_target: the Anax
+;     goal_irreversible: 1 (not reversible)
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When discovering Argaux's note.
+;     INCOMPLETE > COMPLETE
+;         When picking up the Anax's unconscious body.
+;     INCOMPLETE/COMPLETE > FAIL
+;         If the Anax is killed.
+
+; 6:
+;     Steal the Prophet's Hand from the mausoleum.
+;     goal_type: 1 (steal)
+;     goal_target: the Prophet's Hand
+;     goal_irreversible: 1 (not reversible)
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When discovering Argaux's note.
+;     INCOMPLETE > COMPLETE
+;         When picking up the Prophet's Hand.
+
+; 7:
+;     When you have both items, deliver them to "U" in the vacant lot for your payment.
+;     goal_type: ???
+;     TrapSetQVar with Trap/Quest Var: "=1:goal_state_N", triggered by both items being dropped in the right place.
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When discovering Argaux's note.
+;     INCOMPLETE > COMPLETE
+;         Upon dropping both items in the right place.
+
+; 8:
+;     Find out where Lord Umber is performing the ritual, and stop it.
+;     goal_type: ???
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When meeting the Keeper.
+;     INCOMPLETE > COMPLETE
+;         When KOing or killing Lord Umber, and/or taking back the Prophet's Hand, and/or taking back the Anax.
+;     INCOMPLETE > FAIL
+;         After you reach the ritual place, after a certain time has passed, and the ritual completes.
+
+; 9:
+;     Rescue the Anax and take him back to the Hammerite Sanctuary. (Hard/Expert)
+;     goal_type: ???
+;     goal_min_diff: 1 (hard)
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When meeting the Keeper.
+;     INCOMPLETE > COMPLETE
+;         When dropping the Anax in the Sanctuary.
+;     INCOMPLETE/COMPLETE > FAIL
+;         If the Anax is killed.
+
+; 10: Keep the Anax alive.
+;     goal_type: 2 (kill) ??? what if something else kills him?
+;     goal_target: the Anax
+;     goal_reverse: 1 (don't kill him!)
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When the Anax is killed.
+;     INCOMPLETE > FAIL
+;         When the Anax is killed.
+;     INCOMPLETE > COMPLETE
+;         At the end of the mission, automatically.
+
+; 1:
+;     While you're in the neighbourhood, pick up 1000 loot.
+;     goal_type: 3 (loot)
+;     goal_loot: 1000
+;     goal_min_diff: 0 (normal)
+;     goal_max_diff: 0 (normal)
+;     goal_visible: 1
+;     INCOMPLETE > COMPLETE
+;         After getting enough loot.
+; 2:
+;     [Hard]
+;     While you're in the neighbourhood, pick up 1500 loot.
+;     goal_type: 3 (loot)
+;     goal_loot: 1500
+;     goal_min_diff: 1 (hard)
+;     goal_max_diff: 1 (hard)
+;     goal_visible: 1
+;     INCOMPLETE > COMPLETE
+;         After getting enough loot.
+; 3:
+;     [Expert]
+;     goal_type: 3 (loot)
+;     While you're in the neighbourhood, pick up 2000 loot.
+;     goal_loot: 2000
+;     goal_min_diff: 2 (expert)
+;     goal_max_diff: 2 (expert)
+;     goal_visible: 1
+;     INCOMPLETE > COMPLETE
+;         After getting enough loot.
+
+; 11:
+;     [Hard]
+;     Don't kill any unarmed people.
+;     goal_type: 2 (kill)
+;     goal_target: ??
+;     goal_reverse: 1 (don't kill them!)
+;     goal_visible: 1
+;     INCOMPLETE > FAIL
+;         After killing someone.
+;     INCOMPLETE > COMPLETE
+;         At the end of the mission, automatically.
+
+; 12:
+;     [Expert]
+;     Don't kill anyone.
+;     goal_target: ??
+;     goal_reverse: 1 (don't kill them!)
+;     goal_visible: 1
+;     INCOMPLETE > FAIL
+;         After killing someone.
+;     INCOMPLETE > COMPLETE
+;         At the end of the mission, automatically.
+
+; 13:
+;     When you're done, return to the South Gate where you started.
+;     goal_type: 4 (location)
+;     goal_target: the starting room
+;     goal_visible: 0
+;     INVISIBLE > VISIBLE
+;         When discovering Argaux's note.
+;     INCOMPLETE > COMPLETE
+;         Upon returning to the start point.
+
+mprint Goals updated

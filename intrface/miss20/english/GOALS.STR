@@ -1,2 +1,42 @@
-fiction_0: "Insert objectives here."
-text_0: "And the goals too."
+fiction_0: "Your contact, Argaux, will be waiting for you at the \
+fountain. Meet him there to find out what's up."
+text_0: "Meet Argaux at the fountain."
+
+fiction_1: "Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1,000 loot and make it yours."
+text_1: "While you're in the neighbourhood, pick up 1000 loot."
+
+fiction_2: "Newbridge isn't the richest neighbourhood, but there's still minor nobles and merchants living here. You'll put their valuables to better use than they will. Find 1,500 loot and make it yours."
+text_2: "While you're in the neighbourhood, pick up 1500 loot."
+
+fiction_3: "What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and of the loot? Take everything you find. There's got to be at least 2,000 worth."
+text_3: "While you're in the neighbourhood, pick up 2000 loot."
+
+fiction_4: "Find out about the job Argaux had in mind."
+text_4: "Find out about the job Argaux had in mind."
+
+fiction_5: "Take the Anax of Easthart, undamaged, from the Hammer Sanctuary."
+text_5: "Take the Anax of Easthart, undamaged, from the Hammer Sanctuary."
+
+fiction_6: "Steal the Prophet's Hand from the mausoleum."
+text_6: "Steal the Prophet's Hand from the mausoleum."
+
+fiction_7: "When you have both items, deliver them to \"U\" in the vacant lot for your payment."
+text_7: "When you have both items, deliver them to \"U\" in the vacant lot for your payment."
+
+fiction_8: "Find out where Lord Umber is performing the ritual, and stop it."
+text_8: "Find out where Lord Umber is performing the ritual, and stop it."
+
+fiction_9: "Rescue the Anax and take him back to the Hammerite Sanctuary."
+text_9: "Rescue the Anax and take him back to the Hammerite Sanctuary."
+
+fiction_10: "Keep the Anax alive."
+text_10: "Keep the Anax alive."
+
+fiction_11: "It's their money that you want, not their lives. Don't kill any unarmed people."
+text_11: "Don't kill any unarmed people."
+
+fiction_12: "A thief with your skills shouldn't need to employ violence to get the job done. Don't kill anyone."
+text_12: "Don't kill anyone."
+
+fiction_13: "When everything's done, make your way back home via the South Gate."
+text_13: "When everything's done, return to the South Gate where you started."

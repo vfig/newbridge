@@ -32,9 +32,11 @@ class GoalFindArgauxsInfauxs extends SqRootScript
 
     function Activate()
     {
-        if (Quest.Get("goal_state_1") == 0 && Quest.Get("goal_visible_1") == 1) {
+        if (Quest.Get("goal_state_1") == 0) {
             // Complete 'Find Argauxs Infauxs'
+            Quest.Set("goal_state_0", 2);
             Quest.Set("goal_state_1", 1);
+            Quest.Set("goal_visible_1", 1);
             // Show 'Kidnap the Anax', 'Steal the Hand', and 'Deliver the Items'
             Quest.Set("goal_visible_2", 1);
             Quest.Set("goal_visible_3", 1);
@@ -61,10 +63,8 @@ class GoalKidnapTheAnax extends SqRootScript
     {
         // Only possible to affect this goal before 'Deliver the Items' is done.
         if (Quest.Get("goal_state_4") == 0) {
-            if (Quest.Get("goal_state_2") == 0 && Quest.Get("goal_visible_2") == 1) {
-                // Complete 'Kidnap the Anax'
-                Quest.Set("goal_state_2", 1);
-            }
+            // Complete 'Kidnap the Anax'
+            Quest.Set("goal_state_2", 1);
         }
     }
 
@@ -72,10 +72,8 @@ class GoalKidnapTheAnax extends SqRootScript
     {
         // Only possible to affect this goal before 'Deliver the Items' is done.
         if (Quest.Get("goal_state_4") == 0) {
-            if (Quest.Get("goal_state_2") == 1) {
-                // Reset 'Kidnap the Anax'
-                Quest.Set("goal_state_2", 0);
-            }
+            // Reset 'Kidnap the Anax'
+            Quest.Set("goal_state_2", 0);
         }
     }
 }
@@ -98,10 +96,8 @@ class GoalStealTheHand extends SqRootScript
     {
         // Only possible to affect this goal before 'Deliver the Items' is done.
         if (Quest.Get("goal_state_4") == 0) {
-            if (Quest.Get("goal_state_3") == 0 && Quest.Get("goal_visible_3") == 1) {
-                // Complete 'Kidnap the Anax'
-                Quest.Set("goal_state_3", 1);
-            }
+            // Complete 'Kidnap the Anax'
+            Quest.Set("goal_state_3", 1);
         }
     }
 
@@ -109,10 +105,8 @@ class GoalStealTheHand extends SqRootScript
     {
         // Only possible to affect this goal before 'Deliver the Items' is done.
         if (Quest.Get("goal_state_4") == 0) {
-            if (Quest.Get("goal_state_3") == 1) {
-                // Reset 'Kidnap the Anax'
-                Quest.Set("goal_state_3", 0);
-            }
+            // Reset 'Kidnap the Anax'
+            Quest.Set("goal_state_3", 0);
         }
     }
 }
@@ -181,7 +175,7 @@ class GoalDeliverTheItems extends SqRootScript
 
     function Activate()
     {
-        if (Quest.Get("goal_state_4") == 0 && Quest.Get("goal_visible_4") == 1) {
+        if (Quest.Get("goal_state_4") == 0) {
             Quest.Set("goal_state_4", 1);
             // Force completion of the get item goals too.
             Quest.Set("goal_state_2", 1);

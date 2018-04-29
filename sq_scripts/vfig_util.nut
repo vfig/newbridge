@@ -45,11 +45,11 @@ class DebugQuestVars extends SqRootScript
                 text += " [FAIL]"
             }
 
-            text += " \"" + goal_text + "\"";
-
             if (goal_visible == 0) {
                 text += " (hidden)"
             }
+
+            text += " \"" + goal_text + "\"";
 
             if (goal_reverse == 1) {
                 text += " don't"

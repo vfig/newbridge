@@ -20,152 +20,148 @@ run_cmd_script delete_goals
 ;quest_create_mis goal_special_Z, 0
 
 
-; 0: Meet Argaux at the fountain.
-; Triggered by script on MeetArgauxObjectiveRoom
+; 0: Meet Argaux
+;    INCOMPLETE > INACTIVE
+;        When discovering Argaux hanged.
 quest_create_mis goal_state_0, 0
 quest_create_mis goal_visible_0, 1
-quest_create_mis goal_type_0, 0
-quest_create_mis goal_irreversible_0, 1
 
-; 1: Find out what Argaux was up to.
-; Made visible by script on MeetArgauxObjectiveRoom
-; Triggered by taking ArgauxsInstructions (41)
+; 1: Find Argaux's Infauxs
+;    INVISIBLE > VISIBLE
+;        When discovering Argaux hanged.
+;    INCOMPLETE > COMPLETE
+;        When discovering Argaux's note.
 quest_create_mis goal_state_1, 0
 quest_create_mis goal_visible_1, 0
-quest_create_mis goal_type_1, 1
-quest_create_mis goal_target_1, 41
-quest_create_mis goal_irreversible_1, 1
 
-; 5:
-;     Take the Anax of Easthart, undamaged, from the Hammer Sanctuary.
-;     goal_type: 1 (steal)
-;     goal_target: the Anax
-;     goal_irreversible: 1 (not reversible)
-;     goal_visible: 0
-;     INVISIBLE > VISIBLE
-;         When discovering Argaux's note.
-;     INCOMPLETE > COMPLETE
-;         When picking up the Anax's unconscious body.
-;     INCOMPLETE/COMPLETE > FAIL
-;         If the Anax is killed.
+; 2: Kidnap the Anax
+;    INVISIBLE > VISIBLE
+;        When discovering Argaux's note.
+;    INCOMPLETE > COMPLETE
+;        When picking up the Anax's unconscious body.
+;    COMPLETE > INCOMPLETE
+;        When dropping the Anax's unconscious body.
+;    INCOMPLETE/COMPLETE > FAIL
+;        If the Anax is killed (and this is visible). 
+quest_create_mis goal_state_2, 0
+quest_create_mis goal_visible_2, 0
 
-; 6:
-;     Steal the Prophet's Hand from the mausoleum.
-;     goal_type: 1 (steal)
-;     goal_target: the Prophet's Hand
-;     goal_irreversible: 1 (not reversible)
-;     goal_visible: 0
-;     INVISIBLE > VISIBLE
-;         When discovering Argaux's note.
-;     INCOMPLETE > COMPLETE
-;         When picking up the Prophet's Hand.
+; 3: Steal the Hand
+;    INVISIBLE > VISIBLE
+;        When discovering Argaux's note.
+;    INCOMPLETE > COMPLETE
+;        When picking up the Prophet's Hand.
+;    COMPLETE > INCOMPLETE
+;        When dropping the Prophet's Hand.
+quest_create_mis goal_state_3, 0
+quest_create_mis goal_visible_3, 0
 
-; 7:
-;     When you have both items, deliver them to "U" in the vacant lot for your payment.
-;     goal_type: ???
-;     TrapSetQVar with Trap/Quest Var: "=1:goal_state_N", triggered by both items being dropped in the right place.
-;     goal_visible: 0
-;     INVISIBLE > VISIBLE
-;         When discovering Argaux's note.
-;     INCOMPLETE > COMPLETE
-;         Upon dropping both items in the right place.
+; 4: Deliver the items
+;    INVISIBLE > VISIBLE
+;        When discovering Argaux's note.
+;    INCOMPLETE > COMPLETE
+;        Upon dropping both items in the right place.
+quest_create_mis goal_state_4, 0
+quest_create_mis goal_visible_4, 0
 
-; 8:
-;     Find out where Lord Umber is performing the ritual, and stop it.
-;     goal_type: ???
-;     goal_visible: 0
+; 5: Stop the ritual
 ;     INVISIBLE > VISIBLE
 ;         When meeting the Keeper.
 ;     INCOMPLETE > COMPLETE
 ;         When KOing or killing Lord Umber, and/or taking back the Prophet's Hand, and/or taking back the Anax.
 ;     INCOMPLETE > FAIL
 ;         After you reach the ritual place, after a certain time has passed, and the ritual completes.
+;     Find out where Lord Umber is performing the ritual, and stop it.
+quest_create_mis goal_state_5, 0
+quest_create_mis goal_visible_5, 0
 
-; 9:
-;     Rescue the Anax and take him back to the Hammerite Sanctuary. (Hard/Expert)
-;     goal_type: ???
-;     goal_min_diff: 1 (hard)
-;     goal_visible: 0
+; 6: Rescue the Anax (Hard/Expert)
 ;     INVISIBLE > VISIBLE
 ;         When meeting the Keeper.
 ;     INCOMPLETE > COMPLETE
 ;         When dropping the Anax in the Sanctuary.
 ;     INCOMPLETE/COMPLETE > FAIL
-;         If the Anax is killed.
+;         If the Anax is killed (and this is visible).
+;     Rescue the Anax and take him back to the Hammerite Sanctuary. (Hard/Expert)
+quest_create_mis goal_state_6, 0
+quest_create_mis goal_visible_6, 0
 
-; 10: Keep the Anax alive.
-;     goal_type: 2 (kill) ??? what if something else kills him?
-;     goal_target: the Anax
-;     goal_reverse: 1 (don't kill him!)
-;     goal_visible: 0
+; 7: Keep the Anax alive
 ;     INVISIBLE > VISIBLE
 ;         When the Anax is killed.
 ;     INCOMPLETE > FAIL
 ;         When the Anax is killed.
 ;     INCOMPLETE > COMPLETE
 ;         At the end of the mission, automatically.
+quest_create_mis goal_state_7, 0
+quest_create_mis goal_visible_7, 0
 
-; 1:
-;     While you're in the neighbourhood, pick up 1000 loot.
-;     goal_type: 3 (loot)
-;     goal_loot: 1000
-;     goal_min_diff: 0 (normal)
-;     goal_max_diff: 0 (normal)
-;     goal_visible: 1
+; 8: Loot (Normal)
 ;     INCOMPLETE > COMPLETE
 ;         After getting enough loot.
-; 2:
-;     [Hard]
-;     While you're in the neighbourhood, pick up 1500 loot.
-;     goal_type: 3 (loot)
-;     goal_loot: 1500
-;     goal_min_diff: 1 (hard)
-;     goal_max_diff: 1 (hard)
-;     goal_visible: 1
-;     INCOMPLETE > COMPLETE
-;         After getting enough loot.
-; 3:
-;     [Expert]
-;     goal_type: 3 (loot)
-;     While you're in the neighbourhood, pick up 2000 loot.
-;     goal_loot: 2000
-;     goal_min_diff: 2 (expert)
-;     goal_max_diff: 2 (expert)
-;     goal_visible: 1
-;     INCOMPLETE > COMPLETE
-;         After getting enough loot.
+quest_create_mis goal_state_8, 0
+quest_create_mis goal_visible_8, 1
+quest_create_mis goal_type_8, 3
+quest_create_mis goal_loot_8, 1000
+quest_create_mis goal_min_diff_8, 0
+quest_create_mis goal_max_diff_8, 0
 
-; 11:
-;     [Hard]
-;     Don't kill any unarmed people.
-;     goal_type: 2 (kill)
-;     goal_target: ??
-;     goal_reverse: 1 (don't kill them!)
-;     goal_visible: 1
+; 9: Loot (Hard)
+;     INCOMPLETE > COMPLETE
+;         After getting enough loot.
+quest_create_mis goal_state_9, 0
+quest_create_mis goal_visible_9, 1
+quest_create_mis goal_type_9, 3
+quest_create_mis goal_loot_9, 1500
+quest_create_mis goal_min_diff_9, 1
+quest_create_mis goal_max_diff_9, 1
+
+; 10: Loot (Expert)
+;     INCOMPLETE > COMPLETE
+;         After getting enough loot.
+quest_create_mis goal_state_10, 0
+quest_create_mis goal_visible_10, 1
+quest_create_mis goal_type_10, 3
+quest_create_mis goal_loot_10, 2000
+quest_create_mis goal_min_diff_10, 2
+quest_create_mis goal_max_diff_10, 2
+
+; 11: Don't kill bystanders
 ;     INCOMPLETE > FAIL
 ;         After killing someone.
 ;     INCOMPLETE > COMPLETE
 ;         At the end of the mission, automatically.
+quest_create_mis goal_state_11, 0
+quest_create_mis goal_visible_11, 1
+quest_create_mis goal_type_11, 2
+quest_create_mis goal_reverse_11, 1
+quest_create_mis goal_target_11, -1325
+quest_create_mis goal_min_diff_11, 1
+quest_create_mis goal_max_diff_11, 1
 
-; 12:
-;     [Expert]
-;     Don't kill anyone.
-;     goal_target: ??
-;     goal_reverse: 1 (don't kill them!)
-;     goal_visible: 1
+; 12: Don't kill humans
 ;     INCOMPLETE > FAIL
 ;         After killing someone.
 ;     INCOMPLETE > COMPLETE
 ;         At the end of the mission, automatically.
+quest_create_mis goal_state_12, 0
+quest_create_mis goal_visible_12, 1
+quest_create_mis goal_type_12, 2
+quest_create_mis goal_reverse_12, 1
+quest_create_mis goal_target_12, -14
+quest_create_mis goal_min_diff_12, 2
+quest_create_mis goal_max_diff_12, 2
 
-; 13:
-;     When you're done, return to the South Gate where you started.
-;     goal_type: 4 (location)
-;     goal_target: the starting room
-;     goal_visible: 0
+; 13: Return to the start
 ;     INVISIBLE > VISIBLE
 ;         When discovering Argaux's note.
 ;     INCOMPLETE > COMPLETE
 ;         Upon returning to the start point.
+quest_create_mis goal_state_13, 0
+quest_create_mis goal_visible_13, 0
+quest_create_mis goal_final_13, 1
+; FIXME: needs concrete room ID
+;quest_create_mis goal_type_13, 4
+;quest_create_mis goal_target_13, -1325
 
 mprint Goals updated

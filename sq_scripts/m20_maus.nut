@@ -327,7 +327,7 @@ class MausPuzzle extends SqRootScript
 
     function GetProgress()
     {
-        local progress = GetData("MausPuzzleProgress_" + self);
+        local progress = GetData("MausPuzzleProgress");
         if (progress == null) {
             progress = "";
         }
@@ -336,7 +336,7 @@ class MausPuzzle extends SqRootScript
 
     function SetProgress(progress)
     {
-        SetData("MausPuzzleProgress_" + self, progress);
+        SetData("MausPuzzleProgress", progress);
     }
 }
 

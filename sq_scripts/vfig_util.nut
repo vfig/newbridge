@@ -112,7 +112,7 @@ class DebugQuestVars extends SqRootScript
             }
 
             if (goal_min_diff != 0 || goal_max_diff != 0) {
-                text += "(currently: " + diff_names[difficulty] + ")";
+                text += " (currently: " + diff_names[difficulty] + ")";
             }
 
         } else {
@@ -178,7 +178,7 @@ class DebugQuestVars extends SqRootScript
                 Quest.SubscribeMsg(self, "goal_visible_" + num);
             }
         }
-        Display(DumpAllGoals());
+        //Display(DumpAllGoals());
     }
 
     function OnQuestChange()

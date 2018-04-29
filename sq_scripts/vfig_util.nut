@@ -1,30 +1,38 @@
-class DebugQuestVar extends SqRootScript
+class DebugQuestVars extends SqRootScript
 {
-    function OnTurnOn()
+    //-- Utils
+
+    function MissionPathname()
     {
-        local link = Link.GetOne(linkkind("ScriptParams"), self, self);
-        local goal_num = LinkTools.LinkGetData(link, "").tointeger();
-        local goal_exists = (Quest.Exists("goal_state_" + goal_num).tointeger() != 0);
+        // If we had access to the Mission Pathname property from script, 
+        // we wouldn't have to hardcode this. :-/
+        return "miss20";
+    }
 
-        local text = "Goal " + goal_num + ":";
+    function GoalExists(num) {
+        return Quest.Exists("goal_state_" + num);
+    }
 
-        if (goal_exists) {
-            local goal_text = Data.GetString("GOALS", "text_" + goal_num);
-            local goal_state = Quest.Get("goal_state_" + goal_num).tointeger();
-            local goal_visible = Quest.Get("goal_visible_" + goal_num).tointeger();
-            local goal_reverse = Quest.Get("goal_reverse_" + goal_num).tointeger();
-            local goal_type = Quest.Get("goal_type_" + goal_num).tointeger();
-            local goal_target = Quest.Get("goal_target_" + goal_num).tointeger();
+    function DumpGoal(num) {
+        local text = "Goal " + num + ":";
+
+        if (GoalExists(num)) {
+            local goal_text = Data.GetString(MissionPathname() + "/goals", "text_" + num, "", "intrface");
+            local goal_state = Quest.Get("goal_state_" + num).tointeger();
+            local goal_visible = Quest.Get("goal_visible_" + num).tointeger();
+            local goal_reverse = Quest.Get("goal_reverse_" + num).tointeger();
+            local goal_type = Quest.Get("goal_type_" + num).tointeger();
+            local goal_target = Quest.Get("goal_target_" + num).tointeger();
             local goal_target_name = Object.GetName(goal_target);
-            local goal_irreversible = Quest.Get("goal_irreversible_" + goal_num).tointeger();
-            local goal_final = Quest.Get("goal_final_" + goal_num).tointeger();
-            local goal_max_diff = Quest.Get("goal_max_diff_" + goal_num).tointeger();
-            local goal_min_diff = Quest.Get("goal_min_diff_" + goal_num).tointeger();
-            local goal_loot = Quest.Get("goal_loot_" + goal_num).tointeger();
-            local goal_gold = Quest.Get("goal_gold_" + goal_num).tointeger();
-            local goal_gems = Quest.Get("goal_gems_" + goal_num).tointeger();
-            local goal_goods = Quest.Get("goal_goods_" + goal_num).tointeger();
-            local goal_special = Quest.Get("goal_special_" + goal_num).tointeger();
+            local goal_irreversible = Quest.Get("goal_irreversible_" + num).tointeger();
+            local goal_final = Quest.Get("goal_final_" + num).tointeger();
+            local goal_max_diff = Quest.Get("goal_max_diff_" + num).tointeger();
+            local goal_min_diff = Quest.Get("goal_min_diff_" + num).tointeger();
+            local goal_loot = Quest.Get("goal_loot_" + num).tointeger();
+            local goal_gold = Quest.Get("goal_gold_" + num).tointeger();
+            local goal_gems = Quest.Get("goal_gems_" + num).tointeger();
+            local goal_goods = Quest.Get("goal_goods_" + num).tointeger();
+            local goal_special = Quest.Get("goal_special_" + num).tointeger();
             local difficulty = Quest.Get("difficulty");
 
             if (goal_state == 0) {
@@ -108,11 +116,87 @@ class DebugQuestVar extends SqRootScript
             }
 
         } else {
-
             text += " does not exist.";
         }
 
+        return text;
+    }
+
+    function DumpAllGoals() {
+        local text = "";
+        for (local num = 0; num < 32; num += 1) {
+            if (GoalExists(num)) {
+                text += DumpGoal(num) + "\n";
+            }
+        }
+        return text;
+    }
+
+    function Display(text) {
         DarkUI.TextMessage(text);
         print(text);
+    }
+
+    function GetNumber(name)
+    {
+        local lastIndex;
+        for (local i = name.find("_");
+                i != null;
+                i = name.find("_", i + 1)) {
+            lastIndex = i;
+        }
+        if (lastIndex != null) {
+            return name.slice(lastIndex + 1).tointeger();
+        } else {
+            return 999;
+        }
+    }
+
+    function GetName(name)
+    {
+        local lastIndex;
+        for (local i = name.find("_");
+                i != null;
+                i = name.find("_", i + 1)) {
+            lastIndex = i;
+        }
+        if (lastIndex != null) {
+            return name.slice(0, lastIndex);
+        } else {
+            return "???";
+        }
+    }
+
+    //-- Messages
+
+    function OnBeginScript()
+    {
+        print("DebugQuestVars on " + Object.GetName(self) + " (" + self + ") is watching all goals.");
+        for (local num = 0; num < 32; num += 1) {
+            if (GoalExists(num)) {
+                Quest.SubscribeMsg(self, "goal_state_" + num);
+                Quest.SubscribeMsg(self, "goal_visible_" + num);
+            }
+        }
+        Display(DumpAllGoals());
+    }
+
+    function OnQuestChange()
+    {
+        if (message().m_oldValue != message().m_newValue) {
+            local name = GetName(message().m_pName);
+            local num = GetNumber(message().m_pName);
+            if (name == "goal_state") {
+                Display(DumpGoal(num));
+            } else {
+                print(DumpGoal(num));
+            }
+            print("    " + message().m_pName + ": " + message().m_oldValue + " -> " + message().m_newValue);
+        }
+    }
+
+    function OnTurnOn()
+    {
+        Display(DumpAllGoals());
     }
 }

@@ -259,3 +259,18 @@ class GoalRescueTheAnax extends SqRootScript
         }
     }
 }
+
+class GoalKeepTheAnaxAlive extends SqRootScript
+{
+    /* Put this on all The Anaxes. */
+
+    function OnSlain()
+    {
+        Activate();
+    }
+
+    function Activate()
+    {
+        Quest.Set("goal_state_7", 3);
+    }
+}

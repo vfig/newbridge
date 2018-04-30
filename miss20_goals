@@ -159,12 +159,11 @@ quest_create_mis goal_max_diff_12, 2
 ;         When discovering Argaux's note.
 ;     INCOMPLETE > COMPLETE
 ;         Upon returning to the start point.
-; FIXME: needs concrete room ID from actual mission
 quest_create_mis goal_state_13, 0
 quest_create_mis goal_visible_13, 1
 quest_create_mis goal_irreversible_13, 0
 quest_create_mis goal_final_13, 1
 quest_create_mis goal_type_13, 4
-quest_create_mis goal_target_13, 25
+quest_create_mis goal_target_13, 623
 
 mprint Goals updated

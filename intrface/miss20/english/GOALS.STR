@@ -22,20 +22,23 @@ text_6: "Rescue the Anax and take him back to the Hammerite Sanctuary."
 fiction_7: "Don't let the Anax come to any harm."
 text_7: "Don't let the Anax come to any harm."
 
-fiction_8: "Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1,000 loot and make it yours."
-text_8: "While you're in the neighbourhood, pick up 1000 loot."
+fiction_8: "Don't bite the hand that feeds. If someone's paying you, you protect them."
+text_8: "Don't bite the hand that feeds. If someone's paying you, you protect them."
 
-fiction_9: "Newbridge isn't the richest neighbourhood, but there's still minor nobles and merchants living here. You'll put their valuables to better use than they will. Find 1,500 loot and make it yours."
-text_9: "While you're in the neighbourhood, pick up 1500 loot."
+fiction_9: "Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1,000 loot and make it yours."
+text_9: "While you're in the neighbourhood, pick up 1000 loot."
 
-fiction_10: "What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and of the loot? Take everything you find. There's got to be at least 2,000 worth."
-text_10: "While you're in the neighbourhood, pick up 2000 loot."
+fiction_10: "Newbridge isn't the richest neighbourhood, but there's still minor nobles and merchants living here. You'll put their valuables to better use than they will. Find 1,500 loot and make it yours."
+text_10: "While you're in the neighbourhood, pick up 1500 loot."
 
-fiction_11: "It's their money that you want, not their lives. Don't kill any unarmed people."
-text_11: "Don't kill any unarmed people."
+fiction_11: "What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and of the loot? Take everything you find. There's got to be at least 2,000 worth."
+text_11: "While you're in the neighbourhood, pick up 2000 loot."
 
-fiction_12: "A thief with your skills shouldn't need to employ violence to get the job done. Don't kill anyone."
-text_12: "Don't kill anyone."
+fiction_12: "It's their money that you want, not their lives. Don't kill any unarmed people."
+text_12: "Don't kill any unarmed people."
 
-fiction_13: "When everything's done, make your way back home via the South Gate."
-text_13: "When everything's done, return to the South Gate where you started."
+fiction_13: "A thief with your skills shouldn't need to employ violence to get the job done. Don't kill anyone."
+text_13: "Don't kill anyone."
+
+fiction_14: "When everything's done, make your way back home via the South Gate."
+text_14: "When everything's done, return to the South Gate where you started."

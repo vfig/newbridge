@@ -277,3 +277,46 @@ class GoalKeepTheAnaxAlive extends SqRootScript
         Quest.Set("goal_state_7", 3);
     }
 }
+
+class GoalTheHandThatFeeds extends SqRootScript
+{
+    /* Put this on pre-ritual Lady di Rupo and all the Keepers. */
+
+    function IsPlayerResponsible(damage_message)
+    {
+        local player = Object.Named("Player");
+        local culprit = damage_message.culprit;
+        for (;;) {
+            if (culprit == 0) return false;
+            if (culprit == player) return true;
+
+            // Follow the culpability links to see if we find a player.
+            local link = Link.GetOne(linkkind("~CulpableFor"), culprit);
+            if (link == 0) {
+                culprit = 0;
+            } else {
+                culprit = LinkDest(link);
+            }
+        }
+    }
+
+    function OnDamage()
+    {
+        if (IsPlayerResponsible(message())) {
+            Activate();
+        }
+    }
+
+    function OnAIModeChange()
+    {
+        if (message().mode == eAIMode.kAIM_Dead) {
+            Activate();
+        }
+    }
+
+    function Activate()
+    {
+        Quest.Set("goal_visible_8", 1);
+        Quest.Set("goal_state_8", 3);
+    }
+}

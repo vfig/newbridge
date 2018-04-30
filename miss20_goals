@@ -90,7 +90,6 @@ quest_create_mis goal_max_diff_6, 2
 
 ; 7: Keep the Anax alive
 ;     INVISIBLE > VISIBLE
-;         When the Anax is killed.
 ;     INCOMPLETE > FAIL
 ;         When the Anax is killed.
 ;     INCOMPLETE > COMPLETE
@@ -98,50 +97,46 @@ quest_create_mis goal_max_diff_6, 2
 quest_create_mis goal_state_7, 0
 quest_create_mis goal_visible_7, 0
 
-; 8: Loot (Normal)
+; 8: Don't bite the hand that feeds you.
+;     INVISIBLE > VISIBLE
+;     INCOMPLETE > FAIL
+;         When pre-ritual Lady di Rupo, or one of the keepers, is KO'd or killed, or hurt by the player.
 ;     INCOMPLETE > COMPLETE
-;         After getting enough loot.
+;         At the end of the mission, automatically.
 quest_create_mis goal_state_8, 0
-quest_create_mis goal_visible_8, 1
-quest_create_mis goal_type_8, 3
-quest_create_mis goal_loot_8, 1000
-quest_create_mis goal_min_diff_8, 0
-quest_create_mis goal_max_diff_8, 0
+quest_create_mis goal_visible_8, 0
 
-; 9: Loot (Hard)
+; 9: Loot (Normal)
 ;     INCOMPLETE > COMPLETE
 ;         After getting enough loot.
 quest_create_mis goal_state_9, 0
 quest_create_mis goal_visible_9, 1
 quest_create_mis goal_type_9, 3
-quest_create_mis goal_loot_9, 1500
-quest_create_mis goal_min_diff_9, 1
-quest_create_mis goal_max_diff_9, 1
+quest_create_mis goal_loot_9, 1000
+quest_create_mis goal_min_diff_9, 0
+quest_create_mis goal_max_diff_9, 0
 
-; 10: Loot (Expert)
+; 10: Loot (Hard)
 ;     INCOMPLETE > COMPLETE
 ;         After getting enough loot.
 quest_create_mis goal_state_10, 0
 quest_create_mis goal_visible_10, 1
 quest_create_mis goal_type_10, 3
-quest_create_mis goal_loot_10, 2000
-quest_create_mis goal_min_diff_10, 2
-quest_create_mis goal_max_diff_10, 2
+quest_create_mis goal_loot_10, 1500
+quest_create_mis goal_min_diff_10, 1
+quest_create_mis goal_max_diff_10, 1
 
-; 11: Don't kill bystanders
-;     INCOMPLETE > FAIL
-;         After killing someone.
+; 11: Loot (Expert)
 ;     INCOMPLETE > COMPLETE
-;         At the end of the mission, automatically.
+;         After getting enough loot.
 quest_create_mis goal_state_11, 0
 quest_create_mis goal_visible_11, 1
-quest_create_mis goal_type_11, 2
-quest_create_mis goal_reverse_11, 1
-quest_create_mis goal_target_11, -1325
-quest_create_mis goal_min_diff_11, 1
-quest_create_mis goal_max_diff_11, 1
+quest_create_mis goal_type_11, 3
+quest_create_mis goal_loot_11, 2000
+quest_create_mis goal_min_diff_11, 2
+quest_create_mis goal_max_diff_11, 2
 
-; 12: Don't kill humans
+; 12: Don't kill bystanders
 ;     INCOMPLETE > FAIL
 ;         After killing someone.
 ;     INCOMPLETE > COMPLETE
@@ -150,20 +145,31 @@ quest_create_mis goal_state_12, 0
 quest_create_mis goal_visible_12, 1
 quest_create_mis goal_type_12, 2
 quest_create_mis goal_reverse_12, 1
-quest_create_mis goal_target_12, -14
-quest_create_mis goal_min_diff_12, 2
-quest_create_mis goal_max_diff_12, 2
+quest_create_mis goal_target_12, -1325
+quest_create_mis goal_min_diff_12, 1
+quest_create_mis goal_max_diff_12, 1
 
-; 13: Return to the start
-;     INVISIBLE > VISIBLE
-;         When discovering Argaux's note.
+; 13: Don't kill humans
+;     INCOMPLETE > FAIL
+;         After killing someone.
 ;     INCOMPLETE > COMPLETE
-;         Upon returning to the start point.
+;         At the end of the mission, automatically.
 quest_create_mis goal_state_13, 0
 quest_create_mis goal_visible_13, 1
-quest_create_mis goal_irreversible_13, 0
-quest_create_mis goal_final_13, 1
-quest_create_mis goal_type_13, 4
-quest_create_mis goal_target_13, 623
+quest_create_mis goal_type_13, 2
+quest_create_mis goal_reverse_13, 1
+quest_create_mis goal_target_13, -14
+quest_create_mis goal_min_diff_13, 2
+quest_create_mis goal_max_diff_13, 2
+
+; 14: Return to the start
+;     INCOMPLETE > COMPLETE
+;         Upon returning to the start point, and all other goals are complete.
+quest_create_mis goal_state_14, 0
+quest_create_mis goal_visible_14, 1
+quest_create_mis goal_irreversible_14, 0
+quest_create_mis goal_final_14, 1
+quest_create_mis goal_type_14, 4
+quest_create_mis goal_target_14, 623
 
 mprint Goals updated

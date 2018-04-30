@@ -111,15 +111,12 @@ class GoalStealTheHand extends SqRootScript
     }
 }
 
-class GoalItemToDeliver extends ItemToDeliver
-{
-    /* Put this on The Anax and The Prophet's Hand, with a ScriptParams("DeliveryRoom") link
-       and a ScriptParams("NotifyDelivery") link to the target (concrete) room. */
-}
-
 class GoalDeliverTheItems extends SqRootScript
 {
-    /* Put this on the concrete room where the items should be delivered. */
+    /* Put this on the concrete room where the items should be delivered.
+       On The Anax and The Prophet's Hand put the ItemToDeliver script, with
+       a ScriptParams("DeliveryRoom") link and a ScriptParams("NotifyDelivery")
+       link to the target (concrete) room. */
 
     function OnBeginScript()
     {
@@ -180,6 +177,85 @@ class GoalDeliverTheItems extends SqRootScript
             // Force completion of the get item goals too.
             Quest.Set("goal_state_2", 1);
             Quest.Set("goal_state_3", 1);
+        }
+    }
+}
+
+class GoalDamnKeepers extends SqRootScript
+{
+    /* Put this somewhere, I dunno, where the damn keeper intervention activates it. */
+
+    function OnFrobWorldEnd()
+    {
+        Quest.Set("goal_visible_5", 1);
+        Quest.Set("goal_visible_6", 1);
+    }
+}
+
+class GoalStopTheRitualByForce extends SqRootScript
+{
+    /* Put this on the ritual-performing Lady di Rupo. Fires if she is knocked out or killed. */
+
+    function OnAIModeChange()
+    {
+        if (message().mode == eAIMode.kAIM_Dead) {
+            Activate();
+        }
+    }
+
+    function Activate()
+    {
+        if (Quest.Get("goal_state_5") == 0) {
+            Quest.Set("goal_state_5", 1);
+        }
+    }
+}
+
+class GoalStopTheRitualByTheft extends SqRootScript
+{
+    /* Put this on the ritual clones of The Anax and The Prophet's Hand. Fires if they're picked up by the player. */
+
+    function OnContained()
+    {
+        if (message().container == Object.Named("Player")) {
+            if (message().event == eContainsEvent.kContainAdd) {
+                Activate();
+            }
+        }
+    }
+
+    function Activate()
+    {
+        if (Quest.Get("goal_state_5") == 0) {
+            Quest.Set("goal_state_5", 1);
+        }
+    }
+}
+
+class GoalRescueTheAnax extends SqRootScript
+{
+    /* Put this on the concrete room where the Anax should be delivered.
+
+       On the Anax, put ItemToDeliver script, with a ScriptParams("DeliveryRoom") link
+       and a ScriptParams("NotifyDelivery") link to the target (concrete) room. */
+
+    function OnItemDelivered()
+    {
+        local item = message().data;
+        DisableItemWorldFrob(item);
+        Activate();
+    }
+
+    function DisableItemWorldFrob(item)
+    {
+        const IgnoreFlag = 8;
+        Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
+    }
+
+    function Activate()
+    {
+        if (Quest.Get("goal_state_6") == 0) {
+            Quest.Set("goal_state_6", 1);
         }
     }
 }

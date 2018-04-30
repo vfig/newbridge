@@ -1,7 +1,8 @@
 class GoalMeetArgaux extends SqRootScript
 {
-    /* Put this on a concrete room with TrigRoomPlayer script, with a ControlDevice to self. */
-    function OnTurnOn()
+    /* Put this on a concrete room. */
+
+    function OnPlayerRoomEnter()
     {
         Activate();
     }
@@ -20,6 +21,7 @@ class GoalMeetArgaux extends SqRootScript
 class GoalFindArgauxsInfauxs extends SqRootScript
 {
     /* Put this on book/scrolls to frob for info, with FrobInfo > Script flags as appropriate */
+
     function OnFrobWorldEnd()
     {
         Activate();

@@ -320,3 +320,49 @@ class GoalTheHandThatFeeds extends SqRootScript
         Quest.Set("goal_state_8", 3);
     }
 }
+
+class GoalUpdateLootGoals extends SqRootScript
+{
+    /* Put this on a loot item that has value, but shouldn't count towards loot
+       objectives (e.g. payment for a job). It adds its own loot values to the
+       values of all loot goals. Needs FrobInfo > World: Move/Script to work.
+    */
+    function OnFrobWorldEnd()
+    {
+        AddLootValuesToGoals();
+    }
+
+    function AddLootValuesToGoals()
+    {
+        if (Property.Possessed(self, "Loot")) {
+            local item_gold = Property.Get(self, "Loot", "Gold").tointeger();
+            local item_gems = Property.Get(self, "Loot", "Gems").tointeger();
+            local item_goods = Property.Get(self, "Loot", "Art").tointeger();
+            local item_total = item_gold + item_gems + item_goods;
+            for (local goal = 0; goal < 32; goal += 1) {
+                local state_name = "goal_state_" + goal;
+                if (! Quest.Exists(state_name)) break;
+                local total_name = "goal_loot_" + goal;
+                local gold_name = "goal_gold_" + goal;
+                local gems_name = "goal_gems_" + goal;
+                local goods_name = "goal_goods_" + goal;
+                if (Quest.Exists(total_name)) {
+                    local goal_total = Quest.Get(total_name).tointeger();
+                    Quest.Set(total_name, goal_total + item_total);
+                }
+                if (Quest.Exists(gold_name)) {
+                    local goal_gold = Quest.Get(gold_name).tointeger();
+                    Quest.Set(gold_name, goal_gold + item_gold);
+                }
+                if (Quest.Exists(gems_name)) {
+                    local goal_gems = Quest.Get(gems_name).tointeger();
+                    Quest.Set(gems_name, goal_gems + item_gems);
+                }
+                if (Quest.Exists(goods_name)) {
+                    local goal_goods = Quest.Get(goods_name).tointeger();
+                    Quest.Set(goods_name, goal_goods + item_goods);
+                }
+            }
+        }
+    }
+}

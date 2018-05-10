@@ -249,3 +249,118 @@ class M20HotPlateController extends SqRootScript
         }
     }
 }
+
+class MysticGauge extends SqRootScript
+{
+    /* The Mystic Gauge always points towards its target when dropped!
+        Just give it a ControlDevice link to the target, and put the
+        MysticGaugeTarget script onto the target too (if you want the
+        gauge to stop working when the target is picked up). */
+
+    target = 0;
+    wild_mode = false;
+    dead_mode = false;
+
+    function OnSim()
+    {
+        if (message().starting) {
+            // Find out what we're targeting
+            local link = Link.GetOne("ControlDevice", self);
+            target = LinkDest(link);
+            if (target == 0) {
+                SetDeadMode();
+            }
+
+            Physics.SubscribeMsg(self, ePhysScriptMsgType.kFellAsleepMsg);
+        } else {
+            Physics.UnsubscribeMsg(self, ePhysScriptMsgType.kFellAsleepMsg);
+        }
+    }
+
+    function OnPhysFellAsleep()
+    {
+        // We've hit the floor, so we need to update the pointer
+        Update();
+    }
+
+    function OnTargetPickedUp()
+    {
+        // The target has been picked up, so we die forever.
+        SetDeadMode();
+        Update();
+    }
+
+    function SetWildMode(wild) {
+        if (wild_mode != wild) {
+            wild_mode = wild;
+            if (wild) {
+                // No limits!
+                local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
+                Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC | 1));
+                local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
+                Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC & ~2));
+                // And spin wildly!
+                Property.Set(self, "CfgTweqJoints", "    rate-low-high", vector(160.0, 0.0, 360.0));
+            } else {
+                // Okay, we want limits, and we want jitter.
+                local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
+                Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC & ~1));
+                local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
+                Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC | 2));
+            }
+        }
+    }
+
+    function SetDeadMode() {
+        if (! dead_mode) {
+            dead_mode = true;
+
+            // Okay, we want limits, but no jitter
+            local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
+            Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC & ~1));
+            local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
+            Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC &~ 2));
+            // And sit at zero forever
+            Property.Set(self, "CfgTweqJoints", "    rate-low-high", vector(1000.0, 0.0, 0.0));
+        }
+    }
+
+    function Update()
+    {
+        if (target == 0 || dead_mode) {
+            return;
+        }
+
+        const max_distance = 512.0;
+        const min_distance = 64.0;
+        local target_pos = Object.Position(target);
+        local my_pos = Object.Position(self);
+        local my_facing = Object.Facing(self);
+        local distance = sqrt(pow(target_pos.x - my_pos.x, 2) + pow(target_pos.y - my_pos.y, 2));
+        if (distance < min_distance) {
+            SetWildMode(true);
+        } else {
+            SetWildMode(false);
+            local heading = (atan2(target_pos.x - my_pos.x, target_pos.y - my_pos.y) * 180.0 / PI);
+            local gauge = 135.0 + my_facing.z + heading;
+            local clamped_distance = (distance > max_distance ? max_distance : distance);
+            local closeness = (1.0 - ((clamped_distance - min_distance) / (max_distance - min_distance)));
+            local inaccuracy = (closeness * 90.0) + 10.0;
+            local agitation = (closeness * 50.0) + 5.0;
+            Property.Set(self, "CfgTweqJoints", "    rate-low-high", vector(agitation, gauge - inaccuracy, gauge + inaccuracy));
+        }
+    }
+}
+
+class MysticGaugeTarget extends SqRootScript
+{
+    /* Notifies the Mystic Gauge that this item has been picked up by the player. */
+
+    function OnContained()
+    {
+        if ((message().container == Object.Named("Player"))
+            && (message().event == eContainsEvent.kContainAdd)) {
+            Link.BroadcastOnAllLinks(self, "TargetPickedUp", "~ControlDevice");
+        }   
+    }
+}

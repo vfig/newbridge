@@ -2,6 +2,7 @@
 
 ; First make sure all goals are reset.
 run_cmd_script delete_goals
+run_cmd_script delete_monologs
 
 ; These are just here for easy copy and paste.
 ;quest_create_mis goal_state_Z, 0
@@ -19,157 +20,142 @@ run_cmd_script delete_goals
 ;quest_create_mis goal_goods_Z, 0
 ;quest_create_mis goal_special_Z, 0
 
-
-; 0: Meet Argaux
-;    INCOMPLETE > INACTIVE
-;        When discovering Argaux hanged.
+; 0: MeetArgaux
 quest_create_mis goal_state_0, 0
 quest_create_mis goal_visible_0, 1
 
-; 1: Find Argaux's Infauxs
-;    INVISIBLE > VISIBLE
-;        When discovering Argaux hanged.
-;    INCOMPLETE > COMPLETE
-;        When discovering Argaux's note.
+; 1: FindArgauxsInfauxs
 quest_create_mis goal_state_1, 0
 quest_create_mis goal_visible_1, 0
 
-; 2: Kidnap the Anax
-;    INVISIBLE > VISIBLE
-;        When discovering Argaux's note.
-;    INCOMPLETE > COMPLETE
-;        When picking up the Anax's unconscious body.
-;    COMPLETE > INCOMPLETE
-;        When dropping the Anax's unconscious body.
-;    INCOMPLETE/COMPLETE > FAIL
-;        If the Anax is killed (and this is visible). 
+; 2: KidnapTheAnax
 quest_create_mis goal_state_2, 0
 quest_create_mis goal_visible_2, 0
 
-; 3: Steal the Hand
-;    INVISIBLE > VISIBLE
-;        When discovering Argaux's note.
-;    INCOMPLETE > COMPLETE
-;        When picking up the Prophet's Hand.
-;    COMPLETE > INCOMPLETE
-;        When dropping the Prophet's Hand.
+; 3: BonusBurrickTrouble
 quest_create_mis goal_state_3, 0
 quest_create_mis goal_visible_3, 0
 
-; 4: Deliver the items
-;    INVISIBLE > VISIBLE
-;        When discovering Argaux's note.
-;    INCOMPLETE > COMPLETE
-;        Upon dropping both items in the right place.
+; 4: StealTheHand
 quest_create_mis goal_state_4, 0
 quest_create_mis goal_visible_4, 0
 
-; 5: Stop the ritual
-;     INVISIBLE > VISIBLE
-;         When meeting the Keeper.
-;     INCOMPLETE > COMPLETE
-;         When KOing or killing Lady di Rupo, and/or taking back the Prophet's Hand, and/or taking back the Anax.
-;     INCOMPLETE > FAIL
-;         After you reach the ritual place, after a certain time has passed, and the ritual completes.
-;     Find out where Lady di Rupo is performing the ritual, and stop it.
+; 5: BonusBanishTheGhost
 quest_create_mis goal_state_5, 0
 quest_create_mis goal_visible_5, 0
 
-; 6: Rescue the Anax (Hard/Expert)
-;     INVISIBLE > VISIBLE
-;         When meeting the Keeper.
-;     INCOMPLETE > COMPLETE
-;         When dropping the Anax in the Sanctuary.
-;     INCOMPLETE/COMPLETE > FAIL
-;         If the Anax is killed (and this is visible).
-;     Rescue the Anax and take him back to the Hammerite Sanctuary. (Hard/Expert)
+; 6: DeliverTheItems
 quest_create_mis goal_state_6, 0
 quest_create_mis goal_visible_6, 0
-quest_create_mis goal_min_diff_6, 1
-quest_create_mis goal_max_diff_6, 2
 
-; 7: Keep the Anax alive
-;     INVISIBLE > VISIBLE
-;     INCOMPLETE > FAIL
-;         When the Anax is killed.
-;     INCOMPLETE > COMPLETE
-;         At the end of the mission, automatically.
+; 7: StopTheRitual
 quest_create_mis goal_state_7, 0
 quest_create_mis goal_visible_7, 0
 
-; 8: Don't bite the hand that feeds you.
-;     INVISIBLE > VISIBLE
-;     INCOMPLETE > FAIL
-;         When pre-ritual Lady di Rupo, or one of the keepers, is KO'd or killed, or hurt by the player.
-;     INCOMPLETE > COMPLETE
-;         At the end of the mission, automatically.
+; 8: BonusSubvertTheRitual
 quest_create_mis goal_state_8, 0
 quest_create_mis goal_visible_8, 0
 
-; 9: Loot (Normal)
-;     INCOMPLETE > COMPLETE
-;         After getting enough loot.
+; 9: EscapeWithTheAnax
 quest_create_mis goal_state_9, 0
-quest_create_mis goal_visible_9, 1
-quest_create_mis goal_type_9, 3
-quest_create_mis goal_loot_9, 1000
+quest_create_mis goal_visible_9, 0
 quest_create_mis goal_min_diff_9, 0
 quest_create_mis goal_max_diff_9, 0
 
-; 10: Loot (Hard)
-;     INCOMPLETE > COMPLETE
-;         After getting enough loot.
+; 10: ReturnTheAnax (Hard/Expert)
 quest_create_mis goal_state_10, 0
-quest_create_mis goal_visible_10, 1
-quest_create_mis goal_type_10, 3
-quest_create_mis goal_loot_10, 1500
+quest_create_mis goal_visible_10, 0
 quest_create_mis goal_min_diff_10, 1
-quest_create_mis goal_max_diff_10, 1
+quest_create_mis goal_max_diff_10, 2
 
-; 11: Loot (Expert)
-;     INCOMPLETE > COMPLETE
-;         After getting enough loot.
+; 11: BonusSellTheHand
 quest_create_mis goal_state_11, 0
-quest_create_mis goal_visible_11, 1
-quest_create_mis goal_type_11, 3
-quest_create_mis goal_loot_11, 2000
-quest_create_mis goal_min_diff_11, 2
-quest_create_mis goal_max_diff_11, 2
+quest_create_mis goal_visible_11, 0
 
-; 12: Don't kill bystanders
-;     INCOMPLETE > FAIL
-;         After killing someone.
-;     INCOMPLETE > COMPLETE
-;         At the end of the mission, automatically.
+; 12: KeepTheAnaxAlive
 quest_create_mis goal_state_12, 0
-quest_create_mis goal_visible_12, 1
-quest_create_mis goal_type_12, 2
-quest_create_mis goal_reverse_12, 1
-quest_create_mis goal_target_12, -1325
-quest_create_mis goal_min_diff_12, 1
-quest_create_mis goal_max_diff_12, 1
+quest_create_mis goal_visible_12, 0
 
-; 13: Don't kill humans
-;     INCOMPLETE > FAIL
-;         After killing someone.
-;     INCOMPLETE > COMPLETE
-;         At the end of the mission, automatically.
+; 13: DontBiteTheHand
 quest_create_mis goal_state_13, 0
-quest_create_mis goal_visible_13, 1
-quest_create_mis goal_type_13, 2
-quest_create_mis goal_reverse_13, 1
-quest_create_mis goal_target_13, -14
-quest_create_mis goal_min_diff_13, 2
-quest_create_mis goal_max_diff_13, 2
+quest_create_mis goal_visible_13, 0
 
-; 14: Return to the start
-;     INCOMPLETE > COMPLETE
-;         Upon returning to the start point, and all other goals are complete.
+; 14: LootNormal
 quest_create_mis goal_state_14, 0
 quest_create_mis goal_visible_14, 1
-quest_create_mis goal_irreversible_14, 0
-quest_create_mis goal_final_14, 1
-quest_create_mis goal_type_14, 4
-quest_create_mis goal_target_14, 623
+quest_create_mis goal_type_14, 3
+quest_create_mis goal_loot_14, 1000
+quest_create_mis goal_min_diff_14, 0
+quest_create_mis goal_max_diff_14, 0
+
+; 15: LootHard
+quest_create_mis goal_state_15, 0
+quest_create_mis goal_visible_15, 1
+quest_create_mis goal_type_15, 3
+quest_create_mis goal_loot_15, 1500
+quest_create_mis goal_min_diff_15, 1
+quest_create_mis goal_max_diff_15, 1
+
+; 16: LootExpert
+quest_create_mis goal_state_16, 0
+quest_create_mis goal_visible_16, 1
+quest_create_mis goal_type_16, 3
+quest_create_mis goal_loot_16, 2000
+quest_create_mis goal_min_diff_16, 2
+quest_create_mis goal_max_diff_16, 2
+
+; 17: SpecialHard (special 1)
+quest_create_mis goal_state_17, 0
+quest_create_mis goal_visible_17, 1
+quest_create_mis goal_type_17, 3
+quest_create_mis goal_special_17, 1
+quest_create_mis goal_min_diff_17, 1
+quest_create_mis goal_max_diff_17, 2
+
+; 18: SpecialExpert (special 2)
+quest_create_mis goal_state_18, 0
+quest_create_mis goal_visible_18, 1
+quest_create_mis goal_type_18, 3
+quest_create_mis goal_special_18, 2
+quest_create_mis goal_min_diff_18, 2
+quest_create_mis goal_max_diff_18, 2
+
+; 19: DontKillBystanders (Hard)
+quest_create_mis goal_state_19, 0
+quest_create_mis goal_visible_19, 1
+quest_create_mis goal_type_19, 2
+quest_create_mis goal_reverse_19, 1
+quest_create_mis goal_target_19, -1325
+quest_create_mis goal_min_diff_19, 1
+quest_create_mis goal_max_diff_19, 1
+
+; 20: DontKillHumans (Expert)
+quest_create_mis goal_state_20, 0
+quest_create_mis goal_visible_20, 1
+quest_create_mis goal_type_20, 2
+quest_create_mis goal_reverse_20, 1
+quest_create_mis goal_target_20, -14
+quest_create_mis goal_min_diff_20, 2
+quest_create_mis goal_max_diff_20, 2
+
+; 21: ReturnToTheStart
+quest_create_mis goal_state_21, 0
+quest_create_mis goal_visible_21, 1
+quest_create_mis goal_irreversible_21, 0
+quest_create_mis goal_final_21, 1
+quest_create_mis goal_type_21, 4
+quest_create_mis goal_target_21, 623
 
 mprint Goals updated
+
+
+; All monologue variables
+quest_create_mis mlog_done_1, 0
+quest_create_mis mlog_done_2, 0
+quest_create_mis mlog_done_3, 0
+quest_create_mis mlog_done_4, 0
+quest_create_mis mlog_done_5, 0
+quest_create_mis mlog_done_6, 0
+quest_create_mis mlog_done_7, 0
+
+mprint Monologues updated

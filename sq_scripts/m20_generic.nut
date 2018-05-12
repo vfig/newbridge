@@ -1,9 +1,27 @@
+class WhenPlayerCarrying extends SqRootScript
+{
+    /* Sends "PlayerPickedUp" and "PlayerDropped" when the player picks up
+       or drops this item. */
+
+    function OnContained()
+    {
+        if (message().container == Object.Named("Player")) {
+            if (message().event == eContainsEvent.kContainAdd) {
+                SendMessage(self, "PlayerPickedUp");
+            } else if (message().event == eContainsEvent.kContainRemove) {
+                SendMessage(self, "PlayerDropped");
+            }
+        }
+    }
+}
+
+
 class ItemToDeliver extends SqRootScript
 {
     /* Put this on an object with a ScriptParams("DeliveryRoom") link to one
        or more rooms where it should be delivered to. It will broadcast
-       ItemDelivered/ItemNotDelivered messages to all ScriptParams("NotifyDelivery")
-       objects when things change. */
+       ItemDelivered/ItemNotDelivered messages to the room, and to all
+       ScriptParams("NotifyDelivery") objects when things change. */
 
     //-- Messages
 
@@ -75,6 +93,101 @@ class ItemToDeliver extends SqRootScript
             if (data == "NotifyDelivery") {
                 SendMessage(target, (is_delivered ? "ItemDelivered" : "ItemNotDelivered"), self);
             }
+        }
+    }
+}
+
+
+class MultipleDeliveries extends SqRootScript
+{
+    /* Sends "AllItemsDelivered" when all items linked
+       to this with ScriptParams("DeliveryRoom" or "NotifyDelivery")
+       have been delivered, and "AllItemsNotDelivered" when not. */
+
+    function OnBeginScript()
+    {
+        local links = Link.GetAll(linkkind("~ScriptParams"), self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            local item = LinkDest(link);
+            if (data == "DeliveryRoom" || data == "NotifyDelivery") {
+                if (! IsDataSet("ItemDelivered_" + item)) {
+                    SetData("ItemDelivered_" + item, 0);
+                }
+            }
+        }
+    }
+
+    function OnItemDelivered()
+    {
+        local item = message().data;
+        SetData("ItemDelivered_" + item, 1);
+        CheckForAllDeliveries();
+    }
+
+    function OnItemNotDelivered()
+    {
+        local item = message().data;
+        SetData("ItemDelivered_" + item, 0);
+        CheckForAllDeliveries();
+    }
+
+    function CheckForAllDeliveries()
+    {
+        local all_delivered = true;
+        local links = Link.GetAll(linkkind("~ScriptParams"), self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            local item = LinkDest(link);
+            if (data == "DeliveryRoom" || data == "NotifyDelivery") {
+                local delivered = (GetData("ItemDelivered_" + item) == 1);
+                all_delivered = all_delivered && delivered;
+            }
+        }
+
+        if (all_delivered) {
+            SendMessage(self, "AllItemsDelivered");
+        } else {
+            SendMessage(self, "AllItemsNotDelivered");
+        }
+    }
+}
+
+
+class PreserveMe extends SqRootScript
+{
+    /* Sends "NotPreserved" to self when KOd or killed, or if harmed
+       by the player. */
+
+    function IsPlayerResponsible(damage_message)
+    {
+        local player = Object.Named("Player");
+        local culprit = damage_message.culprit;
+        for (;;) {
+            if (culprit == 0) return false;
+            if (culprit == player) return true;
+
+            // Follow the culpability links to see if we find a player.
+            local link = Link.GetOne(linkkind("~CulpableFor"), culprit);
+            if (link == 0) {
+                culprit = 0;
+            } else {
+                culprit = LinkDest(link);
+            }
+        }
+    }
+
+    function OnDamage()
+    {
+        if (IsPlayerResponsible(message())) {
+            SendMessage(self, "NotPreserved");
+        }
+    }
+
+    function OnAIModeChange()
+    {
+        if (message().mode == eAIMode.kAIM_Dead) {
+            SendMessage(self, "NotPreserved");
         }
     }
 }

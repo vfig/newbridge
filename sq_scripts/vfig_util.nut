@@ -1,3 +1,31 @@
+class DebugMessage extends SqRootScript
+{
+    /* Shows the message in the Inventory > Long Description property when frobbed or turned on. */
+
+    function OnTurnOn()
+    {
+        Activate();
+    }
+
+    function OnFrobInvBegin()
+    {
+        Activate();
+    }
+
+    function OnFrobWorldBegin()
+    {
+        Activate();
+    }
+
+    function Activate()
+    {
+        local text = Property.Get(self, "GameDesc", "");
+        if (text != "") {
+            DarkUI.TextMessage(text, 0);
+        }
+    }
+}
+
 class DebugQuestVars extends SqRootScript
 {
     //-- Utils

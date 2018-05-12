@@ -1,0 +1,38 @@
+; Delete all monolog variables for a mission. Run this from Dromed: "run_cmd_script delete_monologs"
+
+; Clean up all monolog variables
+
+quest_delete mlog_done_0
+quest_delete mlog_done_1
+quest_delete mlog_done_2
+quest_delete mlog_done_3
+quest_delete mlog_done_4
+quest_delete mlog_done_5
+quest_delete mlog_done_6
+quest_delete mlog_done_7
+quest_delete mlog_done_8
+quest_delete mlog_done_9
+quest_delete mlog_done_10
+quest_delete mlog_done_11
+quest_delete mlog_done_12
+quest_delete mlog_done_13
+quest_delete mlog_done_14
+quest_delete mlog_done_15
+quest_delete mlog_done_16
+quest_delete mlog_done_17
+quest_delete mlog_done_18
+quest_delete mlog_done_19
+quest_delete mlog_done_20
+quest_delete mlog_done_21
+quest_delete mlog_done_22
+quest_delete mlog_done_23
+quest_delete mlog_done_24
+quest_delete mlog_done_25
+quest_delete mlog_done_26
+quest_delete mlog_done_27
+quest_delete mlog_done_28
+quest_delete mlog_done_29
+quest_delete mlog_done_30
+quest_delete mlog_done_31
+
+mprint Monologs cleared!

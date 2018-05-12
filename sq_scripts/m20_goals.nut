@@ -41,6 +41,8 @@ enum eMonologues {
     /* The Anax */
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
+    /* Delivery */
+    kThisIsTheDeliverySpot  = 8,
     /* The Ritual */
     kFoundTheRitual         = 7
 }
@@ -54,7 +56,8 @@ local DebugMonologueText = [
     "So this is the job Argaux wanted my help on. I think I'll do the job by myself: then I won't have to pay his finder's fee.",
     "Now to find the Anax, whatever that is.",
     "Looks like Argaux's career has come to a sudden stop. I should check his place for info on this job. ... Guess I won't have to give up that finder's fee after all.",
-    "They've already started the ritual. Need to be quick if I'm gonna stop them."
+    "They've already started the ritual. Need to be quick if I'm gonna stop them.",
+    "This looks like the hand-off point."
 ];
 
 local Goal = {
@@ -348,8 +351,7 @@ class GoalNearTheFishmongers extends WatchForItems
     function OnPlayerRoomEnter()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
-            // FIXME: we haven't defined this line!
-            //Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
+            Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
         }
     }
 
@@ -397,8 +399,7 @@ class GoalDeliverTheItems extends MultipleDeliveries
         Goal.Complete(eGoals.kStealTheHand);
         Goal.Complete(eGoals.kDeliverTheItems);
 
-        // FIXME: we haven't defined this conversation properly
-        //Goal.StartConversation(eConversations.kDeliveryIsDone);
+        // FIXME: need to start the "Garrett and Lady di Rupo" conversation.
     }
 }
 
@@ -414,7 +415,7 @@ class GoalDamnKeepers extends SqRootScript
     {
         if (! Goal.IsVisible(eGoals.kStopTheRitual)) {
 
-            // FIXME: needs work for gate and Keeper scripting. Will need a Conversation to be involved.
+            // FIXME: need to start the "Garrett and the Keeper" conversation.
 
             Goal.Show(eGoals.kStopTheRitual);
             Goal.Show(eGoals.kReturnTheAnax);

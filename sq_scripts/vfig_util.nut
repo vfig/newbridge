@@ -21,6 +21,7 @@ class DebugMessage extends SqRootScript
     {
         local text = Property.Get(self, "GameDesc", "");
         if (text != "") {
+            print("MESSAGE: " + text);
             DarkUI.TextMessage(text, 0);
         }
     }

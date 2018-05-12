@@ -7,8 +7,8 @@ fiction_1: "Find out about the job Argaux had in mind."
 text_1: "Find out about the job Argaux had in mind."
 
 ; 2: KidnapTheAnax
-fiction_2: "Take the Anax of Easthart, undamaged, from the Hammer Sanctuary."
-text_2: "Take the Anax of Easthart, undamaged, from the Hammer Sanctuary."
+fiction_2: "Take the Anax of Easthart from the Hammer Sanctuary."
+text_2: "Take the Anax of Easthart from the Hammer Sanctuary."
 
 ; 3: BonusBurrickTrouble
 fiction_3: "(Bonus) Distract the Hammerites with the help of some unusual allies."
@@ -23,8 +23,8 @@ fiction_5: "(Bonus) Banish the Prophet's apparition, just to be safe."
 text_5: "(Bonus) Banish the Prophet's apparition, just to be safe."
 
 ; 6: DeliverTheItems
-fiction_6: "When you have both items, deliver them to 'R' in the vacant lot for your payment."
-text_6: "When you have both items, deliver them to 'R' in the vacant lot for your payment."
+fiction_6: "When you have both items, take them to the fishmongers for your payment."
+text_6: "When you have both items, take them to the fishmongers for your payment."
 
 ; 7: StopTheRitual
 fiction_7: "Find out where Lady di Rupo is performing the ritual, and stop it."

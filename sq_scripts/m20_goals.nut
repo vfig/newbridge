@@ -45,7 +45,19 @@ enum eMonologues {
     kFoundTheRitual         = 7
 }
 
-Goal = {
+// FIXME: don't need these once I have recordings
+local DebugMonologueText = [
+    "0 is not used",
+    "Strange that Argaux's not here. I should scout around to see if he's nearby.",
+    "So this is what Argaux wanted my help on. The money's good. I think I'll do the job by myself.",
+    "So the Anax is a person, not a trinket. That's ... inconvenient.",       
+    "So this is the job Argaux wanted my help on. I think I'll do the job by myself: then I won't have to pay his finder's fee.",
+    "Now to find the Anax, whatever that is.",
+    "Looks like Argaux's career has come to a sudden stop. I should check his place for info on this job. ... Guess I won't have to give up that finder's fee after all.",
+    "They've already started the ritual. Need to be quick if I'm gonna stop them."
+];
+
+local Goal = {
     IsActive = function(goal) {
         return (Quest.Get("goal_state_" + goal) == 0);
     }
@@ -80,17 +92,19 @@ Goal = {
         Quest.Set("goal_visible_" + goal, 1);
     }
 
-    SpeakMonologue(monologue) {
+    SpeakMonologue = function(monologue) {
         if (Quest.Get("mlog_done_" + monologue) == 0) {
             // FIXME: play the voice line here
-            print("FIXME: should play monologue " + monologue);
-            CancelMonologue(monologue);
+            print("Speaking " + monologue + ": " + DebugMonologueText[monologue]);
+            DarkUI.TextMessage(DebugMonologueText[monologue], 0);
+            Quest.Set("mlog_done_" + monologue, 1);
         }
     }
-    CancelMonologue(monologue) {
+    CancelMonologue = function(monologue) {
+        print("Cancelling " + monologue + ": " + DebugMonologueText[monologue]);
         Quest.Set("mlog_done_" + monologue, 1);
     }
-}
+};
 
 
 /* -------- Argaux and the job -------- */
@@ -98,15 +112,43 @@ Goal = {
 
 class GoalArgauxsBody extends SqRootScript
 {
-    /* Put this on Argaux's body, and his key. */
+    /* Put this on Argaux's body. Ensure it has World: FocusScript, Script
+       in its FrobInfo. */
 
-    function OnFrobWorldBegin()
+    function Activate()
     {
         Goal.CancelMonologue(eMonologues.kWhereIsArgaux);
         Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
 
         Goal.Cancel(eGoals.kMeetArgaux);
         Goal.Show(eGoals.kFindArgauxsInfauxs);
+    }
+
+    function OnWorldSelect()
+    {
+        Activate();
+    }
+
+    function OnFrobWorldEnd()
+    {
+        // If you frob the body, you get the key
+        local player = Object.Named("Player");
+        local result = Container.MoveAllContents(self, player);
+    }
+
+    function OnContainer()
+    {
+        // Someone's stolen our key! Good for them!
+        if (message().event == eContainsEvent.kContainRemove) {
+            Activate();
+            DisableItemWorldFrob(self);
+        }
+    }
+
+    function DisableItemWorldFrob(item)
+    {
+        const IgnoreFlag = 8;
+        Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
     }
 }
 
@@ -123,6 +165,7 @@ class GoalTheFountain extends SqRootScript
 class GoalSeizureNotice extends SqRootScript
 {
     /* Put this on the notice on Argaux's door. */
+
 
     function OnFrobWorldEnd()
     {
@@ -159,7 +202,7 @@ class GoalArgauxsInfauxs extends SqRootScript
 
 class GoalDiRuposInfos extends SqRootScript
 {
-    /* Put this on the di Rupo's diary with the job info. */
+    /* Put this on di Rupo's diary with the job info. */
 
     function OnFrobWorldEnd()
     {
@@ -196,7 +239,11 @@ class GoalEnterTheSanctuary extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
-        Goal.SpeakMonologue(eMonologues.kEnteredTheSanctuary);
+        if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
+            Goal.SpeakMonologue(eMonologues.kEnteredTheSanctuary);
+        } else {
+            Goal.CancelMonologue(eMonologues.kEnteredTheSanctuary);
+        }
     }
 }
 
@@ -209,9 +256,23 @@ class GoalReadingAboutTheAnax extends SqRootScript
         - any other readables that reveal the Anax is a person.
     */
 
+    function OnFrobInvEnd()
+    {
+        Activate();
+    }
+
     function OnFrobWorldEnd()
     {
-        Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
+        Activate();
+    }
+
+    function Activate()
+    {
+        if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
+            Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
+        } else {
+            Goal.CancelMonologue(eMonologues.kTheAnaxIsAPerson);
+        }
     }
 }
 
@@ -221,7 +282,11 @@ class GoalSeeingTheAnax extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
-        Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
+        if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
+            Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
+        } else {
+            Goal.CancelMonologue(eMonologues.kTheAnaxIsAPerson);
+        }
     }
 }
 
@@ -321,14 +386,15 @@ class GoalDeliverTheItems extends MultipleDeliveries
         Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
     }
 
-    function OnItemDelivered() {
+    function OnItemDelivered()
+    {
         local item = message().data;
         DisableItemWorldFrob(item);
 
         base.OnItemDelivered();
     }
 
-    function OnAllItemsDelivered() {
+    function OnAllItemsDelivered()
     {
         Goal.Complete(eGoals.kKidnapTheAnax);
         Goal.Complete(eGoals.kStealTheHand);
@@ -415,7 +481,7 @@ class GoalReturnTheAnax extends SqRootScript
     {
         local item = message().data;
         DisableItemWorldFrob(item);
-        Goal.Complete(eGoals.kRescueTheAnax);
+        Goal.Complete(eGoals.kReturnTheAnax);
     }
 
     function DisableItemWorldFrob(item)

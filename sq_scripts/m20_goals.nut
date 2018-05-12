@@ -41,15 +41,24 @@ enum eMonologues {
     /* The Anax */
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
+    kGotTheFirstItem        = 12, // FIXME: script this
+    /* The Hand */
+    kMausoleumLocked        = 0, // FIXME: script this
+    kPuzzleFailed1          = 9, // FIXME: script this
+    kPuzzleFailed2          = 10, // FIXME: script this
+    kPuzzleFailed3          = 11, // FIXME: script this
+    kGotTheSecondItem       = 13, // FIXME: script this
     /* Delivery */
     kThisIsTheDeliverySpot  = 8,
     /* The Ritual */
-    kFoundTheRitual         = 7
+    kLookAtTheTower         = 14, // FIXME: script this
+    kFoundTheRitual         = 7,
+    kRescuingTheAnax        = 15, // FIXME: script this
 }
 
 // FIXME: don't need these once I have recordings
 local DebugMonologueText = [
-    "0 is not used",
+    "Looks like I'll have to find another way in.",
     "Strange that Argaux's not here. I should scout around to see if he's nearby.",
     "So this is what Argaux wanted my help on. The money's good. I think I'll do the job by myself.",
     "So the Anax is a person, not a trinket. That's ... inconvenient.",       
@@ -57,7 +66,14 @@ local DebugMonologueText = [
     "Now to find the Anax, whatever that is.",
     "Looks like Argaux's career has come to a sudden stop. I should check his place for info on this job. ... Guess I won't have to give up that finder's fee after all.",
     "They've already started the ritual. Need to be quick if I'm gonna stop them.",
-    "This looks like the hand-off point."
+    "This looks like the hand-off point.",
+    "Must be the wrong combination.",
+    "Nope!",
+    "I hate to say it, but maybe some research would help me figure this out?",
+    "One down, one to go.",
+    "Now to deliver all this and get my money.",
+    "The tower's all lit up. That's new.",
+    "I hope the Hammers appreciate me rescuing this guy."
 ];
 
 local Goal = {

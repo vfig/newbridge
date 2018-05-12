@@ -16,6 +16,68 @@ class WhenPlayerCarrying extends SqRootScript
 }
 
 
+class WatchForItems extends SqRootScript
+{
+    /* Put this on a concrete room, with ScriptParams("WatchThis") links to
+       each of the items to watch for. It will send "ItemsArrived(true)" when
+       all the items are in the room. */
+
+    item_state = {};
+
+    function IsWatching(obj) {
+        local link = Link.GetOne("ScriptParams", self, obj);
+        return ((link != 0) && (LinkTools.LinkGetData(link, "") == "WatchThis"));
+    }
+
+    function OnObjectRoomEnter()
+    {
+        local item = message().MoveObjId;
+        if (IsWatching(item)) {
+            item_state[item] <- true;
+            CheckForAllItems();
+        }
+    }
+
+    function OnObjectRoomExit()
+    {
+        local item = message().MoveObjId;
+        if (IsWatching(item)) {
+            item_state[item] <- false;
+            CheckForAllItems();
+        }
+    }
+
+    function OnCreatureRoomEnter()
+    {
+        OnObjectRoomEnter();
+    }
+
+    function OnCreatureRoomExit()
+    {
+        OnObjectRoomExit();
+    }
+    
+    function CheckForAllItems()
+    {
+        local all_items = true;
+        local links = Link.GetAll("ScriptParams", self);
+        foreach (link in links) {
+            local data = LinkTools.LinkGetData(link, "");
+            local target = LinkDest(link);
+            if (data == "WatchThis") {
+                local item_present = ((target in item_state) && item_state[target]);
+                if (! item_present) {
+                    all_items = false;
+                    break;
+                }
+            }
+        }
+
+        SendMessage(self, "ItemsArrived", all_items);
+    }
+}
+
+
 class ItemToDeliver extends SqRootScript
 {
     /* Put this on an object with a ScriptParams("DeliveryRoom") link to one
@@ -90,7 +152,7 @@ class ItemToDeliver extends SqRootScript
         foreach (link in links) {
             local data = LinkTools.LinkGetData(link, "");
             local target = LinkDest(link);
-            if (data == "NotifyDelivery") {
+            if (data == "DeliveryRoom" || data == "NotifyDelivery") {
                 SendMessage(target, (is_delivered ? "ItemDelivered" : "ItemNotDelivered"), self);
             }
         }

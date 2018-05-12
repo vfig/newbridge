@@ -241,8 +241,6 @@ class GoalEnterTheSanctuary extends SqRootScript
     {
         if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
             Goal.SpeakMonologue(eMonologues.kEnteredTheSanctuary);
-        } else {
-            Goal.CancelMonologue(eMonologues.kEnteredTheSanctuary);
         }
     }
 }
@@ -268,6 +266,7 @@ class GoalReadingAboutTheAnax extends SqRootScript
 
     function Activate()
     {
+        Goal.CancelMonologue(eMonologues.kEnteredTheSanctuary);
         if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
             Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
         } else {
@@ -282,6 +281,7 @@ class GoalSeeingTheAnax extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
+        Goal.CancelMonologue(eMonologues.kEnteredTheSanctuary);
         if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
             Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
         } else {
@@ -336,26 +336,37 @@ class GoalTheMausoleumHand extends WhenPlayerCarrying
 /* -------- Delivery -------- */
 
 
-class GoalNearTheFishmongers extends SqRootScript
+class GoalNearTheFishmongers extends WatchForItems
 {
     /* Put this on a concrete room in front of the fishmongers. 
-       Add a ControlDevice link to its door. */
+       Add a ControlDevice link to its door, and ScriptParams("WatchThis") links
+       to the Sanctuary Anax and the Mausoleum Hand. */
+
+    // FIXME: okay, right now the player can lock themselves inside the delivery
+    // room if they go out and back into it after dropping the things off ;_;
 
     function OnPlayerRoomEnter()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
             // FIXME: we haven't defined this line!
             //Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
+        }
+    }
 
-            if (Goal.IsComplete(eGoals.kKidnapTheAnax)
-                && Goal.IsComplete(eGoals.kStealTheHand))
-            {
-                // Open the door to the fishmongers when approaching with the items.
-                Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
-            }
-        } else if (Goal.IsComplete(eGoals.kDeliverTheItems)) {
+    function OnPlayerRoomExit()
+    {
+        if (Goal.IsComplete(eGoals.kDeliverTheItems)) {
             // Close the door to the fishmongers again when leaving.
             Link.BroadcastOnAllLinks(self, "TurnOff", "ControlDevice");
+        }
+    }
+
+    function OnItemsArrived()
+    {
+        local all_items = message().data;
+        if (all_items) {
+            // Open the door to the fishmongers when approaching with the items.
+            Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
         }
     }
 }

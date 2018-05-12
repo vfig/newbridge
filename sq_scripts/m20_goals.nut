@@ -340,10 +340,10 @@ class GoalNearTheFishmongers extends WatchForItems
 {
     /* Put this on a concrete room in front of the fishmongers. 
        Add a ControlDevice link to its door, and ScriptParams("WatchThis") links
-       to the Sanctuary Anax and the Mausoleum Hand. */
+       to the Sanctuary Anax and the Mausoleum Hand.
 
-    // FIXME: okay, right now the player can lock themselves inside the delivery
-    // room if they go out and back into it after dropping the things off ;_;
+       Make sure to have a button to open the door from the inside in case
+       a clever player tries to trap themself! */
 
     function OnPlayerRoomEnter()
     {
@@ -368,20 +368,6 @@ class GoalNearTheFishmongers extends WatchForItems
             // Open the door to the fishmongers when approaching with the items.
             Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
         }
-    }
-}
-
-class GoalEnterTheFishmongers extends SqRootScript
-{
-    /* Put this on a concrete room inside the fishmongers. */
-
-    function OnPlayerRoomEnter()
-    {
-        // FIXME: we haven't defined this line!
-        //Goal.CancelMonologue(eMonologues.kThisIsTheDeliverySpot);
-
-        // FIXME: we haven't defined this conversation properly
-        //Goal.StartConversation(eConversations.kAtTheDeliverySpot);
     }
 }
 

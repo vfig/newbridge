@@ -41,18 +41,23 @@ enum eMonologues {
     /* The Anax */
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
+    kHammerTakenByBurricks  = 17, // FIXME: script this
     kGotTheFirstItem        = 12, // FIXME: script this
     /* The Hand */
     kMausoleumLocked        = 0, // FIXME: script this
     kPuzzleFailed1          = 9, // FIXME: script this
     kPuzzleFailed2          = 10, // FIXME: script this
     kPuzzleFailed3          = 11, // FIXME: script this
+    kEnteredTheProphetsRoom = 16, // FIXME: script this
+    kBanishedTheGhost       = 18, // FIXME: script this
     kGotTheSecondItem       = 13, // FIXME: script this
+    kGonnaSellTheHand       = 20, // FIXME: script this
     /* Delivery */
     kThisIsTheDeliverySpot  = 8,
     /* The Ritual */
     kLookAtTheTower         = 14, // FIXME: script this
     kFoundTheRitual         = 7,
+    kReleasedTheProphet     = 19, // FIXME: script this
     kRescuingTheAnax        = 15, // FIXME: script this
 }
 
@@ -73,7 +78,12 @@ local DebugMonologueText = [
     "One down, one to go.",
     "Now to deliver all this and get my money.",
     "The tower's all lit up. That's new.",
-    "I hope the Hammers appreciate me rescuing this guy."
+    "I hope the Hammers appreciate me rescuing this guy.",
+    "I don't like the look of this.",
+    "I guess the Burricks were saving him for a late night snack?",
+    "You know, I really didn't think that would work!",
+    "Heh heh. Sorry about the mess.",
+    "Got this Hand here you might be interested in..."
 ];
 
 local Goal = {
@@ -123,6 +133,10 @@ local Goal = {
         print("Cancelling " + monologue + ": " + DebugMonologueText[monologue]);
         Quest.Set("mlog_done_" + monologue, 1);
     }
+    IsMonologueDone = function(monologue) {
+        return (Quest.Get("mlog_done_" + monologue) == 1);
+    }
+
 };
 
 

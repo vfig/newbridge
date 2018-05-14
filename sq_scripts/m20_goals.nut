@@ -272,7 +272,8 @@ class GoalEnterTheSanctuary extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
-        if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
+        if (Goal.IsActive(eGoals.kKidnapTheAnax)
+            && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
             Goal.SpeakMonologue(eMonologues.kEnteredTheSanctuary);
         }
     }
@@ -300,7 +301,8 @@ class GoalReadingAboutTheAnax extends SqRootScript
     function Activate()
     {
         Goal.CancelMonologue(eMonologues.kEnteredTheSanctuary);
-        if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
+        if (Goal.IsActive(eGoals.kKidnapTheAnax)
+            && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
             Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
         } else {
             Goal.CancelMonologue(eMonologues.kTheAnaxIsAPerson);
@@ -315,7 +317,8 @@ class GoalSeeingTheAnax extends SqRootScript
     function OnPlayerRoomEnter()
     {
         Goal.CancelMonologue(eMonologues.kEnteredTheSanctuary);
-        if (Goal.IsActive(eGoals.kKidnapTheAnax) && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
+        if (Goal.IsActive(eGoals.kKidnapTheAnax)
+            && Goal.IsVisible(eGoals.kKidnapTheAnax)) {
             Goal.SpeakMonologue(eMonologues.kTheAnaxIsAPerson);
         } else {
             Goal.CancelMonologue(eMonologues.kTheAnaxIsAPerson);
@@ -323,13 +326,14 @@ class GoalSeeingTheAnax extends SqRootScript
     }
 }
 
-class GoalTheSanctuaryAnax extends WhenPlayerCarrying
+class GoalKidnapTheAnax extends WhenPlayerCarrying
 {
     /* Put this on the Anax in the sanctuary. */
 
     function OnPlayerPickedUp()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+            // Tick this off even if these objectives aren't visible yet
             Goal.Complete(eGoals.kKidnapTheAnax);
         }
     }
@@ -337,6 +341,7 @@ class GoalTheSanctuaryAnax extends WhenPlayerCarrying
     function OnPlayerDropped()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+            // Untick it again
             Goal.Activate(eGoals.kKidnapTheAnax);
         }
     }
@@ -346,13 +351,14 @@ class GoalTheSanctuaryAnax extends WhenPlayerCarrying
 /* -------- The Hand -------- */
 
 
-class GoalTheMausoleumHand extends WhenPlayerCarrying
+class GoalStealTheHand extends WhenPlayerCarrying
 {
     /* Put this on the Hand in the catacombs. */
 
     function OnPlayerPickedUp()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+            // Tick this off even if these objectives aren't visible yet
             Goal.Complete(eGoals.kStealTheHand);
         }
     }
@@ -360,6 +366,7 @@ class GoalTheMausoleumHand extends WhenPlayerCarrying
     function OnPlayerDropped()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+            // Untick it again
             Goal.Activate(eGoals.kStealTheHand);
         }
     }
@@ -380,7 +387,8 @@ class GoalNearTheFishmongers extends WatchForItems
 
     function OnPlayerRoomEnter()
     {
-        if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+        if (Goal.IsActive(eGoals.kDeliverTheItems)
+            && Goal.IsVisible(eGoals.kDeliverTheItems)) {
             Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
         }
     }
@@ -395,10 +403,16 @@ class GoalNearTheFishmongers extends WatchForItems
 
     function OnItemsArrived()
     {
-        local all_items = message().data;
-        if (all_items) {
-            // Open the door to the fishmongers when approaching with the items.
-            Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+        if (Goal.IsActive(eGoals.kDeliverTheItems)
+            && Goal.IsVisible(eGoals.kDeliverTheItems)) {
+            // If you drop both items outside the fishmongers before getting
+            // the "deliver the items" objective, too bad, you're gonna
+            // have to take them out and in again.
+            local all_items = message().data;
+            if (all_items) {
+                // Open the door to the fishmongers when approaching with the items.
+                Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+            }
         }
     }
 }
@@ -443,12 +457,18 @@ class GoalDamnKeepers extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
-        if (! Goal.IsVisible(eGoals.kStopTheRitual)) {
+        if (Goal.IsComplete(eGoals.kDeliverTheItems)) {
+            if (! Goal.IsVisible(eGoals.kStopTheRitual)) {
 
-            // FIXME: need to start the "Garrett and the Keeper" conversation.
+                // FIXME: need to start the "Garrett and the Keeper" conversation.
 
-            Goal.Show(eGoals.kStopTheRitual);
-            Goal.Show(eGoals.kReturnTheAnax);
+                Goal.Show(eGoals.kStopTheRitual);
+                Goal.Show(eGoals.kReturnTheAnax);
+            } else {
+                print("stop the ritual already visible");
+            }
+        } else {
+            print("kDeliverTheItems not complete");
         }
     }
 }
@@ -472,26 +492,24 @@ class GoalStopTheRitualByTheft extends WhenPlayerCarrying
 {
     /* Put this on the ritual versions of The Anax and The Prophet's Hand. Fires if they're picked up by the player. */
 
-    function PlayerCarryingChanged(is_carrying)
+    function OnPlayerPickedUp()
     {
-        if (is_carrying) {
-            Goal.Complete(eGoals.kStopTheRitual);
-            Goal.Show(eGoals.kEscapeWithTheAnax);
-        }
+        Goal.Complete(eGoals.kStopTheRitual);
+        Goal.Show(eGoals.kEscapeWithTheAnax);
     }
 }
 
 
-class GoalEscapeWithTheAnax extends SqRootScript
+class GoalEscapeWithTheAnax extends WatchForItems
 {
     /* Put this on the concrete room where the Anax should be carried to fulfill
-       the "escape" goal. */
+       the "escape" goal. Add a ScriptParams("WatchThis") link to the ritual Anax. */
 
-    function OnObjectRoomEnter()
+    function OnItemsArrived()
     {
-        // FIXME: determine if the Anax is the object in question
-        local item = message().MoveObjId;
-        if (false) {
+        local all_items = message().data;
+        if (all_items) {
+            // It's okay, you can drop him now.
             Goal.Complete(eGoals.kEscapeWithTheAnax);
         }
     }

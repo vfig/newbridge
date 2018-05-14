@@ -127,11 +127,17 @@ local Goal = {
             print("Speaking " + monologue + ": " + DebugMonologueText[monologue]);
             DarkUI.TextMessage(DebugMonologueText[monologue], 0);
             Quest.Set("mlog_done_" + monologue, 1);
+        } else {
+            print("Skipping " + monologue + ": " + DebugMonologueText[monologue]);
         }
     }
     CancelMonologue = function(monologue) {
-        print("Cancelling " + monologue + ": " + DebugMonologueText[monologue]);
-        Quest.Set("mlog_done_" + monologue, 1);
+        if (Quest.Get("mlog_done_" + monologue) == 0) {
+            print("Cancelling " + monologue + ": " + DebugMonologueText[monologue]);
+            Quest.Set("mlog_done_" + monologue, 1);
+        } else {
+            print("Already cancelled " + monologue + ": " + DebugMonologueText[monologue]);
+        }
     }
     IsMonologueDone = function(monologue) {
         return (Quest.Get("mlog_done_" + monologue) == 1);

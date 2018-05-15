@@ -55,15 +55,15 @@ fiction_13: "Don't bite the hand that feeds. If someone's paying you, you protec
 text_13: "Don't bite the hand that feeds. If someone's paying you, you protect them."
 
 ; 14: LootNormal
-fiction_14: "Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1,000 loot and make it yours."
+fiction_14: "Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1000 loot and make it yours."
 text_14: "While you're in the neighbourhood, pick up 1000 loot."
 
 ; 15: LootHard
-fiction_15: "Newbridge isn't the richest neighbourhood, but there's still minor nobles and merchants living here. You'll put their valuables to better use than they will. Find 1,500 loot and make it yours."
+fiction_15: "Newbridge isn't the richest neighbourhood, but there's still wealthy nobles and Hammers around. You'll put their valuables to better use than they will. Find 1500 loot and make it yours."
 text_15: "While you're in the neighbourhood, pick up 1500 loot."
 
 ; 16: LootExpert
-fiction_16: "What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and of the loot? Take everything you find. There's got to be at least 2,000 worth."
+fiction_16: "What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and the loot. Take everything you find. There's got to be at least 2000 worth."
 text_16: "While you're in the neighbourhood, pick up 2000 loot."
 
 ; 17: BonusLootHard

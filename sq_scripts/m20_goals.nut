@@ -607,7 +607,7 @@ class GoalUpdateLootGoals extends SqRootScript
        objectives (e.g. payment for a job). It adds its own loot values to the
        values of all loot goals. Needs FrobInfo > World: Move/Script to work.
     */
-    function OnFrobWorldEnd()
+    function OnUpdateLootGoals()
     {
         AddLootValuesToGoals();
     }

@@ -253,3 +253,17 @@ class PreserveMe extends SqRootScript
         }
     }
 }
+
+
+class GarrettConversationActor extends SqRootScript
+{
+    // Put this on an conversation actor, with steps in the conversation
+    // that send PlayVO("schema") messages to the actor, followed by
+    // Wait with a suitable time.
+
+    function OnPlayVO()
+    {
+        local schema = message().data;
+        Sound.PlayVoiceOver(self, schema);
+    }
+}

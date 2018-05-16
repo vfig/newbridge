@@ -267,6 +267,7 @@ concept hmt122 7		//"I spy you little fish..."
 
 
 // M20 CONVERSATIONS
+concept nbconv4 10    //"Garrett! What have you done?..."
 concept nbconv7 4    //"Heathens now, are we?..."
 
 

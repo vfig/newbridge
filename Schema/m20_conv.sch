@@ -1,77 +1,138 @@
 //////////////////////////////////
+// 300: GARRETT and LADY DI RUPO
+
+// "Lady di Rupo, I presume?"
+schema nb300
+archetype M20_CONV
+audio_class ambient
+nb300
+schema_voice vgarrett 1 nbconv3 (LineNo 1 1)
+
+// "Indeed. I see..."
+schema nb301
+archetype M20_CONV
+nb301
+schema_voice vdirupo 1 nbconv3 (LineNo 2 2)
+
+// "Garrett. ..."
+schema nb302
+archetype M20_CONV
+audio_class ambient
+nb302
+schema_voice vgarrett 1 nbconv3 (LineNo 3 3)
+
+// "Oh that's too bad..."
+schema nb303
+archetype M20_CONV
+nb303
+schema_voice vdirupo 1 nbconv3 (LineNo 4 4)
+
+// "Five thousand. ..."
+schema nb304
+archetype M20_CONV
+audio_class ambient
+nb304
+schema_voice vgarrett 1 nbconv3 (LineNo 5 5)
+
+// "Ah, the Anax! ..."
+schema nb305
+archetype M20_CONV
+nb305
+schema_voice vdirupo 1 nbconv3 (LineNo 6 6)
+
+// "Well, I guess..."
+schema nb306
+archetype M20_CONV
+audio_class ambient
+nb306
+schema_voice vgarrett 1 nbconv3 (LineNo 7 7)
+
+// "Yes, your payment. ..."
+schema nb307
+archetype M20_CONV
+nb307
+schema_voice vdirupo 1 nbconv3 (LineNo 8 8)
+
+
+//////////////////////////////////
 // 400: GARRETT and THE KEEPER
 
 // "Garrett! What have you done?"
 schema nb400
 archetype M20_CONV
 nb400
-schema_voice keeper1 1 nbconv4 (LineNo 1 1)
+schema_voice vkeeper1 1 nbconv4 (LineNo 1 1)
 
 // "Keepers."
 schema nb401
 archetype M20_CONV
+audio_class ambient
 nb401
-schema_voice garrett 1 nbconv4 (LineNo 2 2)
+schema_voice vgarrett 1 nbconv4 (LineNo 2 2)
 
 // "Lady di Rupo intends..."
 schema nb402
 archetype M20_CONV
 nb402
-schema_voice keeper1 1 nbconv4 (LineNo 3 3)
+schema_voice vkeeper1 1 nbconv4 (LineNo 3 3)
 
 // "And?"
 schema nb403
 archetype M20_CONV
+audio_class ambient
 nb403
-schema_voice garrett 1 nbconv4 (LineNo 4 4)
+schema_voice vgarrett 1 nbconv4 (LineNo 4 4)
 
 // "Are you blind..."
 schema nb404
 archetype M20_CONV
 nb404
-schema_voice keeper1 1 nbconv4 (LineNo 5 5)
+schema_voice vkeeper1 1 nbconv4 (LineNo 5 5)
 
 // "This is still sounding..."
 schema nb405
 archetype M20_CONV
+audio_class ambient
 nb405
-schema_voice garrett 1 nbconv4 (LineNo 6 6)
+schema_voice vgarrett 1 nbconv4 (LineNo 6 6)
 
 // "Your concern is no more..."
 schema nb406
 archetype M20_CONV
 nb406
-schema_voice keeper1 1 nbconv4 (LineNo 7 7)
+schema_voice vkeeper1 1 nbconv4 (LineNo 7 7)
 
 // "Another five thousand? ..."
 schema nb407
 archetype M20_CONV
+audio_class ambient
 nb407
-schema_voice garrett 1 nbconv4 (LineNo 8 8)
+schema_voice vgarrett 1 nbconv4 (LineNo 8 8)
 
 // "Good. Here's a key..."
 schema nb408
 archetype M20_CONV
 nb408
-schema_voice keeper1 1 nbconv4 (LineNo 9 9)
+schema_voice vkeeper1 1 nbconv4 (LineNo 9 9)
 
 // "(scoffs)"
 schema nb409
 archetype M20_CONV
+audio_class ambient
 nb409
-schema_voice garrett 1 nbconv4 (LineNo 10 10)
+schema_voice vgarrett 1 nbconv4 (LineNo 10 10)
 
 // "Stop the ritual. I'll await..."
 schema nb410
 archetype M20_CONV
 nb410
-schema_voice keeper1 1 nbconv4 (LineNo 11 11)
+schema_voice vkeeper1 1 nbconv4 (LineNo 11 11)
 
 // "Stop the ritual. And see to it..."
 schema nb411
 archetype M20_CONV
 nb411
-schema_voice keeper1 1 nbconv4 (LineNo 12 12)
+schema_voice vkeeper1 1 nbconv4 (LineNo 12 12)
 
 
 //////////////////////////////////

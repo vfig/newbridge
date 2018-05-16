@@ -267,6 +267,7 @@ concept hmt122 7		//"I spy you little fish..."
 
 
 // M20 CONVERSATIONS
+concept nbconv3 10    //"Lady di Rupo, I presume?..."
 concept nbconv4 10    //"Garrett! What have you done?..."
 concept nbconv7 4    //"Heathens now, are we?..."
 
@@ -447,4 +448,11 @@ voice vshrimp	//Little guy in outtakes miss18
 
 
 
+// M20 VOICES
 
+voice vgarrett
+
+voice vdirupo
+archetype vpatron2
+
+voice vkeeper1

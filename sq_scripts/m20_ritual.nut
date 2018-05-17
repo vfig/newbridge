@@ -15,6 +15,14 @@ class RitualPerformer extends SqRootScript
         local controller = LinkDest(Link_GetScriptParams("Controller", self));
         SendMessage(controller, "PerformerPatrolPoint", message().patrolObj);
     }
+
+    function OnObjActResult()
+    {
+        local sResults = ["kActionDone", "kActionFailed", "kActionNotAttempted"];
+        local sActions = ["kAINoAction", "kAIGoto", "kAIFrob", "kAIManeuver"];
+        print("ObjActResult action: " + sActions[message().action] + ", result: " + sResults[message().result]
+            + ", data: " + actdata + ", target: " + Object.GetName(target) + " (" + target  ")");
+    }
 }
 
 class RitualController extends SqRootScript

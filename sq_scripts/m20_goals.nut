@@ -619,9 +619,7 @@ class GoalDamnKeepers extends SqRootScript
             Object.Teleport(garrett_voice, patrol_pos, facing);
 
             // Ensure the keeper will patrol away when the conversation is done
-            // AICurrentPatrol is a singleton link, so make sure to delete any existing ones.
-            Link_DestroyAll("AICurrentPatrol", keeper);
-            Link.Create("AICurrentPatrol", keeper, patrol);
+            Link_SetCurrentPatrol(keeper, patrol);
             Object.AddMetaProperty(keeper, Object.Named("M-DoesPatrol"));
             
             // And start the conversation (which should maybe start with a momentary Wait?)

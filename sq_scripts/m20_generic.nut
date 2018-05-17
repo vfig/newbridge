@@ -40,6 +40,26 @@ Link_DestroyAll <- function(kind, from = 0, to = 0)
     }
 }
 
+Link_SetCurrentPatrol <- function(ai, trol)
+{
+    // AICurrentPatrol is a singleton link, so make sure to delete any existing ones.
+    Link_DestroyAll("AICurrentPatrol", ai);
+    Link.Create("AICurrentPatrol", ai, trol);
+}
+
+enum eContainType
+{
+   kContainTypeAlt = -3,
+   kContainTypeHand = -2, 
+   kContainTypeBelt = -1,
+   kContainTypeGeneric = 0,
+}
+
+Link_SetContainType <- function(link, type)
+{
+    LinkTools.LinkSetData(link, "", type);
+}
+
 class WhenPlayerCarrying extends SqRootScript
 {
     /* Sends "PlayerPickedUp" and "PlayerDropped" when the player picks up

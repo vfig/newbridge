@@ -512,14 +512,44 @@ class GoalDeliveryDiRupo extends SqRootScript
 
 class GoalPullTheStrings extends SqRootScript
 {
-    /* Put this on the Keeper. */
+    /* Put this on the intervention Keeper. Link to the continuation conversations
+        with ScriptParams("ConvNormal") and ScriptParams("ConvHard").
+    */
+
+    // Triggered by conversation
+    function OnGiveKey()
+    {
+        // Give the player everything the keeper is carrying
+        local player = Object.Named("Player");
+        local result = Container.MoveAllContents(self, player);
+    }
+
+    // Triggered by conversation
+    function OnConversationContinuation()
+    {
+        // FIXME: figure out which conversation to play next according to difficulty
+        local difficulty = Quest.Get("Difficulty");
+        local conv;
+        if (difficulty == 0) {
+            conv = LinkDest(Link_GetScriptParams("ConvNormal", self));
+        } else {
+            conv = LinkDest(Link_GetScriptParams("ConvHard", self));
+        }
+        AI.StartConversation(conv);
+    }
+
+    // Triggered by conversation
+    function OnConversationFinished()
+    {
+        Goal.Show(eGoals.kStopTheRitual);
+        Goal.Show(eGoals.kReturnTheAnax);
+    }
 
     function OnPatrolPoint()
     {
         // Go away when we reach the end of the patrol
         local link = Link.GetOne("AIPatrol", message().patrolObj);
         if (link == 0) {
-            print("Reached the end of our patrol");
             Object.Destroy(self);
         }
     }
@@ -541,10 +571,10 @@ class GoalDamnKeepers extends SqRootScript
         /*
         if (Goal.IsComplete(eGoals.kDeliverTheItems)
             && (! Goal.IsVisible(eGoals.kStopTheRitual))
-            && (already_triggered != 1))
+            && (! already_triggered))
         {
         */
-        if (true) {
+        if (! already_triggered) {
             // Don't trigger any of the keeper points again.
             Quest.Set("triggered_damn_keepers", 1);
 
@@ -587,11 +617,6 @@ class GoalDamnKeepers extends SqRootScript
             AI.StartConversation(conv);
 
             // FIXME: need to start the "Garrett and the Keeper" conversation.
-
-            // FIXME: the goals should be on the Keeper object, so the conversation can
-            // signal it when done
-            //Goal.Show(eGoals.kStopTheRitual);
-            //Goal.Show(eGoals.kReturnTheAnax);
         }
     }
 }

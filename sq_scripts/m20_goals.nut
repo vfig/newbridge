@@ -121,6 +121,37 @@ local Goal = {
         Quest.Set("goal_visible_" + goal, 1);
     }
 
+    IsGoldilocksDifficulty = function(goal) {
+        local difficulty = Quest.Get("difficulty");
+        if (Quest.Exists("goal_min_diff_" + goal)) {
+            local min_diff = Quest.Get("goal_min_diff_" + goal);
+            if (difficulty < min_diff) {
+                return false;
+            }
+        }
+        if (Quest.Exists("goal_max_diff_" + goal)) {
+            local max_diff = Quest.Get("goal_max_diff_" + goal);
+            if (difficulty > max_diff) {
+                return false;
+            }
+        }
+    }
+
+    // For a few objectives, we want notifications like Thief 2 that the player is on
+    // the right track. But since this Goal table doesn't know if there's new objectives
+    // or not, it's up to each goal script to call this if desired.
+    PlayCompleteNotification = function()
+    {
+        // Only play notifications if they're turned on
+        if (DarkGame.BindingGetFloat("goal_notify") != 0) {
+            local player = Object.Named("Player");
+            local schema = Object.Named("new_obj");
+            local message = Data.GetString("PlayHint.str", "DoneGoal");
+            DarkUI.TextMessage(message);
+            Sound.PlaySchemaAmbient(player, schema);
+        }
+    }
+
     SpeakMonologue = function(monologue) {
         if (Quest.Get("mlog_done_" + monologue) == 0) {
             // FIXME: play the voice line here
@@ -448,11 +479,9 @@ class GoalDeliverTheItems extends MultipleDeliveries
         Goal.Complete(eGoals.kKidnapTheAnax);
         Goal.Complete(eGoals.kStealTheHand);
         Goal.Complete(eGoals.kDeliverTheItems);
-
-        // FIXME: need to start the "Garrett and Lady di Rupo" conversation.
-    }
+        Goal.PlayCompleteNotification();
+   }
 }
-
 
 /* -------- The Ritual -------- */
 
@@ -517,6 +546,9 @@ class GoalEscapeWithTheAnax extends WatchForItems
         if (all_items) {
             // It's okay, you can drop him now.
             Goal.Complete(eGoals.kEscapeWithTheAnax);
+            if (Goal.IsGoldilocksDifficulty(eGoals.kEscapeWithTheAnax)) {
+                Goal.PlayCompleteNotification();
+            }
         }
     }
 }
@@ -534,6 +566,7 @@ class GoalReturnTheAnax extends SqRootScript
         local item = message().data;
         DisableItemWorldFrob(item);
         Goal.Complete(eGoals.kReturnTheAnax);
+        Goal.PlayCompleteNotification();
     }
 
     function DisableItemWorldFrob(item)

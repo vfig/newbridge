@@ -182,7 +182,7 @@ local Goal = {
 
 class GoalArgauxsBody extends SqRootScript
 {
-    /* Put this on Argaux's body. Ensure it has World: FocusScript, Script
+    /* Put this on Argaux's body. This ensures it has World: FocusScript, Script
        in its FrobInfo. */
 
     function Activate()
@@ -192,6 +192,13 @@ class GoalArgauxsBody extends SqRootScript
 
         Goal.Cancel(eGoals.kMeetArgaux);
         Goal.Show(eGoals.kFindArgauxsInfauxs);
+    }
+
+    function OnSim()
+    {
+        if (message().starting) {
+            Object_AddFrobAction(self, eFrobAction.kFrobActionFocusScript | eFrobAction.kFrobActionScript);
+        }
     }
 
     function OnWorldSelect()
@@ -211,14 +218,8 @@ class GoalArgauxsBody extends SqRootScript
         // Someone's stolen our key! Good for them!
         if (message().event == eContainsEvent.kContainRemove) {
             Activate();
-            DisableItemWorldFrob(self);
+            Object_SetFrobAction(self, eFrobAction.kFrobActionIgnore);
         }
-    }
-
-    function DisableItemWorldFrob(item)
-    {
-        const IgnoreFlag = 8;
-        Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
     }
 }
 
@@ -461,16 +462,10 @@ class GoalDeliverTheItems extends MultipleDeliveries
        a ScriptParams("DeliveryRoom") link to this room.
        Give the room a ControlDevice link to the conversation to trigger. */
 
-    function DisableItemWorldFrob(item)
-    {
-        const IgnoreFlag = 8;
-        Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
-    }
-
     function OnItemDelivered()
     {
         local item = message().data;
-        DisableItemWorldFrob(item);
+        Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
 
         base.OnItemDelivered();
     }
@@ -685,15 +680,9 @@ class GoalReturnTheAnax extends SqRootScript
     function OnItemDelivered()
     {
         local item = message().data;
-        DisableItemWorldFrob(item);
+        Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
         Goal.Complete(eGoals.kReturnTheAnax);
         Goal.PlayCompleteNotification();
-    }
-
-    function DisableItemWorldFrob(item)
-    {
-        const IgnoreFlag = 8;
-        Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
     }
 }
 
@@ -734,15 +723,9 @@ class GoalSellTheHand
        On the ritual hand put the ItemToDeliver script, with a ScriptParams("DeliveryRoom")
        link to this room. Add a ControlDevice link to the conversation to trigger. */
 
-    function DisableItemWorldFrob(item)
-    {
-        const IgnoreFlag = 8;
-        Property.Set(item, "FrobInfo", "World Action", IgnoreFlag);
-    }
-
     function OnItemDelivered() {
         local item = message().data;
-        DisableItemWorldFrob(item);
+        Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
 
         Goal.Show(eGoals.kBonusSellTheHand);
         Goal.Complete(eGoals.kBonusSellTheHand);
@@ -759,7 +742,7 @@ class GoalUpdateLootGoals extends SqRootScript
 {
     /* Put this on a loot item that has value, but shouldn't count towards loot
        objectives (e.g. payment for a job). It adds its own loot values to the
-       values of all loot goals. Needs FrobInfo > World: Move/Script to work.
+       values of all loot goals. Send it "UpdateLootGoals" to do the dirty work.
     */
     function OnUpdateLootGoals()
     {

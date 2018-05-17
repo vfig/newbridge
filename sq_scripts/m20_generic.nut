@@ -60,6 +60,61 @@ Link_SetContainType <- function(link, type)
     LinkTools.LinkSetData(link, "", type);
 }
 
+enum eFrobWhere
+{
+    kFrobWorld = 0,
+    kFrobInv = 1,
+    kFrobTool = 2,
+}
+
+enum eFrobAction
+{
+    kFrobActionMove = 1,
+    kFrobActionScript = 2,
+    kFrobActionDelete = 4,
+    kFrobActionIgnore = 8,
+    kFrobActionFocusScript = 16,
+    kFrobActionToolCursor = 32,
+    kFrobActionUseAmmo = 64,
+    kFrobActionDefault = 128,
+    kFrobActionDeselect = 256,
+}
+
+Object_FrobField <- function(where)
+{
+    if (where == eFrobWhere.kFrobTool) {
+        return "Tool Action";
+    } else if (where == eFrobWhere.kFrobInv) {
+        return "Inv Action";
+    } else {
+        return "World Action";
+    }
+}
+
+Object_GetFrobAction <- function(obj, where = eFrobWhere.kFrobWorld)
+{
+    return Property.Get(obj, "FrobInfo", Object_FrobField(where));
+}
+
+Object_SetFrobAction <- function(obj, action, where = eFrobWhere.kFrobWorld)
+{
+    Property.Set(obj, "FrobInfo", Object_FrobField(where), action);
+}
+
+Object_AddFrobAction <- function(obj, action, where = eFrobWhere.kFrobWorld)
+{
+    local frob = Object_GetFrobAction(obj, where);
+    frob = frob | action;
+    Object_SetFrobAction(obj, frob, where);
+}
+
+Object_RemoveFrobAction <- function(obj, action, where = eFrobWhere.kFrobWorld)
+{
+    local frob = Object_GetFrobAction(obj, where);
+    frob = frob & ~action;
+    Object_SetFrobAction(obj, frob, where);
+}
+
 class WhenPlayerCarrying extends SqRootScript
 {
     /* Sends "PlayerPickedUp" and "PlayerDropped" when the player picks up

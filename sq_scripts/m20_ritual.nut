@@ -2,23 +2,37 @@ class RitualPerformer extends SqRootScript
 {
     function OnUnpocketHand()
     {
-        // Transfer the Hand to the Alt location
+        local controller = LinkDest(Link_GetScriptParams("Controller", self));
+
+        // Transfer the Hand to the Alt location, and make it unfrobbable
         local link = Link.GetOne("Contains", self);
-        Link_SetContainType(link, eContainType.kContainTypeAlt);
+        if (link == 0) {
+            SendMessage(controller, "PerformerLookMaNoHands");
+        } else {
+            local hand = LinkDest(link);
+            Link_SetContainType(link, eContainType.kContainTypeAlt);
+            Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
+        }
 
         // Tell the controller about it
-        local controller = LinkDest(Link_GetScriptParams("Controller", self));
         SendMessage(controller, "PerformerWavingStarted");
     }
 
     function OnPocketHand()
     {
-        // Put the Hand back on the belt
+        local controller = LinkDest(Link_GetScriptParams("Controller", self));
+
+        // Put the Hand back on the belt, and make it frobbable again
         local link = Link.GetOne("Contains", self);
-        Link_SetContainType(link, eContainType.kContainTypeBelt);
+        if (link == 0) {
+            SendMessage(controller, "PerformerLookMaNoHands");
+        } else {
+            local hand = LinkDest(link);
+            Link_SetContainType(link, eContainType.kContainTypeBelt);
+            Object_RemoveFrobAction(hand, eFrobAction.kFrobActionIgnore);
+        }
 
         // Tell the controller about it
-        local controller = LinkDest(Link_GetScriptParams("Controller", self));
         SendMessage(controller, "PerformerWavingFinished");
     }
 
@@ -136,6 +150,13 @@ class RitualController extends SqRootScript
         if (current_index == (stages.len() - 1)) {
             FinishRitual();
         }
+    }
+
+    function OnPerformerLookMaNoHands()
+    {
+        // FIXME: stop the ritual and make di rupo react
+        print("RITUAL DEATH: look ma no hands!");
+        Object.Destroy(self);
     }
 
     function OnPerformerConversationFinished()

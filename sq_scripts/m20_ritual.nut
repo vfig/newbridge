@@ -62,7 +62,10 @@ class RitualController extends SqRootScript
     strips = [];
 
     // Vertices in the order that the performer should visit them.
-    stages = [0, 1, 2, 3, 4, 5, 6];
+    //stages = [0, 1, 2, 3, 4, 5, 6];
+    //stages = [0, 3, 6, 2, 5, 1, 4];
+    //stages = [0, 5, 3, 1, 6, 4, 2];
+    stages = [0, 4, 1, 5, 2, 6, 3];
 
     // Status of the ritual
     // FIXME: the following status stuff needs to be GetData/SetData'd so it saves and loads
@@ -105,12 +108,12 @@ class RitualController extends SqRootScript
                 print("RITUAL DEATH: incorrect number of downs.");
                 Object.Destroy(self);
             }
-            // FIXME:
-            /*
             if (lights.len() != stages.len()) {
                 print("RITUAL DEATH: incorrect number of lights.");
                 Object.Destroy(self);
             }
+            // FIXME:
+            /*
             if (extras.len() != stages.len()) {
                 print("RITUAL DEATH: incorrect number of extras.");
                 Object.Destroy(self);
@@ -140,8 +143,10 @@ class RitualController extends SqRootScript
             // We've done our little dance. Time to get down tonight.
             local down = downs[current_stage];
             local strip = strips[current_stage];
+            local light = lights[current_stage];
             print("RITUAL: Down " + current_index + " via " + Object.GetName(down) + " (" + down + ")");
             SendMessage(strip, "TurnOn");
+            SendMessage(light, "TurnOn");
             AI.StartConversation(down);
         }
     }
@@ -156,6 +161,9 @@ class RitualController extends SqRootScript
     {
         print("RITUAL: Stopped waving");
         // FIXME: make the extras stop chanting, if they're not busy
+
+        local light = lights[current_stage];
+            SendMessage(light, "TurnOff");
 
         // Check if we've finished the final stage
         if (current_index == (stages.len() - 1)) {

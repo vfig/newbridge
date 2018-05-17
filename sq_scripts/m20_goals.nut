@@ -510,25 +510,88 @@ class GoalDeliveryDiRupo extends SqRootScript
 
 /* -------- The Ritual -------- */
 
+class GoalPullTheStrings extends SqRootScript
+{
+    /* Put this on the Keeper. */
+
+    function OnPatrolPoint()
+    {
+        // Go away when we reach the end of the patrol
+        local link = Link.GetOne("AIPatrol", message().patrolObj);
+        if (link == 0) {
+            print("Reached the end of our patrol");
+            Object.Destroy(self);
+        }
+    }
+}
+
 
 class GoalDamnKeepers extends SqRootScript
 {
-    /* Put this on each concrete room where the Keeper intervention can happen. */
+    /* Put this on each concrete room where the Keeper intervention can happen. Give it:
+        - a ScriptParams("Door") link to the (locked) door for this room.
+        - a ScriptParams("Patrol") link to the TrolPt where the Keeper should start
+          (it should face the way the Keeper should face).
+        - a ScriptParams("Conv") link to the conversation for the encounter.
+    */
 
     function OnPlayerRoomEnter()
     {
-        if (Goal.IsComplete(eGoals.kDeliverTheItems)) {
-            if (! Goal.IsVisible(eGoals.kStopTheRitual)) {
+        local already_triggered = (Quest.Get("triggered_damn_keepers") == 1);
+        /*
+        if (Goal.IsComplete(eGoals.kDeliverTheItems)
+            && (! Goal.IsVisible(eGoals.kStopTheRitual))
+            && (already_triggered != 1))
+        {
+        */
+        if (true) {
+            // Don't trigger any of the keeper points again.
+            Quest.Set("triggered_damn_keepers", 1);
 
-                // FIXME: need to start the "Garrett and the Keeper" conversation.
+            local player = Object.Named("Player");
+            local door = LinkDest(Link_GetScriptParams("Door", self));
+            local patrol = LinkDest(Link_GetScriptParams("Patrol", self));
+            local conv = LinkDest(Link_GetScriptParams("Conv", self));
+            local keeper = LinkDest(Link_GetConversationActor(1, conv));
+            local garrett_voice = LinkDest(Link_GetConversationActor(2, conv));
 
-                Goal.Show(eGoals.kStopTheRitual);
-                Goal.Show(eGoals.kReturnTheAnax);
-            } else {
-                print("stop the ritual already visible");
-            }
-        } else {
-            print("kDeliverTheItems not complete");
+            if (player == 0) { print("Failed to find player!"); return; }
+            if (door == 0) { print("Failed to find door!"); return; }
+            if (patrol == 0) { print("Failed to find patrol!"); return; }
+            if (conv == 0) { print("Failed to find conv!"); return; }
+            if (keeper == 0) { print("Failed to find keeper!"); return; }
+            if (garrett_voice == 0) { print("Failed to find garrett_voice!"); return; }
+
+            local patrol_pos = Object.Position(patrol);
+            local player_pos = Object.Position(player);
+            // local direction = (patrol_pos - player_pos).GetNormalized();
+            // local z_angle = 270 - (atan2(direction.x, direction.y) * 180 / 3.14);
+            // print("z_angle: " + z_angle);
+            // local facing = vector(0, 0, z_angle);
+            local facing = Object.Facing(patrol);
+
+            // Close the door in front of the player
+            SendMessage(door, "TurnOff");
+
+            // Teleport the actors to the patrol point, and make the keeper face the player.
+            Object.Teleport(keeper, patrol_pos, facing);
+            Object.Teleport(garrett_voice, patrol_pos, facing);
+
+            // Ensure the keeper will patrol away when the conversation is done
+            // AICurrentPatrol is a singleton link, so make sure to delete any existing ones.
+            Link_DestroyAll("AICurrentPatrol", keeper);
+            Link.Create("AICurrentPatrol", keeper, patrol);
+            Object.AddMetaProperty(keeper, Object.Named("M-DoesPatrol"));
+            
+            // And start the conversation (which should maybe start with a momentary Wait?)
+            AI.StartConversation(conv);
+
+            // FIXME: need to start the "Garrett and the Keeper" conversation.
+
+            // FIXME: the goals should be on the Keeper object, so the conversation can
+            // signal it when done
+            //Goal.Show(eGoals.kStopTheRitual);
+            //Goal.Show(eGoals.kReturnTheAnax);
         }
     }
 }

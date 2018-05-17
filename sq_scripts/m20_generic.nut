@@ -1,3 +1,37 @@
+/* Get the ScriptParams link with the given data */
+Link_GetScriptParams <- function(data = "", from = 0, to = 0)
+{
+    local links = Link.GetAll("ScriptParams", from, to);
+    foreach (link in links) {
+        local link_data = LinkTools.LinkGetData(link, "");
+        if (link_data == data) {
+            return link;
+        }
+    }
+    return 0;
+}
+
+/* Get the AIConversationActor link with the given id */
+Link_GetConversationActor <- function(actor_id, conversation)
+{
+    local links = Link.GetAll("AIConversationActor", conversation);
+    foreach (link in links) {
+        local link_data = LinkTools.LinkGetData(link, "Actor ID");
+        if (link_data == actor_id) {
+            return link;
+        }
+    }
+    return 0;
+}
+
+Link_DestroyAll <- function(kind, from = 0, to = 0)
+{
+    local links = Link.GetAll(kind, from, to);
+    foreach (link in links) {
+        Link.Destroy(link);
+    }
+}
+
 class WhenPlayerCarrying extends SqRootScript
 {
     /* Sends "PlayerPickedUp" and "PlayerDropped" when the player picks up

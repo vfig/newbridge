@@ -267,9 +267,10 @@ concept hmt122 7		//"I spy you little fish..."
 
 
 // M20 CONVERSATIONS
-concept nbconv3 10    //"Lady di Rupo, I presume?..."
-concept nbconv4 10    //"Garrett! What have you done?..."
-concept nbconv7 4    //"Heathens now, are we?..."
+concept nbconv3 10  //"Lady di Rupo, I presume?..."
+concept nbconv4 10  //"Garrett! What have you done?..."
+concept nbconv5 10  // Ritual incantations
+concept nbconv7 4   //"Heathens now, are we?..."
 
 
 
@@ -456,3 +457,6 @@ voice vdirupo
 archetype vpatron2
 
 voice vkeeper1
+
+voice vprophet
+archetype vhaunt

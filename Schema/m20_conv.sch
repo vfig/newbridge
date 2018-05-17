@@ -4,7 +4,6 @@
 // "Lady di Rupo, I presume?"
 schema nb300
 archetype M20_CONV
-audio_class ambient
 nb300
 schema_voice vgarrett 1 nbconv3 (LineNo 1 1)
 
@@ -17,7 +16,6 @@ schema_voice vdirupo 1 nbconv3 (LineNo 2 2)
 // "Garrett. ..."
 schema nb302
 archetype M20_CONV
-audio_class ambient
 nb302
 schema_voice vgarrett 1 nbconv3 (LineNo 3 3)
 
@@ -30,7 +28,6 @@ schema_voice vdirupo 1 nbconv3 (LineNo 4 4)
 // "Five thousand. ..."
 schema nb304
 archetype M20_CONV
-audio_class ambient
 nb304
 schema_voice vgarrett 1 nbconv3 (LineNo 5 5)
 
@@ -43,7 +40,6 @@ schema_voice vdirupo 1 nbconv3 (LineNo 6 6)
 // "Well, I guess..."
 schema nb306
 archetype M20_CONV
-audio_class ambient
 nb306
 schema_voice vgarrett 1 nbconv3 (LineNo 7 7)
 
@@ -66,7 +62,6 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 1 1)
 // "Keepers."
 schema nb401
 archetype M20_CONV
-audio_class ambient
 nb401
 schema_voice vgarrett 1 nbconv4 (LineNo 2 2)
 
@@ -79,7 +74,6 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 3 3)
 // "And?"
 schema nb403
 archetype M20_CONV
-audio_class ambient
 nb403
 schema_voice vgarrett 1 nbconv4 (LineNo 4 4)
 
@@ -92,7 +86,6 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 5 5)
 // "This is still sounding..."
 schema nb405
 archetype M20_CONV
-audio_class ambient
 nb405
 schema_voice vgarrett 1 nbconv4 (LineNo 6 6)
 
@@ -105,7 +98,6 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 7 7)
 // "Another five thousand? ..."
 schema nb407
 archetype M20_CONV
-audio_class ambient
 nb407
 schema_voice vgarrett 1 nbconv4 (LineNo 8 8)
 
@@ -118,7 +110,6 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 9 9)
 // "(scoffs)"
 schema nb409
 archetype M20_CONV
-audio_class ambient
 nb409
 schema_voice vgarrett 1 nbconv4 (LineNo 10 10)
 
@@ -133,6 +124,64 @@ schema nb411
 archetype M20_CONV
 nb411
 schema_voice vkeeper1 1 nbconv4 (LineNo 12 12)
+
+
+//////////////////////////////////
+// 500: LADY DI RUPOand THE PROPHET (The ritual)
+
+// "Hand carries Water..."
+schema nb500
+archetype M20_CONV
+nb500
+schema_voice vdirupo 1 nbconv5 (LineNo 1 1)
+
+// "Binders them Bones..."
+schema nb501
+archetype M20_CONV
+nb501
+schema_voice vdirupo 1 nbconv5 (LineNo 2 2)
+
+// "Standers on feets..."
+schema nb502
+archetype M20_CONV
+nb502
+schema_voice vdirupo 1 nbconv5 (LineNo 3 3)
+
+// "Grow like them Treesie..."
+schema nb503
+archetype M20_CONV
+nb503
+schema_voice vdirupo 1 nbconv5 (LineNo 4 4)
+
+// "Wake in the Darkness..."
+schema nb504
+archetype M20_CONV
+nb504
+schema_voice vdirupo 1 nbconv5 (LineNo 5 5)
+
+// "Breathesie them Air..."
+schema nb505
+archetype M20_CONV
+nb505
+schema_voice vdirupo 1 nbconv5 (LineNo 6 6)
+
+// "Fire burn! Flame leap!..."
+schema nb506
+archetype M20_CONV
+nb506
+schema_voice vdirupo 1 nbconv5 (LineNo 7 7)
+
+// "Unbuild! Unmake!..."
+schema nb507
+archetype M20_CONV
+nb507
+schema_voice vprophet 1 nbconv5 (LineNo 8 8)
+
+// "Yes! Yes! Slay them all!..."
+schema nb508
+archetype M20_CONV
+nb508
+schema_voice vdirupo 1 nbconv5 (LineNo 9 9)
 
 
 //////////////////////////////////

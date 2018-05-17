@@ -63,9 +63,9 @@ class RitualController extends SqRootScript
 
     // Vertices in the order that the performer should visit them.
     //stages = [0, 1, 2, 3, 4, 5, 6];
-    //stages = [0, 3, 6, 2, 5, 1, 4];
+    stages = [0, 3, 6, 2, 5, 1, 4];
     //stages = [0, 5, 3, 1, 6, 4, 2];
-    stages = [0, 4, 1, 5, 2, 6, 3];
+    //stages = [0, 4, 1, 5, 2, 6, 3];
 
     // Status of the ritual
     // FIXME: the following status stuff needs to be GetData/SetData'd so it saves and loads

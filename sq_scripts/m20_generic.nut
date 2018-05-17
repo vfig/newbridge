@@ -11,6 +11,14 @@ Link_GetScriptParams <- function(data = "", from = 0, to = 0)
     return 0;
 }
 
+/* Create a new ScriptParams link with the given data */
+Link_CreateScriptParams <- function(data = "", from = 0, to = 0)
+{
+    local link = Link.Create("ScriptParams", from, to);
+    LinkTools.LinkSetData(link, "", data);
+    return link;
+}
+
 /* Get the AIConversationActor link with the given id */
 Link_GetConversationActor <- function(actor_id, conversation)
 {

@@ -729,7 +729,7 @@ class GoalTheHandThatFeeds extends PreserveMe
 
 /* -------- Loot -------- */
 
-
+// FIXME: put this into objectives map
 class GoalSellTheHand
 {
     /* Put this on the concrete room where the ritual hand should be delivered.

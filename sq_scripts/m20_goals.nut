@@ -508,7 +508,7 @@ class GoalDeliveryDiRupo extends SqRootScript
    }
 }
 
-/* -------- The Ritual -------- */
+/* -------- Intervention -------- */
 
 class GoalPullTheStrings extends SqRootScript
 {
@@ -527,7 +527,7 @@ class GoalPullTheStrings extends SqRootScript
     // Triggered by conversation
     function OnConversationContinuation()
     {
-        // FIXME: figure out which conversation to play next according to difficulty
+        // Figure out which conversation to play next according to difficulty
         local difficulty = Quest.Get("Difficulty");
         local conv;
         if (difficulty == 0) {
@@ -543,6 +543,15 @@ class GoalPullTheStrings extends SqRootScript
     {
         Goal.Show(eGoals.kStopTheRitual);
         Goal.Show(eGoals.kReturnTheAnax);
+
+        // Open the door again. Unlock it if it has a linked lock.
+        local door = LinkDest(Link_GetScriptParams("Door", self));
+        local lock_link = Link.GetOne("Lock", door);
+        if (lock_link != 0) {
+            SendMessage(LinkDest(lock_link), "Unlock");
+        } else {
+            SendMessage(door, "Open");
+        }
     }
 
     function OnPatrolPoint()
@@ -568,13 +577,10 @@ class GoalDamnKeepers extends SqRootScript
     function OnPlayerRoomEnter()
     {
         local already_triggered = (Quest.Get("triggered_damn_keepers") == 1);
-        /*
         if (Goal.IsComplete(eGoals.kDeliverTheItems)
             && (! Goal.IsVisible(eGoals.kStopTheRitual))
             && (! already_triggered))
         {
-        */
-        if (! already_triggered) {
             // Don't trigger any of the keeper points again.
             Quest.Set("triggered_damn_keepers", 1);
 
@@ -594,14 +600,19 @@ class GoalDamnKeepers extends SqRootScript
 
             local patrol_pos = Object.Position(patrol);
             local player_pos = Object.Position(player);
-            // local direction = (patrol_pos - player_pos).GetNormalized();
-            // local z_angle = 270 - (atan2(direction.x, direction.y) * 180 / 3.14);
-            // print("z_angle: " + z_angle);
-            // local facing = vector(0, 0, z_angle);
             local facing = Object.Facing(patrol);
 
-            // Close the door in front of the player
-            SendMessage(door, "TurnOff");
+            // Close the door in front of the player. Lock it if it has a linked lock.
+            local lock_link = Link.GetOne("Lock", door);
+            if (lock_link != 0) {
+                SendMessage(LinkDest(lock_link), "Lock");
+            } else {
+                SendMessage(door, "Close");
+            }
+
+            // Make sure the Keeper can find the door again when the conversation ends.
+            local keeper_door_link = Link.Create("ScriptParams", keeper, door);
+            LinkTools.LinkSetData(keeper_door_link, "", "Door");
 
             // Teleport the actors to the patrol point, and make the keeper face the player.
             Object.Teleport(keeper, patrol_pos, facing);
@@ -615,12 +626,11 @@ class GoalDamnKeepers extends SqRootScript
             
             // And start the conversation (which should maybe start with a momentary Wait?)
             AI.StartConversation(conv);
-
-            // FIXME: need to start the "Garrett and the Keeper" conversation.
         }
     }
 }
 
+/* -------- The Ritual -------- */
 
 class GoalStopTheRitualByForce extends SqRootScript
 {

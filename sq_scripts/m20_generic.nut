@@ -301,3 +301,16 @@ class GarrettConversationActor extends SqRootScript
         Sound.PlayVoiceOver(self, schema);
     }
 }
+
+
+class DoorStartsOpen extends SqRootScript
+{
+    // Put this on a door to have it open when the mission starts.
+
+    function OnSim()
+    {
+        if (message().starting) {
+            SendMessage(self, "Open");
+        }
+    }
+}

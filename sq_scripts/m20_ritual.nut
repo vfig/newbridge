@@ -42,6 +42,13 @@ class Controller extends Controlled
     }
 }
 
+enum eRitualStatus {
+    kRitualNotStarted       = 0,
+    kRitualBegun            = 1,
+    kRitualEnded            = 2,
+    kRitualAborted          = 3,
+}
+
 class RitualMasterController extends Controller
 {
     /* The overall ritual process is signalled by these messages:
@@ -93,7 +100,7 @@ class RitualMasterController extends Controller
 
     // Status of the ritual
     // FIXME: the following status stuff needs to be GetData/SetData'd so it saves and loads
-    is_running = false;
+    status = eRitualStatus.kRitualNotStarted;
     current_index = 0; // Index into stages
     current_stage = 0; // Current stage vertex
 
@@ -102,47 +109,60 @@ class RitualMasterController extends Controller
     function OnTurnOn()
     {
         // FIXME: check GetData for is_running
-        if (! is_running) {
-            is_running = true;
+        if (status == eRitualStatus.kRitualNotStarted) {
             Begin();
         } else {
             // FIXME: for testing only:
-            Finish();
+            End();
             // Abort();
         }
     }
 
     function Begin()
     {
-        // FIXME: check GetData for current index? Or do we just resume somehow or something?
-        current_index = 0;
-        current_stage = stages[current_index];
-        print("RITUAL: Begin");
-        PunchDown("RitualBegin", current_stage);
-        print("RITUAL: Index " + current_index + " is stage " + current_stage);
+        if (status == eRitualStatus.kRitualNotStarted) {
+            status = eRitualStatus.kRitualBegun;
 
-        // Seven times rounds and seven times downs - always begin with a round.
-        print("RITUAL: Round " + current_stage);
-        PunchDown("RitualRound", current_stage);
+            // FIXME: check GetData for current index? Or do we just resume somehow or something?
+            current_index = 0;
+            current_stage = stages[current_index];
+            print("RITUAL: Begin");
+            PunchDown("RitualBegin", current_stage);
+            print("RITUAL: Index " + current_index + " is stage " + current_stage);
+
+            // Seven times rounds and seven times downs - always begin with a round.
+            print("RITUAL: Round " + current_stage);
+            PunchDown("RitualRound", current_stage);
+        }
     }
 
     function End()
     {
-        print("RITUAL: End");
-        PunchDown("RitualEnd", current_stage);
+        if (status == eRitualStatus.kRitualBegun) {
+            status = eRitualStatus.kRitualEnded;
 
-        // FIXME: conclude the ritual
-        print("RITUAL DEATH: run out of busywork!");
-        Object.Destroy(self);
+            print("RITUAL: End");
+            PunchDown("RitualEnd", current_stage);
+
+            // FIXME: conclude the ritual
+            print("RITUAL DEATH: run out of busywork!");
+            Object.Destroy(self);
+        }
     }
 
     function Abort()
     {
-        // FIXME: need state variable so we can't Begin/End/Abort inappropriately or more than once
-        print("RITUAL: Abort");
-        // FIXME: stop the ritual and make di rupo react
-        print("RITUAL DEATH: look ma no hands!");
-        Object.Destroy(self);
+        if (status == eRitualStatus.kRitualBegun) {
+            status = eRitualStatus.kRitualAborted;
+
+            // FIXME: need state variable so we can't Begin/End/Abort inappropriately or more than once
+            print("RITUAL: Abort");
+            PunchDown("RitualAbort", current_stage);
+
+            // FIXME: stop the ritual and make di rupo react
+            print("RITUAL DEATH: look ma no hands!");
+            Object.Destroy(self);
+        }
     }
 
     // ---- Messages from child controllers
@@ -378,6 +398,11 @@ class RitualPerformerController extends Controller
 
     function OnRitualEnd()
     {
+        // Kill all the conversations
+        foreach (down in downs) {
+            SendMessage(down, "TurnOff");
+        }
+
         // Wake the performer from her trance
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
         Object.RemoveMetaProperty(performer, "M-RitualTrance");

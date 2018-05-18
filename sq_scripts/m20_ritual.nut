@@ -359,6 +359,7 @@ class RitualPerformerController extends Controller
     performer = 0;
     rounds = [];
     downs = [];
+    searchers = [];
 
     function OnSim()
     {
@@ -367,6 +368,10 @@ class RitualPerformerController extends Controller
             performer = Link_GetScriptParamsDest("Performer", self);
             rounds = Link_GetAllScriptParamsDests("Patrol", self);
             downs = Link_GetAllScriptParamsDests("Conv", self);
+            searchers = Link_GetAllScriptParamsDests("Search", self);
+            print("Initial searchers: " + searchers.len());
+            searchers = Link_CollectPatrolPath(searchers);
+            print("Expanded searchers: " + searchers.len());
             if (performer == 0) {
                 print("RITUAL DEATH: no performer.");
                 Object.Destroy(self);
@@ -428,9 +433,16 @@ class RitualPerformerController extends Controller
 
         // Wake the performer from her trance
         // FIXME: okay, so we want to patrol. But we want to find the nearest trol point
-        //Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-        Link_SetCurrentPatrol(performer, 0);
         Object.RemoveMetaProperty(performer, "M-RitualTrance");
+        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+
+        // Make the performer search around--hack, cause they don't want to investigate :(
+        if (searchers.len() > 0) {
+            local i = Data.RandInt(0, (searchers.len() - 1));
+            Link_SetCurrentPatrol(performer, searchers[i]);
+            print("Setting current patrol to: " + Object_Description(searchers[i]));
+            Object.AddMetaProperty(performer, "Searcher");
+        }
 
         // Make sure she'll investigate
         //Link.Create("AIInvest", performer, Object.Named("Player"));

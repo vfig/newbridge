@@ -93,6 +93,32 @@ Link_SetCurrentPatrol <- function(ai, trol)
     }
 }
 
+Link_CollectPatrolPath <- function(trols)
+{
+    local seen = {};
+    local queue = [];
+    local all = [];
+    foreach (trol in trols) {
+        queue.append(trol);
+    }
+    while (queue.len() > 0) {
+        local trol = queue.pop();
+        all.append(trol);
+        seen[trol] <- true;
+        local links = Link.GetAll("AIPatrol", trol);
+        local count = 0;
+        foreach (link in links) {
+            local dest = LinkDest(link);
+            if (! seen.rawin(dest)) {
+                queue.append(dest);
+            }
+            count += 1;
+        }
+    }
+    return all;
+}
+
+
 enum eContainType
 {
    kContainTypeAlt = -3,

@@ -189,17 +189,16 @@ class RitualMasterController extends SqRootScript
 class RitualPerformer extends SqRootScript
 {
     master = 0;
-    foo = -1;
 
     function OnObeyMe()
     {
         master = message().data;
-        print("master of " + self + " is: " + master + " and foo is: " + foo);
+        print("master of " + self + " is: " + master);
     }
 
     function OnPatrolPoint()
     {
-        print("master is: " + master + " and foo is: " + foo);
+        print("master is: " + master + ", " + this.master);
         // Tell the controller we've reached another patrol point (not necessarily the right one)
         local trol = message().patrolObj;
         print("PERFORMER: reached trol: " + Object.GetName(trol) + " (" + trol + ")"

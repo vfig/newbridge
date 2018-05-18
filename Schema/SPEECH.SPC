@@ -300,6 +300,7 @@ tag CarryBody				//does AI see player carrying a a body
 tag Reacquire True False   		//does the AI see for the 2nd+ time?
 tag Investigate True False  		//is the AI looking for the player?
 
+
 //////////
 //VOICES//
 //////////

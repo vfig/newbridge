@@ -399,33 +399,44 @@ class DoorStartsOpen extends SqRootScript
 }
 
 
+/* Put this script on a conversation, and then you can send "TurnOff" to it to
+   stop it dead. Make sure to give Actor 6 one step somewhere--"Nothing()" is
+   fine for the action--or it will be ignored and its death will be in vain. */
 class ConversationKiller extends SqRootScript
 {
-    function OnTurnOn()
+    function OnSim()
     {
-        // Spawn a ConversationKiller AI to be actor 6
-        if (Link_GetConversationActor(6, self) != 0) {
-            print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") already has actor 6!");
-            return;
+        if (message().starting) {
+            // Spawn a ConversationKiller AI to be actor 6
+            if (Link_GetConversationActor(6, self) == 0) {
+                local killer = Object.BeginCreate(Object.Named("ConversationKiller"));
+                Object.Teleport(killer, Object.Position(self), Object.Facing(self));
+                Object.EndCreate(killer);
+                local link = Link.Create("AIConversationActor", self, killer);
+                LinkTools.LinkSetData(link, "Actor ID", 6);
+            } else {
+                print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") already has actor 6!");
+            }
         }
-        local killer = Object.Create(Object.Named("ConversationKiller"));
-        print("killer " + killer + " pos: " + Object.Position(killer));
-        local link = Link.Create("AIConversationActor", self, killer);
-        LinkTools.LinkSetData(link, "Actor ID", 6);
-
-        // Start conversing
-        AI.StartConversation(self);
     }
 
     function OnTurnOff()
     {
-        // Force the conversation to stop by slaying one of its actors
-        local link = Link_GetConversationActor(6, self)
-        if (link != 0) {
-            local killer = LinkDest(link);
+        // Force the conversation to stop by slaying actor 6
+        local killer_link = Link_GetConversationActor(6, self);
+        if (killer_link != 0) {
+            // Shut up! Just shut up! All you actors, zip it!
+            local links = Link.GetAll("AIConversationActor", self);
+            foreach (link in links) {
+                local actor = LinkDest(link);
+                AI.SetScriptFlags(actor, 1 /* kSpeechOff */);
+            }
+
             // Ironic that we call this AI the "conversation killer" when really
             // it's us that's doing the killing, and it that's getting killed.
-            Damage.Slay(killer, 0);
-        }
+            Damage.Slay(LinkDest(killer_link), 0);
+        } else {
+             print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") has no actor 6!");
+       }
     }
 }

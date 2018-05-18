@@ -1,19 +1,8 @@
 class Controller extends SqRootScript
 {
-    function OnSim()
-    {
-        if (message().starting) {
-            local links = Link.GetAll("ScriptParams", self);
-            foreach (link in links) {
-                local link = Link.Create("~ScriptParams", self, LinkDest(link));
-                LinkTools.LinkSetData(link, "", "Master");
-            }
-        }
-    }
-
     function PunchUp(message, data = 0)
     {
-        local master = Link_GetScriptParamsDest("Master", self);
+        local master = LinkDest(Link.GetOne("~ScriptParams", self));
         if (master != 0) {
             // print("PUNCHUP: " + Object_Description(self)
             //     + " is punching up " + message + "(" + data + ")"
@@ -27,8 +16,11 @@ class Controller extends SqRootScript
     function PunchDown(message, data = 0)
     {
         local links = Link.GetAll("ScriptParams", self);
+        local children = [];
         foreach (link in links) {
-            local child = LinkDest(link);
+            children.append(LinkDest(link));
+        }
+        foreach (child in children) {
             // print("PUNCHDOWN: " + Object_Description(self)
             //     + " is punching down " + message + "(" + data + ")"
             //     + " to " + Object_Description(child));
@@ -42,7 +34,7 @@ class Controlled extends SqRootScript
 {
     function PunchUp(message, data = 0)
     {
-        local master = Link_GetScriptParamsDest("Master", self);
+        local master = LinkDest(Link.GetOne("~ScriptParams", self));
         if (master != 0) {
             // print("PUNCHUP: " + Object_Description(self)
             //     + " is punching up " + message + "(" + data + ")"
@@ -141,6 +133,9 @@ class RitualMasterController extends Controller
 
     function End()
     {
+        print("RITUAL: End");
+        PunchDown("RitualEnd", current_stage);
+
         // FIXME: conclude the ritual
         print("RITUAL DEATH: run out of busywork!");
         Object.Destroy(self);
@@ -178,9 +173,15 @@ class RitualMasterController extends Controller
 
     function OnPerformerFinishedBlessing()
     {
-        // Time for a return
-        print("RITUAL: Return " + current_stage);
-        PunchDown("RitualReturn", current_stage);
+        // Check if it's the final stage:
+        if (current_index < stages.len() - 1) {
+            // Time for a return
+            print("RITUAL: Return " + current_stage);
+            PunchDown("RitualReturn", current_stage);
+        } else {
+            // Time for a grand finale
+            End();
+        }
     }
 
     function OnPerformerReturnedToVertex()
@@ -270,8 +271,6 @@ class RitualPerformerController extends Controller
 
     function OnSim()
     {
-        base.OnSim();
-
         if (message().starting) {
             // Get linked entities and check they're all accounted for.
             performer = Link_GetScriptParamsDest("Performer", self);
@@ -296,6 +295,7 @@ class RitualPerformerController extends Controller
 
     function OnRitualBegin()
     {
+        print("PERFORMER CTL: RitualBegin");
         local stage = message().data;
         local trol = rounds[stage];
         SetPatrolTarget(trol);
@@ -305,12 +305,16 @@ class RitualPerformerController extends Controller
         Object.AddMetaProperty(performer, "M-RitualTrance");
     }
 
-    function OnFinishRitual()
+    function OnRitualEnd()
     {
+        // Wake the performer from her trance
+        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+        Object.RemoveMetaProperty(performer, "M-RitualTrance");
+
         // FIXME: make the performer play a victory conversation. Maybe she can do the spinny dance!!
     }
 
-    function OnAbortRitual()
+    function OnRitualAbort()
     {
         // FIXME - we need to send *back* to the master controller when
         // the perform notices the Hand missing (when about to use it),
@@ -407,26 +411,86 @@ class RitualPerformerController extends Controller
         }
     }
 }
-/*
-class RitualController extends SqRootScript
+
+
+class RitualLightingController extends Controller
 {
-    // Objects and AIs involved in the ritual
-    victim = 0;
-    rounds = [];
-    downs = [];
-    extras = [];
     lights = [];
     strips = [];
+
+    function OnSim()
+    {
+        if (message().starting) {
+            // Get linked entities and check they're all accounted for.
+            lights = Link_GetAllScriptParamsDests("Light", self);
+            strips = Link_GetAllScriptParamsDests("Strip", self);
+            if (lights.len() != 7) {
+                print("RITUAL DEATH: incorrect number of lights.");
+                Object.Destroy(self);
+            }
+            if (strips.len() != 7) {
+                print("RITUAL DEATH: incorrect number of strips.");
+                Object.Destroy(self);
+            }
+        }
+    }
+
+    // ---- Messages from the master for the whole ritual
+
+    function OnRitualBegin()
+    {
+        print("LIGHTING CTL: RitualBegin");
+    }
+
+    function OnRitualEnd()
+    {
+        // FIXME: make the lights flash!
+    }
+
+    function OnRitualAbort()
+    {
+        // FIXME: need to turn off the lights?
+    }
+
+    // ---- Messages from the controller for each step
+
+    function OnRitualDown()
+    {
+        local stage = message().data;
+        local light = lights[stage];
+        local strip = strips[stage];
+        SendMessage(light, "TurnOn");
+        SendMessage(strip, "TurnOn");
+    }
+
+    function OnRitualReturn()
+    {
+        local stage = message().data;
+        local light = lights[stage];
+        SendMessage(light, "TurnOff");
+    }
+}
+
+
+class RitualVictimController extends Controller
+{
+    victim = 0;
     gores = [];
 
 
     function OnSim()
     {
         if (message().starting) {
-            PrecacheLinks();
-
-            // Add some data links to the performer
-            Link_CreateScriptParams("Controller", performer, self);
+            victim = Link_GetScriptParamsDest("Victim", self);
+            gores = Link_GetAllScriptParamsDests("Gore", self);
+            if (victim == 0) {
+                print("RITUAL DEATH: no victim.");
+                Object.Destroy(self);
+            }
+            if (gores.len() != 7) {
+                print("RITUAL DEATH: incorrect number of gores.");
+                Object.Destroy(self);
+            }
 
             // Make sure the gores aren't "there" initially.
             foreach (gore in gores) {
@@ -435,39 +499,15 @@ class RitualController extends SqRootScript
         }
     }
 
-    function OnTurnOn()
+    // ---- Messages from the master for the whole ritual
+
+    function OnRitualBegin()
     {
-        if (! is_running) {
-            is_running = true;
-            StartRitual();
-        } else {
-            // FIXME: for testing only:
-            FinishRitual();
-        }
+        print("VICTIM CTL: RitualBegin");
     }
 
-    function StartRitual()
+    function OnRitualEnd()
     {
-        print("RITUAL: Start");
-
-        // Begin at the beginning
-        SetCurrentIndex(0);
-
-        // FIXME: extras
-    }
-
-    function FinishRitual()
-    {
-        print("RITUAL: Finish");
-
-        // FIXME: need to stop the ritual properly, including stopping any + all active conversations (how? destroy them?)
-
-        // Stop patrolling
-        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-
-        // FIXME: lights - I think I want them all blinking rapidly? Ditto the strips?
-        // FIXME: extras
-    
         // Destroy the victim, and bring out the gores
         Object.Destroy(victim);
         foreach (gore in gores) {
@@ -475,6 +515,10 @@ class RitualController extends SqRootScript
         }
 
         ExplodeVictim();
+    }
+
+    function OnRitualAbort()
+    {
     }
 
     function ExplodeVictim()
@@ -503,89 +547,16 @@ class RitualController extends SqRootScript
             Physics.SetVelocity(gore, vel);
         }
     }
-
-    function SetCurrentIndex(index)
-    {
-        // Update the ritual status, and the performer's target
-        current_index = index;
-        if (current_index >= stages.len()) {
-            print("RITUAL DEATH: me am go too far!");
-            Object.Destroy(self);
-        }
-        current_stage = stages[current_index];
-        current_trol_target = rounds[current_stage];
-
-        // FIXME: update lights
-        // FIXME: update extras
-    }
-
-    function PrecacheLinks()
-    {
-        local links = Link.GetAll("ScriptParams", self);
-        foreach (link in links) {
-            local obj = LinkDest(link);
-            local data = LinkTools.LinkGetData(link, "");
-            if (data == "Performer") {
-                performer = obj;
-            } else if (data == "Victim") {
-                victim = obj;
-            } else if (data == "Round") {
-                rounds.append(obj);
-            } else if (data == "Down") {
-                downs.append(obj);
-            } else if (data == "Light") {
-                lights.append(obj);
-            } else if (data == "Extra") {
-                extras.append(obj);
-            } else if (data == "Strip") {
-                strips.append(obj);
-            } else if (data == "Gore") {
-                gores.append(obj);
-            }
-        }
-
-        // Check everything's okay
-        if (performer == 0) {
-            print("RITUAL DEATH: no performer.");
-            Object.Destroy(self);
-        }
-        if (victim == 0) {
-            print("RITUAL DEATH: no victim.");
-            Object.Destroy(self);
-        }
-        if (rounds.len() != stages.len()) {
-            print("RITUAL DEATH: incorrect number of rounds.");
-            Object.Destroy(self);
-        }
-        if (downs.len() != stages.len()) {
-            print("RITUAL DEATH: incorrect number of downs.");
-            Object.Destroy(self);
-        }
-        if (lights.len() != stages.len()) {
-            print("RITUAL DEATH: incorrect number of lights.");
-            Object.Destroy(self);
-        }
-        // FIXME: well this is never going to be the case! We need a plan to deal with
-        // 0 - 6 extras, and space them out around the ritual area accordingly.
-        // This probably means a bunch of extra disconnected patrol points to send them to
-        // (patrol points so that we can replace the current link, and they'll automatically
-        // return when settling down after alerted)
-        //if (extras.len() != stages.len()) {
-        //    print("RITUAL DEATH: incorrect number of extras.");
-        //    Object.Destroy(self);
-        //}
-        
-        if (strips.len() != stages.len()) {
-            print("RITUAL DEATH: incorrect number of strips.");
-            Object.Destroy(self);
-        }
-        if (gores.len() != stages.len()) {
-            print("RITUAL DEATH: incorrect number of gores.");
-            Object.Destroy(self);
-        }
-    }
 }
-*/
+
+
+// FIXME: extras: We need a plan to deal with
+// 0 - 6 extras, and space them out around the ritual area accordingly.
+// This probably means a bunch of extra disconnected patrol points to send them to
+// (patrol points so that we can replace the current link, and they'll automatically
+// return when settling down after alerted)
+
+
 class RitualFloorStrip extends SqRootScript
 {
     /* When turned on, brighten up and pulse illumination. */

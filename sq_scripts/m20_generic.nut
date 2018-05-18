@@ -397,3 +397,35 @@ class DoorStartsOpen extends SqRootScript
         }
     }
 }
+
+
+class ConversationKiller extends SqRootScript
+{
+    function OnTurnOn()
+    {
+        // Spawn a ConversationKiller AI to be actor 6
+        if (Link_GetConversationActor(6, self) != 0) {
+            print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") already has actor 6!");
+            return;
+        }
+        local killer = Object.Create(Object.Named("ConversationKiller"));
+        print("killer " + killer + " pos: " + Object.Position(killer));
+        local link = Link.Create("AIConversationActor", self, killer);
+        LinkTools.LinkSetData(link, "Actor ID", 6);
+
+        // Start conversing
+        AI.StartConversation(self);
+    }
+
+    function OnTurnOff()
+    {
+        // Force the conversation to stop by slaying one of its actors
+        local link = Link_GetConversationActor(6, self)
+        if (link != 0) {
+            local killer = LinkDest(link);
+            // Ironic that we call this AI the "conversation killer" when really
+            // it's us that's doing the killing, and it that's getting killed.
+            Damage.Slay(killer, 0);
+        }
+    }
+}

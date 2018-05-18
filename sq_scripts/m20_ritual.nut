@@ -159,6 +159,7 @@ class RitualController extends SqRootScript
     function StartRitual()
     {
         print("RITUAL: Start");
+
         // Begin at the beginning
         SetCurrentIndex(0);
         Link_SetCurrentPatrol(performer, current_trol_target);
@@ -166,65 +167,50 @@ class RitualController extends SqRootScript
         Object.AddMetaProperty(performer, "M-RitualTrance");
 
         // FIXME: lights and extras
-
     }
 
     function FinishRitual()
     {
         print("RITUAL: Finish");
+
         // Stop patrolling
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-        print("RITUAL DEBUG: stopped patrolling");
 
         // FIXME: lights and extras
     
         // Destroy the victim, and bring out the gores
         Object.Destroy(victim);
-        print("RITUAL DEBUG: victim destroyed");
-        // Fling body parts everywhere, why don't you?
-        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
-        for (local i = 0; i < gores.len(); i++) {
-            local gore = gores[i];
+        foreach (gore in gores) {
             Object.RemoveMetaProperty(gore, "M-NotHere");
-            print("RITUAL DEBUG: gore " + i + " brought back");
-            /*
-            // Launch it
-            local a = z_angles[i]  * 3.14 / 180;
-            local vel = vector(cos(a), sin(a), 1);
-            vel.Normalize();
-            vel.Scale(30.0);
-            //Property.Set(gore, "PhysControl", "Controls Active", 0);
-            //print("RITUAL DEBUG: gore " + i + " decontrolled");
-            Physics.Activate(gore);
-            print("RITUAL DEBUG: gore " + i + " activated");
-            Physics.SetVelocity(gore, vel);
-            print("RITUAL DEBUG: gore " + i + " launched");
-            */
         }
 
-        print("RITUAL DEBUG: about to post mesage");
-        PostMessage(self, "ExplodeVictim");
-
+        ExplodeVictim();
     }
 
-    function OnExplodeVictim()
+    function ExplodeVictim()
     {
-        print("RITUAL DEBUG: explode victim");
         // Fling body parts everywhere, why don't you?
         local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
         for (local i = 0; i < gores.len(); i++) {
             local gore = gores[i];
-            // Launch it
+
+            // Calculate launch vector
             local a = z_angles[i]  * 3.14 / 180;
             local vel = vector(cos(a), sin(a), 1);
             vel.Normalize();
             vel.Scale(30.0);
-            Property.Set(gore, "PhysControl", "Controls Active", 0);
-            print("RITUAL DEBUG: gore " + i + " decontrolled");
+
+            // Deactivate the physics controls
+            if (! Physics.ValidPos(gore)) {
+                print("RITUAL ERROR: gore " + i + " not in valid position!");
+                continue;
+            } else {
+                Property.Set(gore, "PhysControl", "Controls Active", 0);
+            }
+
+            // And launch!
             Physics.Activate(gore);
-            print("RITUAL DEBUG: gore " + i + " activated");
             Physics.SetVelocity(gore, vel);
-            print("RITUAL DEBUG: gore " + i + " launched");
         }
     }
 

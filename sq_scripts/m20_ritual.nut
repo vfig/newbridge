@@ -1,18 +1,27 @@
-class Controller extends SqRootScript
+class Controlled extends SqRootScript
 {
     function PunchUp(message, data = 0)
     {
-        local master = LinkDest(Link.GetOne("~ScriptParams", self));
-        if (master != 0) {
-            // print("PUNCHUP: " + Object_Description(self)
-            //     + " is punching up " + message + "(" + data + ")"
-            //     + " to " + Object_Description(master));
-            SendMessage(master, message, data);
+        local links = Link.GetAll("~ScriptParams", self);
+        local masters = [];
+        foreach (link in links) {
+            masters.append(LinkDest(link));
+        }
+        if (masters.len() > 0) {
+            foreach (master in masters) {
+                // print("PUNCHUP: " + Object_Description(self)
+                //     + " is punching up " + message + "(" + data + ")"
+                //     + " to " + Object_Description(master));
+                SendMessage(master, message, data);
+            }
         } else {
-            print("PUNCHUP ERROR: " + Object_Description(self) + " has no master!");
+            print("PUNCHUP ERROR: " + Object_Description(self) + " has no masters!");
         }
     }
+}
 
+class Controller extends Controlled
+{
     function PunchDown(message, data = 0)
     {
         local links = Link.GetAll("ScriptParams", self);
@@ -20,32 +29,18 @@ class Controller extends SqRootScript
         foreach (link in links) {
             children.append(LinkDest(link));
         }
-        foreach (child in children) {
-            // print("PUNCHDOWN: " + Object_Description(self)
-            //     + " is punching down " + message + "(" + data + ")"
-            //     + " to " + Object_Description(child));
-            SendMessage(child, message, data);
-        }
-    }
-}
-
-
-class Controlled extends SqRootScript
-{
-    function PunchUp(message, data = 0)
-    {
-        local master = LinkDest(Link.GetOne("~ScriptParams", self));
-        if (master != 0) {
-            // print("PUNCHUP: " + Object_Description(self)
-            //     + " is punching up " + message + "(" + data + ")"
-            //     + " to " + Object_Description(master));
-            SendMessage(master, message, data);
+        if (children.len() > 0 ) {
+            foreach (child in children) {
+                // print("PUNCHDOWN: " + Object_Description(self)
+                //     + " is punching down " + message + "(" + data + ")"
+                //     + " to " + Object_Description(child));
+                SendMessage(child, message, data);
+            }
         } else {
-            print("PUNCHUP ERROR: " + Object_Description(self) + " has no master!");
+            print("PUNCHDOWN ERROR: " + Object_Description(self) + " has no children!");
         }
     }
 }
-
 
 class RitualMasterController extends Controller
 {
@@ -143,6 +138,8 @@ class RitualMasterController extends Controller
 
     function Abort()
     {
+        // FIXME: need state variable so we can't Begin/End/Abort inappropriately or more than once
+        print("RITUAL: Abort");
         // FIXME: stop the ritual and make di rupo react
         print("RITUAL DEATH: look ma no hands!");
         Object.Destroy(self);
@@ -207,6 +204,18 @@ class RitualMasterController extends Controller
         print("RITUAL: Hand has been stolen");
         Abort();
     }
+
+    function OnPerformerAlerted()
+    {
+        print("RITUAL: Performer alerted (perhaps the victim was stolen?)");
+        Abort();
+    }
+
+    function OnPerformerBrainDead()
+    {
+        print("RITUAL: Performer is brain dead");
+        Abort();
+    }
 }
 
 
@@ -259,6 +268,68 @@ class RitualPerformer extends Controlled
     {
         // Tell the controller we've finished going down
         PunchUp("PerformerReturnedToVertex");
+    }
+
+    function OnAlertness()
+    {
+        local levels = ["No Alert", "Low Alert", "Moderate Alert", "High Alert"];
+        print("Alertness: from " + levels[message().oldLevel] + " to " + levels[message().level]);
+
+        // The performer's trance prevents them from noticing the player ordinarily,
+        // so they'll only alert in extreme conditions or when seeing MissingRitualVictim.
+        if (message().level >= 2) {
+            PunchUp("PerformerAlerted");
+        }
+    }
+
+    function OnHighAlert()
+    {
+        local levels = ["No Alert", "Low Alert", "Moderate Alert", "High Alert"];
+        print("HighAlert: from " + levels[message().oldLevel] + " to " + levels[message().level]);
+        // The performer's trance prevents them from noticing the player ordinarily,
+        // so they'll only alert in extreme conditions or when scripted.
+        if (message().level >= 2) {
+            PunchUp("PerformerAlerted");
+        }
+    }
+
+    function OnAIModeChange()
+    {
+        if (message().mode == eAIMode.kAIM_Dead) {
+            PunchUp("PerformerBrainDead");
+        }
+    }
+}
+
+
+class RitualVictim extends SqRootScript
+{
+    // Basically an altered version of GoMissing to spawn
+    // our specific MissingRitualVictim instead of the usual MissingLoot.
+    function OnFrobWorldEnd()
+    {
+        if (! IsDataSet("OutOfPlace")) {
+            local newobj = Object.Create("MissingRitualVictim");
+            Object.Teleport(newobj, vector(0,0,0), vector(0,0,0), self);
+            // Property.Set(newobj,"SuspObj","Is Suspicious",TRUE);
+            // Property.Set(newobj,"SuspObj","Suspicious Type","missingloot");
+            SetData("OutOfPlace", true);
+        }
+    }
+}
+
+
+class MissingRitualVictim extends SqRootScript
+{
+    // Basically an altered version of WatchMe to create
+    // watch links to our ritual participants instead of just
+    // all humans. Beasts have feelings too after all!
+    function OnBeginScript()
+    {
+        if (! IsDataSet("Init")) {
+            Link.CreateMany("AIWatchObj", "@M-RitualParticipant", self);
+            SetData("Init", true);
+        }
     }
 }
 
@@ -386,6 +457,16 @@ class RitualPerformerController extends Controller
     }
 
     function OnPerformerNoticedHandMissing()
+    {
+        PunchUp(message().message);
+    }
+
+    function OnPerformerAlerted()
+    {
+        PunchUp(message().message);
+    }
+
+    function OnPerformerBrainDead()
     {
         PunchUp(message().message);
     }

@@ -51,17 +51,12 @@ class RitualPerformer extends SqRootScript
     }
 }
 
-class RitualController extends SqRootScript
+class RitualMasterController extends SqRootScript
 {
-    // Objects and AIs involved in the ritual
-    performer = null;
-    victim = null;
-    rounds = [];
-    downs = [];
-    extras = [];
-    lights = [];
-    strips = [];
-    gores = [];
+    performer_controller = null;
+    lighting_controller = null;
+    victim_controller = null;
+    // FIXME: extras
 
     // Vertices in the order that the performer should visit them.
     // Can tweak this to adjust the ritual timing in very large increments.
@@ -76,11 +71,112 @@ class RitualController extends SqRootScript
     // Status of the ritual
     // FIXME: the following status stuff needs to be GetData/SetData'd so it saves and loads
     is_running = false;
-    current_index = 0;
-    current_stage = 0;
-    current_trol_target = 0;
+    current_index = 0; // Index into stages
+    current_stage = 0; // Current stage vertex
 
     // FIXME: need to handle the various ways the ritual can be interrupted too, and stop the script then.
+}
+
+class RitualPerformerController extends SqRootScript
+{
+    master = null;
+    performer = null;
+    rounds = [];
+    downs = [];
+
+    //current_trol_target = 0; // FIXME: replaced with GetPatrolTarget() / SetPatrolTarget()
+
+    function OnSim()
+    {
+        if (message().starting()) {
+            // Get linked entities and check they're all accounted for.
+            master = Link_GetScriptParamDest("Master", self);
+            performer = Link_GetScriptParamDest("Performer", self);
+            rounds = Link_GetAllScriptParamsDests("Patrol", self);
+            downs = Link_GetAllScriptParamsDests("Conv", self);
+            if (master == null) {
+                print("RITUAL DEATH: no master.");
+                Object.Destroy(self);
+            }
+            if (performer == null) {
+                print("RITUAL DEATH: no performer.");
+                Object.Destroy(self);
+            }
+            if (rounds.len() != 7) {
+                print("RITUAL DEATH: incorrect number of rounds.");
+                Object.Destroy(self);
+            }
+            if (downs.len() != 7) {
+                print("RITUAL DEATH: incorrect number of downs.");
+                Object.Destroy(self);
+            }
+        }
+    }
+
+    function OnBeginRitual()
+    {
+        local stage = message().data;
+        local trol = rounds[stage];
+        SetPatrolTarget(trol);
+        Link_SetCurrentPatrol(performer, trol);
+        Object.AddMetaProperty(performer, "M-DoesPatrol");
+        Object.AddMetaProperty(performer, "M-RitualTrance");
+    }
+
+    function OnBeginRound()
+    {
+        local stage = message().data;
+        local trol = rounds[stage];
+        SetPatrolTarget(trol);
+    }
+
+    function OnBeginDown()
+    {
+        local stage = message().data;
+        local trol = rounds[stage];
+        SetPatrolTarget(trol);
+    }
+
+    function OnFinishRitual()
+    {
+    }
+
+    function OnAbortRitual()
+    {
+    }
+
+    // ...
+
+    function GetPatrolTarget()
+    {
+        local link = Link.GetOne("Route", self);
+        if (link != 0) {
+            return LinkDest(link);
+        } else {
+            return 0;
+        }
+    }
+
+    function SetPatrolTarget(trol)
+    {
+        Link_DestroyAll("Route", self);
+        if (trol != 0) {
+            Link.Create("Route", self, trol);
+        }
+    }
+}
+
+class RitualController extends SqRootScript
+{
+    // Objects and AIs involved in the ritual
+    victim = null;
+    rounds = [];
+    downs = [];
+    extras = [];
+    lights = [];
+    strips = [];
+    gores = [];
+
 
     function OnSim()
     {
@@ -164,9 +260,6 @@ class RitualController extends SqRootScript
 
         // Begin at the beginning
         SetCurrentIndex(0);
-        Link_SetCurrentPatrol(performer, current_trol_target);
-        Object.AddMetaProperty(performer, "M-DoesPatrol");
-        Object.AddMetaProperty(performer, "M-RitualTrance");
 
         // FIXME: extras
     }

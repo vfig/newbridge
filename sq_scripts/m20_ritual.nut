@@ -55,11 +55,13 @@ class RitualController extends SqRootScript
 {
     // Objects and AIs involved in the ritual
     performer = null;
+    victim = null;
     rounds = [];
     downs = [];
     extras = [];
     lights = [];
     strips = [];
+    gores = [];
 
     // Vertices in the order that the performer should visit them.
     // Can tweak this to adjust the ritual timing in very large increments.
@@ -81,54 +83,15 @@ class RitualController extends SqRootScript
     function OnSim()
     {
         if (message().starting) {
-            local links = Link.GetAll("ScriptParams", self);
-            foreach (link in links) {
-                local obj = LinkDest(link);
-                local data = LinkTools.LinkGetData(link, "");
-                if (data == "Performer") {
-                    performer = obj;
-                } else if (data == "Round") {
-                    rounds.append(obj);
-                } else if (data == "Down") {
-                    downs.append(obj);
-                } else if (data == "Light") {
-                    lights.append(obj);
-                } else if (data == "Extra") {
-                    extras.append(obj);
-                } else if (data == "Strip") {
-                    strips.append(obj);
-                }
-            }
-            // Check everything's okay
-            if (performer == null) {
-                print("RITUAL DEATH: no performer.");
-                Object.Destroy(self);
-            }
-            if (rounds.len() != stages.len()) {
-                print("RITUAL DEATH: incorrect number of rounds.");
-                Object.Destroy(self);
-            }
-            if (downs.len() != stages.len()) {
-                print("RITUAL DEATH: incorrect number of downs.");
-                Object.Destroy(self);
-            }
-            if (lights.len() != stages.len()) {
-                print("RITUAL DEATH: incorrect number of lights.");
-                Object.Destroy(self);
-            }
-            // FIXME:
-            /*
-            if (extras.len() != stages.len()) {
-                print("RITUAL DEATH: incorrect number of extras.");
-                Object.Destroy(self);
-            }
-            */
-            if (strips.len() != stages.len()) {
-                print("RITUAL DEATH: incorrect number of strips.");
-                Object.Destroy(self);
-            }
+            PrecacheLinks();
+
             // Add some data links to the performer
             Link_CreateScriptParams("Controller", performer, self);
+
+            // Make sure the gores aren't "there" initially.
+            foreach (gore in gores) {
+                Object.AddMetaProperty(gore, "M-NotHere");
+            }
         }
     }
 
@@ -137,6 +100,9 @@ class RitualController extends SqRootScript
         if (! is_running) {
             is_running = true;
             StartRitual();
+        } else {
+            // FIXME: for testing only:
+            FinishRitual();
         }
     }
 
@@ -200,6 +166,7 @@ class RitualController extends SqRootScript
         Object.AddMetaProperty(performer, "M-RitualTrance");
 
         // FIXME: lights and extras
+
     }
 
     function FinishRitual()
@@ -207,8 +174,58 @@ class RitualController extends SqRootScript
         print("RITUAL: Finish");
         // Stop patrolling
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+        print("RITUAL DEBUG: stopped patrolling");
 
         // FIXME: lights and extras
+    
+        // Destroy the victim, and bring out the gores
+        Object.Destroy(victim);
+        print("RITUAL DEBUG: victim destroyed");
+        // Fling body parts everywhere, why don't you?
+        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
+        for (local i = 0; i < gores.len(); i++) {
+            local gore = gores[i];
+            Object.RemoveMetaProperty(gore, "M-NotHere");
+            print("RITUAL DEBUG: gore " + i + " brought back");
+            /*
+            // Launch it
+            local a = z_angles[i]  * 3.14 / 180;
+            local vel = vector(cos(a), sin(a), 1);
+            vel.Normalize();
+            vel.Scale(30.0);
+            //Property.Set(gore, "PhysControl", "Controls Active", 0);
+            //print("RITUAL DEBUG: gore " + i + " decontrolled");
+            Physics.Activate(gore);
+            print("RITUAL DEBUG: gore " + i + " activated");
+            Physics.SetVelocity(gore, vel);
+            print("RITUAL DEBUG: gore " + i + " launched");
+            */
+        }
+
+        print("RITUAL DEBUG: about to post mesage");
+        PostMessage(self, "ExplodeVictim");
+
+    }
+
+    function OnExplodeVictim()
+    {
+        print("RITUAL DEBUG: explode victim");
+        // Fling body parts everywhere, why don't you?
+        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
+        for (local i = 0; i < gores.len(); i++) {
+            local gore = gores[i];
+            // Launch it
+            local a = z_angles[i]  * 3.14 / 180;
+            local vel = vector(cos(a), sin(a), 1);
+            vel.Normalize();
+            vel.Scale(30.0);
+            Property.Set(gore, "PhysControl", "Controls Active", 0);
+            print("RITUAL DEBUG: gore " + i + " decontrolled");
+            Physics.Activate(gore);
+            print("RITUAL DEBUG: gore " + i + " activated");
+            Physics.SetVelocity(gore, vel);
+            print("RITUAL DEBUG: gore " + i + " launched");
+        }
     }
 
     function SetCurrentIndex(index)
@@ -224,6 +241,69 @@ class RitualController extends SqRootScript
 
         // FIXME: update lights
         // FIXME: update extras
+    }
+
+    function PrecacheLinks()
+    {
+        local links = Link.GetAll("ScriptParams", self);
+        foreach (link in links) {
+            local obj = LinkDest(link);
+            local data = LinkTools.LinkGetData(link, "");
+            if (data == "Performer") {
+                performer = obj;
+            } else if (data == "Victim") {
+                victim = obj;
+            } else if (data == "Round") {
+                rounds.append(obj);
+            } else if (data == "Down") {
+                downs.append(obj);
+            } else if (data == "Light") {
+                lights.append(obj);
+            } else if (data == "Extra") {
+                extras.append(obj);
+            } else if (data == "Strip") {
+                strips.append(obj);
+            } else if (data == "Gore") {
+                gores.append(obj);
+            }
+        }
+
+        // Check everything's okay
+        if (performer == null) {
+            print("RITUAL DEATH: no performer.");
+            Object.Destroy(self);
+        }
+        if (victim == null) {
+            print("RITUAL DEATH: no victim.");
+            Object.Destroy(self);
+        }
+        if (rounds.len() != stages.len()) {
+            print("RITUAL DEATH: incorrect number of rounds.");
+            Object.Destroy(self);
+        }
+        if (downs.len() != stages.len()) {
+            print("RITUAL DEATH: incorrect number of downs.");
+            Object.Destroy(self);
+        }
+        if (lights.len() != stages.len()) {
+            print("RITUAL DEATH: incorrect number of lights.");
+            Object.Destroy(self);
+        }
+        // FIXME:
+        /*
+        if (extras.len() != stages.len()) {
+            print("RITUAL DEATH: incorrect number of extras.");
+            Object.Destroy(self);
+        }
+        */
+        if (strips.len() != stages.len()) {
+            print("RITUAL DEATH: incorrect number of strips.");
+            Object.Destroy(self);
+        }
+        if (gores.len() != stages.len()) {
+            print("RITUAL DEATH: incorrect number of gores.");
+            Object.Destroy(self);
+        }
     }
 }
 

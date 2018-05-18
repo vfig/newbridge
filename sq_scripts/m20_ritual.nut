@@ -80,6 +80,8 @@ class RitualController extends SqRootScript
     current_stage = 0;
     current_trol_target = 0;
 
+    // FIXME: need to handle the various ways the ritual can be interrupted too, and stop the script then.
+
     function OnSim()
     {
         if (message().starting) {
@@ -153,7 +155,7 @@ class RitualController extends SqRootScript
     {
         // The ritual is proceeding according to plan.
         SetCurrentIndex(current_index + 1);
-        print("RITUAL: Round " + current_index + " to " + current_stage);
+        print("RITUAL: Round " + current_index + ", next vertex is " + current_stage);
     }
 
     function StartRitual()
@@ -166,17 +168,20 @@ class RitualController extends SqRootScript
         Object.AddMetaProperty(performer, "M-DoesPatrol");
         Object.AddMetaProperty(performer, "M-RitualTrance");
 
-        // FIXME: lights and extras
+        // FIXME: extras
     }
 
     function FinishRitual()
     {
         print("RITUAL: Finish");
 
+        // FIXME: need to stop the ritual properly, including stopping any + all active conversations (how? destroy them?)
+
         // Stop patrolling
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
 
-        // FIXME: lights and extras
+        // FIXME: lights - I think I want them all blinking rapidly? Ditto the strips?
+        // FIXME: extras
     
         // Destroy the victim, and bring out the gores
         Object.Destroy(victim);
@@ -275,7 +280,11 @@ class RitualController extends SqRootScript
             print("RITUAL DEATH: incorrect number of lights.");
             Object.Destroy(self);
         }
-        // FIXME:
+        // FIXME: well this is never going to be the case! We need a plan to deal with
+        // 0 - 6 extras, and space them out around the ritual area accordingly.
+        // This probably means a bunch of extra disconnected patrol points to send them to
+        // (patrol points so that we can replace the current link, and they'll automatically
+        // return when settling down after alerted)
         /*
         if (extras.len() != stages.len()) {
             print("RITUAL DEATH: incorrect number of extras.");

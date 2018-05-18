@@ -64,12 +64,12 @@ class RitualController extends SqRootScript
     // Vertices in the order that the performer should visit them.
     // Can tweak this to adjust the ritual timing in very large increments.
     // Timing can also be tweaked more generally with M-RitualTrance Creature Time Warp.
+    // But the last entry must be 6, because that's the head.
     // FIXME: might in fact want to adjust time warp for Normal difficulty
     // FIXME: If the stages are changed, also need to adjust the Ritual tags in the conv schema.
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
-    stages = [0, 3, 6, 2, 5, 1, 4]; // With time warp 1.5, this takes 5:20 to complete.
-    //stages = [0, 4, 1, 5, 2, 6, 3];
-    //stages = [0, 5, 3, 1, 6, 4, 2]; // very slow
+    stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
+    //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
 
     // Status of the ritual
     // FIXME: the following status stuff needs to be GetData/SetData'd so it saves and loads

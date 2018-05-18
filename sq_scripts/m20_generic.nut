@@ -88,7 +88,9 @@ Link_SetCurrentPatrol <- function(ai, trol)
 {
     // AICurrentPatrol is a singleton link, so make sure to delete any existing ones.
     Link_DestroyAll("AICurrentPatrol", ai);
-    Link.Create("AICurrentPatrol", ai, trol);
+    if (trol != 0) {
+        Link.Create("AICurrentPatrol", ai, trol);
+    }
 }
 
 enum eContainType

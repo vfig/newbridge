@@ -160,7 +160,7 @@ class RitualMasterController extends Controller
             PunchDown("RitualAbort", current_stage);
 
             // FIXME: stop the ritual and make di rupo react
-            print("RITUAL DEATH: look ma no hands!");
+            print("RITUAL DEATH: stopped the ritual!");
             Object.Destroy(self);
         }
     }
@@ -297,7 +297,7 @@ class RitualPerformer extends Controlled
 
         // The performer's trance prevents them from noticing the player ordinarily,
         // so they'll only alert in extreme conditions or when seeing MissingRitualVictim.
-        if (message().level >= 2) {
+        if (message().level >= eAIScriptAlertLevel.kModerateAlert) {
             PunchUp("PerformerAlerted");
         }
     }
@@ -308,7 +308,7 @@ class RitualPerformer extends Controlled
         print("HighAlert: from " + levels[message().oldLevel] + " to " + levels[message().level]);
         // The performer's trance prevents them from noticing the player ordinarily,
         // so they'll only alert in extreme conditions or when scripted.
-        if (message().level >= 2) {
+        if (message().level >= eAIScriptAlertLevel.kModerateAlert) {
             PunchUp("PerformerAlerted");
         }
     }
@@ -331,8 +331,8 @@ class RitualVictim extends SqRootScript
         if (! IsDataSet("OutOfPlace")) {
             local newobj = Object.Create("MissingRitualVictim");
             Object.Teleport(newobj, vector(0,0,0), vector(0,0,0), self);
-            // Property.Set(newobj,"SuspObj","Is Suspicious",TRUE);
-            // Property.Set(newobj,"SuspObj","Suspicious Type","missingloot");
+            Property.Set(newobj, "SuspObj", "Is Suspicious", true);
+            //Property.Set(newobj, "SuspObj", "Suspicious Type", "missingbody");
             SetData("OutOfPlace", true);
         }
     }
@@ -379,6 +379,11 @@ class RitualPerformerController extends Controller
                 print("RITUAL DEATH: incorrect number of downs.");
                 Object.Destroy(self);
             }
+
+            // Start the performer in a trance so they won't spook
+            // at anything before the ritual begins.
+            print("PERFORMER CTL: Starting trance");
+            Object.AddMetaProperty(performer, "M-RitualTrance");
         }
     }
 
@@ -391,9 +396,8 @@ class RitualPerformerController extends Controller
         local trol = rounds[stage];
         SetPatrolTarget(trol);
         Link_SetCurrentPatrol(performer, trol);
-        print("PERFORMER CTL: Starting trance");
+        print("PERFORMER CTL: Starting patrol");
         Object.AddMetaProperty(performer, "M-DoesPatrol");
-        Object.AddMetaProperty(performer, "M-RitualTrance");
     }
 
     function OnRitualEnd()
@@ -423,8 +427,25 @@ class RitualPerformerController extends Controller
         }
 
         // Wake the performer from her trance
-        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+        // FIXME: okay, so we want to patrol. But we want to find the nearest trol point
+        //Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+        Link_SetCurrentPatrol(performer, 0);
         Object.RemoveMetaProperty(performer, "M-RitualTrance");
+
+        // Make sure she'll investigate
+        //Link.Create("AIInvest", performer, Object.Named("Player"));
+            //LinkID Create(linkkind kind, object from, object to);
+
+        // // And make sure she's alerted!
+        // Property.Set(performer, "AI_Alertness", "Level", 2);
+        // Property.Set(performer, "AI_Alertness", "Peak", 3);
+
+        // Property.Set(performer, "AI_AlertCap", "Max level", 3);
+        // Property.Set(performer, "AI_AlertCap", "Min level", 2);
+        // Property.Set(performer, "AI_AlertCap", "Min relax after peak", 2);
+
+        // AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kModerateAlert);
+        //AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kLowAlert);
     }
 
     // ---- Messages from the controller for each step
@@ -519,10 +540,22 @@ class RitualPerformerController extends Controller
 }
 
 
+class DisableStrobes extends SqRootScript
+{
+    // Can use a .dml to patch this onto RitualLightingController to disable strobes.
+    function OnSim()
+    {
+        if (message().starting) {
+            SendMessage(self, "DisableStrobes");
+        }
+    }
+}
+
 class RitualLightingController extends Controller
 {
     lights = [];
     strips = [];
+    strobes = [];
 
     function OnSim()
     {
@@ -530,6 +563,7 @@ class RitualLightingController extends Controller
             // Get linked entities and check they're all accounted for.
             lights = Link_GetAllScriptParamsDests("Light", self);
             strips = Link_GetAllScriptParamsDests("Strip", self);
+            strobes = Link_GetAllScriptParamsDests("Strobe", self);
             if (lights.len() != 7) {
                 print("RITUAL DEATH: incorrect number of lights.");
                 Object.Destroy(self);
@@ -538,10 +572,21 @@ class RitualLightingController extends Controller
                 print("RITUAL DEATH: incorrect number of strips.");
                 Object.Destroy(self);
             }
+
+            // We don't care how many strobes there are, but make sure they're off to begin with
+            foreach (strobe in strobes) {
+                SendMessage(strobe, "TurnOff");
+            }
         }
     }
 
+    function OnDisableStrobes()
+    {
+        SetData("StrobeDisabled", true);
+    }
+
     // ---- Messages from the master for the whole ritual
+
 
     function OnRitualBegin()
     {
@@ -550,7 +595,24 @@ class RitualLightingController extends Controller
 
     function OnRitualEnd()
     {
-        // FIXME: make the lights flash!
+        if (GetData("StrobeDisabled")) {
+            // Just turn on all the lights.
+            foreach (light in lights) {
+                SendMessage(light, "TurnOn");
+            }
+        } else {
+            // Make all the strobes flash horrendously
+            foreach (light in lights) {
+                SendMessage(light, "TurnOff");
+            }
+            foreach (strobe in strobes) {
+                SendMessage(strobe, "TurnOn");
+            }
+        }
+        // And all the strips glow steadily
+        foreach (strip in strips) {
+            SendMessage(strip, "Fullbright");
+        }
     }
 
     function OnRitualAbort()
@@ -695,6 +757,14 @@ class RitualFloorStrip extends SqRootScript
             previous_time = message().time;
             SetFlickering(true);
         }
+    }
+
+    function OnFullbright()
+    {
+        // Stop animating
+        SetFlickering(false);
+        // Self-illuminate fully
+        Property.Set(self, "ExtraLight", "Amount (-1..1)", 1.0);
     }
 
     function OnTweqComplete()

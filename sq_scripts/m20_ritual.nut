@@ -1,62 +1,59 @@
-class RitualPerformer extends SqRootScript
+function PunchUp(master, message, data = 0)
 {
-    function OnUnpocketHand()
-    {
-        local controller = LinkDest(Link_GetScriptParams("Controller", self));
-
-        // Transfer the Hand to the Alt location, and make it unfrobbable
-        local link = Link.GetOne("Contains", self);
-        if (link == 0) {
-            SendMessage(controller, "PerformerLookMaNoHands");
-        } else {
-            local hand = LinkDest(link);
-            Link_SetContainType(link, eContainType.kContainTypeAlt);
-            Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
-        }
-
-        // Tell the controller about it
-        SendMessage(controller, "PerformerWavingStarted");
+    if (master == null || master == 0) {
+        print("PUNCHUP ERROR: no master?!");
     }
+    SendMessage(master, message, data);
+}
 
-    function OnPocketHand()
-    {
-        local controller = LinkDest(Link_GetScriptParams("Controller", self));
-
-        // Put the Hand back on the belt, and make it frobbable again
-        local link = Link.GetOne("Contains", self);
-        if (link == 0) {
-            SendMessage(controller, "PerformerLookMaNoHands");
-        } else {
-            local hand = LinkDest(link);
-            Link_SetContainType(link, eContainType.kContainTypeBelt);
-            Object_RemoveFrobAction(hand, eFrobAction.kFrobActionIgnore);
-        }
-
-        // Tell the controller about it
-        SendMessage(controller, "PerformerWavingFinished");
-    }
-
-    function OnPatrolPoint()
-    {
-        // Tell the controller we've reached another patrol point
-        local controller = LinkDest(Link_GetScriptParams("Controller", self));
-        SendMessage(controller, "PerformerPatrolPoint", message().patrolObj);
-    }
-
-    function OnConversationFinished()
-    {
-        // Tell the controller we've finished going down
-        local controller = LinkDest(Link_GetScriptParams("Controller", self));
-        SendMessage(controller, "PerformerConversationFinished");
+function PunchDown(master, message, data = 0)
+{
+    local links = Link.GetAll("ScriptParams", master);
+    foreach (link in links) {
+        local dest = LinkDest(link);
+        print("PUNCHDOWN: " + Object.GetName(master) + " (" + master + ")'s punching down " + message + "(" + data + ") to " + Object.GetName(dest) + " (" + dest + ").");
+        SendMessage(dest, message, data);
     }
 }
 
 class RitualMasterController extends SqRootScript
 {
-    performer_controller = null;
-    lighting_controller = null;
-    victim_controller = null;
-    // FIXME: extras
+    /* The overall ritual process is signalled by these messages:
+
+            RitualBegin:
+                The ritual has started.
+            RitualEnd:
+                The ritual reached its conclusion.
+            RitualAbort:
+                The ritual was stopped by the player
+
+        Each stage of the ritual is signalled by these messages, with
+        the current stage number as the data of each:
+
+            RitualRound:
+                The lights go off etc.
+                Everyone walks to the next vertex.
+
+            RitualPause:
+                The performer turns to face the altar.
+                The extras face the altar and ululate.
+
+            RitualDown:
+                The performer walks to the altar.
+                The lights come on etc.
+
+            RitualBless:
+                The performer waves the hand over the altar and chants.
+                (The ritual ends here mid-blessing if it's at the last stage)
+
+            RitualReturn:
+                The performer walks back to the vertex.
+
+        Each step is begun by the master sending a Ritual<whatever>
+        message to the other controllers. Each step ends when the master
+        sends the next Ritual<whatever> to the other controllers (usually in
+        response to messages from the performer controller).
+    */
 
     // Vertices in the order that the performer should visit them.
     // Can tweak this to adjust the ritual timing in very large increments.
@@ -75,30 +72,208 @@ class RitualMasterController extends SqRootScript
     current_stage = 0; // Current stage vertex
 
     // FIXME: need to handle the various ways the ritual can be interrupted too, and stop the script then.
+
+    function OnTurnOn()
+    {
+        // FIXME: check GetData for is_running
+        if (! is_running) {
+            is_running = true;
+
+            // Tell the other controllers who their god is
+            PunchDown(self, "ObeyMe", self);
+
+            Begin();
+        } else {
+            // FIXME: for testing only:
+            Finish();
+            // Abort();
+        }
+    }
+
+    function Begin()
+    {
+        // FIXME: check GetData for current index? Or do we just resume somehow or something?
+        current_index = 0;
+        current_stage = stages[current_index];
+        print("RITUAL: Begin");
+        PunchDown(self, "RitualBegin", current_stage);
+        print("RITUAL: Index " + current_index + " is stage " + current_stage);
+
+        // Seven times rounds and seven times downs - always begin with a round.
+        print("RITUAL: Round " + current_stage);
+        PunchDown(self, "RitualRound", current_stage);
+    }
+
+    function End()
+    {
+        // FIXME: conclude the ritual
+        print("RITUAL DEATH: run out of busywork!");
+        Object.Destroy(self);
+    }
+
+    function Abort()
+    {
+        // FIXME: stop the ritual and make di rupo react
+        print("RITUAL DEATH: look ma no hands!");
+        Object.Destroy(self);
+    }
+
+    // ---- Messages from child controllers
+
+    function OnPerformerReachedVertex()
+    {
+        // Time for a pause
+        print("RITUAL: Pause " + current_stage);
+        PunchDown(self, "RitualPause", current_stage);
+    }
+
+    function OnPerformerFacedAltar()
+    {
+        // Time for a down
+        print("RITUAL: Down " + current_stage);
+        PunchDown(self, "RitualDown", current_stage);
+    }
+
+    function OnPerformerReachedAltar()
+    {
+        // Time for a bless
+        print("RITUAL: Bless " + current_stage);
+        PunchDown(self, "RitualBless", current_stage);
+    }
+
+    function OnPerformerFinishedBlessing()
+    {
+        // Time for a return
+        print("RITUAL: Return " + current_stage);
+        PunchDown(self, "RitualReturn", current_stage);
+    }
+
+    function OnPerformerReturnedToVertex()
+    {
+        // On to the next stage
+        current_index = current_index + 1;
+        if (current_index >= stages.len()) {
+            print("RITUAL DEATH: me am go too far!");
+            Object.Destroy(self);
+        }
+        current_stage = stages[current_index];
+        print("RITUAL: Index " + current_index + " is stage " + current_stage);
+
+        // Time for the next round
+        print("RITUAL: Round " + current_stage);
+        PunchDown(self, "RitualRound", current_stage);
+    }
+
+    // ---- Messages of abort conditions
+
+    function OnPerformerNoticedHandMissing()
+    {
+        print("RITUAL: Hand has been stolen");
+        Abort();
+    }
+
+    // ---- Utilities
+
+    // function PunchDown(message, data)
+    // {
+    //     local links = Link.GetAll("ScriptParams", self);
+    //     foreach (link in links) {
+    //         local dest = LinkDest(link);
+    //         print("MASTER: punching down " + message + "(" + data + ") to " + Object.GetName(dest) + " (" + dest + ").");
+    //         SendMessage(dest, message, data);
+    //     }
+    // }
 }
+
+
+class RitualPerformer extends SqRootScript
+{
+    master = 0;
+    foo = -1;
+
+    function OnObeyMe()
+    {
+        master = message().data;
+        print("master of " + self + " is: " + master + " and foo is: " + foo);
+    }
+
+    function OnPatrolPoint()
+    {
+        print("master is: " + master + " and foo is: " + foo);
+        // Tell the controller we've reached another patrol point (not necessarily the right one)
+        local trol = message().patrolObj;
+        print("PERFORMER: reached trol: " + Object.GetName(trol) + " (" + trol + ")"
+            + ", punching up to: " + Object.GetName(master) + " (" + master + ")");
+        PunchUp(self, "PerformerPatrolPoint", trol);
+    }
+
+    function OnStartWalking()
+    {
+        PunchUp(self, "PerformerFacedAltar");
+    }
+
+    function OnUnpocketHand()
+    {
+        // Transfer the Hand to the Alt location, and make it unfrobbable
+        local link = Link.GetOne("Contains", self);
+        if (link != 0) {
+            local hand = LinkDest(link);
+            Link_SetContainType(link, eContainType.kContainTypeAlt);
+            Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
+
+            // Tell the controller about it
+            PunchUp(self, "PerformerReachedAltar");
+        } else {
+            // The hand's been stolen: tell the controller
+            PunchUp(self, "PerformerNoticedHandMissing");
+        }
+    }
+
+    function OnPocketHand()
+    {
+        // Put the Hand back on the belt, and make it frobbable again
+        local link = Link.GetOne("Contains", self);
+        if (link != 0) {
+            local hand = LinkDest(link);
+            Link_SetContainType(link, eContainType.kContainTypeBelt);
+            Object_RemoveFrobAction(hand, eFrobAction.kFrobActionIgnore);
+        }
+
+        // Tell the controller about it
+        PunchUp(self, "PerformerFinishedBlessing");
+    }
+
+    function OnConversationFinished()
+    {
+        // Tell the controller we've finished going down
+        PunchUp(self, "PerformerReturnedToVertex");
+    }
+}
+
 
 class RitualPerformerController extends SqRootScript
 {
-    master = null;
-    performer = null;
+    master = 0;
+    performer = 0;
     rounds = [];
     downs = [];
 
-    //current_trol_target = 0; // FIXME: replaced with GetPatrolTarget() / SetPatrolTarget()
+    function OnObeyMe()
+    {
+        master = message().data;
+        print("master of " + self + " is: " + master);
+        // I'm a demigod still though: tell my underlings who their boss is
+        PunchDown(self, "ObeyMe", self);
+    }
 
     function OnSim()
     {
-        if (message().starting()) {
+        if (message().starting) {
             // Get linked entities and check they're all accounted for.
-            master = Link_GetScriptParamDest("Master", self);
-            performer = Link_GetScriptParamDest("Performer", self);
+            performer = Link_GetScriptParamsDest("Performer", self);
             rounds = Link_GetAllScriptParamsDests("Patrol", self);
             downs = Link_GetAllScriptParamsDests("Conv", self);
-            if (master == null) {
-                print("RITUAL DEATH: no master.");
-                Object.Destroy(self);
-            }
-            if (performer == null) {
+            if (performer == 0) {
                 print("RITUAL DEATH: no performer.");
                 Object.Destroy(self);
             }
@@ -113,39 +288,101 @@ class RitualPerformerController extends SqRootScript
         }
     }
 
-    function OnBeginRitual()
+    // ---- Messages from the master for the whole ritual
+
+    function OnRitualBegin()
     {
         local stage = message().data;
         local trol = rounds[stage];
         SetPatrolTarget(trol);
         Link_SetCurrentPatrol(performer, trol);
+        print("PERFORMER CTL: Starting trance");
         Object.AddMetaProperty(performer, "M-DoesPatrol");
         Object.AddMetaProperty(performer, "M-RitualTrance");
     }
 
-    function OnBeginRound()
-    {
-        local stage = message().data;
-        local trol = rounds[stage];
-        SetPatrolTarget(trol);
-    }
-
-    function OnBeginDown()
-    {
-        local stage = message().data;
-        local trol = rounds[stage];
-        SetPatrolTarget(trol);
-    }
-
     function OnFinishRitual()
     {
+        // FIXME: make the performer play a victory conversation. Maybe she can do the spinny dance!!
     }
 
     function OnAbortRitual()
     {
+        // FIXME - we need to send *back* to the master controller when
+        // the perform notices the Hand missing (when about to use it),
+        // or the Anax missing (when the lights are on), and then the
+        // master controller can abort the whole thing.
+
+        // Kill all the conversations
+        foreach (down in downs) {
+            SendMessage(down, "TurnOff");
+        }
+
+        // Wake the performer from her trance
+        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+        Object.RemoveMetaProperty(performer, "M-RitualTrance");
     }
 
-    // ...
+    // ---- Messages from the controller for each step
+
+    function OnRitualRound()
+    {
+        local stage = message().data;
+        local trol = rounds[stage];
+        print("PERFORMER CTL: Patrolling to " + Object.GetName(trol) + " (" + trol + ") for stage " + stage);
+        SetPatrolTarget(trol);
+    }
+
+    function OnRitualPause()
+    {
+        local stage = message().data;
+        local down = downs[stage];
+        // We call it a down, but really it's a system of a down.
+        // The system drives all the facing, the downing, the
+        // blessing, and the returning.
+        print("PERFORMER CTL: Starting conversation " + Object.GetName(down) + " (" + down + ") for stage " + stage);
+        AI.StartConversation(down);
+    }
+
+    // ---- Messages from the performer
+
+    function OnPerformerPatrolPoint()
+    {
+        local trol = message().data;
+        if (trol == GetPatrolTarget()) {
+            print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
+            PunchUp(self, "PerformerReachedVertex");
+        } else {
+            print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
+        }
+    }
+
+    function OnPerformerFacedAltar()
+    {
+        PunchUp(self, message().message);
+    }
+
+    function OnPerformerReachedAltar()
+    {
+        PunchUp(self, message().message);
+    }
+
+    function OnPerformerFinishedBlessing()
+    {
+        PunchUp(self, message().message);
+    }
+
+    function OnPerformerReturnedToVertex()
+    {
+        PunchUp(self, message().message);
+    }
+
+    function OnPerformerNoticedHandMissing()
+    {
+        PunchUp(self, message().message);
+    }
+
+    // ---- Utilities
 
     function GetPatrolTarget()
     {
@@ -159,17 +396,18 @@ class RitualPerformerController extends SqRootScript
 
     function SetPatrolTarget(trol)
     {
+        print("PERFORMER CTL: new target is: " + Object.GetName(trol) + " (" + trol + ")");
         Link_DestroyAll("Route", self);
         if (trol != 0) {
             Link.Create("Route", self, trol);
         }
     }
 }
-
+/*
 class RitualController extends SqRootScript
 {
     // Objects and AIs involved in the ritual
-    victim = null;
+    victim = 0;
     rounds = [];
     downs = [];
     extras = [];
@@ -202,56 +440,6 @@ class RitualController extends SqRootScript
             // FIXME: for testing only:
             FinishRitual();
         }
-    }
-
-    function OnPerformerPatrolPoint()
-    {
-        local trol = message().data;
-        if (trol == current_trol_target) {
-            // We've done our little dance. Time to get down tonight.
-            local down = downs[current_stage];
-            local strip = strips[current_stage];
-            local light = lights[current_stage];
-            print("RITUAL: Down " + current_index + " via " + Object.GetName(down) + " (" + down + ")");
-            SendMessage(strip, "TurnOn");
-            SendMessage(light, "TurnOn");
-            AI.StartConversation(down);
-        }
-    }
-
-    function OnPerformerWavingStarted()
-    {
-        print("RITUAL: Waving");
-        // FIXME: make the extras chant, if they're not busy
-    }
-
-    function OnPerformerWavingFinished()
-    {
-        print("RITUAL: Stopped waving");
-        // FIXME: make the extras stop chanting, if they're not busy
-
-        local light = lights[current_stage];
-            SendMessage(light, "TurnOff");
-
-        // Check if we've finished the final stage
-        if (current_index == (stages.len() - 1)) {
-            FinishRitual();
-        }
-    }
-
-    function OnPerformerLookMaNoHands()
-    {
-        print("RITUAL: Hand has been stolen");
-        // FIXME: stop the ritual and make di rupo react
-        print("RITUAL DEATH: look ma no hands!");
-        Object.Destroy(self);
-    }
-
-    function OnPerformerConversationFinished()
-    {
-        // The ritual is proceeding according to plan.
-        SetCurrentIndex(current_index + 1);
-        print("RITUAL: Round " + current_index + ", next vertex is " + current_stage);
     }
 
     function StartRitual()
@@ -353,11 +541,11 @@ class RitualController extends SqRootScript
         }
 
         // Check everything's okay
-        if (performer == null) {
+        if (performer == 0) {
             print("RITUAL DEATH: no performer.");
             Object.Destroy(self);
         }
-        if (victim == null) {
+        if (victim == 0) {
             print("RITUAL DEATH: no victim.");
             Object.Destroy(self);
         }
@@ -378,12 +566,11 @@ class RitualController extends SqRootScript
         // This probably means a bunch of extra disconnected patrol points to send them to
         // (patrol points so that we can replace the current link, and they'll automatically
         // return when settling down after alerted)
-        /*
-        if (extras.len() != stages.len()) {
-            print("RITUAL DEATH: incorrect number of extras.");
-            Object.Destroy(self);
-        }
-        */
+        //if (extras.len() != stages.len()) {
+        //    print("RITUAL DEATH: incorrect number of extras.");
+        //    Object.Destroy(self);
+        //}
+        
         if (strips.len() != stages.len()) {
             print("RITUAL DEATH: incorrect number of strips.");
             Object.Destroy(self);
@@ -394,7 +581,7 @@ class RitualController extends SqRootScript
         }
     }
 }
-
+*/
 class RitualFloorStrip extends SqRootScript
 {
     /* When turned on, brighten up and pulse illumination. */

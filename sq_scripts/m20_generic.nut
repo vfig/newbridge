@@ -11,10 +11,29 @@ Link_GetScriptParams <- function(data = "", from = 0, to = 0)
     return 0;
 }
 
+/* Get the ~ScriptParams link with the given data */
+Link_GetInverseScriptParams <- function(data = "", from = 0, to = 0)
+{
+    local links = Link.GetAll("~ScriptParams", from, to);
+    foreach (link in links) {
+        local link_data = LinkTools.LinkGetData(link, "");
+        if (link_data == data) {
+            return link;
+        }
+    }
+    return 0;
+}
+
 /* Get the dest of the ScriptParams link with the given data */
-Link_GetScriptParamDest <- function(data = "", from = 0)
+Link_GetScriptParamsDest <- function(data = "", from = 0)
 {
     return LinkDest(Link_GetScriptParams(data, from));
+}
+
+/* Get the dest of the ScriptParams link with the given data */
+Link_GetInverseScriptParamsDest <- function(data = "", from = 0)
+{
+    return LinkDest(Link_GetInverseScriptParams(data, from));
 }
 
 /* Get the destinations of all ScriptParams links with the given data */

@@ -1,22 +1,61 @@
-function PunchUp(master, message, data = 0)
+class Controller extends SqRootScript
 {
-    if (master == null || master == 0) {
-        print("PUNCHUP ERROR: no master?!");
+    function OnSim()
+    {
+        if (message().starting) {
+            local links = Link.GetAll("ScriptParams", self);
+            foreach (link in links) {
+                local link = Link.Create("~ScriptParams", self, LinkDest(link));
+                LinkTools.LinkSetData(link, "", "Master");
+            }
+        }
     }
-    SendMessage(master, message, data);
+
+    function PunchUp(message, data = 0)
+    {
+        local master = Link_GetScriptParamsDest("Master", self);
+        if (master != 0) {
+            // print("PUNCHUP: " + Object_Description(self)
+            //     + " is punching up " + message + "(" + data + ")"
+            //     + " to " + Object_Description(master));
+            SendMessage(master, message, data);
+        } else {
+            print("PUNCHUP ERROR: " + Object_Description(self) + " has no master!");
+        }
+    }
+
+    function PunchDown(message, data = 0)
+    {
+        local links = Link.GetAll("ScriptParams", self);
+        foreach (link in links) {
+            local child = LinkDest(link);
+            // print("PUNCHDOWN: " + Object_Description(self)
+            //     + " is punching down " + message + "(" + data + ")"
+            //     + " to " + Object_Description(child));
+            SendMessage(child, message, data);
+        }
+    }
 }
 
-function PunchDown(master, message, data = 0)
+
+class Controlled extends SqRootScript
 {
-    local links = Link.GetAll("ScriptParams", master);
-    foreach (link in links) {
-        local dest = LinkDest(link);
-        print("PUNCHDOWN: " + Object.GetName(master) + " (" + master + ")'s punching down " + message + "(" + data + ") to " + Object.GetName(dest) + " (" + dest + ").");
-        SendMessage(dest, message, data);
+    function PunchUp(message, data = 0)
+    {
+        local master = Link_GetScriptParamsDest("Master", self);
+        if (master != 0) {
+            // print("PUNCHUP: " + Object_Description(self)
+            //     + " is punching up " + message + "(" + data + ")"
+            //     + " to " + Object_Description(master));
+            SendMessage(master, message, data);
+        } else {
+            print("PUNCHUP ERROR: " + Object_Description(self) + " has no master!");
+        }
     }
 }
 
-class RitualMasterController extends SqRootScript
+
+class RitualMasterController extends Controller
 {
     /* The overall ritual process is signalled by these messages:
 
@@ -78,10 +117,6 @@ class RitualMasterController extends SqRootScript
         // FIXME: check GetData for is_running
         if (! is_running) {
             is_running = true;
-
-            // Tell the other controllers who their god is
-            PunchDown(self, "ObeyMe", self);
-
             Begin();
         } else {
             // FIXME: for testing only:
@@ -96,12 +131,12 @@ class RitualMasterController extends SqRootScript
         current_index = 0;
         current_stage = stages[current_index];
         print("RITUAL: Begin");
-        PunchDown(self, "RitualBegin", current_stage);
+        PunchDown("RitualBegin", current_stage);
         print("RITUAL: Index " + current_index + " is stage " + current_stage);
 
         // Seven times rounds and seven times downs - always begin with a round.
         print("RITUAL: Round " + current_stage);
-        PunchDown(self, "RitualRound", current_stage);
+        PunchDown("RitualRound", current_stage);
     }
 
     function End()
@@ -124,28 +159,28 @@ class RitualMasterController extends SqRootScript
     {
         // Time for a pause
         print("RITUAL: Pause " + current_stage);
-        PunchDown(self, "RitualPause", current_stage);
+        PunchDown("RitualPause", current_stage);
     }
 
     function OnPerformerFacedAltar()
     {
         // Time for a down
         print("RITUAL: Down " + current_stage);
-        PunchDown(self, "RitualDown", current_stage);
+        PunchDown("RitualDown", current_stage);
     }
 
     function OnPerformerReachedAltar()
     {
         // Time for a bless
         print("RITUAL: Bless " + current_stage);
-        PunchDown(self, "RitualBless", current_stage);
+        PunchDown("RitualBless", current_stage);
     }
 
     function OnPerformerFinishedBlessing()
     {
         // Time for a return
         print("RITUAL: Return " + current_stage);
-        PunchDown(self, "RitualReturn", current_stage);
+        PunchDown("RitualReturn", current_stage);
     }
 
     function OnPerformerReturnedToVertex()
@@ -161,7 +196,7 @@ class RitualMasterController extends SqRootScript
 
         // Time for the next round
         print("RITUAL: Round " + current_stage);
-        PunchDown(self, "RitualRound", current_stage);
+        PunchDown("RitualRound", current_stage);
     }
 
     // ---- Messages of abort conditions
@@ -171,44 +206,21 @@ class RitualMasterController extends SqRootScript
         print("RITUAL: Hand has been stolen");
         Abort();
     }
-
-    // ---- Utilities
-
-    // function PunchDown(message, data)
-    // {
-    //     local links = Link.GetAll("ScriptParams", self);
-    //     foreach (link in links) {
-    //         local dest = LinkDest(link);
-    //         print("MASTER: punching down " + message + "(" + data + ") to " + Object.GetName(dest) + " (" + dest + ").");
-    //         SendMessage(dest, message, data);
-    //     }
-    // }
 }
 
 
-class RitualPerformer extends SqRootScript
+class RitualPerformer extends Controlled
 {
-    master = 0;
-
-    function OnObeyMe()
-    {
-        master = message().data;
-        print("master of " + self + " is: " + master);
-    }
-
     function OnPatrolPoint()
     {
-        print("master is: " + master + ", " + this.master);
         // Tell the controller we've reached another patrol point (not necessarily the right one)
         local trol = message().patrolObj;
-        print("PERFORMER: reached trol: " + Object.GetName(trol) + " (" + trol + ")"
-            + ", punching up to: " + Object.GetName(master) + " (" + master + ")");
-        PunchUp(self, "PerformerPatrolPoint", trol);
+        PunchUp("PerformerPatrolPoint", trol);
     }
 
     function OnStartWalking()
     {
-        PunchUp(self, "PerformerFacedAltar");
+        PunchUp("PerformerFacedAltar");
     }
 
     function OnUnpocketHand()
@@ -221,10 +233,10 @@ class RitualPerformer extends SqRootScript
             Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
 
             // Tell the controller about it
-            PunchUp(self, "PerformerReachedAltar");
+            PunchUp("PerformerReachedAltar");
         } else {
             // The hand's been stolen: tell the controller
-            PunchUp(self, "PerformerNoticedHandMissing");
+            PunchUp("PerformerNoticedHandMissing");
         }
     }
 
@@ -239,34 +251,27 @@ class RitualPerformer extends SqRootScript
         }
 
         // Tell the controller about it
-        PunchUp(self, "PerformerFinishedBlessing");
+        PunchUp("PerformerFinishedBlessing");
     }
 
     function OnConversationFinished()
     {
         // Tell the controller we've finished going down
-        PunchUp(self, "PerformerReturnedToVertex");
+        PunchUp("PerformerReturnedToVertex");
     }
 }
 
 
-class RitualPerformerController extends SqRootScript
+class RitualPerformerController extends Controller
 {
-    master = 0;
     performer = 0;
     rounds = [];
     downs = [];
 
-    function OnObeyMe()
-    {
-        master = message().data;
-        print("master of " + self + " is: " + master);
-        // I'm a demigod still though: tell my underlings who their boss is
-        PunchDown(self, "ObeyMe", self);
-    }
-
     function OnSim()
     {
+        base.OnSim();
+
         if (message().starting) {
             // Get linked entities and check they're all accounted for.
             performer = Link_GetScriptParamsDest("Performer", self);
@@ -350,7 +355,7 @@ class RitualPerformerController extends SqRootScript
         local trol = message().data;
         if (trol == GetPatrolTarget()) {
             print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
-            PunchUp(self, "PerformerReachedVertex");
+            PunchUp("PerformerReachedVertex");
         } else {
             print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
         }
@@ -358,27 +363,27 @@ class RitualPerformerController extends SqRootScript
 
     function OnPerformerFacedAltar()
     {
-        PunchUp(self, message().message);
+        PunchUp(message().message);
     }
 
     function OnPerformerReachedAltar()
     {
-        PunchUp(self, message().message);
+        PunchUp(message().message);
     }
 
     function OnPerformerFinishedBlessing()
     {
-        PunchUp(self, message().message);
+        PunchUp(message().message);
     }
 
     function OnPerformerReturnedToVertex()
     {
-        PunchUp(self, message().message);
+        PunchUp(message().message);
     }
 
     function OnPerformerNoticedHandMissing()
     {
-        PunchUp(self, message().message);
+        PunchUp(message().message);
     }
 
     // ---- Utilities

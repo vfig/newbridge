@@ -1,3 +1,8 @@
+Object_Description <- function(obj)
+{
+    return (Object.GetName(obj) + " (" + obj + ")");
+}
+
 /* Get the ScriptParams link with the given data */
 Link_GetScriptParams <- function(data = "", from = 0, to = 0)
 {

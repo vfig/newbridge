@@ -383,7 +383,7 @@ class RitualPerformerController extends Controller
     performer = 0;
     rounds = [];
     downs = [];
-    searchers = [];
+    search_trols = [];
     search_convs = [];
 
     function OnSim()
@@ -393,9 +393,9 @@ class RitualPerformerController extends Controller
             performer = Link_GetScriptParamsDest("Performer", self);
             rounds = Link_GetAllScriptParamsDests("Round", self);
             downs = Link_GetAllScriptParamsDests("Down", self);
-            searchers = Link_GetAllScriptParamsDests("Search", self);
+            search_trols = Link_GetAllScriptParamsDests("SearchTrol", self);
+            search_trols = Link_CollectPatrolPath(search_trols);
             search_convs = Link_GetAllScriptParamsDests("SearchConv", self);
-            searchers = Link_CollectPatrolPath(searchers);
             if (performer == 0) {
                 print("PERFORMER CTL DEATH: no performer.");
                 Object.Destroy(self);
@@ -417,6 +417,9 @@ class RitualPerformerController extends Controller
             // at anything before the ritual begins.
             print("PERFORMER CTL: Starting trance");
             Object.AddMetaProperty(performer, "M-RitualTrance");
+
+            // FIXME: for testing only
+            Object.AddMetaProperty(performer, "M-GetOnWithIt");
         }
     }
 
@@ -583,9 +586,9 @@ class RitualPerformerController extends Controller
     {
         print("PERFORMER CTL: Now searching.");
         SetData("IsSearching", true);
-        if (searchers.len() > 0) {
-            local i = Data.RandInt(0, (searchers.len() - 1));
-            local target = searchers[i];
+        if (search_trols.len() > 0) {
+            local i = Data.RandInt(0, (search_trols.len() - 1));
+            local target = search_trols[i];
             Link_SetCurrentPatrol(performer, target);
         }
         Object.AddMetaProperty(performer, "M-RitualSearchModerate");
@@ -866,5 +869,219 @@ class RitualFloorStrip extends SqRootScript
         local animS = Property.Get(self, "StTweqBlink", "AnimS");
         local newAnimS = (on ? (animS | 1) : (animS & ~1));
         Property.Set(self, "StTweqBlink", "AnimS", newAnimS);
+    }
+}
+
+
+class RitualExtraController extends Controller
+{
+    extras = [];
+    trols = [];
+
+    function OnSim()
+    {
+        if (message().starting) {
+            // Get linked entities and check they're all accounted for.
+            extras = Link_GetAllScriptParamsDests("Extra", self);
+            trols = Link_GetAllScriptParamsDests("Trol", self);
+            trols = Link_CollectPatrolPath(trols);
+            if (extras.len() == 0) {
+                print("EXTRA CTL DEATH: no extras.");
+                Object.Destroy(self);
+            }
+            if (trols.len() != 14) {
+                // Needs to be 2x as many as performer round trol points
+                // so we can space out the extras roughly evenly
+                print("EXTRA CTL DEATH: incorrect number of trols.");
+                Object.Destroy(self);
+            }
+
+            // FIXME: for testing only
+            foreach (extra in extras) {
+                Object.AddMetaProperty(extra, "M-GetOnWithIt");
+            }
+        }
+    }
+
+    // ---- Messages from the master for the whole ritual
+
+    function OnRitualBegin()
+    {
+        local stage = message().data;
+
+        // First positions, everyone
+        PickPatrolPoints(stage, extras, true);
+    }
+
+    function OnRitualEnd()
+    {
+    }
+
+    function OnRitualAbort()
+    {
+    }
+
+    // ---- Messages from the controller for each step
+
+    function OnRitualPause()
+    {
+        // Extras suddenly get a desire to make some noise
+    }
+
+    function OnRitualDown()
+    {
+    }
+
+    function OnRitualBless()
+    {
+    }
+
+    function OnRitualReturn()
+    {
+    }
+
+    function OnRitualRound()
+    {
+        local stage = message().data;
+
+        // Find the extras available to participate in this round:
+        // those who are dead, unconscious, or off searching for
+        // or attacking the player are excused.
+
+        // FIXME: for now, just use them all
+        local available_extras = GetAvailableExtras();
+        PickPatrolPoints(stage, available_extras);
+    }
+
+    // ---- Messages from the extras
+
+    function OnExtraPatrolPoint()
+    {
+        // They suddenly get a desire not to patrol anymore, but
+        // instead to face the altar
+        local extra = message().from;
+        SendMessage(extra, "StopPatrolling");
+
+        // FIXME: handle the facing bit
+    }
+
+    // ---- Utilities
+
+    function GetAvailableExtras()
+    {
+        local available_extras = [];
+        foreach (extra in extras) {
+            available_extras.append(extra);
+        }
+        print("EXTRA CTL: " + available_extras.len() + " extras available.");
+        return available_extras;
+    }
+
+    function PickPatrolPoints(stage, available_extras, go_directly = false)
+    {
+        // The performer will be at index stage*2 in the trol ring;
+        // pick roughly-evenly-spaced places for the extras around the
+        // rest of the ring.
+        local picked_trols = [];
+        local spacing = (trols.len() / (available_extras.len() + 1));
+        print("EXTRA CTL: extras spaced every " + spacing + " points.");
+        local performer_index = (2 * stage);
+        local patrol_message = (go_directly ? "PatrolDirectlyTo" : "PatrolTo");
+        foreach (extra_index, extra in available_extras) {
+            local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len());
+            local pick = trols[pick_index];
+            // print("EXTRA CTL: extra " + extra_index + ": " + Object_Description(extra)
+            //     + " picked trol #" + pick_index + ": " + Object_Description(pick));
+            picked_trols.append(pick);
+            local closest_trol = FindClosestTrol(Object.Position(extra));
+            SendMessage(extra, patrol_message, pick, closest_trol);
+        }
+    }
+
+    function FindClosestTrol(pos)
+    {
+        local closest = 0;
+        local shortest_distance = 9999999;
+        foreach (trol in trols) {
+            local trol_pos = Object.Position(trol);
+            local delta = (trol_pos - pos);
+            // Ignore z, nobody's flying to their patrol point
+            local distance = (delta.x * delta.x) + (delta.y * delta.y);
+            if (distance < shortest_distance) {
+                shortest_distance = distance;
+                closest = trol;
+            }
+        }
+        return closest;
+    }
+}
+
+class RitualExtra extends Controlled
+{
+    // ---- Messages from the controller
+
+    function OnPatrolTo()
+    {
+        local trol = message().data;
+        local start_at_trol = message().data2;
+        SetPatrolTarget(trol);
+        if (Link_GetCurrentPatrol(self) == 0) {
+            Link_SetCurrentPatrol(self, start_at_trol);
+        }
+        Object.AddMetaProperty(self, "M-DoesPatrol");
+        print("EXTRA: " + Object_Description(self)
+            + " patrolling to " + Object_Description(trol)
+            + " via " + Object_Description(start_at_trol));
+    }
+
+    function OnPatrolDirectlyTo()
+    {
+        local trol = message().data;
+        SetPatrolTarget(trol);
+        Link_SetCurrentPatrol(self, trol);
+        Object.AddMetaProperty(self, "M-DoesPatrol");
+        print("EXTRA: " + Object_Description(self)
+            + " patrolling directly to " + Object_Description(trol));
+    }
+
+    function OnStopPatrolling()
+    {
+        Object.RemoveMetaProperty(self, "M-DoesPatrol");
+    }
+
+    // ---- Messages from the AI
+
+    function OnPatrolPoint()
+    {
+        // Tell the controller we've reached our target patrol point
+        local trol = message().patrolObj;
+        if (trol == GetPatrolTarget()) {
+            print("EXTRA: " + Object_Description(self) + " reached target point " + Object_Description(trol));
+            PunchUp("ExtraPatrolPoint", trol);
+        } else {
+            print("EXTRA: " + Object_Description(self) + " reached non-target point " + Object_Description(trol));
+            print("EXTRA: " + Object_Description(self) + " continuing on to " + Object_Description(Link_GetCurrentPatrol(self)));
+        }
+    }
+
+    // ---- Utilities
+
+    function GetPatrolTarget()
+    {
+        local link = Link.GetOne("Route", self);
+        if (link != 0) {
+            return LinkDest(link);
+        } else {
+            return 0;
+        }
+    }
+
+    function SetPatrolTarget(trol)
+    {
+        print("EXTRA " + Object_Description(self) + ": new target is: " + Object_Description(trol));
+        Link_DestroyAll("Route", self);
+        if (trol != 0) {
+            Link.Create("Route", self, trol);
+        }
     }
 }

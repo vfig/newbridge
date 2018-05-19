@@ -84,6 +84,17 @@ Link_DestroyAll <- function(kind, from = 0, to = 0)
     }
 }
 
+Link_GetCurrentPatrol <- function(ai)
+{
+    // AICurrentPatrol is a singleton link
+    local link = Link.GetOne("AICurrentPatrol", ai);
+    if (link != 0) {
+        return LinkDest(link);
+    } else {
+        return 0;
+    }
+}
+
 Link_SetCurrentPatrol <- function(ai, trol)
 {
     // AICurrentPatrol is a singleton link, so make sure to delete any existing ones.

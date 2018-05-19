@@ -241,6 +241,24 @@ class RitualMasterController extends Controller
 
 class RitualPerformer extends Controlled
 {
+// FIXME: cleanup
+    function OnTweqComplete()
+    {
+        local level = Property.Get(self, "AI_Alertness", "Level");
+        local peak = Property.Get(self, "AI_Alertness", "Peak");
+        local max = Property.Get(self, "AI_AlertCap", "Max level");
+        local min = Property.Get(self, "AI_AlertCap", "Min level");
+        local min_relax = Property.Get(self, "AI_AlertCap", "Min relax after peak");
+        print("Alert level: " + level + " (peak " + peak + "). Cap: min " + min + ", max " + max + ", min relax " + min_relax);
+    }
+
+// FIXME: cleanup
+    function OnNoticedVictimMissing()
+    {
+        print("!!! WHERE HAS THE VICTIM GONE ??? !!!");
+        PunchUp("PerformerAlerted");
+    }
+
     function OnPatrolPoint()
     {
         // Tell the controller we've reached another patrol point (not necessarily the right one)
@@ -426,22 +444,31 @@ class RitualPerformerController extends Controller
         // or the Anax missing (when the lights are on), and then the
         // master controller can abort the whole thing.
 
-        // Kill all the conversations
-        foreach (down in downs) {
-            SendMessage(down, "TurnOff");
-        }
-
         // Wake the performer from her trance
-        // FIXME: okay, so we want to patrol. But we want to find the nearest trol point
         Object.RemoveMetaProperty(performer, "M-RitualTrance");
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+
+        // Kill all the conversations
+        foreach (down in downs) {
+            print("Killing conversation: " + Object_Description(down));
+            SendMessage(down, "TurnOff");
+        }
 
         // Make the performer search around--hack, cause they don't want to investigate :(
         if (searchers.len() > 0) {
             local i = Data.RandInt(0, (searchers.len() - 1));
-            Link_SetCurrentPatrol(performer, searchers[i]);
-            print("Setting current patrol to: " + Object_Description(searchers[i]));
+            local target = searchers[i];
+            Link_SetCurrentPatrol(performer, target);
+            print("Setting current patrol to: " + Object_Description(target));
             Object.AddMetaProperty(performer, "Searcher");
+            // Send them away
+            AI.MakeGotoObjLoc(performer, target, eAIScriptSpeed.kNormalSpeed, eAIActionPriority.kNormalPriorityAction, "foo");
+
+            local links = Link.GetAll(0, performer);
+            foreach (link in links) {
+                local slink = sLink(link);
+                print("Link " + slink.flavor + " from " + Object_Description(slink.source) + " to " + Object_Description(slink.dest));
+            }
         }
 
         // Make sure she'll investigate
@@ -458,6 +485,15 @@ class RitualPerformerController extends Controller
 
         // AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kModerateAlert);
         //AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kLowAlert);
+    }
+
+    function OnObjActResult()
+    {
+        print("Completed action: " + message().action
+            + ", result: " + message().result
+            + ", data: " + message().data
+            + ", target: " + Object_Description(message().target));
+        // FIXME: dunno what I was thinking here... that maybe now we fiddle with the convo?
     }
 
     // ---- Messages from the controller for each step

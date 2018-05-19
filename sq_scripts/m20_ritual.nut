@@ -339,12 +339,8 @@ class RitualPerformer extends Controlled
         local dagger = Link_GetScriptParamsDest("Dagger", self);
         print("PERFORMER: Drawing dagger: " + dagger);
         if (dagger != 0) {
-            local link = Link.GetOne("Contains", self, dagger);
-            print("PERFORMER: Alting dagger link: " + link);
-            if (link) {
-                Link_SetContainType(link, eContainType.kContainTypeAlt);
-            }
-            // FIXME: new metaproperty for a better altlinklocation please
+            // Dagger's already there, just not rendered! So render it.
+            Property.Set(dagger, "HasRefs", "", true);
         }
     }
 }
@@ -472,8 +468,14 @@ class RitualPerformerController extends Controller
         PlayRandomSearchConv();
 
         // Make sure the performer will investigate a little before searching.
-        Link.Create("AIInvest", performer, Object.Named("Player"));
-        Link.Create("AIAwareness", performer, Object.Named("Player"));
+        // These are singleton links, so don't add them if they're already present!
+        local player = Object.Named("Player");
+        if (! Link.AnyExist("AIInvest", performer, player)) {
+            Link.Create("AIInvest", performer, Object.Named("Player"));
+        }
+        if (! Link.AnyExist("AIAwareness", performer, player)) {
+            Link.Create("AIAwareness", performer, Object.Named("Player"));
+        }
 
         // Even after investigating, the performer should search around endlessly,
         // starting at a random point.

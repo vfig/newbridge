@@ -910,7 +910,8 @@ class RitualExtraController extends Controller
         local stage = message().data;
 
         // First positions, everyone
-        PickPatrolPoints(stage, extras, true);
+        local available_extras = GetAvailableExtras();
+        PickPatrolPoints(stage, available_extras, true);
     }
 
     function OnRitualEnd()
@@ -943,12 +944,6 @@ class RitualExtraController extends Controller
     function OnRitualRound()
     {
         local stage = message().data;
-
-        // Find the extras available to participate in this round:
-        // those who are dead, unconscious, or off searching for
-        // or attacking the player are excused.
-
-        // FIXME: for now, just use them all
         local available_extras = GetAvailableExtras();
         PickPatrolPoints(stage, available_extras);
     }
@@ -965,13 +960,35 @@ class RitualExtraController extends Controller
         // FIXME: handle the facing bit
     }
 
+    function OnExtraBrainDead()
+    {
+        // Well, I _suppose_ we can leave you out of the rest of the ritual
+        local extra = message().from;
+        Link_DestroyAll("ScriptParams", self, extra);
+        local index = extras.find(extra);
+        if (index != null) {
+            extras.remove(index);
+        }
+        print("EXTRA CTL: extra " + Object_Description(extra) + " is excused from the ritual due to brain death.");
+    }
+
     // ---- Utilities
 
     function GetAvailableExtras()
     {
         local available_extras = [];
+        // Find the extras available to participate in this round:
+        // those who are dead, unconscious, or off searching for
+        // or attacking the player are excused.
         foreach (extra in extras) {
-            available_extras.append(extra);
+            local level = AI.GetAlertLevel(extra);
+            local compare_level = Property.Get(extra, "AI_Alertness", "Level");
+            if (level < eAIScriptAlertLevel.kModerateAlert) {
+                available_extras.append(extra);
+            } else {
+                print("EXTRA CTL: extra " + Object_Description(extra)
+                    + " is at alert " + level + " (compare: " + compare_level + ") and temporarily excused.");
+            }
         }
         print("EXTRA CTL: " + available_extras.len() + " extras available.");
         return available_extras;
@@ -983,18 +1000,17 @@ class RitualExtraController extends Controller
         // pick roughly-evenly-spaced places for the extras around the
         // rest of the ring.
         local picked_trols = [];
-        local spacing = (trols.len() / (available_extras.len() + 1));
+        local spacing = (trols.len() / (available_extras.len() + 1.0));
         print("EXTRA CTL: extras spaced every " + spacing + " points.");
         local performer_index = (2 * stage);
-        local patrol_message = (go_directly ? "PatrolDirectlyTo" : "PatrolTo");
         foreach (extra_index, extra in available_extras) {
             local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len());
             local pick = trols[pick_index];
             // print("EXTRA CTL: extra " + extra_index + ": " + Object_Description(extra)
             //     + " picked trol #" + pick_index + ": " + Object_Description(pick));
             picked_trols.append(pick);
-            local closest_trol = FindClosestTrol(Object.Position(extra));
-            SendMessage(extra, patrol_message, pick, closest_trol);
+            local closest_trol = (go_directly ? 0 : FindClosestTrol(Object.Position(extra)));
+            SendMessage(extra, "PatrolTo", pick, closest_trol);
         }
     }
 
@@ -1024,24 +1040,24 @@ class RitualExtra extends Controlled
     {
         local trol = message().data;
         local start_at_trol = message().data2;
+        local direct = (start_at_trol == 0);
         SetPatrolTarget(trol);
-        if (Link_GetCurrentPatrol(self) == 0) {
-            Link_SetCurrentPatrol(self, start_at_trol);
+        if (direct) {
+            Link_SetCurrentPatrol(self, trol);
+        } else {
+            if (Link_GetCurrentPatrol(self) == 0) {
+                Link_SetCurrentPatrol(self, start_at_trol);
+            }
         }
         Object.AddMetaProperty(self, "M-DoesPatrol");
-        print("EXTRA: " + Object_Description(self)
-            + " patrolling to " + Object_Description(trol)
-            + " via " + Object_Description(start_at_trol));
-    }
-
-    function OnPatrolDirectlyTo()
-    {
-        local trol = message().data;
-        SetPatrolTarget(trol);
-        Link_SetCurrentPatrol(self, trol);
-        Object.AddMetaProperty(self, "M-DoesPatrol");
-        print("EXTRA: " + Object_Description(self)
-            + " patrolling directly to " + Object_Description(trol));
+        if (direct) {
+            print("EXTRA: " + Object_Description(self)
+                + " patrolling directly to " + Object_Description(trol));
+        } else {
+            print("EXTRA: " + Object_Description(self)
+                + " patrolling to " + Object_Description(trol)
+                + " via " + Object_Description(start_at_trol));
+        }
     }
 
     function OnStopPatrolling()
@@ -1061,6 +1077,24 @@ class RitualExtra extends Controlled
         } else {
             print("EXTRA: " + Object_Description(self) + " reached non-target point " + Object_Description(trol));
             print("EXTRA: " + Object_Description(self) + " continuing on to " + Object_Description(Link_GetCurrentPatrol(self)));
+        }
+    }
+
+    function OnAIModeChange()
+    {
+        if (message().mode == eAIMode.kAIM_Dead) {
+            PunchUp("ExtraBrainDead");
+        }
+    }
+
+    function OnAlertness()
+    {
+        if ((message().level > message().oldLevel)
+            && (message().level >= eAIScriptAlertLevel.kModerateAlert))
+        {
+            // Forget where we were going, so that when we return to the
+            // ritual, we can go to our spot via the closest point.
+            Link_DestroyAll("AICurrentPatrol", self);
         }
     }
 

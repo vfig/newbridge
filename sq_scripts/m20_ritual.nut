@@ -429,9 +429,9 @@ class RitualPerformerController extends Controller
     {
         local stage = message().data;
         local trol = rounds[stage];
+        print("PERFORMER CTL: Starting patrol");
         SetPatrolTarget(trol);
         Link_SetCurrentPatrol(performer, trol);
-        print("PERFORMER CTL: Starting patrol");
         Object.AddMetaProperty(performer, "M-DoesPatrol");
     }
 
@@ -1062,6 +1062,10 @@ class RitualExtra extends Controlled
 
     function OnStopPatrolling()
     {
+        // This is our new idle spot.
+        Property.Set(self, "AI_IdleOrgn", "Original Location", Object.Position(self));
+        Property.Set(self, "AI_IdleOrgn", "Original Facing", Object.Facing(self).z);
+        // Don't patrol away.
         Object.RemoveMetaProperty(self, "M-DoesPatrol");
     }
 
@@ -1092,33 +1096,14 @@ class RitualExtra extends Controlled
         if ((message().level > message().oldLevel)
             && (message().level >= eAIScriptAlertLevel.kModerateAlert))
         {
-            // Forget where we were going, so that when we return to the
-            // ritual, we can go to our spot via the closest point.
+            // Stop patrolling and forget where we were going, so that when
+            // we return to the ritual, we can go to our last idle spot instead.
+            Object.RemoveMetaProperty(self, "M-DoesPatrol");
             Link_DestroyAll("AICurrentPatrol", self);
+
+            // Be lazy about investigating though.
+            Object.AddMetaProperty(self, "M-RitualLazyExtra");
         }
-
-        /* Plan:
-
-            When an extra starts investigating, they punch up to ask to be excused.
-            When they stop having any AIInvestigate or AIAttack links, then they punch up to rejoin.
-            When they rejoin, they're sent directly to place beside the performer: ((2 * stage + 1) % stage_count)
-                and inserted at the front of the extras array, so they'll then be the first in line.
-
-        or maybe not?
-
-        Okay, different technique needed: I still want them to calm down sooner, so:
-
-            What if, when alerted to > 2, we activate a tweq for every few seconds.
-            Then when tweq'd, we check:
-
-                * Make sure we have no AIAttack links to the player.
-                * Check the time on the all AIAwareness links that are level >= 2.
-                    - if any are more than 30 seconds old, delete them and stop the tweq.
-                    - and also remove any AIInvest links too.
-                * Regardless, stop the tweq when alertness reaches <= 1.
-
-                If that doesn't work, can maybe throw a temporary low AlertCap in there, then take it off again?
-        */
     }
 
     // ---- Utilities
@@ -1135,10 +1120,99 @@ class RitualExtra extends Controlled
 
     function SetPatrolTarget(trol)
     {
-        print("EXTRA " + Object_Description(self) + ": new target is: " + Object_Description(trol));
         Link_DestroyAll("Route", self);
         if (trol != 0) {
             Link.Create("Route", self, trol);
+        }
+    }
+}
+
+
+class RitualLazyExtra extends SqRootScript
+{
+    // Makes extras give up investigating and return to normal alert levels
+    // much sooner than normal. Default is investigation ends 30s after contact,
+    // and alertness ends 120s after contact. That's way too long, given the
+    // length of the whole ritual.
+
+    kAwarenessMaxAge = [10.0, 20.0]; // Time to expire level 2 and 3 awareness, respectively.
+
+    function OnBeginScript()
+    {
+        // Start the tweq.
+        Property.Set(self, "StTweqBlink", "AnimS", 1);
+    }
+
+    function OnTweqComplete()
+    {
+        // Don't try to stop looking if we're busy attacking!
+        if (! Link.AnyExist("AIAttack", self)) {
+            ExpireAwareness();
+        }
+    }
+
+    function OnAlertness()
+    {
+        if (message().level < 2) {
+            // Laziness worked, we can stop checking if we're lazy enough.
+            Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
+        }
+    }
+
+    function OnAIModeChange()
+    {
+        if (message().mode == eAIMode.kAIM_Dead) {
+            // We're brain dead, stop caring.
+            Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
+        }
+    }
+
+    // ---- Utilities
+
+    function GetModerateAwarenessLinks(age_filtered) {
+        local links = Link.GetAll("AIAwareness", self);
+        local filtered_links = [];
+        foreach (link in links) {
+            // Ignore low alert awareness
+            local level = LinkTools.LinkGetData(link, "Level");
+            if (level < 2) {
+                continue;
+            }
+            if (age_filtered) {
+                // Ignore recent awareness
+                local last_contact_time = (LinkTools.LinkGetData(link, "Time last contact") / 1000.0);
+                local elapsed = (GetTime() - last_contact_time);
+                if (elapsed < kAwarenessMaxAge[level - 2]) {
+                    continue;
+                }
+            }
+            filtered_links.append(link);
+        }
+        return filtered_links;
+    }
+
+    function DestroyInvestigateLinks()
+    {
+        local links = Link.GetAll("AIInvest", self);
+        local count = 0;
+        foreach (link in links) {
+            Link.Destroy(link);
+            count++;
+        }
+        return count;
+    }
+
+    function ExpireAwareness() {
+        // Clean up old links.
+        local old_links = GetModerateAwarenessLinks(true);
+        foreach (link in old_links) {
+            Link.Destroy(link);
+        }
+        // Check if we still need to be alert.
+        local remaining_links = GetModerateAwarenessLinks(false);
+        if (remaining_links.len() == 0) {
+            // No reason to stay alert, so stop investigating already.
+            local count = DestroyInvestigateLinks();
         }
     }
 }

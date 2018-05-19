@@ -268,14 +268,19 @@ class RitualPerformer extends Controlled
     function OnUnpocketHand()
     {
         // Transfer the Hand to the Alt location, and make it unfrobbable
-        local link = Link.GetOne("Contains", self);
-        if (link != 0) {
-            local hand = LinkDest(link);
-            Link_SetContainType(link, eContainType.kContainTypeAlt);
-            Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
+        local hand = Link_GetScriptParamsDest("Hand", self);
+        if (hand != 0) {
+            local link = Link.GetOne("Contains", self, hand);
+            if (link != 0) {
+                Link_SetContainType(link, eContainType.kContainTypeAlt);
+                Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
 
-            // Tell the controller about it
-            PunchUp("PerformerReachedAltar");
+                // Tell the controller about it
+                PunchUp("PerformerReachedAltar");
+            } else {
+                // The hand's been stolen: tell the controller
+                PunchUp("PerformerNoticedHandMissing");
+            }
         } else {
             // The hand's been stolen: tell the controller
             PunchUp("PerformerNoticedHandMissing");
@@ -285,11 +290,13 @@ class RitualPerformer extends Controlled
     function OnPocketHand()
     {
         // Put the Hand back on the belt, and make it frobbable again
-        local link = Link.GetOne("Contains", self);
-        if (link != 0) {
-            local hand = LinkDest(link);
-            Link_SetContainType(link, eContainType.kContainTypeBelt);
-            Object_RemoveFrobAction(hand, eFrobAction.kFrobActionIgnore);
+        local hand = Link_GetScriptParamsDest("Hand", self);
+        if (hand != 0) {
+            local link = Link.GetOne("Contains", self, hand);
+            if (link != 0) {
+                Link_SetContainType(link, eContainType.kContainTypeBelt);
+                Object_RemoveFrobAction(hand, eFrobAction.kFrobActionIgnore);
+            }
         }
 
         // Tell the controller about it
@@ -324,6 +331,20 @@ class RitualPerformer extends Controlled
     {
         if (message().mode == eAIMode.kAIM_Dead) {
             PunchUp("PerformerBrainDead");
+        }
+    }
+
+    function OnDrawDagger()
+    {
+        local dagger = Link_GetScriptParamsDest("Dagger", self);
+        print("PERFORMER: Drawing dagger: " + dagger);
+        if (dagger != 0) {
+            local link = Link.GetOne("Contains", self, dagger);
+            print("PERFORMER: Alting dagger link: " + link);
+            if (link) {
+                Link_SetContainType(link, eContainType.kContainTypeAlt);
+            }
+            // FIXME: new metaproperty for a better altlinklocation please
         }
     }
 }
@@ -432,20 +453,18 @@ class RitualPerformerController extends Controller
 
     function OnRitualAbort()
     {
-        // FIXME - we need to send *back* to the master controller when
-        // the perform notices the Hand missing (when about to use it),
-        // or the Anax missing (when the lights are on), and then the
-        // master controller can abort the whole thing.
-
         // Wake the performer from her trance
         Object.RemoveMetaProperty(performer, "M-RitualTrance");
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
 
-        // // Kill all the conversations
-        // foreach (down in downs) {
-        //     print("Killing conversation: " + Object_Description(down));
-        //     SendMessage(down, "TurnOff");
-        // }
+        // Kill all the conversations
+        foreach (down in downs) {
+            print("Killing conversation: " + Object_Description(down));
+            SendMessage(down, "TurnOff");
+        }
+
+        // Bring out a weapon.
+        SendMessage(performer, "DrawDagger");
 
         // HACK: aborting the conversation by killing an actor or actor link
         // leaves the performer's AI in a weird state. We really don't want that.
@@ -459,19 +478,6 @@ class RitualPerformerController extends Controller
         // Even after investigating, the performer should search around endlessly,
         // starting at a random point.
         BeginRandomSearch();
-        
-        //LinkID Create(linkkind kind, object from, object to);
-
-        // // And make sure she's alerted!
-        // Property.Set(performer, "AI_Alertness", "Level", 2);
-        // Property.Set(performer, "AI_Alertness", "Peak", 3);
-
-        // Property.Set(performer, "AI_AlertCap", "Max level", 3);
-        // Property.Set(performer, "AI_AlertCap", "Min level", 2);
-        // Property.Set(performer, "AI_AlertCap", "Min relax after peak", 2);
-
-        // AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kModerateAlert);
-        //AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kLowAlert);
     }
 
     function OnConversationDone()

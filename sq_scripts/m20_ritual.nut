@@ -108,7 +108,7 @@ class RitualMasterController extends Controller
 
     function OnTurnOn()
     {
-        // FIXME: check GetData for is_running
+        // FIXME: check GetData for status
         if (status == eRitualStatus.kRitualNotStarted) {
             Begin();
         } else {
@@ -144,8 +144,9 @@ class RitualMasterController extends Controller
             print("RITUAL: End");
             PunchDown("RitualEnd", current_stage);
 
-            // FIXME: conclude the ritual
-            print("RITUAL DEATH: run out of busywork!");
+            // FIXME: objectives tie in
+
+            print("RITUAL DEATH: Beware! The Prophet has returned!");
             Object.Destroy(self);
         }
     }
@@ -155,12 +156,12 @@ class RitualMasterController extends Controller
         if (status == eRitualStatus.kRitualBegun) {
             status = eRitualStatus.kRitualAborted;
 
-            // FIXME: need state variable so we can't Begin/End/Abort inappropriately or more than once
             print("RITUAL: Abort");
             PunchDown("RitualAbort", current_stage);
 
-            // FIXME: stop the ritual and make di rupo react
-            print("RITUAL DEATH: stopped the ritual!");
+            // FIXME: objectives tie-in
+
+            print("RITUAL DEATH: Well done, you stopped the ritual!");
             Object.Destroy(self);
         }
     }
@@ -337,7 +338,6 @@ class RitualPerformer extends Controlled
     function OnDrawDagger()
     {
         local dagger = Link_GetScriptParamsDest("Dagger", self);
-        print("PERFORMER: Drawing dagger: " + dagger);
         if (dagger != 0) {
             // Dagger's already there, just not rendered! So render it.
             Property.Set(dagger, "HasRefs", "", true);
@@ -397,19 +397,19 @@ class RitualPerformerController extends Controller
             search_convs = Link_GetAllScriptParamsDests("SearchConv", self);
             searchers = Link_CollectPatrolPath(searchers);
             if (performer == 0) {
-                print("RITUAL DEATH: no performer.");
+                print("PERFORMER CTL DEATH: no performer.");
                 Object.Destroy(self);
             }
             if (rounds.len() != 7) {
-                print("RITUAL DEATH: incorrect number of rounds.");
+                print("PERFORMER CTL DEATH: incorrect number of rounds.");
                 Object.Destroy(self);
             }
             if (downs.len() != 7) {
-                print("RITUAL DEATH: incorrect number of downs.");
+                print("PERFORMER CTL DEATH: incorrect number of downs.");
                 Object.Destroy(self);
             }
             if (search_convs.len() == 0) {
-                print("RITUAL DEATH: no search_convs.");
+                print("PERFORMER CTL DEATH: no search_convs.");
                 Object.Destroy(self);
             }
 
@@ -424,7 +424,6 @@ class RitualPerformerController extends Controller
 
     function OnRitualBegin()
     {
-        print("PERFORMER CTL: RitualBegin");
         local stage = message().data;
         local trol = rounds[stage];
         SetPatrolTarget(trol);
@@ -455,7 +454,6 @@ class RitualPerformerController extends Controller
 
         // Kill all the conversations
         foreach (down in downs) {
-            print("Killing conversation: " + Object_Description(down));
             SendMessage(down, "TurnOff");
         }
 
@@ -480,20 +478,6 @@ class RitualPerformerController extends Controller
         // Even after investigating, the performer should search around endlessly,
         // starting at a random point.
         BeginRandomSearch();
-    }
-
-    function OnConversationDone()
-    {
-        print("ConversationDone!");
-    }
-
-    function OnObjActResult()
-    {
-        print("Completed action: " + message().action
-            + ", result: " + message().result
-            + ", data: " + message().data
-            + ", target: " + Object_Description(message().target));
-        // FIXME: dunno what I was thinking here... that maybe now we fiddle with the convo?
     }
 
     // ---- Messages from the controller for each step
@@ -642,11 +626,11 @@ class RitualLightingController extends Controller
             strips = Link_GetAllScriptParamsDests("Strip", self);
             strobes = Link_GetAllScriptParamsDests("Strobe", self);
             if (lights.len() != 7) {
-                print("RITUAL DEATH: incorrect number of lights.");
+                print("LIGHTING CTL DEATH: incorrect number of lights.");
                 Object.Destroy(self);
             }
             if (strips.len() != 7) {
-                print("RITUAL DEATH: incorrect number of strips.");
+                print("LIGHTING CTL DEATH: incorrect number of strips.");
                 Object.Destroy(self);
             }
 
@@ -667,17 +651,18 @@ class RitualLightingController extends Controller
 
     function OnRitualBegin()
     {
-        print("LIGHTING CTL: RitualBegin");
     }
 
     function OnRitualEnd()
     {
         if (GetData("StrobeDisabled")) {
+            print("LIGHTING CTL: Strobes are disabled.");
             // Just turn on all the lights.
             foreach (light in lights) {
                 SendMessage(light, "TurnOn");
             }
         } else {
+            print("LIGHTING CTL: Strobes are enabled.");
             // Make all the strobes flash horrendously
             foreach (light in lights) {
                 SendMessage(light, "TurnOff");
@@ -729,11 +714,11 @@ class RitualVictimController extends Controller
             victim = Link_GetScriptParamsDest("Victim", self);
             gores = Link_GetAllScriptParamsDests("Gore", self);
             if (victim == 0) {
-                print("RITUAL DEATH: no victim.");
+                print("VICTIM CTL DEATH: no victim.");
                 Object.Destroy(self);
             }
             if (gores.len() != 7) {
-                print("RITUAL DEATH: incorrect number of gores.");
+                print("VICTIM CTL DEATH: incorrect number of gores.");
                 Object.Destroy(self);
             }
 
@@ -748,7 +733,6 @@ class RitualVictimController extends Controller
 
     function OnRitualBegin()
     {
-        print("VICTIM CTL: RitualBegin");
     }
 
     function OnRitualEnd()
@@ -781,7 +765,7 @@ class RitualVictimController extends Controller
 
             // Deactivate the physics controls
             if (! Physics.ValidPos(gore)) {
-                print("RITUAL ERROR: gore " + i + " not in valid position!");
+                print("VICTIM CTL ERROR: gore " + i + " not in valid position!");
                 continue;
             } else {
                 Property.Set(gore, "PhysControl", "Controls Active", 0);

@@ -476,27 +476,8 @@ class DoorStartsOpen extends SqRootScript
    fine for the action--or it will be ignored and its death will be in vain. */
 class ConversationKiller extends SqRootScript
 {
-    /*
-    function OnSim()
-    {
-        if (message().starting) {
-            // Spawn a ConversationKiller AI to be actor 6
-            if (Link_GetConversationActor(6, self) == 0) {
-                local killer = Object.BeginCreate(Object.Named("ConversationKiller"));
-                Object.Teleport(killer, Object.Position(self), Object.Facing(self));
-                Object.EndCreate(killer);
-                local link = Link.Create("AIConversationActor", self, killer);
-                LinkTools.LinkSetData(link, "Actor ID", 6);
-            } else {
-                print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") already has actor 6!");
-            }
-        }
-    }
-    */
-
     function OnTurnOff()
     {
-        // FIXME: test if this is a better way
         // Kill the AIConversationActor links to force the conversation to stop.
         local links = Link.GetAll("AIConversationActor", self);
         foreach (link in links) {
@@ -504,23 +485,5 @@ class ConversationKiller extends SqRootScript
             AI.SetScriptFlags(actor, 1); // 1 == kSpeechOff
             Link.Destroy(link);
         }
-        /*
-        // Force the conversation to stop by slaying actor 6
-        local killer_link = Link_GetConversationActor(6, self);
-        if (killer_link != 0) {
-            // Shut up! Just shut up! All you actors, zip it!
-            local links = Link.GetAll("AIConversationActor", self);
-            foreach (link in links) {
-                local actor = LinkDest(link);
-                AI.SetScriptFlags(actor, 1); // 1 == kSpeechOff
-            }
-
-            // Ironic that we call this AI the "conversation killer" when really
-            // it's us that's doing the killing, and it that's getting killed.
-            Damage.Slay(LinkDest(killer_link), 0);
-        } else {
-             print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") has no actor 6!");
-        }
-        */
     }
 }

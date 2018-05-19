@@ -1096,6 +1096,29 @@ class RitualExtra extends Controlled
             // ritual, we can go to our spot via the closest point.
             Link_DestroyAll("AICurrentPatrol", self);
         }
+
+        /* Plan:
+
+            When an extra starts investigating, they punch up to ask to be excused.
+            When they stop having any AIInvestigate or AIAttack links, then they punch up to rejoin.
+            When they rejoin, they're sent directly to place beside the performer: ((2 * stage + 1) % stage_count)
+                and inserted at the front of the extras array, so they'll then be the first in line.
+
+        or maybe not?
+
+        Okay, different technique needed: I still want them to calm down sooner, so:
+
+            What if, when alerted to > 2, we activate a tweq for every few seconds.
+            Then when tweq'd, we check:
+
+                * Make sure we have no AIAttack links to the player.
+                * Check the time on the all AIAwareness links that are level >= 2.
+                    - if any are more than 30 seconds old, delete them and stop the tweq.
+                    - and also remove any AIInvest links too.
+                * Regardless, stop the tweq when alertness reaches <= 1.
+
+                If that doesn't work, can maybe throw a temporary low AlertCap in there, then take it off again?
+        */
     }
 
     // ---- Utilities

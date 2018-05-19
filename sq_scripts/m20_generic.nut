@@ -476,6 +476,7 @@ class DoorStartsOpen extends SqRootScript
    fine for the action--or it will be ignored and its death will be in vain. */
 class ConversationKiller extends SqRootScript
 {
+    /*
     function OnSim()
     {
         if (message().starting) {
@@ -491,11 +492,11 @@ class ConversationKiller extends SqRootScript
             }
         }
     }
+    */
 
     function OnTurnOff()
     {
         // FIXME: test if this is a better way
-        /*
         // Kill the AIConversationActor links to force the conversation to stop.
         local links = Link.GetAll("AIConversationActor", self);
         foreach (link in links) {
@@ -503,7 +504,7 @@ class ConversationKiller extends SqRootScript
             AI.SetScriptFlags(actor, 1); // 1 == kSpeechOff
             Link.Destroy(link);
         }
-        */
+        /*
         // Force the conversation to stop by slaying actor 6
         local killer_link = Link_GetConversationActor(6, self);
         if (killer_link != 0) {
@@ -511,7 +512,7 @@ class ConversationKiller extends SqRootScript
             local links = Link.GetAll("AIConversationActor", self);
             foreach (link in links) {
                 local actor = LinkDest(link);
-                AI.SetScriptFlags(actor, 1 /* kSpeechOff */);
+                AI.SetScriptFlags(actor, 1); // 1 == kSpeechOff
             }
 
             // Ironic that we call this AI the "conversation killer" when really
@@ -519,6 +520,7 @@ class ConversationKiller extends SqRootScript
             Damage.Slay(LinkDest(killer_link), 0);
         } else {
              print("ConversationKiller error: " + Object.GetName(self) + " (" + self + ") has no actor 6!");
-       }
+        }
+        */
     }
 }

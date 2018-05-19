@@ -225,9 +225,15 @@ class RitualMasterController extends Controller
         Abort();
     }
 
+    function OnPerformerNoticedHandMissing()
+    {
+        print("RITUAL: Victim has been unkidnapped");
+        Abort();
+    }
+
     function OnPerformerAlerted()
     {
-        print("RITUAL: Performer alerted (perhaps the victim was stolen?)");
+        print("RITUAL: Performer alerted");
         Abort();
     }
 
@@ -241,22 +247,10 @@ class RitualMasterController extends Controller
 
 class RitualPerformer extends Controlled
 {
-// FIXME: cleanup
-    function OnTweqComplete()
-    {
-        local level = Property.Get(self, "AI_Alertness", "Level");
-        local peak = Property.Get(self, "AI_Alertness", "Peak");
-        local max = Property.Get(self, "AI_AlertCap", "Max level");
-        local min = Property.Get(self, "AI_AlertCap", "Min level");
-        local min_relax = Property.Get(self, "AI_AlertCap", "Min relax after peak");
-        print("Alert level: " + level + " (peak " + peak + "). Cap: min " + min + ", max " + max + ", min relax " + min_relax);
-    }
 
-// FIXME: cleanup
     function OnNoticedVictimMissing()
     {
-        print("!!! WHERE HAS THE VICTIM GONE ??? !!!");
-        PunchUp("PerformerAlerted");
+        PunchUp("PerformerNoticedVictimMissing");
     }
 
     function OnPatrolPoint()
@@ -310,11 +304,8 @@ class RitualPerformer extends Controlled
 
     function OnAlertness()
     {
-        local levels = ["No Alert", "Low Alert", "Moderate Alert", "High Alert"];
-        print("Alertness: from " + levels[message().oldLevel] + " to " + levels[message().level]);
-
         // The performer's trance prevents them from noticing the player ordinarily,
-        // so they'll only alert in extreme conditions or when seeing MissingRitualVictim.
+        // so they'll only alert in extreme conditions or when scripted.
         if (message().level >= eAIScriptAlertLevel.kModerateAlert) {
             PunchUp("PerformerAlerted");
         }
@@ -322,8 +313,6 @@ class RitualPerformer extends Controlled
 
     function OnHighAlert()
     {
-        local levels = ["No Alert", "Low Alert", "Moderate Alert", "High Alert"];
-        print("HighAlert: from " + levels[message().oldLevel] + " to " + levels[message().level]);
         // The performer's trance prevents them from noticing the player ordinarily,
         // so they'll only alert in extreme conditions or when scripted.
         if (message().level >= eAIScriptAlertLevel.kModerateAlert) {
@@ -378,18 +367,18 @@ class RitualPerformerController extends Controller
     rounds = [];
     downs = [];
     searchers = [];
+    search_convs = [];
 
     function OnSim()
     {
         if (message().starting) {
             // Get linked entities and check they're all accounted for.
             performer = Link_GetScriptParamsDest("Performer", self);
-            rounds = Link_GetAllScriptParamsDests("Patrol", self);
-            downs = Link_GetAllScriptParamsDests("Conv", self);
+            rounds = Link_GetAllScriptParamsDests("Round", self);
+            downs = Link_GetAllScriptParamsDests("Down", self);
             searchers = Link_GetAllScriptParamsDests("Search", self);
-            print("Initial searchers: " + searchers.len());
+            search_convs = Link_GetAllScriptParamsDests("SearchConv", self);
             searchers = Link_CollectPatrolPath(searchers);
-            print("Expanded searchers: " + searchers.len());
             if (performer == 0) {
                 print("RITUAL DEATH: no performer.");
                 Object.Destroy(self);
@@ -400,6 +389,10 @@ class RitualPerformerController extends Controller
             }
             if (downs.len() != 7) {
                 print("RITUAL DEATH: incorrect number of downs.");
+                Object.Destroy(self);
+            }
+            if (search_convs.len() == 0) {
+                print("RITUAL DEATH: no search_convs.");
                 Object.Destroy(self);
             }
 
@@ -448,32 +441,26 @@ class RitualPerformerController extends Controller
         Object.RemoveMetaProperty(performer, "M-RitualTrance");
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
 
-        // Kill all the conversations
-        foreach (down in downs) {
-            print("Killing conversation: " + Object_Description(down));
-            SendMessage(down, "TurnOff");
-        }
+        // // Kill all the conversations
+        // foreach (down in downs) {
+        //     print("Killing conversation: " + Object_Description(down));
+        //     SendMessage(down, "TurnOff");
+        // }
 
-        // Make the performer search around--hack, cause they don't want to investigate :(
-        if (searchers.len() > 0) {
-            local i = Data.RandInt(0, (searchers.len() - 1));
-            local target = searchers[i];
-            Link_SetCurrentPatrol(performer, target);
-            print("Setting current patrol to: " + Object_Description(target));
-            Object.AddMetaProperty(performer, "Searcher");
-            // Send them away
-            AI.MakeGotoObjLoc(performer, target, eAIScriptSpeed.kNormalSpeed, eAIActionPriority.kNormalPriorityAction, "foo");
+        // HACK: aborting the conversation by killing an actor or actor link
+        // leaves the performer's AI in a weird state. We really don't want that.
+        // So instead, we make them play a different conversation which overrides it.
+        PlayRandomSearchConv();
 
-            local links = Link.GetAll(0, performer);
-            foreach (link in links) {
-                local slink = sLink(link);
-                print("Link " + slink.flavor + " from " + Object_Description(slink.source) + " to " + Object_Description(slink.dest));
-            }
-        }
+        // Make sure the performer will investigate a little before searching.
+        Link.Create("AIInvest", performer, Object.Named("Player"));
+        Link.Create("AIAwareness", performer, Object.Named("Player"));
 
-        // Make sure she'll investigate
-        //Link.Create("AIInvest", performer, Object.Named("Player"));
-            //LinkID Create(linkkind kind, object from, object to);
+        // Even after investigating, the performer should search around endlessly,
+        // starting at a random point.
+        BeginRandomSearch();
+        
+        //LinkID Create(linkkind kind, object from, object to);
 
         // // And make sure she's alerted!
         // Property.Set(performer, "AI_Alertness", "Level", 2);
@@ -485,6 +472,11 @@ class RitualPerformerController extends Controller
 
         // AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kModerateAlert);
         //AI.SetMinimumAlert(performer, eAIScriptAlertLevel.kLowAlert);
+    }
+
+    function OnConversationDone()
+    {
+        print("ConversationDone!");
     }
 
     function OnObjActResult()
@@ -521,12 +513,16 @@ class RitualPerformerController extends Controller
 
     function OnPerformerPatrolPoint()
     {
-        local trol = message().data;
-        if (trol == GetPatrolTarget()) {
-            print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
-            PunchUp("PerformerReachedVertex");
+        if (GetData("IsSearching")) {
+            PlayRandomSearchConv();
         } else {
-            print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
+            local trol = message().data;
+            if (trol == GetPatrolTarget()) {
+                print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
+                PunchUp("PerformerReachedVertex");
+            } else {
+                print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
+            }
         }
     }
 
@@ -551,6 +547,11 @@ class RitualPerformerController extends Controller
     }
 
     function OnPerformerNoticedHandMissing()
+    {
+        PunchUp(message().message);
+    }
+
+    function OnPerformerNoticedVictimMissing()
     {
         PunchUp(message().message);
     }
@@ -584,6 +585,26 @@ class RitualPerformerController extends Controller
         if (trol != 0) {
             Link.Create("Route", self, trol);
         }
+    }
+
+    function BeginRandomSearch()
+    {
+        print("PERFORMER CTL: Now searching.");
+        SetData("IsSearching", true);
+        if (searchers.len() > 0) {
+            local i = Data.RandInt(0, (searchers.len() - 1));
+            local target = searchers[i];
+            Link_SetCurrentPatrol(performer, target);
+        }
+        Object.AddMetaProperty(performer, "M-RitualSearchModerate");
+    }
+
+    function PlayRandomSearchConv()
+    {
+        local i = Data.RandInt(0, (search_convs.len() - 1));
+        local conv = search_convs[i];
+        print("PERFORMER CTL: Chose random search conv: " + Object_Description(conv));
+        AI.StartConversation(conv);
     }
 }
 

@@ -805,13 +805,6 @@ class RitualVictimController extends Controller
 }
 
 
-// FIXME: extras: We need a plan to deal with
-// 0 - 6 extras, and space them out around the ritual area accordingly.
-// This probably means a bunch of extra disconnected patrol points to send them to
-// (patrol points so that we can replace the current link, and they'll automatically
-// return when settling down after alerted)
-
-
 class RitualFloorStrip extends SqRootScript
 {
     /* When turned on, brighten up and pulse illumination. */
@@ -1162,14 +1155,21 @@ class RitualLazyExtra extends SqRootScript
     // and alertness ends 120s after contact. That's way too long, given the
     // length of the whole ritual.
 
-    // Time (in seconds) to expire level 2 and 3 awareness, respectively.
+    // Minimum time (in seconds) to investigate.
+    kInvestigateMinAge = 10.0;
+
+    // Maximum time (in seconds) to persist level 2 and 3 awareness, respectively.
     kAwarenessMaxAge2 = 10.0;
     kAwarenessMaxAge3 = 20.0;
 
     function OnBeginScript()
     {
-        // Start the tweq.
         print("LAZINESS: " + Object_Description(self) + " is lazy.");
+
+        // Put on an alert cap (with default/inherited values) so we can hack it later.
+        Property.Add(self, "AI_AlertCap");
+
+        // Start the tweq.
         Property.Set(self, "StTweqBlink", "AnimS", 1);
     }
 
@@ -1177,10 +1177,10 @@ class RitualLazyExtra extends SqRootScript
     {
         // Don't try to stop looking if we're busy attacking!
         if (! Link.AnyExist("AIAttack", self)) {
-            print("LAZINESS: " + Object_Description(self) + " is still lazy.");
+            //print("LAZINESS: " + Object_Description(self) + " is still lazy.");
             ExpireAwareness();
         } else {
-            print("LAZINESS: " + Object_Description(self) + " is busy attacking something.");
+            //print("LAZINESS: " + Object_Description(self) + " is busy attacking something.");
         }
     }
 
@@ -1188,8 +1188,9 @@ class RitualLazyExtra extends SqRootScript
     {
         if (message().level < 2) {
             print("LAZINESS: " + Object_Description(self) + " has calmed down. Back to work.");
-            // Laziness worked, we can stop checking if we're lazy enough.
+            // Laziness worked, we can stop checking that we're lazy enough.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
+            Property.Remove(self, "AI_AlertCap");
         }
     }
 
@@ -1199,18 +1200,40 @@ class RitualLazyExtra extends SqRootScript
             print("LAZINESS: " + Object_Description(self) + " is brain dead. Back to work (or not).");
             // We're brain dead, stop caring.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
+            Property.Remove(self, "AI_AlertCap");
         }
     }
 
     function ExpireAwareness()
     {
-        // We're going to destroy some links, so cache the iterator first just in case.
+        // First of all, if we're investigating, we let that happen for a while
+        local invest_link = Link.GetOne("AIInvest", self);
+        if (invest_link != 0) {
+            // Find out why we're investigating.
+            local awareness_link = Link.GetOne("AIAwareness", self, LinkDest(invest_link));
+            if (awareness_link != 0) {
+                local age = (GetTime() - LinkLastContactTime(awareness_link));
+                if (age < kInvestigateMinAge) {
+                    // Let the investigation continue.
+                    //print("LAZINESS: " + Object_Description(self) + " continuing fresh (" + age + "s) investigation: " + Link_Description(invest_link));
+                    return;
+                } else {
+                    //print("LAZINESS: " + Object_Description(self) + " investigation is getting old (" + age + "s): " + Link_Description(invest_link));
+                }
+            } else {
+                //print("LAZINESS: " + Object_Description(self) + " has no awareness link for its investigation.");
+            }
+        } else {
+            //print("LAZINESS: " + Object_Description(self) + " is not investigating.");
+        }
+
+        // Okay, we're going to destroy some links, so cache the iterator first just in case.
         local links = [];
         foreach (link in Link.GetAll("AIAwareness", self)) {
             links.append(link);
         }
-        local destroy_count = 0;
-        local ignore_count = 0;
+        // Conditionally destroy means: destroy these if there are no other reasons to stay alert (live friendlies).
+        local conditionally_destroy_links = [];
         local keep_count = 0;
         foreach (link in links) {
             // Basic evidence
@@ -1230,54 +1253,52 @@ class RitualLazyExtra extends SqRootScript
             // Draw conclusions:
             local ignore = false;
             local destroy = false;
+            local conditionally_destroy = false;
             if (is_low_level) {
                 // This link isn't keeping us alerted, so ignore it.
-                print("LAZINESS: Ignoring low level: " + Link_Description(link));
+                //print("LAZINESS: Ignoring low level: " + Link_Description(link));
                 ignore = true;
             } else if (is_hostile_team) {
                 if (is_old) {
                     // Guess it was just rats again.
-                    print("LAZINESS: Destroying old (" + age + "s) hostile: " + Link_Description(link));
+                    //print("LAZINESS: Destroying old (" + age + "s) hostile: " + Link_Description(link));
                     destroy = true;
                 } else {
-                    print("LAZINESS: Keeping recent (" + age + "s) hostile: " + Link_Description(link));
+                    //print("LAZINESS: Keeping recent (" + age + "s) hostile: " + Link_Description(link));
                 }
             } else if (is_same_team) {
                 if (is_me) {
                     if (is_old) {
                         // Well, I heard something, but that was a while ago.
-                        print("LAZINESS: Destroying old (" + age + "s) heard: " + Link_Description(link));
+                        //print("LAZINESS: Destroying old (" + age + "s) heard: " + Link_Description(link));
                         destroy = true;
                     } else {
-                        print("LAZINESS: Keeping recent (" + age + "s) heard: " + Link_Description(link));
+                        //print("LAZINESS: Keeping recent (" + age + "s) heard: " + Link_Description(link));
                     }
                 } else {
                     if (is_dead) {
-                        if (is_old) {
-                            // It's a friendly corpse, but it's old news.
-                            print("LAZINESS: Destroying old (" + age + "s) friendly corpse: " + Link_Description(link));
-                            destroy = true;
-                        } else {
-                            print("LAZINESS: Keeping recent (" + age + "s) friendly corpse: " + Link_Description(link));
-                        }
+                        // Friendly corpses aren't interesting once an investigation is over.
+                        //print("LAZINESS: Conditionally destroying friendly corpse: " + Link_Description(link));
+                        conditionally_destroy = true;
                     } else {
                         // Friends don't let friends stay angry.
-                        print("LAZINESS: Destroying friendly: " + Link_Description(link));
-                        destroy = true;
+                        //print("LAZINESS: Conditionally destroying friendly: " + Link_Description(link));
+                        conditionally_destroy = true;
                     }
                 }
             } else {
                 // Neutral team? Can they even alert you? Don't care, let's get rid of it.
-                print("LAZINESS: Destroying neutral: " + Link_Description(link));
+                //print("LAZINESS: Destroying neutral: " + Link_Description(link));
                 destroy = true;
             }
 
             // Act upon the conclusions.
             if (ignore) {
-                ++ignore_count;
+                // Well, what did you expect?
             } else if (destroy) {
                 Link.Destroy(link);
-                ++destroy_count;
+            } else if (conditionally_destroy) {
+                conditionally_destroy_links.append(link);
             } else {
                 ++keep_count;
             }
@@ -1285,66 +1306,29 @@ class RitualLazyExtra extends SqRootScript
 
         // When there's nothing to see, there's no reason to keep investigating.
         if (keep_count == 0) {
+            //print("LAZINESS: " + Object_Description(self) + " is destroying its investigation (if any).");
             Link_DestroyAll("AIInvest", self);
+
+            // And destroy the conditional ones
+            foreach (link in conditionally_destroy_links) {
+                //print("LAZINESS: Actually destroying conditional: " + Link_Description(link));
+                Link.Destroy(link);
+            }
         }
 
-        print("LAZINESS: kept " + keep_count + ", destroyed " + destroy_count + ", ignored " + ignore_count);
         if (keep_count == 0) {
-            print ("LAZINESS CONCLUSION: No reason to stay alert.");
+            print ("LAZINESS CONCLUSION: No reason for " + Object_Description(self) + " to stay alert.");
+            // HACK: sometimes despite all the awareness fudging, sometimes they don't calm
+            // down soon enough. So let's put a cap on until they do.
+            Property.Set(self, "AI_AlertCap", "Max level", 1);
+            Property.Set(self, "AI_AlertCap", "Min level", 0);
+            Property.Set(self, "AI_AlertCap", "Min relax after peak", 1);
         } else {
-            print ("LAZINESS CONCLUSION: Ooh, ooh, ooh, ooh, stayin' alert, stayin' alert!");
+            print ("LAZINESS CONCLUSION: " + Object_Description(self) + " should stay alert, there's trouble out there.");
         }
     }
 
     // ---- Utilities
-
-    // FIXME: remove this when we're done with it
-    /*
-    Link "AIAwareness"          // type sAIAwareness              , flags 0x0010
-    {
-        "Flags" : bitflags    // flags: "Seen", "Heard", "CanRaycast", "HaveLOS", "Blind", "Deaf", "Highest", "FirstHand"
-        "Level" : enum    // enums: "(0) None", "(1) Low", "(2) Moderate", "(3) High"
-        "Peak Level" : enum    // enums: "(0) None", "(1) Low", "(2) Moderate", "(3) High"
-        "Level enter time" : int
-        "Time last contact" : int
-        "Pos last contact" : vector
-        "Last pulse level" : enum    // enums: "(0) None", "(1) Low", "(2) Moderate", "(3) High"
-        "Vision cone" : int
-        "Time last update" : int
-        "Time last update LOS" : int
-        "Last true contact" : int
-        "Freshness" : int
-    }
-    */
-    function DebugGetFlags(link) {
-        local flags = LinkTools.LinkGetData(link, "Flags");
-        local s = " ";
-        if ((flags & (1 << 0)) != 0) {
-            s += "Seen ";
-        }
-        if ((flags & (1 << 1)) != 0) {
-            s += "Heard ";
-        }
-        if ((flags & (1 << 2)) != 0) {
-            s += "CanRaycast ";
-        }
-        if ((flags & (1 << 3)) != 0) {
-            s += "HaveLOS ";
-        }
-        if ((flags & (1 << 4)) != 0) {
-            s += "Blind ";
-        }
-        if ((flags & (1 << 5)) != 0) {
-            s += "Deaf ";
-        }
-        if ((flags & (1 << 6)) != 0) {
-            s += "Highest ";
-        }
-        if ((flags & (1 << 7)) != 0) {
-            s += "FirstHand ";
-        }
-        return s;
-    }
 
     function Link_Description(link)
     {

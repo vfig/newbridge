@@ -1140,6 +1140,7 @@ class RitualLazyExtra extends SqRootScript
     function OnBeginScript()
     {
         // Start the tweq.
+        print("LAZINESS: " + Object_Description(self) + " is lazy.");
         Property.Set(self, "StTweqBlink", "AnimS", 1);
     }
 
@@ -1147,13 +1148,17 @@ class RitualLazyExtra extends SqRootScript
     {
         // Don't try to stop looking if we're busy attacking!
         if (! Link.AnyExist("AIAttack", self)) {
+            print("LAZINESS: " + Object_Description(self) + " is still lazy.");
             ExpireAwareness();
+        } else {
+            print("LAZINESS: " + Object_Description(self) + " is busy attacking something.");
         }
     }
 
     function OnAlertness()
     {
         if (message().level < 2) {
+            print("LAZINESS: " + Object_Description(self) + " has calmed down. Back to work.");
             // Laziness worked, we can stop checking if we're lazy enough.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
         }
@@ -1162,6 +1167,7 @@ class RitualLazyExtra extends SqRootScript
     function OnAIModeChange()
     {
         if (message().mode == eAIMode.kAIM_Dead) {
+            print("LAZINESS: " + Object_Description(self) + " is brain dead. Back to work (or not).");
             // We're brain dead, stop caring.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
         }
@@ -1169,20 +1175,39 @@ class RitualLazyExtra extends SqRootScript
 
     // ---- Utilities
 
-    function GetModerateAwarenessLinks(age_filtered) {
+    function GetModerateAwarenessLinks(age_filtered, team_filtered) {
         local links = Link.GetAll("AIAwareness", self);
         local filtered_links = [];
+        local my_team = Property.Get(self, "AI_Team", "");
         foreach (link in links) {
             // Ignore low alert awareness
             local level = LinkTools.LinkGetData(link, "Level");
             if (level < 2) {
                 continue;
             }
+            // Conditionally ignore same-team links (except those to myself, which is
+            // really a link to the homunculus in my head that hears suspicious sounds).
+            if (team_filtered) {
+                local dest = LinkDest(link);
+                if (dest != self) {
+                    local other_team = Property.Get(dest, "AI_Team", "");
+                    // Team 1 is neutral, of course, so they don't count either.
+                    if ((my_team == 1) || (other_team == 1) || (my_team == other_team)) {
+                        print("LAZINESS: ignoring AIAwareness (level " + level + ") "
+                            + Object_Description(self) + " -> "
+                            + Object_Description(LinkDest(link)) + ": team " + other_team + ".");
+                        continue;
+                    }
+                }
+            }
+            // Conditionally ignore recent awareness links.
             if (age_filtered) {
-                // Ignore recent awareness
                 local last_contact_time = (LinkTools.LinkGetData(link, "Time last contact") / 1000.0);
                 local elapsed = (GetTime() - last_contact_time);
                 if (elapsed < kAwarenessMaxAge[level - 2]) {
+                    print("LAZINESS: ignoring AIAwareness (level " + level + ") "
+                        + Object_Description(self) + " -> "
+                        + Object_Description(LinkDest(link)) + ": only " + elapsed + "s old.");
                     continue;
                 }
             }
@@ -1204,15 +1229,25 @@ class RitualLazyExtra extends SqRootScript
 
     function ExpireAwareness() {
         // Clean up old links.
-        local old_links = GetModerateAwarenessLinks(true);
+        local old_links = GetModerateAwarenessLinks(true, false);
         foreach (link in old_links) {
             Link.Destroy(link);
         }
-        // Check if we still need to be alert.
-        local remaining_links = GetModerateAwarenessLinks(false);
+        print("LAZINESS: removed " + old_links.len() + " old awareness links.");
+        // Check if there's any reason to still be alert.
+        local remaining_links = GetModerateAwarenessLinks(false, true);
         if (remaining_links.len() == 0) {
             // No reason to stay alert, so stop investigating already.
             local count = DestroyInvestigateLinks();
+            print("LAZINESS: no more awareness; removed " + count + " investigations.");
+
+            // Clean up same-team links that might otherwise keep us at alert level 3.
+            local same_team_links = GetModerateAwarenessLinks(false, false);
+            foreach (link in same_team_links) {
+                Link.Destroy(link);
+            }
+            print("LAZINESS: removed " + same_team_links.len() + " same-team awareness links.");
+
         }
     }
 }

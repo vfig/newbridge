@@ -1078,9 +1078,6 @@ class RitualExtra extends Controlled
 
     function OnStopPatrolling()
     {
-        // This is our new idle spot.
-        Property.Set(self, "AI_IdleOrgn", "Original Location", Object.Position(self));
-        Property.Set(self, "AI_IdleOrgn", "Original Facing", Object.Facing(self).z);
         // Don't patrol away.
         Object.RemoveMetaProperty(self, "M-DoesPatrol");
     }
@@ -1143,6 +1140,11 @@ class RitualExtra extends Controlled
         Link_DestroyAll("Route", self);
         if (trol != 0) {
             Link.Create("Route", self, trol);
+
+            // We also want this to be our idle spot, so we'll wander back here
+            // if we were alerted, and calmed down in between rounds.
+            Property.Set(self, "AI_IdleOrgn", "Original Location", Object.Position(trol));
+            Property.Set(self, "AI_IdleOrgn", "Original Facing", Object.Facing(trol).z);
         }
     }
 }
@@ -1154,6 +1156,8 @@ class RitualLazyExtra extends SqRootScript
     // much sooner than normal. Default is investigation ends 30s after contact,
     // and alertness ends 120s after contact. That's way too long, given the
     // length of the whole ritual.
+
+// FIXME: tweak these times when playtesting
 
     // Minimum time (in seconds) to investigate.
     kInvestigateMinAge = 10.0;

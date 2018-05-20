@@ -1,3 +1,9 @@
+// FIXME: for the sake of saving, need to review everything here,
+// and might want to track more things with more links and/or SetData
+// instead of member variables.
+// Also need to consider OnSim() vs OnBeginScript().
+
+
 class Controlled extends SqRootScript
 {
     function PunchUp(message, data = 0)
@@ -95,7 +101,11 @@ class RitualMasterController extends Controller
     // FIXME: might in fact want to adjust time warp for Normal difficulty
     // FIXME: If the stages are changed, also need to adjust the Ritual tags in the conv schema.
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
-    stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
+
+    // FIXME: shortcut for working on the finale
+    stages = [6]; 
+//    stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
+
     //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
 
     // Status of the ritual
@@ -169,8 +179,11 @@ class RitualMasterController extends Controller
 
             // FIXME: objectives tie in
 
-            print("RITUAL DEATH: Beware! The Prophet has returned!");
-            Object.Destroy(self);
+            // Time for a grand finale before failing the mission.
+            Finale();
+
+            // print("RITUAL DEATH: Beware! The Prophet has returned!");
+            // Object.Destroy(self);
         }
     }
 
@@ -193,52 +206,63 @@ class RitualMasterController extends Controller
 
     function OnPerformerReachedVertex()
     {
-        // Time for a pause
-        print("RITUAL: Pause " + current_stage);
-        PunchDown("RitualPause", current_stage);
+        if (status == eRitualStatus.kRitualBegun) {
+            // Time for a pause
+            print("RITUAL: Pause " + current_stage);
+            PunchDown("RitualPause", current_stage);
+        }
     }
 
     function OnPerformerFacedAltar()
     {
-        // Time for a down
-        print("RITUAL: Down " + current_stage);
-        PunchDown("RitualDown", current_stage);
+        if (status == eRitualStatus.kRitualBegun) {
+            // Time for a down
+            print("RITUAL: Down " + current_stage);
+            PunchDown("RitualDown", current_stage);
+        }
     }
 
     function OnPerformerReachedAltar()
     {
-        // Time for a bless
-        print("RITUAL: Bless " + current_stage);
-        PunchDown("RitualBless", current_stage);
+        if (status == eRitualStatus.kRitualBegun) {
+            // Time for a bless
+            print("RITUAL: Bless " + current_stage);
+            PunchDown("RitualBless", current_stage);
+        }
     }
 
     function OnPerformerFinishedBlessing()
     {
-        // Check if it's the final stage:
-        if (current_index < stages.len() - 1) {
-            // Time for a return
-            print("RITUAL: Return " + current_stage);
-            PunchDown("RitualReturn", current_stage);
-        } else {
-            // Time for a grand finale
-            End();
+        if (status == eRitualStatus.kRitualBegun) {
+            // Check if it's the final stage:
+            if (current_index < stages.len() - 1) {
+                // Time for a return
+                print("RITUAL: Return " + current_stage);
+                PunchDown("RitualReturn", current_stage);
+            } else {
+                // Time for a grand finale
+                End();
+            }
         }
     }
 
     function OnPerformerReturnedToVertex()
     {
-        // On to the next stage
-        current_index = current_index + 1;
-        if (current_index >= stages.len()) {
-            print("RITUAL DEATH: me am go too far!");
-            Object.Destroy(self);
-        }
-        current_stage = stages[current_index];
-        print("RITUAL: Index " + current_index + " is stage " + current_stage);
+        if (status == eRitualStatus.kRitualBegun) {
+            // On to the next stage
+            current_index = current_index + 1;
+            if (current_index >= stages.len()) {
+                print("RITUAL DEATH: me am go too far!");
+                Object.Destroy(self);
+                return;
+            }
+            current_stage = stages[current_index];
+            print("RITUAL: Index " + current_index + " is stage " + current_stage);
 
-        // Time for the next round
-        print("RITUAL: Round " + current_stage);
-        PunchDown("RitualRound", current_stage);
+            // Time for the next round
+            print("RITUAL: Round " + current_stage);
+            PunchDown("RitualRound", current_stage);
+        }
     }
 
     // ---- Messages of abort conditions
@@ -265,6 +289,22 @@ class RitualMasterController extends Controller
     {
         print("RITUAL: Performer is brain dead");
         Abort();
+    }
+
+    // ---- Finale, and messages for finale coordination
+
+    function Finale()
+    {
+        // local 
+        // cMultiParm SendMessage(object to, string sMessage, cMultiParm data, cMultiParm data2, cMultiParm data3);
+
+        /*
+            Here's the plan:
+
+            - Find out which extras are available for the finale
+            - Assign each to a best-fit down-trol-point
+            - Use Goto to make them all go 
+        */
     }
 }
 
@@ -422,18 +462,22 @@ class RitualPerformerController extends Controller
             if (performer == 0) {
                 print("PERFORMER CTL DEATH: no performer.");
                 Object.Destroy(self);
+                return;
             }
             if (rounds.len() != 7) {
                 print("PERFORMER CTL DEATH: incorrect number of rounds.");
                 Object.Destroy(self);
+                return;
             }
             if (downs.len() != 7) {
                 print("PERFORMER CTL DEATH: incorrect number of downs.");
                 Object.Destroy(self);
+                return;
             }
             if (search_convs.len() == 0) {
                 print("PERFORMER CTL DEATH: no search_convs.");
                 Object.Destroy(self);
+                return;
             }
 
             // Start the performer in a trance so they won't spook
@@ -465,11 +509,11 @@ class RitualPerformerController extends Controller
             SendMessage(down, "TurnOff");
         }
 
-        // Wake the performer from her trance
+        // Performer doesn't patrol anymor (but remains entranced).
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-        Object.RemoveMetaProperty(performer, "M-RitualTrance");
 
         // FIXME: make the performer play a victory conversation. Maybe she can do the spinny dance!!
+        // eh, the finale controller can handle this.
     }
 
     function OnRitualAbort()
@@ -654,10 +698,12 @@ class RitualLightingController extends Controller
             if (lights.len() != 7) {
                 print("LIGHTING CTL DEATH: incorrect number of lights.");
                 Object.Destroy(self);
+                return;
             }
             if (strips.len() != 7) {
                 print("LIGHTING CTL DEATH: incorrect number of strips.");
                 Object.Destroy(self);
+                return;
             }
 
             // We don't care how many strobes there are, but make sure they're off to begin with
@@ -742,10 +788,12 @@ class RitualVictimController extends Controller
             if (victim == 0) {
                 print("VICTIM CTL DEATH: no victim.");
                 Object.Destroy(self);
+                return;
             }
             if (gores.len() != 7) {
                 print("VICTIM CTL DEATH: incorrect number of gores.");
                 Object.Destroy(self);
+                return;
             }
 
             // Make sure the gores aren't "there" initially.
@@ -763,6 +811,9 @@ class RitualVictimController extends Controller
 
     function OnRitualEnd()
     {
+        /* FIXME - this doesn't happen on ritual end now, but only when
+           the finale controller commands! */
+        /*
         // Destroy the victim, and bring out the gores
         Object.Destroy(victim);
         foreach (gore in gores) {
@@ -770,6 +821,7 @@ class RitualVictimController extends Controller
         }
 
         ExplodeVictim();
+        */
     }
 
     function OnRitualAbort()
@@ -904,12 +956,14 @@ class RitualExtraController extends Controller
             if (extras.len() == 0) {
                 print("EXTRA CTL DEATH: no extras.");
                 Object.Destroy(self);
+                return;
             }
             if (trols.len() != 14) {
                 // Needs to be 2x as many as performer round trol points
                 // so we can space out the extras roughly evenly
                 print("EXTRA CTL DEATH: incorrect number of trols.");
                 Object.Destroy(self);
+                return;
             }
 
             // FIXME: for testing only
@@ -1020,10 +1074,10 @@ class RitualExtraController extends Controller
 //        print("EXTRA CTL: extras spaced every " + spacing + " points.");
         local performer_index = (2 * stage);
         foreach (extra_index, extra in available_extras) {
-            local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len());
+            local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len()).tointeger();
             local pick = trols[pick_index];
-            // print("EXTRA CTL: extra " + extra_index + ": " + Object_Description(extra)
-            //     + " picked trol #" + pick_index + ": " + Object_Description(pick));
+//            print("EXTRA CTL: extra " + extra_index + ": " + Object_Description(extra)
+//                + " picked trol #" + pick_index + ": " + Object_Description(pick));
             picked_trols.append(pick);
             local closest_trol = (go_directly ? 0 : FindClosestTrol(Object.Position(extra)));
             SendMessage(extra, "PatrolTo", pick, closest_trol);
@@ -1065,15 +1119,26 @@ class RitualExtra extends Controlled
                 Link_SetCurrentPatrol(self, start_at_trol);
             }
         }
+
         Object.AddMetaProperty(self, "M-DoesPatrol");
         if (direct) {
-//            print("EXTRA: " + Object_Description(self)
-//                + " patrolling directly to " + Object_Description(trol));
+           // print("EXTRA: " + Object_Description(self)
+           //     + " patrolling directly to " + Object_Description(trol));
         } else {
-//            print("EXTRA: " + Object_Description(self)
-//                + " patrolling to " + Object_Description(trol)
-//                + " via " + Object_Description(start_at_trol));
+           // print("EXTRA: " + Object_Description(self)
+           //     + " patrolling to " + Object_Description(trol)
+           //     + " via " + Object_Description(start_at_trol));
         }
+    }
+
+    function OnRunTo()
+    {
+        local trol = message().data;
+        SetIdleOrigin(trol);
+        local result = AI.MakeGotoObjLoc(self, trol, eAIScriptSpeed.kFast, eAIActionPriority.kHighPriorityAction);
+        // FIXME: handle a bad result?
+        // FIXME: why did this work once before?
+        print("EXTRA: " + Object_Description(self) + " running to: " + Object_Description(trol) + ", result: " + result);
     }
 
     function OnStopPatrolling()
@@ -1123,6 +1188,26 @@ class RitualExtra extends Controlled
         }
     }
 
+    function OnMessage()
+    {
+        print("EXTRA MESSAGE: " + message().message
+                + "\n from: " + Object_Description(message().from)
+                + "\n to: " + Object_Description(message().to));
+    }
+
+    function OnObjActResult()
+    {
+        if (message().action == eAIAction.kAIGoto) {
+            if (message().result == eAIActionResult.kActionDone) {
+                PunchUp("ExtraRunToSucceeded");
+            } else {
+                PunchUp("ExtraRunToFailed");
+            }
+        } else {
+            print("EXTRA OBJACTRESULT: " + message().action + ", " + message().result);
+        }
+    }
+
     // ---- Utilities
 
     function GetPatrolTarget()
@@ -1137,17 +1222,23 @@ class RitualExtra extends Controlled
 
     function SetPatrolTarget(trol)
     {
+        // print("EXTRA: " + Object_Description(self) + " new target is: " + Object.GetName(trol) + " (" + trol + ")");
         Link_DestroyAll("Route", self);
         if (trol != 0) {
             Link.Create("Route", self, trol);
 
             // We also want this to be our idle spot, so we'll wander back here
             // if we were alerted, and calmed down in between rounds.
-            local pos = Object.Position(trol);
-            local facing = floor(Object.Facing(trol).z + 0.5);
-            Property.Set(self, "AI_IdleOrgn", "Original Location", pos);
-            Property.Set(self, "AI_IdleOrgn", "Original Facing", facing);
+            SetIdleOrigin(trol);
         }
+    }
+
+    function SetIdleOrigin(obj)
+    {
+        local pos = Object.Position(obj);
+        local facing = floor(Object.Facing(obj).z + 0.5).tointeger();
+        Property.Set(self, "AI_IdleOrgn", "Original Location", pos);
+        Property.Set(self, "AI_IdleOrgn", "Original Facing", facing);
     }
 }
 
@@ -1368,5 +1459,252 @@ class RitualLazyExtra extends SqRootScript
     function AIMode(ai)
     {
         return Property.Get(ai, "AI_Mode", "");
+    }
+}
+
+
+class RitualFinaleController extends Controller
+{
+    performer_ctl = 0;
+    extra_ctl = 0;
+    victim_ctl = 0;
+    performer = 0;
+    extras = [];
+    victim = 0;
+    gores = [];
+    down_trols = [];
+    round_trols = [];
+    convs = [];
+    // FIXME: gonna need a bunch of particles too, and the prophet!
+    waiting_for_extras = 9999;
+
+    function OnSim()
+    {
+        if (message().starting) {
+            // Get linked entities and check they're all accounted for.
+            performer_ctl = Link_GetScriptParamsDest("PerformerCtl", self);
+            extra_ctl = Link_GetScriptParamsDest("ExtraCtl", self);
+            victim_ctl = Link_GetScriptParamsDest("VictimCtl", self);
+            down_trols = Link_GetAllScriptParamsDests("Trol", self);
+            if (performer_ctl == 0) {
+                print("FINALE CTL DEATH: no performer_ctl.");
+                Object.Destroy(self);
+                return;
+            }
+            if (extra_ctl == 0) {
+                print("FINALE CTL DEATH: no extra_ctl.");
+                Object.Destroy(self);
+                return;
+            }
+            if (victim_ctl == 0) {
+                print("FINALE CTL DEATH: no victim_ctl.");
+                Object.Destroy(self);
+                return;
+            }
+            if (down_trols.len() != 7) {
+                print("FINALE CTL DEATH: incorrect number of down_trols: " + down_trols.len());
+                Object.Destroy(self);
+                return;
+            }
+
+            // Like a sneaksie thiefsie taffer, we reaches out and steals
+            // all the links from the other controllers
+            performer = Link_GetScriptParamsDest("Performer", performer_ctl);
+            round_trols = Link_GetAllScriptParamsDests("Round", performer_ctl);
+            extras = Link_GetAllScriptParamsDests("Extra", extra_ctl);
+            victim = Link_GetScriptParamsDest("Victim", victim_ctl);
+            gores = Link_GetAllScriptParamsDests("Gore", victim_ctl);
+            if (performer == 0) {
+                print("FINALE CTL DEATH: no performer.");
+                Object.Destroy(self);
+                return;
+            }
+            if (round_trols.len() != 7) {
+                print("FINALE CTL DEATH: incorrect number of round_trols.");
+                Object.Destroy(self);
+                return;
+            }
+            // Don't care how many extras there are, we'll just use them all.
+            if (victim == 0) {
+                print("FINALE CTL DEATH: no victim.");
+                Object.Destroy(self);
+                return;
+            }
+            if (gores.len() != 7) {
+                print("FINALE CTL DEATH: incorrect number of gores.");
+                Object.Destroy(self);
+                return;
+            }
+
+            // Make sure the extras won't patrol any more.
+            foreach (extra in extras) {
+                SendMessage(extra, "StopPatrolling");
+            }
+        }
+    }
+
+    function OnRitualEnd()
+    {
+        // The ritual's ended, but the show is just beginning!
+
+        // The performer should be already in place, but send all available
+        // extras to the altar.
+        DiscardUnavailableExtras();
+
+        // Make sure the extras don't get distracted anymore.
+        foreach (extra in extras) {
+            Object.AddMetaProperty(extra, "M-RitualExtraTrance");
+        }
+
+        // The performer should be already in place, but send all available
+        // extras to the altar.
+        PlacesEveryone();
+
+        // Now we wait for them all to tell us that they're ready (or
+        // otherwise become unavailable).
+        waiting_for_extras = extras.len();
+    }
+
+    function DiscardUnavailableExtras()
+    {
+        // FIXME: filter extras to only available. Permanently, cause any that
+        // are dead or busy now aren't coming back in the finale. If they
+        // wanted to take part, they should've stayed alive, now, shouldn't they?
+
+        // FIXME: maybe ones that aren't dead should just get M-GetOnWithIt and
+        // hurry back sooner? (Make sure to remove it when they arrive!)
+        // If the player's under attack or hiding, this would draw their attention
+        // to the ritual and their failure, which would definitely be better than a
+        // sudden "Mission failed".
+        //
+        // IDEEEEEEAAAAAAAAAA: at this point the player should have a last-ditch
+        // chance to stop the ritual--by dispatching di Rupo. If they hurry, or
+        // use an arrow, they can still get it done. (And maybe that'd stun or KO
+        // all the extras too, if it goes wrong at that point?).
+    }
+
+    function PlacesEveryone()
+    {
+        // For whatever mad reason, it's vertex 6 that's the performer's place
+        // at the finale. Too late to renumber everything now. Well, it's not
+        // really, but I'm too lazy. Anyway the performer needs some head.
+        foreach (i, gore in gores) {
+            print("" + i + ": " + Object_Description(gore));
+        }
+        Link_CreateScriptParams("PoundOfFlesh", performer, gores[6]);
+
+        // The extras get the other chunks of meat and positions. We'll take
+        // whatever gore is leftover
+        PickGores();
+    }
+
+    function ContinueWhenAllExtrasReady()
+    {
+        if (waiting_for_extras > 0) {
+            print("FINALE CTL: Still waiting for " + waiting_for_extras + " extras.");
+            return;
+        }
+
+        // Point of no return
+        print("FINALE CTL: All extras ready.");
+    }
+
+    // ---- Utilities
+
+    function PickGores()
+    {
+        local extra_trols = down_trols.slice(0, 6);
+        local extra_gores = gores.slice(0, 6);
+        local extra_round_trols = round_trols.slice(0, 6)
+        foreach (extra in extras) {
+            // Find the closest gore (well, the down points aren't evenly spread,
+            // so find the closest trol_ritual_roundX and use its index.)
+            local index = FindClosestTrolIndex(Object.Position(extra), extra_round_trols);
+            local gore = extra_trols[index];
+            local trol = extra_gores[index];
+            extra_trols.remove(index);
+            extra_gores.remove(index);
+            extra_round_trols.remove(index);
+            print("FINALE CTL: " + Object_Description(extra)
+                + " has been allocated " + Object_Description(gore)
+                + " and will go to " + Object_Description(trol));
+            Link_CreateScriptParams("PoundOfFlesh", extra, gore);
+            SendMessage(extra, "RunTo", trol);
+        }
+        // We'll take any unallocated gore bits ourselves
+        foreach (gore in extra_gores) {
+            print("FINALE CTL: " + Object_Description(gore) + " is unallocated, will explode.");
+        }
+    }
+
+    function FindClosestTrolIndex(pos, trols)
+    {
+        local closest_index = 0;
+        local shortest_distance = 9999999;
+        foreach (i, trol in trols) {
+            local trol_pos = Object.Position(trol);
+            local delta = (trol_pos - pos);
+            // Ignore z, nobody's flying to their patrol point
+            local distance = (delta.x * delta.x) + (delta.y * delta.y);
+            if (distance < shortest_distance) {
+                shortest_distance = distance;
+                closest_index = i;
+            }
+        }
+        return closest_index;
+    }
+
+    // ---- Messages from performers, extras etc.
+
+    // FIXME: will we even get these messages? Will have to link ourselves to all our
+    // stolen linksies so we get PunchUps from them--also not from their controllers.
+
+    function OnPerformerBrainDead()
+    {
+        print("FINALE CTL: " + Object_Description(performer) + " is brain dead.");
+
+        // FIXME: make sure this is ignored past the point of no return
+        // (or make the performer invincible after that??)
+    }
+
+    function OnExtraRunToSucceeded()
+    {
+        local extra = message().from;
+        print("FINALE CTL: " + Object_Description(extra) + " is at the altar.");
+        MarkExtraAsReady(extra);
+    }
+
+    function OnExtraRunToFailed()
+    {
+        local extra = message().from;
+        print("FINALE CTL: " + Object_Description(extra) + " couldn't reach altar. Stealing their gore.");
+        MarkExtraAsUnavailable(extra);
+    }
+
+    function OnExtraBrainDead()
+    {
+        local extra = message().from;
+        print("FINALE CTL: " + Object_Description(extra) + " is brain dead. Stealing their gore.");
+        MarkExtraAsUnavailable(extra);
+    }
+
+    function MarkExtraAsReady(extra)
+    {
+        --waiting_for_extras;
+        ContinueWhenAllExtrasReady();
+    }
+
+    function MarkExtraAsUnavailable(extra)
+    {
+        // Move this extra's gore back to our control.
+        local link = Link_GetScriptParams("PoundOfFlesh", extra);
+        if (link != 0) {
+            local gore = LinkDest(link);
+            Link.Destroy(link);
+            Link_CreateScriptParams("PoundOfFlesh", self, gore);
+        }
+
+        --waiting_for_extras;
+        ContinueWhenAllExtrasReady();
     }
 }

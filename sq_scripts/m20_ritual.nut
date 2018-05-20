@@ -1143,8 +1143,10 @@ class RitualExtra extends Controlled
 
             // We also want this to be our idle spot, so we'll wander back here
             // if we were alerted, and calmed down in between rounds.
-            Property.Set(self, "AI_IdleOrgn", "Original Location", Object.Position(trol));
-            Property.Set(self, "AI_IdleOrgn", "Original Facing", Object.Facing(trol).z);
+            local pos = Object.Position(trol);
+            local facing = floor(Object.Facing(trol).z + 0.5);
+            Property.Set(self, "AI_IdleOrgn", "Original Location", pos);
+            Property.Set(self, "AI_IdleOrgn", "Original Facing", facing);
         }
     }
 }

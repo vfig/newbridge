@@ -1135,10 +1135,7 @@ class RitualExtra extends Controlled
     {
         local trol = message().data;
         SetIdleOrigin(trol);
-        local result = AI.MakeGotoObjLoc(self, trol, eAIScriptSpeed.kFast, eAIActionPriority.kHighPriorityAction);
-        // FIXME: handle a bad result?
-        // FIXME: why did this work once before?
-        print("EXTRA: " + Object_Description(self) + " running to: " + Object_Description(trol) + ", result: " + result);
+        AI.MakeGotoObjLoc(self, trol, eAIScriptSpeed.kFast, eAIActionPriority.kHighPriorityAction);
     }
 
     function OnStopPatrolling()
@@ -1188,13 +1185,6 @@ class RitualExtra extends Controlled
         }
     }
 
-    function OnMessage()
-    {
-        print("EXTRA MESSAGE: " + message().message
-                + "\n from: " + Object_Description(message().from)
-                + "\n to: " + Object_Description(message().to));
-    }
-
     function OnObjActResult()
     {
         if (message().action == eAIAction.kAIGoto) {
@@ -1203,8 +1193,6 @@ class RitualExtra extends Controlled
             } else {
                 PunchUp("ExtraRunToFailed");
             }
-        } else {
-            print("EXTRA OBJACTRESULT: " + message().action + ", " + message().result);
         }
     }
 
@@ -1535,11 +1523,6 @@ class RitualFinaleController extends Controller
                 Object.Destroy(self);
                 return;
             }
-
-            // Make sure the extras won't patrol any more.
-            foreach (extra in extras) {
-                SendMessage(extra, "StopPatrolling");
-            }
         }
     }
 
@@ -1547,12 +1530,20 @@ class RitualFinaleController extends Controller
     {
         // The ritual's ended, but the show is just beginning!
 
-        // The performer should be already in place, but send all available
-        // extras to the altar.
+        // Make the stolen ais send messages to us too.
+        Link_CreateScriptParams("Finale", self, performer);
+        foreach (extra in extras) {
+            Link_CreateScriptParams("Finale", self, extra);
+        }
+
+        // FIXME: make sure the performer stays in place
+
+        // Ignore any extras that are dead or busy.
         DiscardUnavailableExtras();
 
-        // Make sure the extras don't get distracted anymore.
+        // Make sure the extras don't patrol or get distracted anymore.
         foreach (extra in extras) {
+            SendMessage(extra, "StopPatrolling");
             Object.AddMetaProperty(extra, "M-RitualExtraTrance");
         }
 
@@ -1620,8 +1611,8 @@ class RitualFinaleController extends Controller
             // Find the closest gore (well, the down points aren't evenly spread,
             // so find the closest trol_ritual_roundX and use its index.)
             local index = FindClosestTrolIndex(Object.Position(extra), extra_round_trols);
-            local gore = extra_trols[index];
-            local trol = extra_gores[index];
+            local gore = extra_gores[index];
+            local trol = extra_trols[index];
             extra_trols.remove(index);
             extra_gores.remove(index);
             extra_round_trols.remove(index);

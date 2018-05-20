@@ -126,6 +126,29 @@ class RitualMasterController extends Controller
             // FIXME: check GetData for current index? Or do we just resume somehow or something?
             current_index = 0;
             current_stage = stages[current_index];
+
+            // FIXME: remove this whitespace
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+            print(" ");
+
             print("RITUAL: Begin");
             PunchDown("RitualBegin", current_stage);
             print("RITUAL: Index " + current_index + " is stage " + current_stage);
@@ -415,7 +438,7 @@ class RitualPerformerController extends Controller
 
             // Start the performer in a trance so they won't spook
             // at anything before the ritual begins.
-            print("PERFORMER CTL: Starting trance");
+//            print("PERFORMER CTL: Starting trance");
             Object.AddMetaProperty(performer, "M-RitualTrance");
 
             // FIXME: for testing only
@@ -429,7 +452,7 @@ class RitualPerformerController extends Controller
     {
         local stage = message().data;
         local trol = rounds[stage];
-        print("PERFORMER CTL: Starting patrol");
+//        print("PERFORMER CTL: Starting patrol");
         SetPatrolTarget(trol);
         Link_SetCurrentPatrol(performer, trol);
         Object.AddMetaProperty(performer, "M-DoesPatrol");
@@ -489,7 +512,7 @@ class RitualPerformerController extends Controller
     {
         local stage = message().data;
         local trol = rounds[stage];
-        print("PERFORMER CTL: Patrolling to " + Object.GetName(trol) + " (" + trol + ") for stage " + stage);
+//        print("PERFORMER CTL: Patrolling to " + Object.GetName(trol) + " (" + trol + ") for stage " + stage);
         SetPatrolTarget(trol);
     }
 
@@ -500,7 +523,7 @@ class RitualPerformerController extends Controller
         // We call it a down, but really it's a system of a down.
         // The system drives all the facing, the downing, the
         // blessing, and the returning.
-        print("PERFORMER CTL: Starting conversation " + Object.GetName(down) + " (" + down + ") for stage " + stage);
+//        print("PERFORMER CTL: Starting conversation " + Object.GetName(down) + " (" + down + ") for stage " + stage);
         AI.StartConversation(down);
     }
 
@@ -513,10 +536,10 @@ class RitualPerformerController extends Controller
         } else {
             local trol = message().data;
             if (trol == GetPatrolTarget()) {
-                print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
+//                print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
                 PunchUp("PerformerReachedVertex");
             } else {
-                print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
+//                print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
             }
         }
     }
@@ -575,7 +598,7 @@ class RitualPerformerController extends Controller
 
     function SetPatrolTarget(trol)
     {
-        print("PERFORMER CTL: new target is: " + Object.GetName(trol) + " (" + trol + ")");
+//        print("PERFORMER CTL: new target is: " + Object.GetName(trol) + " (" + trol + ")");
         Link_DestroyAll("Route", self);
         if (trol != 0) {
             Link.Create("Route", self, trol);
@@ -584,7 +607,7 @@ class RitualPerformerController extends Controller
 
     function BeginRandomSearch()
     {
-        print("PERFORMER CTL: Now searching.");
+//        print("PERFORMER CTL: Now searching.");
         SetData("IsSearching", true);
         if (search_trols.len() > 0) {
             local i = Data.RandInt(0, (search_trols.len() - 1));
@@ -598,7 +621,7 @@ class RitualPerformerController extends Controller
     {
         local i = Data.RandInt(0, (search_convs.len() - 1));
         local conv = search_convs[i];
-        print("PERFORMER CTL: Chose random search conv: " + Object_Description(conv));
+//        print("PERFORMER CTL: Chose random search conv: " + Object_Description(conv));
         AI.StartConversation(conv);
     }
 }
@@ -1001,7 +1024,7 @@ class RitualExtraController extends Controller
         // rest of the ring.
         local picked_trols = [];
         local spacing = (trols.len() / (available_extras.len() + 1.0));
-        print("EXTRA CTL: extras spaced every " + spacing + " points.");
+//        print("EXTRA CTL: extras spaced every " + spacing + " points.");
         local performer_index = (2 * stage);
         foreach (extra_index, extra in available_extras) {
             local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len());
@@ -1051,12 +1074,12 @@ class RitualExtra extends Controlled
         }
         Object.AddMetaProperty(self, "M-DoesPatrol");
         if (direct) {
-            print("EXTRA: " + Object_Description(self)
-                + " patrolling directly to " + Object_Description(trol));
+//            print("EXTRA: " + Object_Description(self)
+//                + " patrolling directly to " + Object_Description(trol));
         } else {
-            print("EXTRA: " + Object_Description(self)
-                + " patrolling to " + Object_Description(trol)
-                + " via " + Object_Description(start_at_trol));
+//            print("EXTRA: " + Object_Description(self)
+//                + " patrolling to " + Object_Description(trol)
+//                + " via " + Object_Description(start_at_trol));
         }
     }
 
@@ -1076,11 +1099,11 @@ class RitualExtra extends Controlled
         // Tell the controller we've reached our target patrol point
         local trol = message().patrolObj;
         if (trol == GetPatrolTarget()) {
-            print("EXTRA: " + Object_Description(self) + " reached target point " + Object_Description(trol));
+//            print("EXTRA: " + Object_Description(self) + " reached target point " + Object_Description(trol));
             PunchUp("ExtraPatrolPoint", trol);
         } else {
-            print("EXTRA: " + Object_Description(self) + " reached non-target point " + Object_Description(trol));
-            print("EXTRA: " + Object_Description(self) + " continuing on to " + Object_Description(Link_GetCurrentPatrol(self)));
+//            print("EXTRA: " + Object_Description(self) + " reached non-target point " + Object_Description(trol));
+//            print("EXTRA: " + Object_Description(self) + " continuing on to " + Object_Description(Link_GetCurrentPatrol(self)));
         }
     }
 
@@ -1093,6 +1116,10 @@ class RitualExtra extends Controlled
 
     function OnAlertness()
     {
+        print("EXTRA: " + Object_Description(self)
+            + " alertness " + message().oldLevel
+            + " ===================> " + message().level);
+
         if ((message().level > message().oldLevel)
             && (message().level >= eAIScriptAlertLevel.kModerateAlert))
         {
@@ -1135,7 +1162,9 @@ class RitualLazyExtra extends SqRootScript
     // and alertness ends 120s after contact. That's way too long, given the
     // length of the whole ritual.
 
-    kAwarenessMaxAge = [10.0, 20.0]; // Time to expire level 2 and 3 awareness, respectively.
+    // Time (in seconds) to expire level 2 and 3 awareness, respectively.
+    kAwarenessMaxAge2 = 10.0;
+    kAwarenessMaxAge3 = 20.0;
 
     function OnBeginScript()
     {
@@ -1173,81 +1202,181 @@ class RitualLazyExtra extends SqRootScript
         }
     }
 
-    // ---- Utilities
-
-    function GetModerateAwarenessLinks(age_filtered, team_filtered) {
-        local links = Link.GetAll("AIAwareness", self);
-        local filtered_links = [];
-        local my_team = Property.Get(self, "AI_Team", "");
+    function ExpireAwareness()
+    {
+        // We're going to destroy some links, so cache the iterator first just in case.
+        local links = [];
+        foreach (link in Link.GetAll("AIAwareness", self)) {
+            links.append(link);
+        }
+        local destroy_count = 0;
+        local ignore_count = 0;
+        local keep_count = 0;
         foreach (link in links) {
-            // Ignore low alert awareness
-            local level = LinkTools.LinkGetData(link, "Level");
-            if (level < 2) {
-                continue;
-            }
-            // Conditionally ignore same-team links (except those to myself, which is
-            // really a link to the homunculus in my head that hears suspicious sounds).
-            if (team_filtered) {
-                local dest = LinkDest(link);
-                if (dest != self) {
-                    local other_team = Property.Get(dest, "AI_Team", "");
-                    // Team 1 is neutral, of course, so they don't count either.
-                    if ((my_team == 1) || (other_team == 1) || (my_team == other_team)) {
-                        print("LAZINESS: ignoring AIAwareness (level " + level + ") "
-                            + Object_Description(self) + " -> "
-                            + Object_Description(LinkDest(link)) + ": team " + other_team + ".");
-                        continue;
+            // Basic evidence
+            local dest = LinkDest(link);
+            local level = LinkAlertLevel(link);
+            local age = (GetTime() - LinkLastContactTime(link));
+
+            // Derived evidence
+            local is_me = (dest == self);
+            local is_hostile_team = AIHostileTeam(AITeam(self), AITeam(dest));
+            local is_same_team = (AITeam(self) == AITeam(dest));
+            local is_dead = (AIMode(dest) == eAIMode.kAIM_Dead);
+            local is_low_level = (level < 2);
+            local is_old = (((level == 2) && (age >= kAwarenessMaxAge2))
+                || ((level == 3) && (age >= kAwarenessMaxAge3)));
+
+            // Draw conclusions:
+            local ignore = false;
+            local destroy = false;
+            if (is_low_level) {
+                // This link isn't keeping us alerted, so ignore it.
+                print("LAZINESS: Ignoring low level: " + Link_Description(link));
+                ignore = true;
+            } else if (is_hostile_team) {
+                if (is_old) {
+                    // Guess it was just rats again.
+                    print("LAZINESS: Destroying old (" + age + "s) hostile: " + Link_Description(link));
+                    destroy = true;
+                } else {
+                    print("LAZINESS: Keeping recent (" + age + "s) hostile: " + Link_Description(link));
+                }
+            } else if (is_same_team) {
+                if (is_me) {
+                    if (is_old) {
+                        // Well, I heard something, but that was a while ago.
+                        print("LAZINESS: Destroying old (" + age + "s) heard: " + Link_Description(link));
+                        destroy = true;
+                    } else {
+                        print("LAZINESS: Keeping recent (" + age + "s) heard: " + Link_Description(link));
+                    }
+                } else {
+                    if (is_dead) {
+                        if (is_old) {
+                            // It's a friendly corpse, but it's old news.
+                            print("LAZINESS: Destroying old (" + age + "s) friendly corpse: " + Link_Description(link));
+                            destroy = true;
+                        } else {
+                            print("LAZINESS: Keeping recent (" + age + "s) friendly corpse: " + Link_Description(link));
+                        }
+                    } else {
+                        // Friends don't let friends stay angry.
+                        print("LAZINESS: Destroying friendly: " + Link_Description(link));
+                        destroy = true;
                     }
                 }
+            } else {
+                // Neutral team? Can they even alert you? Don't care, let's get rid of it.
+                print("LAZINESS: Destroying neutral: " + Link_Description(link));
+                destroy = true;
             }
-            // Conditionally ignore recent awareness links.
-            if (age_filtered) {
-                local last_contact_time = (LinkTools.LinkGetData(link, "Time last contact") / 1000.0);
-                local elapsed = (GetTime() - last_contact_time);
-                if (elapsed < kAwarenessMaxAge[level - 2]) {
-                    print("LAZINESS: ignoring AIAwareness (level " + level + ") "
-                        + Object_Description(self) + " -> "
-                        + Object_Description(LinkDest(link)) + ": only " + elapsed + "s old.");
-                    continue;
-                }
-            }
-            filtered_links.append(link);
-        }
-        return filtered_links;
-    }
 
-    function DestroyInvestigateLinks()
-    {
-        local links = Link.GetAll("AIInvest", self);
-        local count = 0;
-        foreach (link in links) {
-            Link.Destroy(link);
-            count++;
-        }
-        return count;
-    }
-
-    function ExpireAwareness() {
-        // Clean up old links.
-        local old_links = GetModerateAwarenessLinks(true, false);
-        foreach (link in old_links) {
-            Link.Destroy(link);
-        }
-        print("LAZINESS: removed " + old_links.len() + " old awareness links.");
-        // Check if there's any reason to still be alert.
-        local remaining_links = GetModerateAwarenessLinks(false, true);
-        if (remaining_links.len() == 0) {
-            // No reason to stay alert, so stop investigating already.
-            local count = DestroyInvestigateLinks();
-            print("LAZINESS: no more awareness; removed " + count + " investigations.");
-
-            // Clean up same-team links that might otherwise keep us at alert level 3.
-            local same_team_links = GetModerateAwarenessLinks(false, false);
-            foreach (link in same_team_links) {
+            // Act upon the conclusions.
+            if (ignore) {
+                ++ignore_count;
+            } else if (destroy) {
                 Link.Destroy(link);
+                ++destroy_count;
+            } else {
+                ++keep_count;
             }
-            print("LAZINESS: removed " + same_team_links.len() + " same-team awareness links.");
-
         }
+
+        // When there's nothing to see, there's no reason to keep investigating.
+        if (keep_count == 0) {
+            Link_DestroyAll("AIInvest", self);
+        }
+
+        print("LAZINESS: kept " + keep_count + ", destroyed " + destroy_count + ", ignored " + ignore_count);
+        if (keep_count == 0) {
+            print ("LAZINESS CONCLUSION: No reason to stay alert.");
+        } else {
+            print ("LAZINESS CONCLUSION: Ooh, ooh, ooh, ooh, stayin' alert, stayin' alert!");
+        }
+    }
+
+    // ---- Utilities
+
+    // FIXME: remove this when we're done with it
+    /*
+    Link "AIAwareness"          // type sAIAwareness              , flags 0x0010
+    {
+        "Flags" : bitflags    // flags: "Seen", "Heard", "CanRaycast", "HaveLOS", "Blind", "Deaf", "Highest", "FirstHand"
+        "Level" : enum    // enums: "(0) None", "(1) Low", "(2) Moderate", "(3) High"
+        "Peak Level" : enum    // enums: "(0) None", "(1) Low", "(2) Moderate", "(3) High"
+        "Level enter time" : int
+        "Time last contact" : int
+        "Pos last contact" : vector
+        "Last pulse level" : enum    // enums: "(0) None", "(1) Low", "(2) Moderate", "(3) High"
+        "Vision cone" : int
+        "Time last update" : int
+        "Time last update LOS" : int
+        "Last true contact" : int
+        "Freshness" : int
+    }
+    */
+    function DebugGetFlags(link) {
+        local flags = LinkTools.LinkGetData(link, "Flags");
+        local s = " ";
+        if ((flags & (1 << 0)) != 0) {
+            s += "Seen ";
+        }
+        if ((flags & (1 << 1)) != 0) {
+            s += "Heard ";
+        }
+        if ((flags & (1 << 2)) != 0) {
+            s += "CanRaycast ";
+        }
+        if ((flags & (1 << 3)) != 0) {
+            s += "HaveLOS ";
+        }
+        if ((flags & (1 << 4)) != 0) {
+            s += "Blind ";
+        }
+        if ((flags & (1 << 5)) != 0) {
+            s += "Deaf ";
+        }
+        if ((flags & (1 << 6)) != 0) {
+            s += "Highest ";
+        }
+        if ((flags & (1 << 7)) != 0) {
+            s += "FirstHand ";
+        }
+        return s;
+    }
+
+    function Link_Description(link)
+    {
+        return ("AIAwareness (level " + LinkAlertLevel(link) + ") "
+            + Object_Description(self) + " -> "
+            + Object_Description(LinkDest(link)));
+    }
+
+    function LinkAlertLevel(link)
+    {
+        return LinkTools.LinkGetData(link, "Level");
+    }
+
+    function LinkLastContactTime(link)
+    {
+        return (LinkTools.LinkGetData(link, "Time last contact") / 1000.0);
+    }
+
+    function AITeam(ai)
+    {
+        return Property.Get(ai, "AI_Team");
+    }
+
+    function AIHostileTeam(team1, team2)
+    {
+        return ((team1 != eAITeam.kAIT_Neutral)
+            && (team2 != eAITeam.kAIT_Neutral)
+            && (team1 != team2));
+    }
+
+    function AIMode(ai)
+    {
+        return Property.Get(ai, "AI_Mode", "");
     }
 }

@@ -129,17 +129,9 @@ Link_CollectPatrolPath <- function(trols)
     return all;
 }
 
-
-enum eContainType
-{
-   kContainTypeAlt = -3,
-   kContainTypeHand = -2, 
-   kContainTypeBelt = -1,
-   kContainTypeGeneric = 0,
-}
-
 Link_SetContainType <- function(link, type)
 {
+    // Type should be an eDarkContainType value.
     LinkTools.LinkSetData(link, "", type);
 }
 

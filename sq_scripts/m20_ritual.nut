@@ -336,7 +336,7 @@ class RitualPerformer extends Controlled
         if (hand != 0) {
             local link = Link.GetOne("Contains", self, hand);
             if (link != 0) {
-                Link_SetContainType(link, eContainType.kContainTypeAlt);
+                Link_SetContainType(link, eDarkContainType.kContainTypeAlt);
                 Object_AddFrobAction(hand, eFrobAction.kFrobActionIgnore);
 
                 // Tell the controller about it
@@ -358,7 +358,7 @@ class RitualPerformer extends Controlled
         if (hand != 0) {
             local link = Link.GetOne("Contains", self, hand);
             if (link != 0) {
-                Link_SetContainType(link, eContainType.kContainTypeBelt);
+                Link_SetContainType(link, eDarkContainType.kContainTypeBelt);
                 Object_RemoveFrobAction(hand, eFrobAction.kFrobActionIgnore);
             }
         }
@@ -1142,6 +1142,17 @@ class RitualExtra extends Controlled
     {
         // Don't patrol away.
         Object.RemoveMetaProperty(self, "M-DoesPatrol");
+    }
+
+    function OnRipAndTear()
+    {
+        // Move the pound of flesh to our location
+        local gore = Link_GetScriptParamsDest("PoundOfFlesh", self);
+        print("gore: " + Object_Description(gore));
+        if (gore != 0) {
+            local result = Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
+            print("Result: " + result);
+        }
     }
 
     // ---- Messages from the AI

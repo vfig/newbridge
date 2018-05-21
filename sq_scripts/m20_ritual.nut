@@ -820,39 +820,11 @@ class RitualVictimController extends Controller
             Object.RemoveMetaProperty(gore, "M-NotHere");
         }
 
-        ExplodeVictim();
         */
     }
 
     function OnRitualAbort()
     {
-    }
-
-    function ExplodeVictim()
-    {
-        // Fling body parts everywhere, why don't you?
-        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
-        for (local i = 0; i < gores.len(); i++) {
-            local gore = gores[i];
-
-            // Calculate launch vector
-            local a = z_angles[i]  * 3.14 / 180;
-            local vel = vector(cos(a), sin(a), 1);
-            vel.Normalize();
-            vel.Scale(30.0);
-
-            // Deactivate the physics controls
-            if (! Physics.ValidPos(gore)) {
-                print("VICTIM CTL ERROR: gore " + i + " not in valid position!");
-                continue;
-            } else {
-                Property.Set(gore, "PhysControl", "Controls Active", 0);
-            }
-
-            // And launch!
-            Physics.Activate(gore);
-            Physics.SetVelocity(gore, vel);
-        }
     }
 }
 
@@ -1148,7 +1120,6 @@ class RitualExtra extends Controlled
     {
         // Pick up the pound of flesh and make it visible.
         local gore = Link_GetScriptParamsDest("PoundOfFlesh", self);
-        Object.RemoveMetaProperty(gore, "M-NotHere");
         if (gore != 0) {
             Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
@@ -1474,7 +1445,7 @@ class RitualFinaleController extends Controller
     gores = [];
     down_trols = [];
     round_trols = [];
-    convs = [];
+    conv_celebs = [];
     // FIXME: gonna need a bunch of particles too, and the prophet!
     waiting_for_extras = 9999;
 
@@ -1486,6 +1457,7 @@ class RitualFinaleController extends Controller
             extra_ctl = Link_GetScriptParamsDest("ExtraCtl", self);
             victim_ctl = Link_GetScriptParamsDest("VictimCtl", self);
             down_trols = Link_GetAllScriptParamsDests("Trol", self);
+            conv_celebs = Link_GetAllScriptParamsDests("ConvCeleb", self);
             if (performer_ctl == 0) {
                 print("FINALE CTL DEATH: no performer_ctl.");
                 Object.Destroy(self);
@@ -1503,6 +1475,12 @@ class RitualFinaleController extends Controller
             }
             if (down_trols.len() != 7) {
                 print("FINALE CTL DEATH: incorrect number of down_trols: " + down_trols.len());
+                Object.Destroy(self);
+                return;
+            }
+            // FIXME: should be 7 once the performer gets in on the fun
+            if (conv_celebs.len() != 6) {
+                print("FINALE CTL DEATH: incorrect number of conv_celebs: " + conv_celebs.len());
                 Object.Destroy(self);
                 return;
             }
@@ -1568,6 +1546,8 @@ class RitualFinaleController extends Controller
         waiting_for_extras = extras.len();
     }
 
+    // ---- Final functionality
+
     function DiscardUnavailableExtras()
     {
         // FIXME: filter extras to only available. Permanently, cause any that
@@ -1613,9 +1593,43 @@ class RitualFinaleController extends Controller
 
         // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
         // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
+
+        // Start pulling that Anax to pieces
+        foreach (conv in conv_celebs) {
+            AI.StartConversation(conv);
+        }
     }
 
-    // ---- Utilities
+    function ExplodeVictim()
+    {
+        // Fling body parts everywhere, why don't you?
+        local available_gores = Link_GetAllScriptParamsDests("PoundOfFlesh", self);
+        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
+        foreach (gore in available_gores) {
+        //for (local i = 0; i < gores.len(); i++) {
+            //local gore = gores[i];
+            // Get its nominal index, so we can figure out the appropriate angle
+            local i = gores.find(gore);
+
+            // Calculate launch vector
+            local a = z_angles[i]  * 3.14 / 180;
+            local vel = vector(cos(a), sin(a), 1);
+            vel.Normalize();
+            vel.Scale(30.0);
+
+            // Deactivate the physics controls
+            if (! Physics.ValidPos(gore)) {
+                print("VICTIM CTL ERROR: gore " + i + " not in valid position!");
+                continue;
+            } else {
+                Property.Set(gore, "PhysControl", "Controls Active", 0);
+            }
+
+            // And launch!
+            Physics.Activate(gore);
+            Physics.SetVelocity(gore, vel);
+        }
+    }
 
     function PickGores()
     {
@@ -1640,6 +1654,7 @@ class RitualFinaleController extends Controller
         // We'll take any unallocated gore bits ourselves
         foreach (gore in extra_gores) {
             print("FINALE CTL: " + Object_Description(gore) + " is unallocated, will explode.");
+            Link_CreateScriptParams("PoundOfFlesh", self, gore);
         }
     }
 
@@ -1716,10 +1731,14 @@ class RitualFinaleController extends Controller
 
     function OnExtraRipAndTear()
     {
-        // The first one to grab their chunk of meat removes the victim too
+        // The first one to grab their chunk of meat turns the victim into giblets
         if (victim != 0) {
+            foreach (gore in gores) {
+                Object.RemoveMetaProperty(gore, "M-NotHere");
+            }
             Object.Destroy(victim);
             victim = 0;
+            ExplodeVictim();
 
             // FIXME: a fountain of blood would be good here. A small, decorous one, not an Army of
             // Darkness one. Though now that you mention it....

@@ -210,7 +210,7 @@ AI_SetIdleOrigin <- function(ai, target)
     Property.Set(ai, "AI_IdleOrgn", "Original Facing", facing);
 }
 
-AITeam <- function(ai)
+AI_Team <- function(ai)
 {
     return Property.Get(ai, "AI_Team", "");
 }

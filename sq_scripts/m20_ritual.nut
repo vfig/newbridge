@@ -3,8 +3,8 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = true;
-const DEBUG_SKIPTOTHEEND = false;
+const DEBUG_GETONWITHIT = false;
+const DEBUG_SKIPTOTHEEND = true;
 
 // ---- Logging
 
@@ -32,6 +32,7 @@ RitualLogsEnabled <- function()
         | eRitualLog.kExtra
         | eRitualLog.kVictim
         | eRitualLog.kLighting
+        | eRitualLog.kFinale
         // Contexts
 //        | eRitualLog.kPathing
         | eRitualLog.kAlertness
@@ -145,6 +146,7 @@ class RitualController extends SqRootScript
             if ((Status() == null) || (StageIndex() == null)) {
                 SetStatus(eRitualStatus.kRitualNotStarted);
                 SetStageIndex(0);
+                SetAwaitingExtras(Extras().len());
             }
 
             // FIXME: move all these to utility functions so we can get
@@ -272,27 +274,244 @@ class RitualController extends SqRootScript
         // FIXME: Extras suddenly get a desire to make some noise
     }
 
-    function End()
+    function StepDown()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
-            status = eRitualStatus.kRitualEnded;
+        local stage = Stage();
+        local stage_index = StageIndex();
+        if (stage_index == (stages.len() - 1)) {
+            SetStatus(eRitualStatus.kRitualLastStage);
+        }
+        RitualLog(eRitualLog.kRitual, "Down " + stage_index + ", Stage " + stage);
 
-            RitualLog(eRitualLog.kRitual, "End");
-            PunchDown("RitualEnd", current_stage);
+        if (Status() == eRitualStatus.kRitualLastStage) {
+            if (GetData("StrobeDisabled")) {
+                RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
+                // Just turn on all the lights.
+                foreach (light in Lights()) {
+                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
+                    SendMessage(light, "TurnOn");
+                }
+            } else {
+                RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
+                // Make all the strobes flash horrendously
+                foreach (light in Lights()) {
+                    RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
+                    SendMessage(light, "TurnOff");
+                }
+                foreach (strobe in Strobes()) {
+                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strobe));
+                    SendMessage(strobe, "TurnOn");
+                }
+            }
+            // Make all the strips glow steadily
+            foreach (strip in Strips()) {
+                RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
+                SendMessage(strip, "Fullbright");
+            }
+        } else {
+            local light = Lights()[stage];
+            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
+            SendMessage(light, "TurnOn");
 
-            // FIXME: objectives tie in
-
-            // Time for a grand finale before failing the mission.
-            Finale();
-
-            // FIXME: this should not happen here yet!
-            Die("Beware! The Prophet has returned!");
+            local strip = Strips()[stage];
+            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
+            SendMessage(strip, "TurnOn");
         }
     }
 
+    function StepBless()
+    {
+        local stage = Stage();
+        local stage_index = StageIndex();
+        RitualLog(eRitualLog.kRitual, "Bless " + stage_index + ", Stage " + stage);
+    }
+
+    function StepReturn()
+    {
+        local stage = Stage();
+        local stage_index = StageIndex();
+        RitualLog(eRitualLog.kRitual, "Return " + stage_index + ", Stage " + stage);
+
+        local light = Lights()[stage];
+        RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
+        SendMessage(light, "TurnOff");
+    }
+
+    // ---- The Grand Finale
+
+    function Finale()
+    {
+        if (Status() == eRitualStatus.kRitualInProgress) {
+            SetStatus(eRitualStatus.kRitualFinale);
+            // The ritual's ended, but the show is just beginning!
+            // Time for a grand finale before failing the mission.
+            RitualLog(eRitualLog.kRitual, "Finale");
+
+            // FIXME: objectives tie in
+
+            // Kill all the down conversations
+            foreach (down in DownConvs()) {
+                SendMessage(down, "TurnOff");
+            }
+            // Performer stays entranced, but no longer patrosl, and now moves at normal speed.
+            Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+            Object.RemoveMetaProperty(performer, "M-RitualTrance");
+            Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
+
+            // Ignore any extras that are dead or busy.
+            // FIXME: does this work as a mutating function like this?
+            DiscardUnavailableExtras();
+
+            // Make sure the extras don't patrol or get distracted anymore.
+            foreach (extra in Extras()) {
+                SendMessage(extra, "StopPatrolling");
+                Object.AddMetaProperty(extra, "M-RitualFinaleTrance");
+            }
+
+            // The performer should be already in place, but send all available
+            // extras to the altar.
+            // FIXME: of course we want that to be last stage, but that's post-refactor
+    
+            local performer = Performer();
+            // For whatever mad reason, it's vertex 6 that's the performer's place
+            // at the finale. Too late to renumber everything now. Well, it's not
+            // really, but I'm too lazy. Anyway the performer needs some head.
+            Link_CreateScriptParams("PoundOfFlesh", performer, gores[6]);
+
+            // Make sure di Rupo stays around at the altar while the extras get
+            // here. We do that by giving her a new conversation to deal with.
+            AI_SetIdleOrigin(performer, performer);
+            AI.StartConversation(PerfWaitConv());
+
+            // The extras get the other chunks of meat and positions. Any gore
+            // that is unclaimed is for the explosion.
+            PickGoresAndRunToAltar();
+
+            // Now we wait for them all to tell us that they're ready (or
+            // otherwise become unavailable).
+            //?? ContinueWhenAllExtrasReady();
+            //?? waiting_for_extras = extras.len();
+        }
+    }
+
+    function DiscardUnavailableExtras()
+    {
+        // Filter out dead or KO'd extras cause they aren't coming
+        // back in the finale. If they wanted to take part, they
+        // should've stayed alive, now, shouldn't they?
+
+        // FIXME: restore this
+        //
+        // local available_extras = [];
+        // foreach (extra in extras) {
+        //     if (AI_Mode(extra) != eAIMode.kAIM_Dead) {
+        //         available_extras.append(extra);
+        //     }
+        // }
+        // extras = available_extras;
+
+        // FIXME: 
+        //
+        // PROBABLY should refactor this to be all under the one controller, with
+        // more explicit stages, and debug-flags to control specific variations
+        // (performer death, extra death, etc).
+        //
+        // More importantly, maybe the strobes should start and the extras run to
+        // the altar just as the performer begins walking the last down? Gives a
+        // little more time for that last minute "oh shit I need to stop this"
+        // reaction.
+        //
+        // IDEEEEEEAAAAAAAAAA: at this point the player should have a last-ditch
+        // chance to stop the ritual--by dispatching di Rupo. If they hurry, or
+        // use an arrow, they can still get it done. (And maybe that'd stun or KO
+        // all the extras too, if it goes wrong at that point?).
+    }
+
+    function PickGoresAndRunToAltar()
+    {
+        // FIXME: needs to be only available ones?
+        local extras = Extras();
+        local down_trols = DownTrols().slice(0, 6);
+        local gores = Gores().slice(0, 6);
+        local round_trols = RoundTrols().slice(0, 6)
+        foreach (extra in extras) {
+            // Find the closest gore (well, the down points aren't evenly spread,
+            // so find the closest trol_ritual_roundX and use its index.)
+            local index = FindClosestTrolIndex(Object.Position(extra), round_trols);
+            local gore = gores[index];
+            local trol = down_trols[index];
+            down_trols.remove(index);
+            gores.remove(index);
+            round_trols.remove(index);
+            RitualLog(eRitualLog.kFinale,
+                Object_Description(extra)
+                + " has been allocated " + Object_Description(gore)
+                + " and will go to " + Object_Description(trol));
+            Link_CreateScriptParams("PoundOfFlesh", extra, gore);
+            SendMessage(extra, "RunTo", trol);
+        }
+        // Keep any unclaimed gore bits ourselves for the explosion
+        foreach (gore in gores) {
+            RitualLog(eRitualLog.kFinale,
+                Object_Description(gore) + " is unallocated, will explode.");
+            Link_CreateScriptParams("PoundOfFlesh", self, gore);
+        }
+    }
+
+    function FindClosestTrolIndex(pos, trols)
+    {
+        local closest_index = 0;
+        local shortest_distance = 9999999;
+        foreach (i, trol in trols) {
+            local trol_pos = Object.Position(trol);
+            local delta = (trol_pos - pos);
+            // Ignore z, nobody's flying to their patrol point
+            local distance = (delta.x * delta.x) + (delta.y * delta.y);
+            if (distance < shortest_distance) {
+                shortest_distance = distance;
+                closest_index = i;
+            }
+        }
+        return closest_index;
+    }
+
+    function ContinueWhenAllExtrasReady()
+    {
+        if (AwaitingExtras() > 0) {
+            RitualLog(eRitualLog.kFinale,
+                "Still waiting for " + AwaitingExtras() + " extras.");
+            return;
+        }
+
+        // Point of no return--well, that's in just a moment when we RIP AND TEAR!
+        RitualLog(eRitualLog.kFinale,
+            "All extras ready.");
+
+        // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
+        // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
+
+        // Start pulling that Anax to pieces
+        foreach (conv in conv_celebs) {
+            AI.StartConversation(conv);
+        }
+    }
+
+    // ---- The End
+
+    function End()
+    {
+        SetStatus(eRitualStatus.kRitualEnded);
+        RitualLog(eRitualLog.kRitual, "End");
+        Die("Beware! The Prophet has returned!");
+    }
+
+    // ---- Oh no, the player got in the way! Abort! Abort!
+
     function Abort()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
+        if ((Status() == eRitualStatus.kRitualInProgress)
+            || (Status() == eRitualStatus.kRitualLastStage))
+        {
             status = eRitualStatus.kRitualAborted;
 
             RitualLog(eRitualLog.kRitual, "Abort");
@@ -387,50 +606,45 @@ class RitualController extends SqRootScript
 
     function OnPerformerFacedAltar()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
-            // Time for a down
-            RitualLog(eRitualLog.kRitual, "Down " + current_stage);
-            PunchDown("RitualDown", current_stage);
+        if (Status() == eRitualStatus.kRitualInProgress) {
+            StepDown();
         }
     }
 
     function OnPerformerReachedAltar()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
-            // Time for a bless
-            RitualLog(eRitualLog.kRitual, "Bless " + current_stage);
-            PunchDown("RitualBless", current_stage);
+        if ((Status() == eRitualStatus.kRitualInProgress)
+            || (Status() == eRitualStatus.kRitualLastStage))
+        {
+            StepBless();
         }
     }
 
     function OnPerformerFinishedBlessing()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
-            // Check if it's the final stage:
-            if (current_index < stages.len() - 1) {
-                // Time for a return
-                RitualLog(eRitualLog.kRitual, "Return " + current_stage);
-                PunchDown("RitualReturn", current_stage);
-            } else {
-                // Time for a grand finale
-                End();
-            }
+        if (Status() == eRitualStatus.kRitualInProgress) {
+            StepReturn();
+        } else if (Status() == eRitualStatus.kRitualLastStage) {
+            // Time for a grand finale
+            Finale();
         }
     }
 
     function OnPerformerReturnedToVertex()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
+        if (Status() == eRitualStatus.kRitualInProgress) {
             // On to the next stage
-            current_index = current_index + 1;
-            if (current_index >= stages.len()) {
-                Die("RITUAL DEATH: me am go too far!");
-            } else {
-                // Time for the next round
-                current_stage = stages[current_index];
-                RitualRound();
-            }
+            SetStageIndex(StageIndex() + 1);
+            StepRound();
+        } else {
+            Die("me am go too far!");
         }
+    }
+
+    function OnExtraReachedTarget()
+    {
+        local extra = message().from;
+        SendMessage(extra, "StopPatrolling");
     }
 
     // ---- Messages of abort conditions
@@ -459,12 +673,6 @@ class RitualController extends SqRootScript
         Abort();
     }
 
-    // ---- Finale, and messages for finale coordination
-
-    function Finale()
-    {
-    }
-
     // ---- Ritual status
 
     function Status() {
@@ -487,6 +695,16 @@ class RitualController extends SqRootScript
 
     function Stage() {
         return stages[StageIndex()];
+    }
+
+    function AwaitingExtras()
+    {
+        return GetData("AwaitingExtras");
+    }
+
+    function SetAwaitingExtras(count)
+    {
+        SetData("AwaitingExtras", count);
     }
 
     // ---- Linked entities
@@ -805,17 +1023,6 @@ class RitualPerformerController
     // ---- Messages from the master for the whole ritual
 
 
-    function OnRitualEnd()
-    {
-        // Kill all the conversations
-        foreach (down in downs) {
-            SendMessage(down, "TurnOff");
-        }
-
-        // Performer doesn't patrol anymore.
-        Object.RemoveMetaProperty(performer, "M-RitualTrance");
-        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-    }
 
     function OnRitualAbort()
     {
@@ -952,29 +1159,6 @@ class RitualLightingController
 
 
 
-    function OnRitualEnd()
-    {
-        if (GetData("StrobeDisabled")) {
-            RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
-            // Just turn on all the lights.
-            foreach (light in lights) {
-                SendMessage(light, "TurnOn");
-            }
-        } else {
-            RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
-            // Make all the strobes flash horrendously
-            foreach (light in lights) {
-                SendMessage(light, "TurnOff");
-            }
-            foreach (strobe in strobes) {
-                SendMessage(strobe, "TurnOn");
-            }
-        }
-        // And all the strips glow steadily
-        foreach (strip in strips) {
-            SendMessage(strip, "Fullbright");
-        }
-    }
 
     function OnRitualAbort()
     {
@@ -983,37 +1167,12 @@ class RitualLightingController
 
     // ---- Messages from the controller for each step
 
-    function OnRitualDown()
-    {
-        local stage = message().data;
-        local light = lights[stage];
-        local strip = strips[stage];
-        SendMessage(light, "TurnOn");
-        SendMessage(strip, "TurnOn");
-    }
 
-    function OnRitualReturn()
-    {
-        local stage = message().data;
-        local light = lights[stage];
-        SendMessage(light, "TurnOff");
-    }
 }
 
 
 class RitualVictimController
 {
-
-    // ---- Messages from the master for the whole ritual
-
-
-    // function OnRitualEnd()
-    // {
-    // }
-
-    // function OnRitualAbort()
-    // {
-    // }
 
     // ---- Messages for the finale
 
@@ -1116,43 +1275,9 @@ class RitualFloorStrip extends SqRootScript
 class RitualExtraController
 {
 
-    // ---- Messages from the master for the whole ritual
-
-
-    function OnRitualEnd()
-    {
-    }
-
-    function OnRitualAbort()
-    {
-    }
-
-    // ---- Messages from the controller for each step
-
-
-    function OnRitualDown()
-    {
-    }
-
-    function OnRitualBless()
-    {
-    }
-
-    function OnRitualReturn()
-    {
-    }
-
 
     // ---- Messages from the extras
 
-    function OnExtraReachedTarget()
-    {
-        // They suddenly get a desire not to patrol anymore, but
-        // instead to face the altar (because their idle origin
-        // tells them to do that).
-        local extra = message().from;
-        SendMessage(extra, "StopPatrolling");
-    }
 
     function OnExtraBrainDead()
     {
@@ -1566,108 +1691,9 @@ class RitualLazyExtra extends SqRootScript
 
 class RitualFinaleController
 {
-    waiting_for_extras = 9999;
-
-    function OnRitualEnd()
-    {
-        // The ritual's ended, but the show is just beginning!
-
-        // Make the stolen ais send messages to us too.
-        Link_CreateScriptParams("Finale", self, performer);
-        foreach (extra in extras) {
-            Link_CreateScriptParams("Finale", self, extra);
-        }
-
-        // Performer stays entranced, but now moves at normal speed.
-        Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
-
-        // Ignore any extras that are dead or busy.
-        DiscardUnavailableExtras();
-
-        // Make sure the extras don't patrol or get distracted anymore.
-        foreach (extra in extras) {
-            SendMessage(extra, "StopPatrolling");
-            Object.AddMetaProperty(extra, "M-RitualFinaleTrance");
-        }
-
-        // The performer should be already in place, but send all available
-        // extras to the altar.
-        PlacesEveryone();
-
-        // Now we wait for them all to tell us that they're ready (or
-        // otherwise become unavailable).
-        waiting_for_extras = extras.len();
-    }
 
     // ---- Final functionality
 
-    function DiscardUnavailableExtras()
-    {
-        // Filter out dead or KO'd extras cause they aren't coming
-        // back in the finale. If they wanted to take part, they
-        // should've stayed alive, now, shouldn't they?
-        local available_extras = [];
-        foreach (extra in extras) {
-            if (AI_Mode(extra) != eAIMode.kAIM_Dead) {
-                available_extras.append(extra);
-            }
-        }
-        extras = available_extras;
-
-        // FIXME: 
-        //
-        // PROBABLY should refactor this to be all under the one controller, with
-        // more explicit stages, and debug-flags to control specific variations
-        // (performer death, extra death, etc).
-        //
-        // More importantly, maybe the strobes should start and the extras run to
-        // the altar just as the performer begins walking the last down? Gives a
-        // little more time for that last minute "oh shit I need to stop this"
-        // reaction.
-        //
-        // IDEEEEEEAAAAAAAAAA: at this point the player should have a last-ditch
-        // chance to stop the ritual--by dispatching di Rupo. If they hurry, or
-        // use an arrow, they can still get it done. (And maybe that'd stun or KO
-        // all the extras too, if it goes wrong at that point?).
-    }
-
-    function PlacesEveryone()
-    {
-        // For whatever mad reason, it's vertex 6 that's the performer's place
-        // at the finale. Too late to renumber everything now. Well, it's not
-        // really, but I'm too lazy. Anyway the performer needs some head.
-        Link_CreateScriptParams("PoundOfFlesh", performer, gores[6]);
-
-        // Make sure di Rupo stays around at the altar while the extras get
-        // here. We do that by giving her a new conversation to deal with.
-        AI_SetIdleOrigin(performer, performer);
-        AI.StartConversation(conv_perfwait);
-
-        // The extras get the other chunks of meat and positions. We'll get
-        // whatever gore is leftover for the explosion.
-        PickGoresAndRunToAltar();
-    }
-
-    function ContinueWhenAllExtrasReady()
-    {
-        if (waiting_for_extras > 0) {
-            RitualLog(eRitualLog.kFinale,
-                "Still waiting for " + waiting_for_extras + " extras.");
-            return;
-        }
-
-        // Point of no return--well, that's in just a moment when we RIP AND TEAR!
-        RitualLog(eRitualLog.kFinale,
-            "All extras ready.");
-
-        // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
-        // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
-
-        // Start pulling that Anax to pieces
-        foreach (conv in conv_celebs) {
-            AI.StartConversation(conv);
-        }
-    }
 
     function ExplodeVictim()
     {
@@ -1701,55 +1727,10 @@ class RitualFinaleController
         }
     }
 
-    function PickGoresAndRunToAltar()
-    {
-        local extra_trols = down_trols.slice(0, 6);
-        local extra_gores = gores.slice(0, 6);
-        local extra_round_trols = round_trols.slice(0, 6)
-        foreach (extra in extras) {
-            // Find the closest gore (well, the down points aren't evenly spread,
-            // so find the closest trol_ritual_roundX and use its index.)
-            local index = FindClosestTrolIndex(Object.Position(extra), extra_round_trols);
-            local gore = extra_gores[index];
-            local trol = extra_trols[index];
-            extra_trols.remove(index);
-            extra_gores.remove(index);
-            extra_round_trols.remove(index);
-            RitualLog(eRitualLog.kFinale,
-                Object_Description(extra)
-                + " has been allocated " + Object_Description(gore)
-                + " and will go to " + Object_Description(trol));
-            Link_CreateScriptParams("PoundOfFlesh", extra, gore);
-            SendMessage(extra, "RunTo", trol);
-        }
-        // We'll take any unallocated gore bits ourselves
-        foreach (gore in extra_gores) {
-            RitualLog(eRitualLog.kFinale,
-                Object_Description(gore) + " is unallocated, will explode.");
-            Link_CreateScriptParams("PoundOfFlesh", self, gore);
-        }
-    }
-
-    function FindClosestTrolIndex(pos, trols)
-    {
-        local closest_index = 0;
-        local shortest_distance = 9999999;
-        foreach (i, trol in trols) {
-            local trol_pos = Object.Position(trol);
-            local delta = (trol_pos - pos);
-            // Ignore z, nobody's flying to their patrol point
-            local distance = (delta.x * delta.x) + (delta.y * delta.y);
-            if (distance < shortest_distance) {
-                shortest_distance = distance;
-                closest_index = i;
-            }
-        }
-        return closest_index;
-    }
 
     function MarkExtraAsReady(extra)
     {
-        --waiting_for_extras;
+        SetAwaitingExtras(AwaitingExtras() - 1);
         ContinueWhenAllExtrasReady();
     }
 
@@ -1763,7 +1744,7 @@ class RitualFinaleController
             Link_CreateScriptParams("PoundOfFlesh", self, gore);
         }
 
-        --waiting_for_extras;
+        SetAwaitingExtras(AwaitingExtras() - 1);
         ContinueWhenAllExtrasReady();
     }
 

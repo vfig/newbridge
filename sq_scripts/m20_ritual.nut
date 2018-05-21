@@ -6,53 +6,68 @@
 const DEBUG_GETONWITHIT = true;
 const DEBUG_SKIPTOTHEEND = false;
 
-/*
-class Controlled extends SqRootScript
+// ---- Logging
+
+enum eRitualLog
 {
-    function PunchUp(message, data = 0)
-    {
-        local links = Link.GetAll("~ScriptParams", self);
-        local masters = [];
-        foreach (link in links) {
-            masters.append(LinkDest(link));
-        }
-        if (masters.len() > 0) {
-            foreach (master in masters) {
-                // print("PUNCHUP: " + Object_Description(self)
-                //     + " is punching up " + message + "(" + data + ")"
-                //     + " to " + Object_Description(master));
-                SendMessage(master, message, data);
-            }
-        } else {
-            print("PUNCHUP ERROR: " + Object_Description(self) + " has no masters!");
-        }
+    // Subjects
+    kRitual         = 1,
+    kPerformer      = 2,
+    kExtra          = 4,
+    kVictim         = 8,
+    kLighting       = 16,
+    kFinale         = 32,
+    // Contexts
+    kPathing        = 256,
+    kAlertness      = 512,
+    kLaziness       = 1024,
+}
+
+RitualLogsEnabled <- function()
+{
+    return (0
+        // Subjects
+        | eRitualLog.kRitual
+        | eRitualLog.kPerformer
+        | eRitualLog.kExtra
+        | eRitualLog.kVictim
+        | eRitualLog.kLighting
+        // Contexts
+//        | eRitualLog.kPathing
+        | eRitualLog.kAlertness
+//        | eRitualLog.kLaziness
+        );
+}
+
+RitualLogName <- function(log)
+{
+    local function concat(prev, cur) {
+        return (prev + " " + cur);
+    }
+    local names = [];
+    if ((log & eRitualLog.kRitual) != 0) { names.append("RITUAL"); }
+    if ((log & eRitualLog.kPerformer) != 0) { names.append("PERFORMER"); }
+    if ((log & eRitualLog.kExtra) != 0) { names.append("EXTRA"); }
+    if ((log & eRitualLog.kVictim) != 0) { names.append("VICTIM"); }
+    if ((log & eRitualLog.kLighting) != 0) { names.append("LIGHTING"); }
+    if ((log & eRitualLog.kPathing) != 0) { names.append("PATHING"); }
+    if ((log & eRitualLog.kAlertness) != 0) { names.append("ALERTNESS"); }
+    if ((log & eRitualLog.kLaziness) != 0) { names.append("LAZINESS"); }
+    local name = names.reduce(concat);
+    return ((name == null) ? "" : name);
+}
+
+RitualLog <- function(log, message)
+{
+    if ((RitualLogsEnabled() & log) == log) {
+        print(RitualLogName(log) + ": " + message);
     }
 }
 
-class Controller extends Controlled
-{
-    function PunchDown(message, data = 0)
-    {
-        local links = Link.GetAll("ScriptParams", self);
-        local children = [];
-        foreach (link in links) {
-            children.append(LinkDest(link));
-        }
-        if (children.len() > 0 ) {
-            foreach (child in children) {
-                // print("PUNCHDOWN: " + Object_Description(self)
-                //     + " is punching down " + message + "(" + data + ")"
-                //     + " to " + Object_Description(child));
-                SendMessage(child, message, data);
-            }
-        } else {
-            print("PUNCHDOWN ERROR: " + Object_Description(self) + " has no children!");
-        }
-    }
-}
-*/
+// ---- The Ritual
 
-enum eRitualStatus {
+enum eRitualStatus
+{
     kRitualNotStarted       = 0,
     kRitualInProgress       = 1,
     kRitualLastStage        = 2,
@@ -114,6 +129,8 @@ class RitualController extends SqRootScript
     // But the last entry must be 6, because that's the victim's head.
     // FIXME: might in fact want to adjust time warp for Normal difficulty
     // FIXME: If the stages are changed, also need to adjust the LineNo 0-6 tags in the conv schema.
+    // FIXME: If the stages are changed, the extras' starting points should also be updated.
+    // FIXME: Actually I need to put the extras in starting positions anyway!
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
     stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
     //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
@@ -133,57 +150,28 @@ class RitualController extends SqRootScript
             // FIXME: move all these to utility functions so we can get
             // things as we need them.
 
-            // Check all linked entities and are accounted for.
-            local performer = Link_GetScriptParamsDest("Performer", self);
-            if (performer == 0) { Die("no performer."); return; }
-
-            local victim = Link_GetScriptParamsDest("Victim", self);
-            if (victim == 0) { Die("no victim."); return; }
-
-            local extras = Link_GetAllScriptParamsDests("Extra", self);
-            if (extras.len() == 0) { Die("no extras."); return; }
-
-            local round_trols = Link_CollectPatrolPath(Link_GetAllScriptParamsDests("PerfRoundTrol", self));
-            if (round_trols.len() != 7) { Die("need 7 round_trols."); return; }
-
-            local down_convs = Link_GetAllScriptParamsDests("DownConv", self);
-            if (down_convs.len() != 7) { Die("need 7 down_convs."); return; }
-
-            local extra_round_trols = Link_CollectPatrolPath(Link_GetAllScriptParamsDests("ExtraRoundTrol", self));
-            if (extra_round_trols.len() != 14) { Die("need 14 extra_round_trols."); return; }
-
-            local lights = Link_GetAllScriptParamsDests("Light", self);
-            if (lights.len() != 7) { Die("need 7 lights."); return; }
-
-            local strips = Link_GetAllScriptParamsDests("Strip", self);
-            if (strips.len() != 7) { Die("need 7 strips."); return; }
-
-            local down_trols = Link_GetAllScriptParamsDests("DownTrol", self);
-            if (down_trols.len() != 7) { Die("need 7 down_trols."); return; }
-
-            local strobes = Link_GetAllScriptParamsDests("Strobe", self);
-            if (strobes.len() == 0) { Die("no strobes."); return; }
-
-            local perf_wait_conv = Link_GetScriptParamsDest("PerfWaitConv", self);
-            if (perf_wait_conv == 0) { Die("no perf_wait_conv."); return; }
-
-            local finale_convs = Link_GetAllScriptParamsDests("FinaleConv", self);
-            if (finale_convs.len() != 7) { Die("need 7 finale_convs."); return; }
-
-            local gores = Link_GetAllScriptParamsDests("Gore", self);
-            if (gores.len() != 7) { Die("need 7 gores."); return; }
-
-            local blood = Link_GetScriptParamsDest("Blood", self);
-            if (blood == 0) { Die("no blood."); return; }
-
-            local search_trols = Link_CollectPatrolPath(Link_GetAllScriptParamsDests("SearchTrol", self));
-            if (down_trols.len() == 0) { Die("no search_trols."); return; }
-
-            // FIXME: Maybe I only need one search conv for the perf (and one for each extra)? Try the "Search, Scan" tag.
-            // note that the investigate ability doesn't seem to use the Search, Peek tags: that's for Assassins.
-            local perf_search_convs = Link_GetAllScriptParamsDests("PerfSearchConv", self);
-            if (perf_search_convs.len() == 0) { Die("no perf_search_convs."); return; }
-
+            // Check linked objects needed for ...
+            // ... the whole ritual ...
+            Performer();
+            Victim();
+            Extras();
+            // ... the main ritual ...
+            PerfRoundTrols();
+            DownConvs();
+            ExtraRoundTrols();
+            Lights();
+            Strips();
+            // ... the last stage ...
+            DownTrols();
+            Strobes();
+            // ... the finale ...
+            PerfWaitConv();
+            FinaleConvs();
+            Gores();
+            BloodFX();
+            // ... aborting ...
+            SearchTrols();
+            PerfSearchConvs();
 
 
             // FIXME: need to know if we're at the start of the mission,
@@ -192,28 +180,30 @@ class RitualController extends SqRootScript
 
             // Start the performer in a trance so they won't spook
             // at anything before the ritual begins.
-//            print("PERFORMER CTL: Starting trance");
+            RitualLog(eRitualLog.kPerformer, "Starting trance");
+            local performer = Performer();
             Object.AddMetaProperty(performer, "M-RitualTrance");
-
             if (DEBUG_GETONWITHIT) {
                 Object.AddMetaProperty(performer, "M-GetOnWithIt");
             }
 
+            local extras = Extras();
+            if (DEBUG_GETONWITHIT) {
+                foreach (extra in extras) {
+                    Object.AddMetaProperty(extra, "M-GetOnWithIt");
+                }
+            }
+
             // We don't care how many strobes there are, but make sure they're off to begin with
+            local strobes = Strobes();
             foreach (strobe in strobes) {
                 SendMessage(strobe, "TurnOff");
             }
 
             // Make sure the gores aren't "there" initially.
+            local gores = Gores();
             foreach (gore in gores) {
                 Object.AddMetaProperty(gore, "M-NotHere");
-            }
-
-
-            if (DEBUG_GETONWITHIT) {
-                foreach (extra in extras) {
-                    Object.AddMetaProperty(extra, "M-GetOnWithIt");
-                }
             }
         }
     }
@@ -230,41 +220,56 @@ class RitualController extends SqRootScript
         if (Status() == eRitualStatus.kRitualNotStarted) {
             SetStatus(eRitualStatus.kRitualInProgress);
 
-            local stage_index = StageIndex();
             local stage = Stage()
 
             // FIXME: remove this whitespace
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
-            print(" ");
+            print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
-            print("RITUAL: Begin");
-            print("RITUAL: Index " + stage_index + " is stage " + stage);
+            RitualLog(eRitualLog.kRitual, "Begin");
+
+            // First positions, everyone
+            RitualLog(eRitualLog.kPerformer, "Patrolling directly to first position.");
+            local performer = Performer();
+            local trol = PerfRoundTrols()[stage];
+            SendMessage(performer, "PatrolTo", trol);
+
+            RitualLog(eRitualLog.kExtra, "All extras patrolling directly to first positions.");
+            SendExtrasToVertices(stage, GetAvailableExtras(), true);
 
             // Seven times rounds and seven times downs - always begin with a round.
-            print("RITUAL: Round " + stage);
-            //FIXME: make this a method of ours
-            //PunchDown("RitualRound", stage);
-        } else {
-            print("RITUAL ERROR: Incorrect status (" + Status() + ") to begin.");
+            StepRound();
         }
+    }
+
+    function StepRound()
+    {
+        local stage = Stage();
+        local stage_index = StageIndex();
+        RitualLog(eRitualLog.kRitual, "Round " + stage_index + ", Stage " + stage);
+
+        // Send the performer to their vertex
+        local performer = Performer();
+        local trol = PerfRoundTrols()[stage];
+        SendMessage(performer, "PatrolTo", trol);
+
+        // Send the extras to their vertices
+        SendExtrasToVertices(stage, GetAvailableExtras());
+    }
+
+    function StepPause()
+    {
+        local stage = Stage();
+        local stage_index = StageIndex();
+        RitualLog(eRitualLog.kRitual, "Pause " + stage_index + ", Stage " + stage);
+
+        // We call it a down, but really it's a system of a down.
+        // The system drives all the facing, the downing, the
+        // blessing, and the returning.
+        local down = DownConvs()[stage];
+        RitualLog(eRitualLog.kPerformer, "Starting conv " + Object_Description(down));
+        AI.StartConversation(down);
+
+        // FIXME: Extras suddenly get a desire to make some noise
     }
 
     function End()
@@ -272,7 +277,7 @@ class RitualController extends SqRootScript
         if (status == eRitualStatus.kRitualInProgress) {
             status = eRitualStatus.kRitualEnded;
 
-            print("RITUAL: End");
+            RitualLog(eRitualLog.kRitual, "End");
             PunchDown("RitualEnd", current_stage);
 
             // FIXME: objectives tie in
@@ -280,8 +285,8 @@ class RitualController extends SqRootScript
             // Time for a grand finale before failing the mission.
             Finale();
 
-            print("RITUAL DEATH: Beware! The Prophet has returned!");
-            Object.Destroy(self);
+            // FIXME: this should not happen here yet!
+            Die("Beware! The Prophet has returned!");
         }
     }
 
@@ -290,13 +295,12 @@ class RitualController extends SqRootScript
         if (status == eRitualStatus.kRitualInProgress) {
             status = eRitualStatus.kRitualAborted;
 
-            print("RITUAL: Abort");
+            RitualLog(eRitualLog.kRitual, "Abort");
             PunchDown("RitualAbort", current_stage);
 
             // FIXME: objectives tie-in
 
-            print("RITUAL DEATH: Well done, you stopped the ritual!");
-            Object.Destroy(self);
+            Die("Well done, you stopped the ritual!");
         }
     }
 
@@ -308,14 +312,76 @@ class RitualController extends SqRootScript
         Object.Destroy(self);
     }
 
-    // ---- Messages from child controllers
+    // ---- Utilities
 
-    function OnPerformerReachedVertex()
+    function GetAvailableExtras()
     {
-        if (status == eRitualStatus.kRitualInProgress) {
-            // Time for a pause
-            print("RITUAL: Pause " + current_stage);
-            PunchDown("RitualPause", current_stage);
+        local extras = Extras();
+        local available_extras = [];
+        // Find the extras available to participate in this round:
+        // those who are dead, unconscious, or off searching for
+        // or attacking the player are excused.
+        foreach (extra in extras) {
+            // FIXME: we can't use alert status! They can stay alerted for too long!
+            // FIXME: we should only excuse them if they are (a) investigating, (b) attacking, or (c) brain-dead.
+            local level = AI.GetAlertLevel(extra);
+            if (level < eAIScriptAlertLevel.kModerateAlert) {
+                available_extras.append(extra);
+            } else {
+                RitualLog(eRitualLog.kExtra | eRitualLog.kAlertness,
+                    Object_Description(extra)
+                    + " is at alert " + level
+                    + " and temporarily excused.");
+            }
+        }
+        RitualLog(eRitualLog.kExtra, available_extras.len() + " extras available.");
+        return available_extras;
+    }
+
+    function SendExtrasToVertices(stage, extras, go_directly = false)
+    {
+        // The performer will be at index stage*2 in the trol ring;
+        // pick roughly-evenly-spaced places for the extras around the
+        // rest of the ring.
+        local trols = ExtraRoundTrols();
+        local picked_trols = [];
+        local spacing = (trols.len() / (extras.len() + 1.0));
+        local performer_index = (2 * stage);
+        foreach (extra_index, extra in extras) {
+            local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len()).tointeger();
+            local pick = trols[pick_index];
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                "extra #" + extra_index + ": " + Object_Description(extra)
+                + " picked trol #" + pick_index + ": " + Object_Description(pick));
+            picked_trols.append(pick);
+            local closest_trol = (go_directly ? 0 : FindClosestTrol(Object.Position(extra), trols));
+            SendMessage(extra, "PatrolTo", pick, closest_trol);
+        }
+    }
+
+    function FindClosestTrol(pos, trols)
+    {
+        local closest = 0;
+        local shortest_distance = 9999999;
+        foreach (trol in trols) {
+            local trol_pos = Object.Position(trol);
+            local delta = (trol_pos - pos);
+            // Ignore z, nobody's flying to their patrol point
+            local distance = (delta.x * delta.x) + (delta.y * delta.y);
+            if (distance < shortest_distance) {
+                shortest_distance = distance;
+                closest = trol;
+            }
+        }
+        return closest;
+    }
+
+    // ---- Messages from performer, extras, and victims
+
+    function OnPerformerReachedTarget()
+    {
+        if (Status() == eRitualStatus.kRitualInProgress) {
+            StepPause();
         }
     }
 
@@ -323,7 +389,7 @@ class RitualController extends SqRootScript
     {
         if (status == eRitualStatus.kRitualInProgress) {
             // Time for a down
-            print("RITUAL: Down " + current_stage);
+            RitualLog(eRitualLog.kRitual, "Down " + current_stage);
             PunchDown("RitualDown", current_stage);
         }
     }
@@ -332,7 +398,7 @@ class RitualController extends SqRootScript
     {
         if (status == eRitualStatus.kRitualInProgress) {
             // Time for a bless
-            print("RITUAL: Bless " + current_stage);
+            RitualLog(eRitualLog.kRitual, "Bless " + current_stage);
             PunchDown("RitualBless", current_stage);
         }
     }
@@ -343,7 +409,7 @@ class RitualController extends SqRootScript
             // Check if it's the final stage:
             if (current_index < stages.len() - 1) {
                 // Time for a return
-                print("RITUAL: Return " + current_stage);
+                RitualLog(eRitualLog.kRitual, "Return " + current_stage);
                 PunchDown("RitualReturn", current_stage);
             } else {
                 // Time for a grand finale
@@ -358,16 +424,12 @@ class RitualController extends SqRootScript
             // On to the next stage
             current_index = current_index + 1;
             if (current_index >= stages.len()) {
-                print("RITUAL DEATH: me am go too far!");
-                Object.Destroy(self);
-                return;
+                Die("RITUAL DEATH: me am go too far!");
+            } else {
+                // Time for the next round
+                current_stage = stages[current_index];
+                RitualRound();
             }
-            current_stage = stages[current_index];
-            print("RITUAL: Index " + current_index + " is stage " + current_stage);
-
-            // Time for the next round
-            print("RITUAL: Round " + current_stage);
-            PunchDown("RitualRound", current_stage);
         }
     }
 
@@ -375,25 +437,25 @@ class RitualController extends SqRootScript
 
     function OnPerformerNoticedHandMissing()
     {
-        print("RITUAL: Hand has been stolen");
+        RitualLog(eRitualLog.kRitual, "Hand has been stolen");
         Abort();
     }
 
     function OnPerformerNoticedHandMissing()
     {
-        print("RITUAL: Victim has been unkidnapped");
+        RitualLog(eRitualLog.kRitual, "Victim has been unkidnapped");
         Abort();
     }
 
     function OnPerformerAlerted()
     {
-        print("RITUAL: Performer alerted");
+        RitualLog(eRitualLog.kRitual, "Performer alerted");
         Abort();
     }
 
     function OnPerformerBrainDead()
     {
-        print("RITUAL: Performer is brain dead");
+        RitualLog(eRitualLog.kRitual, "Performer is brain dead");
         Abort();
     }
 
@@ -403,7 +465,7 @@ class RitualController extends SqRootScript
     {
     }
 
-    // ---- Utilities
+    // ---- Ritual status
 
     function Status() {
         return GetData("RitualStatus");
@@ -426,11 +488,140 @@ class RitualController extends SqRootScript
     function Stage() {
         return stages[StageIndex()];
     }
+
+    // ---- Linked entities
+
+    function Performer()
+    {
+        local performer = Link_GetOneParam("Performer", self);
+        if (performer == 0) { Die("no Performer."); }
+        return performer;
+    }
+
+    function Victim()
+    {
+        local victim = Link_GetOneParam("Victim", self);
+        if (victim == 0) { Die("no Victim."); }
+        return victim;
+    }
+
+    function Extras()
+    {
+        local extras = Link_GetAllParams("Extra", self);
+        if (extras.len() == 0) { Die("no Extra(s)."); }
+        return extras;
+    }
+
+    function PerfRoundTrols()
+    {
+        local trols = Link_CollectPatrolPath(Link_GetAllParams("PerfRoundTrol", self));
+        if (trols.len() != 7) { Die("need 7 PerfRoundTrol(s)."); }
+        return trols;
+    }
+
+    function DownConvs()
+    {
+        local convs = Link_GetAllParams("DownConv", self);
+        if (convs.len() != 7) { Die("need 7 DownConv(s)."); }
+        return convs;
+    }
+
+    function ExtraRoundTrols()
+    {
+        local trols = Link_CollectPatrolPath(Link_GetAllParams("ExtraRoundTrol", self));
+        if (trols.len() != 14) { Die("need 14 ExtraRoundTrol(s)."); }
+        return trols;
+    }
+
+    function Lights()
+    {
+        local lights = Link_GetAllParams("Light", self);
+        if (lights.len() != 7) { Die("need 7 Light(s)."); }
+        return lights;
+    }
+
+    function Strips()
+    {
+        local strips = Link_GetAllParams("Strip", self);
+        if (strips.len() != 7) { Die("need 7 Strip(s)."); }
+        return strips;
+    }
+
+    function DownTrols()
+    {
+        local trols = Link_GetAllParams("DownTrol", self);
+        if (trols.len() != 7) { Die("need 7 DownTrol(s)."); }
+        return trols;
+    }
+
+    function Strobes()
+    {
+        local strobes = Link_GetAllParams("Strobe", self);
+        if (strobes.len() == 0) { Die("no Strobe(s)."); }
+        return strobes;
+    }
+
+    function PerfWaitConv()
+    {
+        local conv = Link_GetOneParam("PerfWaitConv", self);
+        if (conv == 0) { Die("no PerfWaitConv."); }
+        return conv;
+    }
+
+    function FinaleConvs()
+    {
+        local convs = Link_GetAllParams("FinaleConv", self);
+        if (convs.len() != 7) { Die("need 7 FinaleConv(s)."); }
+        return convs;
+    }
+
+    function Gores()
+    {
+        local gores = Link_GetAllParams("Gore", self);
+        if (gores.len() != 7) { Die("need 7 Gore(s)."); }
+        return gores;
+    }
+
+    function BloodFX()
+    {
+        local fx = Link_GetOneParam("BloodFX", self);
+        if (fx == 0) { Die("no BloodFX."); }
+        return fx;
+    }
+
+    function SearchTrols()
+    {
+        local trols = Link_CollectPatrolPath(Link_GetAllParams("SearchTrol", self));
+        if (trols.len() == 0) { Die("no SearchTrol(s)."); }
+        return trols;
+    }
+
+    function PerfSearchConvs()
+    {
+        // FIXME: Maybe I only need one search conv for the perf (and one for each extra)? Try the "Search, Scan" tag.
+        // note that the investigate ability doesn't seem to use the Search, Peek tags: that's for Assassins.
+        local convs = Link_GetAllParams("PerfSearchConv", self);
+        if (convs.len() == 0) { Die("no PerfSearchConv(s)."); }
+        return convs;
+    }
 }
 
-/*
-class RitualPerformer extends Controlled
+
+class RitualPerformer extends SqRootScript
 {
+    // ---- Messages from the controller
+
+    function OnPatrolTo()
+    {
+        local trol = message().data;
+        SetPatrolTarget(trol);
+        if (Link_GetCurrentPatrol(self) == 0) {
+            Link_SetCurrentPatrol(self, trol);
+        }
+        Object.AddMetaProperty(self, "M-DoesPatrol");
+    }
+
+    // ---- Messages from AI and scripts
 
     function OnNoticedVictimMissing()
     {
@@ -441,7 +632,17 @@ class RitualPerformer extends Controlled
     {
         // Tell the controller we've reached another patrol point (not necessarily the right one)
         local trol = message().patrolObj;
-        PunchUp("PerformerPatrolPoint", trol);
+        if (trol == GetPatrolTarget()) {
+            RitualLog(eRitualLog.kPerformer | eRitualLog.kPathing, "reached target: " + Object.GetName(trol) + " (" + trol + ")");
+            SetPatrolTarget(0);
+            PunchUp("PerformerReachedTarget", trol);
+        } else {
+            RitualLog(eRitualLog.kPerformer | eRitualLog.kPathing, "reached trol: " + Object.GetName(trol) + " (" + trol + ")");
+            // FIXME: we should do our own searching maybe?
+            // the ritual controller doesn't need to get involved: we can have the link to the
+            // search conv. In fact, it could be even be a different metaproperty+script that manages searching,
+            // and is the same for the performer and all the extras. But that comes later.
+        }
     }
 
     function OnStartWalking()
@@ -452,7 +653,7 @@ class RitualPerformer extends Controlled
     function OnUnpocketHand()
     {
         // Transfer the Hand to the Alt location, and make it unfrobbable
-        local hand = Link_GetScriptParamsDest("Hand", self);
+        local hand = Link_GetOneParam("Hand", self);
         if (hand != 0) {
             local link = Link.GetOne("Contains", self, hand);
             if (link != 0) {
@@ -474,7 +675,7 @@ class RitualPerformer extends Controlled
     function OnPocketHand()
     {
         // Put the Hand back on the belt, and make it frobbable again
-        local hand = Link_GetScriptParamsDest("Hand", self);
+        local hand = Link_GetOneParam("Hand", self);
         if (hand != 0) {
             local link = Link.GetOne("Contains", self, hand);
             if (link != 0) {
@@ -520,7 +721,7 @@ class RitualPerformer extends Controlled
 
     function OnDrawDagger()
     {
-        local dagger = Link_GetScriptParamsDest("Dagger", self);
+        local dagger = Link_GetOneParam("Dagger", self);
         if (dagger != 0) {
             // Dagger's already there, just not rendered! So render it.
             Property.Set(dagger, "HasRefs", "", true);
@@ -530,12 +731,38 @@ class RitualPerformer extends Controlled
     function OnRipAndTear()
     {
         // Pick up the pound of flesh and make it visible.
-        local gore = Link_GetScriptParamsDest("PoundOfFlesh", self);
+        local gore = Link_GetOneParam("PoundOfFlesh", self);
         if (gore != 0) {
             Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
         // Let the controller know.
         PunchUp("PerformerRipAndTear", gore);
+    }
+
+    // ---- Utilities
+
+    function PunchUp(message, data = 0, data2 = 0)
+    {
+        Link_BroadcastOnAllLinks(message, "~ScriptParams", self, data, data2);
+    }
+
+    function GetPatrolTarget()
+    {
+        local link = Link.GetOne("Route", self);
+        if (link != 0) {
+            return LinkDest(link);
+        } else {
+            return 0;
+        }
+    }
+
+    function SetPatrolTarget(trol)
+    {
+        RitualLog(eRitualLog.kPerformer | eRitualLog.kPathing, "new target is: " + Object.GetName(trol) + " (" + trol + ")");
+        Link_DestroyAll("Route", self);
+        if (trol != 0) {
+            Link.Create("Route", self, trol);
+        }
     }
 }
 
@@ -572,20 +799,11 @@ class MissingRitualVictim extends SqRootScript
 }
 
 
-class RitualPerformerController extends Controller
+class RitualPerformerController
 {
  
     // ---- Messages from the master for the whole ritual
 
-    function OnRitualBegin()
-    {
-        local stage = message().data;
-        local trol = rounds[stage];
-//        print("PERFORMER CTL: Starting patrol");
-        SetPatrolTarget(trol);
-        Link_SetCurrentPatrol(performer, trol);
-        Object.AddMetaProperty(performer, "M-DoesPatrol");
-    }
 
     function OnRitualEnd()
     {
@@ -635,24 +853,7 @@ class RitualPerformerController extends Controller
 
     // ---- Messages from the controller for each step
 
-    function OnRitualRound()
-    {
-        local stage = message().data;
-        local trol = rounds[stage];
-//        print("PERFORMER CTL: Patrolling to " + Object.GetName(trol) + " (" + trol + ") for stage " + stage);
-        SetPatrolTarget(trol);
-    }
 
-    function OnRitualPause()
-    {
-        local stage = message().data;
-        local down = downs[stage];
-        // We call it a down, but really it's a system of a down.
-        // The system drives all the facing, the downing, the
-        // blessing, and the returning.
-//        print("PERFORMER CTL: Starting conversation " + Object.GetName(down) + " (" + down + ") for stage " + stage);
-        AI.StartConversation(down);
-    }
 
     // ---- Messages from the performer
 
@@ -661,13 +862,6 @@ class RitualPerformerController extends Controller
         if (GetData("IsSearching")) {
             PlayRandomSearchConv();
         } else {
-            local trol = message().data;
-            if (trol == GetPatrolTarget()) {
-//                print("PERFORMER CTL: reached target: " + Object.GetName(trol) + " (" + trol + ")");
-                PunchUp("PerformerReachedVertex");
-            } else {
-//                print("PERFORMER CTL: reached troll trol: " + Object.GetName(trol) + " (" + trol + ")");
-            }
         }
     }
 
@@ -713,28 +907,9 @@ class RitualPerformerController extends Controller
 
     // ---- Utilities
 
-    function GetPatrolTarget()
-    {
-        local link = Link.GetOne("Route", self);
-        if (link != 0) {
-            return LinkDest(link);
-        } else {
-            return 0;
-        }
-    }
-
-    function SetPatrolTarget(trol)
-    {
-//        print("PERFORMER CTL: new target is: " + Object.GetName(trol) + " (" + trol + ")");
-        Link_DestroyAll("Route", self);
-        if (trol != 0) {
-            Link.Create("Route", self, trol);
-        }
-    }
-
     function BeginRandomSearch()
     {
-//        print("PERFORMER CTL: Now searching.");
+        RitualLog(eRitualLog.kPerformer, "Now searching.");
         SetData("IsSearching", true);
         if (search_trols.len() > 0) {
             local i = Data.RandInt(0, (search_trols.len() - 1));
@@ -748,7 +923,7 @@ class RitualPerformerController extends Controller
     {
         local i = Data.RandInt(0, (search_convs.len() - 1));
         local conv = search_convs[i];
-//        print("PERFORMER CTL: Chose random search conv: " + Object_Description(conv));
+        RitualLog(eRitualLog.kPerformer, "Chose random search conv: " + Object_Description(conv));
         AI.StartConversation(conv);
     }
 }
@@ -765,7 +940,7 @@ class DisableStrobes extends SqRootScript
     }
 }
 
-class RitualLightingController extends Controller
+class RitualLightingController
 {
 
     function OnDisableStrobes()
@@ -776,20 +951,17 @@ class RitualLightingController extends Controller
     // ---- Messages from the master for the whole ritual
 
 
-    function OnRitualBegin()
-    {
-    }
 
     function OnRitualEnd()
     {
         if (GetData("StrobeDisabled")) {
-            print("LIGHTING CTL: Strobes are disabled.");
+            RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
             // Just turn on all the lights.
             foreach (light in lights) {
                 SendMessage(light, "TurnOn");
             }
         } else {
-            print("LIGHTING CTL: Strobes are enabled.");
+            RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
             // Make all the strobes flash horrendously
             foreach (light in lights) {
                 SendMessage(light, "TurnOff");
@@ -829,14 +1001,11 @@ class RitualLightingController extends Controller
 }
 
 
-class RitualVictimController extends Controller
+class RitualVictimController
 {
 
     // ---- Messages from the master for the whole ritual
 
-    // function OnRitualBegin()
-    // {
-    // }
 
     // function OnRitualEnd()
     // {
@@ -944,19 +1113,11 @@ class RitualFloorStrip extends SqRootScript
 }
 
 
-class RitualExtraController extends Controller
+class RitualExtraController
 {
 
     // ---- Messages from the master for the whole ritual
 
-    function OnRitualBegin()
-    {
-        local stage = message().data;
-
-        // First positions, everyone
-        local available_extras = GetAvailableExtras();
-        PickPatrolPoints(stage, available_extras, true);
-    }
 
     function OnRitualEnd()
     {
@@ -968,10 +1129,6 @@ class RitualExtraController extends Controller
 
     // ---- Messages from the controller for each step
 
-    function OnRitualPause()
-    {
-        // Extras suddenly get a desire to make some noise
-    }
 
     function OnRitualDown()
     {
@@ -985,16 +1142,10 @@ class RitualExtraController extends Controller
     {
     }
 
-    function OnRitualRound()
-    {
-        local stage = message().data;
-        local available_extras = GetAvailableExtras();
-        PickPatrolPoints(stage, available_extras);
-    }
 
     // ---- Messages from the extras
 
-    function OnExtraPatrolPoint()
+    function OnExtraReachedTarget()
     {
         // They suddenly get a desire not to patrol anymore, but
         // instead to face the altar (because their idle origin
@@ -1012,71 +1163,16 @@ class RitualExtraController extends Controller
         if (index != null) {
             extras.remove(index);
         }
-        print("EXTRA CTL: extra " + Object_Description(extra) + " is excused from the ritual due to brain death.");
+        RitualLog(eRitualLog.kExtra, Object_Description(extra) + " is excused from the ritual due to brain death.");
     }
 
     // ---- Utilities
 
-    function GetAvailableExtras()
-    {
-        local available_extras = [];
-        // Find the extras available to participate in this round:
-        // those who are dead, unconscious, or off searching for
-        // or attacking the player are excused.
-        foreach (extra in extras) {
-            local level = AI.GetAlertLevel(extra);
-            local compare_level = Property.Get(extra, "AI_Alertness", "Level");
-            if (level < eAIScriptAlertLevel.kModerateAlert) {
-                available_extras.append(extra);
-            } else {
-                print("EXTRA CTL: extra " + Object_Description(extra)
-                    + " is at alert " + level + " (compare: " + compare_level + ") and temporarily excused.");
-            }
-        }
-        print("EXTRA CTL: " + available_extras.len() + " extras available.");
-        return available_extras;
-    }
 
-    function PickPatrolPoints(stage, available_extras, go_directly = false)
-    {
-        // The performer will be at index stage*2 in the trol ring;
-        // pick roughly-evenly-spaced places for the extras around the
-        // rest of the ring.
-        local picked_trols = [];
-        local spacing = (trols.len() / (available_extras.len() + 1.0));
-//        print("EXTRA CTL: extras spaced every " + spacing + " points.");
-        local performer_index = (2 * stage);
-        foreach (extra_index, extra in available_extras) {
-            local pick_index = (floor(performer_index + ((extra_index + 1) * spacing) + 0.5) % trols.len()).tointeger();
-            local pick = trols[pick_index];
-//            print("EXTRA CTL: extra " + extra_index + ": " + Object_Description(extra)
-//                + " picked trol #" + pick_index + ": " + Object_Description(pick));
-            picked_trols.append(pick);
-            local closest_trol = (go_directly ? 0 : FindClosestTrol(Object.Position(extra)));
-            SendMessage(extra, "PatrolTo", pick, closest_trol);
-        }
-    }
-
-    function FindClosestTrol(pos)
-    {
-        local closest = 0;
-        local shortest_distance = 9999999;
-        foreach (trol in trols) {
-            local trol_pos = Object.Position(trol);
-            local delta = (trol_pos - pos);
-            // Ignore z, nobody's flying to their patrol point
-            local distance = (delta.x * delta.x) + (delta.y * delta.y);
-            if (distance < shortest_distance) {
-                shortest_distance = distance;
-                closest = trol;
-            }
-        }
-        return closest;
-    }
 }
-*/
 
-class RitualExtra
+
+class RitualExtra extends SqRootScript
 {
     // ---- Messages from the controller
 
@@ -1087,21 +1183,24 @@ class RitualExtra
         local direct = (start_at_trol == 0);
         SetPatrolTarget(trol);
         if (direct) {
+            // Go directly to the target
             Link_SetCurrentPatrol(self, trol);
         } else {
+            // If we're not already patrolling, use the suggested start point
             if (Link_GetCurrentPatrol(self) == 0) {
                 Link_SetCurrentPatrol(self, start_at_trol);
             }
         }
-
         Object.AddMetaProperty(self, "M-DoesPatrol");
         if (direct) {
-           // print("EXTRA: " + Object_Description(self)
-           //     + " patrolling directly to " + Object_Description(trol));
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                Object_Description(self)
+                + " patrolling directly to " + Object_Description(trol));
         } else {
-           // print("EXTRA: " + Object_Description(self)
-           //     + " patrolling to " + Object_Description(trol)
-           //     + " via " + Object_Description(start_at_trol));
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                Object_Description(self)
+                + " patrolling to " + Object_Description(trol)
+                + " via " + Object_Description(start_at_trol));
         }
     }
 
@@ -1121,7 +1220,7 @@ class RitualExtra
     function OnRipAndTear()
     {
         // Pick up the pound of flesh and make it visible.
-        local gore = Link_GetScriptParamsDest("PoundOfFlesh", self);
+        local gore = Link_GetOneParam("PoundOfFlesh", self);
         if (gore != 0) {
             Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
@@ -1134,11 +1233,15 @@ class RitualExtra
         // Tell the controller we've reached our target patrol point
         local trol = message().patrolObj;
         if (trol == GetPatrolTarget()) {
-//            print("EXTRA: " + Object_Description(self) + " reached target point " + Object_Description(trol));
-            PunchUp("ExtraPatrolPoint", trol);
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                Object_Description(self)
+                + " reached target point " + Object_Description(trol));
+            PunchUp("ExtraReachedTarget", trol);
         } else {
-//            print("EXTRA: " + Object_Description(self) + " reached non-target point " + Object_Description(trol));
-//            print("EXTRA: " + Object_Description(self) + " continuing on to " + Object_Description(Link_GetCurrentPatrol(self)));
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                Object_Description(self)
+                + " reached non-target point " + Object_Description(trol)
+                + ", continuing on to " + Object_Description(Link_GetCurrentPatrol(self)));
         }
     }
 
@@ -1151,9 +1254,9 @@ class RitualExtra
 
     function OnAlertness()
     {
-        print("EXTRA: " + Object_Description(self)
-            + " alertness " + message().oldLevel
-            + " ===================> " + message().level);
+        RitualLog(eRitualLog.kExtra | eRitualLog.kAlertness,
+            Object_Description(self)
+            + message().oldLevel + " ===================> " + message().level);
 
         if ((message().level > message().oldLevel)
             && (message().level >= eAIScriptAlertLevel.kModerateAlert))
@@ -1181,6 +1284,11 @@ class RitualExtra
 
     // ---- Utilities
 
+    function PunchUp(message, data = 0, data2 = 0)
+    {
+        Link_BroadcastOnAllLinks(message, "~ScriptParams", self, data, data2);
+    }
+
     function GetPatrolTarget()
     {
         local link = Link.GetOne("Route", self);
@@ -1193,7 +1301,9 @@ class RitualExtra
 
     function SetPatrolTarget(trol)
     {
-        // print("EXTRA: " + Object_Description(self) + " new target is: " + Object.GetName(trol) + " (" + trol + ")");
+        RitualLog(eRitualLog.kExtra | eRitualLog.kPathing, 
+            Object_Description(self)
+            + " new target is: " + Object.GetName(trol) + " (" + trol + ")");
         Link_DestroyAll("Route", self);
         if (trol != 0) {
             Link.Create("Route", self, trol);
@@ -1225,7 +1335,8 @@ class RitualLazyExtra extends SqRootScript
 
     function OnBeginScript()
     {
-        //print("LAZINESS: " + Object_Description(self) + " is lazy.");
+        RitualLog(eRitualLog.kLaziness,
+            Object_Description(self) + " is lazy.");
 
         // Start the tweq.
         Property.Set(self, "StTweqBlink", "AnimS", 1);
@@ -1235,17 +1346,20 @@ class RitualLazyExtra extends SqRootScript
     {
         // Don't try to stop looking if we're busy attacking!
         if (! Link.AnyExist("AIAttack", self)) {
-            //print("LAZINESS: " + Object_Description(self) + " is at alert " + AI_AlertLevel(self) + " and still lazy.");
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " is at alert " + AI_AlertLevel(self) + " and still lazy.");
             ExpireAwareness();
         } else {
-            //print("LAZINESS: " + Object_Description(self) + " is busy attacking something.");
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " is busy attacking something.");
         }
     }
 
     function OnAlertness()
     {
         if (message().level < 2) {
-            //print("LAZINESS: " + Object_Description(self) + " has calmed down. Back to work.");
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " has calmed down. Back to work.");
             // Laziness worked, we can stop checking that we're lazy enough.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
         }
@@ -1254,7 +1368,8 @@ class RitualLazyExtra extends SqRootScript
     function OnAIModeChange()
     {
         if (message().mode == eAIMode.kAIM_Dead) {
-            //print("LAZINESS: " + Object_Description(self) + " is brain dead. Back to work (or not).");
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " is brain dead. Back to work (or not).");
             // We're brain dead, stop caring.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
         }
@@ -1271,16 +1386,20 @@ class RitualLazyExtra extends SqRootScript
                 local age = (GetTime() - Awareness_LastContactTime(awareness_link));
                 if (age < kInvestigateMinAge) {
                     // Let the investigation continue.
-                    //print("LAZINESS: " + Object_Description(self) + " continuing fresh (" + age + "s) investigation: " + Awareness_Description(invest_link));
+                    RitualLog(eRitualLog.kLaziness,
+                        Object_Description(self) + " continuing fresh (" + age + "s) investigation: " + Awareness_Description(invest_link));
                     return;
                 } else {
-                    //print("LAZINESS: " + Object_Description(self) + " investigation is getting old (" + age + "s): " + Awareness_Description(invest_link));
+                    RitualLog(eRitualLog.kLaziness,
+                        Object_Description(self) + " investigation is getting old (" + age + "s): " + Awareness_Description(invest_link));
                 }
             } else {
-                //print("LAZINESS: " + Object_Description(self) + " has no awareness link for its investigation.");
+                RitualLog(eRitualLog.kLaziness,
+                    Object_Description(self) + " has no awareness link for its investigation.");
             }
         } else {
-            //print("LAZINESS: " + Object_Description(self) + " is not investigating.");
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " is not investigating.");
         }
 
         // Okay, we're going to destroy some links, so cache the iterator first just in case.
@@ -1314,24 +1433,29 @@ class RitualLazyExtra extends SqRootScript
             local conditionally_destroy = false;
             if (is_low_level) {
                 // This link isn't keeping us alerted, so ignore it.
-                //print("LAZINESS: Ignoring low level: " + Awareness_Description(link));
+                RitualLog(eRitualLog.kLaziness,
+                    "Ignoring low level: " + Awareness_Description(link));
                 ignore = true;
             } else if (is_hostile_team) {
                 if (is_old) {
                     // Guess it was just rats again.
-                    //print("LAZINESS: Destroying old (" + age + "s) hostile: " + Awareness_Description(link));
+                    RitualLog(eRitualLog.kLaziness,
+                        "Destroying old (" + age + "s) hostile: " + Awareness_Description(link));
                     destroy = true;
                 } else {
-                    //print("LAZINESS: Keeping recent (" + age + "s) hostile: " + Awareness_Description(link));
+                    RitualLog(eRitualLog.kLaziness,
+                        "Keeping recent (" + age + "s) hostile: " + Awareness_Description(link));
                 }
             } else if (is_same_team) {
                 if (is_me) {
                     if (is_old) {
                         // Well, I heard something, but that was a while ago.
-                        //print("LAZINESS: Destroying old (" + age + "s) heard: " + Awareness_Description(link));
+                        RitualLog(eRitualLog.kLaziness,
+                            "Destroying old (" + age + "s) heard: " + Awareness_Description(link));
                         destroy = true;
                     } else {
-                        //print("LAZINESS: Keeping recent (" + age + "s) heard: " + Awareness_Description(link));
+                        RitualLog(eRitualLog.kLaziness,
+                            "Keeping recent (" + age + "s) heard: " + Awareness_Description(link));
                     }
                 } else {
                     if (is_dead) {
@@ -1339,21 +1463,25 @@ class RitualLazyExtra extends SqRootScript
                         if (have_los) {
                             // But if it's still in sight, there's not much we can do,
                             // they *will* stay alert despite our best efforts.
-                            //print("LAZINESS: Friendly corpse is in sight, leaving it alone: " + Awareness_Description(link));
+                            RitualLog(eRitualLog.kLaziness,
+                                "Friendly corpse is in sight, leaving it alone: " + Awareness_Description(link));
                         } else {
                             // But keep the link around so they don't forget and start investigating it again.
-                            //print("LAZINESS: Expiring friendly corpse: " + Awareness_Description(link));
+                            RitualLog(eRitualLog.kLaziness,
+                                "Expiring friendly corpse: " + Awareness_Description(link));
                             expire = true;
                         }
                     } else {
                         // Friends don't let friends stay angry.
-                        //print("LAZINESS: Conditionally destroying friendly: " + Awareness_Description(link));
+                        RitualLog(eRitualLog.kLaziness,
+                            "Conditionally destroying friendly: " + Awareness_Description(link));
                         conditionally_destroy = true;
                     }
                 }
             } else {
                 // Neutral team? Can they even alert you? Don't care, let's get rid of it.
-                //print("LAZINESS: Destroying neutral: " + Awareness_Description(link));
+                RitualLog(eRitualLog.kLaziness,
+                    "Destroying neutral: " + Awareness_Description(link));
                 destroy = true;
             }
 
@@ -1373,18 +1501,21 @@ class RitualLazyExtra extends SqRootScript
 
         // When there's nothing to see, there's no reason to keep investigating.
         if (keep_count == 0) {
-            //print("LAZINESS: " + Object_Description(self) + " is destroying its investigation (if any).");
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " is destroying its investigation (if any).");
             Link_DestroyAll("AIInvest", self);
 
             // And destroy the conditional ones
             foreach (link in conditionally_destroy_links) {
-                //print("LAZINESS: Actually destroying conditional: " + Awareness_Description(link));
+                RitualLog(eRitualLog.kLaziness,
+                    "Actually destroying conditional: " + Awareness_Description(link));
                 Link.Destroy(link);
             }
         }
 
         if (keep_count == 0) {
-            //print("LAZINESS CONCLUSION: No reason for " + Object_Description(self) + " to stay alert.");
+            RitualLog(eRitualLog.kLaziness,
+                "CONCLUSION: No reason for " + Object_Description(self) + " to stay alert.");
             // HACK: sometimes despite all the awareness fudging, sometimes they don't calm
             // down soon enough. So let's force them to for now.
             // But if there's a body sitting right in front of them, they'll stay constantly on the
@@ -1392,7 +1523,8 @@ class RitualLazyExtra extends SqRootScript
             Property.Set(self, "AI_Alertness", "Level", 1);
             Property.Set(self, "AI_Alertness", "Peak", 1);
         } else {
-            //print("LAZINESS CONCLUSION: " + Object_Description(self) + " should stay alert, there's trouble out there.");
+            RitualLog(eRitualLog.kLaziness,
+                "CONCLUSION: " + Object_Description(self) + " should stay alert, there's trouble out there.");
         }
     }
 
@@ -1431,8 +1563,8 @@ class RitualLazyExtra extends SqRootScript
     }
 }
 
-/*
-class RitualFinaleController extends Controller
+
+class RitualFinaleController
 {
     waiting_for_extras = 9999;
 
@@ -1519,12 +1651,14 @@ class RitualFinaleController extends Controller
     function ContinueWhenAllExtrasReady()
     {
         if (waiting_for_extras > 0) {
-            print("FINALE CTL: Still waiting for " + waiting_for_extras + " extras.");
+            RitualLog(eRitualLog.kFinale,
+                "Still waiting for " + waiting_for_extras + " extras.");
             return;
         }
 
         // Point of no return--well, that's in just a moment when we RIP AND TEAR!
-        print("FINALE CTL: All extras ready.");
+        RitualLog(eRitualLog.kFinale,
+            "All extras ready.");
 
         // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
         // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
@@ -1538,7 +1672,7 @@ class RitualFinaleController extends Controller
     function ExplodeVictim()
     {
         // Fling body parts everywhere, why don't you?
-        local available_gores = Link_GetAllScriptParamsDests("PoundOfFlesh", self);
+        local available_gores = Link_GetAllParams("PoundOfFlesh", self);
         local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
         foreach (gore in available_gores) {
         //for (local i = 0; i < gores.len(); i++) {
@@ -1554,7 +1688,8 @@ class RitualFinaleController extends Controller
 
             // Deactivate the physics controls
             if (! Physics.ValidPos(gore)) {
-                print("VICTIM CTL ERROR: gore " + i + " not in valid position!");
+                RitualLog(eRitualLog.kFinale,
+                    "ERROR: gore " + i + " not in valid position!");
                 continue;
             } else {
                 Property.Set(gore, "PhysControl", "Controls Active", 0);
@@ -1580,7 +1715,8 @@ class RitualFinaleController extends Controller
             extra_trols.remove(index);
             extra_gores.remove(index);
             extra_round_trols.remove(index);
-            print("FINALE CTL: " + Object_Description(extra)
+            RitualLog(eRitualLog.kFinale,
+                Object_Description(extra)
                 + " has been allocated " + Object_Description(gore)
                 + " and will go to " + Object_Description(trol));
             Link_CreateScriptParams("PoundOfFlesh", extra, gore);
@@ -1588,7 +1724,8 @@ class RitualFinaleController extends Controller
         }
         // We'll take any unallocated gore bits ourselves
         foreach (gore in extra_gores) {
-            print("FINALE CTL: " + Object_Description(gore) + " is unallocated, will explode.");
+            RitualLog(eRitualLog.kFinale,
+                Object_Description(gore) + " is unallocated, will explode.");
             Link_CreateScriptParams("PoundOfFlesh", self, gore);
         }
     }
@@ -1619,7 +1756,7 @@ class RitualFinaleController extends Controller
     function MarkExtraAsUnavailable(extra)
     {
         // Move this extra's gore back to our control.
-        local link = Link_GetScriptParams("PoundOfFlesh", extra);
+        local link = Link_GetOneScriptParams("PoundOfFlesh", extra);
         if (link != 0) {
             local gore = LinkDest(link);
             Link.Destroy(link);
@@ -1634,7 +1771,8 @@ class RitualFinaleController extends Controller
 
     function OnPerformerBrainDead()
     {
-        print("FINALE CTL: " + Object_Description(performer) + " is brain dead.");
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(performer) + " is brain dead.");
 
         // FIXME: make sure this is ignored past the point of no return
         // (or make the performer invincible after that??)
@@ -1643,21 +1781,24 @@ class RitualFinaleController extends Controller
     function OnExtraRunToSucceeded()
     {
         local extra = message().from;
-        print("FINALE CTL: " + Object_Description(extra) + " is at the altar.");
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(extra) + " is at the altar.");
         MarkExtraAsReady(extra);
     }
 
     function OnExtraRunToFailed()
     {
         local extra = message().from;
-        print("FINALE CTL: " + Object_Description(extra) + " couldn't reach altar. Stealing their gore.");
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(extra) + " couldn't reach altar. Stealing their gore.");
         MarkExtraAsUnavailable(extra);
     }
 
     function OnExtraBrainDead()
     {
         local extra = message().from;
-        print("FINALE CTL: " + Object_Description(extra) + " is brain dead. Stealing their gore.");
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(extra) + " is brain dead. Stealing their gore.");
         MarkExtraAsUnavailable(extra);
     }
 
@@ -1672,7 +1813,8 @@ class RitualFinaleController extends Controller
     {
         if (victim != 0) {
             // This is the real point of no return
-            print("FINALE CTL: Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
+            RitualLog(eRitualLog.kFinale,
+                "Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
 
             // The performer grabs their chunk of meat and everyone turns the victim into giblets
             SendMessage(victim_ctl, "Dismember");
@@ -1684,4 +1826,3 @@ class RitualFinaleController extends Controller
     }
 
 }
-*/

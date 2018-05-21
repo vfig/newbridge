@@ -4,7 +4,7 @@ Object_Description <- function(obj)
 }
 
 /* Get the ScriptParams link with the given data */
-Link_GetScriptParams <- function(data = "", from = 0, to = 0)
+Link_GetOneScriptParams <- function(data = "", from = 0, to = 0)
 {
     local links = Link.GetAll("ScriptParams", from, to);
     foreach (link in links) {
@@ -17,7 +17,7 @@ Link_GetScriptParams <- function(data = "", from = 0, to = 0)
 }
 
 /* Get the ~ScriptParams link with the given data */
-Link_GetInverseScriptParams <- function(data = "", from = 0, to = 0)
+Link_GetOneInverseScriptParams <- function(data = "", from = 0, to = 0)
 {
     local links = Link.GetAll("~ScriptParams", from, to);
     foreach (link in links) {
@@ -30,19 +30,13 @@ Link_GetInverseScriptParams <- function(data = "", from = 0, to = 0)
 }
 
 /* Get the dest of the ScriptParams link with the given data */
-Link_GetScriptParamsDest <- function(data = "", from = 0)
+Link_GetOneParam <- function(data = "", from = 0)
 {
-    return LinkDest(Link_GetScriptParams(data, from));
-}
-
-/* Get the dest of the ScriptParams link with the given data */
-Link_GetInverseScriptParamsDest <- function(data = "", from = 0)
-{
-    return LinkDest(Link_GetInverseScriptParams(data, from));
+    return LinkDest(Link_GetOneScriptParams(data, from));
 }
 
 /* Get the destinations of all ScriptParams links with the given data */
-Link_GetAllScriptParamsDests <- function(data = "", from = 0)
+Link_GetAllParams <- function(data = "", from = 0)
 {
     local dests = [];
     local links = Link.GetAll("ScriptParams", from);
@@ -74,6 +68,14 @@ Link_GetConversationActor <- function(actor_id, conversation)
         }
     }
     return 0;
+}
+
+Link_BroadcastOnAllLinks <- function(message, kind, from, data = 0, data2 = 0)
+{
+    local links = Link.GetAll(kind, from);
+    foreach (link in links) {
+        SendMessage(LinkDest(link), message, data, data2);
+    }
 }
 
 Link_DestroyAll <- function(kind, from = 0, to = 0)

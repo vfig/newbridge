@@ -5,7 +5,7 @@
 
 const DEBUG_GETONWITHIT = false;
 const DEBUG_SKIPTOTHEEND = true;
-const DEBUG_DISABLESTROBES = false;
+const DEBUG_DISABLESTROBES = true;
 
 // ---- Logging
 
@@ -331,8 +331,10 @@ class RitualController extends SqRootScript
             local strobes = Strobes();
             if (DEBUG_DISABLESTROBES || (strobes.len() == 0)) {
                 RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
-                // Just turn on all the lights.
-                foreach (light in Lights()) {
+                // Just turn on three lights.
+                local lights = Lights();
+                local three_lights = [lights[1], lights[4], lights[6]];
+                foreach (light in three_lights) {
                     RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
                     SendMessage(light, "TurnOn");
                 }

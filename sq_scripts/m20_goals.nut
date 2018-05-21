@@ -632,8 +632,10 @@ class GoalStopTheRitualByForce extends SqRootScript
     function OnAIModeChange()
     {
         if (message().mode == eAIMode.kAIM_Dead) {
-            Goal.Complete(eGoals.kStopTheRitual);
-            Goal.Show(eGoals.kEscapeWithTheAnax);
+            if (Goal.IsActive(eGoals.kStopTheRitual)) {
+                Goal.Complete(eGoals.kStopTheRitual);
+                Goal.Show(eGoals.kEscapeWithTheAnax);
+            }
         }
     }
 }
@@ -645,8 +647,43 @@ class GoalStopTheRitualByTheft extends WhenPlayerCarrying
 
     function OnPlayerPickedUp()
     {
-        Goal.Complete(eGoals.kStopTheRitual);
-        Goal.Show(eGoals.kEscapeWithTheAnax);
+        if (Goal.IsActive(eGoals.kStopTheRitual)) {
+            Goal.Complete(eGoals.kStopTheRitual);
+            Goal.Show(eGoals.kEscapeWithTheAnax);
+        }
+    }
+}
+
+
+class GoalFailToStopTheRitual extends SqRootScript
+{
+    /* Put this on the ritual controller. It listens for a "RitualEnded"
+       message, and cancels the relevant objectives, then fails them
+       a short time later. This gives us a slightly longer delay before
+       showing "mission failed" than the default. */
+    function OnRitualEnded()
+    {
+        if (Goal.IsActive(eGoals.kStopTheRitual)) {
+            Goal.Cancel(eGoals.kStopTheRitual);
+            Goal.Cancel(eGoals.kEscapeWithTheAnax);
+            Goal.Cancel(eGoals.kKeepTheAnaxAlive);
+
+            // FIXME... will a timer be saved? What happens if you save after this
+            // point, but before the objectives actually get failed?
+
+            // Total time from point of no return to failure is about
+            // 15 seconds, which feels pretty good.
+            SetOneShotTimer("FailTheMission", 10.0);
+        }
+    }
+
+    function OnTimer()
+    {
+        if (message().name == "FailTheMission") {
+            Goal.Fail(eGoals.kStopTheRitual);
+            Goal.Fail(eGoals.kEscapeWithTheAnax);
+            Goal.Fail(eGoals.kKeepTheAnaxAlive);
+        }
     }
 }
 

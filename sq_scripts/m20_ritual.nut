@@ -373,14 +373,17 @@ class RitualController extends SqRootScript
             // Time for a grand finale before failing the mission.
             RitualLog(eRitualLog.kRitual, "Finale");
 
-            // FIXME: objectives tie in
+            // Make the Hand vanish!
+            RitualLog(eRitualLog.kRitual, "The Hand is consumed, and cannot be stolen anymore!");
+            local performer = Performer();
+            SendMessage(performer, "ConsumeTheHand");
 
             // Kill all the down conversations
             foreach (down in DownConvs()) {
                 SendMessage(down, "TurnOff");
             }
+
             // Performer stays entranced, but no longer patrosl, and now moves at normal speed.
-            local performer = Performer();
             Object.RemoveMetaProperty(performer, "M-DoesPatrol");
             Object.RemoveMetaProperty(performer, "M-RitualTrance");
             Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
@@ -476,12 +479,12 @@ class RitualController extends SqRootScript
                 "Still waiting for " + AwaitingExtras() + " extras.");
             return;
         }
-
-        // Point of no return--well, that's in just a moment when we RIP AND TEAR!
         RitualLog(eRitualLog.kFinale, "All extras ready.");
 
-        // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
-        // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
+        // Point of no return--well, that's in just a moment when we RIP AND TEAR!
+        // Make sure it's too late to rescue the Anax
+        RitualLog(eRitualLog.kFinale, "Point of no return! You can't rescue the victim now.");
+        Object_AddFrobAction(Victim(), eFrobAction.kFrobActionIgnore);
 
         // Start pulling that Anax to pieces
         foreach (conv in FinaleConvs()) {
@@ -534,9 +537,13 @@ class RitualController extends SqRootScript
 
     function End()
     {
-        SetStatus(eRitualStatus.kEnded);
-        RitualLog(eRitualLog.kRitual, "End");
-        Die("Beware! The Prophet has returned!");
+        if (Status() == eRitualStatus.kFinale) {
+            SetStatus(eRitualStatus.kEnded);
+            RitualLog(eRitualLog.kRitual, "End");
+
+            // Begin the countdown to mission failure.
+            SendMessage(self, "RitualEnded");
+        }
     }
 
     // ---- The Player Intervened
@@ -994,6 +1001,15 @@ class RitualPerformer extends SqRootScript
             Link_SetCurrentPatrol(self, trol);
         }
         Object.AddMetaProperty(self, "M-DoesPatrol");
+    }
+
+    function ConsumeTheHand()
+    {
+        // FIXME: Particle effect, like a shower of sparks or something?
+        local hand = Link_GetOneParam("Hand", self);
+        if (hand != 0) {
+            Object.Destroy(hand);
+        }
     }
 
     // ---- Messages from AI and scripts

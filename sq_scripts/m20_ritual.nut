@@ -3,9 +3,10 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = false;
-const DEBUG_SKIPTOTHEEND = true;
+const DEBUG_GETONWITHIT = true;
+const DEBUG_SKIPTOTHEEND = false;
 
+/*
 class Controlled extends SqRootScript
 {
     function PunchUp(message, data = 0)
@@ -49,94 +50,188 @@ class Controller extends Controlled
         }
     }
 }
+*/
 
 enum eRitualStatus {
     kRitualNotStarted       = 0,
-    kRitualBegun            = 1,
-    kRitualEnded            = 2,
-    kRitualAborted          = 3,
+    kRitualInProgress       = 1,
+    kRitualLastStage        = 2,
+    kRitualFinale           = 3,
+    kRitualEnded            = 4,
+    kRitualAborted          = 5,
 }
 
-class RitualMasterController extends Controller
+class RitualController extends SqRootScript
 {
-    /* The overall ritual process is signalled by these messages:
+    /* The overall ritual runs through these statuses:
 
-            RitualBegin:
-                The ritual has started.
-            RitualEnd:
-                The ritual reached its conclusion.
-            RitualAbort:
-                The ritual was stopped by the player
+        kRitualNotStarted
+            The ritual has not yet begun. Waiting for the player to get near, basically.
 
-        Each stage of the ritual is signalled by these messages, with
-        the current stage number as the data of each:
+        kRitualInProgress
+            The rounds and downs are happening. The performer is in a trance, but the
+            extras will react to the player pretty much as usual. While in progress,
+            the following steps take place, triggered by the performer:
 
-            RitualRound:
+            Round:
                 The lights go off etc.
                 Everyone walks to the next vertex.
 
-            RitualPause:
+            Pause:
                 The performer turns to face the altar.
                 The extras face the altar and ululate.
 
-            RitualDown:
+            Down:
                 The performer walks to the altar.
                 The lights come on etc.
 
-            RitualBless:
+            Bless:
                 The performer waves the hand over the altar and chants.
                 (The ritual ends here mid-blessing if it's at the last stage)
 
-            RitualReturn:
+            Return:
                 The performer walks back to the vertex.
 
-        Each step is begun by the master sending a Ritual<whatever>
-        message to the other controllers. Each step ends when the master
-        sends the next Ritual<whatever> to the other controllers (usually in
-        response to messages from the performer controller).
+        kRitualLastStage
+            Di Rupo is walking down to the altar for the last time. The extras enter a
+            trance and run to the altar too. Last chance for player intervention. Only
+            the Pause / Down / Bless steps happen during this stage.
+
+        kRitualFinale
+            The Anax is torn apart, everyone celebrates, and the Prophet appears.
+
+        kRitualEnded
+            After the finale, there's nothing more to do.
+
+        kRitualAborted
+            The ritual was stopped--by the Hand being stolen, or the Anax, or di Rupo
+            being KO'd or killed--and everyone gets angsty.
     */
 
     // Vertices in the order that the performer should visit them.
     // Can tweak this to adjust the ritual timing in very large increments.
     // Timing can also be tweaked more generally with M-RitualTrance Creature Time Warp.
-    // But the last entry must be 6, because that's the head.
+    // But the last entry must be 6, because that's the victim's head.
     // FIXME: might in fact want to adjust time warp for Normal difficulty
-    // FIXME: If the stages are changed, also need to adjust the Ritual tags in the conv schema.
+    // FIXME: If the stages are changed, also need to adjust the LineNo 0-6 tags in the conv schema.
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
     stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
     //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
 
-    // Status of the ritual
-    // FIXME: the following status stuff needs to be GetData/SetData'd so it saves and loads
-    status = eRitualStatus.kRitualNotStarted;
-    current_index = 0; // Index into stages
-    current_stage = 0; // Current stage vertex
-
-    // FIXME: need to handle the various ways the ritual can be interrupted too, and stop the script then.
-
-    function OnBeginScript()
+    function OnSim()
     {
-        if (DEBUG_SKIPTOTHEEND) {
-            stages = [6];
+        if (message().starting) {
+            if (DEBUG_SKIPTOTHEEND) {
+                stages = [6];
+            }
+
+            if ((Status() == null) || (StageIndex() == null)) {
+                SetStatus(eRitualStatus.kRitualNotStarted);
+                SetStageIndex(0);
+            }
+
+            // FIXME: move all these to utility functions so we can get
+            // things as we need them.
+
+            // Check all linked entities and are accounted for.
+            local performer = Link_GetScriptParamsDest("Performer", self);
+            if (performer == 0) { Die("no performer."); return; }
+
+            local victim = Link_GetScriptParamsDest("Victim", self);
+            if (victim == 0) { Die("no victim."); return; }
+
+            local extras = Link_GetAllScriptParamsDests("Extra", self);
+            if (extras.len() == 0) { Die("no extras."); return; }
+
+            local round_trols = Link_CollectPatrolPath(Link_GetAllScriptParamsDests("PerfRoundTrol", self));
+            if (round_trols.len() != 7) { Die("need 7 round_trols."); return; }
+
+            local down_convs = Link_GetAllScriptParamsDests("DownConv", self);
+            if (down_convs.len() != 7) { Die("need 7 down_convs."); return; }
+
+            local extra_round_trols = Link_CollectPatrolPath(Link_GetAllScriptParamsDests("ExtraRoundTrol", self));
+            if (extra_round_trols.len() != 14) { Die("need 14 extra_round_trols."); return; }
+
+            local lights = Link_GetAllScriptParamsDests("Light", self);
+            if (lights.len() != 7) { Die("need 7 lights."); return; }
+
+            local strips = Link_GetAllScriptParamsDests("Strip", self);
+            if (strips.len() != 7) { Die("need 7 strips."); return; }
+
+            local down_trols = Link_GetAllScriptParamsDests("DownTrol", self);
+            if (down_trols.len() != 7) { Die("need 7 down_trols."); return; }
+
+            local strobes = Link_GetAllScriptParamsDests("Strobe", self);
+            if (strobes.len() == 0) { Die("no strobes."); return; }
+
+            local perf_wait_conv = Link_GetScriptParamsDest("PerfWaitConv", self);
+            if (perf_wait_conv == 0) { Die("no perf_wait_conv."); return; }
+
+            local finale_convs = Link_GetAllScriptParamsDests("FinaleConv", self);
+            if (finale_convs.len() != 7) { Die("need 7 finale_convs."); return; }
+
+            local gores = Link_GetAllScriptParamsDests("Gore", self);
+            if (gores.len() != 7) { Die("need 7 gores."); return; }
+
+            local blood = Link_GetScriptParamsDest("Blood", self);
+            if (blood == 0) { Die("no blood."); return; }
+
+            local search_trols = Link_CollectPatrolPath(Link_GetAllScriptParamsDests("SearchTrol", self));
+            if (down_trols.len() == 0) { Die("no search_trols."); return; }
+
+            // FIXME: Maybe I only need one search conv for the perf (and one for each extra)? Try the "Search, Scan" tag.
+            // note that the investigate ability doesn't seem to use the Search, Peek tags: that's for Assassins.
+            local perf_search_convs = Link_GetAllScriptParamsDests("PerfSearchConv", self);
+            if (perf_search_convs.len() == 0) { Die("no perf_search_convs."); return; }
+
+
+
+            // FIXME: need to know if we're at the start of the mission,
+            // or just loading a save! We should only do the following
+            // at the start of a mission!
+
+            // Start the performer in a trance so they won't spook
+            // at anything before the ritual begins.
+//            print("PERFORMER CTL: Starting trance");
+            Object.AddMetaProperty(performer, "M-RitualTrance");
+
+            if (DEBUG_GETONWITHIT) {
+                Object.AddMetaProperty(performer, "M-GetOnWithIt");
+            }
+
+            // We don't care how many strobes there are, but make sure they're off to begin with
+            foreach (strobe in strobes) {
+                SendMessage(strobe, "TurnOff");
+            }
+
+            // Make sure the gores aren't "there" initially.
+            foreach (gore in gores) {
+                Object.AddMetaProperty(gore, "M-NotHere");
+            }
+
+
+            if (DEBUG_GETONWITHIT) {
+                foreach (extra in extras) {
+                    Object.AddMetaProperty(extra, "M-GetOnWithIt");
+                }
+            }
         }
     }
 
     function OnTurnOn()
     {
-        // FIXME: check GetData for status
-        if (status == eRitualStatus.kRitualNotStarted) {
-            Begin();
-        }
+        Begin();
     }
+
+    // ---- The ritual begins (kRitualInProgress)
 
     function Begin()
     {
-        if (status == eRitualStatus.kRitualNotStarted) {
-            status = eRitualStatus.kRitualBegun;
+        if (Status() == eRitualStatus.kRitualNotStarted) {
+            SetStatus(eRitualStatus.kRitualInProgress);
 
-            // FIXME: check GetData for current index? Or do we just resume somehow or something?
-            current_index = 0;
-            current_stage = stages[current_index];
+            local stage_index = StageIndex();
+            local stage = Stage()
 
             // FIXME: remove this whitespace
             print(" ");
@@ -161,18 +256,20 @@ class RitualMasterController extends Controller
             print(" ");
 
             print("RITUAL: Begin");
-            PunchDown("RitualBegin", current_stage);
-            print("RITUAL: Index " + current_index + " is stage " + current_stage);
+            print("RITUAL: Index " + stage_index + " is stage " + stage);
 
             // Seven times rounds and seven times downs - always begin with a round.
-            print("RITUAL: Round " + current_stage);
-            PunchDown("RitualRound", current_stage);
+            print("RITUAL: Round " + stage);
+            //FIXME: make this a method of ours
+            //PunchDown("RitualRound", stage);
+        } else {
+            print("RITUAL ERROR: Incorrect status (" + Status() + ") to begin.");
         }
     }
 
     function End()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             status = eRitualStatus.kRitualEnded;
 
             print("RITUAL: End");
@@ -190,7 +287,7 @@ class RitualMasterController extends Controller
 
     function Abort()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             status = eRitualStatus.kRitualAborted;
 
             print("RITUAL: Abort");
@@ -203,11 +300,19 @@ class RitualMasterController extends Controller
         }
     }
 
+    function Die(reason)
+    {
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        print("RITUAL DEATH: " + reason);
+        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+        Object.Destroy(self);
+    }
+
     // ---- Messages from child controllers
 
     function OnPerformerReachedVertex()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             // Time for a pause
             print("RITUAL: Pause " + current_stage);
             PunchDown("RitualPause", current_stage);
@@ -216,7 +321,7 @@ class RitualMasterController extends Controller
 
     function OnPerformerFacedAltar()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             // Time for a down
             print("RITUAL: Down " + current_stage);
             PunchDown("RitualDown", current_stage);
@@ -225,7 +330,7 @@ class RitualMasterController extends Controller
 
     function OnPerformerReachedAltar()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             // Time for a bless
             print("RITUAL: Bless " + current_stage);
             PunchDown("RitualBless", current_stage);
@@ -234,7 +339,7 @@ class RitualMasterController extends Controller
 
     function OnPerformerFinishedBlessing()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             // Check if it's the final stage:
             if (current_index < stages.len() - 1) {
                 // Time for a return
@@ -249,7 +354,7 @@ class RitualMasterController extends Controller
 
     function OnPerformerReturnedToVertex()
     {
-        if (status == eRitualStatus.kRitualBegun) {
+        if (status == eRitualStatus.kRitualInProgress) {
             // On to the next stage
             current_index = current_index + 1;
             if (current_index >= stages.len()) {
@@ -296,20 +401,34 @@ class RitualMasterController extends Controller
 
     function Finale()
     {
-        // local 
-        // cMultiParm SendMessage(object to, string sMessage, cMultiParm data, cMultiParm data2, cMultiParm data3);
+    }
 
-        /*
-            Here's the plan:
+    // ---- Utilities
 
-            - Find out which extras are available for the finale
-            - Assign each to a best-fit down-trol-point
-            - Use Goto to make them all go 
-        */
+    function Status() {
+        return GetData("RitualStatus");
+    }
+
+    function SetStatus(status) {
+        SetData("RitualStatus", status);
+    }
+
+    function StageIndex()
+    {
+        return GetData("RitualStageIndex");
+    }
+
+    function SetStageIndex(index)
+    {
+        SetData("RitualStageIndex", index);
+    }
+
+    function Stage() {
+        return stages[StageIndex()];
     }
 }
 
-
+/*
 class RitualPerformer extends Controlled
 {
 
@@ -455,54 +574,7 @@ class MissingRitualVictim extends SqRootScript
 
 class RitualPerformerController extends Controller
 {
-    performer = 0;
-    rounds = [];
-    downs = [];
-    search_trols = [];
-    search_convs = [];
-
-    function OnSim()
-    {
-        if (message().starting) {
-            // Get linked entities and check they're all accounted for.
-            performer = Link_GetScriptParamsDest("Performer", self);
-            rounds = Link_GetAllScriptParamsDests("Round", self);
-            downs = Link_GetAllScriptParamsDests("Down", self);
-            search_trols = Link_GetAllScriptParamsDests("SearchTrol", self);
-            search_trols = Link_CollectPatrolPath(search_trols);
-            search_convs = Link_GetAllScriptParamsDests("SearchConv", self);
-            if (performer == 0) {
-                print("PERFORMER CTL DEATH: no performer.");
-                Object.Destroy(self);
-                return;
-            }
-            if (rounds.len() != 7) {
-                print("PERFORMER CTL DEATH: incorrect number of rounds.");
-                Object.Destroy(self);
-                return;
-            }
-            if (downs.len() != 7) {
-                print("PERFORMER CTL DEATH: incorrect number of downs.");
-                Object.Destroy(self);
-                return;
-            }
-            if (search_convs.len() == 0) {
-                print("PERFORMER CTL DEATH: no search_convs.");
-                Object.Destroy(self);
-                return;
-            }
-
-            // Start the performer in a trance so they won't spook
-            // at anything before the ritual begins.
-//            print("PERFORMER CTL: Starting trance");
-            Object.AddMetaProperty(performer, "M-RitualTrance");
-
-            if (DEBUG_GETONWITHIT) {
-                Object.AddMetaProperty(performer, "M-GetOnWithIt");
-            }
-        }
-    }
-
+ 
     // ---- Messages from the master for the whole ritual
 
     function OnRitualBegin()
@@ -695,34 +767,6 @@ class DisableStrobes extends SqRootScript
 
 class RitualLightingController extends Controller
 {
-    lights = [];
-    strips = [];
-    strobes = [];
-
-    function OnSim()
-    {
-        if (message().starting) {
-            // Get linked entities and check they're all accounted for.
-            lights = Link_GetAllScriptParamsDests("Light", self);
-            strips = Link_GetAllScriptParamsDests("Strip", self);
-            strobes = Link_GetAllScriptParamsDests("Strobe", self);
-            if (lights.len() != 7) {
-                print("LIGHTING CTL DEATH: incorrect number of lights.");
-                Object.Destroy(self);
-                return;
-            }
-            if (strips.len() != 7) {
-                print("LIGHTING CTL DEATH: incorrect number of strips.");
-                Object.Destroy(self);
-                return;
-            }
-
-            // We don't care how many strobes there are, but make sure they're off to begin with
-            foreach (strobe in strobes) {
-                SendMessage(strobe, "TurnOff");
-            }
-        }
-    }
 
     function OnDisableStrobes()
     {
@@ -787,38 +831,6 @@ class RitualLightingController extends Controller
 
 class RitualVictimController extends Controller
 {
-    victim = 0;
-    gores = [];
-    blood = 0;
-
-    function OnSim()
-    {
-        if (message().starting) {
-            victim = Link_GetScriptParamsDest("Victim", self);
-            gores = Link_GetAllScriptParamsDests("Gore", self);
-            blood = Link_GetScriptParamsDest("Blood", self);
-            if (victim == 0) {
-                print("VICTIM CTL DEATH: no victim.");
-                Object.Destroy(self);
-                return;
-            }
-            if (gores.len() != 7) {
-                print("VICTIM CTL DEATH: incorrect number of gores.");
-                Object.Destroy(self);
-                return;
-            }
-            if (blood == 0) {
-                print("VICTIM CTL DEATH: no blood.");
-                Object.Destroy(self);
-                return;
-            }
-
-            // Make sure the gores aren't "there" initially.
-            foreach (gore in gores) {
-                Object.AddMetaProperty(gore, "M-NotHere");
-            }
-        }
-    }
 
     // ---- Messages from the master for the whole ritual
 
@@ -850,7 +862,7 @@ class RitualVictimController extends Controller
 
 class RitualFloorStrip extends SqRootScript
 {
-    /* When turned on, brighten up and pulse illumination. */
+    // When turned on, brighten up and pulse illumination.
 
     is_on = false;
     selfillum = 0.0; // 0...1
@@ -934,36 +946,6 @@ class RitualFloorStrip extends SqRootScript
 
 class RitualExtraController extends Controller
 {
-    extras = [];
-    trols = [];
-
-    function OnSim()
-    {
-        if (message().starting) {
-            // Get linked entities and check they're all accounted for.
-            extras = Link_GetAllScriptParamsDests("Extra", self);
-            trols = Link_GetAllScriptParamsDests("Trol", self);
-            trols = Link_CollectPatrolPath(trols);
-            if (extras.len() == 0) {
-                print("EXTRA CTL DEATH: no extras.");
-                Object.Destroy(self);
-                return;
-            }
-            if (trols.len() != 14) {
-                // Needs to be 2x as many as performer round trol points
-                // so we can space out the extras roughly evenly
-                print("EXTRA CTL DEATH: incorrect number of trols.");
-                Object.Destroy(self);
-                return;
-            }
-
-            if (DEBUG_GETONWITHIT) {
-                foreach (extra in extras) {
-                    Object.AddMetaProperty(extra, "M-GetOnWithIt");
-                }
-            }
-        }
-    }
 
     // ---- Messages from the master for the whole ritual
 
@@ -1092,8 +1074,9 @@ class RitualExtraController extends Controller
         return closest;
     }
 }
+*/
 
-class RitualExtra extends Controlled
+class RitualExtra
 {
     // ---- Messages from the controller
 
@@ -1448,94 +1431,10 @@ class RitualLazyExtra extends SqRootScript
     }
 }
 
-
+/*
 class RitualFinaleController extends Controller
 {
-    performer_ctl = 0;
-    extra_ctl = 0;
-    victim_ctl = 0;
-    performer = 0;
-    extras = [];
-    victim = 0;
-    gores = [];
-    down_trols = [];
-    round_trols = [];
-    conv_perfwait = 0;
-    conv_celebs = [];
-    // FIXME: gonna need a bunch of particles too, and the prophet!
     waiting_for_extras = 9999;
-
-    function OnSim()
-    {
-        if (message().starting) {
-            // Get linked entities and check they're all accounted for.
-            performer_ctl = Link_GetScriptParamsDest("PerformerCtl", self);
-            extra_ctl = Link_GetScriptParamsDest("ExtraCtl", self);
-            victim_ctl = Link_GetScriptParamsDest("VictimCtl", self);
-            down_trols = Link_GetAllScriptParamsDests("Trol", self);
-            conv_perfwait = Link_GetScriptParamsDest("ConvPerfWait", self);
-            conv_celebs = Link_GetAllScriptParamsDests("ConvCeleb", self);
-            if (performer_ctl == 0) {
-                print("FINALE CTL DEATH: no performer_ctl.");
-                Object.Destroy(self);
-                return;
-            }
-            if (extra_ctl == 0) {
-                print("FINALE CTL DEATH: no extra_ctl.");
-                Object.Destroy(self);
-                return;
-            }
-            if (victim_ctl == 0) {
-                print("FINALE CTL DEATH: no victim_ctl.");
-                Object.Destroy(self);
-                return;
-            }
-            if (down_trols.len() != 7) {
-                print("FINALE CTL DEATH: incorrect number of down_trols: " + down_trols.len());
-                Object.Destroy(self);
-                return;
-            }
-            if (conv_perfwait == 0) {
-                print("FINALE CTL DEATH: no conv_perfwait.");
-                Object.Destroy(self);
-                return;
-            }
-            if (conv_celebs.len() != 7) {
-                print("FINALE CTL DEATH: incorrect number of conv_celebs: " + conv_celebs.len());
-                Object.Destroy(self);
-                return;
-            }
-
-            // Like a sneaksie thiefsie taffer, we reaches out and steals
-            // all the links from the other controllers
-            performer = Link_GetScriptParamsDest("Performer", performer_ctl);
-            round_trols = Link_GetAllScriptParamsDests("Round", performer_ctl);
-            extras = Link_GetAllScriptParamsDests("Extra", extra_ctl);
-            victim = Link_GetScriptParamsDest("Victim", victim_ctl);
-            gores = Link_GetAllScriptParamsDests("Gore", victim_ctl);
-            if (performer == 0) {
-                print("FINALE CTL DEATH: no performer.");
-                Object.Destroy(self);
-                return;
-            }
-            if (round_trols.len() != 7) {
-                print("FINALE CTL DEATH: incorrect number of round_trols.");
-                Object.Destroy(self);
-                return;
-            }
-            // Don't care how many extras there are, we'll just use them all.
-            if (victim == 0) {
-                print("FINALE CTL DEATH: no victim.");
-                Object.Destroy(self);
-                return;
-            }
-            if (gores.len() != 7) {
-                print("FINALE CTL DEATH: incorrect number of gores.");
-                Object.Destroy(self);
-                return;
-            }
-        }
-    }
 
     function OnRitualEnd()
     {
@@ -1785,3 +1684,4 @@ class RitualFinaleController extends Controller
     }
 
 }
+*/

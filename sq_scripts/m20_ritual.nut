@@ -1515,16 +1515,17 @@ class RitualFinaleController extends Controller
         }
 
         // Performer stays entranced, but now moves at normal speed.
-        Object.AddMetaProperty(performer, "M-RitualExtraTrance");
+        Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
 
         // Ignore any extras that are dead or busy.
         DiscardUnavailableExtras();
 
         // Make sure the extras don't patrol or get distracted anymore.
+        // Have to also stop being lazy, so its alert cap won't override the trance's one.
         foreach (extra in extras) {
             SendMessage(extra, "StopBeingLazy");
             SendMessage(extra, "StopPatrolling");
-            Object.AddMetaProperty(extra, "M-RitualExtraTrance");
+            Object.AddMetaProperty(extra, "M-RitualFinaleTrance");
         }
 
         // The performer should be already in place, but send all available

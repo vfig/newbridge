@@ -3,6 +3,8 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
+const DEBUG_GETONWITHIT = false;
+const DEBUG_SKIPTOTHEEND = true;
 
 class Controlled extends SqRootScript
 {
@@ -101,11 +103,7 @@ class RitualMasterController extends Controller
     // FIXME: might in fact want to adjust time warp for Normal difficulty
     // FIXME: If the stages are changed, also need to adjust the Ritual tags in the conv schema.
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
-
-    // FIXME: shortcut for working on the finale
-    stages = [6]; 
-//    stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
-
+    stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
     //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
 
     // Status of the ritual
@@ -116,15 +114,18 @@ class RitualMasterController extends Controller
 
     // FIXME: need to handle the various ways the ritual can be interrupted too, and stop the script then.
 
+    function OnBeginScript()
+    {
+        if (DEBUG_SKIPTOTHEEND) {
+            stages = [6];
+        }
+    }
+
     function OnTurnOn()
     {
         // FIXME: check GetData for status
         if (status == eRitualStatus.kRitualNotStarted) {
             Begin();
-        } else {
-            // FIXME: for testing only:
-            End();
-            // Abort();
         }
     }
 
@@ -182,8 +183,8 @@ class RitualMasterController extends Controller
             // Time for a grand finale before failing the mission.
             Finale();
 
-            // print("RITUAL DEATH: Beware! The Prophet has returned!");
-            // Object.Destroy(self);
+            print("RITUAL DEATH: Beware! The Prophet has returned!");
+            Object.Destroy(self);
         }
     }
 
@@ -406,6 +407,17 @@ class RitualPerformer extends Controlled
             Property.Set(dagger, "HasRefs", "", true);
         }
     }
+
+    function OnRipAndTear()
+    {
+        // Pick up the pound of flesh and make it visible.
+        local gore = Link_GetScriptParamsDest("PoundOfFlesh", self);
+        if (gore != 0) {
+            Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
+        }
+        // Let the controller know.
+        PunchUp("PerformerRipAndTear", gore);
+    }
 }
 
 
@@ -485,8 +497,9 @@ class RitualPerformerController extends Controller
 //            print("PERFORMER CTL: Starting trance");
             Object.AddMetaProperty(performer, "M-RitualTrance");
 
-            // FIXME: for testing only
-            Object.AddMetaProperty(performer, "M-GetOnWithIt");
+            if (DEBUG_GETONWITHIT) {
+                Object.AddMetaProperty(performer, "M-GetOnWithIt");
+            }
         }
     }
 
@@ -509,11 +522,9 @@ class RitualPerformerController extends Controller
             SendMessage(down, "TurnOff");
         }
 
-        // Performer doesn't patrol anymor (but remains entranced).
+        // Performer doesn't patrol anymore.
+        Object.RemoveMetaProperty(performer, "M-RitualTrance");
         Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-
-        // FIXME: make the performer play a victory conversation. Maybe she can do the spinny dance!!
-        // eh, the finale controller can handle this.
     }
 
     function OnRitualAbort()
@@ -805,27 +816,17 @@ class RitualVictimController extends Controller
 
     // ---- Messages from the master for the whole ritual
 
-    function OnRitualBegin()
-    {
-    }
+    // function OnRitualBegin()
+    // {
+    // }
 
-    function OnRitualEnd()
-    {
-        /* FIXME - this doesn't happen on ritual end now, but only when
-           the finale controller commands! */
-        /*
-        // Destroy the victim, and bring out the gores
-        Object.Destroy(victim);
-        foreach (gore in gores) {
-            Object.RemoveMetaProperty(gore, "M-NotHere");
-        }
+    // function OnRitualEnd()
+    // {
+    // }
 
-        */
-    }
-
-    function OnRitualAbort()
-    {
-    }
+    // function OnRitualAbort()
+    // {
+    // }
 }
 
 
@@ -938,9 +939,10 @@ class RitualExtraController extends Controller
                 return;
             }
 
-            // FIXME: for testing only
-            foreach (extra in extras) {
-                Object.AddMetaProperty(extra, "M-GetOnWithIt");
+            if (DEBUG_GETONWITHIT) {
+                foreach (extra in extras) {
+                    Object.AddMetaProperty(extra, "M-GetOnWithIt");
+                }
             }
         }
     }
@@ -995,11 +997,10 @@ class RitualExtraController extends Controller
     function OnExtraPatrolPoint()
     {
         // They suddenly get a desire not to patrol anymore, but
-        // instead to face the altar
+        // instead to face the altar (because their idle origin
+        // tells them to do that).
         local extra = message().from;
         SendMessage(extra, "StopPatrolling");
-
-        // FIXME: handle the facing bit
     }
 
     function OnExtraBrainDead()
@@ -1106,7 +1107,7 @@ class RitualExtra extends Controlled
     function OnRunTo()
     {
         local trol = message().data;
-        SetIdleOrigin(trol);
+        AI_SetIdleOrigin(self, trol);
         AI.MakeGotoObjLoc(self, trol, eAIScriptSpeed.kFast, eAIActionPriority.kHighPriorityAction);
     }
 
@@ -1123,8 +1124,6 @@ class RitualExtra extends Controlled
         if (gore != 0) {
             Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
-        // Let the controller know.
-        PunchUp("ExtraRipAndTear", gore);
     }
 
     // ---- Messages from the AI
@@ -1200,16 +1199,8 @@ class RitualExtra extends Controlled
 
             // We also want this to be our idle spot, so we'll wander back here
             // if we were alerted, and calmed down in between rounds.
-            SetIdleOrigin(trol);
+            AI_SetIdleOrigin(self, trol);
         }
-    }
-
-    function SetIdleOrigin(obj)
-    {
-        local pos = Object.Position(obj);
-        local facing = floor(Object.Facing(obj).z + 0.5).tointeger();
-        Property.Set(self, "AI_IdleOrgn", "Original Location", pos);
-        Property.Set(self, "AI_IdleOrgn", "Original Facing", facing);
     }
 }
 
@@ -1222,6 +1213,7 @@ class RitualLazyExtra extends SqRootScript
     // length of the whole ritual.
 
 // FIXME: tweak these times when playtesting
+// FIXME: maybe even make these times vary by difficulty?
 
     // Minimum time (in seconds) to investigate.
     kInvestigateMinAge = 10.0;
@@ -1239,6 +1231,13 @@ class RitualLazyExtra extends SqRootScript
 
         // Start the tweq.
         Property.Set(self, "StTweqBlink", "AnimS", 1);
+    }
+
+    function OnStopBeingLazy()
+    {
+        // Get rid of the alert cap, and stop being lazy now.
+        Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
+        Property.Remove(self, "AI_AlertCap");
     }
 
     function OnTweqComplete()
@@ -1280,13 +1279,13 @@ class RitualLazyExtra extends SqRootScript
             // Find out why we're investigating.
             local awareness_link = Link.GetOne("AIAwareness", self, LinkDest(invest_link));
             if (awareness_link != 0) {
-                local age = (GetTime() - LinkLastContactTime(awareness_link));
+                local age = (GetTime() - Awareness_LastContactTime(awareness_link));
                 if (age < kInvestigateMinAge) {
                     // Let the investigation continue.
-                    //print("LAZINESS: " + Object_Description(self) + " continuing fresh (" + age + "s) investigation: " + Link_Description(invest_link));
+                    //print("LAZINESS: " + Object_Description(self) + " continuing fresh (" + age + "s) investigation: " + Awareness_Description(invest_link));
                     return;
                 } else {
-                    //print("LAZINESS: " + Object_Description(self) + " investigation is getting old (" + age + "s): " + Link_Description(invest_link));
+                    //print("LAZINESS: " + Object_Description(self) + " investigation is getting old (" + age + "s): " + Awareness_Description(invest_link));
                 }
             } else {
                 //print("LAZINESS: " + Object_Description(self) + " has no awareness link for its investigation.");
@@ -1306,14 +1305,14 @@ class RitualLazyExtra extends SqRootScript
         foreach (link in links) {
             // Basic evidence
             local dest = LinkDest(link);
-            local level = LinkAlertLevel(link);
-            local age = (GetTime() - LinkLastContactTime(link));
+            local level = Awareness_AlertLevel(link);
+            local age = (GetTime() - Awareness_LastContactTime(link));
 
             // Derived evidence
             local is_me = (dest == self);
-            local is_hostile_team = AIHostileTeam(AITeam(self), AITeam(dest));
-            local is_same_team = (AITeam(self) == AITeam(dest));
-            local is_dead = (AIMode(dest) == eAIMode.kAIM_Dead);
+            local is_hostile_team = AI_HostileTeam(AI_Team(self), AI_Team(dest));
+            local is_same_team = (AI_Team(self) == AI_Team(dest));
+            local is_dead = (AI_Mode(dest) == eAIMode.kAIM_Dead);
             local is_low_level = (level < 2);
             local is_old = (((level == 2) && (age >= kAwarenessMaxAge2))
                 || ((level == 3) && (age >= kAwarenessMaxAge3)));
@@ -1324,39 +1323,39 @@ class RitualLazyExtra extends SqRootScript
             local conditionally_destroy = false;
             if (is_low_level) {
                 // This link isn't keeping us alerted, so ignore it.
-                //print("LAZINESS: Ignoring low level: " + Link_Description(link));
+                //print("LAZINESS: Ignoring low level: " + Awareness_Description(link));
                 ignore = true;
             } else if (is_hostile_team) {
                 if (is_old) {
                     // Guess it was just rats again.
-                    //print("LAZINESS: Destroying old (" + age + "s) hostile: " + Link_Description(link));
+                    //print("LAZINESS: Destroying old (" + age + "s) hostile: " + Awareness_Description(link));
                     destroy = true;
                 } else {
-                    //print("LAZINESS: Keeping recent (" + age + "s) hostile: " + Link_Description(link));
+                    //print("LAZINESS: Keeping recent (" + age + "s) hostile: " + Awareness_Description(link));
                 }
             } else if (is_same_team) {
                 if (is_me) {
                     if (is_old) {
                         // Well, I heard something, but that was a while ago.
-                        //print("LAZINESS: Destroying old (" + age + "s) heard: " + Link_Description(link));
+                        //print("LAZINESS: Destroying old (" + age + "s) heard: " + Awareness_Description(link));
                         destroy = true;
                     } else {
-                        //print("LAZINESS: Keeping recent (" + age + "s) heard: " + Link_Description(link));
+                        //print("LAZINESS: Keeping recent (" + age + "s) heard: " + Awareness_Description(link));
                     }
                 } else {
                     if (is_dead) {
                         // Friendly corpses aren't interesting once an investigation is over.
-                        //print("LAZINESS: Conditionally destroying friendly corpse: " + Link_Description(link));
+                        //print("LAZINESS: Conditionally destroying friendly corpse: " + Awareness_Description(link));
                         conditionally_destroy = true;
                     } else {
                         // Friends don't let friends stay angry.
-                        //print("LAZINESS: Conditionally destroying friendly: " + Link_Description(link));
+                        //print("LAZINESS: Conditionally destroying friendly: " + Awareness_Description(link));
                         conditionally_destroy = true;
                     }
                 }
             } else {
                 // Neutral team? Can they even alert you? Don't care, let's get rid of it.
-                //print("LAZINESS: Destroying neutral: " + Link_Description(link));
+                //print("LAZINESS: Destroying neutral: " + Awareness_Description(link));
                 destroy = true;
             }
 
@@ -1379,7 +1378,7 @@ class RitualLazyExtra extends SqRootScript
 
             // And destroy the conditional ones
             foreach (link in conditionally_destroy_links) {
-                //print("LAZINESS: Actually destroying conditional: " + Link_Description(link));
+                //print("LAZINESS: Actually destroying conditional: " + Awareness_Description(link));
                 Link.Destroy(link);
             }
         }
@@ -1398,38 +1397,21 @@ class RitualLazyExtra extends SqRootScript
 
     // ---- Utilities
 
-    function Link_Description(link)
+    function Awareness_Description(link)
     {
-        return ("AIAwareness (level " + LinkAlertLevel(link) + ") "
+        return ("AIAwareness (level " + Awareness_AlertLevel(link) + ") "
             + Object_Description(self) + " -> "
             + Object_Description(LinkDest(link)));
     }
 
-    function LinkAlertLevel(link)
+    function Awareness_AlertLevel(link)
     {
         return LinkTools.LinkGetData(link, "Level");
     }
 
-    function LinkLastContactTime(link)
+    function Awareness_LastContactTime(link)
     {
         return (LinkTools.LinkGetData(link, "Time last contact") / 1000.0);
-    }
-
-    function AITeam(ai)
-    {
-        return Property.Get(ai, "AI_Team");
-    }
-
-    function AIHostileTeam(team1, team2)
-    {
-        return ((team1 != eAITeam.kAIT_Neutral)
-            && (team2 != eAITeam.kAIT_Neutral)
-            && (team1 != team2));
-    }
-
-    function AIMode(ai)
-    {
-        return Property.Get(ai, "AI_Mode", "");
     }
 }
 
@@ -1445,6 +1427,7 @@ class RitualFinaleController extends Controller
     gores = [];
     down_trols = [];
     round_trols = [];
+    conv_perfwait = 0;
     conv_celebs = [];
     // FIXME: gonna need a bunch of particles too, and the prophet!
     waiting_for_extras = 9999;
@@ -1457,6 +1440,7 @@ class RitualFinaleController extends Controller
             extra_ctl = Link_GetScriptParamsDest("ExtraCtl", self);
             victim_ctl = Link_GetScriptParamsDest("VictimCtl", self);
             down_trols = Link_GetAllScriptParamsDests("Trol", self);
+            conv_perfwait = Link_GetScriptParamsDest("ConvPerfWait", self);
             conv_celebs = Link_GetAllScriptParamsDests("ConvCeleb", self);
             if (performer_ctl == 0) {
                 print("FINALE CTL DEATH: no performer_ctl.");
@@ -1478,8 +1462,12 @@ class RitualFinaleController extends Controller
                 Object.Destroy(self);
                 return;
             }
-            // FIXME: should be 7 once the performer gets in on the fun
-            if (conv_celebs.len() != 6) {
+            if (conv_perfwait == 0) {
+                print("FINALE CTL DEATH: no conv_perfwait.");
+                Object.Destroy(self);
+                return;
+            }
+            if (conv_celebs.len() != 7) {
                 print("FINALE CTL DEATH: incorrect number of conv_celebs: " + conv_celebs.len());
                 Object.Destroy(self);
                 return;
@@ -1526,13 +1514,15 @@ class RitualFinaleController extends Controller
             Link_CreateScriptParams("Finale", self, extra);
         }
 
-        // FIXME: make sure the performer stays in place
+        // Performer stays entranced, but now moves at normal speed.
+        Object.AddMetaProperty(performer, "M-RitualExtraTrance");
 
         // Ignore any extras that are dead or busy.
         DiscardUnavailableExtras();
 
         // Make sure the extras don't patrol or get distracted anymore.
         foreach (extra in extras) {
+            SendMessage(extra, "StopBeingLazy");
             SendMessage(extra, "StopPatrolling");
             Object.AddMetaProperty(extra, "M-RitualExtraTrance");
         }
@@ -1550,9 +1540,16 @@ class RitualFinaleController extends Controller
 
     function DiscardUnavailableExtras()
     {
-        // FIXME: filter extras to only available. Permanently, cause any that
-        // are dead or busy now aren't coming back in the finale. If they
-        // wanted to take part, they should've stayed alive, now, shouldn't they?
+        // Filter out dead or KO'd extras cause they aren't coming
+        // back in the finale. If they wanted to take part, they
+        // should've stayed alive, now, shouldn't they?
+        local available_extras = [];
+        foreach (extra in extras) {
+            if (AI_Mode(extra) != eAIMode.kAIM_Dead) {
+                available_extras.append(extra);
+            }
+        }
+        extras = available_extras;
 
         // FIXME: maybe ones that aren't dead should just get M-GetOnWithIt and
         // hurry back sooner? (Make sure to remove it when they arrive!)
@@ -1571,14 +1568,16 @@ class RitualFinaleController extends Controller
         // For whatever mad reason, it's vertex 6 that's the performer's place
         // at the finale. Too late to renumber everything now. Well, it's not
         // really, but I'm too lazy. Anyway the performer needs some head.
-        foreach (i, gore in gores) {
-            print("" + i + ": " + Object_Description(gore));
-        }
         Link_CreateScriptParams("PoundOfFlesh", performer, gores[6]);
 
-        // The extras get the other chunks of meat and positions. We'll take
-        // whatever gore is leftover
-        PickGores();
+        // Make sure di Rupo stays around at the altar while the extras get
+        // here. We do that by giving her a new conversation to deal with.
+        AI_SetIdleOrigin(performer, performer);
+        AI.StartConversation(conv_perfwait);
+
+        // The extras get the other chunks of meat and positions. We'll get
+        // whatever gore is leftover for the explosion.
+        PickGoresAndRunToAltar();
     }
 
     function ContinueWhenAllExtrasReady()
@@ -1588,7 +1587,7 @@ class RitualFinaleController extends Controller
             return;
         }
 
-        // Point of no return
+        // Point of no return--well, that's in just a moment when we RIP AND TEAR!
         print("FINALE CTL: All extras ready.");
 
         // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
@@ -1631,7 +1630,7 @@ class RitualFinaleController extends Controller
         }
     }
 
-    function PickGores()
+    function PickGoresAndRunToAltar()
     {
         local extra_trols = down_trols.slice(0, 6);
         local extra_gores = gores.slice(0, 6);
@@ -1697,9 +1696,6 @@ class RitualFinaleController extends Controller
 
     // ---- Messages from performers, extras etc.
 
-    // FIXME: will we even get these messages? Will have to link ourselves to all our
-    // stolen linksies so we get PunchUps from them--also not from their controllers.
-
     function OnPerformerBrainDead()
     {
         print("FINALE CTL: " + Object_Description(performer) + " is brain dead.");
@@ -1731,19 +1727,28 @@ class RitualFinaleController extends Controller
 
     function OnExtraRipAndTear()
     {
-        // The first one to grab their chunk of meat turns the victim into giblets
+        // Handle it the same as the perfomer. Too late to stop now (unless I
+        // implement the last-minute reprieve).
+        OnPerformerRipAndTear();
+    }
+
+    function OnPerformerRipAndTear()
+    {
         if (victim != 0) {
+            // This is the real point of no return
+            print("FINALE CTL: Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
+
+            // The performer grabs their chunk of meat and everyone turns the victim into giblets
             foreach (gore in gores) {
                 Object.RemoveMetaProperty(gore, "M-NotHere");
             }
             Object.Destroy(victim);
             victim = 0;
-            ExplodeVictim();
 
             // FIXME: a fountain of blood would be good here. A small, decorous one, not an Army of
             // Darkness one. Though now that you mention it....
 
-            // FIXME: Don't forget the Performer has to rip and tear the head, too!
+            ExplodeVictim();
         }
     }
 

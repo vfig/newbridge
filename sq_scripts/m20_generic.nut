@@ -190,6 +190,31 @@ Object_RemoveFrobAction <- function(obj, action, where = eFrobWhere.kFrobWorld)
     Object_SetFrobAction(obj, frob, where);
 }
 
+AI_HostileTeam <- function(team1, team2)
+{
+    return ((team1 != eAITeam.kAIT_Neutral)
+        && (team2 != eAITeam.kAIT_Neutral)
+        && (team1 != team2));
+}
+
+AI_Mode <- function(ai)
+{
+    return Property.Get(ai, "AI_Mode", "");
+}
+
+AI_SetIdleOrigin <- function(ai, target)
+{
+    local pos = Object.Position(target);
+    local facing = floor(Object.Facing(target).z + 0.5).tointeger();
+    Property.Set(ai, "AI_IdleOrgn", "Original Location", pos);
+    Property.Set(ai, "AI_IdleOrgn", "Original Facing", facing);
+}
+
+AITeam <- function(ai)
+{
+    return Property.Get(ai, "AI_Team", "");
+}
+
 class WhenPlayerCarrying extends SqRootScript
 {
     /* Sends "PlayerPickedUp" and "PlayerDropped" when the player picks up

@@ -625,7 +625,6 @@ class GoalDamnKeepers extends SqRootScript
 
 /* -------- The Ritual -------- */
 
-// FIXME: this'll have to go: the ritual goals should be triggered by the ritual master controller
 class GoalStopTheRitualByForce extends SqRootScript
 {
     /* Put this on the ritual-performing Lady di Rupo. Fires if she is knocked out or killed. */
@@ -640,7 +639,6 @@ class GoalStopTheRitualByForce extends SqRootScript
 }
 
 
-// FIXME: this'll have to chanhe: the ritual goals should be triggered by the ritual master controller
 class GoalStopTheRitualByTheft extends WhenPlayerCarrying
 {
     /* Put this on the ritual versions of The Anax and The Prophet's Hand. Fires if they're picked up by the player. */

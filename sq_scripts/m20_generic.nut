@@ -529,3 +529,28 @@ class ConversationKiller extends SqRootScript
         }
     }
 }
+
+
+/* Normally particles won't render on an object that's contained--even if the
+   object ends up rendered after all, on an Alt or Belt location. For this hack,
+   create a clone of the particles, and ParticleAttachement it to a rendered,
+   fully transparent marker, that is then DetailAttachement linked to the AI
+   with the belt. This script then destroys those two hack objects when this
+   thing is pickpocketed. */
+class HackBeltParticles extends WhenPlayerCarrying
+{
+    function OnPlayerPickedUp()
+    {
+        local detail_link = Link.GetOne("~DetailAttachement", self);
+        if (detail_link != 0) {
+            local hack_marker = LinkDest(detail_link);
+            local particle_link = Link.GetOne("~ParticleAttachement", hack_marker);
+            if (particle_link != 0) {
+                // We've identified the hack, kill them all!
+                local particles = LinkDest(particle_link);
+                Object.Destroy(particles);
+                Object.Destroy(hack_marker);
+            }
+        }
+    }
+}

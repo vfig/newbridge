@@ -190,6 +190,11 @@ Object_RemoveFrobAction <- function(obj, action, where = eFrobWhere.kFrobWorld)
     Object_SetFrobAction(obj, frob, where);
 }
 
+AI_AlertLevel <- function(ai)
+{
+    return Property.Get(self, "AI_Alertness", "Level");
+}
+
 AI_HostileTeam <- function(team1, team2)
 {
     return ((team1 != eAITeam.kAIT_Neutral)

@@ -1242,27 +1242,17 @@ class RitualLazyExtra extends SqRootScript
 
     function OnBeginScript()
     {
-        print("LAZINESS: " + Object_Description(self) + " is lazy.");
-
-        // Put on an alert cap (with default/inherited values) so we can hack it later.
-        Property.Add(self, "AI_AlertCap");
+        //print("LAZINESS: " + Object_Description(self) + " is lazy.");
 
         // Start the tweq.
         Property.Set(self, "StTweqBlink", "AnimS", 1);
-    }
-
-    function OnStopBeingLazy()
-    {
-        // Get rid of the alert cap, and stop being lazy now.
-        Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
-        Property.Remove(self, "AI_AlertCap");
     }
 
     function OnTweqComplete()
     {
         // Don't try to stop looking if we're busy attacking!
         if (! Link.AnyExist("AIAttack", self)) {
-            //print("LAZINESS: " + Object_Description(self) + " is still lazy.");
+            //print("LAZINESS: " + Object_Description(self) + " is at alert " + AI_AlertLevel(self) + " and still lazy.");
             ExpireAwareness();
         } else {
             //print("LAZINESS: " + Object_Description(self) + " is busy attacking something.");
@@ -1272,20 +1262,18 @@ class RitualLazyExtra extends SqRootScript
     function OnAlertness()
     {
         if (message().level < 2) {
-            print("LAZINESS: " + Object_Description(self) + " has calmed down. Back to work.");
+            //print("LAZINESS: " + Object_Description(self) + " has calmed down. Back to work.");
             // Laziness worked, we can stop checking that we're lazy enough.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
-            Property.Remove(self, "AI_AlertCap");
         }
     }
 
     function OnAIModeChange()
     {
         if (message().mode == eAIMode.kAIM_Dead) {
-            print("LAZINESS: " + Object_Description(self) + " is brain dead. Back to work (or not).");
+            //print("LAZINESS: " + Object_Description(self) + " is brain dead. Back to work (or not).");
             // We're brain dead, stop caring.
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
-            Property.Remove(self, "AI_AlertCap");
         }
     }
 
@@ -1325,6 +1313,7 @@ class RitualLazyExtra extends SqRootScript
             local dest = LinkDest(link);
             local level = Awareness_AlertLevel(link);
             local age = (GetTime() - Awareness_LastContactTime(link));
+            local have_los = Awareness_HaveLOS(link);
 
             // Derived evidence
             local is_me = (dest == self);
@@ -1338,6 +1327,7 @@ class RitualLazyExtra extends SqRootScript
             // Draw conclusions:
             local ignore = false;
             local destroy = false;
+            local expire = false;
             local conditionally_destroy = false;
             if (is_low_level) {
                 // This link isn't keeping us alerted, so ignore it.
@@ -1363,8 +1353,15 @@ class RitualLazyExtra extends SqRootScript
                 } else {
                     if (is_dead) {
                         // Friendly corpses aren't interesting once an investigation is over.
-                        //print("LAZINESS: Conditionally destroying friendly corpse: " + Awareness_Description(link));
-                        conditionally_destroy = true;
+                        if (have_los) {
+                            // But if it's still in sight, there's not much we can do,
+                            // they *will* stay alert despite our best efforts.
+                            //print("LAZINESS: Friendly corpse is in sight, leaving it alone: " + Awareness_Description(link));
+                        } else {
+                            // But keep the link around so they don't forget and start investigating it again.
+                            //print("LAZINESS: Expiring friendly corpse: " + Awareness_Description(link));
+                            expire = true;
+                        }
                     } else {
                         // Friends don't let friends stay angry.
                         //print("LAZINESS: Conditionally destroying friendly: " + Awareness_Description(link));
@@ -1382,6 +1379,8 @@ class RitualLazyExtra extends SqRootScript
                 // Well, what did you expect?
             } else if (destroy) {
                 Link.Destroy(link);
+            } else if (expire) {
+                Awareness_Expire(link);
             } else if (conditionally_destroy) {
                 conditionally_destroy_links.append(link);
             } else {
@@ -1402,14 +1401,15 @@ class RitualLazyExtra extends SqRootScript
         }
 
         if (keep_count == 0) {
-            print ("LAZINESS CONCLUSION: No reason for " + Object_Description(self) + " to stay alert.");
+            //print("LAZINESS CONCLUSION: No reason for " + Object_Description(self) + " to stay alert.");
             // HACK: sometimes despite all the awareness fudging, sometimes they don't calm
-            // down soon enough. So let's put a cap on until they do.
-            Property.Set(self, "AI_AlertCap", "Max level", 1);
-            Property.Set(self, "AI_AlertCap", "Min level", 0);
-            Property.Set(self, "AI_AlertCap", "Min relax after peak", 1);
+            // down soon enough. So let's force them to for now.
+            // But if there's a body sitting right in front of them, they'll stay constantly on the
+            // alert no matter what. Not much I can do about that.
+            Property.Set(self, "AI_Alertness", "Level", 1);
+            Property.Set(self, "AI_Alertness", "Peak", 1);
         } else {
-            print ("LAZINESS CONCLUSION: " + Object_Description(self) + " should stay alert, there's trouble out there.");
+            //print("LAZINESS CONCLUSION: " + Object_Description(self) + " should stay alert, there's trouble out there.");
         }
     }
 
@@ -1430,6 +1430,21 @@ class RitualLazyExtra extends SqRootScript
     function Awareness_LastContactTime(link)
     {
         return (LinkTools.LinkGetData(link, "Time last contact") / 1000.0);
+    }
+
+    function Awareness_HaveLOS(link)
+    {
+        local flags = LinkTools.LinkGetData(link, "Flags");
+        return ((flags & 0x08) != 0); // "HaveLOS"
+    }
+
+    function Awareness_Expire(link)
+    {
+        // Anything more than two minutes ago is old news.
+        local a_long_time_ago = (floor((GetTime() - 120)).tointeger() * 1000);
+        LinkTools.LinkSetData(link, "Level enter time", a_long_time_ago);
+        LinkTools.LinkSetData(link, "Time last contact", a_long_time_ago);
+        LinkTools.LinkSetData(link, "Last true contact", a_long_time_ago);
     }
 }
 
@@ -1539,9 +1554,7 @@ class RitualFinaleController extends Controller
         DiscardUnavailableExtras();
 
         // Make sure the extras don't patrol or get distracted anymore.
-        // Have to also stop being lazy, so its alert cap won't override the trance's one.
         foreach (extra in extras) {
-            SendMessage(extra, "StopBeingLazy");
             SendMessage(extra, "StopPatrolling");
             Object.AddMetaProperty(extra, "M-RitualFinaleTrance");
         }

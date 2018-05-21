@@ -789,13 +789,14 @@ class RitualVictimController extends Controller
 {
     victim = 0;
     gores = [];
-
+    blood = 0;
 
     function OnSim()
     {
         if (message().starting) {
             victim = Link_GetScriptParamsDest("Victim", self);
             gores = Link_GetAllScriptParamsDests("Gore", self);
+            blood = Link_GetScriptParamsDest("Blood", self);
             if (victim == 0) {
                 print("VICTIM CTL DEATH: no victim.");
                 Object.Destroy(self);
@@ -803,6 +804,11 @@ class RitualVictimController extends Controller
             }
             if (gores.len() != 7) {
                 print("VICTIM CTL DEATH: incorrect number of gores.");
+                Object.Destroy(self);
+                return;
+            }
+            if (blood == 0) {
+                print("VICTIM CTL DEATH: no blood.");
                 Object.Destroy(self);
                 return;
             }
@@ -827,6 +833,18 @@ class RitualVictimController extends Controller
     // function OnRitualAbort()
     // {
     // }
+
+    // ---- Messages for the finale
+
+    function OnDismember()
+    {
+        // Get rid of the victim, show the gore, and a splash of blood
+        SendMessage(blood, "TurnOn");
+        foreach (gore in gores) {
+            Object.RemoveMetaProperty(gore, "M-NotHere");
+        }
+        Object.Destroy(victim);
+    }
 }
 
 
@@ -1552,11 +1570,16 @@ class RitualFinaleController extends Controller
         }
         extras = available_extras;
 
-        // FIXME: maybe ones that aren't dead should just get M-GetOnWithIt and
-        // hurry back sooner? (Make sure to remove it when they arrive!)
-        // If the player's under attack or hiding, this would draw their attention
-        // to the ritual and their failure, which would definitely be better than a
-        // sudden "Mission failed".
+        // FIXME: 
+        //
+        // PROBABLY should refactor this to be all under the one controller, with
+        // more explicit stages, and debug-flags to control specific variations
+        // (performer death, extra death, etc).
+        //
+        // More importantly, maybe the strobes should start and the extras run to
+        // the altar just as the performer begins walking the last down? Gives a
+        // little more time for that last minute "oh shit I need to stop this"
+        // reaction.
         //
         // IDEEEEEEAAAAAAAAAA: at this point the player should have a last-ditch
         // chance to stop the ritual--by dispatching di Rupo. If they hurry, or
@@ -1740,14 +1763,9 @@ class RitualFinaleController extends Controller
             print("FINALE CTL: Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
 
             // The performer grabs their chunk of meat and everyone turns the victim into giblets
-            foreach (gore in gores) {
-                Object.RemoveMetaProperty(gore, "M-NotHere");
-            }
-            Object.Destroy(victim);
+            SendMessage(victim_ctl, "Dismember");
             victim = 0;
 
-            // FIXME: a fountain of blood would be good here. A small, decorous one, not an Army of
-            // Darkness one. Though now that you mention it....
 
             ExplodeVictim();
         }

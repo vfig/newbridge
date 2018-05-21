@@ -266,12 +266,12 @@ concept hmt12200 7	//Reenacts Opera saga
 concept hmt122 7		//"I spy you little fish..."
 
 
-// M20 CONVERSATIONS
+// M20 CONVERSATIONS AND SUCH
 concept nbconv3 10  //"Lady di Rupo, I presume?..."
 concept nbconv4 10  //"Garrett! What have you done?..."
 concept nbconv5 10  // Ritual incantations
 concept nbconv7 4   //"Heathens now, are we?..."
-
+concept nbritcel 7  // Ritual celebration noises
 
 
 ////////

@@ -1146,13 +1146,14 @@ class RitualExtra extends Controlled
 
     function OnRipAndTear()
     {
-        // Move the pound of flesh to our location
+        // Pick up the pound of flesh and make it visible.
         local gore = Link_GetScriptParamsDest("PoundOfFlesh", self);
-        print("gore: " + Object_Description(gore));
+        Object.RemoveMetaProperty(gore, "M-NotHere");
         if (gore != 0) {
-            local result = Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
-            print("Result: " + result);
+            Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
+        // Let the controller know.
+        PunchUp("ExtraRipAndTear", gore);
     }
 
     // ---- Messages from the AI
@@ -1609,6 +1610,9 @@ class RitualFinaleController extends Controller
 
         // Point of no return
         print("FINALE CTL: All extras ready.");
+
+        // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
+        // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
     }
 
     // ---- Utilities
@@ -1656,6 +1660,26 @@ class RitualFinaleController extends Controller
         return closest_index;
     }
 
+    function MarkExtraAsReady(extra)
+    {
+        --waiting_for_extras;
+        ContinueWhenAllExtrasReady();
+    }
+
+    function MarkExtraAsUnavailable(extra)
+    {
+        // Move this extra's gore back to our control.
+        local link = Link_GetScriptParams("PoundOfFlesh", extra);
+        if (link != 0) {
+            local gore = LinkDest(link);
+            Link.Destroy(link);
+            Link_CreateScriptParams("PoundOfFlesh", self, gore);
+        }
+
+        --waiting_for_extras;
+        ContinueWhenAllExtrasReady();
+    }
+
     // ---- Messages from performers, extras etc.
 
     // FIXME: will we even get these messages? Will have to link ourselves to all our
@@ -1690,23 +1714,18 @@ class RitualFinaleController extends Controller
         MarkExtraAsUnavailable(extra);
     }
 
-    function MarkExtraAsReady(extra)
+    function OnExtraRipAndTear()
     {
-        --waiting_for_extras;
-        ContinueWhenAllExtrasReady();
-    }
+        // The first one to grab their chunk of meat removes the victim too
+        if (victim != 0) {
+            Object.Destroy(victim);
+            victim = 0;
 
-    function MarkExtraAsUnavailable(extra)
-    {
-        // Move this extra's gore back to our control.
-        local link = Link_GetScriptParams("PoundOfFlesh", extra);
-        if (link != 0) {
-            local gore = LinkDest(link);
-            Link.Destroy(link);
-            Link_CreateScriptParams("PoundOfFlesh", self, gore);
+            // FIXME: a fountain of blood would be good here. A small, decorous one, not an Army of
+            // Darkness one. Though now that you mention it....
+
+            // FIXME: Don't forget the Performer has to rip and tear the head, too!
         }
-
-        --waiting_for_extras;
-        ContinueWhenAllExtrasReady();
     }
+
 }

@@ -16,6 +16,20 @@ Link_GetOneScriptParams <- function(data = "", from = 0, to = 0)
     return 0;
 }
 
+/* Get all ScriptParams links with the given data */
+Link_GetAllScriptParams <- function(data = "", from = 0, to = 0)
+{
+    local links = Link.GetAll("ScriptParams", from, to);
+    local matching_links = [];
+    foreach (link in links) {
+        local link_data = LinkTools.LinkGetData(link, "");
+        if (link_data == data) {
+            matching_links.append(link);
+        }
+    }
+    return matching_links;
+}
+
 /* Get the ~ScriptParams link with the given data */
 Link_GetOneInverseScriptParams <- function(data = "", from = 0, to = 0)
 {
@@ -38,15 +52,8 @@ Link_GetOneParam <- function(data = "", from = 0)
 /* Get the destinations of all ScriptParams links with the given data */
 Link_GetAllParams <- function(data = "", from = 0)
 {
-    local dests = [];
-    local links = Link.GetAll("ScriptParams", from);
-    foreach (link in links) {
-        local link_data = LinkTools.LinkGetData(link, "");
-        if (link_data == data) {
-            dests.append(LinkDest(link));
-        }
-    }
-    return dests;
+    local links = Link_GetAllScriptParams(data, from);
+    return links.map(LinkDest);
 }
 
 /* Create a new ScriptParams link with the given data */

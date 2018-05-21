@@ -3,8 +3,9 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = false;
+const DEBUG_GETONWITHIT = true;
 const DEBUG_SKIPTOTHEEND = true;
+const DEBUG_DISABLESTROBES = true;
 
 // ---- Logging
 
@@ -31,7 +32,7 @@ RitualLogsEnabled <- function()
         | eRitualLog.kPerformer
         | eRitualLog.kExtra
         | eRitualLog.kVictim
-        | eRitualLog.kLighting
+//        | eRitualLog.kLighting
         | eRitualLog.kFinale
         // Contexts
 //        | eRitualLog.kPathing
@@ -69,22 +70,22 @@ RitualLog <- function(log, message)
 
 enum eRitualStatus
 {
-    kRitualNotStarted       = 0,
-    kRitualInProgress       = 1,
-    kRitualLastStage        = 2,
-    kRitualFinale           = 3,
-    kRitualEnded            = 4,
-    kRitualAborted          = 5,
+    kNotStarted       = 0,
+    kInProgress       = 1,
+    kLastStage        = 2,
+    kFinale           = 3,
+    kEnded            = 4,
+    kAborted          = 5,
 }
 
 class RitualController extends SqRootScript
 {
     /* The overall ritual runs through these statuses:
 
-        kRitualNotStarted
+        kNotStarted
             The ritual has not yet begun. Waiting for the player to get near, basically.
 
-        kRitualInProgress
+        kInProgress
             The rounds and downs are happening. The performer is in a trance, but the
             extras will react to the player pretty much as usual. While in progress,
             the following steps take place, triggered by the performer:
@@ -108,18 +109,18 @@ class RitualController extends SqRootScript
             Return:
                 The performer walks back to the vertex.
 
-        kRitualLastStage
+        kLastStage
             Di Rupo is walking down to the altar for the last time. The extras enter a
             trance and run to the altar too. Last chance for player intervention. Only
             the Pause / Down / Bless steps happen during this stage.
 
-        kRitualFinale
+        kFinale
             The Anax is torn apart, everyone celebrates, and the Prophet appears.
 
-        kRitualEnded
+        kEnded
             After the finale, there's nothing more to do.
 
-        kRitualAborted
+        kAborted
             The ritual was stopped--by the Hand being stolen, or the Anax, or di Rupo
             being KO'd or killed--and everyone gets angsty.
     */
@@ -144,7 +145,7 @@ class RitualController extends SqRootScript
             }
 
             if ((Status() == null) || (StageIndex() == null)) {
-                SetStatus(eRitualStatus.kRitualNotStarted);
+                SetStatus(eRitualStatus.kNotStarted);
                 SetStageIndex(0);
                 SetAwaitingExtras(Extras().len());
             }
@@ -197,14 +198,12 @@ class RitualController extends SqRootScript
             }
 
             // We don't care how many strobes there are, but make sure they're off to begin with
-            local strobes = Strobes();
-            foreach (strobe in strobes) {
+            foreach (strobe in Strobes()) {
                 SendMessage(strobe, "TurnOff");
             }
 
             // Make sure the gores aren't "there" initially.
-            local gores = Gores();
-            foreach (gore in gores) {
+            foreach (gore in Gores()) {
                 Object.AddMetaProperty(gore, "M-NotHere");
             }
         }
@@ -215,12 +214,12 @@ class RitualController extends SqRootScript
         Begin();
     }
 
-    // ---- The ritual begins (kRitualInProgress)
+    // ---- The ritual begins (kInProgress)
 
     function Begin()
     {
-        if (Status() == eRitualStatus.kRitualNotStarted) {
-            SetStatus(eRitualStatus.kRitualInProgress);
+        if (Status() == eRitualStatus.kNotStarted) {
+            SetStatus(eRitualStatus.kInProgress);
 
             local stage = Stage()
 
@@ -279,12 +278,13 @@ class RitualController extends SqRootScript
         local stage = Stage();
         local stage_index = StageIndex();
         if (stage_index == (stages.len() - 1)) {
-            SetStatus(eRitualStatus.kRitualLastStage);
+            SetStatus(eRitualStatus.kLastStage);
         }
         RitualLog(eRitualLog.kRitual, "Down " + stage_index + ", Stage " + stage);
 
-        if (Status() == eRitualStatus.kRitualLastStage) {
-            if (GetData("StrobeDisabled")) {
+        if (Status() == eRitualStatus.kLastStage) {
+            local strobes = Strobes();
+            if (DEBUG_DISABLESTROBES || (strobes.len() == 0)) {
                 RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
                 // Just turn on all the lights.
                 foreach (light in Lights()) {
@@ -341,8 +341,8 @@ class RitualController extends SqRootScript
 
     function Finale()
     {
-        if (Status() == eRitualStatus.kRitualInProgress) {
-            SetStatus(eRitualStatus.kRitualFinale);
+        if (Status() == eRitualStatus.kLastStage) {
+            SetStatus(eRitualStatus.kFinale);
             // The ritual's ended, but the show is just beginning!
             // Time for a grand finale before failing the mission.
             RitualLog(eRitualLog.kRitual, "Finale");
@@ -354,9 +354,15 @@ class RitualController extends SqRootScript
                 SendMessage(down, "TurnOff");
             }
             // Performer stays entranced, but no longer patrosl, and now moves at normal speed.
+            local performer = Performer();
             Object.RemoveMetaProperty(performer, "M-DoesPatrol");
             Object.RemoveMetaProperty(performer, "M-RitualTrance");
             Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
+
+            // Make sure di Rupo stays around at the altar while the extras get
+            // here. We do that by giving her a new conversation to deal with.
+            AI_SetIdleOrigin(performer, performer);
+            AI.StartConversation(PerfWaitConv());
 
             // Ignore any extras that are dead or busy.
             // FIXME: does this work as a mutating function like this?
@@ -372,16 +378,10 @@ class RitualController extends SqRootScript
             // extras to the altar.
             // FIXME: of course we want that to be last stage, but that's post-refactor
     
-            local performer = Performer();
             // For whatever mad reason, it's vertex 6 that's the performer's place
             // at the finale. Too late to renumber everything now. Well, it's not
             // really, but I'm too lazy. Anyway the performer needs some head.
-            Link_CreateScriptParams("PoundOfFlesh", performer, gores[6]);
-
-            // Make sure di Rupo stays around at the altar while the extras get
-            // here. We do that by giving her a new conversation to deal with.
-            AI_SetIdleOrigin(performer, performer);
-            AI.StartConversation(PerfWaitConv());
+            Link_CreateScriptParams("PoundOfFlesh", performer, Gores()[6]);
 
             // The extras get the other chunks of meat and positions. Any gore
             // that is unclaimed is for the explosion.
@@ -389,8 +389,7 @@ class RitualController extends SqRootScript
 
             // Now we wait for them all to tell us that they're ready (or
             // otherwise become unavailable).
-            //?? ContinueWhenAllExtrasReady();
-            //?? waiting_for_extras = extras.len();
+            ContinueWhenAllExtrasReady();
         }
     }
 
@@ -433,7 +432,7 @@ class RitualController extends SqRootScript
         local extras = Extras();
         local down_trols = DownTrols().slice(0, 6);
         local gores = Gores().slice(0, 6);
-        local round_trols = RoundTrols().slice(0, 6)
+        local round_trols = PerfRoundTrols().slice(0, 6)
         foreach (extra in extras) {
             // Find the closest gore (well, the down points aren't evenly spread,
             // so find the closest trol_ritual_roundX and use its index.)
@@ -475,6 +474,23 @@ class RitualController extends SqRootScript
         return closest_index;
     }
 
+    function MarkExtraAsReady(extra)
+    {
+        StopAwaitingOneExtra();
+    }
+
+    function MarkExtraAsUnavailable(extra)
+    {
+        // Move this extra's gore back to our control.
+        local link = Link_GetOneScriptParams("PoundOfFlesh", extra);
+        if (link != 0) {
+            local gore = LinkDest(link);
+            Link.Destroy(link);
+            Link_CreateScriptParams("PoundOfFlesh", self, gore);
+        }
+        StopAwaitingOneExtra();
+    }
+
     function ContinueWhenAllExtrasReady()
     {
         if (AwaitingExtras() > 0) {
@@ -484,15 +500,57 @@ class RitualController extends SqRootScript
         }
 
         // Point of no return--well, that's in just a moment when we RIP AND TEAR!
-        RitualLog(eRitualLog.kFinale,
-            "All extras ready.");
+        RitualLog(eRitualLog.kFinale, "All extras ready.");
 
         // FIXME: here we need to make sure the Anax is no longer rescuable in any possible way
         // FIXME: the Hand should have vanished in a shower of sparks when the finale began, too.
 
         // Start pulling that Anax to pieces
-        foreach (conv in conv_celebs) {
+        foreach (conv in FinaleConvs()) {
             AI.StartConversation(conv);
+        }
+    }
+
+    function TearVictimApart()
+    {
+        // The performer grabs their chunk of meat and everyone turns the victim into giblets
+        foreach (gore in Gores()) {
+            Object.RemoveMetaProperty(gore, "M-NotHere");
+        }
+        Object.Destroy(Victim());
+
+        SendMessage(BloodFX(), "TurnOn");
+    }
+
+    function ExplodeVictim()
+    {
+        // Fling body parts everywhere, why don't you?
+        local available_gores = Link_GetAllParams("PoundOfFlesh", self);
+        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
+        foreach (gore in available_gores) {
+        //for (local i = 0; i < gores.len(); i++) {
+            //local gore = gores[i];
+            // Get its nominal index, so we can figure out the appropriate angle
+            local i = gores.find(gore);
+
+            // Calculate launch vector
+            local a = z_angles[i]  * 3.14 / 180;
+            local vel = vector(cos(a), sin(a), 1);
+            vel.Normalize();
+            vel.Scale(30.0);
+
+            // Deactivate the physics controls
+            if (! Physics.ValidPos(gore)) {
+                RitualLog(eRitualLog.kFinale,
+                    "ERROR: gore " + i + " not in valid position!");
+                continue;
+            } else {
+                Property.Set(gore, "PhysControl", "Controls Active", 0);
+            }
+
+            // And launch!
+            Physics.Activate(gore);
+            Physics.SetVelocity(gore, vel);
         }
     }
 
@@ -500,7 +558,7 @@ class RitualController extends SqRootScript
 
     function End()
     {
-        SetStatus(eRitualStatus.kRitualEnded);
+        SetStatus(eRitualStatus.kEnded);
         RitualLog(eRitualLog.kRitual, "End");
         Die("Beware! The Prophet has returned!");
     }
@@ -509,10 +567,10 @@ class RitualController extends SqRootScript
 
     function Abort()
     {
-        if ((Status() == eRitualStatus.kRitualInProgress)
-            || (Status() == eRitualStatus.kRitualLastStage))
+        if ((Status() == eRitualStatus.kInProgress)
+            || (Status() == eRitualStatus.kLastStage))
         {
-            status = eRitualStatus.kRitualAborted;
+            status = eRitualStatus.kAborted;
 
             RitualLog(eRitualLog.kRitual, "Abort");
             PunchDown("RitualAbort", current_stage);
@@ -599,22 +657,25 @@ class RitualController extends SqRootScript
 
     function OnPerformerReachedTarget()
     {
-        if (Status() == eRitualStatus.kRitualInProgress) {
+        RitualLog(eRitualLog.kPerformer, "Reached target.");
+        if (Status() == eRitualStatus.kInProgress) {
             StepPause();
         }
     }
 
     function OnPerformerFacedAltar()
     {
-        if (Status() == eRitualStatus.kRitualInProgress) {
+        RitualLog(eRitualLog.kPerformer, "Faced altar.");
+        if (Status() == eRitualStatus.kInProgress) {
             StepDown();
         }
     }
 
     function OnPerformerReachedAltar()
     {
-        if ((Status() == eRitualStatus.kRitualInProgress)
-            || (Status() == eRitualStatus.kRitualLastStage))
+        RitualLog(eRitualLog.kPerformer, "Reached altar.");
+        if ((Status() == eRitualStatus.kInProgress)
+            || (Status() == eRitualStatus.kLastStage))
         {
             StepBless();
         }
@@ -622,9 +683,10 @@ class RitualController extends SqRootScript
 
     function OnPerformerFinishedBlessing()
     {
-        if (Status() == eRitualStatus.kRitualInProgress) {
+        RitualLog(eRitualLog.kPerformer, "Finished blessing.");
+        if (Status() == eRitualStatus.kInProgress) {
             StepReturn();
-        } else if (Status() == eRitualStatus.kRitualLastStage) {
+        } else if (Status() == eRitualStatus.kLastStage) {
             // Time for a grand finale
             Finale();
         }
@@ -632,7 +694,7 @@ class RitualController extends SqRootScript
 
     function OnPerformerReturnedToVertex()
     {
-        if (Status() == eRitualStatus.kRitualInProgress) {
+        if (Status() == eRitualStatus.kInProgress) {
             // On to the next stage
             SetStageIndex(StageIndex() + 1);
             StepRound();
@@ -647,6 +709,58 @@ class RitualController extends SqRootScript
         SendMessage(extra, "StopPatrolling");
     }
 
+////////////////////
+
+    // ---- Messages from performers, extras etc.
+
+    function OnPerformerBrainDead()
+    {
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(performer) + " is brain dead.");
+
+        // FIXME: make sure this is ignored past the point of no return
+        // (or make the performer invincible after that??)
+    }
+
+    function OnExtraRunToSucceeded()
+    {
+        local extra = message().from;
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(extra) + " is at the altar.");
+        MarkExtraAsReady(extra);
+    }
+
+    function OnExtraRunToFailed()
+    {
+        local extra = message().from;
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(extra) + " couldn't reach altar. Stealing their gore.");
+        MarkExtraAsUnavailable(extra);
+    }
+
+    function OnExtraBrainDead()
+    {
+        local extra = message().from;
+        RitualLog(eRitualLog.kFinale,
+            Object_Description(extra) + " is brain dead. Stealing their gore.");
+        MarkExtraAsUnavailable(extra);
+    }
+
+    function OnRipAndTear()
+    {
+        if (Status() == eRitualStatus.kFinale) {
+            // This is the real point of no return!
+            RitualLog(eRitualLog.kFinale,
+                "Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
+
+            TearVictimApart();
+            ExplodeVictim();
+            End();
+        }
+    }
+
+
+//////////////////////////////////
     // ---- Messages of abort conditions
 
     function OnPerformerNoticedHandMissing()
@@ -702,9 +816,18 @@ class RitualController extends SqRootScript
         return GetData("AwaitingExtras");
     }
 
+    function StopAwaitingOneExtra()
+    {
+        SetAwaitingExtras(AwaitingExtras() - 1);
+    }
+
     function SetAwaitingExtras(count)
     {
         SetData("AwaitingExtras", count);
+        // If in the finale, check if we're ready to continue.
+        if (Status() == eRitualStatus.kFinale) {
+            ContinueWhenAllExtrasReady();
+        }
     }
 
     // ---- Linked entities
@@ -954,7 +1077,7 @@ class RitualPerformer extends SqRootScript
             Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
         // Let the controller know.
-        PunchUp("PerformerRipAndTear", gore);
+        PunchUp("RipAndTear", gore);
     }
 
     // ---- Utilities
@@ -1072,45 +1195,6 @@ class RitualPerformerController
         }
     }
 
-    function OnPerformerFacedAltar()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerReachedAltar()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerFinishedBlessing()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerReturnedToVertex()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerNoticedHandMissing()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerNoticedVictimMissing()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerAlerted()
-    {
-        PunchUp(message().message);
-    }
-
-    function OnPerformerBrainDead()
-    {
-        PunchUp(message().message);
-    }
 
     // ---- Utilities
 
@@ -1142,51 +1226,14 @@ class DisableStrobes extends SqRootScript
     function OnSim()
     {
         if (message().starting) {
-            SendMessage(self, "DisableStrobes");
+            // Destroy all strobe links
+            local links = Link_GetAllScriptParams("Strobe", self);
+            foreach (link in links) {
+                Link.Destroy(link);
+            }
         }
     }
 }
-
-class RitualLightingController
-{
-
-    function OnDisableStrobes()
-    {
-        SetData("StrobeDisabled", true);
-    }
-
-    // ---- Messages from the master for the whole ritual
-
-
-
-
-    function OnRitualAbort()
-    {
-        // FIXME: need to turn off the lights?
-    }
-
-    // ---- Messages from the controller for each step
-
-
-}
-
-
-class RitualVictimController
-{
-
-    // ---- Messages for the finale
-
-    function OnDismember()
-    {
-        // Get rid of the victim, show the gore, and a splash of blood
-        SendMessage(blood, "TurnOn");
-        foreach (gore in gores) {
-            Object.RemoveMetaProperty(gore, "M-NotHere");
-        }
-        Object.Destroy(victim);
-    }
-}
-
 
 class RitualFloorStrip extends SqRootScript
 {
@@ -1272,6 +1319,7 @@ class RitualFloorStrip extends SqRootScript
 }
 
 
+// FIXME: clean this up
 class RitualExtraController
 {
 
@@ -1349,6 +1397,7 @@ class RitualExtra extends SqRootScript
         if (gore != 0) {
             Container.Add(gore, self, eDarkContainType.kContainTypeAlt);
         }
+        PunchUp("RipAndTear", gore);
     }
 
     // ---- Messages from the AI
@@ -1686,124 +1735,4 @@ class RitualLazyExtra extends SqRootScript
         LinkTools.LinkSetData(link, "Time last contact", a_long_time_ago);
         LinkTools.LinkSetData(link, "Last true contact", a_long_time_ago);
     }
-}
-
-
-class RitualFinaleController
-{
-
-    // ---- Final functionality
-
-
-    function ExplodeVictim()
-    {
-        // Fling body parts everywhere, why don't you?
-        local available_gores = Link_GetAllParams("PoundOfFlesh", self);
-        local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
-        foreach (gore in available_gores) {
-        //for (local i = 0; i < gores.len(); i++) {
-            //local gore = gores[i];
-            // Get its nominal index, so we can figure out the appropriate angle
-            local i = gores.find(gore);
-
-            // Calculate launch vector
-            local a = z_angles[i]  * 3.14 / 180;
-            local vel = vector(cos(a), sin(a), 1);
-            vel.Normalize();
-            vel.Scale(30.0);
-
-            // Deactivate the physics controls
-            if (! Physics.ValidPos(gore)) {
-                RitualLog(eRitualLog.kFinale,
-                    "ERROR: gore " + i + " not in valid position!");
-                continue;
-            } else {
-                Property.Set(gore, "PhysControl", "Controls Active", 0);
-            }
-
-            // And launch!
-            Physics.Activate(gore);
-            Physics.SetVelocity(gore, vel);
-        }
-    }
-
-
-    function MarkExtraAsReady(extra)
-    {
-        SetAwaitingExtras(AwaitingExtras() - 1);
-        ContinueWhenAllExtrasReady();
-    }
-
-    function MarkExtraAsUnavailable(extra)
-    {
-        // Move this extra's gore back to our control.
-        local link = Link_GetOneScriptParams("PoundOfFlesh", extra);
-        if (link != 0) {
-            local gore = LinkDest(link);
-            Link.Destroy(link);
-            Link_CreateScriptParams("PoundOfFlesh", self, gore);
-        }
-
-        SetAwaitingExtras(AwaitingExtras() - 1);
-        ContinueWhenAllExtrasReady();
-    }
-
-    // ---- Messages from performers, extras etc.
-
-    function OnPerformerBrainDead()
-    {
-        RitualLog(eRitualLog.kFinale,
-            Object_Description(performer) + " is brain dead.");
-
-        // FIXME: make sure this is ignored past the point of no return
-        // (or make the performer invincible after that??)
-    }
-
-    function OnExtraRunToSucceeded()
-    {
-        local extra = message().from;
-        RitualLog(eRitualLog.kFinale,
-            Object_Description(extra) + " is at the altar.");
-        MarkExtraAsReady(extra);
-    }
-
-    function OnExtraRunToFailed()
-    {
-        local extra = message().from;
-        RitualLog(eRitualLog.kFinale,
-            Object_Description(extra) + " couldn't reach altar. Stealing their gore.");
-        MarkExtraAsUnavailable(extra);
-    }
-
-    function OnExtraBrainDead()
-    {
-        local extra = message().from;
-        RitualLog(eRitualLog.kFinale,
-            Object_Description(extra) + " is brain dead. Stealing their gore.");
-        MarkExtraAsUnavailable(extra);
-    }
-
-    function OnExtraRipAndTear()
-    {
-        // Handle it the same as the perfomer. Too late to stop now (unless I
-        // implement the last-minute reprieve).
-        OnPerformerRipAndTear();
-    }
-
-    function OnPerformerRipAndTear()
-    {
-        if (victim != 0) {
-            // This is the real point of no return
-            RitualLog(eRitualLog.kFinale,
-                "Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
-
-            // The performer grabs their chunk of meat and everyone turns the victim into giblets
-            SendMessage(victim_ctl, "Dismember");
-            victim = 0;
-
-
-            ExplodeVictim();
-        }
-    }
-
 }

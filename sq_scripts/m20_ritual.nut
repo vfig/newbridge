@@ -563,23 +563,91 @@ class RitualController extends SqRootScript
         Die("Beware! The Prophet has returned!");
     }
 
-    // ---- Oh no, the player got in the way! Abort! Abort!
+    // ---- The Player Intervened
 
     function Abort()
     {
         if ((Status() == eRitualStatus.kInProgress)
             || (Status() == eRitualStatus.kLastStage))
         {
-            status = eRitualStatus.kAborted;
-
+            SetStatus(eRitualStatus.kAborted);
             RitualLog(eRitualLog.kRitual, "Abort");
-            PunchDown("RitualAbort", current_stage);
 
             // FIXME: objectives tie-in
+
+            // Kill all the conversations
+            foreach (down in DownConvs()) {
+                SendMessage(down, "TurnOff");
+            }
+
+            // Wake the performer from her trance
+            local performer = Performer();
+            Object.RemoveMetaProperty(performer, "M-RitualTrance");
+            Object.RemoveMetaProperty(performer, "M-DoesPatrol");
+
+            // FIXME: move this to the performer
+            // Bring out a weapon.
+            SendMessage(performer, "DrawDagger");
+
+            // FIXME: move this to the performer
+            // HACK: aborting the conversation by killing an actor or actor link
+            // leaves the performer's AI in a weird state. We really don't want that.
+            // So instead, we make them play a different conversation which overrides it.
+            PlayRandomSearchConv();
+
+            // Make sure the performer will investigate a little before searching.
+            // These are singleton links, so don't add them if they're already present!
+            local player = Object.Named("Player");
+            if (! Link.AnyExist("AIInvest", performer, player)) {
+                Link.Create("AIInvest", performer, Object.Named("Player"));
+            }
+            if (! Link.AnyExist("AIAwareness", performer, player)) {
+                Link.Create("AIAwareness", performer, Object.Named("Player"));
+            }
+
+            // FIXME: move this to the performer
+            // Even after investigating, the performer should search around endlessly,
+            // starting at a random point.
+            BeginRandomSearch();
 
             Die("Well done, you stopped the ritual!");
         }
     }
+
+    // FIXME: performer should handle this
+    function BeginRandomSearch()
+    {
+        RitualLog(eRitualLog.kPerformer, "Now searching.");
+        SetData("IsSearching", true);
+        local performer = Performer();
+        local search_trols = SearchTrols();
+        if (search_trols.len() > 0) {
+            local i = Data.RandInt(0, (search_trols.len() - 1));
+            local target = search_trols[i];
+            Link_SetCurrentPatrol(performer, target);
+        }
+        Object.AddMetaProperty(performer, "M-RitualSearchModerate");
+    }
+
+    // FIXME: performer should handle this
+    function PlayRandomSearchConv()
+    {
+        local search_convs = PerfSearchConvs();
+        local i = Data.RandInt(0, (search_convs.len() - 1));
+        local conv = search_convs[i];
+        RitualLog(eRitualLog.kPerformer, "Chose random search conv: " + Object_Description(conv));
+        AI.StartConversation(conv);
+    }
+
+    // FIXME: performer should handle this
+    function OnPerformerPatrolPoint()
+    {
+        if (GetData("IsSearching")) {
+            PlayRandomSearchConv();
+        }
+    }
+
+    // ---- Errors
 
     function Die(reason)
     {
@@ -709,18 +777,7 @@ class RitualController extends SqRootScript
         SendMessage(extra, "StopPatrolling");
     }
 
-////////////////////
-
     // ---- Messages from performers, extras etc.
-
-    function OnPerformerBrainDead()
-    {
-        RitualLog(eRitualLog.kFinale,
-            Object_Description(performer) + " is brain dead.");
-
-        // FIXME: make sure this is ignored past the point of no return
-        // (or make the performer invincible after that??)
-    }
 
     function OnExtraRunToSucceeded()
     {
@@ -740,9 +797,10 @@ class RitualController extends SqRootScript
 
     function OnExtraBrainDead()
     {
+        // Well, I _suppose_ we can leave you out of the rest of the ritual
         local extra = message().from;
-        RitualLog(eRitualLog.kFinale,
-            Object_Description(extra) + " is brain dead. Stealing their gore.");
+        RitualLog(eRitualLog.kExtra, Object_Description(extra) + " is excused from the ritual due to brain death.");
+        Link_DestroyAll("ScriptParams", self, extra);
         MarkExtraAsUnavailable(extra);
     }
 
@@ -759,8 +817,6 @@ class RitualController extends SqRootScript
         }
     }
 
-
-//////////////////////////////////
     // ---- Messages of abort conditions
 
     function OnPerformerNoticedHandMissing()
@@ -769,7 +825,7 @@ class RitualController extends SqRootScript
         Abort();
     }
 
-    function OnPerformerNoticedHandMissing()
+    function OnPerformerNoticedVictimMissing()
     {
         RitualLog(eRitualLog.kRitual, "Victim has been unkidnapped");
         Abort();
@@ -983,6 +1039,7 @@ class RitualPerformer extends SqRootScript
             // the ritual controller doesn't need to get involved: we can have the link to the
             // search conv. In fact, it could be even be a different metaproperty+script that manages searching,
             // and is the same for the performer and all the extras. But that comes later.
+            PunchUp("PerformerPatrolPoint", trol);
         }
     }
 
@@ -1139,87 +1196,6 @@ class MissingRitualVictim extends SqRootScript
     }
 }
 
-
-class RitualPerformerController
-{
- 
-    // ---- Messages from the master for the whole ritual
-
-
-
-    function OnRitualAbort()
-    {
-        // Wake the performer from her trance
-        Object.RemoveMetaProperty(performer, "M-RitualTrance");
-        Object.RemoveMetaProperty(performer, "M-DoesPatrol");
-
-        // Kill all the conversations
-        foreach (down in downs) {
-            SendMessage(down, "TurnOff");
-        }
-
-        // Bring out a weapon.
-        SendMessage(performer, "DrawDagger");
-
-        // HACK: aborting the conversation by killing an actor or actor link
-        // leaves the performer's AI in a weird state. We really don't want that.
-        // So instead, we make them play a different conversation which overrides it.
-        PlayRandomSearchConv();
-
-        // Make sure the performer will investigate a little before searching.
-        // These are singleton links, so don't add them if they're already present!
-        local player = Object.Named("Player");
-        if (! Link.AnyExist("AIInvest", performer, player)) {
-            Link.Create("AIInvest", performer, Object.Named("Player"));
-        }
-        if (! Link.AnyExist("AIAwareness", performer, player)) {
-            Link.Create("AIAwareness", performer, Object.Named("Player"));
-        }
-
-        // Even after investigating, the performer should search around endlessly,
-        // starting at a random point.
-        BeginRandomSearch();
-    }
-
-    // ---- Messages from the controller for each step
-
-
-
-    // ---- Messages from the performer
-
-    function OnPerformerPatrolPoint()
-    {
-        if (GetData("IsSearching")) {
-            PlayRandomSearchConv();
-        } else {
-        }
-    }
-
-
-    // ---- Utilities
-
-    function BeginRandomSearch()
-    {
-        RitualLog(eRitualLog.kPerformer, "Now searching.");
-        SetData("IsSearching", true);
-        if (search_trols.len() > 0) {
-            local i = Data.RandInt(0, (search_trols.len() - 1));
-            local target = search_trols[i];
-            Link_SetCurrentPatrol(performer, target);
-        }
-        Object.AddMetaProperty(performer, "M-RitualSearchModerate");
-    }
-
-    function PlayRandomSearchConv()
-    {
-        local i = Data.RandInt(0, (search_convs.len() - 1));
-        local conv = search_convs[i];
-        RitualLog(eRitualLog.kPerformer, "Chose random search conv: " + Object_Description(conv));
-        AI.StartConversation(conv);
-    }
-}
-
-
 class DisableStrobes extends SqRootScript
 {
     // Can use a .dml to patch this onto RitualLightingController to disable strobes.
@@ -1317,33 +1293,6 @@ class RitualFloorStrip extends SqRootScript
         Property.Set(self, "StTweqBlink", "AnimS", newAnimS);
     }
 }
-
-
-// FIXME: clean this up
-class RitualExtraController
-{
-
-
-    // ---- Messages from the extras
-
-
-    function OnExtraBrainDead()
-    {
-        // Well, I _suppose_ we can leave you out of the rest of the ritual
-        local extra = message().from;
-        Link_DestroyAll("ScriptParams", self, extra);
-        local index = extras.find(extra);
-        if (index != null) {
-            extras.remove(index);
-        }
-        RitualLog(eRitualLog.kExtra, Object_Description(extra) + " is excused from the ritual due to brain death.");
-    }
-
-    // ---- Utilities
-
-
-}
-
 
 class RitualExtra extends SqRootScript
 {

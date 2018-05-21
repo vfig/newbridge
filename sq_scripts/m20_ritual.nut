@@ -3,9 +3,9 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = true;
+const DEBUG_GETONWITHIT = false;
 const DEBUG_SKIPTOTHEEND = true;
-const DEBUG_DISABLESTROBES = true;
+const DEBUG_DISABLESTROBES = false;
 
 // ---- Logging
 
@@ -277,38 +277,9 @@ class RitualController extends SqRootScript
     {
         local stage = Stage();
         local stage_index = StageIndex();
-        if (stage_index == (stages.len() - 1)) {
-            SetStatus(eRitualStatus.kLastStage);
-        }
         RitualLog(eRitualLog.kRitual, "Down " + stage_index + ", Stage " + stage);
 
-        if (Status() == eRitualStatus.kLastStage) {
-            local strobes = Strobes();
-            if (DEBUG_DISABLESTROBES || (strobes.len() == 0)) {
-                RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
-                // Just turn on all the lights.
-                foreach (light in Lights()) {
-                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
-                    SendMessage(light, "TurnOn");
-                }
-            } else {
-                RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
-                // Make all the strobes flash horrendously
-                foreach (light in Lights()) {
-                    RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
-                    SendMessage(light, "TurnOff");
-                }
-                foreach (strobe in Strobes()) {
-                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strobe));
-                    SendMessage(strobe, "TurnOn");
-                }
-            }
-            // Make all the strips glow steadily
-            foreach (strip in Strips()) {
-                RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
-                SendMessage(strip, "Fullbright");
-            }
-        } else {
+        if (Status() == eRitualStatus.kInProgress) {
             local light = Lights()[stage];
             RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
             SendMessage(light, "TurnOn");
@@ -332,9 +303,62 @@ class RitualController extends SqRootScript
         local stage_index = StageIndex();
         RitualLog(eRitualLog.kRitual, "Return " + stage_index + ", Stage " + stage);
 
-        local light = Lights()[stage];
-        RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
-        SendMessage(light, "TurnOff");
+        if (Status() == eRitualStatus.kInProgress) {
+            local light = Lights()[stage];
+            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
+            SendMessage(light, "TurnOff");
+        }
+    }
+
+    // ---- The Last Stage
+
+    function LastStage()
+    {
+        if (Status() == eRitualStatus.kInProgress) {
+            SetStatus(eRitualStatus.kLastStage);
+
+            // Make sure the extras don't patrol or get distracted anymore.
+            foreach (extra in Extras()) {
+                SendMessage(extra, "StopPatrolling");
+                Object.AddMetaProperty(extra, "M-RitualFinaleTrance");
+            }
+
+            // The performer and extras get their chunks of meat and positions. Any gore
+            // that is unclaimed is for the explosion.
+            PickGoresAndRunToAltar();
+
+            // Turn on the strobe lights (or substitute)
+            local strobes = Strobes();
+            if (DEBUG_DISABLESTROBES || (strobes.len() == 0)) {
+                RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
+                // Just turn on all the lights.
+                foreach (light in Lights()) {
+                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
+                    SendMessage(light, "TurnOn");
+                }
+            } else {
+                RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
+                // Make all the strobes flash horrendously
+                foreach (light in Lights()) {
+                    RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
+                    SendMessage(light, "TurnOff");
+                }
+                foreach (strobe in Strobes()) {
+                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strobe));
+                    SendMessage(strobe, "TurnOn");
+                }
+            }
+
+            // Make all the strips glow steadily
+            foreach (strip in Strips()) {
+                RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
+                SendMessage(strip, "Fullbright");
+            }
+
+            // The Down conversation will handle taking us up to the end of the
+            // blessing, so just continue on with the stage stuff.
+            StepDown();
+        }
     }
 
     // ---- The Grand Finale
@@ -364,72 +388,23 @@ class RitualController extends SqRootScript
             AI_SetIdleOrigin(performer, performer);
             AI.StartConversation(PerfWaitConv());
 
-            // Ignore any extras that are dead or busy.
-            // FIXME: does this work as a mutating function like this?
-            DiscardUnavailableExtras();
-
-            // Make sure the extras don't patrol or get distracted anymore.
-            foreach (extra in Extras()) {
-                SendMessage(extra, "StopPatrolling");
-                Object.AddMetaProperty(extra, "M-RitualFinaleTrance");
-            }
-
-            // The performer should be already in place, but send all available
-            // extras to the altar.
-            // FIXME: of course we want that to be last stage, but that's post-refactor
-    
-            // For whatever mad reason, it's vertex 6 that's the performer's place
-            // at the finale. Too late to renumber everything now. Well, it's not
-            // really, but I'm too lazy. Anyway the performer needs some head.
-            Link_CreateScriptParams("PoundOfFlesh", performer, Gores()[6]);
-
-            // The extras get the other chunks of meat and positions. Any gore
-            // that is unclaimed is for the explosion.
-            PickGoresAndRunToAltar();
-
             // Now we wait for them all to tell us that they're ready (or
             // otherwise become unavailable).
             ContinueWhenAllExtrasReady();
         }
     }
 
-    function DiscardUnavailableExtras()
-    {
-        // Filter out dead or KO'd extras cause they aren't coming
-        // back in the finale. If they wanted to take part, they
-        // should've stayed alive, now, shouldn't they?
-
-        // FIXME: restore this
-        //
-        // local available_extras = [];
-        // foreach (extra in extras) {
-        //     if (AI_Mode(extra) != eAIMode.kAIM_Dead) {
-        //         available_extras.append(extra);
-        //     }
-        // }
-        // extras = available_extras;
-
-        // FIXME: 
-        //
-        // PROBABLY should refactor this to be all under the one controller, with
-        // more explicit stages, and debug-flags to control specific variations
-        // (performer death, extra death, etc).
-        //
-        // More importantly, maybe the strobes should start and the extras run to
-        // the altar just as the performer begins walking the last down? Gives a
-        // little more time for that last minute "oh shit I need to stop this"
-        // reaction.
-        //
-        // IDEEEEEEAAAAAAAAAA: at this point the player should have a last-ditch
-        // chance to stop the ritual--by dispatching di Rupo. If they hurry, or
-        // use an arrow, they can still get it done. (And maybe that'd stun or KO
-        // all the extras too, if it goes wrong at that point?).
-    }
-
     function PickGoresAndRunToAltar()
     {
-        // FIXME: needs to be only available ones?
-        local extras = Extras();
+        // For whatever mad reason, it's vertex 6 that's the performer's place
+        // at the finale. Too late to renumber everything now. Well, it's not
+        // really, but I'm too lazy. Anyway the performer gets the victim's head.
+        // And they should already be in position.
+        local performer = Performer();
+        Link_CreateScriptParams("PoundOfFlesh", performer, Gores()[6]);
+
+        // Assign the remaining gores to available extras.
+        local extras = GetAvailableExtras(true);
         local down_trols = DownTrols().slice(0, 6);
         local gores = Gores().slice(0, 6);
         local round_trols = PerfRoundTrols().slice(0, 6)
@@ -449,7 +424,8 @@ class RitualController extends SqRootScript
             Link_CreateScriptParams("PoundOfFlesh", extra, gore);
             SendMessage(extra, "RunTo", trol);
         }
-        // Keep any unclaimed gore bits ourselves for the explosion
+
+        // Keep any unclaimed gore bits ourselves for the explosion.
         foreach (gore in gores) {
             RitualLog(eRitualLog.kFinale,
                 Object_Description(gore) + " is unallocated, will explode.");
@@ -528,8 +504,6 @@ class RitualController extends SqRootScript
         local available_gores = Link_GetAllParams("PoundOfFlesh", self);
         local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
         foreach (gore in available_gores) {
-        //for (local i = 0; i < gores.len(); i++) {
-            //local gore = gores[i];
             // Get its nominal index, so we can figure out the appropriate angle
             local i = gores.find(gore);
 
@@ -659,7 +633,7 @@ class RitualController extends SqRootScript
 
     // ---- Utilities
 
-    function GetAvailableExtras()
+    function GetAvailableExtras(ignore_busy = false)
     {
         local extras = Extras();
         local available_extras = [];
@@ -667,16 +641,14 @@ class RitualController extends SqRootScript
         // those who are dead, unconscious, or off searching for
         // or attacking the player are excused.
         foreach (extra in extras) {
-            // FIXME: we can't use alert status! They can stay alerted for too long!
-            // FIXME: we should only excuse them if they are (a) investigating, (b) attacking, or (c) brain-dead.
-            local level = AI.GetAlertLevel(extra);
-            if (level < eAIScriptAlertLevel.kModerateAlert) {
-                available_extras.append(extra);
-            } else {
+            if (AI_Mode(extra) == eAIMode.kAIM_Dead) {
                 RitualLog(eRitualLog.kExtra | eRitualLog.kAlertness,
-                    Object_Description(extra)
-                    + " is at alert " + level
-                    + " and temporarily excused.");
+                    Object_Description(extra) + " is at dead, and temporarily excused.");
+            } else if ((! ignore_busy) && (Link.AnyExist("AIAttack", extra) || Link.AnyExist("AIInvest", extra))) {
+                RitualLog(eRitualLog.kExtra | eRitualLog.kAlertness,
+                    Object_Description(extra) + " is at attacking or investigating, and temporarily excused.");
+            } else {
+                available_extras.append(extra);
             }
         }
         RitualLog(eRitualLog.kExtra, available_extras.len() + " extras available.");
@@ -735,7 +707,11 @@ class RitualController extends SqRootScript
     {
         RitualLog(eRitualLog.kPerformer, "Faced altar.");
         if (Status() == eRitualStatus.kInProgress) {
-            StepDown();
+            if (StageIndex() == (stages.len() - 1)) {
+                LastStage();
+            } else {
+                StepDown();
+            }
         }
     }
 

@@ -657,6 +657,15 @@ class GoalStopTheRitualByTheft extends WhenPlayerCarrying
 
 class GoalFailToStopTheRitual extends SqRootScript
 {
+    // FIXME: for debugging only
+    function OnSim()
+    {
+        if (message().starting) {
+            Goal.Show(eGoals.kStopTheRitual);
+            Goal.Show(eGoals.kKeepTheAnaxAlive);
+        }
+    }
+
     /* Put this on the ritual controller. It listens for a "RitualEnded"
        message, and cancels the relevant objectives, then fails them
        a short time later. This gives us a slightly longer delay before
@@ -664,11 +673,6 @@ class GoalFailToStopTheRitual extends SqRootScript
     function OnRitualEnded()
     {
         if (Goal.IsActive(eGoals.kStopTheRitual)) {
-            // FIXME: for debugging only
-            Goal.Show(eGoals.kStopTheRitual);
-            Goal.Show(eGoals.kKeepTheAnaxAlive);
-
-
             Goal.Cancel(eGoals.kStopTheRitual);
             Goal.Cancel(eGoals.kEscapeWithTheAnax);
             Goal.Cancel(eGoals.kKeepTheAnaxAlive);

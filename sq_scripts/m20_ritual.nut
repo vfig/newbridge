@@ -4,8 +4,8 @@
 // Also need to consider OnSim() vs OnBeginScript().
 
 const DEBUG_GETONWITHIT = false;
-const DEBUG_SKIPTOTHEEND = true;
-const DEBUG_DISABLESTROBES = true;
+const DEBUG_SKIPTOTHEEND = false;
+const DEBUG_DISABLESTROBES = false;
 
 // ---- Logging
 
@@ -137,6 +137,7 @@ class RitualController extends SqRootScript
     // FIXME: If the stages are changed, also need to adjust the LineNo 0-6 tags in the conv schema.
     // FIXME: If the stages are changed, the extras' starting points should also be updated.
     // FIXME: Actually I need to put the extras in starting positions anyway!
+    // FIXME: If the stages or timing are changed, the timing of the particle systems should also be updated.
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
     stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
     //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
@@ -168,6 +169,7 @@ class RitualController extends SqRootScript
             ExtraRoundTrols();
             Lights();
             Strips();
+            Particles();
             // ... the last stage ...
             DownTrols();
             Strobes();
@@ -280,6 +282,7 @@ class RitualController extends SqRootScript
         local stage_index = StageIndex();
         RitualLog(eRitualLog.kRitual, "Down " + stage_index + ", Stage " + stage);
 
+        // Normal lighting is for normal stages, not the last stage.
         if (Status() == eRitualStatus.kInProgress) {
             local light = Lights()[stage];
             RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
@@ -308,6 +311,16 @@ class RitualController extends SqRootScript
             local light = Lights()[stage];
             RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
             SendMessage(light, "TurnOff");
+
+            if (stage_index == 0) {
+                // Start the big slow-build particles
+                local particles = Particles();
+                SendMessage(particles[0], "TurnOn");
+            } else if (stage_index == 3) {
+                // Start the medium particles
+                local particles = Particles();
+                SendMessage(particles[1], "TurnOn");
+            }
         }
     }
 
@@ -357,6 +370,10 @@ class RitualController extends SqRootScript
                 RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
                 SendMessage(strip, "Fullbright");
             }
+
+            // Start the small intense particles
+            local particles = Particles();
+            SendMessage(particles[2], "TurnOn");
 
             // The Down conversation will handle taking us up to the end of the
             // blessing, so just continue on with the stage stuff.
@@ -908,6 +925,13 @@ class RitualController extends SqRootScript
         local strips = Link_GetAllParams("Strip", self);
         if (strips.len() != 7) { Die("need 7 Strip(s)."); }
         return strips;
+    }
+
+    function Particles()
+    {
+        local particles = Link_GetAllParams("Particles", self);
+        if (particles.len() != 3) { Die("need 3 Particles."); }
+        return particles;
     }
 
     function DownTrols()
@@ -1753,41 +1777,29 @@ class RitualProphetSpawner extends SqRootScript
 {
     function OnTurnOn()
     {
-        // FIXME: set off some neat particle fx
         SetOneShotTimer("Spawn", 2.0);
     }
 
     function OnTimer()
     {
         if (message().name == "Spawn") {
-            local prophet = Prophet();
+            // Teleport the Prophet here, dismiss the particles, and animate him.
+            local prophet = Link_GetOneParam("Prophet", self);
+            local particle_hack = Link_GetOneParam("ParticleHack", self);
+            local conv = Link_GetOneParam("ProphetConv", self);
             Object.Teleport(prophet, vector(0,0,0), vector(0,0,0), self);
-            AI.StartConversation(ProphetConv());
+            SendMessage(particle_hack, "TurnOn");
+            AI.StartConversation(conv);
         }
-    }
-
-    function Prophet()
-    {
-        return Link_GetOneParam("Prophet", self);
-    }
-
-    function ProphetConv()
-    {
-        return Link_GetOneParam("ProphetConv", self);
     }
 }
 
 
-class ParticleZoomTest extends SqRootScript
+class RitualParticleHack extends SqRootScript
 {
     function OnTurnOn()
     {
-        print("TurnOn");
-    }
-
-    function OnTurnOff()
-    {
-        print("TurnOff");
+        // Let me fall! The attached particles will fall with me.
         if (Property.Possessed(self, "PhysControl")) {
             Property.Set(self, "PhysControl", "Controls Active", 0);
         }

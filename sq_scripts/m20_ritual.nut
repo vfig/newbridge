@@ -1042,19 +1042,34 @@ class RitualPerformer extends SqRootScript
     {
         if (message().name == "ConsumeHand") {
             // Make the Hand vanish! It's consumed by magic, dummy, you don't eat it.
-
-            // FIXME: Particle effect, like a shower of sparks or something?
-
             local hand = Link_GetOneParam("Hand", self);
             if (hand != 0) {
                 RitualLog(eRitualLog.kPerformer, "Consuming the Hand.");
+
+                // Spawn an effect for the hand being consumed
+                local fx = Object.BeginCreate("FinaleHandExplode");
+                if (fx != 0) {
+                    Object.Teleport(fx, vector(0,0,0), vector(0,0,0), hand);
+                    Object.EndCreate(fx);
+                    // The hand animation has 18 frames, at 15fps, so let's
+                    // destroy it when we're done.
+                    SetOneShotTimer("FinaleHandExplode", (18.0 / 15.0), fx);
+                }
+
                 // This destroys the hand and its hacked particles. Nice!
                 Object.Destroy(hand);
             } else {
                 RitualLog(eRitualLog.kPerformer, "ERROR: Can't find the Hand!");
             }
-
             PunchUp("PerformerConsumedHand")
+
+        } else if (message().name == "FinaleHandExplode") {
+            // Clean up the animation
+            RitualLog(eRitualLog.kPerformer, "Cleaning up Hand fx.");
+            local fx = message().data;
+            if (fx != 0) {
+                Object.Destroy(fx);
+            }
         }
     }
 

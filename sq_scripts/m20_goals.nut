@@ -664,6 +664,11 @@ class GoalFailToStopTheRitual extends SqRootScript
     function OnRitualEnded()
     {
         if (Goal.IsActive(eGoals.kStopTheRitual)) {
+            // FIXME: for debugging only
+            Goal.Show(eGoals.kStopTheRitual);
+            Goal.Show(eGoals.kKeepTheAnaxAlive);
+
+
             Goal.Cancel(eGoals.kStopTheRitual);
             Goal.Cancel(eGoals.kEscapeWithTheAnax);
             Goal.Cancel(eGoals.kKeepTheAnaxAlive);
@@ -671,9 +676,9 @@ class GoalFailToStopTheRitual extends SqRootScript
             // FIXME... will a timer be saved? What happens if you save after this
             // point, but before the objectives actually get failed?
 
-            // Total time from point of no return to failure is about
-            // 15 seconds, which feels pretty good.
-            SetOneShotTimer("FailTheMission", 10.0);
+            // Delay mission failure just a bit, so the player can watch the
+            // ritual finish.
+            SetOneShotTimer("FailTheMission", 12.5);
         }
     }
 
@@ -683,6 +688,11 @@ class GoalFailToStopTheRitual extends SqRootScript
             Goal.Fail(eGoals.kStopTheRitual);
             Goal.Fail(eGoals.kEscapeWithTheAnax);
             Goal.Fail(eGoals.kKeepTheAnaxAlive);
+
+            // FIXME: for debugging only
+            SetOneShotTimer("FakeOut", 4.5);
+        } else if (message().name == "FakeOut") {
+            Debug.Command("movie", "DEATH.AVI");
         }
     }
 }

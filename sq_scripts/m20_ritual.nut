@@ -3,7 +3,7 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = true;
+const DEBUG_GETONWITHIT = false;
 const DEBUG_SKIPTOTHEEND = true;
 const DEBUG_DISABLESTROBES = true;
 
@@ -778,7 +778,7 @@ class RitualController extends SqRootScript
 
             TearVictimApart();
             ExplodeVictim();
-            SendMessage(ProphetSpawner(), "MakeAProphet");
+            SendMessage(ProphetSpawner(), "TurnOn");
             End();
         }
     }
@@ -1751,8 +1751,9 @@ class RitualSearcher extends SqRootScript
 
 class RitualProphetSpawner extends SqRootScript
 {
-    function OnMakeAProphet()
+    function OnTurnOn()
     {
+        // FIXME: set off some neat particle fx
         SetOneShotTimer("Spawn", 2.0);
     }
 
@@ -1761,11 +1762,17 @@ class RitualProphetSpawner extends SqRootScript
         if (message().name == "Spawn") {
             local prophet = Prophet();
             Object.Teleport(prophet, vector(0,0,0), vector(0,0,0), self);
+            AI.StartConversation(ProphetConv());
         }
     }
 
     function Prophet()
     {
         return Link_GetOneParam("Prophet", self);
+    }
+
+    function ProphetConv()
+    {
+        return Link_GetOneParam("ProphetConv", self);
     }
 }

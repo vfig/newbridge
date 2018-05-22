@@ -3,7 +3,7 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = false;
+const DEBUG_GETONWITHIT = true;
 const DEBUG_SKIPTOTHEEND = true;
 const DEBUG_DISABLESTROBES = true;
 
@@ -176,7 +176,7 @@ class RitualController extends SqRootScript
             FinaleConvs();
             Gores();
             BloodFX();
-
+            ProphetSpawner();
 
             // FIXME: need to know if we're at the start of the mission,
             // or just loading a save! We should only do the following
@@ -778,6 +778,7 @@ class RitualController extends SqRootScript
 
             TearVictimApart();
             ExplodeVictim();
+            SendMessage(ProphetSpawner(), "MakeAProphet");
             End();
         }
     }
@@ -949,6 +950,13 @@ class RitualController extends SqRootScript
         local fx = Link_GetOneParam("BloodFX", self);
         if (fx == 0) { Die("no BloodFX."); }
         return fx;
+    }
+
+    function ProphetSpawner()
+    {
+        local obj = Link_GetOneParam("ProphetSpawner", self);
+        if (obj == 0) { Die("no ProphetSpawner."); }
+        return obj;
     }
 }
 
@@ -1737,5 +1745,27 @@ class RitualSearcher extends SqRootScript
         RitualLog(eRitualLog.kSearching,
             Object_Description(self) + " is at " + Object_Description(trol));
         PlaySearchConv();
+    }
+}
+
+
+class RitualProphetSpawner extends SqRootScript
+{
+    function OnMakeAProphet()
+    {
+        SetOneShotTimer("Spawn", 2.0);
+    }
+
+    function OnTimer()
+    {
+        if (message().name == "Spawn") {
+            local prophet = Prophet();
+            Object.Teleport(prophet, vector(0,0,0), vector(0,0,0), self);
+        }
+    }
+
+    function Prophet()
+    {
+        return Link_GetOneParam("Prophet", self);
     }
 }

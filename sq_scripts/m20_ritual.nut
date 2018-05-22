@@ -3,7 +3,7 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = true;
+const DEBUG_GETONWITHIT = false;
 const DEBUG_SKIPTOTHEEND = true;
 const DEBUG_DISABLESTROBES = true;
 
@@ -133,6 +133,7 @@ class RitualController extends SqRootScript
     // Timing can also be tweaked more generally with M-RitualTrance Creature Time Warp.
     // But the last entry must be 6, because that's the victim's head.
     // FIXME: might in fact want to adjust time warp for Normal difficulty
+    // FIXME: If the M-RitualTrance time warp is changed, need to adjust timing in OnLastBlessing()
     // FIXME: If the stages are changed, also need to adjust the LineNo 0-6 tags in the conv schema.
     // FIXME: If the stages are changed, the extras' starting points should also be updated.
     // FIXME: Actually I need to put the extras in starting positions anyway!
@@ -373,17 +374,13 @@ class RitualController extends SqRootScript
             // Time for a grand finale before failing the mission.
             RitualLog(eRitualLog.kRitual, "Finale");
 
-            // Make the Hand vanish!
-            RitualLog(eRitualLog.kRitual, "The Hand is consumed, and cannot be stolen anymore!");
-            local performer = Performer();
-            SendMessage(performer, "ConsumeTheHand");
-
             // Kill all the down conversations
             foreach (down in DownConvs()) {
                 SendMessage(down, "TurnOff");
             }
 
             // Performer stays entranced, but no longer patrosl, and now moves at normal speed.
+            local performer = Performer();
             Object.RemoveMetaProperty(performer, "M-DoesPatrol");
             Object.RemoveMetaProperty(performer, "M-RitualTrance");
             Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
@@ -717,7 +714,12 @@ class RitualController extends SqRootScript
         RitualLog(eRitualLog.kPerformer, "Finished blessing.");
         if (Status() == eRitualStatus.kInProgress) {
             StepReturn();
-        } else if (Status() == eRitualStatus.kLastStage) {
+        }
+    }
+
+    function OnPerformerConsumedHand()
+    {
+        if (Status() == eRitualStatus.kLastStage) {
             // Time for a grand finale
             Finale();
         }
@@ -965,15 +967,6 @@ class RitualPerformer extends SqRootScript
         Object.AddMetaProperty(self, "M-DoesPatrol");
     }
 
-    function ConsumeTheHand()
-    {
-        // FIXME: Particle effect, like a shower of sparks or something?
-        local hand = Link_GetOneParam("Hand", self);
-        if (hand != 0) {
-            Object.Destroy(hand);
-        }
-    }
-
     // ---- Messages from AI and scripts
 
     function OnNoticedVictimMissing()
@@ -1035,6 +1028,34 @@ class RitualPerformer extends SqRootScript
 
         // Tell the controller about it
         PunchUp("PerformerFinishedBlessing");
+    }
+
+    function OnLastBlessingStart()
+    {
+        RitualLog(eRitualLog.kPerformer, "Last blessing starts.");
+        // The last blessing is happening. Start a timer for consuming the
+        // hand, so it happens mid-motion.
+        SetOneShotTimer("ConsumeHand", 3.0);
+    }
+
+    function OnTimer()
+    {
+        if (message().name == "ConsumeHand") {
+            // Make the Hand vanish! It's consumed by magic, dummy, you don't eat it.
+
+            // FIXME: Particle effect, like a shower of sparks or something?
+
+            local hand = Link_GetOneParam("Hand", self);
+            if (hand != 0) {
+                RitualLog(eRitualLog.kPerformer, "Consuming the Hand.");
+                // This destroys the hand and its hacked particles. Nice!
+                Object.Destroy(hand);
+            } else {
+                RitualLog(eRitualLog.kPerformer, "ERROR: Can't find the Hand!");
+            }
+
+            PunchUp("PerformerConsumedHand")
+        }
     }
 
     function OnConversationFinished()

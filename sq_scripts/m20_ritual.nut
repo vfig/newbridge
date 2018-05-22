@@ -3,7 +3,7 @@
 // instead of member variables.
 // Also need to consider OnSim() vs OnBeginScript().
 
-const DEBUG_GETONWITHIT = false;
+const DEBUG_GETONWITHIT = true;
 const DEBUG_SKIPTOTHEEND = true;
 const DEBUG_DISABLESTROBES = true;
 
@@ -22,6 +22,7 @@ enum eRitualLog
     kPathing        = 256,
     kAlertness      = 512,
     kLaziness       = 1024,
+    kSearching      = 2048,
 }
 
 RitualLogsEnabled <- function()
@@ -30,14 +31,15 @@ RitualLogsEnabled <- function()
         // Subjects
         | eRitualLog.kRitual
         | eRitualLog.kPerformer
-        | eRitualLog.kExtra
-        | eRitualLog.kVictim
+//        | eRitualLog.kExtra
+//        | eRitualLog.kVictim
 //        | eRitualLog.kLighting
-        | eRitualLog.kFinale
+//        | eRitualLog.kFinale
         // Contexts
 //        | eRitualLog.kPathing
         | eRitualLog.kAlertness
 //        | eRitualLog.kLaziness
+//        | eRitualLog.kSearching
         );
 }
 
@@ -55,6 +57,7 @@ RitualLogName <- function(log)
     if ((log & eRitualLog.kPathing) != 0) { names.append("PATHING"); }
     if ((log & eRitualLog.kAlertness) != 0) { names.append("ALERTNESS"); }
     if ((log & eRitualLog.kLaziness) != 0) { names.append("LAZINESS"); }
+    if ((log & eRitualLog.kSearching) != 0) { names.append("SEARCHING"); }
     local name = names.reduce(concat);
     return ((name == null) ? "" : name);
 }
@@ -172,9 +175,6 @@ class RitualController extends SqRootScript
             FinaleConvs();
             Gores();
             BloodFX();
-            // ... aborting ...
-            SearchTrols();
-            PerfSearchConvs();
 
 
             // FIXME: need to know if we're at the start of the mission,
@@ -556,77 +556,55 @@ class RitualController extends SqRootScript
             SetStatus(eRitualStatus.kAborted);
             RitualLog(eRitualLog.kRitual, "Abort");
 
-            // FIXME: objectives tie-in
-
             // Kill all the conversations
             foreach (down in DownConvs()) {
                 SendMessage(down, "TurnOff");
             }
 
-            // Wake the performer from her trance
             local performer = Performer();
-            Object.RemoveMetaProperty(performer, "M-RitualTrance");
-            Object.RemoveMetaProperty(performer, "M-DoesPatrol");
 
-            // FIXME: move this to the performer
-            // Bring out a weapon.
-            SendMessage(performer, "DrawDagger");
+            // Wake the performer from her trance (if not dead), and make
+            // them look like they're searching for the player.
+            if (AI_Mode(performer) != eAIMode.kAIM_Dead) {
+                Object.RemoveMetaProperty(performer, "M-RitualTrance");
+                Object.RemoveMetaProperty(performer, "M-RitualFinaleTrance");
+                Object.RemoveMetaProperty(performer, "M-DoesPatrol");
 
-            // FIXME: move this to the performer
-            // HACK: aborting the conversation by killing an actor or actor link
-            // leaves the performer's AI in a weird state. We really don't want that.
-            // So instead, we make them play a different conversation which overrides it.
-            PlayRandomSearchConv();
+                // HACK: aborting the conversation by killing an actor link
+                // leaves the performer's AI in a weird state. We really don't want that.
+                // So instead, we make them play a different conversation to override it,
+                // and they'll be fine once that conversation finishes.
+                AI.StartConversation(PerfWaitConv());
 
-            // Make sure the performer will investigate a little before searching.
-            // These are singleton links, so don't add them if they're already present!
-            local player = Object.Named("Player");
-            if (! Link.AnyExist("AIInvest", performer, player)) {
-                Link.Create("AIInvest", performer, Object.Named("Player"));
+                // Bring out a weapon.
+                SendMessage(performer, "DrawDagger");
+
+                // Make sure the performer will investigate a little before searching.
+                // These are singleton links, so don't add them if they're already present!
+                local player = Object.Named("Player");
+                if (! Link.AnyExist("AIInvest", performer, player)) {
+                    Link.Create("AIInvest", performer, Object.Named("Player"));
+                }
+                if (! Link.AnyExist("AIAwareness", performer, player)) {
+                    Link.Create("AIAwareness", performer, Object.Named("Player"));
+                }
+
+                // Even after investigating, the performer should search around endlessly,
+                // starting at a random point.
+                Object.AddMetaProperty(performer, "M-RitualSearcher");
             }
-            if (! Link.AnyExist("AIAwareness", performer, player)) {
-                Link.Create("AIAwareness", performer, Object.Named("Player"));
-            }
 
-            // FIXME: move this to the performer
-            // Even after investigating, the performer should search around endlessly,
-            // starting at a random point.
-            BeginRandomSearch();
+            // Make all the extras search too.
+            foreach (extra in Extras()) {
+                if (AI_Mode(extra) != eAIMode.kAIM_Dead) {
+                    Object.RemoveMetaProperty(extra, "M-RitualFinaleTrance");
+                    Object.RemoveMetaProperty(extra, "M-DoesPatrol");
+                    Object.RemoveMetaProperty(extra, "M-RitualLazyExtra");
+                    Object.AddMetaProperty(extra, "M-RitualSearcher");
+                }
+            }
 
             Die("Well done, you stopped the ritual!");
-        }
-    }
-
-    // FIXME: performer should handle this
-    function BeginRandomSearch()
-    {
-        RitualLog(eRitualLog.kPerformer, "Now searching.");
-        SetData("IsSearching", true);
-        local performer = Performer();
-        local search_trols = SearchTrols();
-        if (search_trols.len() > 0) {
-            local i = Data.RandInt(0, (search_trols.len() - 1));
-            local target = search_trols[i];
-            Link_SetCurrentPatrol(performer, target);
-        }
-        Object.AddMetaProperty(performer, "M-RitualSearchModerate");
-    }
-
-    // FIXME: performer should handle this
-    function PlayRandomSearchConv()
-    {
-        local search_convs = PerfSearchConvs();
-        local i = Data.RandInt(0, (search_convs.len() - 1));
-        local conv = search_convs[i];
-        RitualLog(eRitualLog.kPerformer, "Chose random search conv: " + Object_Description(conv));
-        AI.StartConversation(conv);
-    }
-
-    // FIXME: performer should handle this
-    function OnPerformerPatrolPoint()
-    {
-        if (GetData("IsSearching")) {
-            PlayRandomSearchConv();
         }
     }
 
@@ -970,22 +948,6 @@ class RitualController extends SqRootScript
         if (fx == 0) { Die("no BloodFX."); }
         return fx;
     }
-
-    function SearchTrols()
-    {
-        local trols = Link_CollectPatrolPath(Link_GetAllParams("SearchTrol", self));
-        if (trols.len() == 0) { Die("no SearchTrol(s)."); }
-        return trols;
-    }
-
-    function PerfSearchConvs()
-    {
-        // FIXME: Maybe I only need one search conv for the perf (and one for each extra)? Try the "Search, Scan" tag.
-        // note that the investigate ability doesn't seem to use the Search, Peek tags: that's for Assassins.
-        local convs = Link_GetAllParams("PerfSearchConv", self);
-        if (convs.len() == 0) { Die("no PerfSearchConv(s)."); }
-        return convs;
-    }
 }
 
 
@@ -1029,11 +991,6 @@ class RitualPerformer extends SqRootScript
             PunchUp("PerformerReachedTarget", trol);
         } else {
             RitualLog(eRitualLog.kPerformer | eRitualLog.kPathing, "reached trol: " + Object.GetName(trol) + " (" + trol + ")");
-            // FIXME: we should do our own searching maybe?
-            // the ritual controller doesn't need to get involved: we can have the link to the
-            // search conv. In fact, it could be even be a different metaproperty+script that manages searching,
-            // and is the same for the performer and all the extras. But that comes later.
-            PunchUp("PerformerPatrolPoint", trol);
         }
     }
 
@@ -1088,6 +1045,10 @@ class RitualPerformer extends SqRootScript
 
     function OnAlertness()
     {
+        RitualLog(eRitualLog.kPerformer | eRitualLog.kAlertness,
+            Object_Description(self) + " alertness "
+            + message().oldLevel + " ======> " + message().level);
+
         // The performer's trance prevents them from noticing the player ordinarily,
         // so they'll only alert in extreme conditions or when scripted.
         if (message().level >= eAIScriptAlertLevel.kModerateAlert) {
@@ -1372,19 +1333,20 @@ class RitualExtra extends SqRootScript
     function OnAlertness()
     {
         RitualLog(eRitualLog.kExtra | eRitualLog.kAlertness,
-            Object_Description(self)
-            + message().oldLevel + " ===================> " + message().level);
+            Object_Description(self) + " alertness "
+            + message().oldLevel + " ======> " + message().level);
 
-        if ((message().level > message().oldLevel)
-            && (message().level >= eAIScriptAlertLevel.kModerateAlert))
-        {
-            // Stop patrolling and forget where we were going, so that when
-            // we return to the ritual, we can go to our last idle spot instead.
-            Object.RemoveMetaProperty(self, "M-DoesPatrol");
-            Link_DestroyAll("AICurrentPatrol", self);
+        // If we're searching, let it handle alertness.
+        if (! Object.HasMetaProperty(self, "M-RitualSearcher")) {
 
-            // Be lazy about investigating though.
-            Object.AddMetaProperty(self, "M-RitualLazyExtra");
+            if ((message().level > message().oldLevel)
+                && (message().level >= eAIScriptAlertLevel.kModerateAlert))
+            {
+                // Stop patrolling and forget where we were going, so that when
+                // we return to the ritual, we can go to our last idle spot instead.
+                Object.RemoveMetaProperty(self, "M-DoesPatrol");
+                Link_DestroyAll("AICurrentPatrol", self);
+            }
         }
     }
 
@@ -1454,9 +1416,14 @@ class RitualLazyExtra extends SqRootScript
     {
         RitualLog(eRitualLog.kLaziness,
             Object_Description(self) + " is lazy.");
+    }
 
-        // Start the tweq.
-        Property.Set(self, "StTweqBlink", "AnimS", 1);
+
+    function OnEndScript()
+    {
+        RitualLog(eRitualLog.kLaziness,
+            Object_Description(self) + " is no longer lazy.");
+        Property.Set(self, "StTweqBlink", "AnimS", 0);
     }
 
     function OnTweqComplete()
@@ -1474,11 +1441,16 @@ class RitualLazyExtra extends SqRootScript
 
     function OnAlertness()
     {
-        if (message().level < 2) {
+        if (message().level >= 2) {
+            // Start the tweq.
+            RitualLog(eRitualLog.kLaziness,
+                Object_Description(self) + " is alert, but lazy.");
+            Property.Set(self, "StTweqBlink", "AnimS", 1);
+        } else if (message().level < 2) {
+            // Laziness worked, we can stop checking that we're lazy enough.
             RitualLog(eRitualLog.kLaziness,
                 Object_Description(self) + " has calmed down. Back to work.");
-            // Laziness worked, we can stop checking that we're lazy enough.
-            Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
+            Property.Set(self, "StTweqBlink", "AnimS", 0);
         }
     }
 
@@ -1488,6 +1460,7 @@ class RitualLazyExtra extends SqRootScript
             RitualLog(eRitualLog.kLaziness,
                 Object_Description(self) + " is brain dead. Back to work (or not).");
             // We're brain dead, stop caring.
+            Property.Set(self, "StTweqBlink", "AnimS", 0);
             Object.RemoveMetaProperty(self, "M-RitualLazyExtra");
         }
     }
@@ -1677,5 +1650,56 @@ class RitualLazyExtra extends SqRootScript
         LinkTools.LinkSetData(link, "Level enter time", a_long_time_ago);
         LinkTools.LinkSetData(link, "Time last contact", a_long_time_ago);
         LinkTools.LinkSetData(link, "Last true contact", a_long_time_ago);
+    }
+}
+
+class RitualSearcher extends SqRootScript
+{
+    function OnBeginScript()
+    {
+        RitualLog(eRitualLog.kSearching,
+            Object_Description(self) + " now searching.");
+
+        // Pick a random search trol to start
+        local trols = Link_CollectPatrolPath(Link_GetAllParams("SearchTrol", self));
+        if (trols.len() > 0) {
+            local i = Data.RandInt(0, (trols.len() - 1));
+            local trol = trols[i];
+            if (trol != 0) {
+                RitualLog(eRitualLog.kSearching,
+                    Object_Description(self) + " starting search at " + Object_Description(trol));
+                Link_SetCurrentPatrol(self, trol);
+            } else {
+                RitualLog(eRitualLog.kSearching,
+                    "ERROR: " Object_Description(self) + " can't find SearchTrol(s).");
+            }
+        }
+
+        // These metaproperties govern walking around with the "Search"
+        // motion tags on low alert, and without them on high alert.
+        if (AI_AlertLevel(self) >= 3) {
+            Object.AddMetaProperty(self, "M-RitualSearchHigh");
+        } else {
+            Object.AddMetaProperty(self, "M-RitualSearchModerate");
+        }
+    }
+
+    function PlaySearchConv()
+    {
+        local conv = Link_GetOneParam("SearchConv", self);
+        if (conv != 0) {
+            AI.StartConversation(conv);
+        } else {
+            RitualLog(eRitualLog.kSearching,
+                "ERROR: " Object_Description(self) + " can't find SearchConv.");
+        }
+    }
+
+    function OnPatrolPoint()
+    {
+        local trol = message().patrolObj;
+        RitualLog(eRitualLog.kSearching,
+            Object_Description(self) + " is at " + Object_Description(trol));
+        PlaySearchConv();
     }
 }

@@ -1776,3 +1776,20 @@ class RitualProphetSpawner extends SqRootScript
         return Link_GetOneParam("ProphetConv", self);
     }
 }
+
+
+class ParticleZoomTest extends SqRootScript
+{
+    function OnTurnOn()
+    {
+        print("TurnOn");
+    }
+
+    function OnTurnOff()
+    {
+        print("TurnOff");
+        if (Property.Possessed(self, "PhysControl")) {
+            Property.Set(self, "PhysControl", "Controls Active", 0);
+        }
+    }
+}

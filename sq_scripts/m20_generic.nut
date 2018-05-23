@@ -513,24 +513,6 @@ class DoorStartsOpen extends SqRootScript
 }
 
 
-/* Put this script on a conversation, and then you can send "TurnOff" to it to
-   stop it dead. Make sure to give Actor 6 one step somewhere--"Nothing()" is
-   fine for the action--or it will be ignored and its death will be in vain. */
-class ConversationKiller extends SqRootScript
-{
-    function OnTurnOff()
-    {
-        // Kill the AIConversationActor links to force the conversation to stop.
-        local links = Link.GetAll("AIConversationActor", self);
-        foreach (link in links) {
-            local actor = LinkDest(link);
-            AI.SetScriptFlags(actor, 1); // 1 == kSpeechOff
-            Link.Destroy(link);
-        }
-    }
-}
-
-
 /* Normally particles won't render on an object that's contained--even if the
    object ends up rendered after all, on an Alt or Belt location. For this hack,
    create a clone of the particles, and ParticleAttachement it to a rendered,

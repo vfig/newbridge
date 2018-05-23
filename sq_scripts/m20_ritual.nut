@@ -81,6 +81,14 @@ enum eRitualStatus
     kAborted          = 5,
 }
 
+enum eRitualAbort
+{
+    kMissingHand        = 0,
+    kMissingVictim      = 1,
+    kPerformerBrainDead = 2,
+    kPerformerAlerted   = 3,
+}
+
 class RitualController extends SqRootScript
 {
     /* The overall ritual runs through these statuses:
@@ -179,6 +187,9 @@ class RitualController extends SqRootScript
             Gores();
             BloodFX();
             ProphetSpawner();
+            // ... aborting ...
+            NoHandConv();
+            NoVictimConv();
 
             // FIXME: need to know if we're at the start of the mission,
             // or just loading a save! We should only do the following
@@ -391,11 +402,6 @@ class RitualController extends SqRootScript
             // Time for a grand finale before failing the mission.
             RitualLog(eRitualLog.kRitual, "Finale");
 
-            // Kill all the down conversations
-            foreach (down in DownConvs()) {
-                SendMessage(down, "TurnOff");
-            }
-
             // Performer stays entranced, but no longer patrosl, and now moves at normal speed.
             local performer = Performer();
             Object.RemoveMetaProperty(performer, "M-DoesPatrol");
@@ -403,7 +409,7 @@ class RitualController extends SqRootScript
             Object.AddMetaProperty(performer, "M-RitualFinaleTrance");
 
             // Make sure di Rupo stays around at the altar while the extras get
-            // here. We do that by giving her a new conversation to deal with.
+            // here. HACK: we do that by giving her a new conversation to deal with.
             AI_SetIdleOrigin(performer, performer);
             AI.StartConversation(PerfWaitConv());
 
@@ -562,34 +568,61 @@ class RitualController extends SqRootScript
 
     // ---- The Player Intervened
 
-    function Abort()
+    function Abort(reason)
     {
+        // Give the performer a moment to react.
         if ((Status() == eRitualStatus.kInProgress)
             || (Status() == eRitualStatus.kLastStage))
         {
             SetStatus(eRitualStatus.kAborted);
             RitualLog(eRitualLog.kRitual, "Abort");
 
-            // Kill all the conversations
-            foreach (down in DownConvs()) {
-                SendMessage(down, "TurnOff");
-            }
-
-            local performer = Performer();
-
             // Wake the performer from her trance (if not dead), and make
             // them look like they're searching for the player.
+            local performer = Performer();
             if (AI_Mode(performer) != eAIMode.kAIM_Dead) {
                 Object.RemoveMetaProperty(performer, "M-RitualTrance");
                 Object.RemoveMetaProperty(performer, "M-RitualFinaleTrance");
                 Object.RemoveMetaProperty(performer, "M-DoesPatrol");
 
-                // HACK: aborting the conversation by killing an actor link
-                // leaves the performer's AI in a weird state. We really don't want that.
-                // So instead, we make them play a different conversation to override it,
-                // and they'll be fine once that conversation finishes.
-                AI.StartConversation(PerfWaitConv());
+                // HACK: you'll notice all the DownConvs have a Wait(100) between
+                // sending PerformerReachedAltar and starting the blessing. This
+                // allows the conversations below to get their speech in first--
+                // otherwise the blessing speech plays despite (for example) the
+                // hand having gone missing! I needed this hack because I couldn't
+                // find a way to get this speech to be overrule the other (priority
+                // settings in schema didn't affect it), nor could I reliably just
+                // stop the other speech without muting the performer. It's all bad.
+                if (reason == eRitualAbort.kMissingHand) {
+                    AI.StartConversation(NoHandConv());
+                } else if (reason == eRitualAbort.kMissingVictim) {
+                    AI.StartConversation(NoVictimConv());
+                } else {
+                    // HACK: abort the down conversation by playing another.
+                    AI.StartConversation(PerfWaitConv());
+                }
+                // We'll finish aborting when the conversation is done.
+            } else {
+                // Performer's dead, finish up right now.
+                FinishAborting();
+            }
+        }
+    }
 
+    function FinishAborting()
+    {
+        if (Status() == eRitualStatus.kAborted) {
+            RitualLog(eRitualLog.kRitual, "FinishAborting");
+
+            // Stop the particle effects (they may take a while)
+            local particles = Particles();
+            foreach (particle in particles) {
+                SendMessage(particle, "TurnOff");
+            }
+
+            // Make the performer search for the player
+            local performer = Performer();
+            if (AI_Mode(performer) != eAIMode.kAIM_Dead) {
                 // Bring out a weapon.
                 SendMessage(performer, "DrawDagger");
 
@@ -618,7 +651,10 @@ class RitualController extends SqRootScript
                 }
             }
 
-            Die("Well done, you stopped the ritual!");
+            // Stop here if we're not waiting for the performer
+            if (AI_Mode(performer) == eAIMode.kAIM_Dead) {
+                Die("Well done, you stopped the ritual!");
+            }
         }
     }
 
@@ -800,30 +836,43 @@ class RitualController extends SqRootScript
         }
     }
 
+    function OnConversationFinished()
+    {
+        local name = message().data;
+        if ((name == "NoHandConv")
+            || (name == "NoVictimConv")
+            || (name == "PerfWaitConv"))
+        {
+            if (Status() == eRitualStatus.kAborted) {
+                FinishAborting();
+            }
+        }
+    }
+
     // ---- Messages of abort conditions
 
     function OnPerformerNoticedHandMissing()
     {
         RitualLog(eRitualLog.kRitual, "Hand has been stolen");
-        Abort();
+        Abort(eRitualAbort.kMissingHand);
     }
 
     function OnPerformerNoticedVictimMissing()
     {
         RitualLog(eRitualLog.kRitual, "Victim has been unkidnapped");
-        Abort();
+        Abort(eRitualAbort.kMissingVictim);
     }
 
     function OnPerformerAlerted()
     {
         RitualLog(eRitualLog.kRitual, "Performer alerted");
-        Abort();
+        Abort(eRitualAbort.kPerformerAlerted);
     }
 
     function OnPerformerBrainDead()
     {
         RitualLog(eRitualLog.kRitual, "Performer is brain dead");
-        Abort();
+        Abort(eRitualAbort.kPerformerBrainDead);
     }
 
     // ---- Ritual status
@@ -948,6 +997,20 @@ class RitualController extends SqRootScript
         return strobes;
     }
 
+    function NoHandConv()
+    {
+        local conv = Link_GetOneParam("NoHandConv", self);
+        if (conv == 0) { Die("no NoHandConv."); }
+        return conv;
+    }
+
+    function NoVictimConv()
+    {
+        local conv = Link_GetOneParam("NoVictimConv", self);
+        if (conv == 0) { Die("no NoVictimConv."); }
+        return conv;
+    }
+
     function PerfWaitConv()
     {
         local conv = Link_GetOneParam("PerfWaitConv", self);
@@ -999,12 +1062,17 @@ class RitualPerformer extends SqRootScript
         Object.AddMetaProperty(self, "M-DoesPatrol");
     }
 
-    // ---- Messages from AI and scripts
-
-    function OnNoticedVictimMissing()
+    function OnWait()
     {
-        PunchUp("PerformerNoticedVictimMissing");
+        local conv = Link_GetOneParam("WaitConv", self);
+        if (conv != 0) {
+            AI.StartConversation(conv);
+        } else {
+            RitualLog(eRitualLog.kPerformer, "ERROR: no WaitConv.");
+        }
     }
+
+    // ---- Messages from AI and scripts
 
     function OnPatrolPoint()
     {
@@ -1024,6 +1092,12 @@ class RitualPerformer extends SqRootScript
         PunchUp("PerformerFacedAltar");
     }
 
+    function OnNoticedVictimMissing()
+    {
+        RitualLog(eRitualLog.kPerformer, "noticed victim has gone missing.");
+        PunchUp("PerformerNoticedVictimMissing");
+    }
+
     function OnUnpocketHand()
     {
         // Transfer the Hand to the Alt location, and make it unfrobbable
@@ -1037,11 +1111,13 @@ class RitualPerformer extends SqRootScript
                 // Tell the controller about it
                 PunchUp("PerformerReachedAltar");
             } else {
-                // The hand's been stolen: tell the controller
+                // The hand's been stolen!
+                RitualLog(eRitualLog.kPerformer, "noticed hand has gone missing.");
                 PunchUp("PerformerNoticedHandMissing");
             }
         } else {
-            // The hand's been stolen: tell the controller
+            // The hand's been stolen!
+            RitualLog(eRitualLog.kPerformer, "noticed hand has gone missing.");
             PunchUp("PerformerNoticedHandMissing");
         }
     }
@@ -1107,8 +1183,14 @@ class RitualPerformer extends SqRootScript
 
     function OnConversationFinished()
     {
-        // Tell the controller we've finished going down
-        PunchUp("PerformerReturnedToVertex");
+        local name = message().data;
+        if (name == "DownConv") {
+            // Tell the controller we've finished going down
+            PunchUp("PerformerReturnedToVertex");
+        } else {
+            RitualLog(eRitualLog.kPerformer, "conversation finished: " + name);
+            PunchUp(message().message, message().data);
+        }
     }
 
     function OnAlertness()

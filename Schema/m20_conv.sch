@@ -174,6 +174,8 @@ archetype M20_CONV
 nb506
 schema_voice vdirupo 1 nbconv5 (LineNo 6 6)
 
+// Look, there's no LineNo 7. That's just how it is.
+
 // "Unbuild! Unmake!..."
 schema nb507
 archetype M20_CONV
@@ -185,6 +187,30 @@ schema nb508
 archetype M20_CONV
 nb508
 schema_voice vdirupo 1 nbconv5 (LineNo 9 9)
+
+// "No! My Hand! ..."
+schema nb509
+archetype M20_CONV
+nb509
+schema_voice vdirupo 1 nbconv5 (LineNo 10 10)
+
+// "Where has he gone? ..."
+schema nb510
+archetype M20_CONV
+nb510
+schema_voice vdirupo 1 nbconv5 (LineNo 11 11)
+
+// "Aah! Who are you? ..."
+schema nb511
+archetype M20_CONV
+nb511
+schema_voice vdirupo 1 nbconv5 (LineNo 12 12)
+
+// "Thiefs! Took my hand! ..."
+schema nb512
+archetype M20_CONV
+nb512
+schema_voice vprophet 1 nbconv5 (LineNo 13 13)
 
 
 //////////////////////////////////

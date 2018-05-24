@@ -267,10 +267,14 @@ concept hmt122 7		//"I spy you little fish..."
 
 
 // M20 CONVERSATIONS AND SUCH
+concept nbconv0 10  // Garrett's internal monologue
+concept nbconv1 7   // Various npc lines
 concept nbconv3 10  //"Lady di Rupo, I presume?..."
 concept nbconv4 10  //"Garrett! What have you done?..."
 concept nbconv5 10  // Ritual incantations
+concept nbconv6 10  //"It's done. The ritual is stopped..."
 concept nbconv7 4   //"Heathens now, are we?..."
+concept nbconv8 4   //"Hullo, Sarge. Did you see..."
 concept nbritcel 7  // Ritual celebration noises
 
 
@@ -452,12 +456,16 @@ voice vshrimp	//Little guy in outtakes miss18
 
 // M20 VOICES
 
+// don't really need this, since garrett can only play VO and not act in conversations
 voice vgarrett
 
+// dirupo pain/death/searching lines should be copied from vpatron2
 voice vdirupo
-archetype vpatron2
 
+// keeper pain/death lines should be copied from normal1 (sv1)
 voice vkeeper1
 
+// propher apparition uses vhaunt, so this is just for the resurrected dude
 voice vprophet
-archetype vhaunt
+
+// Mystic merchant will just reuse normal1 (sv1), so no need for a voice entry here

@@ -513,6 +513,19 @@ class DoorStartsOpen extends SqRootScript
 }
 
 
+class StartsOff extends SqRootScript
+{
+    // Put this on a n object to send it TurnOff when the mission starts.
+
+    function OnSim()
+    {
+        if (message().starting) {
+            SendMessage(self, "TurnOff");
+        }
+    }
+}
+
+
 /* Normally particles won't render on an object that's contained--even if the
    object ends up rendered after all, on an Alt or Belt location. For this hack,
    create a clone of the particles, and ParticleAttachement it to a rendered,

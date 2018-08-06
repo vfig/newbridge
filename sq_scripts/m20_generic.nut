@@ -549,3 +549,28 @@ class HackBeltParticles extends WhenPlayerCarrying
         }
     }
 }
+
+/* Sends itself TurnOff a few seconds after receiving TurnOn */
+class AutoTurnOff extends SqRootScript
+{
+    timer = 0;
+
+    function OnTurnOn()
+    {
+        // If we get multiple TurnOns before the timer fires, kill the old timer.
+        if (timer != 0) {
+            KillTimer(timer);
+            timer = 0;
+        }
+
+        timer = SetOneShotTimer("AutoTurnOff", 6.0);
+    }
+
+    function OnTimer()
+    {
+        if (message().name == "AutoTurnOff") {
+            SendMessage(self, "TurnOff");
+            timer = 0;
+        }
+    }
+}

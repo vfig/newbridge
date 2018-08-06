@@ -574,3 +574,57 @@ class AutoTurnOff extends SqRootScript
         }
     }
 }
+
+/* Adds and removes "(Unconscious)" / "(Corpse)" to an AI's 'Object Name' property
+   when their status changes.  If the AI's name refers to an OBJNAMES.STR entry,
+   that will be read when the game starts.  To localise the status labels, add
+   the 'Name_UncStatus' and 'Name_CorpseStatus' strings to OBJNAMES.STR. */
+class AIStatusSuffix extends SqRootScript
+{
+    function UpdateSuffix()
+    {
+        // What is my original given name?
+        local name = GetData("AIStatusName");
+        if (name == "" || name == null) {
+            name = Data.GetObjString(self, "objnames");
+            SetData("AIStatusName", name);
+        }
+
+        // Am I dead or unconscious?
+        local suffix = "";
+        local mode = Property.Get(self, "AI_Mode");
+        if (mode == eAIMode.kAIM_Dead) {
+            local hp = Property.Get(self, "HitPoints");
+            if (hp <= 0) {
+                local text = Data.GetString("objnames.str", "Name_CorpseStatus");
+                if (text == "") { text = "(Corpse)"; }
+                suffix = " " + text;
+            } else {
+                local text = Data.GetString("objnames.str", "Name_UncStatus");
+                if (text == "") { text = "(Unconscious)"; }
+                suffix = " " + text;
+            }
+        }
+
+        // Update my name property
+        local prop = ("@hack: \"" + name + suffix + "\"");
+        Property.SetSimple(self, "GameName", prop);
+    }
+
+    function OnSim()
+    {
+        if (message().starting) {
+            UpdateSuffix();
+        }
+    }
+
+    function OnAIModeChange()
+    {
+        UpdateSuffix();
+    }
+
+    function OnSlain()
+    {
+        UpdateSuffix();
+    }
+}

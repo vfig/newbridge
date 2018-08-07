@@ -456,3 +456,30 @@ class PickUpWeapon extends SqRootScript
         return ((flags & 0x08) != 0); // "HaveLOS"
     }
 }
+
+
+class MarathonRunner extends SqRootScript
+{
+    function OnHighAlert()
+    {
+        SetData("MarathonStarted", GetTime());
+    }
+
+    function OnObjActResult()
+    {
+        // After running to a weapon...
+        if ((message().action == eAIAction.kAIGoto)
+            && (message().actdata == "PUWToWeapon"))
+        {
+            local started = GetData("MarathonStarted");
+            local ended = GetTime();
+            local duration = (ended - started).tointeger();
+            if (duration > 60) {
+                // So, if I don't manage to do some of the bonus objectives, rather than
+                // rework the objective scripting, just repurpose them and make this a
+                // bonus objective as an easter egg.
+                print("Congratulations, you made " + Object_Description(self) + " run a marathon for " + duration + " seconds!");
+            }
+        }
+    }
+}

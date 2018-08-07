@@ -364,3 +364,95 @@ class MysticGaugeTarget extends SqRootScript
         }   
     }
 }
+
+class PickUpWeapon extends SqRootScript
+{
+    /* Make an AI (hammerites only for now) run to pick up a weapon (hammers
+       only for now) when high alerted.
+
+       Put this script on an AI, and give them a ScriptParams(PickUpWeapon) link
+       to a Warhammer they can "pick up".
+    */
+
+    function OnHighAlert()
+    {
+        local link = Link_GetOneScriptParams("PickUpWeapon", self);
+        local weapon = ((link != 0) ? LinkDest(link) : 0);
+        // Destroy the link so we never try to pick up the weapon again.
+        Link.Destroy(link);
+
+        if (weapon == 0) {
+            // Can't find a weapon, so I'll just be a coward instead.
+            // (or maybe I've already picked one up?)
+        } else {
+            // Poop out a marker where we got alerted from, and keep a link to it.
+            local pos = Object.Position(self);
+            local marker = Object.BeginCreate("Marker");
+            if (marker != 0) {
+                Object.Teleport(marker, vector(0,0,0), vector(0,0,0), self);
+                Object.EndCreate(marker);
+                local link = Link.Create("ScriptParams", self, marker);
+                LinkTools.LinkSetData(link, "", "PUWOrigin");
+            }
+
+            // Run to the weapon.
+            // High priority so that it overrides the AI's desire to attack us bare-handed!
+            AI.MakeGotoObjLoc(self, weapon, eAIScriptSpeed.kFast,
+                eAIActionPriority.kHighPriorityAction, "PUWToWeapon");
+        }
+    }
+
+    function OnObjActResult()
+    {
+        // After running to the weapon...
+        if ((message().action == eAIAction.kAIGoto)
+            // FIXME: "the index 'result' does not exist ?!?
+            // So if we can't path to the weapon, we'll just magically get it. Okay!
+            /* && (message().result = eAIActionResult.kActionDone) */
+            && (message().actdata == "PUWToWeapon"))
+        {
+            // Pick up the weapon. It's a trick: actually we destroy the weapon and
+            // polymorphise into a Hammerite-with-a-hammer.
+            local weapon = message().target;
+            if (weapon != 0) {
+                Property.Set(self, "ModelName", "", "exphamh4");
+                Object.Destroy(weapon);
+            }
+
+            // Check for a pooped marker
+            local link = Link_GetOneScriptParams("PUWOrigin", self);
+            local marker = ((link != 0) ? LinkDest(link) : 0);
+            // Destroy the link so we never try to run to the marker again.
+            Link.Destroy(link);
+
+            // If we can see the player, forget the marker; otherwise
+            // run back to it, cause they're probably somewhere around there, right?
+            local player = Object.Named("Player");
+            local awareness = Link.GetOne("AIAwareness", self, player);
+            if ((awareness != 0)
+                && Awareness_HaveLOS(awareness))
+            {
+                Object.Destroy(marker);
+            } else {
+                AI.MakeGotoObjLoc(self, marker, eAIScriptSpeed.kFast,
+                    eAIActionPriority.kNormalPriorityAction, "PUWToMarker");
+            }
+
+        // After running back to the marker...
+        } else if ((message().action == eAIAction.kAIGoto)
+            && (message().actdata == "PUWToMarker"))
+        {
+            // Get rid of the marker now that we're here.
+            local marker = message().target;
+            if (marker != 0) {
+                Object.Destroy(marker);
+            }
+        }
+    }
+
+    function Awareness_HaveLOS(link)
+    {
+        local flags = LinkTools.LinkGetData(link, "Flags");
+        return ((flags & 0x08) != 0); // "HaveLOS"
+    }
+}

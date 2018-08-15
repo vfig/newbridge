@@ -50,3 +50,52 @@ class BigClock extends SqRootScript
         Property.Set(self, "JointPos", "Joint 1", hourAngle);
     }
 }
+
+
+class VanishingAct extends SqRootScript
+{
+    // Put this on an object with an inactive Flicker tweq, and an
+    // Alpha property. When it receives the TurnOff message,
+    // it will disappear in 10 seconds and then destroy itself.
+
+    previous_time = 0;
+    period = 10.0;
+
+    function OnTurnOff()
+    {
+        previous_time = message().time;
+        SetFlickering(true);
+    }
+
+    function OnTweqComplete()
+    {
+        // Figure out how much time has passed since the last update
+        local time = message().time
+        local elapsed = (time - previous_time) / 1000.0;
+        if (elapsed < 0) {
+            elapsed = 0;
+        } else if (elapsed > period) {
+            elapsed = period;
+        }
+        previous_time = time;
+
+        // Calculate the alpha change corresponding to the elapsed time
+        local alpha = Property.Get(self, "RenderAlpha", "").tofloat();
+        alpha = alpha - (elapsed / period);
+        if (alpha <= 0) {
+            SetFlickering(false);
+            Object.Destroy(self);
+        }
+
+        // Update alpha accordingly
+        Property.Set(self, "RenderAlpha", "", alpha);
+    }
+
+
+    function SetFlickering(on) {
+        // Turn on or off the flicker tweq
+        local animS = Property.Get(self, "StTweqBlink", "AnimS");
+        local newAnimS = (on ? (animS | 1) : (animS & ~1));
+        Property.Set(self, "StTweqBlink", "AnimS", newAnimS);
+    }
+}

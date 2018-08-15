@@ -547,15 +547,9 @@ class GoalPullTheStrings extends SqRootScript
         } else {
             SendMessage(door, "Open");
         }
-    }
 
-    function OnPatrolPoint()
-    {
-        // Go away when we reach the end of the patrol
-        local link = Link.GetOne("AIPatrol", message().patrolObj);
-        if (link == 0) {
-            Object.Destroy(self);
-        }
+        // And the keeper does his vanishing act
+        SendMessage(self, "TurnOff");
     }
 }
 
@@ -567,6 +561,17 @@ class GoalDamnKeepers extends SqRootScript
         - a ScriptParams("Patrol") link to the TrolPt where the Keeper should start
           (it should face the way the Keeper should face).
         - a ScriptParams("Conv") link to the conversation for the encounter.
+    */
+
+    /*
+    // FIXME: enable this only for debugging this goal
+    function OnSim()
+    {
+        if (message().starting) {
+            Goal.Show(eGoals.kDeliverTheItems);
+            Goal.Complete(eGoals.kDeliverTheItems)
+        }
+    }
     */
 
     function OnPlayerRoomEnter()
@@ -657,8 +662,8 @@ class GoalStopTheRitualByTheft extends WhenPlayerCarrying
 
 class GoalFailToStopTheRitual extends SqRootScript
 {
-    // FIXME: enable this only for debugging this goal
     /*
+    // FIXME: enable this only for debugging this goal
     function OnSim()
     {
         if (message().starting) {

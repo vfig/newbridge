@@ -1,0 +1,7 @@
+BUGS:
+
+- After delivery conversation, can enter the fishmongers and then go back in--which closes the door on you! Bad, cause I need to destroy the DeliveryDiRupo, Hand, and Anax at that point.
+
+- Garrett discovers the Anax is a person upon entering the crypt -- but might not yet have actually seen the Anax in person! See if we can do it when the Anax enters his view.
+
+

@@ -4,4 +4,5 @@ BUGS:
 
 - Garrett discovers the Anax is a person upon entering the crypt -- but might not yet have actually seen the Anax in person! See if we can do it when the Anax enters his view.
 
+- Misaligned textures and overlapping rooms in the manor
 

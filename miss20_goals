@@ -144,7 +144,8 @@ quest_create_mis goal_visible_21, 1
 quest_create_mis goal_irreversible_21, 0
 quest_create_mis goal_final_21, 1
 quest_create_mis goal_type_21, 4
-quest_create_mis goal_target_21, 623
+; The room ID here is that of SouthGateRoom
+quest_create_mis goal_target_21, 1053
 
 mprint Goals updated
 

@@ -1,0 +1,93 @@
+# Plan for room archetypes and EAX settings:
+#
+# - One archetype for each type of room, so I can set EAX by archetype
+#   instead of tediously room-by-room. (eax_set_archetype <archetype_id>,<room_type>)
+#
+# - Doorway rooms should have each half matching the larger room on its side.
+#
+# - Keep all room EAX settings in a script so it can be rerun.
+#
+# - For final release, customise EAX of some rooms according to their wall/floor/
+#   ceiling/furnishings/size, where it seems necessary. Add the change to the script.
+#
+# - One archetype for each room/group of rooms that needs objectives,
+#   scripts and/or links. (marked here with *)
+
+ExteriorRoom (generic exteriors)
+    PlazaRoom
+        FountainRoom*
+    StreetRoom
+        SouthGateRoom*
+        KeeperManorRoom*
+        KeeperForkRoom*
+    AlleyRoom
+        OutsideFishmongersRoom*
+        KeeperAlleyRoom*
+
+InteriorRoom (generic interiors)
+    InsideFishmongersRoom*
+
+SanctuaryRoom* (all sanctuary spaces, including garden)
+    SanctuaryGardenRoom
+    SanctuaryCryptRoom*
+    ...more as needed for EAX
+
+CemeteryRoom
+    MausoleumRoom
+    CatacombRoom
+    KeeperCemeteryRoom*
+
+ManorRoom (all manor spaces, including grounds)
+    ManorGroundsRoom
+    ManorTowerRoom* [script should allow anything-but-CaveRoom tbh]
+    ...more as needed for EAX
+
+CaveRoom (caves below the manor)
+
+
+
+==== Summary from objectives_test, for reference:
+
+FountainRoom (42) - fountain square
+    - GoalTheFountain
+SanctuaryRoom (36) - sanctury (hammer floor)
+    - GoalEnterTheSanctuary; GoalReturnTheAnax
+    - ~ScriptParams: RitualTheAnax "DeliveryRoom"
+    CryptRoom (37) - room with anax
+        - GoalSeeingTheAnax
+TowerRoom (10) - room for tower (where Anax is safe)
+    - GoalEscapeWithTheAnax
+    - ScriptParams: RitualTheAnax "WatchThis"
+SouthGateRoom (12) - starting room
+OutsideFishmongersRoom (56) - room outside fishmongers
+    - GoalNearTheFishmongers
+    - ControlDevice: A 4x7rusty
+    - ScriptParams: MausoleumTheHand "WatchThis"
+    - ScriptParams: SanctuaryTheAnax "WatchThis"    
+InsideFishmongersRoom (57) - room inside fishmongers (really now)
+    - GoalDeliverTheItems
+    - ControlDevice: Conv300
+    - ~ScriptParams: MausoleumTheHand "DeliveryRoom"
+    - ~ScriptParams: SanctuaryTheAnax "DeliveryRoom"
+KeeperRoom (52)
+    KeeperRoomManor (53) - room approaching manor, before portcullis
+        - GoalDamnKeepers
+        - ScriptParams: door_keeper_manor "Door"
+        - ScriptParmams: trol_keeper_manor1 "Patrol"
+        - ScriptParams: Conv400 "Conv"
+    KeeperRoomCemetery (63) - room in south of cemetery, behind gates
+        - GoalDamnKeepers
+        - ScriptParams: CemeteryGate1 "Door"
+        - ScriptParmams: trol_keeper_cemetery1 "Patrol"
+        - ScriptParams: Conv400 "Conv"
+    KeeperRoomFork (45) - room just before sanctuary, behind portcullis
+        - GoalDamnKeepers
+        - ScriptParams: door_keeper_fork "Door"
+        - ScriptParmams: trol_keeper_fork1 "Patrol"
+        - ScriptParams: Conv400 "Conv"
+    KeeperRoomAlley (54) - room in middle of alley, behind gate
+        - GoalDamnKeepers
+        - ScriptParams: door_keeper_alley "Door"
+        - ScriptParmams: trol_keeper_alley1 "Patrol"
+        - ScriptParams: Conv400 "Conv"
+RitualRoom (96) - room for ritual

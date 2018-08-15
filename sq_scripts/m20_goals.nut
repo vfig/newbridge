@@ -526,9 +526,9 @@ class GoalPullTheStrings extends SqRootScript
         local difficulty = Quest.Get("Difficulty");
         local conv;
         if (difficulty == 0) {
-            conv = LinkDest(Link_GetScriptParams("ConvNormal", self));
+            conv = LinkDest(Link_GetOneScriptParams("ConvNormal", self));
         } else {
-            conv = LinkDest(Link_GetScriptParams("ConvHard", self));
+            conv = LinkDest(Link_GetOneScriptParams("ConvHard", self));
         }
         AI.StartConversation(conv);
     }
@@ -540,7 +540,7 @@ class GoalPullTheStrings extends SqRootScript
         Goal.Show(eGoals.kReturnTheAnax);
 
         // Open the door again. Unlock it if it has a linked lock.
-        local door = LinkDest(Link_GetScriptParams("Door", self));
+        local door = LinkDest(Link_GetOneScriptParams("Door", self));
         local lock_link = Link.GetOne("Lock", door);
         if (lock_link != 0) {
             SendMessage(LinkDest(lock_link), "Unlock");
@@ -580,9 +580,9 @@ class GoalDamnKeepers extends SqRootScript
             Quest.Set("triggered_damn_keepers", 1);
 
             local player = Object.Named("Player");
-            local door = LinkDest(Link_GetScriptParams("Door", self));
-            local patrol = LinkDest(Link_GetScriptParams("Patrol", self));
-            local conv = LinkDest(Link_GetScriptParams("Conv", self));
+            local door = LinkDest(Link_GetOneScriptParams("Door", self));
+            local patrol = LinkDest(Link_GetOneScriptParams("Patrol", self));
+            local conv = LinkDest(Link_GetOneScriptParams("Conv", self));
             local keeper = LinkDest(Link_GetConversationActor(1, conv));
             local garrett_voice = LinkDest(Link_GetConversationActor(2, conv));
 
@@ -657,7 +657,8 @@ class GoalStopTheRitualByTheft extends WhenPlayerCarrying
 
 class GoalFailToStopTheRitual extends SqRootScript
 {
-    // FIXME: for debugging only
+    // FIXME: enable this only for debugging this goal
+    /*
     function OnSim()
     {
         if (message().starting) {
@@ -665,6 +666,7 @@ class GoalFailToStopTheRitual extends SqRootScript
             Goal.Show(eGoals.kKeepTheAnaxAlive);
         }
     }
+    */
 
     /* Put this on the ritual controller. It listens for a "RitualEnded"
        message, and cancels the relevant objectives, then fails them

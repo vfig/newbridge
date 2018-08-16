@@ -4,5 +4,7 @@ BUGS:
 
 - Garrett discovers the Anax is a person upon entering the crypt -- but might not yet have actually seen the Anax in person! See if we can do it when the Anax enters his view.
 
+- Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk I don't know if that's an issue.
+
 - Misaligned textures and overlapping rooms in the manor
 

@@ -513,6 +513,19 @@ class DoorStartsOpen extends SqRootScript
 }
 
 
+class StartsOn extends SqRootScript
+{
+    // Put this on a n object to send it TurnOn when the mission starts.
+
+    function OnSim()
+    {
+        if (message().starting) {
+            SendMessage(self, "TurnOn");
+        }
+    }
+}
+
+
 class StartsOff extends SqRootScript
 {
     // Put this on a n object to send it TurnOff when the mission starts.

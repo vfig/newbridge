@@ -275,6 +275,8 @@ concept nbconv5 10  // Ritual incantations
 concept nbconv6 10  //"It's done. The ritual is stopped..."
 concept nbconv7 4   //"Heathens now, are we?..."
 concept nbconv8 4   //"Hullo, Sarge. Did you see..."
+concept nbconv9 4   //"Morten's taking his time..."
+concept nbconv10 4  //"Builder's grace to thee..."
 concept nbritcel 7  // Ritual celebration noises
 
 

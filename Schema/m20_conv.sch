@@ -520,3 +520,64 @@ archetype M20_CONV
 nb807
 schema_voice guard1 1 nbconv8 (LineNo 8 8)
 
+
+//////////////////////////////////
+// 900: THIEF 1 AND THIEF 2
+
+// "Morten's sure takin' his time in there..."
+schema nb900
+archetype M20_CONV
+nb900
+schema_voice vthief2 1 nbconv9 (LineNo 1 1)
+
+// "Could be. Maybe the traps done for 'im?..."
+schema nb901
+archetype M20_CONV
+nb901
+schema_voice vthief1 1 nbconv9 (LineNo 2 2)
+
+// "Me? Well I would, but you know..."
+schema nb902
+archetype M20_CONV
+nb902
+schema_voice vthief2 1 nbconv9 (LineNo 3 3)
+
+// "Ah, yer just scared!..."
+schema nb903
+archetype M20_CONV
+nb903
+schema_voice vthief1 1 nbconv9 (LineNo 4 4)
+
+// "I am not! I'm not scared...."
+schema nb904
+archetype M20_CONV
+nb904
+schema_voice vthief2 1 nbconv9 (LineNo 5 5)
+
+
+//////////////////////////////////
+// 1000: PRIEST AND HAMMERITE 2
+
+// "The Builder's blessing, brother..."
+schema nb1000
+archetype M20_CONV
+nb1000
+schema_voice hammer1 1 nbconv10 (LineNo 1 1)
+
+// "Quiet enough. Most carters pay the toll..."
+schema nb1001
+archetype M20_CONV
+nb1001
+schema_voice hammer3 1 nbconv10 (LineNo 2 2)
+
+// "The skirmish yester noon hath taught..."
+schema nb1002
+archetype M20_CONV
+nb1002
+schema_voice hammer1 1 nbconv10 (LineNo 3 3)
+
+// "Regrettably. I shall ask Brother Lionel..."
+schema nb1003
+archetype M20_CONV
+nb1003
+schema_voice hammer3 1 nbconv10 (LineNo 4 4)

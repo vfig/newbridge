@@ -2,9 +2,10 @@ BUGS:
 
 - After delivery conversation, can enter the fishmongers and then go back in--which closes the door on you! Bad, cause I need to destroy the DeliveryDiRupo, Hand, and Anax at that point.
 
-- Garrett discovers the Anax is a person upon entering the crypt -- but might not yet have actually seen the Anax in person! See if we can do it when the Anax enters his view.
+- Garrett discovers the Anax is a person upon entering the crypt -- but might not yet have actually seen the Anax in person! See if we can do it when the Anax enters his view. But first, cause it's simpler, just make it when he enters the _Eastern_ crypt room where the Anax hangs out.
 
-- Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk I don't know if that's an issue.
+- Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk, and I don't know if that's an issue.
 
 - Misaligned textures and overlapping rooms in the manor
 
+- Can get _slightly_ too high in the bell tower and see the carpet of the world. Tweak it slightly. Also, climbing to the top of your rope gets you stuck between the beams and the bell; check the bell's dimensions.

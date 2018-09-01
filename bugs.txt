@@ -13,3 +13,5 @@ BUGS:
 - Ritual person-shaped particle system should start one vertex previous?
 
 - Wind sound effect blowing out torch suggests air, which I don't want. Also should be slight wind sfx near air lever, if possible.
+
+- Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.

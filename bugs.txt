@@ -15,3 +15,5 @@ BUGS:
 - Wind sound effect blowing out torch suggests air, which I don't want. Also should be slight wind sfx near air lever, if possible.
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
+
+- If you flashbomb di Rupo right before she reaches the altar, then steal the Anax while she is still blinded, she reacts and alerts, but then just stands still. It seems NoVictimConv never finishes??!?

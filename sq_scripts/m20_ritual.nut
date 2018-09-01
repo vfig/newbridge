@@ -627,14 +627,12 @@ class RitualController extends SqRootScript
                 SendMessage(performer, "DrawDagger");
 
                 // Make sure the performer will investigate a little before searching.
-                // These are singleton links, so don't add them if they're already present!
+                // These are singleton links, so destroy any existing ones first!
                 local player = Object.Named("Player");
-                if (! Link.AnyExist("AIInvest", performer, player)) {
-                    Link.Create("AIInvest", performer, Object.Named("Player"));
-                }
-                if (! Link.AnyExist("AIAwareness", performer, player)) {
-                    Link.Create("AIAwareness", performer, Object.Named("Player"));
-                }
+                Link_DestroyAll("AIInvest", performer);
+                Link.Create("AIInvest", performer, player);
+                Link_DestroyAll("AIAwareness", performer, player);
+                Link.Create("AIAwareness", performer, player);
 
                 // Even after investigating, the performer should search around endlessly,
                 // starting at a random point.

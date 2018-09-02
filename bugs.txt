@@ -16,4 +16,6 @@ BUGS:
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
-- If you flashbomb di Rupo right before she reaches the altar, then steal the Anax while she is still blinded, she reacts and alerts, but then just stands still. It seems NoVictimConv never finishes??!?
+- The apparition of The Prophet in the mausoleum ought to get destroyed when the ritual begins.
+
+- The door in front of the fishmongers doesn't trigger reliably (possibly blocked by the player?) Make sure--after the rebuild--it opens *inward* to the room and detects if the player dropped the hand and/or the anax in the room area and then picks them up again.

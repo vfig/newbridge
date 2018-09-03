@@ -4,6 +4,9 @@ region 1: Sanctuary
     id 3: Warden's Key (Priest room)
     id 4: Tower key
 
-region 2:
-region 4:
-region 8:
+region 10: City
+    id 1: Argaux's Lockbox
+
+region 100:
+
+region 1000:

@@ -641,3 +641,13 @@ class AIStatusSuffix extends SqRootScript
         UpdateSuffix();
     }
 }
+
+class LockboxFrobSound extends SqRootScript
+{
+    function OnFrobWorldEnd()
+    {
+        if (Locked.IsLocked(self)) {
+            Sound.PlaySchemaAtObject(self, "locked", self);
+        }
+    }
+}

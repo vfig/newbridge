@@ -3,24 +3,24 @@ fiction_0: "Your contact, Argaux, will be waiting for you at the fountain. Meet 
 text_0: "Meet Argaux at the fountain."
 
 ; 1: FindArgauxsInfauxs
-fiction_1: "Find out about the job Argaux had in mind."
-text_1: "Find out about the job Argaux had in mind."
+fiction_1: "See what you can learn about the job at Argaux's place."
+text_1: "See what you can learn about the job at Argaux's place."
 
 ; 2: KidnapTheAnax
 fiction_2: "Take the Anax of Easthart from the Hammer Sanctuary."
 text_2: "Take the Anax of Easthart from the Hammer Sanctuary."
 
 ; 3: BonusBurrickTrouble
-fiction_3: "(Bonus) Distract the Hammerites with the help of some unusual allies."
-text_3: "(Bonus) Distract the Hammerites with the help of some unusual allies."
+fiction_3: "(CUT) Distract the Hammerites with the help of some unusual allies."
+text_3: "(CUT) Distract the Hammerites with the help of some unusual allies."
 
 ; 4: StealTheHand
 fiction_4: "Steal the Prophet's Hand from the mausoleum."
 text_4: "Steal the Prophet's Hand from the mausoleum."
 
 ; 5: BonusBanishTheGhost
-fiction_5: "(Bonus) Banish the Prophet's apparition, just to be safe."
-text_5: "(Bonus) Banish the Prophet's apparition, just to be safe."
+fiction_5: "(CUT) Banish the Prophet's apparition, just to be safe."
+text_5: "(CUT) Banish the Prophet's apparition, just to be safe."
 
 ; 6: DeliverTheItems
 fiction_6: "When you have both items, take them to the fishmongers for your payment."
@@ -31,8 +31,8 @@ fiction_7: "Find out where Lady di Rupo is performing the ritual, and stop it."
 text_7: "Find out where Lady di Rupo is performing the ritual, and stop it."
 
 ; 8: BonusSubvertTheRitual
-fiction_8: "(Bonus) That'll interrupt the ritual for sure. Shame about the mess."
-text_8: "(Bonus) That'll interrupt the ritual for sure. Shame about the mess."
+fiction_8: "(CUT) That'll interrupt the ritual for sure. Shame about the mess."
+text_8: "(CUT) That'll interrupt the ritual for sure. Shame about the mess."
 
 ; 9: EscapeWithTheAnax
 fiction_9: "Get the Anax safely out of the area."
@@ -43,8 +43,8 @@ fiction_10: "Rescue the Anax and bring him back to the Hammerite Sanctuary."
 text_10: "Rescue the Anax and bring him back to the Hammerite Sanctuary."
 
 ; 11: BonusSellTheHand
-fiction_11: "(Bonus) The Hand's useless to you now. See if you can find a buyer for it."
-text_11: "(Bonus) The Hand's useless to you now. See if you can find a buyer for it."
+fiction_11: "(CUT) The Hand's useless to you now. See if you can find a buyer for it."
+text_11: "(CUT) The Hand's useless to you now. See if you can find a buyer for it."
 
 ; 12: KeepTheAnaxAlive
 fiction_12: "Don't let the Anax come to any harm."
@@ -75,7 +75,7 @@ fiction_18: "FIXME: steal special loot 2"
 text_18: "FIXME: steal special loot 2"
 
 ; 19: DontKillBystanders
-fiction_19: "It's their money that you want, not their lives. Don't kill any unarmed people."
+fiction_19: "Don't kill any unarmed people. It's their money that you want, not their lives."
 text_19: "Don't kill any unarmed people."
 
 ; 20: DontKillHumans

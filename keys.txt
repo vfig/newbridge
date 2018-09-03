@@ -6,6 +6,7 @@ region 1: Sanctuary
 
 region 10: City
     id 1: Argaux's Lockbox
+    id 2: Warehouse trapdoor
 
 region 100:
 

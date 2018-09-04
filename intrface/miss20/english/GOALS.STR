@@ -3,8 +3,8 @@ fiction_0: "Your contact, Argaux, will be waiting for you at the fountain. Meet 
 text_0: "Meet Argaux at the fountain."
 
 ; 1: FindArgauxsInfauxs
-fiction_1: "See what you can learn about the job at Argaux's place."
-text_1: "See what you can learn about the job at Argaux's place."
+fiction_1: "Go to Argaux's place and see what you can find out."
+text_1: "Go to Argaux's place and see what you can find out."
 
 ; 2: KidnapTheAnax
 fiction_2: "Take the Anax of Easthart from the Hammer Sanctuary."

@@ -45,10 +45,10 @@ enum eMonologues {
     kHammerTakenByBurricks  = 17, // CUT!
     kGotTheFirstItem        = 12, // FIXME: script this
     /* The Hand */
-    kMausoleumLocked        = 0, // FIXME: script this
-    kPuzzleFailed1          = 9, // FIXME: script this
-    kPuzzleFailed2          = 10, // FIXME: script this
-    kPuzzleFailed3          = 11, // FIXME: script this
+    kMausoleumLocked        = 0,
+    kPuzzleFailed1          = 9,
+    kPuzzleFailed2          = 10,
+    kPuzzleFailed3          = 11,
     kEnteredTheProphetsRoom = 16, // FIXME: script this
     kFoundTheOldRing        = 21, // CUT!
     kBanishedTheGhost       = 18, // CUT!
@@ -442,6 +442,41 @@ class GoalEnterTheMausoleum extends SqRootScript
     function OnPlayerRoomEnter()
     {
         Goal.CancelMonologue(eMonologues.kMausoleumLocked);
+    }
+}
+
+class GoalMausPuzzleFailure extends SqRootScript
+{
+    /* Put this on a relay triggered when the puzzle is failed. */
+
+    function OnTurnOn() {
+        // Curses, failed again!
+        local count = GetFailureCount();
+        ++count;
+        SetFailureCount(count);
+
+        // Might want to react verbally
+        if (count == 1) {
+            Goal.SpeakMonologue(eMonologues.kPuzzleFailed1);
+        } else if (count == 2) {
+            Goal.SpeakMonologue(eMonologues.kPuzzleFailed2);
+        } else if (count == 3) {
+            Goal.SpeakMonologue(eMonologues.kPuzzleFailed3);
+        }
+    }
+
+    function GetFailureCount()
+    {
+        if (IsDataSet("MausPuzzleFailureCount")) {
+            return GetData("MausPuzzleFailureCount");
+        } else {
+            return 0;
+        }
+    }
+
+    function SetFailureCount(count)
+    {
+        SetData("MausPuzzleFailureCount", count);
     }
 }
 

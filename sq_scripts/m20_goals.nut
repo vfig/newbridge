@@ -4,18 +4,18 @@ enum eGoals {
     kFindArgauxsInfauxs     = 1,
     /* The Anax */
     kKidnapTheAnax          = 2,
-    kBonusBurrickTrouble    = 3,
+    kBonusBurrickTrouble    = 3, // CUT!
     /* The Hand */
     kStealTheHand           = 4,
-    kBonusBanishTheGhost    = 5,
+    kBonusBanishTheGhost    = 5, // CUT!
     /* Delivery */
     kDeliverTheItems        = 6,
     /* The Ritual */
     kStopTheRitual          = 7,
-    kBonusSubvertTheRitual  = 8,
+    kBonusSubvertTheRitual  = 8, // CUT!
     kEscapeWithTheAnax      = 9,
-    kReturnTheAnax          = 10, // Hard + Expert
-    kBonusSellTheHand       = 11,
+    kReturnTheAnax          = 10, // CUT! (was Hard + Expert)
+    kBonusSellTheHand       = 11, // CUT!
     /* Silly player */
     kKeepTheAnaxAlive       = 12,
     kDontBiteTheHand        = 13,
@@ -38,10 +38,11 @@ enum eMonologues {
     kFoundArgauxsBody       = 6,
     kFoundArgauxsInfauxs    = 2,
     kFoundDiRuposInfos      = 4,
+    kFoundArgauxsBodyLater  = 22, // FIXME: script this
     /* The Anax */
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
-    kHammerTakenByBurricks  = 17, // FIXME: script this
+    kHammerTakenByBurricks  = 17, // CUT!
     kGotTheFirstItem        = 12, // FIXME: script this
     /* The Hand */
     kMausoleumLocked        = 0, // FIXME: script this
@@ -49,41 +50,57 @@ enum eMonologues {
     kPuzzleFailed2          = 10, // FIXME: script this
     kPuzzleFailed3          = 11, // FIXME: script this
     kEnteredTheProphetsRoom = 16, // FIXME: script this
-    kBanishedTheGhost       = 18, // FIXME: script this
+    kFoundTheOldRing        = 21, // CUT!
+    kBanishedTheGhost       = 18, // CUT!
     kGotTheSecondItem       = 13, // FIXME: script this
-    kGonnaSellTheHand       = 20, // FIXME: script this
+    kGonnaSellTheHand       = 20, // CUT!
     /* Delivery */
     kThisIsTheDeliverySpot  = 8,
     /* The Ritual */
     kLookAtTheTower         = 14, // FIXME: script this
-    kFoundTheRitual         = 7,
-    kReleasedTheProphet     = 19, // FIXME: script this
-    kRescuingTheAnax        = 15, // FIXME: script this
+    kFoundTheRitual         = 7,  // FIXME: script this
+    kReleasedTheProphet     = 19, // CUT!
+    kRescuingTheAnax        = 15, // CUT!
+    kSafePlaceForAnax       = 23, // FIXME: script this
 }
 
 // FIXME: don't need these once I have recordings
 local DebugMonologueText = [
-    "Looks like I'll have to find another way in.",
+    // 0-15:
+    "Sealed shut! I'll have to find another way in.",
     "Strange that Argaux's not here. I should scout around to see if he's nearby.",
     "So this is what Argaux wanted my help on. The money's good. I think I'll do the job by myself.",
     "So the Anax is a person, not a trinket. That's ... inconvenient.",       
     "So this is the job Argaux wanted my help on. I think I'll do the job by myself: then I won't have to pay his finder's fee.",
     "Now to find the Anax, whatever that is.",
-    "Looks like Argaux's career has come to a sudden stop. I should check his place for info on this job. ... Guess I won't have to give up that finder's fee after all.",
-    "They've already started the ritual. Need to be quick if I'm gonna stop them.",
+    "Poor Argaux. ... Guess he won't be collecting his finder's fee now. I should check his place for info on the job.",
+    "Damn, they've already started the ritual! Need to be quick if I'm gonna stop them.",
     "This looks like the hand-off point.",
-    "Must be the wrong combination.",
-    "Nope!",
-    "I hate to say it, but maybe some research would help me figure this out?",
+    "Damn, must be the wrong combination.",
+    "Still wrong!",
+    "*Sigh* ... I've never liked reading, but maybe some research would help me figure this out.",
     "One down, one to go.",
     "Now to deliver all this and get my money.",
     "The tower's all lit up. That's new.",
-    "I hope the Hammers appreciate me rescuing this guy.",
+    "CUT: I hope the Hammers appreciate me rescuing this guy.",
+    // 16:
     "I don't like the look of this.",
-    "I guess the Burricks were saving him for a late night snack?",
-    "You know, I really didn't think that would work!",
-    "Heh heh. Sorry about the mess.",
-    "Got this Hand here you might be interested in..."
+    "CUT: I guess the Burricks were saving him for a late night snack?",
+    "CUT: You know, I really didn't think that would work!",
+    "CUT: Heh heh. Sorry about the mess.",
+    "CUT: Got this Hand here you might be interested in...",
+    "CUT: This looks old!",
+    // 22-23:
+    "Looks like Argaux's career has come to a sudden stop. ... Poor Argaux",
+    "*Phew* This guy's getting heavy! I figure he'll be safe enough here",
+];
+
+local MonologueSchemas = [
+    "nb000", "nb001", "nb002", "nb003", "nb004",
+    "nb005", "nb006", "nb007", "nb008", "nb009",
+    "nb010", "nb011", "nb012", "nb013", "nb014",
+    "nb015", "nb016", "nb017", "nb018", "nb019",
+    "nb020", "nb021", "nb022", "nb023",
 ];
 
 local Goal = {
@@ -154,9 +171,11 @@ local Goal = {
 
     SpeakMonologue = function(monologue) {
         if (Quest.Get("mlog_done_" + monologue) == 0) {
-            // FIXME: play the voice line here
+            local player = Object.Named("Player");
             print("Speaking " + monologue + ": " + DebugMonologueText[monologue]);
-            DarkUI.TextMessage(DebugMonologueText[monologue], 0);
+            Sound.PlayVoiceOver(player, MonologueSchemas[monologue]);
+            // FIXME: remove this.
+            //DarkUI.TextMessage(DebugMonologueText[monologue], 0);
             Quest.Set("mlog_done_" + monologue, 1);
         } else {
             print("Skipping " + monologue + ": " + DebugMonologueText[monologue]);
@@ -388,6 +407,26 @@ class GoalKidnapTheAnax extends WhenPlayerCarrying
 
 /* -------- The Hand -------- */
 
+
+class GoalMausoleumIsLocked extends SqRootScript
+{
+    /* Put this on the mausoleum doors. */
+
+    function OnFrobWorldEnd()
+    {
+        Goal.SpeakMonologue(eMonologues.kMausoleumLocked);
+    }
+}
+
+class GoalEnterTheMausoleum extends SqRootScript
+{
+    /* Put this on the concrete mausoleum rooms. */
+
+    function OnPlayerRoomEnter()
+    {
+        Goal.CancelMonologue(eMonologues.kMausoleumLocked);
+    }
+}
 
 class GoalStealTheHand extends WhenPlayerCarrying
 {

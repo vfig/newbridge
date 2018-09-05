@@ -37,7 +37,7 @@ archetype M20_CONV
 nb005
 schema_voice vgarrett 1 nbconv0 (LineNo 6 6)
 
-// "Looks like Argaux's career..."
+// "Looks like Argaux's career... I'll take the job..."
 schema nb006
 archetype M20_CONV
 nb006
@@ -132,6 +132,18 @@ schema nb021
 archetype M20_CONV
 nb021
 schema_voice vgarrett 1 nbconv0 (LineNo 22 22)
+
+// "Looks like Argaux's career ..."
+schema nb022
+archetype M20_CONV
+nb022
+schema_voice vgarrett 1 nbconv0 (LineNo 23 23)
+
+// "This guy's getting heavy. ..."
+schema nb023
+archetype M20_CONV
+nb023
+schema_voice vgarrett 1 nbconv0 (LineNo 24 24)
 
 
 //////////////////////////////////

@@ -23,5 +23,3 @@ BUGS:
 - Need actual stairs in Hammer Sanctuary, not just ramps
 
 - Lever behind statue in Hammer Sanctuary needs to be visible without climbing up beside. Doesn't need to be _that_ hidden.
-
-- Door outside fishmonger's isn't opening reliably...

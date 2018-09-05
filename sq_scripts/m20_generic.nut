@@ -250,61 +250,87 @@ class WhenPlayerCarrying extends SqRootScript
 class WatchForItems extends SqRootScript
 {
     /* Put this on a concrete room, with ScriptParams("WatchThis") links to
-       each of the items to watch for. It will send "ItemsArrived(true)" when
-       all the items are in the room. */
+       each of the items to watch for; each item must also have the ItemToWatch
+       script on it, if you want the script to trigger when the player is already
+       in the room and picks the item up.
 
-    item_state = {};
+       This will send "ItemsArrived(true)" to itself when the player is in the room
+       and is carrying all the items.
+    */
 
-    function IsWatching(obj) {
-        local link = Link.GetOne("ScriptParams", self, obj);
-        return ((link != 0) && (LinkTools.LinkGetData(link, "") == "WatchThis"));
-    }
-
-    function OnObjectRoomEnter()
+    function GetPlayerInRoom()
     {
-        local item = message().MoveObjId;
-        if (IsWatching(item)) {
-            item_state[item] <- true;
-            CheckForAllItems();
+        if (IsDataSet("WFIPlayerInRoom")) {
+            return GetData("WFIPlayerInRoom");
+        } else {
+            return false;
         }
     }
 
-    function OnObjectRoomExit()
+    function SetPlayerInRoom(in_room)
     {
-        local item = message().MoveObjId;
-        if (IsWatching(item)) {
-            item_state[item] <- false;
-            CheckForAllItems();
-        }
+        SetData("WFIPlayerInRoom", in_room);
     }
 
-    function OnCreatureRoomEnter()
+    function OnPlayerRoomEnter()
     {
-        OnObjectRoomEnter();
+        SetPlayerInRoom(true);
+        CheckForAllItems();
     }
 
-    function OnCreatureRoomExit()
+    function OnPlayerRoomExit()
     {
-        OnObjectRoomExit();
+        SetPlayerInRoom(false);
     }
-    
+
+    function OnWatchedItemContained()
+    {
+        CheckForAllItems();
+    }
+
     function CheckForAllItems()
     {
-        local all_items = true;
-        local links = Link.GetAll("ScriptParams", self);
-        foreach (link in links) {
-            local data = LinkTools.LinkGetData(link, "");
-            local target = LinkDest(link);
-            if (data == "WatchThis") {
-                local item_present = ((target in item_state) && item_state[target]);
-                if (! item_present) {
-                    all_items = false;
-                    break;
+        if (GetPlayerInRoom()) {
+            local player = Object.Named("Player");
+            local all_items = true;
+            local links = Link.GetAll("ScriptParams", self);
+            foreach (link in links) {
+                local data = LinkTools.LinkGetData(link, "");
+                local target = LinkDest(link);
+                if (data == "WatchThis") {
+                    local item_present = (Container.IsHeld(player, target) != 0x7FFFFFFF);
+                    if (! item_present) {
+                        all_items = false;
+                        break;
+                    }
                 }
             }
+            SendMessage(self, "ItemsArrived", all_items);
         }
+    }
+}
 
-        SendMessage(self, "ItemsArrived", all_items);
+
+class ItemToWatch extends SqRootScript
+{
+    function OnContained()
+    {
+        local watcher = GetWatcher();
+        if (watcher != null) {
+            SendMessage(watcher, "WatchedItemContained", self);
+        }
+    }
+
+    function GetWatcher() {
+        local links = Link.GetAll("~ScriptParams", self);
+        local watcher = null;
+        foreach (link in links) {
+            if (LinkTools.LinkGetData(link, "") == "WatchThis") {
+                watcher = LinkDest(link);
+                break;
+            }
+        }
+        return watcher;
     }
 }
 

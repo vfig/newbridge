@@ -513,6 +513,8 @@ class GoalNearTheFishmongers extends WatchForItems
 
     function OnPlayerRoomEnter()
     {
+        base.OnPlayerRoomEnter();
+
         if (Goal.IsActive(eGoals.kDeliverTheItems)
             && Goal.IsVisible(eGoals.kDeliverTheItems)) {
             Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
@@ -521,6 +523,8 @@ class GoalNearTheFishmongers extends WatchForItems
 
     function OnPlayerRoomExit()
     {
+        base.OnPlayerRoomExit();
+
         if (Goal.IsComplete(eGoals.kDeliverTheItems)) {
             // Close the door to the fishmongers again when leaving.
             Link.BroadcastOnAllLinks(self, "TurnOff", "ControlDevice");

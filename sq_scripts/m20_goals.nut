@@ -49,7 +49,7 @@ enum eMonologues {
     kPuzzleFailed1          = 9,
     kPuzzleFailed2          = 10,
     kPuzzleFailed3          = 11,
-    kEnteredTheProphetsRoom = 16, // FIXME: script this
+    kEnteredTheProphetsRoom = 16,
     kFoundTheOldRing        = 21, // CUT!
     kBanishedTheGhost       = 18, // CUT!
     kGotTheSecondItem       = 13, // FIXME: script this
@@ -477,6 +477,16 @@ class GoalMausPuzzleFailure extends SqRootScript
     function SetFailureCount(count)
     {
         SetData("MausPuzzleFailureCount", count);
+    }
+}
+
+class GoalEnteredTheProphetsRoom extends SqRootScript
+{
+    /* Put this on the concrete prophet's room. */
+
+    function OnPlayerRoomEnter()
+    {
+        Goal.SpeakMonologue(eMonologues.kEnteredTheProphetsRoom);
     }
 }
 

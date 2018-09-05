@@ -24,6 +24,4 @@ BUGS:
 
 - Lever behind statue in Hammer Sanctuary needs to be visible without climbing up beside. Doesn't need to be _that_ hidden.
 
-- Reading the notice after reading di rupo's journal shows the already-cancelled FindArgauxInfaux objective
-
 - Door outside fishmonger's isn't opening reliably...

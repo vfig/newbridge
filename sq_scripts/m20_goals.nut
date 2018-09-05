@@ -38,7 +38,7 @@ enum eMonologues {
     kFoundArgauxsBody       = 6,
     kFoundArgauxsInfauxs    = 2,
     kFoundDiRuposInfos      = 4,
-    kFoundArgauxsBodyLater  = 22, // FIXME: script this
+    kFoundArgauxsBodyLater  = 22,
     /* The Anax */
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
@@ -207,10 +207,19 @@ class GoalArgauxsBody extends SqRootScript
     function Activate()
     {
         Goal.CancelMonologue(eMonologues.kWhereIsArgaux);
-        Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
 
-        Goal.Cancel(eGoals.kMeetArgaux);
-        Goal.Show(eGoals.kFindArgauxsInfauxs);
+        if (Goal.IsActive(eGoals.kMeetArgaux)) {
+            // If the player didn't know Argaux is dead, give them a new goal, and talk about it.
+            Goal.Cancel(eGoals.kMeetArgaux);
+            Goal.Show(eGoals.kFindArgauxsInfauxs);
+            Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
+            Goal.CancelMonologue(eMonologues.kFoundArgauxsBodyLater);
+        } else {
+            // If the player already knew Argaux is dead, just react verbally.
+            Goal.CancelMonologue(eMonologues.kFoundArgauxsBody);
+            Goal.SpeakMonologue(eMonologues.kFoundArgauxsBodyLater);
+        }
+
     }
 
     function OnSim()
@@ -260,10 +269,18 @@ class GoalSeizureNotice extends SqRootScript
     function OnFrobWorldEnd()
     {
         Goal.CancelMonologue(eMonologues.kWhereIsArgaux);
-        Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
 
-        Goal.Cancel(eGoals.kMeetArgaux);
-        Goal.Show(eGoals.kFindArgauxsInfauxs);
+        if (Goal.IsActive(eGoals.kMeetArgaux)) {
+            // If the player didn't know Argaux is dead, give them a new goal, and talk about it.
+            Goal.Cancel(eGoals.kMeetArgaux);
+            Goal.Show(eGoals.kFindArgauxsInfauxs);
+            Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
+            Goal.CancelMonologue(eMonologues.kFoundArgauxsBodyLater);
+        } else {
+            // If the player already knew Argaux is dead, just react verbally.
+            Goal.CancelMonologue(eMonologues.kFoundArgauxsBody);
+            Goal.SpeakMonologue(eMonologues.kFoundArgauxsBodyLater);
+        }
     }
 }
 

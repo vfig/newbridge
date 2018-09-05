@@ -58,7 +58,7 @@ enum eMonologues {
     kThisIsTheDeliverySpot  = 8,
     /* The Ritual */
     kLookAtTheTower         = 14, // FIXME: script this
-    kFoundTheRitual         = 7,  // FIXME: script this
+    kFoundTheRitual         = 7,
     kReleasedTheProphet     = 19, // CUT!
     kRescuingTheAnax        = 15, // CUT!
     kSafePlaceForAnax       = 23,
@@ -717,6 +717,18 @@ class GoalDamnKeepers extends SqRootScript
 }
 
 /* -------- The Ritual -------- */
+
+class GoalFoundTheRitual extends SqRootScript
+{
+    /* Put this on the concrete room where the player sees the ritual */
+
+    function OnPlayerRoomEnter()
+    {
+        if (Goal.IsActive(eGoals.kStopTheRitual)) {
+            Goal.SpeakMonologue(eMonologues.kFoundTheRitual);
+        }
+    }
+}
 
 class GoalStopTheRitualByForce extends SqRootScript
 {

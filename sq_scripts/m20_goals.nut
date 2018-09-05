@@ -61,7 +61,7 @@ enum eMonologues {
     kFoundTheRitual         = 7,  // FIXME: script this
     kReleasedTheProphet     = 19, // CUT!
     kRescuingTheAnax        = 15, // CUT!
-    kSafePlaceForAnax       = 23, // FIXME: script this
+    kSafePlaceForAnax       = 23,
 }
 
 // FIXME: don't need these once I have recordings
@@ -139,6 +139,8 @@ local Goal = {
     }
 
     IsGoldilocksDifficulty = function(goal) {
+        // Return true if the current difficulty is neither too high for the
+        // goal, nor too low, but just right.
         local difficulty = Quest.Get("difficulty");
         if (Quest.Exists("goal_min_diff_" + goal)) {
             local min_diff = Quest.Get("goal_min_diff_" + goal);
@@ -151,21 +153,6 @@ local Goal = {
             if (difficulty > max_diff) {
                 return false;
             }
-        }
-    }
-
-    // For a few objectives, we want notifications like Thief 2 that the player is on
-    // the right track. But since this Goal table doesn't know if there's new objectives
-    // or not, it's up to each goal script to call this if desired.
-    PlayCompleteNotification = function()
-    {
-        // Only play notifications if they're turned on
-        if (DarkGame.BindingGetFloat("goal_notify") != 0) {
-            local player = Object.Named("Player");
-            local schema = Object.Named("new_obj");
-            local message = Data.GetString("PlayHint.str", "DoneGoal");
-            DarkUI.TextMessage(message);
-            Sound.PlaySchemaAmbient(player, schema);
         }
     }
 
@@ -600,7 +587,6 @@ class GoalDeliveryDiRupo extends SqRootScript
         Goal.Complete(eGoals.kKidnapTheAnax);
         Goal.Complete(eGoals.kStealTheHand);
         Goal.Complete(eGoals.kDeliverTheItems);
-        Goal.PlayCompleteNotification();
    }
 }
 
@@ -638,7 +624,8 @@ class GoalPullTheStrings extends SqRootScript
     function OnConversationFinished()
     {
         Goal.Show(eGoals.kStopTheRitual);
-        Goal.Show(eGoals.kReturnTheAnax);
+        // CUT!
+        //Goal.Show(eGoals.kReturnTheAnax);
 
         // Open the door again. Unlock it if it has a linked lock.
         local door = LinkDest(Link_GetOneScriptParams("Door", self));
@@ -815,15 +802,25 @@ class GoalEscapeWithTheAnax extends WatchForItems
     /* Put this on the concrete room where the Anax should be carried to fulfill
        the "escape" goal. Add a ScriptParams("WatchThis") link to the ritual Anax. */
 
+    /*
+    // FIXME: enable this only for debugging this goal
+    function OnSim()
+    {
+        if (message().starting) {
+            Goal.Show(eGoals.kEscapeWithTheAnax);
+        }
+    }
+    */
+
     function OnItemsArrived()
     {
         local all_items = message().data;
         if (all_items) {
             // It's okay, you can drop him now.
             Goal.Complete(eGoals.kEscapeWithTheAnax);
-            if (Goal.IsGoldilocksDifficulty(eGoals.kEscapeWithTheAnax)) {
-                Goal.PlayCompleteNotification();
-            }
+
+            // Garrett needs to say something so the player actually knows this.
+            Goal.SpeakMonologue(eMonologues.kSafePlaceForAnax);
         }
     }
 }
@@ -836,13 +833,13 @@ class GoalReturnTheAnax extends SqRootScript
        On the ritual Anax, put ItemToDeliver script, with a ScriptParams("DeliveryRoom") link
        to the room. */
 
-    function OnItemDelivered()
-    {
-        local item = message().data;
-        Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
-        Goal.Complete(eGoals.kReturnTheAnax);
-        Goal.PlayCompleteNotification();
-    }
+    // CUT!
+    // function OnItemDelivered()
+    // {
+    //     local item = message().data;
+    //     Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
+    //     Goal.Complete(eGoals.kReturnTheAnax);
+    // }
 }
 
 

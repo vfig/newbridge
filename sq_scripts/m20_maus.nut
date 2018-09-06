@@ -27,13 +27,15 @@ class SendMessageTrap extends SqRootScript
     {
         print("SendMessageTrap:");
         local links = Link.GetAll(linkkind("ScriptParams"), self);
+        local link_cache = [];
         foreach (link in links) {
+            link_cache.append(link);
+            // Log a preview, so we can check if the send is working correctly or not.
             local data = LinkTools.LinkGetData(link, "");
             local target = LinkDest(link);
             print("  preview: " + data + " -> " + Object.GetName(target) + " (" + target + ")");
         }
-        local links = Link.GetAll(linkkind("ScriptParams"), self);
-        foreach (link in links) {
+        foreach (link in link_cache) {
             local data = LinkTools.LinkGetData(link, "");
             local target = LinkDest(link);
             print("  send: " + data + " -> " + Object.GetName(target) + " (" + target + ")");

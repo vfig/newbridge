@@ -1,4 +1,4 @@
-class SlidingBanner extends SqRootScript {
+class TestSlidingBanner extends SqRootScript {
     function OnFrobWorldEnd() {
         local animS = Property.Get(self, "StTweqModels", "AnimS");
         local isTurnedOn = ((animS & 2) == 0);

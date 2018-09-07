@@ -483,3 +483,35 @@ class MarathonRunner extends SqRootScript
         }
     }
 }
+
+class SlidingBanner extends SqRootScript {
+    function OnTurnOn() {
+        SlideBanner(true);
+    }
+
+    function OnTurnOff() {
+        SlideBanner(false);
+    }
+
+    function ToggleBanner() {
+        local animS = Property.Get(self, "StTweqModels", "AnimS");
+        local isTurnedOn = ((animS & 2) == 0);
+        SlideBanner(!isTurnedOn);
+    }
+
+    function SlideBanner(open) {
+        // Turn on the models tweq, setting the reverse bit according to "open".
+        local animS = Property.Get(self, "StTweqModels", "AnimS");
+        // Set the On bit.
+        animS = (animS | 1);
+        // Set or clear the Reverse bit.
+        if (open) {
+            animS = (animS & ~2)
+        } else {
+            animS = (animS | 2)
+        }
+        Property.Set(self, "StTweqModels", "AnimS", animS);
+        // If we're not open, then block frob.
+        Property.SetSimple(self, "BlockFrob", !open);
+    }
+}

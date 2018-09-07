@@ -99,3 +99,29 @@ class VanishingAct extends SqRootScript
         Property.Set(self, "StTweqBlink", "AnimS", newAnimS);
     }
 }
+
+class SetIdlingDirections extends SqRootScript
+{
+    // When a "SetIdlingDirection" message is received,
+    // parameter 1 should be which field (1, 2, or 3),
+    // and parameter 2 should be the facing direction.
+    //
+    // Note that Idling: Directions sets up its timer on
+    // sim start, and the weight fields all have the same
+    // name, so the only thing we can do from script is
+    // change the directions.
+    //
+    // So, set up the AI initially with the times you
+    // want and the weights you want, but set all the
+    // directions initially to the same default.
+    //
+    function OnSetIdlingDirection() {
+        if (Property.Possessed(self, "AI_IdleDirs")) {
+            local fields = ["Facing 1: direction", "Facing 2: direction", "Facing 3: direction"];
+            local field_index = message().data.tointeger() - 1;
+            if (field_index < 0 || field_index > 2) { field_index = 0; }
+            local angle = message().data2.tofloat();
+            Property.Set(self, "AI_IdleDirs", fields[field_index], angle);
+        }
+    }
+}

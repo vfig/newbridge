@@ -18,8 +18,6 @@ BUGS:
 
 - The apparition of The Prophet in the mausoleum ought to get destroyed when the ritual begins.
 
-- The door in front of the fishmongers doesn't trigger reliably (possibly blocked by the player?) Make sure--after the rebuild--it opens *inward* to the room and detects if the player dropped the hand and/or the anax in the room area and then picks them up again.
-
 - Need actual stairs in Hammer Sanctuary, not just ramps
 
 - Lever behind statue in Hammer Sanctuary needs to be visible without climbing up beside. Doesn't need to be _that_ hidden.

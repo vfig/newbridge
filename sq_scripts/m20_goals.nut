@@ -519,15 +519,28 @@ class GoalNearTheFishmongers extends WatchForItems
             && Goal.IsVisible(eGoals.kDeliverTheItems)) {
             Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
         }
+
+        // FIXME -- for debugging only!!!
+        OnItemsArrived();
     }
 
     function OnPlayerRoomExit()
     {
         base.OnPlayerRoomExit();
 
+        // Exclude specific other rooms (just return early)
+        local to_room = message().ToObjId;
+        local other_rooms = Link_GetAllParams("OtherRoom", self);
+        foreach (room in other_rooms) {
+            if (room == to_room) {
+                return;
+            }
+        }
+
         if (Goal.IsComplete(eGoals.kDeliverTheItems)) {
             // Close the door to the fishmongers again when leaving.
-            Link.BroadcastOnAllLinks(self, "TurnOff", "ControlDevice");
+            Link.BroadcastOnAllLinks(self, "Lock", "ControlDevice");
+            Link.BroadcastOnAllLinks(self, "Close", "ControlDevice");
         }
     }
 
@@ -537,11 +550,12 @@ class GoalNearTheFishmongers extends WatchForItems
             && Goal.IsVisible(eGoals.kDeliverTheItems)) {
             // If you drop both items outside the fishmongers before getting
             // the "deliver the items" objective, too bad, you're gonna
-            // have to take them out and in again.
+            // have to take them out and in again maybe.
             local all_items = message().data;
             if (all_items) {
                 // Open the door to the fishmongers when approaching with the items.
-                Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+                Link.BroadcastOnAllLinks(self, "Unlock", "ControlDevice");
+                Link.BroadcastOnAllLinks(self, "Open", "ControlDevice");
             }
         }
     }

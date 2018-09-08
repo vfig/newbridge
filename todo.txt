@@ -1,0 +1,86 @@
+BETA
+====
+
+- Build blockout & lighting
+    - Rich street
+    - Mountain air
+    - Manor grounds
+    - Caves
+
+- Detail
+    - Cemetery
+    - Sanctuary basement
+    - Fountain square windows & doors
+    - Upper street & alley
+    - Handoff behind fishmongers
+    - Manor foundation and bedrooms and hole in the wall!
+
+- Plug in conversations and proper triggers
+    x Conv700
+        x Hammer needs to flee to proper place afterwards
+    x Conv800
+        x Guards need to patrol afterwards (well, Benny goes off to think about his error)
+    - Conv900
+        x Thieves need to patrol/idle with directions afterwards
+    x Conv1000
+        x Hammers need to patrol afterwards
+    - Conv1100
+    - Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
+    - Unused9 (GUARD2/GUARD3: "Go for the stomach, or lower. A Hammer's usually weak there.")
+    - Unused20 (SV1/SV2: "There was this big mob of Hammers, circled round some guy like wolves.")
+
+- Mountain visibility
+
+- Exterior room brushes
+
+- Map
+    - City map (draw and scan)
+        - Automap segments
+        - Automap properties
+    - Hammerite map
+        - Scripting for finding
+        - Automap segments
+        - Automap properties
+
+- Sounds
+    - Incidental sounds (machinery, water, etc)
+    - Ambience plan
+    - Ambience schemas (test them with a tool? or just a new test map and reload_schemas?)
+    - Add Environmental AmbientHacked entities for ambiences
+
+- Guards
+    x Groups & archetypes & hostility
+        - They're all hostile, so just mix BaffGuards and OperaGuards as I want, I suppose
+    - Patrols and so on
+    - Difficulty variations
+
+- City loot
+    - Allocate loot areas
+    - Scatter loot
+    - Build new interiors (full detail + room brush) as desired  }- (maybe post-beta)
+    - Randomised loot / difficulty variations?                   }
+
+- Test mission scripting permutations without hacks
+
+- Briefing book as placeholder
+
+- Proper VO (maybe post-beta)
+
+- Beta test and bug fixing
+
+
+RELEASE
+=======
+
+- Script & apply room EAXes
+
+- Translations & subtitles
+
+- Briefing video
+
+- Credits video
+    - McTaffer's "filth.wav" as a stinger?
+
+- FM packaging
+    - Test with fresh GOG, Steam releases
+    - Test with Darkloader?

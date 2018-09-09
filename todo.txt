@@ -48,6 +48,10 @@ BETA
     - Ambience schemas (test them with a tool? or just a new test map and reload_schemas?)
     - Add Environmental AmbientHacked entities for ambiences
 
+- Loadouts
+    - Difficulty variation
+    - Store, and starting loot.
+
 - Guards
     x Groups & archetypes & hostility
         - They're all hostile, so just mix BaffGuards and OperaGuards as I want, I suppose

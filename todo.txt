@@ -8,8 +8,6 @@ BETA
     - Caves
 
 - Detail
-    - Cemetery (graves & such)
-        - Buildings around cemetery, & alley to market.
     - Sanctuary basement
     - Fountain square windows & doors
     - Upper street & alley

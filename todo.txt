@@ -2,9 +2,9 @@ BETA
 ====
 
 - Build blockout & lighting
+    - Manor grounds
     - Rich street
     - Mountain air
-    - Manor grounds
     - Caves
 
 - Detail
@@ -12,7 +12,7 @@ BETA
     - Fountain square windows & doors
     - Upper street & alley
     - Handoff behind fishmongers
-    - Manor foundation and bedrooms and hole in the wall!
+    - Manor foundation, bedrooms, and fire room blank wall
 
 - Books
     - Keeper books need texts

@@ -2,12 +2,12 @@ BETA
 ====
 
 - Build blockout & lighting
-    - Manor grounds
     - Rich street
     - Mountain air
     - Caves
 
 - Detail
+    - Manor grounds
     - Sanctuary basement
     - Fountain square windows & doors
     - Upper street & alley

@@ -26,7 +26,11 @@ BETA
     - Conv1100
     - Unused9 (GUARD2/GUARD3: "Go for the stomach, or lower. A Hammer's usually weak there.")
     - Unused20 (SV1/SV2: "There was this big mob of Hammers, circled round some guy like wolves.")
-    - Unused2? (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
+    - Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
+        - YES! Make a guard that just patrols in circles around the front yard, and trigger this
+            convo when the player is nearby and another guard passes near. Absolutely worth it!
+                - NO. Do that for two of the guards in the market square. I've got the tower convo and
+                    the "market this morning" servant convo for the manor.
 
 - Mountain visibility
 

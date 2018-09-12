@@ -4,15 +4,15 @@ BETA
 - Build blockout & lighting
     - Rich street
     - Mountain air
-    - Caves
+    - Caves amd tower entrance
 
 - Detail
-    - Manor grounds (back yard and up to tower)
     - Fountain square windows & doors
     - Sanctuary basement
     - Upper street & alley
     - Manor general texture alignment
     - Manor bedrooms, misc Jorge, and pantry
+    - Manor windows (on hallway and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)
 
 - Books

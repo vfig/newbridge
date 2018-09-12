@@ -7,16 +7,17 @@ BETA
     - Caves
 
 - Detail
-    - Manor grounds
-    - Sanctuary basement
+    - Manor grounds (back yard and up to tower)
     - Fountain square windows & doors
+    - Sanctuary basement
     - Upper street & alley
-    - Handoff behind fishmongers
-    - Manor foundation, bedrooms, and fire room blank wall
+    - Manor general texture alignment
+    - Manor bedrooms, misc Jorge, and pantry
+    - Handoff behind fishmongers (windows etc on other buildings)
 
 - Books
-    - Keeper books need texts
     - market_letter needs a location
+    - city_thiefscroll needs a location
 
 - Conversations and proper triggers
     x Conv700

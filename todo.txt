@@ -10,7 +10,6 @@ BETA
     - Fountain square windows & doors
     - Sanctuary basement
     - Upper street & alley
-    - Manor general texture alignment
     - Manor bedrooms, misc Jorge, and pantry
     - Manor windows (on hallway and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)

@@ -80,14 +80,14 @@ whgasp
 // Catacombs ambience 1 (room tone)
 schema m20catatone
 archetype AMB_M20
-volume -500
+volume -1000
 mono_loop 0 0
 cavetone
 
 // Catacombs ambience 2 (voices)
 schema m20catavoice
 archetype AMB_M20
-volume -1
+volume -500
 mono_loop 10000 20000
 delay 5000
 no_repeat
@@ -97,16 +97,16 @@ mgbab1 mgbab2 mgbab3 mgbab4 mgbab5
 // Catacombs ambience 3 (nervous loop)
 schema m20cataloop1
 archetype AMB_M20
-volume -500
+volume -1000
 mono_loop 0 0
 humfire
 
 // Catacombs ambience 4 (tension loop)
 schema m20cataloop2
 archetype AMB_M20
-volume -100
+volume -1000
 mono_loop 0 0
-loloop1a
+loloop2
 
 // Catacombs ambience 5 (bells)
 schema m20catabells

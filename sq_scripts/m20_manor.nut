@@ -52,3 +52,11 @@ class InfuriatingPainting extends SqRootScript
         }
     }
 }
+
+class ButlerRoomBell extends SqRootScript
+{
+    function OnFrobWorldEnd() {
+        Sound.PlaySchemaAtObject(self, "dinner_bell", self);
+        AI.Signal(Object.Named("Baltasar"), "WakeUp");
+    }
+}

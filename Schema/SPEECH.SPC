@@ -278,7 +278,7 @@ concept nbconv8 4   //"Hullo, Sarge. Did you see..."
 concept nbconv9 4   //"Morten's taking his time..."
 concept nbconv10 4  //"Builder's grace to thee..."
 concept nbritcel 7  // Ritual celebration noises
-
+concept nbwakeup 4  // Butler wakes up
 
 ////////
 //TAGS//

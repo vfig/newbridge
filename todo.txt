@@ -8,10 +8,10 @@ BETA
 
 - Detail
     - Fountain square windows & doors
-    - Sanctuary basement
-    - Upper street & alley
-    - Manor bedrooms, misc Jorge, and pantry
-    - Manor windows (on hallway and basement of old manor building)
+    - Sanctuary basement rooms
+    - Upper street & alley (windows & doors & buildings)
+    - Manor pantry, secret room, and misc Jorge.
+    - Manor windows (on hallway; and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)
 
 - Books

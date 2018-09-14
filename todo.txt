@@ -9,6 +9,7 @@ BETA
 - Detail
     - Fountain square windows & doors
     - Sanctuary basement rooms
+    - Buildings overlooking cemetery on West and North (windows & doors)
     - Upper street & alley (windows & doors & buildings)
     - Manor pantry, secret room, and misc Jorge.
     - Manor windows (on hallway; and basement of old manor building)

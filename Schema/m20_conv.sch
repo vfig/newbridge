@@ -145,6 +145,13 @@ archetype M20_CONV
 nb023
 schema_voice vgarrett 1 nbconv0 (LineNo 24 24)
 
+// "It's a long way down" (with a delay)
+schema nb024
+archetype PLAYER_SPEECH
+play_once
+delay 3000
+garm0409
+
 
 //////////////////////////////////
 // 100: VARIOUS LINES

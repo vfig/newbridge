@@ -15,6 +15,10 @@ BETA
     - New manor windows (on hallway; and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)
 
+- Ritual
+    - Get rid of the damn strobes!
+    - Use an audio cue to make things more dramatic or something!
+
 - Books
     - market_letter needs a location
     - city_thiefscroll needs a location

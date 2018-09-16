@@ -677,3 +677,16 @@ class LockboxFrobSound extends SqRootScript
         }
     }
 }
+
+class Illuminate extends SqRootScript
+{
+    function OnTurnOn()
+    {
+        Property.Set(self, "ExtraLight", "Amount (-1..1)", 1.0);
+    }
+
+    function OnTurnOff()
+    {
+        Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
+    }
+}

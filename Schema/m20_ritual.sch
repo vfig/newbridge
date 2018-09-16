@@ -25,3 +25,10 @@ archetype AI_NONE
 no_repeat
 bb1a3__1 bb1a3__2 bb1a3__3 bb1a3__4
 schema_voice vbug 1 nbritcel
+
+// Ritual marker stone
+schema nbritmark
+archetype AI_NONE
+mono_loop 0 0
+volume -500
+squarelo

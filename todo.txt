@@ -24,11 +24,12 @@ BETA
     - city_thiefscroll needs a location
 
 - Conversations and proper triggers
+    - Conv600 (keeper ending; needs goal changed from room to scripted)
     x Conv700
     x Conv800
     x Conv900
     x Conv1000
-    - Conv1100
+    - Conv1100 (the tower)
     - Unused9 (GUARD2/GUARD3: "Go for the stomach, or lower. A Hammer's usually weak there.")
     x Unused20 (SV1/SV2: "There was this big mob of Hammers, circled round some guy like wolves.")
     - Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")

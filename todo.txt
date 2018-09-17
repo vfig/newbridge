@@ -20,6 +20,7 @@ BETA
     - sound effects??
     - timing
     - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
+    - Proper triggering of rescued Anax goal.
 
 - Books
     - market_letter needs a location

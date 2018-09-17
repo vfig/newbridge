@@ -1,6 +1,8 @@
 difficulty: "Difficulty:"
-start_training: "FIXME"
-skip_training: "FIXME" 
+; We don't really want the training mission button.
+; Easiest thing to do is leave it blank.
+start_training: ""
+skip_training: "Making a Profit"
 options: "Options"
 cancel: "Cancel" 
 

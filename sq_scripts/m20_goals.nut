@@ -766,7 +766,22 @@ class GoalFoundTheRitual extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
-        if (Goal.IsActive(eGoals.kStopTheRitual)) {
+        local already_triggered = (Quest.Get("triggered_ritual_echo") == 1);
+        if (Goal.IsActive(eGoals.kStopTheRitual)
+            && (! already_triggered))
+        {
+            // Don't trigger the line again
+            Quest.Set("triggered_ritual_echo", 1);
+
+            // Play the first line of the ritual
+            // (it should be processed to sound echoey)
+            Sound.PlaySchemaAmbient(self, "nb500");
+        }
+    }
+
+    function OnSchemaDone()
+    {
+        if (message().name == "nb500") {
             Goal.SpeakMonologue(eMonologues.kFoundTheRitual);
         }
     }

@@ -1087,11 +1087,11 @@ class RitualPerformer extends SqRootScript
         local trol = message().data;
         local teleport = message().data2;
 
+        SetPatrolTarget(trol);
         if (teleport) {
             Object.Teleport(self, Object.Position(trol), Object.Facing(trol));
             ReachedPatrolTarget(trol);
         } else {
-            SetPatrolTarget(trol);
             if (Link_GetCurrentPatrol(self) == 0) {
                 Link_SetCurrentPatrol(self, trol);
             }

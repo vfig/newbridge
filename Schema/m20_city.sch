@@ -4,6 +4,27 @@ archetype AMB_M20
 volume -1000
 gears2
 
+// Turbine turning on
+schema m20turbon
+archetype AMB_M20
+volume -500
+turbinpu
+
+// Turbine turning off
+schema m20turboff
+archetype AMB_M20
+volume -500
+turb2st
+
+// Turbine looping
+schema m20turbloop
+archetype AMB_M20
+mono_loop 0 0
+volume -500
+turb2lp
+
+
+// -------------------------- AMBIENCE ----------------------------
 
 // City streets ambience 1 (room tone)
 schema m20citytone

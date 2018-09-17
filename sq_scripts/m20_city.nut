@@ -125,3 +125,55 @@ class SetIdlingDirections extends SqRootScript
         }
     }
 }
+
+class SwitchableJoints extends SqRootScript
+{
+    // Put this on an object with a Joints tweq.
+    // When it receives TurnOn, it will turn on the joints;
+    // when it receives TurnOff, it will turn them off again (what a twist!)
+    function OnTurnOn() {
+        if (Property.Possessed(self, "StTweqJoints")) {
+            local animS = Property.Get(self, "StTweqJoints", "AnimS");
+            animS = (animS | TWEQ_AS_ONOFF);
+            Property.Set(self, "StTweqJoints", "AnimS", animS);
+        }
+    }
+
+    function OnTurnOff() {
+        if (Property.Possessed(self, "StTweqJoints")) {
+            local animS = Property.Get(self, "StTweqJoints", "AnimS");
+            animS = (animS & ~TWEQ_AS_ONOFF);
+            Property.Set(self, "StTweqJoints", "AnimS", animS);
+        }
+    }
+}
+
+class TurbineSounds extends SqRootScript
+{
+    // Put this on a turbine object with an AmbientHacked.
+    // When it receives TurnOn, it will play a start sound and turn on its sound.
+    // when it receives TurnOff, it will turn them off again (what a twist!)
+    function OnTurnOn() {
+        // Immediately turn on the ambient loop
+        if (Property.Possessed(self, "AmbientHacked")) {
+            local flags = Property.Get(self, "AmbientHacked", "Flags");
+            flags = (flags & ~AMBFLG_S_TURNEDOFF);
+            Property.Set(self, "AmbientHacked", "Flags", flags);
+        }
+
+        Sound.HaltSchema(self, "m20turboff");
+        Sound.PlaySchemaAtObject(self, "m20turbon", self);
+    }
+
+    function OnTurnOff() {
+        // Immediately turn off the ambient loop
+        if (Property.Possessed(self, "AmbientHacked")) {
+            local flags = Property.Get(self, "AmbientHacked", "Flags");
+            flags = (flags | AMBFLG_S_TURNEDOFF);
+            Property.Set(self, "AmbientHacked", "Flags", flags);
+        }
+
+        Sound.HaltSchema(self, "m20turbon");
+        Sound.PlaySchemaAtObject(self, "m20turboff", self);
+    }
+}

@@ -87,6 +87,8 @@ RELEASE
 
 - Script & apply room EAXes
 
+- Survey all doors for bad offsets that might make them vanish
+
 - Translations & subtitles
 
 - Briefing video

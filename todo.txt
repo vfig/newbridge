@@ -20,9 +20,6 @@ BETA
     - Make it actually start properly
         - echoing first line through the caves when the player reaches them
         - then start at point 2 when player reaches the antechamber
-    - Get rid of the damn strobes!
-        - maybe make the markers flash instead of the room lights?
-            - but need the spotlights--or some of them--to turn on at least.
     - Use an audio cue to make things more dramatic or something!
     - difficulty variation
 

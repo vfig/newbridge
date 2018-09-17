@@ -17,10 +17,7 @@ BETA
     - Tower entrance - rubbish and a few bones
 
 - Ritual
-    - Make it actually start properly
-        - echoing first line through the caves when the player reaches them
-        - then start at point 2 when player reaches the antechamber
-    - Use an audio cue to make things more dramatic or something!
+    - sound effects??
     - difficulty variation
 
 - Books

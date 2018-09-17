@@ -1,7 +1,6 @@
 BUGS:
 
 - Ritual:
-    - The failure movie is still hacked in to play.
     - The Prophet falls through the altar again
 
 - After delivery conversation, can enter the fishmongers and then go back in--which closes the door on you! Bad, cause I need to destroy the DeliveryDiRupo, Hand, and Anax at that point. To fix, make the door-close trigger when _entering_ the market square (or the alleyway just off it), and not on _exiting_ the "in front of fishmongers".

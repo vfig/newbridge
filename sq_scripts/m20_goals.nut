@@ -842,10 +842,12 @@ class GoalFailToStopTheRitual extends SqRootScript
             Goal.Fail(eGoals.kEscapeWithTheAnax);
             Goal.Fail(eGoals.kKeepTheAnaxAlive);
 
+        /*
             // FIXME: for debugging only
             SetOneShotTimer("FakeOut", 4.5);
         } else if (message().name == "FakeOut") {
             Debug.Command("movie", "DEATH.AVI");
+        */
         }
     }
 }

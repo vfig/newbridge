@@ -18,7 +18,8 @@ BETA
 
 - Ritual
     - sound effects??
-    - difficulty variation
+    - timing
+    - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
 
 - Books
     - market_letter needs a location

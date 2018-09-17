@@ -146,8 +146,9 @@ class RitualController extends SqRootScript
     // FIXME: If the stages are changed, the extras' starting points should also be updated.
     // FIXME: Actually I need to put the extras in starting positions anyway!
     // FIXME: If the stages or timing are changed, the timing of the particle systems should also be updated.
+    // We skip the first stage, as we pretend it was done before the player arrives.
+    stages = [2, 5, 1, 4, 0, 3, 6];
     //stages = [0, 1, 2, 3, 4, 5, 6]; // very fast
-    stages = [2, 5, 1, 4, 0, 3, 6]; // With time warp 1.5, this takes 5:20 to complete.
     //stages = [4, 2, 0, 5, 3, 1, 6]; // very slow
 
     function OnSim()
@@ -243,10 +244,10 @@ class RitualController extends SqRootScript
             RitualLog(eRitualLog.kRitual, "Begin");
 
             // First positions, everyone
-            RitualLog(eRitualLog.kPerformer, "Patrolling directly to first position.");
+            RitualLog(eRitualLog.kPerformer, "Teleporting directly to first position.");
             local performer = Performer();
             local trol = PerfRoundTrols()[stage];
-            SendMessage(performer, "PatrolTo", trol);
+            SendMessage(performer, "PatrolTo", trol, true);
 
             RitualLog(eRitualLog.kExtra, "All extras patrolling directly to first positions.");
             SendExtrasToVertices(stage, GetAvailableExtras(), true);
@@ -265,7 +266,7 @@ class RitualController extends SqRootScript
         // Send the performer to their vertex
         local performer = Performer();
         local trol = PerfRoundTrols()[stage];
-        SendMessage(performer, "PatrolTo", trol);
+        SendMessage(performer, "PatrolTo", trol, false);
 
         // Send the extras to their vertices
         SendExtrasToVertices(stage, GetAvailableExtras());
@@ -1053,11 +1054,19 @@ class RitualPerformer extends SqRootScript
     function OnPatrolTo()
     {
         local trol = message().data;
-        SetPatrolTarget(trol);
-        if (Link_GetCurrentPatrol(self) == 0) {
-            Link_SetCurrentPatrol(self, trol);
+        local teleport = message().data2;
+
+
+        if (teleport) {
+            Object.Teleport(self, Object.Position(trol), Object.Facing(trol));
+            ReachedPatrolTarget(trol);
+        } else {
+            SetPatrolTarget(trol);
+            if (Link_GetCurrentPatrol(self) == 0) {
+                Link_SetCurrentPatrol(self, trol);
+            }
+            Object.AddMetaProperty(self, "M-DoesPatrol");
         }
-        Object.AddMetaProperty(self, "M-DoesPatrol");
     }
 
     function OnWait()
@@ -1078,8 +1087,7 @@ class RitualPerformer extends SqRootScript
         local trol = message().patrolObj;
         if (trol == GetPatrolTarget()) {
             RitualLog(eRitualLog.kPerformer | eRitualLog.kPathing, "reached target: " + Object.GetName(trol) + " (" + trol + ")");
-            SetPatrolTarget(0);
-            PunchUp("PerformerReachedTarget", trol);
+            ReachedPatrolTarget(trol);
         } else {
             RitualLog(eRitualLog.kPerformer | eRitualLog.kPathing, "reached trol: " + Object.GetName(trol) + " (" + trol + ")");
         }
@@ -1264,6 +1272,12 @@ class RitualPerformer extends SqRootScript
         if (trol != 0) {
             Link.Create("Route", self, trol);
         }
+    }
+
+    function ReachedPatrolTarget(trol)
+    {
+        SetPatrolTarget(0);
+        PunchUp("PerformerReachedTarget", trol);
     }
 }
 

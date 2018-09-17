@@ -78,8 +78,10 @@ BETA
     - Randomised loot / difficulty variations?                   }
 
 - Test mission scripting permutations without hacks
+    - On all difficulties! :-/
 
-- Briefing book as placeholder
+x Briefing book as placeholder
+    - Replace cs20 contents with info for beta testers
 
 - Proper VO (maybe post-beta)
 

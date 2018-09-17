@@ -300,9 +300,7 @@ class RitualController extends SqRootScript
             RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
             SendMessage(light, "TurnOn");
 
-            local strip = Strips()[stage];
-            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
-            SendMessage(strip, "TurnOn");
+            ActivateStrip(stage_index);
         }
     }
 
@@ -324,15 +322,7 @@ class RitualController extends SqRootScript
             RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
             SendMessage(light, "TurnOff");
 
-            if (stage_index == 0) {
-                // Start the big slow-build particles
-                local particles = Particles();
-                SendMessage(particles[0], "TurnOn");
-            } else if (stage_index == 3) {
-                // Start the medium particles
-                local particles = Particles();
-                SendMessage(particles[1], "TurnOn");
-            }
+            ActivateParticles(stage_index);
         }
     }
 
@@ -377,15 +367,9 @@ class RitualController extends SqRootScript
                 }
             }
 
-            // Make all the strips glow steadily
-            foreach (strip in Strips()) {
-                RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
-                SendMessage(strip, "Fullbright");
-            }
-
-            // Start the small intense particles
-            local particles = Particles();
-            SendMessage(particles[2], "TurnOn");
+            local stage_index = StageIndex();
+            ActivateStrip(stage_index);
+            ActivateParticles(stage_index);
 
             // The Down conversation will handle taking us up to the end of the
             // blessing, so just continue on with the stage stuff.
@@ -551,6 +535,37 @@ class RitualController extends SqRootScript
             // And launch!
             Physics.Activate(gore);
             Physics.SetVelocity(gore, vel);
+        }
+    }
+
+    function ActivateStrip(stage_index) {
+        if (stage_index == 6) {
+            // Make all the strips glow steadily
+            foreach (strip in Strips()) {
+                RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
+                PostMessage(strip, "Fullbright");
+            }
+        } else {
+            local stage = stages[stage_index];
+            local strip = Strips()[stage];
+            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strip));
+            SendMessage(strip, "TurnOn");
+        }
+    }
+
+    function ActivateParticles(stage_index) {
+        if (stage_index == 0) {
+            // Start the big slow-build particles
+            local particles = Particles();
+            SendMessage(particles[0], "TurnOn");
+        } else if (stage_index == 3) {
+            // Start the medium particles
+            local particles = Particles();
+            SendMessage(particles[1], "TurnOn");
+        } else if (stage_index == 6) {
+            // Start the small intense particles
+            local particles = Particles();
+            SendMessage(particles[2], "TurnOn");
         }
     }
 

@@ -138,6 +138,30 @@ local Goal = {
         Quest.Set("goal_visible_" + goal, 1);
     }
 
+    IsAllDoneExcept = function(exclude_goal) {
+        // Return true if all visible goals except the given one are
+        // done (completed or cancelled).
+        for (local goal = 0; goal < 32; goal += 1) {
+            local state_name = ("goal_state_" + goal);
+            local visible_name = ("goal_visible_" + goal);
+            if (! Quest.Exists(state_name)) break;
+            if ((goal != exclude_goal)
+                && (Quest.Get(visible_name) == 1))
+                /* && (IsGoldilocksDifficulty(goal))) */
+            {
+                local state = Quest.Get(state_name);
+                if ((state != 1 /* complete */)
+                    && (state != 2 /* cancelled */))
+                {
+                    // This goal isn't done!
+                    return false;
+                }
+            }
+        }
+        // All active goals seem to be okay
+        return true;
+    }
+
     IsGoldilocksDifficulty = function(goal) {
         // Return true if the current difficulty is neither too high for the
         // goal, nor too low, but just right.
@@ -870,6 +894,167 @@ class GoalReturnTheAnax extends SqRootScript
     //     Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
     //     Goal.Complete(eGoals.kReturnTheAnax);
     // }
+}
+
+
+/* -------- Ending -------------- */
+
+class GoalEffTheKeepers extends SqRootScript
+{
+    /* Put this on the canal Keeper. Give it
+        - a ScriptParams("Patrol") link to the TrolPt where the Keeper should wait
+          (it should face the way the Keeper should face).
+       The Keeper will appear when only the last objective remains.
+    */
+
+    function OnBeginScript()
+    {
+        SubscribeAll();
+    }
+
+    function SubscribeAll()
+    {
+        // Monitor all goal state qvars
+        for (local goal = 0; goal < 32; goal += 1) {
+            local state_name = ("goal_state_" + goal);
+            if (! Quest.Exists(state_name)) break;
+            Quest.SubscribeMsg(self, state_name);
+        }
+    }
+
+    function UnsubscribeAll()
+    {
+        // Monitor all goal state qvars
+        for (local goal = 0; goal < 32; goal += 1) {
+            local state_name = ("goal_state_" + goal);
+            if (! Quest.Exists(state_name)) break;
+            Quest.UnsubscribeMsg(self, state_name);
+        }
+    }
+
+    function OnQuestChange()
+    {
+        // Check if only the last goal remains
+        local already_teleported = (Quest.Get("teleported_damn_keepers2") == 1);
+        if (Goal.IsAllDoneExcept(eGoals.kReturnToTheStart)
+            && (! already_teleported))
+        {
+            // Don't teleport the keeper again.
+            Quest.Set("teleported_damn_keepers2", 1);
+
+            // We don't care about qvar changes anymore
+            UnsubscribeAll();
+
+            // Check our connections
+            local patrol = LinkDest(Link_GetOneScriptParams("Patrol", self));
+            if (patrol == 0) { print("Failed to find patrol!"); return; }
+
+            // Teleport into place.
+            local patrol_pos = Object.Position(patrol);
+            local facing = Object.Facing(patrol);
+            Object.Teleport(self, patrol_pos, facing);
+        }
+    }
+
+    // Triggered by conversation
+    function OnGivePayment()
+    {
+        // Trigger the loot goals to update for this payment.
+        // Got to do this before transferring containment, otherwise that'll
+        // set off quest var state changes.
+        local link = Link.GetOne("Contains", self);
+        local payment = LinkDest(link);
+        SendMessage(payment, "UpdateLootGoals");
+
+        // Give the player everything the keeper is carrying
+        local player = Object.Named("Player");
+        local result = Container.MoveAllContents(self, player);
+    }
+
+    // Triggered by conversation
+    function OnConversationFinished()
+    {
+        // All done! This _should_ end the mission now.
+        Goal.Complete(eGoals.kReturnToTheStart);
+
+        // And the keeper does his vanishing act
+        SendMessage(self, "TurnOff");
+    }
+}
+
+
+class GoalReturnToTheStart extends SqRootScript
+{
+    /* Put this on the concrete room where the Keeper waits at the canal. Give it
+        - a ScriptParams("Conv") link to the conversation for the encounter.
+    */
+
+    /*
+    // FIXME: enable this only for debugging this goal
+    function OnSim()
+    {
+        if (message().starting) {
+            SetOneShotTimer("fakeit", 2);
+        }
+    }
+
+    function OnTimer()
+    {
+        print("~~~~ faking it ~~~~~");
+        // Cancel all previous goals except loot
+        for (local goal = 0; goal < eGoals.kReturnToTheStart; goal++) {
+            if ((goal != eGoals.kLootNormal)
+                && (goal != eGoals.kLootHard)
+                && (goal != eGoals.kLootExpert)
+                && (Goal.IsVisible(goal)))
+            {
+                Goal.Cancel(goal)
+            }
+        }
+
+        // Create a coin for the loot goal
+        local coin = Object.Create(Object.Named("GiantCoin"));
+        Property.Set(coin, "Loot", "Gold", 1000);
+        Object.Teleport(coin, Object.Position(Object.Named("Player")), vector());
+    }
+    */
+
+    function OnPlayerRoomEnter()
+    {
+        local already_triggered = (Quest.Get("triggered_damn_keepers2") == 1);
+        if (Goal.IsAllDoneExcept(eGoals.kReturnToTheStart)
+            && (! already_triggered))
+        {
+            // Don't trigger any of the keeper points again.
+            Quest.Set("triggered_damn_keepers2", 1);
+
+            local player = Object.Named("Player");
+            local conv = LinkDest(Link_GetOneScriptParams("Conv", self));
+            local keeper = LinkDest(Link_GetConversationActor(1, conv));
+            local garrett_voice = LinkDest(Link_GetConversationActor(2, conv));
+            local patrol = LinkDest(Link_GetOneScriptParams("Patrol", keeper));
+
+            if (player == 0) { print("Failed to find player!"); return; }
+            if (conv == 0) { print("Failed to find conv!"); return; }
+            if (keeper == 0) { print("Failed to find keeper!"); return; }
+            if (garrett_voice == 0) { print("Failed to find garrett_voice!"); return; }
+            if (patrol == 0) { print("Failed to find patrol!"); return; }
+
+            local keeper_pos = Object.Position(keeper);
+            local player_pos = Object.Position(player);
+            local facing = Object.Facing(keeper);
+
+            // Teleport the garrett actors to where the keeper is.
+            Object.Teleport(garrett_voice, keeper_pos, facing);
+
+            // Ensure the keeper will patrol away when the conversation is done
+            Link_SetCurrentPatrol(keeper, patrol);
+            Object.AddMetaProperty(keeper, Object.Named("M-DoesPatrol"));
+            
+            // And start the conversation (which should maybe start with a momentary Wait?)
+            AI.StartConversation(conv);
+        }
+    }
 }
 
 

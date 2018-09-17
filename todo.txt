@@ -2,7 +2,6 @@ BETA
 ====
 
 - Build blockout & lighting
-    - Caves, ritual chamber, and tower entrance
     - Mountain air
 
 - Detail
@@ -14,6 +13,8 @@ BETA
     - Manor pantry, secret room, and misc Jorge.
     - New manor windows (on hallway; and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)
+    - Caves and ritual chamber?
+    - Tower entrance
 
 - Ritual
     - Get rid of the damn strobes!
@@ -22,9 +23,10 @@ BETA
 - Books
     - market_letter needs a location
     - city_thiefscroll needs a location
+    - some letters and stuff in the works buildings?
 
 - Conversations and proper triggers
-    - Conv600 (keeper ending; needs goal changed from room to scripted)
+    x Conv600 (keeper ending; needs goal changed from room to scripted)
     x Conv700
     x Conv800
     x Conv900

@@ -106,25 +106,32 @@ quest_create_mis goal_max_diff_16, 2
 
 ; 17: SpecialHard (special 1)
 quest_create_mis goal_state_17, 0
-quest_create_mis goal_visible_17, 1
-quest_create_mis goal_type_17, 3
-quest_create_mis goal_special_17, 1
-quest_create_mis goal_min_diff_17, 1
-quest_create_mis goal_max_diff_17, 2
+;; FIXME: remove this when we've implemented the special loot
+quest_create_mis goal_visible_17, 0
+;; FIXME: uncomment the rest when we've implemented the special loot
+;quest_create_mis goal_visible_17, 1
+;quest_create_mis goal_type_17, 3
+;quest_create_mis goal_special_17, 1
+;quest_create_mis goal_min_diff_17, 1
+;quest_create_mis goal_max_diff_17, 2
 
 ; 18: SpecialExpert (special 2)
 quest_create_mis goal_state_18, 0
-quest_create_mis goal_visible_18, 1
-quest_create_mis goal_type_18, 3
-quest_create_mis goal_special_18, 2
-quest_create_mis goal_min_diff_18, 2
-quest_create_mis goal_max_diff_18, 2
+;; FIXME: remove this when we've implemented the special loot
+quest_create_mis goal_visible_18, 0
+;; FIXME: uncomment the rest when we've implemented the special loot
+;quest_create_mis goal_visible_18, 1
+;quest_create_mis goal_type_18, 3
+;quest_create_mis goal_special_18, 2
+;quest_create_mis goal_min_diff_18, 2
+;quest_create_mis goal_max_diff_18, 2
 
 ; 19: DontKillBystanders (Hard)
 quest_create_mis goal_state_19, 0
 quest_create_mis goal_visible_19, 1
 quest_create_mis goal_type_19, 2
 quest_create_mis goal_reverse_19, 1
+; This is the bystander archetype
 quest_create_mis goal_target_19, -1325
 quest_create_mis goal_min_diff_19, 1
 quest_create_mis goal_max_diff_19, 1
@@ -134,6 +141,7 @@ quest_create_mis goal_state_20, 0
 quest_create_mis goal_visible_20, 1
 quest_create_mis goal_type_20, 2
 quest_create_mis goal_reverse_20, 1
+; This is the Human archetype
 quest_create_mis goal_target_20, -14
 quest_create_mis goal_min_diff_20, 2
 quest_create_mis goal_max_diff_20, 2
@@ -141,11 +149,6 @@ quest_create_mis goal_max_diff_20, 2
 ; 21: ReturnToTheStart
 quest_create_mis goal_state_21, 0
 quest_create_mis goal_visible_21, 1
-quest_create_mis goal_irreversible_21, 0
-quest_create_mis goal_final_21, 1
-quest_create_mis goal_type_21, 4
-; The room ID here is that of SouthGateRoom
-quest_create_mis goal_target_21, 1053
 
 mprint Goals updated
 
@@ -158,5 +161,21 @@ quest_create_mis mlog_done_4, 0
 quest_create_mis mlog_done_5, 0
 quest_create_mis mlog_done_6, 0
 quest_create_mis mlog_done_7, 0
+quest_create_mis mlog_done_8, 0
+quest_create_mis mlog_done_9, 0
+quest_create_mis mlog_done_10, 0
+quest_create_mis mlog_done_11, 0
+quest_create_mis mlog_done_12, 0
+quest_create_mis mlog_done_13, 0
+quest_create_mis mlog_done_14, 0
+quest_create_mis mlog_done_15, 0
+quest_create_mis mlog_done_16, 0
+quest_create_mis mlog_done_17, 0
+quest_create_mis mlog_done_18, 0
+quest_create_mis mlog_done_19, 0
+quest_create_mis mlog_done_20, 0
+quest_create_mis mlog_done_21, 0
+quest_create_mis mlog_done_22, 0
+quest_create_mis mlog_done_23, 0
 
 mprint Monologues updated

@@ -570,7 +570,7 @@ class RitualController extends SqRootScript
     }
 
     function ActivateParticles(stage_index) {
-        if (stage_index == 0) {
+        if (stage_index == 1) {
             // Start the big slow-build particles
             local particles = Particles();
             SendMessage(particles[0], "TurnOn");
@@ -578,8 +578,8 @@ class RitualController extends SqRootScript
             // Start the medium particles
             local particles = Particles();
             SendMessage(particles[1], "TurnOn");
-        } else if (stage_index == 6) {
-            // Start the small intense particles
+        } else if (stage_index == 5) {
+            // Start the small intense person-shaped particles
             local particles = Particles();
             SendMessage(particles[2], "TurnOn");
         }

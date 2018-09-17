@@ -13,8 +13,6 @@ BUGS:
 
 - Can get _slightly_ too high in the bell tower and see the carpet of the world. Tweak it slightly. Also, climbing to the top of your rope gets you stuck between the beams and the bell; check the bell's dimensions.
 
-- Ritual person-shaped particle system should start one vertex previous?
-
 - Wind sound effect blowing out torch suggests air, which I don't want. Also should be slight wind sfx near air lever, if possible.
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.

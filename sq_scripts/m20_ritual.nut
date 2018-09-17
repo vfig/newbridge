@@ -30,14 +30,14 @@ RitualLogsEnabled <- function()
     return (0
         // Subjects
         | eRitualLog.kRitual
-        | eRitualLog.kPerformer
+//        | eRitualLog.kPerformer
 //        | eRitualLog.kExtra
 //        | eRitualLog.kVictim
 //        | eRitualLog.kLighting
 //        | eRitualLog.kFinale
         // Contexts
 //        | eRitualLog.kPathing
-        | eRitualLog.kAlertness
+//        | eRitualLog.kAlertness
 //        | eRitualLog.kLaziness
 //        | eRitualLog.kSearching
         );
@@ -154,14 +154,16 @@ class RitualController extends SqRootScript
     function OnSim()
     {
         if (message().starting) {
-            if (DEBUG_SKIPTOTHEEND) {
-                stages = [6];
-            }
-
             if ((Status() == null) || (StageIndex() == null)) {
                 SetStatus(eRitualStatus.kNotStarted);
-                SetStageIndex(0);
+                // We always skip the first stage now; we pretend it happens
+                // while Garrett is going through the caves.
+                SetStageIndex(1);
                 SetAwaitingExtras(Extras().len());
+            }
+
+            if (DEBUG_SKIPTOTHEEND) {
+                SetStageIndex(6);
             }
 
             // FIXME: move all these to utility functions so we can get
@@ -237,11 +239,14 @@ class RitualController extends SqRootScript
             SetStatus(eRitualStatus.kInProgress);
 
             local stage = Stage()
+            local stage_index = StageIndex();
 
-            // FIXME: remove this whitespace
-            print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            RitualLog(eRitualLog.kRitual, "Begin\n\n");
 
-            RitualLog(eRitualLog.kRitual, "Begin");
+            // Skip any stages that come before this one.
+            for (local i = 0; i < stage_index; i++) {
+                SkipRound(i);
+            }
 
             // First positions, everyone
             RitualLog(eRitualLog.kPerformer, "Teleporting directly to first position.");
@@ -255,6 +260,17 @@ class RitualController extends SqRootScript
             // Seven times rounds and seven times downs - always begin with a round.
             StepRound();
         }
+    }
+
+    function SkipRound(stage_index)
+    {
+        local stage = stages[stage_index];
+        RitualLog(eRitualLog.kRitual, "Skipping Round " + stage_index + ", Stage " + stage);
+
+        // If we skip stages (only at the start), we still need to turn on their
+        // effects!
+        ActivateStrip(stage_index);
+        ActivateParticles(stage_index);
     }
 
     function StepRound()

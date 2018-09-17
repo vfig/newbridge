@@ -249,7 +249,7 @@ class RitualController extends SqRootScript
             local trol = PerfRoundTrols()[stage];
             SendMessage(performer, "PatrolTo", trol, true);
 
-            RitualLog(eRitualLog.kExtra, "All extras patrolling directly to first positions.");
+            RitualLog(eRitualLog.kExtra, "All extras teleporting to first positions.");
             SendExtrasToVertices(stage, GetAvailableExtras(), true);
 
             // Seven times rounds and seven times downs - always begin with a round.
@@ -691,7 +691,7 @@ class RitualController extends SqRootScript
         return available_extras;
     }
 
-    function SendExtrasToVertices(stage, extras, go_directly = false)
+    function SendExtrasToVertices(stage, extras, teleport = false)
     {
         // The performer will be at index stage*2 in the trol ring;
         // pick roughly-evenly-spaced places for the extras around the
@@ -707,7 +707,7 @@ class RitualController extends SqRootScript
                 "extra #" + extra_index + ": " + Object_Description(extra)
                 + " picked trol #" + pick_index + ": " + Object_Description(pick));
             picked_trols.append(pick);
-            local closest_trol = (go_directly ? 0 : FindClosestTrol(Object.Position(extra), trols));
+            local closest_trol = (teleport ? -1 : FindClosestTrol(Object.Position(extra), trols));
             SendMessage(extra, "PatrolTo", pick, closest_trol);
         }
     }
@@ -1055,7 +1055,6 @@ class RitualPerformer extends SqRootScript
     {
         local trol = message().data;
         local teleport = message().data2;
-
 
         if (teleport) {
             Object.Teleport(self, Object.Position(trol), Object.Facing(trol));
@@ -1420,22 +1419,27 @@ class RitualExtra extends SqRootScript
         local trol = message().data;
         local start_at_trol = message().data2;
         local direct = (start_at_trol == 0);
+        local teleport = (start_at_trol < 0);
         SetPatrolTarget(trol);
-        if (direct) {
+        if (teleport) {
+            Object.Teleport(self, Object.Position(trol), Object.Facing(trol));
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                Object_Description(self)
+                + " teleporting to " + Object_Description(trol));
+            ReachedPatrolTarget(trol);
+        } else if (direct) {
             // Go directly to the target
             Link_SetCurrentPatrol(self, trol);
+            Object.AddMetaProperty(self, "M-DoesPatrol");
+            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
+                Object_Description(self)
+                + " patrolling directly to " + Object_Description(trol));
         } else {
             // If we're not already patrolling, use the suggested start point
             if (Link_GetCurrentPatrol(self) == 0) {
                 Link_SetCurrentPatrol(self, start_at_trol);
             }
-        }
-        Object.AddMetaProperty(self, "M-DoesPatrol");
-        if (direct) {
-            RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
-                Object_Description(self)
-                + " patrolling directly to " + Object_Description(trol));
-        } else {
+            Object.AddMetaProperty(self, "M-DoesPatrol");
             RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
                 Object_Description(self)
                 + " patrolling to " + Object_Description(trol)
@@ -1476,7 +1480,7 @@ class RitualExtra extends SqRootScript
             RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
                 Object_Description(self)
                 + " reached target point " + Object_Description(trol));
-            PunchUp("ExtraReachedTarget", trol);
+            ReachedPatrolTarget(trol);
         } else {
             RitualLog(eRitualLog.kExtra | eRitualLog.kPathing,
                 Object_Description(self)
@@ -1553,6 +1557,11 @@ class RitualExtra extends SqRootScript
             // if we were alerted, and calmed down in between rounds.
             AI_SetIdleOrigin(self, trol);
         }
+    }
+
+    function ReachedPatrolTarget(trol)
+    {
+        PunchUp("ExtraReachedTarget", trol);
     }
 }
 

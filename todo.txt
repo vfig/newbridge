@@ -5,12 +5,13 @@ BETA
     - Mountain air
 
 - Detail
+    - Manor secret room (it's plot relevant!)
     - Fountain square windows & doors
     - Sanctuary basement rooms
     - Buildings overlooking cemetery on West and North (windows & doors)
     - Upper street & alley (windows & doors & buildings)
     - Rich street (windows & doors & buildings)
-    - Manor pantry, secret room, and misc Jorge.
+    - Manor pantry and misc Jorge.
     - New manor windows (on hallway; and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)
     - Caves and ritual chamber?

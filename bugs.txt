@@ -19,3 +19,22 @@ BUGS:
 - Need actual stairs in Hammer Sanctuary, not just ramps
 
 - Lever behind statue in Hammer Sanctuary needs to be visible without climbing up beside. Doesn't need to be _that_ hidden.
+
+
+----
+
+BAD VIS SPOTS, POTENTIAL PERFORMANCE ISSUES:
+
+LOCATION            POLYGONS    PORTALS     NOTE
+(portalize only)
+325 172 -317        1503        10482       Warehouse door
+339 30  -311        1415        12651       Stairs near fountain square
+207 -207 -313       945         8227        Clock tower
+180 -70 -333        974         10963       Near cemetery wall
+159 -31 -332        736         10001       Cemetery entrance
+-10 -48 -303        1630        14001       North cemetery stairs
+68 -351 -244        1966        14431       Sanctuary tower
+240 235 -258        4598        27644       Clifftop beside tower
+(after optimize)
+240 235 -258        4145        17960       Clifftop beside tower
+

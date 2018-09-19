@@ -22,6 +22,8 @@ BUGS:
 
 - You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
+- Weird side to climbable roof in hammer square.
+
 ----
 
 BAD VIS SPOTS, POTENTIAL PERFORMANCE ISSUES:

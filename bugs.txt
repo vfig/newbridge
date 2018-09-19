@@ -18,6 +18,9 @@ BUGS:
 
 - Lever behind statue in Hammer Sanctuary needs to be visible without climbing up beside. Doesn't need to be _that_ hidden.
 
+- Mantling out of the broken mausoleums, or on top of them from behind, is more difficult than it should be.
+
+- You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
 ----
 

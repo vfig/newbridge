@@ -20,11 +20,13 @@ BETA
     - Caves and ritual chamber?
     - Tower entrance - rubbish and a few bones
 
+- Locks & keys in the manor! Especially, you know, the tower doors!!
+
 - Ritual
     - sound effects??
     - timing
     - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
-    - Proper triggering of rescued Anax goal.
+    - (Double-check proper triggering of rescued Anax goal after room archetypes)
 
 - Books
     - market_letter needs a location
@@ -52,6 +54,11 @@ BETA
     - argaux's place
     - sanctuary basement (& crypt?)
     - south caves
+
+- Assign better room archetypes, taking into consideration:
+    - Triggers
+    - Automap
+    - EAX
 
 - Map
     - City map (draw and scan)

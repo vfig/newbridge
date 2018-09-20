@@ -49,8 +49,6 @@ BETA
 - Mountain visibility?
 
 - Room brushes
-    - alley
-    - canal
     - argaux's place
     - sanctuary basement (& crypt?)
     - south caves

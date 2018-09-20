@@ -886,7 +886,10 @@ class GoalEscapeWithTheAnax extends WatchForItems
     function OnItemsArrived()
     {
         local all_items = message().data;
-        if (all_items) {
+        if (all_items
+            && Goal.IsActive(eGoals.kEscapeWithTheAnax)
+            && Goal.IsVisible(eGoals.kEscapeWithTheAnax))
+        {
             // It's okay, you can drop him now.
             Goal.Complete(eGoals.kEscapeWithTheAnax);
 

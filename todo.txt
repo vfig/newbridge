@@ -1,11 +1,55 @@
-BETA
-====
+BETA (September)
+================
 
 - Build blockout & lighting
+    - Sky textures instead of the patchwork bullshit
     - Buildings overlooking cemetery on West and North 
 
 - Detail
     - Manor secret room (it's plot relevant!)
+
+- Locks & keys in the manor! Especially, you know, the tower doors!!
+
+- Ritual
+    - sound effects??
+    - timing
+    - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
+
+- Books
+    - market_letter needs a location
+    - city_thiefscroll needs a location
+    - some letters and stuff in the works buildings?
+    - Pagan book in manor
+
+- Map
+    - At minimum, the basic city map that I already sketched
+
+- Loadouts
+    - Difficulty variation
+    - Store, and starting loot.
+
+- Guards
+    - Patrols and so on
+    - Difficulty variations
+
+- City loot
+    - Allocate loot areas
+    - Scatter loot
+    - And tulz!
+
+- Test mission scripting permutations without hacks
+    - On all difficulties! :-/
+
+x Briefing book as placeholder
+    - Replace cs20 contents with info for beta testers
+
+- Normalise placeholder VO volume
+
+
+POST-BETA (October)
+===================
+
+- Detail
     - Fountain square windows & doors
     - West of fountain square there's a Jorge door.
     - Fountain square west alley
@@ -20,49 +64,21 @@ BETA
     - Caves and ritual chamber?
     - Tower entrance - rubbish and a few bones
 
-- Locks & keys in the manor! Especially, you know, the tower doors!!
-
 - Ritual
-    - sound effects??
-    - timing
-    - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
 
-- Books
-    - market_letter needs a location
-    - city_thiefscroll needs a location
-    - some letters and stuff in the works buildings?
 
 - Conversations and proper triggers
-    x Conv600 (keeper ending; needs goal changed from room to scripted)
-    x Conv700
-    x Conv800
-    x Conv900
-    x Conv1000
     - Conv1100 (the tower)
     - Unused9 (GUARD2/GUARD3: "Go for the stomach, or lower. A Hammer's usually weak there.")
-    x Unused20 (SV1/SV2: "There was this big mob of Hammers, circled round some guy like wolves.")
     - Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
-        - YES! Make a guard that just patrols in circles around the front yard, and trigger this
-            convo when the player is nearby and another guard passes near. Absolutely worth it!
-                - NO. Do that for two of the guards in the market square. I've got the tower convo and
-                    the "market this morning" servant convo for the manor.
-
-- Mountain visibility?
 
 - Assign better room archetypes, taking into consideration:
     - Triggers
     - Automap
     - EAX
 
-- Map
-    - City map (draw and scan)
-        - Automap segments
-        - Automap properties
-    - Hammerite map
-        - Scripting for finding
-        - Automap segments
-        - Automap properties
+- Mountain visibility?
 
 - Sounds
     - Incidental sounds (machinery, water, etc)
@@ -70,36 +86,28 @@ BETA
     - Ambience schemas (test them with a tool? or just a new test map and reload_schemas?)
     - Add Environmental AmbientHacked entities for ambiences
 
-- Loadouts
-    - Difficulty variation
-    - Store, and starting loot.
-
-- Guards
-    x Groups & archetypes & hostility
-        - They're all hostile, so just mix BaffGuards and OperaGuards as I want, I suppose
-    - Patrols and so on
-    - Difficulty variations
-
 - City loot
-    - Allocate loot areas
-    - Scatter loot
-    - And tulz!
     - Build new interiors (full detail + room brush) as desired  }- (maybe post-beta)
     - Randomised loot / difficulty variations?                   }
+
+- Proper VO (maybe post-beta)
+
+
+RELEASE (November)
+==================
+
+- Map
+    - City map (draw and scan)
+        - Automap segments
+        - Automap properties
+    - Hammerite map (draw and scan)
+        - Scripting for finding & updating qvars and automap info
+        - Automap segments
+        - Automap properties
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
 
-x Briefing book as placeholder
-    - Replace cs20 contents with info for beta testers
-
-- Proper VO (maybe post-beta)
-
-- Beta test and bug fixing
-
-
-RELEASE
-=======
 
 - Survey all doors for:
     - if they can vanish

@@ -45,7 +45,13 @@ BETA
 
 - Mountain visibility
 
-- Exterior room brushes
+- Room brushes
+    - alley
+    - argaux's place
+    - sw streets
+    - fountain square
+    - hangman's square
+    - canal
 
 - Map
     - City map (draw and scan)
@@ -92,9 +98,12 @@ x Briefing book as placeholder
 RELEASE
 =======
 
-- Script & apply room EAXes
+- Survey all doors for:
+    - if they can vanish
+    - if they separate rooms properly
+    - (for gates) if they correctly don't block sound & vision
 
-- Survey all doors for bad offsets that might make them vanish
+- Script & apply room EAXes
 
 - Translations & subtitles
 

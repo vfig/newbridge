@@ -2,15 +2,18 @@ BETA
 ====
 
 - Build blockout & lighting
-    - Mountain air
+    - Buildings overlooking cemetery on West and North 
 
 - Detail
     - Manor secret room (it's plot relevant!)
     - Fountain square windows & doors
+    - West of fountain square there's a Jorge door.
+    - Fountain square west alley
+    - Fountain square east alley
     - Sanctuary basement rooms
-    - Buildings overlooking cemetery on West and North (windows & doors)
     - Upper street & alley (windows & doors & buildings)
     - Rich street (windows & doors & buildings)
+    - Manor storage room.
     - Manor pantry and misc Jorge.
     - New manor windows (on hallway; and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)
@@ -43,15 +46,15 @@ BETA
                 - NO. Do that for two of the guards in the market square. I've got the tower convo and
                     the "market this morning" servant convo for the manor.
 
-- Mountain visibility
+- Mountain visibility?
 
 - Room brushes
     - alley
-    - argaux's place
-    - sw streets
-    - fountain square
     - hangman's square
     - canal
+    - argaux's place
+    - sanctuary basement (& crypt?)
+    - south caves
 
 - Map
     - City map (draw and scan)
@@ -81,6 +84,7 @@ BETA
 - City loot
     - Allocate loot areas
     - Scatter loot
+    - And tulz!
     - Build new interiors (full detail + room brush) as desired  }- (maybe post-beta)
     - Randomised loot / difficulty variations?                   }
 

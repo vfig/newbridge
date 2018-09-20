@@ -52,7 +52,6 @@ BETA
 
 - Room brushes
     - argaux's place
-    - sanctuary basement (& crypt?)
 
 - Assign better room archetypes, taking into consideration:
     - Triggers

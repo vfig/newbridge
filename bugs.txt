@@ -16,9 +16,13 @@ BUGS:
 
 - Mantling out of the broken mausoleums, or on top of them from behind, is more difficult than it should be.
 
+- Mantling out of the hole you came in by, in the mausoleum, is impossible without new_mantle.
+
 - You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
 - Weird side to climbable roof in hammer square.
+
+- When manor servants flee, they flee to the Hammer Sanctuary! I mean, it is a sanctuary, but it's not meant for them.
 
 ----
 

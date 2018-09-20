@@ -8,6 +8,10 @@ region 10: City
     id 1: Argaux's Lockbox
     id 2: Warehouse trapdoor
 
-region 100:
+region 100: Manor
+    id 1: Manor doors (Key2)
+    id 2: Tower (Key5)
+    id 3: Secret room safe (Key3)
 
 region 1000:
+

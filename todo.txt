@@ -50,9 +50,6 @@ BETA
 
 - Mountain visibility?
 
-- Room brushes
-    - argaux's place
-
 - Assign better room archetypes, taking into consideration:
     - Triggers
     - Automap

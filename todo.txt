@@ -5,9 +5,6 @@ BETA (September)
     - Sky textures instead of the patchwork bullshit
     - Buildings overlooking cemetery on West and North 
 
-- Detail
-    - Manor secret room (it's plot relevant!)
-
 - Locks & keys in the manor! Especially, you know, the tower doors!!
 
 - Ritual

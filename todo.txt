@@ -50,7 +50,6 @@ BETA
 
 - Room brushes
     - alley
-    - hangman's square
     - canal
     - argaux's place
     - sanctuary basement (& crypt?)

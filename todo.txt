@@ -19,7 +19,6 @@ BETA (September)
     - market_letter needs a location
     - city_thiefscroll needs a location
     - some letters and stuff in the works buildings?
-    - Pagan book in manor
 
 - Map
     - At minimum, the basic city map that I already sketched
@@ -39,6 +38,7 @@ BETA (September)
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
+    - Include Keeper bullshit variation!
 
 x Briefing book as placeholder
     - Replace cs20 contents with info for beta testers

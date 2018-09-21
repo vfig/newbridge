@@ -2,8 +2,6 @@ BUGS:
 
 - Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk, and I don't know if that's an issue.
 
-- Wind sound effect blowing out torch suggests air, which I don't want. Also should be slight wind sfx near air lever, if possible.
-
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
 - The apparition of The Prophet in the mausoleum ought to get destroyed when the ritual begins.

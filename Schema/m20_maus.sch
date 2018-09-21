@@ -10,11 +10,18 @@ volume -500
 mono_loop 0 0
 subson1
 
-// Mausoleum wind dousing torch
+// Mausoleum spooky torch dousing
 schema m20mausdous
 archetype AMB_M20
-volume -1
-mbreath1
+volume -500
+squeaks1
+
+// Mausoleum wind ambience
+schema m20mauswind
+archetype AMB_M20
+volume -2000
+mono_loop 5000 10000
+wind1 wind3 wind4
 
 // Mausoleum puzzle sound 1
 schema m20mauspuz1

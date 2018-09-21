@@ -7,6 +7,7 @@ BUGS:
 - You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
 - When manor servants flee, they flee to the Hammer Sanctuary! I mean, it is a sanctuary, but it's not meant for them.
+    - This is because the lone FleePt in the map is in the basement of the Hammer sanctuary, beside the sleeping guard.
 
 ----
 

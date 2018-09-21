@@ -6,6 +6,7 @@ BETA (September)
     - Difficulty variations
 
 - City loot
+    - Bystanders
     - Allocate loot areas
     - Scatter loot
     - And tulz!
@@ -48,7 +49,6 @@ POST-BETA (October)
     - West of fountain square there's a Jorge door.
     - Fountain square west alley
     - Fountain square east alley
-    - Need actual stairs in Hammer Sanctuary, not just ramps
     - Sanctuary basement rooms
     - Upper street & alley (windows & doors & buildings)
     - Rich street (windows & doors & buildings)

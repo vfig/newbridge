@@ -2,7 +2,6 @@ BETA (September)
 ================
 
 - Build blockout & lighting
-    - Sky textures instead of the patchwork bullshit
     - Buildings overlooking cemetery on West and North 
 
 - Ritual

@@ -3,10 +3,15 @@ BETA (September)
 
 - Guards
     - Patrols and so on
+        -  Middle streets
+        -  Rich streets? There's no hiding places at the moment, so currently minimal
+            - I kind of like the variation. Get a breather on the way to di Rupo's.
+        - More di Rupo guards (inside and out, including conversation havers)
     - Difficulty variations
 
 - City loot
     - Bystanders
+        - Long patrols
     - Allocate loot areas
     - Scatter loot
     - And tulz!

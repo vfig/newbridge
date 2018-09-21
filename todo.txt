@@ -1,6 +1,19 @@
 BETA (September)
 ================
 
+- Guards
+    - Patrols and so on
+    - Difficulty variations
+
+- City loot
+    - Allocate loot areas
+    - Scatter loot
+    - And tulz!
+
+- Loadouts
+    - Difficulty variation
+    - Store, and starting loot.
+
 - Build blockout & lighting
     - Buildings overlooking cemetery on West and North 
 
@@ -10,25 +23,12 @@ BETA (September)
     - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
 
 - Books
-    - market_letter needs a location
     - city_thiefscroll needs a location
     - some letters and stuff in the works buildings?
+    - Review and finalise all readables!
 
 - Map
     - At minimum, the basic city map that I already sketched
-
-- Loadouts
-    - Difficulty variation
-    - Store, and starting loot.
-
-- Guards
-    - Patrols and so on
-    - Difficulty variations
-
-- City loot
-    - Allocate loot areas
-    - Scatter loot
-    - And tulz!
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

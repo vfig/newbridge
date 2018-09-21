@@ -4,8 +4,6 @@ BUGS:
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
-- The apparition of The Prophet in the mausoleum ought to get destroyed when the ritual begins.
-
 - Need actual stairs in Hammer Sanctuary, not just ramps
 
 - Lever behind statue in Hammer Sanctuary needs to be visible without climbing up beside. Doesn't need to be _that_ hidden.

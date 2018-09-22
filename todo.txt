@@ -1,13 +1,6 @@
 BETA (September)
 ================
 
-- Guards
-    - Patrols and so on
-        -  Middle streets
-        -  Rich streets? There's no hiding places at the moment, so currently minimal
-            - I kind of like the variation. Get a breather on the way to di Rupo's.
-    - Difficulty variations
-
 - City loot
     - Bystanders
         - Long patrols
@@ -65,6 +58,10 @@ POST-BETA (October)
     - Handoff behind fishmongers (windows etc on other buildings)
     - Caves and ritual chamber?
     - Tower entrance - rubbish and a few bones
+
+- Rich Street Guards?
+    -  There's no hiding places at the moment, so currently minimal.
+       I kind of like the variation. Get a breather on the way to di Rupo's.
 
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)

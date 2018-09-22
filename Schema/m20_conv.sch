@@ -600,3 +600,25 @@ schema nb1003
 archetype M20_CONV
 nb1003
 schema_voice hammer3 1 nbconv10 (LineNo 4 4)
+
+
+//////////////////////////////////
+// 1100: BENNY and GUARD 1
+
+// "So, how come the old Lady..."
+schema nb1100
+archetype M20_CONV
+nb1100
+schema_voice guard3 1 nbconv11 (LineNo 1 1)
+
+// "Orders are to be followed..."
+schema nb1101
+archetype M20_CONV
+nb1101
+schema_voice guard1 1 nbconv11 (LineNo 2 2)
+
+// "Yeah, it'd be..."
+schema nb1102
+archetype M20_CONV
+nb1102
+schema_voice guard3 1 nbconv11 (LineNo 3 3)

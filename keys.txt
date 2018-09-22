@@ -12,6 +12,7 @@ region 100: Manor
     id 1: Manor doors (Key2)
     id 2: Tower (Key5)
     id 3: Secret room safe (Key3)
+    id 4: Manor bedrooms key (Key1; not for player)
 
 region 1000:
 

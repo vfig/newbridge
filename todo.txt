@@ -6,7 +6,6 @@ BETA (September)
         -  Middle streets
         -  Rich streets? There's no hiding places at the moment, so currently minimal
             - I kind of like the variation. Get a breather on the way to di Rupo's.
-        - More di Rupo guards (inside and out, including conversation havers)
     - Difficulty variations
 
 - City loot
@@ -15,6 +14,9 @@ BETA (September)
     - Allocate loot areas
     - Scatter loot
     - And tulz!
+
+- Flee points
+    - scattered around the city, so fleeing behaviours don't end up stupid.
 
 - Loadouts
     - Difficulty variation

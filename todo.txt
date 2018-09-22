@@ -1,15 +1,10 @@
 BETA (September)
 ================
 
-- City loot
-    - Bystanders
-        - Long patrols
-    - Allocate loot areas
-    - Scatter loot
-    - And tulz!
-
-- Flee points
-    - scattered around the city, so fleeing behaviours don't end up stupid.
+- Books
+    - city_thiefscroll needs a location
+    - some letters and stuff in the works buildings?
+    - Review and finalise all readables!
 
 - Loadouts
     - Difficulty variation
@@ -23,13 +18,18 @@ BETA (September)
     - timing
     - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
 
-- Books
-    - city_thiefscroll needs a location
-    - some letters and stuff in the works buildings?
-    - Review and finalise all readables!
-
 - Map
     - At minimum, the basic city map that I already sketched
+
+- City loot
+    - Bystanders
+        - Long patrols
+    - Allocate loot areas
+    - Scatter loot
+    - And tulz!
+
+- Flee points
+    - scattered around the city, so fleeing behaviours don't end up stupid.
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
@@ -50,6 +50,7 @@ POST-BETA (October)
     - Fountain square west alley
     - Fountain square east alley
     - Sanctuary basement rooms
+    - Sanctuary upstairs middle room.
     - Upper street & alley (windows & doors & buildings)
     - Rich street (windows & doors & buildings)
     - Manor storage room.

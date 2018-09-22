@@ -112,8 +112,11 @@ PLAYTEST NOTES:
 
 * EscapeWithTheAnax doesn't trigger in the alley.
 
-* CRITICAL!!! Keeper by the canal didn't trigger... why not?
-    (cause I'm playing in the editor? But all _visible_ objectives are okay!)
+* Wow, when debugging that^, Dannot didn't even teleport sanely to the right spot :( I guess he fell out of the world after the tp
+
+* Rich streets keeper appears _in front_ of Garrett, just
+
+* Hammerite sanctuary stairs are almost invisible... have something at the end of each hallway for visible contrast.
 
 ----
 

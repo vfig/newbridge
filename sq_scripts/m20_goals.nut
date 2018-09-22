@@ -141,23 +141,50 @@ local Goal = {
     IsAllDoneExcept = function(exclude_goal) {
         // Return true if all visible goals except the given one are
         // done (completed or cancelled).
+        print("FFF   Testing all goals okay except: " + exclude_goal);
         for (local goal = 0; goal < 32; goal += 1) {
             local state_name = ("goal_state_" + goal);
             local visible_name = ("goal_visible_" + goal);
+            local reverse_name = ("goal_reverse_" + goal);
+
+            if (! Quest.Exists(state_name))
+                print("FFF   Reached end of qvars with " + state_name);
+
             if (! Quest.Exists(state_name)) break;
+
+            if (!(goal != exclude_goal))
+                print("FFF   Skipping excluded qvar " + state_name)
+            if (!(Quest.Get(visible_name) == 1))
+                print("FFF   Skipping not visible qvar " + visible_name);
+
             if ((goal != exclude_goal)
                 && (Quest.Get(visible_name) == 1))
                 /* && (IsGoldilocksDifficulty(goal))) */
             {
                 local state = Quest.Get(state_name);
-                if ((state != 1 /* complete */)
-                    && (state != 2 /* cancelled */))
-                {
-                    // This goal isn't done!
-                    return false;
+                local reverse = (Quest.Exists(reverse_name)
+                    && (Quest.Get(reverse_name) == 1));
+
+                print("FFF   Testing qvar " + state_name + " value: " + state);
+
+                if (reverse) {
+                    if (state != 0 /* unticked, but it's a reverse goal */) {
+                        print("FFF   Aborting because reverse goal " + state_name + " is done!");
+                        // This goal is done but shouldn't be!
+                        return false;
+                    }
+                } else {
+                    if ((state != 1 /* complete */)
+                        && (state != 2 /* cancelled */))
+                    {
+                        print("FFF   Aborting because " + state_name + " isn't done!");
+                        // This goal isn't done!
+                        return false;
+                    }
                 }
             }
         }
+        print("FFF   Okay, all done except excluded.");
         // All active goals seem to be okay
         return true;
     }
@@ -934,26 +961,32 @@ class GoalEffTheKeepers extends SqRootScript
 
     function SubscribeAll()
     {
-        // Monitor all goal state qvars
+        // Monitor all goal state and visibility qvars
         for (local goal = 0; goal < 32; goal += 1) {
             local state_name = ("goal_state_" + goal);
+            local visible_name = ("goal_visible_" + goal);
             if (! Quest.Exists(state_name)) break;
             Quest.SubscribeMsg(self, state_name);
+            Quest.SubscribeMsg(self, visible_name);
         }
     }
 
     function UnsubscribeAll()
     {
-        // Monitor all goal state qvars
+        // Monitor all goal state and visibility qvars
         for (local goal = 0; goal < 32; goal += 1) {
             local state_name = ("goal_state_" + goal);
+            local visible_name = ("goal_visible_" + goal);
             if (! Quest.Exists(state_name)) break;
             Quest.UnsubscribeMsg(self, state_name);
+            Quest.UnsubscribeMsg(self, visible_name);
         }
     }
 
     function OnQuestChange()
     {
+        print("FFF   Quest state changed, retesting.");
+
         // Check if only the last goal remains
         local already_teleported = (Quest.Get("teleported_damn_keepers2") == 1);
         if (Goal.IsAllDoneExcept(eGoals.kReturnToTheStart)
@@ -1041,6 +1074,8 @@ class GoalReturnToTheStart extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
+        print("FFF   Entered canal final room.");
+
         local already_triggered = (Quest.Get("triggered_damn_keepers2") == 1);
         if (Goal.IsAllDoneExcept(eGoals.kReturnToTheStart)
             && (! already_triggered))

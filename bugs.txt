@@ -1,15 +1,12 @@
 BUGS:
 
-- Pond in manor grounds is silent!
-
 - Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk, and I don't know if that's an issue.
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
 - You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
-- When manor servants flee, they flee to the Hammer Sanctuary! I mean, it is a sanctuary, but it's not meant for them.
-    - This is because the lone FleePt in the map is in the basement of the Hammer sanctuary, beside the sleeping guard.
+- various voids: fountain square blustone building, rich street
 
 ----
 

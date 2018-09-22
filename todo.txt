@@ -18,9 +18,6 @@ BETA (September)
     - timing
     - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
 
-- Map
-    - At minimum, the basic city map that I already sketched
-
 - City loot
     - Bystanders
         - Long patrols

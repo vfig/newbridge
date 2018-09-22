@@ -177,3 +177,17 @@ class TurbineSounds extends SqRootScript
         Sound.PlaySchemaAtObject(self, "m20turboff", self);
     }
 }
+
+class ActivateMapPageOne extends SqRootScript
+{
+    function OnFrobInvEnd() {
+        // Enable page 1 if it's not already
+        local max_page = Quest.Get("map_max_page");
+        if (max_page < 1) {
+            Quest.Set("map_max_page", 1);
+        }
+
+        // Show the map
+        Debug.Command("automap");
+    }
+}

@@ -1,0 +1,11 @@
+; Creates map qvars for Newbridge mission. Run this from Dromed: "run_cmd_script miss20_map"
+
+quest_delete map_min_page
+quest_delete map_max_page
+
+; We start with only one page of the map visible.
+; The second page will be scripted later.
+quest_create_mis map_min_page, 0
+quest_create_mis map_max_page, 0
+
+mprint Map qvars updated

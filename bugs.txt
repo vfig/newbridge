@@ -1,122 +1,134 @@
-BUGS:
+FIX BEFORE BETA 1
+=================
+
+- di Rupo should probably move slightly faster in the ritual (pre BETA so testers can feedback on it)
+
+- MAP! Need to have final text for it for sake of translators.
+
+- Replace "Amelia" with "Camelia"
+
+- "Curse mine ailing memory" note should say it's to remind himself
+
+- Sign di Rupo's notes with "dR"?
+
+- Anax's diary should be more scathing about keep the crypt keys so these incompetent fools can't get in his way
+
+- Argaux's place needs to have healing potion instead of speed; and sanctuary map!
+
+- Argaux's place should have normal mine, not gas mine. And a rope arrow. (But on the other hand a gas mine is great fun. Should have one _somewhere_, just not so obvious. Also a couple gas arrows around.)
+
+- Hammer square: surprisingly difficult to get by! Is the stationary guard Hard+?
+
+- Mausoleum torch should go out about two seconds after entering, in case the player decides to douse it with a water arrow.
+
+- Other mausoleum torch should re-light itself if doused!
+
+- Dump the bedroll troll from the bell tower chest - keep the hammer one in the priest's room for tradition's sake
+
+- Dump the hammer troll chest in the sanctuary basement.
+
+- Dump the canister troll chest in the manor.
+
+- If you go in through the window, and don't have the Anax's room key, you get stuck in the vestibule+anax room! Not great. Can't rope + mantle onto bookshelf without new_mantle. (Can rope up to bookshelf, jump across to light, then back to bookshelf. But some wooden roof beams for easier roping wouldn't go amiss.)
+
+- Works station with streetlight control should be locked, if only as a formality.
+
+- Ritual Anax is just titled "Unconscious Body"
+
+- Needs to be a rope arrow or two in the ritual chamber/mine just in case you used your only one getting down.
+
+- Danno didn't even teleport sanely to the right spot :( I guess he fell out of the world after the tp
+
+
+
+FIX BEFORE BETA 2
+=================
+
+- Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
 
 - Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk, and I don't know if that's an issue.
 
-- Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
+- collector tower above Argaux's place is not in a room brush
 
-- You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
+- Drunk guard's tower: wood should hang out, too hard to hit. Also can't mantle in properly without new_mantle.
+
+- Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
 - various voids: fountain square blustone building, rich street
 
-PLAYTEST NOTES:
+- ProphetStatueHack doesn't seem to be high enough -- sword goes right through his head
 
-* Hammer square: surprisingly difficult to get by! Is the stationary guard Hard+?
+- Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
 
-* West exit from Hammer square is quite boring on the way to the fountain--ALL THE STREETS ARE, THEY HAVE NO LOOT!
+- Thieves' conversation didn't trigger as I emerged from the catacombs! Or if it did, it went by _much_ too fast and silently.
 
-* Drunk guard's tower: wood should hang out, too hard to hit. Also can't mantle in properly without new_mantle.
+- Possible to get stuck if you fall behind the southernmost mausoleums while trying to climb over them. Move the southernmost a little west.
 
-* Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
+- Give one of the thieves a purse.
 
-* MAP! Need to have final text for it for sake of translators.
+- Alley gates should start open.
 
-* Argaux's place needs to have healing potion instead of speed; and sanctuary map!
+- Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
 
-* Replace "Amelia" with "Camelia"
+- di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
 
-* Argaux's place should have normal mine, not gas mine. And a rope arrow. (But on the other hand a gas mine is great fun. Should have one _somewhere_, just not so obvious. Also a couple gas arrows around.)
+- (Why are there two guards patrolling outside the sanctuary? Is one the guard from Hammer square?? This makes three altogether, where's the difficulty variation?)
 
-* collector tower above Argaux's place is not in a room brush
+- A few hammerites should have purses or healing potions
 
-* Con guard (sleeping standing up) giving off bad creature pos errors
+- Warden's chest is locked but empty!?
 
-* Mausoleum torch should go out about two seconds after entering, in case the player decides to douse it with a water arrow.
+- Tower steps should have different texture, they're almost invisible.
 
-* Other mausoleum torch should re-light itself if doused!
+- Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.
 
-* ProphetStatueHack doesn't seem to be high enough -- sword goes right through his head
+- More bad sound propagation at manor: standing in the secret room, can hear footsteps of guard on marble in long gallery.
 
-* Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
+- Strange sound propagation in market square: while waiting in lightswitch doorway, guard's feet went nearly silent as he walked by :(
 
-* Thieves' conversation didn't trigger as I emerged from the catacombs! Or if it did, it went by _much_ too fast and silently.
+- Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
 
-* Possible to get stuck if you fall behind the southernmost mausoleums while trying to climb over them. Move the southernmost a little west.
+- (sound propagation?) Ritual chant is inaudible from antechamber mouth.
 
-* Give one of the thieves a purse.
+- Sanctuary basement isn't lit _at all_!!
 
-* Alley gates should start open.
+- Should have a couple tools in the hand-off room. Flashbombs or such.
 
-* Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
+- Opera archer takes _way_ too long to turn.
 
-* (Why are there two guards patrolling outside the sanctuary? Is one the guard from Hammer square?? This makes three altogether, where's the difficulty variation?)
+- Caves need some diamonds, or gold or something
 
-* Dump the bedroll troll from the bell tower chest - keep the hammer one in the priest's room for tradition's sake
+- Bugbeast seemed to come right for me (just east of steps) when searching... how? Is there a trol point down there?
 
-* Does the priest go superefficient while I'm in the vestibule? No, he just took forever.
+- Needs to be something to land on beside wall across from works station, so you don't hurt yourself leaving that way.
 
-* "Curse mine ailing memory" note should say it's to remind himself
+- EscapeWithTheAnax doesn't trigger in the alley.
 
-* If you go in through the window, and don't have the Anax's room key, you get stuck in the vestibule+anax room! Not great. Can't rope + mantle onto bookshelf without new_mantle. (Can rope up to bookshelf, jump across to light, then back to bookshelf. But some wooden roof beams for easier roping wouldn't go amiss.)
+- Rich streets keeper appears _in front_ of Garrett, just
 
-* Sanctuary basement isn't lit _at all_!!
+- Hammerite sanctuary stairs are almost invisible... have something at the end of each hallway for visible contrast.
 
-* Dump the hammer troll chest in the sanctuary basement.
 
-* Anax's diary should be more scathing about keep the crypt keys so these incompetent fools can't get in his way
 
-* A few hammerites should have purses or healing potions
+FIX BEFORE RELEASE
+==================
 
-* Warden's chest is locked but empty!?
 
-* Strange sound propagation in market square: while waiting in lightswitch doorway, guard's feet went nearly silent as he walked by :(
 
-* If you cut the banner in the hand-off room, Lady di Rupo runs to inspect the damage! But then walks casually back behind the counter.
+ONLY IF I FEEL LIKE IT
+======================
 
-* Should have a couple tools in the hand-off room. Flashbombs or such.
+- You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
-* Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
+- Con guard (sleeping standing up) giving off bad creature pos errors
 
-* Cemetery keeper appears right beside the statue of Death. Nice :)
+- If you cut the banner in the hand-off room, Lady di Rupo runs to inspect the damage! But then walks casually back behind the counter.
 
-* Opera archer takes _way_ too long to turn.
+- Cemetery keeper appears right beside the statue of Death. Nice :)
 
-* Works station with streetlight control should be locked, if only as a formality.
+- Use R insignia door for safe.
 
-* di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
 
-* Tower steps should have different texture, they're almost invisible.
-
-* Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.
-
-* More bad sound propagation at manor: standing in the secret room, can hear footsteps of guard on marble in long gallery.
-
-* Sign di Rupo's notes with "dR"?
-
-* Use R insignia door for safe.
-
-* Can I make other ritual lines echo through the caves if they play before Garrett gets there?? (oh wait, it's not actually started yet, so don't worry)
-
-* Caves need some diamonds, or gold or something
-
-* Ritual chant is inaudible from antechamber mouth.
-
-* Bugbeast seemed to come right for me (just east of steps) when searching... how? Is there a trol point down there?
-
-* di Rupo should probably move slightly faster in the ritual (pre BETA so testers can feedback on it)
-
-* Ritual Anax is just titled "Unconscious Body"
-
-* Needs to be a rope arrow or two in the ritual chamber/mine just in case you used your only one getting down.
-
-* Needs to be something to land on beside wall across from works station, so you don't hurt yourself leaving that way.
-
-* EscapeWithTheAnax doesn't trigger in the alley.
-
-* Wow, when debugging that^, Dannot didn't even teleport sanely to the right spot :( I guess he fell out of the world after the tp
-
-* Rich streets keeper appears _in front_ of Garrett, just
-
-* Hammerite sanctuary stairs are almost invisible... have something at the end of each hallway for visible contrast.
 
 ----
 

@@ -2,9 +2,10 @@ BETA (September)
 ================
 
 - Books
-    - city_thiefscroll needs a location
     - some letters and stuff in the works buildings?
-    - Review and finalise all readables!
+    - Review and finalise all readables:
+        - city_thiefscroll
+        - ... add new ones here as I write them ...
 
 - Loadouts
     - Difficulty variation

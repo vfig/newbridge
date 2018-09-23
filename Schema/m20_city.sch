@@ -23,6 +23,12 @@ mono_loop 0 0
 volume -500
 turb2lp
 
+// Mine softly arming
+schema mine_arm_quiet
+archetype AMB_M20
+volume -2000
+minearmg
+
 
 // -------------------------- AMBIENCE ----------------------------
 

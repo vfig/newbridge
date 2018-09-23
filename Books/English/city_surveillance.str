@@ -1,9 +1,5 @@
 ; Found in an "inaccessible" area. Only intrepid climbers can reach it.
-;
-; NOTE FOR TRANSLATORS:
-;
-; This text is going to be an easter egg, since it's impossible to reach
-; without a lot of clever climbing. But I don't know what yet.
-; If you like, please put your own fun easter egg text in here instead!
 
-Page_0: "..."
+Page_0: "What did I do to deserve this assignment? Keeping watch on Garrett day in and day out is the most insipid and monotonous task imaginable. All he does is skulk around places he shouldn't be, stealing anything that looks vaguely valuable. It's not like the rent for his dingy attic is very high, so what does he even spend it all on?
+
+For that matter, how does he even carry it all? A dozen rings or diamonds are one thing, but a dozen candlesticks? A dozen ornate vases?"

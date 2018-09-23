@@ -42,9 +42,9 @@ text_9: "Get the Anax safely out of the area."
 fiction_10: "Rescue the Anax and bring him back to the Hammerite Sanctuary."
 text_10: "Rescue the Anax and bring him back to the Hammerite Sanctuary."
 
-; 11: BonusSellTheHand
-fiction_11: "(CUT) The Hand's useless to you now. See if you can find a buyer for it."
-text_11: "(CUT) The Hand's useless to you now. See if you can find a buyer for it."
+; 11: BonusTerencesHammer
+fiction_11: "(Bonus) This ancient jeweled hammer is a priceless relic. But as your fence always says, everything has its price."
+text_11: "(Bonus) This ancient jeweled hammer is a priceless relic. But as your fence always says, everything has its price."
 
 ; 12: KeepTheAnaxAlive
 fiction_12: "Don't let the Anax come to any harm."

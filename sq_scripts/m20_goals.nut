@@ -15,7 +15,8 @@ enum eGoals {
     kBonusSubvertTheRitual  = 8, // CUT!
     kEscapeWithTheAnax      = 9,
     kReturnTheAnax          = 10, // CUT! (was Hard + Expert)
-    kBonusSellTheHand       = 11, // CUT!
+    /* Bonus loot */
+    kBonusTerencesHammer    = 11, // Replaces cut "sell the hand" bonus objective.
     /* Silly player */
     kKeepTheAnaxAlive       = 12,
     kDontBiteTheHand        = 13,
@@ -1140,26 +1141,16 @@ class GoalTheHandThatFeeds extends PreserveMe
 }
 
 
-/* -------- Loot -------- */
+/* -------- Bonus goals -------- */
 
-// FIXME: put this into objectives map
-class GoalSellTheHand
+class GoalTerencesHammer extends SqRootScript
 {
-    /* Put this on the concrete room where the ritual hand should be delivered.
-       On the ritual hand put the ItemToDeliver script, with a ScriptParams("DeliveryRoom")
-       link to this room. Add a ControlDevice link to the conversation to trigger. */
-
-    function OnItemDelivered() {
-        local item = message().data;
-        Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
-
-        Goal.Show(eGoals.kBonusSellTheHand);
-        Goal.Complete(eGoals.kBonusSellTheHand);
-
-        Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+    function OnFrobWorldEnd()
+    {
+        Goal.Show(eGoals.kBonusTerencesHammer);
+        Goal.Complete(eGoals.kBonusTerencesHammer);
     }
 }
-
 
 /* ------------- */
 

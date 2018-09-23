@@ -68,7 +68,7 @@ quest_create_mis goal_visible_10, 0
 quest_create_mis goal_min_diff_10, 1
 quest_create_mis goal_max_diff_10, 2
 
-; 11: BonusSellTheHand
+; 11: BonusTerencesHammer
 quest_create_mis goal_state_11, 0
 quest_create_mis goal_visible_11, 0
 

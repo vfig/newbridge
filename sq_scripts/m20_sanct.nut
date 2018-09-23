@@ -332,7 +332,7 @@ class MysticGauge extends SqRootScript
         }
 
         const max_distance = 512.0;
-        const min_distance = 64.0;
+        const min_distance = 48.0;
         local target_pos = Object.Position(target);
         local my_pos = Object.Position(self);
         local my_facing = Object.Facing(self);
@@ -345,7 +345,7 @@ class MysticGauge extends SqRootScript
             local gauge = 135.0 + my_facing.z + heading;
             local clamped_distance = (distance > max_distance ? max_distance : distance);
             local closeness = (1.0 - ((clamped_distance - min_distance) / (max_distance - min_distance)));
-            local inaccuracy = (closeness * 90.0) + 10.0;
+            local inaccuracy = ((1.0 - closeness) * 90.0) + 10.0;
             local agitation = (closeness * 50.0) + 5.0;
             Property.Set(self, "CfgTweqJoints", "    rate-low-high", vector(agitation, gauge - inaccuracy, gauge + inaccuracy));
         }

@@ -4,11 +4,6 @@ BETA (September)
 - Build blockout & lighting
     - Buildings overlooking cemetery on West and North 
 
-- Ritual
-    - sound effects??
-    - timing
-    - check efficiency settings of performer & extras, so they don't visually slide into place after teleporting.
-
 - City loot
     - Bystanders
         - Long patrols

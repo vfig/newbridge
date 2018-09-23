@@ -8,13 +8,11 @@ BETA (September)
     - Scatter loot
     - And tulz!
 
-- Flee points
-    - scattered around the city, so fleeing behaviours don't end up stupid.
-
 - Books
     - some letters and stuff in the works buildings?
     - Review and finalise all readables:
         - city_thiefscroll
+        - city_surveillance
         - ... add new ones here as I write them ...
 
 - Test mission scripting permutations without hacks

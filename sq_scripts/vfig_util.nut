@@ -229,3 +229,13 @@ class DebugQuestVars extends SqRootScript
         Display(DumpAllGoals());
     }
 }
+
+class EditorOnly extends SqRootScript
+{
+    function OnBeginScript()
+    {
+        if (! Version.IsEditor()) {
+            Object.Destroy(self);
+        }
+    }
+}

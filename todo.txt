@@ -1,16 +1,6 @@
 BETA (September)
 ================
 
-- Books
-    - some letters and stuff in the works buildings?
-    - Review and finalise all readables:
-        - city_thiefscroll
-        - ... add new ones here as I write them ...
-
-- Loadouts
-    - Difficulty variation
-    - Store, and starting loot.
-
 - Build blockout & lighting
     - Buildings overlooking cemetery on West and North 
 
@@ -29,6 +19,12 @@ BETA (September)
 - Flee points
     - scattered around the city, so fleeing behaviours don't end up stupid.
 
+- Books
+    - some letters and stuff in the works buildings?
+    - Review and finalise all readables:
+        - city_thiefscroll
+        - ... add new ones here as I write them ...
+
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
     - Include Keeper bullshit variation!
@@ -37,6 +33,9 @@ x Briefing book as placeholder
     - Replace cs20 contents with info for beta testers
 
 - Normalise placeholder VO volume
+    - Drop in already recorded VO instead where possible, even if rough.
+
+- Readme! At least a rough draft
 
 
 POST-BETA (October)

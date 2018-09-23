@@ -1,0 +1,37 @@
+ALL DIFFICULTIES
+----------------
+Blackjack
+Sword
+Lock picks
+
+
+NORMAL
+------
+
+3000 loot
+2 flash bombs
+2 healing potions
+20 broadhead arrows
+3 rope arrows
+2 noisemaker arrows
+1 fire arrow
+15 water arrows
+8 moss arrows
+
+
+HARD
+----
+
+2000 loot
+1 flash bomb
+1 healing potion
+5 broadhead arrows
+1 rope arrow
+3 water arrows
+1 moss arrow
+
+
+EXPERT
+------
+
+1000 loot

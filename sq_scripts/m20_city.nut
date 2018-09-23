@@ -191,3 +191,12 @@ class ActivateMapPageOne extends SqRootScript
         Debug.Command("automap");
     }
 }
+
+class PleaseKillMe extends SqRootScript
+{
+    function OnFrobInvEnd() {
+        Container.Remove(self);
+        Object.Teleport(self, vector(2, 0, 2), vector(), Object.Named("Player"));
+        Damage.Slay(self, 0);
+    }
+}

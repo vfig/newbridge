@@ -1,17 +1,7 @@
 FIX BEFORE BETA 1
 =================
 
-- Dump the bedroll troll from the bell tower chest - keep the hammer one in the priest's room for tradition's sake
-
-- Dump the canister troll chest in the manor.
-
-- If you go in through the window, and don't have the Anax's room key, you get stuck in the vestibule+anax room! Not great. Can't rope + mantle onto bookshelf without new_mantle. (Can rope up to bookshelf, jump across to light, then back to bookshelf. But some wooden roof beams for easier roping wouldn't go amiss.)
-
-- Works station with streetlight control should be locked, if only as a formality.
-
-- Ritual Anax is just titled "Unconscious Body"
-
-- Needs to be a rope arrow or two in the ritual chamber/mine just in case you used your only one getting down.
+- Dump the canister troll chest in the manor. (but what to replace it with?)
 
 
 

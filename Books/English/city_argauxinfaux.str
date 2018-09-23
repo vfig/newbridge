@@ -1,5 +1,10 @@
 ; Found in the Argaux's secret room.
 ; This is the message detailing the job Lady di Rupo hired Argaux for.
+;
+; NOTE FOR TRANSLATORS:
+;
+; 'Argo' is an intentional misspelling of 'Argaux'; Lady di Rupo doesn't
+; know the fancy way that Argaux likes to spell his name.
 
 Page_0: "Mister Argo,
 
@@ -13,4 +18,4 @@ Page_1: "For these two items I will pay you the sum of five thousand gold pieces
 
 Speed and secrecy are essential!  I need not remind you of the consequences should you fail me or betray my trust.
 
-- Lady Amelia di Rupo"
+- Lady Camelia di Rupo"

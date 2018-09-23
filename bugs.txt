@@ -3,14 +3,6 @@ FIX BEFORE BETA 1
 
 - di Rupo should probably move slightly faster in the ritual (pre BETA so testers can feedback on it)
 
-- Replace "Amelia" with "Camelia"
-
-- "Curse mine ailing memory" note should say it's to remind himself
-
-- Sign di Rupo's notes with "dR"?
-
-- Anax's diary should be more scathing about keep the crypt keys so these incompetent fools can't get in his way
-
 - a gas mine is great fun. Should have one _somewhere_, just not so obvious. Also a couple gas arrows around.)
 
 - Hammer square: surprisingly difficult to get by! Is the stationary guard Hard+?

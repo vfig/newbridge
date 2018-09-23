@@ -1,5 +1,12 @@
-; Found in the city (not sure where yet).
+; Found in the city, in Danno's shack.
 ; This is the backstory for the dead thief in the mausoleum.
+;
+; NOTE FOR TRANSLATORS:
+;
+; This is written by Morten the thief, who is a little more literate than
+; Danno is (see 'maus_thiefscroll'). Morten's also from a different part
+; of the country, so his dialect is a bit different: he says 'yez' a lot
+; instead of 'you' and 'your'.
 
 Page_0: "Danno, I got the taffin best idea! Yez remember the rock-fall last week? Smushed that poor pursecutter's legs yez know. But it came down on that big old mausoleum place in the graveyard too. Yez know the one? Been sealed tight for a hundred years they say. But the rocks have smashed its walls and they're weak as dogs piss now! I got a peek through a crack and there's some glinty pickings in there for sure. But all locked up tight behind iron bars and some kinda traps. So I need yez help. Can yez tell me anything about the place that'll get me past em?
 

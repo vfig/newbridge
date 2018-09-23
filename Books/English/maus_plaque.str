@@ -2,6 +2,26 @@
 ; This is the primary clue for solving the lever puzzle to open the tomb:
 ; Weeps (water), dead fleshes (flesh), rock (earth), root (plants),
 ; darkness (darkness), storms (air), flames (fire).
+;
+; NOTE FOR TRANSLATORS
+;
+; This is a pagan poem with a very rough rhythm and no rhyme.
+; As described above, it includes seven key words associated
+; with the seven elements, in a specific order. It is important
+; that the key words or phrases appear in this specific order,
+; and that the words in the rest of the poem won't be confused
+; by the player as being key words.
+
+; The rest of the poem, half elegy and half prophecy, is really
+; just there to obscure the clues a little. If it was rewritten
+; in plain English (to clarify the meaning), it'd go something
+; like this:
+;
+;     Weep for the death of the Prophet,
+;     whose body now lies under rocks and roots.
+;     Be afraid! I [the Prophet] am still alive, and waiting.
+;     When the Woodsie Lord [the Trickster] returns with darkness,
+;     I too will return, with storm and fire!
 
 Page_0: "Weeps you now at prophet's passing
 Dead fleshes lying under rock and root

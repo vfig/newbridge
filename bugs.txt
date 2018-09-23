@@ -25,8 +25,6 @@ FIX BEFORE BETA 1
 
 - Needs to be a rope arrow or two in the ritual chamber/mine just in case you used your only one getting down.
 
-- Danno didn't even teleport sanely to the right spot :( I guess he fell out of the world after the tp
-
 
 
 FIX BEFORE BETA 2
@@ -47,8 +45,6 @@ FIX BEFORE BETA 2
 - ProphetStatueHack doesn't seem to be high enough -- sword goes right through his head
 
 - Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
-
-- Thieves' conversation didn't trigger as I emerged from the catacombs! Or if it did, it went by _much_ too fast and silently.
 
 - Possible to get stuck if you fall behind the southernmost mausoleums while trying to climb over them. Move the southernmost a little west.
 

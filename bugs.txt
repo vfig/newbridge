@@ -24,8 +24,6 @@ FIX BEFORE BETA 2
 
 - Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
 
-- Possible to get stuck if you fall behind the southernmost mausoleums while trying to climb over them. Move the southernmost a little west.
-
 - Give one of the thieves a purse.
 
 - Alley gates should start open.

@@ -1,9 +1,6 @@
 BETA (September)
 ================
 
-- Build blockout & lighting
-    - Buildings overlooking cemetery on West and North 
-
 - City loot
     - Bystanders
         - Long patrols

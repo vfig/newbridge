@@ -350,3 +350,47 @@ class TheProphet extends SqRootScript
         Object.RemoveMetaProperty(self, "M-InactiveProphet");
     }
 }
+
+class MausDouse extends SqRootScript
+{
+    function OnPlayerRoomEnter()
+    {
+        SetOneShotTimer("Douse", 5.0);
+    }
+
+    function OnTimer()
+    {
+        if (message().name == "Douse") {
+            Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+        }
+    }
+}
+
+class AutoRelight extends SqRootScript
+{
+    function OnWaterStimStimulus()
+    {
+        SetOneShotTimer("Relight", 4.0);
+    }
+
+    function OnKOGasStimulus()
+    {
+        SetOneShotTimer("Relight", 4.0);
+    }
+
+    function OnTurnOff()
+    {
+        SetOneShotTimer("Relight", 4.0);
+    }
+
+    function OnTimer()
+    {
+        if (message().name == "Relight") {
+            SendMessage(self, "TurnOn");
+            Light.SetMode(self, ANIM_LIGHT_MODE_FLICKER);
+            SetOneShotTimer("Steady", 1.0);
+        } else if (message().name == "Steady") {
+           Light.SetMode(self, ANIM_LIGHT_MODE_MAXIMUM);
+        }
+    }
+}

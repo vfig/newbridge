@@ -1,19 +1,7 @@
 FIX BEFORE BETA 1
 =================
 
-- di Rupo should probably move slightly faster in the ritual (pre BETA so testers can feedback on it)
-
-- a gas mine is great fun. Should have one _somewhere_, just not so obvious. Also a couple gas arrows around.)
-
-- Hammer square: surprisingly difficult to get by! Is the stationary guard Hard+?
-
-- Mausoleum torch should go out about two seconds after entering, in case the player decides to douse it with a water arrow.
-
-- Other mausoleum torch should re-light itself if doused!
-
 - Dump the bedroll troll from the bell tower chest - keep the hammer one in the priest's room for tradition's sake
-
-- Dump the hammer troll chest in the sanctuary basement.
 
 - Dump the canister troll chest in the manor.
 

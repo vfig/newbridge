@@ -57,9 +57,7 @@ POST-BETA (October)
 
 
 - Conversations and proper triggers
-    - Conv1100 (the tower)
-    - Unused9 (GUARD2/GUARD3: "Go for the stomach, or lower. A Hammer's usually weak there.")
-    - Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
+    - ? Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
 
 - Assign better room archetypes, taking into consideration:
     - Triggers

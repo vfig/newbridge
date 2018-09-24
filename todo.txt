@@ -1,9 +1,6 @@
 BETA (September)
 ================
 
-- Review loot totals and distribution
-- Review tulz totals and distribution
-
 - Books
     - some letters and stuff in the works buildings?
     - Review and finalise all readables:
@@ -26,6 +23,9 @@ x Briefing book as placeholder
 
 POST-BETA (October)
 ===================
+
+- Review loot totals and distribution
+- Review tulz totals and distribution
 
 - Detail
     - Fountain square windows & doors

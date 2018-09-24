@@ -200,3 +200,26 @@ class PleaseKillMe extends SqRootScript
         Damage.Slay(self, 0);
     }
 }
+
+class WakeMeUpInside extends SqRootScript
+{
+    function OnTurnOn() {
+        Object.AddMetaProperty(self, "M-StillGroggy");
+        Object.RemoveMetaProperty(self, "M-SleepingStandingUp");
+        AI.MakeGotoObjLoc(self, self, eAIScriptSpeed.kNormalSpeed, eAIActionPriority.kNormalPriorityAction, null);
+    }
+}
+
+class ClearMyHead extends SqRootScript
+{
+    function OnBeginScript() {
+        SetOneShotTimer("ClearMyHead", 4.0);
+    }
+
+    function OnTimer() {
+        if (message().name == "ClearMyHead") {
+            AI.ClearAlertness(self);
+            Object.RemoveMetaProperty(self, "M-StillGroggy");
+        }
+    }
+}

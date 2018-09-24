@@ -26,8 +26,6 @@ FIX BEFORE BETA 2
 
 - Give one of the thieves a purse.
 
-- Alley gates should start open.
-
 - Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
 
 - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
@@ -56,9 +54,7 @@ FIX BEFORE BETA 2
 
 - Opera archer takes _way_ too long to turn.
 
-- Caves need some diamonds, or gold or something
-
-- Bugbeast seemed to come right for me (just east of steps) when searching... how? Is there a trol point down there?
+- Bugbeast seemed to come right for me (just east of steps) when searching... how? Is there a trol point down there? Review the search trol points.
 
 - Needs to be something to land on beside wall across from works station, so you don't hurt yourself leaving that way.
 

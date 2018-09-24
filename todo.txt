@@ -1,12 +1,10 @@
 BETA (September)
 ================
 
-- City loot
-    - Bystanders
-        - Long patrols
-    - Allocate loot areas
-    - Scatter loot
-    - And tulz!
+- Bystanders
+    - Long patrols?
+- Review loot totals and distribution
+- Review tulz totals and distribution
 
 - Books
     - some letters and stuff in the works buildings?
@@ -38,7 +36,8 @@ POST-BETA (October)
     - Fountain square east alley
     - Sanctuary basement rooms
     - Sanctuary upstairs middle room.
-    - Upper street & alley (windows & doors & buildings)
+    - Upper street (windows & doors & buildings)
+    - Upper street alley
     - Rich street (windows & doors & buildings)
     - Manor storage room.
     - Manor pantry and misc Jorge.
@@ -50,6 +49,8 @@ POST-BETA (October)
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.
+
+- Rich street: scatter loot And tulz!
 
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)

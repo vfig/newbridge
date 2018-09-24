@@ -51,7 +51,6 @@ enum eMonologues {
     kPuzzleFailed2          = 10,
     kPuzzleFailed3          = 11,
     kEnteredTheProphetsRoom = 16,
-    kFoundTheOldRing        = 21, // CUT!
     kBanishedTheGhost       = 18, // CUT!
     kGotTheSecondItem       = 13, // FIXME: script this
     kGonnaSellTheHand       = 20, // CUT!
@@ -63,6 +62,8 @@ enum eMonologues {
     kReleasedTheProphet     = 19, // CUT!
     kRescuingTheAnax        = 15, // CUT!
     kSafePlaceForAnax       = 23,
+    /* Misc */
+    kFoundTheOldRelic       = 21,
 }
 
 // FIXME: don't need these once I have recordings
@@ -90,7 +91,8 @@ local DebugMonologueText = [
     "CUT: You know, I really didn't think that would work!",
     "CUT: Heh heh. Sorry about the mess.",
     "CUT: Got this Hand here you might be interested in...",
-    "CUT: This looks old!",
+    // 21 (garm0901):
+    "What have we here?",
     // 22-23:
     "Looks like Argaux's career has come to a sudden stop. ... Poor Argaux",
     "*Phew* This guy's getting heavy! I figure he'll be safe enough here",
@@ -101,7 +103,7 @@ local MonologueSchemas = [
     "nb005", "nb006", "nb007", "nb008", "nb009",
     "nb010", "nb011", "nb012", "nb013", "nb014",
     "nb015", "nb016", "nb017", "nb018", "nb019",
-    "nb020", "nb021", "nb022", "nb023",
+    "nb020", "garm0901", "nb022", "nb023",
 ];
 
 local Goal = {
@@ -1147,6 +1149,7 @@ class GoalTerencesHammer extends SqRootScript
 {
     function OnFrobWorldEnd()
     {
+        Goal.SpeakMonologue(eMonologues.kFoundTheOldRelic);
         Goal.Show(eGoals.kBonusTerencesHammer);
         Goal.Complete(eGoals.kBonusTerencesHammer);
     }

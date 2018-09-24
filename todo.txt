@@ -28,10 +28,7 @@ POST-BETA (October)
 - Review tulz totals and distribution
 
 - Detail
-    - Fountain square windows & doors
-    - West of fountain square there's a Jorge door.
     - Fountain square west alley
-    - Fountain square east alley
     - Sanctuary basement rooms
     - Sanctuary upstairs middle room.
     - Upper street (windows & doors & buildings)

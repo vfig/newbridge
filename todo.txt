@@ -1,8 +1,6 @@
 BETA (September)
 ================
 
-- Bystanders
-    - Long patrols?
 - Review loot totals and distribution
 - Review tulz totals and distribution
 

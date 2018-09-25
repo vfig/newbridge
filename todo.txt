@@ -3,7 +3,6 @@ BETA (September)
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
-    - Include Keeper bullshit variation!
 
 x Briefing book as placeholder
     - Replace cs20 contents with info for beta testers
@@ -44,8 +43,7 @@ POST-BETA (October)
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
 
-- Conversations and proper triggers
-    - ? Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
+- Review how well Keeper intervention worked for people.
 
 - Assign better room archetypes, taking into consideration:
     - Triggers

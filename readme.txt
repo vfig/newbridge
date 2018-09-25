@@ -77,6 +77,10 @@ Voice acting:
     Hammerite priest    :
     Hammerite watchman  :
 
+Translation             :
+                        :
+                        :
+
 Beta testing            :
                         :
                         :

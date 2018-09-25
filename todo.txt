@@ -1,9 +1,6 @@
 BETA (September)
 ================
 
-- Books
-    - review and edit the letters in the works buildings.
-
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
     - Include Keeper bullshit variation!

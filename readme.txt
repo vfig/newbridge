@@ -1,5 +1,5 @@
 =============================================================================
- Sep 30, 2018
+ Sep 28, 2018
  Making a Profit - Beta 1
 
 ! BETA FOR TESTING ONLY ! Please do not distribute this!
@@ -14,7 +14,7 @@ Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
 Version                 : Beta 1
-Date of Release         : Sep 30, 2018
+Date of Release         : Sep 28, 2018
 
 Description:
 

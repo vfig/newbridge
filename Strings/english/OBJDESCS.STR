@@ -1,3 +1,7 @@
+; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+; so you should hopefully have a translation already that you can copy paste.
+; All the new text from this FM is under the heading NEWBRIDGE at the end.
+
 use_blackjack: "This weapon will knock out an unsuspecting target with \
 little noise and no blood."
 

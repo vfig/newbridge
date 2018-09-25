@@ -14,7 +14,8 @@ x Briefing book as placeholder
 - Normalise placeholder VO volume
     - Drop in already recorded VO instead where possible, even if rough.
 
-- Readme! At least a rough draft
+- Remove all the unnecessary files.
+- Batch file or something to zip up all necessary files, excluding editor scripts and such.
 
 
 POST-BETA (October)

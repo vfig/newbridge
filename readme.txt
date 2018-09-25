@@ -57,7 +57,33 @@ Build Time              : 96 days (so far)
 =============================================================================
 * Credits *
 
-...TBC...
+Design and build        :
+
+Story                   :
+
+Briefing art            :
+
+Voice acting:
+    Garrett             :
+    Lady di Rupo        :
+    Keeper              :
+    Prophet             :
+    Benny               :
+    Sergeant            :
+    Heathen guard       :
+    Cowardly Hammerite  :
+    Danno the thief     :
+    Olver the thief     :
+    Hammerite priest    :
+    Hammerite watchman  :
+
+Beta testing            :
+                        :
+                        :
+
+Special thanks          :
+                        :
+                        :
 
 =============================================================================
 * Loading Information *

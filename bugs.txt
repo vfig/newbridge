@@ -8,13 +8,20 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
+- Audio propagation issues: probably related to room brushes that are too long in one dimension:
+    - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
+    - Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
+    - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
+    - Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
+    - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
+
+- Other audio propagation issues:
+    - Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.
+    - More bad sound propagation at manor: standing in the secret room, can hear footsteps of guard on marble in long gallery.
 
 - Does the Keeper intervention actually work in practice? Bearing in mind the player could be pursued by guards at the time! Can I just have the gates already shut + locked to prevent that, and only trigger the keeper appearing if not in combat? Also the keeper doesn't wait for Garrett to turn around and face him before continuing to talk, and I don't know if that's an issue.
 
 - collector tower above Argaux's place is not in a room brush
-
-- Drunk guard's tower: wood should hang out, too hard to hit. Also can't mantle in properly without new_mantle.
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
@@ -26,10 +33,6 @@ FIX BEFORE BETA 2
 
 - Give one of the thieves a purse.
 
-- Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
-
-- di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
-
 - (Why are there two guards patrolling outside the sanctuary? Is one the guard from Hammer square?? This makes three altogether, where's the difficulty variation?)
 
 - A few hammerites should have purses or healing potions
@@ -38,17 +41,7 @@ FIX BEFORE BETA 2
 
 - Tower steps should have different texture, they're almost invisible.
 
-- Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.
-
-- More bad sound propagation at manor: standing in the secret room, can hear footsteps of guard on marble in long gallery.
-
-- Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
-
-- (sound propagation?) Ritual chant is inaudible from antechamber mouth.
-
 - Sanctuary basement isn't lit _at all_!!
-
-- Should have a couple tools in the hand-off room. Flashbombs or such.
 
 - Opera archer takes _way_ too long to turn.
 

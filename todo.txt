@@ -2,11 +2,7 @@ BETA (September)
 ================
 
 - Books
-    - some letters and stuff in the works buildings?
-    - Review and finalise all readables:
-        - city_thiefscroll
-        - city_surveillance
-        - ... add new ones here as I write them ...
+    - review and edit the letters in the works buildings.
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
@@ -50,7 +46,6 @@ POST-BETA (October)
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
 
-
 - Conversations and proper triggers
     - ? Unused2 (GUARD1/GUARD2: "Nothing ever happens ... just patrol around in circles.")
 
@@ -71,7 +66,8 @@ POST-BETA (October)
     - Build new interiors (full detail + room brush) as desired  }- (maybe post-beta)
     - Randomised loot / difficulty variations?                   }
 
-- Proper VO (maybe post-beta)
+- Proper VO
+    - Process and normalise
 
 
 RELEASE (November)

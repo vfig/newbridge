@@ -52,10 +52,12 @@ Auto Map                : Yes
 New Graphics            : No
 New Sounds              : Yes
 Multi-Language Support  : No (not yet)
-
-* Construction *
-
 Build Time              : 96 days (so far)
+
+=============================================================================
+* Credits *
+
+...TBC...
 
 =============================================================================
 * Loading Information *

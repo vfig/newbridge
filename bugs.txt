@@ -8,6 +8,10 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- If you bypass the keeper intervention (e.g. by climbing the cemetery wall via the crayman obelisk) then the Keeper appears at the canal anyway, and the mission ends when you get there! Need to guarantee that it checks that you've at least done the StopTheRitual objective before TPing the keeper!
+
+- Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
+
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.

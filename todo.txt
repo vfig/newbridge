@@ -1,5 +1,5 @@
-BETA (September)
-================
+BETA 1 (September)
+==================
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
@@ -7,15 +7,11 @@ BETA (September)
 x Briefing book as placeholder
     - Replace cs20 contents with info for beta testers
 
-- Normalise placeholder VO volume
-    - Drop in already recorded VO instead where possible, even if rough.
-
-- Remove all the unnecessary files.
 - Batch file or something to zip up all necessary files, excluding editor scripts and such.
 
 
-POST-BETA (October)
-===================
+BETA 2 (October)
+================
 
 - Review loot totals and distribution
 - Review tulz totals and distribution
@@ -64,6 +60,7 @@ POST-BETA (October)
 
 - Proper VO
     - Process and normalise
+    - Remove unused placeholder lines (mostly nb1xx)
 
 
 RELEASE (November)

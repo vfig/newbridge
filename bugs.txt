@@ -7,17 +7,17 @@ FIX BEFORE BETA 2
 
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
 
-- On Normal, the doorway between Sanctuary library and the other room has a black rectangle
-
-- On Normal, the doorway to the south caves has a black rectangle
-
 - Guard patrolling outside sanctuary gets stuck on lamppost if heading from one door to the other.
 
 - Market square conv should trigger from Eagle-Eyed Jack's perch.
 
 - Save and load just after the manor bowman conversation, and the guy who should continue patrolling to the back yard just stops where he is :(
 
+- When the intervention starts, destroy delivery di rupo and things.
+
 - Secret treasure door in mausoleum is silent
+
+- Wandering merchant (middle streets) is not knocked out easily
 
 - Dump the canister troll chest in the manor. (but what to replace it with?)
 

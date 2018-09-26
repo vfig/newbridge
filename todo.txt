@@ -1,12 +1,6 @@
 BETA 1 (September)
 ==================
 
-- Test mission scripting permutations without hacks
-    - On all difficulties! :-/
-
-x Briefing book as placeholder
-    - Replace cs20 contents with info for beta testers
-
 
 BETA 2 (October)
 ================

@@ -982,9 +982,12 @@ class GoalEffTheKeepers extends SqRootScript
     {
         print("FFF   Quest state changed, retesting.");
 
-        // Check if only the last goal remains
+        // Check if only the last goal remains.
+        // We also explicitly check for kStopTheRitual to prevent bypassing
+        // the keeper intervention.
         local already_teleported = (Quest.Get("teleported_damn_keepers2") == 1);
         if (Goal.IsAllDoneExcept(eGoals.kReturnToTheStart)
+            && Goal.IsComplete(eGoals.kStopTheRitual)
             && (! already_teleported))
         {
             // Don't teleport the keeper again.
@@ -1071,8 +1074,11 @@ class GoalReturnToTheStart extends SqRootScript
     {
         print("FFF   Entered canal final room.");
 
+        // We also explicitly check for kStopTheRitual to prevent bypassing
+        // the keeper intervention.
         local already_triggered = (Quest.Get("triggered_damn_keepers2") == 1);
         if (Goal.IsAllDoneExcept(eGoals.kReturnToTheStart)
+            && Goal.IsComplete(eGoals.kStopTheRitual)
             && (! already_triggered))
         {
             // Don't trigger any of the keeper points again.

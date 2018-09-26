@@ -1,7 +1,6 @@
 FIX BEFORE BETA 1
 =================
 
-- Prophet apparition appears to still trigger some traps?? That's bad!
 
 FIX BEFORE BETA 2
 =================
@@ -41,8 +40,6 @@ FIX BEFORE BETA 2
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
 - various voids: fountain square blustone building, rich street
-
-- ProphetStatueHack doesn't seem to be high enough -- sword goes right through his head
 
 - Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
 

@@ -37,6 +37,8 @@ BETA 2 (October)
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
 
+- Really need a bell pull in di Rupo's room that triggers the butler's bell.
+
 - Review how well Keeper intervention worked for people.
 
 - Assign better room archetypes, taking into consideration:

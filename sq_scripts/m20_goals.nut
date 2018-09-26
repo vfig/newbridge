@@ -215,8 +215,6 @@ local Goal = {
             local player = Object.Named("Player");
             print("Speaking " + monologue + ": " + DebugMonologueText[monologue]);
             Sound.PlayVoiceOver(player, MonologueSchemas[monologue]);
-            // FIXME: remove this.
-            //DarkUI.TextMessage(DebugMonologueText[monologue], 0);
             Quest.Set("mlog_done_" + monologue, 1);
         } else {
             print("Skipping " + monologue + ": " + DebugMonologueText[monologue]);
@@ -573,9 +571,6 @@ class GoalNearTheFishmongers extends WatchForItems
             && Goal.IsVisible(eGoals.kDeliverTheItems)) {
             Goal.SpeakMonologue(eMonologues.kThisIsTheDeliverySpot);
         }
-
-        // FIXME -- for debugging only!!!
-        OnItemsArrived();
     }
 
     function OnPlayerRoomExit()
@@ -870,9 +865,6 @@ class GoalFailToStopTheRitual extends SqRootScript
             Goal.Cancel(eGoals.kStopTheRitual);
             Goal.Cancel(eGoals.kEscapeWithTheAnax);
             Goal.Cancel(eGoals.kKeepTheAnaxAlive);
-
-            // FIXME... will a timer be saved? What happens if you save after this
-            // point, but before the objectives actually get failed?
 
             // Delay mission failure just a bit, so the player can watch the
             // ritual finish.

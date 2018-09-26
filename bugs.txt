@@ -1,9 +1,13 @@
 FIX BEFORE BETA 1
 =================
 
-- Dump the canister troll chest in the manor. (but what to replace it with?)
+- Prophet apparition appears to still trigger some traps?? That's bad!
 
+- You can pick the lock of Argaux's lockbox D:
 
+- If you cut the banner in the hand-off room, Lady di Rupo runs to inspect the damage! If this happens during the conversation, she breaks, and simply won't finish properly, and the objective will never tick off. Oops.
+
+- Had an instance of 'Escape with the Anax' objective not showing up D:
 
 FIX BEFORE BETA 2
 =================
@@ -16,9 +20,15 @@ FIX BEFORE BETA 2
 
 - On Normal, the doorway to the south caves has a black rectangle
 
+- Guard patrolling outside sanctuary gets stuck on lamppost if heading from one door to the other.
+
 - Market square conv should trigger from Eagle-Eyed Jack's perch.
 
 - Save and load just after the manor bowman conversation, and the guy who should continue patrolling to the back yard just stops where he is :(
+
+- Secret treasure door in mausoleum is silent
+
+- Dump the canister troll chest in the manor. (but what to replace it with?)
 
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
@@ -26,6 +36,7 @@ FIX BEFORE BETA 2
     - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
     - Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
     - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
+    - Sound propagation into water room from hallway seems unmuted by the doors.
 
 - Other audio propagation issues:
     - Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.
@@ -78,8 +89,6 @@ ONLY IF I FEEL LIKE IT
 - You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
 - Con guard (sleeping standing up) giving off bad creature pos errors
-
-- If you cut the banner in the hand-off room, Lady di Rupo runs to inspect the damage! But then walks casually back behind the counter.
 
 - Cemetery keeper appears right beside the statue of Death. Nice :)
 

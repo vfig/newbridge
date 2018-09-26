@@ -30,6 +30,7 @@ FIX BEFORE BETA 2
     - Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
     - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
     - Sound propagation into water room from hallway seems unmuted by the doors.
+    - At -6.82,207,-276, can't hear the guard a few feet away! Bad propagation again, sigh. Possibly the weird overlap of square and diagonal rooms?
 
 - Other audio propagation issues:
     - Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.

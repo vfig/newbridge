@@ -234,8 +234,76 @@ class EditorOnly extends SqRootScript
 {
     function OnBeginScript()
     {
-        if (! Version.IsEditor()) {
+        if (! IsEditor()) {
             Object.Destroy(self);
+        }
+    }
+}
+
+class CheckDarkGameType extends SqRootScript
+{
+    // Sends TurnOn to all ControlDevice links if
+    // the game is not the required game.
+    function OnSim()
+    {
+        if (message().starting) {
+            // required_game_type should be:
+            //   0 = T1/TG
+            //   1 = SS2
+            //   2 = T2
+            local required_game_type = 0;
+
+            local game_type = GetDarkGame();
+            print("Game type is " + game_type
+                + ", mission requires " + required_game_type);
+
+            if (game_type != required_game_type) {
+                Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+            }
+        }
+    }
+}
+
+class CheckNewDarkVersion extends SqRootScript
+{
+    // Sends TurnOn to all ControlDevice links if
+    // the game is not NewDark 1.26 (or later)
+    function OnSim()
+    {
+        if (message().starting) {
+            local required_major_version = 1;
+            local required_minor_version = 26;
+
+            local major_version = int_ref();
+            local minor_version = int_ref();
+            Version.GetVersion(major_version, minor_version);
+            print("NewDark version is " + major_version + "." + minor_version
+                + ", mission requires version " + required_major_version + "." + required_minor_version);
+
+            local bad_major_version = (major_version.tointeger() < required_major_version);
+            local bad_minor_version = ((major_version.tointeger() == required_major_version)
+                && (minor_version.tointeger() < required_minor_version));
+            if (bad_major_version || bad_minor_version) {
+                Link.BroadcastOnAllLinks(self, "TurnOn", "ControlDevice");
+            }
+        }
+    }
+}
+
+class CheckSquirrelScript extends SqRootScript
+{
+    // Put this on a concrete room where the player starts, with
+    // The TrigPlayerRoom script, and a ControlDevice link to
+    // whatever should be activated if Squirrel scripts don't load.
+    //
+    // If Squirrel scripts _do_ load, this script will destroy the
+    // objects pointed to by the links before they can activate.
+    function OnSim()
+    {
+        local links = Link.GetAll("ControlDevice", self);
+        foreach (link in links) {
+            local obj = LinkDest(link);
+            Object.Destroy(obj);
         }
     }
 }

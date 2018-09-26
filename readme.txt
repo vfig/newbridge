@@ -52,7 +52,7 @@ Auto Map                : Yes
 New Graphics            : No
 New Sounds              : Yes
 Multi-Language Support  : No (not yet)
-Build Time              : 96 days (so far)
+Build Time              : 532 hours over 98 calendar days (so far)
 
 =============================================================================
 * Credits *
@@ -65,17 +65,18 @@ Briefing art            :
 
 Voice acting:
     Garrett             :
-    Lady di Rupo        :
-    Keeper              :
+    Lady di Rupo        : Shadow Creepr
+    Keeper              : Yandros
     Prophet             :
-    Benny               :
-    Sergeant            :
-    Heathen guard       :
-    Cowardly Hammerite  :
-    Danno the thief     :
-    Olver the thief     :
-    Hammerite priest    :
-    Hammerite watchman  :
+    The Eternal Benny   : Yandros
+    Irate Sergeant      : MasterThief3
+    Heathen guard       : Yandros
+    Cowardly Hammerite  : McTaffer
+    Danno the meister   : Yandros
+    Olver the digger    : McTaffer
+    Morten the berk     : Nobody, cause he's dead
+    Hammerite priest    : McTaffer
+    Hammerite watchman  : Yandros
 
 Translation             :
                         :

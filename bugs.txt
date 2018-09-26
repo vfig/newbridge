@@ -21,6 +21,8 @@ FIX BEFORE BETA 2
 
 - Dump the canister troll chest in the manor. (but what to replace it with?)
 
+- Need to update ritual script so OnLastBlessing destroys the hand at the right moment.
+
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.

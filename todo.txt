@@ -7,8 +7,6 @@ BETA 1 (September)
 x Briefing book as placeholder
     - Replace cs20 contents with info for beta testers
 
-- Batch file or something to zip up all necessary files, excluding editor scripts and such.
-
 
 BETA 2 (October)
 ================

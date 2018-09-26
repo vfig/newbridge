@@ -7,8 +7,6 @@ FIX BEFORE BETA 1
 
 - If you cut the banner in the hand-off room, Lady di Rupo runs to inspect the damage! If this happens during the conversation, she breaks, and simply won't finish properly, and the objective will never tick off. Oops.
 
-- Had an instance of 'Escape with the Anax' objective not showing up D:
-
 FIX BEFORE BETA 2
 =================
 

@@ -32,7 +32,7 @@ quest_create_mis goal_visible_1, 0
 quest_create_mis goal_state_2, 0
 quest_create_mis goal_visible_2, 0
 
-; 3: BonusBurrickTrouble
+; CUT! 3: BonusBurrickTrouble
 quest_create_mis goal_state_3, 0
 quest_create_mis goal_visible_3, 0
 
@@ -40,7 +40,7 @@ quest_create_mis goal_visible_3, 0
 quest_create_mis goal_state_4, 0
 quest_create_mis goal_visible_4, 0
 
-; 5: BonusBanishTheGhost
+; CUT! 5: BonusBanishTheGhost
 quest_create_mis goal_state_5, 0
 quest_create_mis goal_visible_5, 0
 
@@ -52,17 +52,15 @@ quest_create_mis goal_visible_6, 0
 quest_create_mis goal_state_7, 0
 quest_create_mis goal_visible_7, 0
 
-; 8: BonusSubvertTheRitual
+; CUT! 8: BonusSubvertTheRitual
 quest_create_mis goal_state_8, 0
 quest_create_mis goal_visible_8, 0
 
 ; 9: EscapeWithTheAnax
 quest_create_mis goal_state_9, 0
 quest_create_mis goal_visible_9, 0
-quest_create_mis goal_min_diff_9, 0
-quest_create_mis goal_max_diff_9, 0
 
-; 10: ReturnTheAnax (Hard/Expert)
+; CUT! 10: ReturnTheAnax (Hard/Expert)
 quest_create_mis goal_state_10, 0
 quest_create_mis goal_visible_10, 0
 quest_create_mis goal_min_diff_10, 1
@@ -104,7 +102,7 @@ quest_create_mis goal_loot_16, 2000
 quest_create_mis goal_min_diff_16, 2
 quest_create_mis goal_max_diff_16, 2
 
-; 17: SpecialHard (special 1)
+; CUT! 17: SpecialHard (special 1)
 quest_create_mis goal_state_17, 0
 ;; FIXME: remove this when we've implemented the special loot
 quest_create_mis goal_visible_17, 0
@@ -115,7 +113,7 @@ quest_create_mis goal_visible_17, 0
 ;quest_create_mis goal_min_diff_17, 1
 ;quest_create_mis goal_max_diff_17, 2
 
-; 18: SpecialExpert (special 2)
+; CUT! 18: SpecialExpert (special 2)
 quest_create_mis goal_state_18, 0
 ;; FIXME: remove this when we've implemented the special loot
 quest_create_mis goal_visible_18, 0

@@ -64,8 +64,6 @@ FIX BEFORE BETA 2
 
 - EscapeWithTheAnax doesn't trigger in the alley.
 
-- Rich streets keeper appears _in front_ of Garrett, just
-
 - Hammerite sanctuary stairs are almost invisible... have something at the end of each hallway for visible contrast.
 
 
@@ -81,8 +79,6 @@ ONLY IF I FEEL LIKE IT
 - You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
 - Con guard (sleeping standing up) giving off bad creature pos errors
-
-- Cemetery keeper appears right beside the statue of Death. Nice :)
 
 - Use R insignia door for safe.
 

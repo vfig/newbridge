@@ -1,3 +1,6 @@
+; NOTE FOR TRANSLATORS: the goals with '(CUT)' at the start were cut
+; from the mission and are no longer used. You can skip them.
+
 ; 0: MeetArgaux
 fiction_0: "Your contact, Argaux, will be waiting for you at the fountain. Meet him there to find out what's up."
 text_0: "Meet Argaux at the fountain."

@@ -1,0 +1,270 @@
+SUB1
+
+// Scene 0: Garrett's inner monologue
+{
+    TYPE "player"
+    DESCR "Garrett to himself"
+    SUB "nb000" { TEXT "Sealed shut! I'll have to find another way in." }
+    SUB "nb001" { TEXT "Strange that Argaux's not here. I should scout around to see if he's nearby." }
+    SUB "nb002" { TEXT "So this is what Argaux wanted my help on. The money's good. I think I'll do the job by myself." }
+    SUB "nb003" { TEXT "So the Anax is a person, not a trinket. That's ... inconvenient." }
+    SUB "nb004" { TEXT "So this is what Argaux wanted my help on. I think I'll do the job by myself: then I won't have to pay his finder's fee." }
+    SUB "nb005" { TEXT "Now to find the Anax, whatever that is." }
+    SUB "nb006" { TEXT "Poor Argaux. ... Guess he won't be collecting his finder's fee now. I should check his place for info on the job." }
+    SUB "nb007" { TEXT "Damn, they've already started the ritual! Need to be quick if I'm gonna stop them." }
+    SUB "nb008" { TEXT "This looks like the hand-off point." }
+    SUB "nb009" { TEXT "Damn, must be the wrong combination." }
+    SUB "nb010" { TEXT "Still wrong!" }
+    SUB "nb011" { Text "(sigh) I've never liked reading, but maybe some research would help me figure this out." }
+    SUB "nb012" { TEXT "One down, one to go." }
+    SUB "nb013" { TEXT "Now to deliver all this and get my money." }
+    SUB "nb014" { TEXT "The tower's all lit up. That's new." }
+    SUB "nb016" { TEXT "I don't like the look of this." }
+    SUB "nb022" { TEXT "Looks like Argaux's career has come to a sudden stop. ... Poor Argaux." }
+    SUB "nb023" { Text "(phew) This guy's getting heavy! I figure he'll be safe enough here." }
+}
+
+// There is no Scene 1.
+
+// Scene 2: The briefing
+{
+    TYPE "movie"
+    SRTSUB "movie/b20" "b20.srt"
+}
+
+// Scene 3: The hand-off
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb300" { TEXT "Lady di Rupo, I presume?" }
+    SUB "nb302" { TEXT "Garrett. Argaux is ... well, let's just say he's not having a good day." }
+    SUB "nb304" { TEXT "Five thousand. Yeah, I know the terms you offered Argaux. And I ought to charge you extra for the trouble of lugging this fat Hammerite up here. What do you want with him, anyway?" }
+    SUB "nb306" { TEXT "Well, I guess that's your business. But I won't weep much if a few less Hammers get between me and my money. Speaking of...?" }
+}
+{
+    TYPE "convo"
+    DESCR "di Rupo"
+    SUB "nb301" { TEXT "Indeed. I see you've brought my goods, mister Argo." }
+    SUB "nb303" { TEXT "Oh, that's too bad. But I can work with you instead, mister Garrett. I can pay you three thousand--" }
+    SUB "nb305" { TEXT "Ah, the Anax! Who'd have expected such a high-ranking Hammer official would visit this little district? But the Hammerites have been causing a great deal of trouble for me lately, and the Anax here will help me put a stop to that, permanently." }
+    SUB "nb307" { TEXT "Yes, your payment. Here you are. Fare well, mister Garrett." }
+}
+
+// Scene 4: Intervention
+{
+    TYPE "convo"
+    DESCR "Keeper"
+    SUB "nb400" { TEXT "Garrett! What have you done?" }
+    SUB "nb402" { TEXT "Lady di Rupo intends a ritual to resurrect The Prophet, using that Hammerite's body." }
+    SUB "nb404" { TEXT "Are you blind as well as foolish? This act will cause ripples far beyond this corner of the city. It must be prevented." }
+    SUB "nb406" { TEXT "Your concern is no more than we expected. And so the Conclave authorized me to offer you what you will care about: the same fee again, if you will aid us." }
+    SUB "nb408" { TEXT "Good. I can't tell you how we laid hands on it, but take this key. You might need it." }
+    SUB "nb410" { TEXT "Stop the ritual. I'll await you at the South Gate, with your payment." }
+}
+{
+    TYPE "convo"
+    DESCR "Garrett to himself"
+    SUB "nb401" { TEXT "Keepers." }
+}
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb403" { TEXT "And?" }
+    SUB "nb405" { TEXT "This is still sounding like your problem, not mine." }
+    SUB "nb407" { TEXT "Another five thousand? Isn't that a little desperate? ... But, I could use the money." }
+}
+
+// Scene 5: The ritual
+{
+    TYPE "convo"
+    DESCR "di Rupo chanting"
+    SUB "nb500" { TEXT "Hand carries Water to wakes sleepsie Prophet." }
+    SUB "nb501" { TEXT "Binders them Bones into fleshy new body." }
+    SUB "nb502" { TEXT "Standers on feets, with them Earth underneath." }
+    SUB "nb503" { TEXT "Grow like them Treesie does, tall, strong and green." }
+    SUB "nb504" { TEXT "Wake in the Darkness. Be servant of night!" }
+    SUB "nb505" { TEXT "Breathesie them Air into lung-sacks again!" }
+    SUB "nb506" { TEXT "Fire burn! Flame leap! And slaysie them Hammers!" }
+}
+{
+    TYPE "convo"
+    DESCR "di Rupo"
+    SUB "nb508" { TEXT "Yes! Yes! Slay them all! (triumphant laugh)" }
+    SUB "nb509" { TEXT "No! My hand! Where is my hand?! Find the thief!" }
+    SUB "nb510" { TEXT "Where has he gone?! Nooo! Treachery! Help!" }
+}
+{
+    TYPE "convo"
+    DESCR "The Prophet"
+    SUB "nb507" { TEXT "(evil laugh) Unbuild! Unmake! Hammerfools die!" }
+}
+
+// Scene 6: Ending
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb600" { TEXT "It's done. The ritual's stopped." }
+    SUB "nb602" { TEXT "I think he'll be okay. Now where's my money?" }
+    SUB "nb605" { TEXT "No. I did what you wanted. Now leave me alone." }
+}
+{
+    TYPE "convo"
+    DESCR "Keeper"
+    SUB "nb601" { TEXT "And the Anax?" }
+    SUB "nb603" { TEXT "Here. And thank you, Garrett." }
+    SUB "nb604" { TEXT "You've done this city a greater service than you know. Your talent is still exceptional. We could use--" }
+}
+
+// Scene 7: Conversation, Guard and Hammerite
+{
+    TYPE "convo"
+    DESCR "Guard"
+    SUB "nb700" { TEXT "Heathens, are we? And what business it is of yours?" }
+    SUB "nb702" { TEXT "Ha! Threatening the Lady now? Look around you, hammer boy. All the guards here are in her pocket. Better be careful what you say." }
+    SUB "nb704" { TEXT "Not afraid, you say? Our swords are more than a match for your fly-swatters. So here's a scratch you can take back to your precious Builder!" }
+}
+{
+    TYPE "convo"
+    DESCR "Hammerite"
+    SUB "nb701" { TEXT "'Tis the business of all who follow the Builder to uproot the weeds of the cursed Trickster, from ruffians like thee, to the wealthy nobles that dwelleth upon the hilltop." }
+    SUB "nb703" { TEXT "Thou and thy kind art a plague that hath troubled this city long enough! I fear no scratches from vermin such as thee. Our cause is righteous and justified by the Builder himself." }
+    SUB "nb705" { TEXT "(gasp) 'Tis well for thee I have urgent duties I must attend, else thou wouldst now be flattened gainst these stones. But mark, the Warden shall hear of this!" }
+}
+
+// Scene 8: Conversation, Benny and Sergeant
+{
+    TYPE "convo"
+    DESCR "Guard"
+    SUB "nb800" { TEXT "Hullo, Sarge. Did you see the bad guy we caught tonight? Followed procedure and all! Searched his house, then hung him!" }
+    SUB "nb802" { TEXT "That's right, Sarge. He was just hanging about by the fountain back there." }
+    SUB "nb804" { TEXT "But he was up to no good! You could tell just by looking at him! Probably planning murder. That's worth his neck, right?" }
+    SUB "nb806" { TEXT "Oh! ... You're right! He's still hanging about, up there... Loitering! I'll give him a night in the cells then!" }
+}
+{
+    TYPE "convo"
+    DESCR "Sergeant"
+    SUB "nb801" { TEXT "Yes, that's what I'm here about. There's a problem. Your report. It says he was executed for... loitering?" }
+    SUB "nb803" { TEXT "Hanging about? You can't hang a fellow for just hanging about, Benny. We have rules." }
+    SUB "nb805" { TEXT "It'll be our necks on the rope if you keep making taff like this! Loitering's a night in the cells, not the gallows! I'm going to lose this report, but you'd better get rid of the body. Can't just leave it hanging there." }
+    SUB "nb807" { TEXT "No, you dunderhead! He's dead! You've got to-- Oh hang it all! I'll get Davidson to do it. Now get out of my sight! I don't want to see you hanging about here anymore either." }
+}
+
+// Scene 9: Conversation, Thieves
+{
+    TYPE "convo"
+    DESCR "First thief"
+    SUB "nb900" { TEXT "Morten's sure takin' his time in there. You think maybe something's happened?" }
+    SUB "nb902" { TEXT "Me? Well I would, but you know I have a gammy foot! You'd manage the climb much easier. You go in!" }
+    SUB "nb904" { TEXT "I am not! I'm not scared. I-- wait, d'you hear that? I think he's coming out!" }
+}
+{
+    TYPE "convo"
+    DESCR "Second thief"
+    SUB "nb901" { TEXT "Could be. Maybe the traps done for 'im? ... Why dontcha go in and look for 'im if yer so worried?" }
+    SUB "nb903" { TEXT "\"You know I have a gammy foot!\" Ah, yer just scared! A quiverin' gutless daisy-liver, that's you." }
+}
+
+// Scene 10: Conversation, Priest and Hammerite
+{
+    TYPE "convo"
+    DESCR "Priest"
+    SUB "nb1000" { TEXT "The Builder's blessing, brother. How went thy watch at the gate?" }
+    SUB "nb1002" { TEXT "The skirmish this morn hath taught that riffraff their lesson, then. But I fear their debris still defaces the Builder's image?" }
+}
+{
+    TYPE "convo"
+    DESCR "Hammerite"
+    SUB "nb1001" { TEXT "Quiet enough. Most carters pay the toll without argument now." }
+    SUB "nb1003" { TEXT "Regrettably. I shall ask Brother Lionel for assistance. Be assured it shall be removed by morning." }
+}
+
+// Scene 11: Conversation, Benny and Guard
+{
+    TYPE "convo"
+    DESCR "First guard"
+    SUB "nb1100" { TEXT "So, how come the old Lady doesn't let us into the tower? You could stand on the top and shoot arrows for miles!" }
+    SUB "nb1102" { TEXT "Yeah, it'd be-- Hey!! I'm not that fat!" }
+}
+{
+    TYPE "convo"
+    DESCR "Second guard"
+    SUB "nb1101" { TEXT "Orders are to be followed, Benny, not questioned. Besides, that tower's hundreds of years old. It'd probably fall down as soon as you stepped inside." }
+}
+
+// OM Garrett lines
+{
+    TYPE "player"
+    DESCR "Garrett to himself"
+    SUB    "garm0409" { TEXT "It's a long way down." }
+    SUB    "garm0901" { TEXT "What have we here?" }
+}
+
+// OM guard line
+{
+    TYPE "convo"
+    DESCR "Sergeant"
+    SUB "sg1c3701" { TEXT "I hate night watch." }
+}
+
+// OM conv, servants
+{
+    TYPE "convo"
+    DESCR "First servant"
+    SUB    "sv1c0701" { TEXT "Coming from market this morning, it was awful!" }
+    SUB    "sv1c0703" { TEXT "There was this big mob of Hammers, circled round some guy like wolves." }
+    SUB    "sv1c0705" { TEXT "No, I ran! I don't want them turning eyes on me. It took forever to circle round." }
+}
+{
+    TYPE "convo"
+    DESCR "Second servant"
+    SUB    "sv2c0702" { TEXT "I saw you got back late." }
+    SUB    "sv2c0704" { TEXT "So you stayed and watched?" }
+}
+
+// OM conv, guards
+{
+    TYPE "convo"
+    DESCR "Sergeant"
+    SUB    "Sg2c2001" { TEXT "So, like I was tellin' you yesterday, you wanna hurt the guy, not knock him down or pat him on the head." }
+    SUB    "Sg2c2003" { TEXT "Thunk him on the shoulder and that'll just slow him up! Go for the stomach, or lower. Armor's usually weak there." }
+}
+{
+    TYPE "convo"
+    DESCR "Guard"
+    SUB    "Sg3c2002" { TEXT "What am I not doing?" }
+    SUB    "Sg3c2004" { TEXT "Hammer's got it good. Just smash 'em flat with those things." }
+}
+
+// Significant sound effects
+{
+    // Mausoleum creaking
+    TYPE "fx"
+    DESCR "(loud creaking)"
+    SUB "squeaks1" {}
+}
+{
+    // Mausoleum wind
+    TYPE "fx"
+    DESCR "(wind blowing)"
+    SUB "wind1" {}
+    SUB "wind3" {}
+    SUB "wind4" {}
+}
+{
+    // Mausoleum sigh
+    TYPE "fx"
+    DESCR "(long sigh)"
+    SUB "whgasp" {}
+}
+{
+    // Catacombs sigh
+    TYPE "fx"
+    DESCR "(sighing)"
+    SUB "vbreath" {}
+}
+{
+    // Manor burrick
+    TYPE "fx"
+    DESCR "(burrick death cry)"
+    SUB "bk1die_2" {}
+}

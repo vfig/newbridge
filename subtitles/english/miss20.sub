@@ -59,7 +59,7 @@ SUB1
     SUB "nb404" { TEXT "Are you blind as well as foolish? This act will cause ripples far beyond this corner of the city. It must be prevented." }
     SUB "nb406" { TEXT "Your concern is no more than we expected. And so the Conclave authorized me to offer you what you will care about: the same fee again, if you will aid us." }
     SUB "nb408" { TEXT "Good. I can't tell you how we laid hands on it, but take this key. You might need it." }
-    SUB "nb410" { TEXT "Stop the ritual. I'll await you at the South Gate, with your payment." }
+    SUB "nb410" { TEXT "Stop the ritual. I'll await you at the canal, with your payment." }
 }
 {
     TYPE "convo"

@@ -6,7 +6,6 @@ FIX BEFORE BETA 2
 =================
 
 - Conversation problems (reported by marbleman):
-    - "If I save and reload after these two [guard+hammerite] finish their convo and start patrolling normally, they restart the convo"
     - "These guys [benny+sergeant by clock] just stop, but they do keep on patrolling a bit later"
     - "Same with these guys [priest+hammerite]"
     - "This thief [Danno] stops"

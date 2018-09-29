@@ -20,6 +20,8 @@ FIX BEFORE BETA 2
     - Any way to make that more obvious, I wonder?
     - Removed the red herring feedback from sounds at least.
 
+- Can frob letter + tower key through safe door.
+
 - Out of bounds
     - "Got out of bounds here [by canal]" - needs a little care to prevent accessing anything outwith canal zone after reaching there.
     - "And here" - above turbines by Argaux's, by mantling a shutter.
@@ -57,11 +59,15 @@ FIX BEFORE BETA 2
 
 - Secret treasure door in mausoleum is silent
 
-- Wandering merchant (middle streets) is not knocked out easily
+- Wandering merchant (middle streets) is not knocked out easily (and he also doesn't flee when confronted)
 
 - Dump the canister troll chest in the manor. (but what to replace it with?)
 
 - Need to update ritual script so OnLastBlessing destroys the hand at the right moment.
+
+- Crypt doors disappeared for marbleman.
+
+- Gold trim on circular rich street building is ropable carpet.
 
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
@@ -71,6 +77,7 @@ FIX BEFORE BETA 2
     - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
     - Sound propagation into water room from hallway seems unmuted by the doors.
     - At -6.82,207,-276, can't hear the guard a few feet away! Bad propagation again, sigh. Possibly the weird overlap of square and diagonal rooms?
+    - In cave at 61.7, 247, -292 can hear guard outside walking on the gravel.
 
 - Other audio propagation issues:
     - Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.

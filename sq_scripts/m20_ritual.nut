@@ -527,6 +527,7 @@ class RitualController extends SqRootScript
     function ExplodeVictim()
     {
         // Fling body parts everywhere, why don't you?
+        local gores = Gores().slice(0, 6);
         local available_gores = Link_GetAllParams("PoundOfFlesh", self);
         local z_angles = [141.429, 192.857, 244.286, 295.714, 347.143, 38.571, 90.0];
         foreach (gore in available_gores) {

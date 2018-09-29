@@ -5,18 +5,20 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Catacombs is confusing to people. Maybe a couple more landmarks?
-
-- People aren't making the connection between the plaque and the items around the room :(
-    - Any way to make that more obvious, I wonder?
-    - Removed the red herring feedback from sounds at least.
-
 - Conversation problems (reported by marbleman):
     - "If I save and reload after these two [guard+hammerite] finish their convo and start patrolling normally, they restart the convo"
     - "These guys [benny+sergeant by clock] just stop, but they do keep on patrolling a bit later"
     - "Same with these guys [priest+hammerite]"
     - "This thief [Danno] stops"
+    - Save and load just after the manor bowman conversation, and the guy who should continue patrolling to the back yard just stops where he is :(
     - GENERALLY it seems Returns to Origin should not be relied on. Instead I should probably DoesPatrol with a specific link to next patrol point.
+
+- Catacombs is confusing to people. Maybe a couple more landmarks?
+    - Or not. So far nobody's reporting real difficulty.
+
+- People aren't making the connection between the plaque and the items around the room :(
+    - Any way to make that more obvious, I wonder?
+    - Removed the red herring feedback from sounds at least.
 
 - Out of bounds
     - "Got out of bounds here [by canal]" - needs a little care to prevent accessing anything outwith canal zone after reaching there.
@@ -50,8 +52,6 @@ FIX BEFORE BETA 2
 - Guard patrolling outside sanctuary gets stuck on lamppost if heading from one door to the other.
 
 - Market square conv should trigger from Eagle-Eyed Jack's perch.
-
-- Save and load just after the manor bowman conversation, and the guy who should continue patrolling to the back yard just stops where he is :(
 
 - When the intervention starts, destroy delivery di rupo and things.
 

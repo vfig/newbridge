@@ -34,7 +34,7 @@ BETA 2 (October)
 - Rich street: scatter loot And tulz!
 
 - Priceless hammer relic location should be randomized
-    - And possibly it should be loot?
+    - And possibly it should be loot? So people look for it?
 
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)

@@ -18,8 +18,6 @@ FIX BEFORE BETA 2
     - "This thief [Danno] stops"
     - GENERALLY it seems Returns to Origin should not be relied on. Instead I should probably DoesPatrol with a specific link to next patrol point.
 
-- marbleman reported (Expert) "the last line the keeper says seems to be a placeholder. Was it not recoded with the others?"
-
 - Out of bounds
     - "Got out of bounds here [by canal]" - needs a little care to prevent accessing anything outwith canal zone after reaching there.
     - "And here" - above turbines by Argaux's, by mantling a shutter.

@@ -27,7 +27,14 @@ BETA 2 (October)
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.
 
+- Make speed potion available on Normal for the catacombs
+
+- Something in the middle/west of market square to add shadow to allow another path across?
+
 - Rich street: scatter loot And tulz!
+
+- Priceless hammer relic location should be randomized
+    - And possibly it should be loot?
 
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)

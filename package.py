@@ -4,7 +4,7 @@
 #
 INCLUDE = [
     # Subdirs
-    'Books',
+    'books',
     'fam',
     'intrface',
     'mesh',
@@ -12,7 +12,7 @@ INCLUDE = [
     'obj',
     'snd',
     'sq_scripts',
-    'Strings',
+    'strings',
 
     # Files
     'fm.cfg',

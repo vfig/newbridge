@@ -9,6 +9,7 @@ FIX BEFORE BETA 2
 
 - People aren't making the connection between the plaque and the items around the room :(
     - Any way to make that more obvious, I wonder?
+    - Removed the red herring feedback from sounds at least.
 
 - Conversation problems (reported by marbleman):
     - "If I save and reload after these two [guard+hammerite] finish their convo and start patrolling normally, they restart the convo"

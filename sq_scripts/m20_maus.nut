@@ -309,7 +309,12 @@ class MausPuzzle extends SqRootScript
             local data = LinkTools.LinkGetData(link, "");
             if (data.find("Sound") == 0) {
                 local target = LinkDest(link);
-                local message = ((data == "Sound" + step) ? "TurnOn" : "TurnOff");
+                local message;
+                if (data == "Sound1") {
+                    message = ((step >= 1 && step <= 6) ? "TurnOn" : "TurnOff");
+                } else if (data == "Sound7") {
+                    message = ((step == 7) ? "TurnOn" : "TurnOff");
+                }
                 SendMessage(target, message);
             }
         }

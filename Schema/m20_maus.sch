@@ -21,61 +21,64 @@ schema m20mauswind
 archetype AMB_M20
 volume -2000
 mono_loop 5000 10000
+no_repeat
 wind1 wind3 wind4
+
+// Mausoleum water ambience
+schema m20mauswater
+archetype AMB_M20
+volume -1500
+mono_loop 400 400
+no_repeat
+drip1 drip2 drip3
 
 // Mausoleum puzzle sound 1
 schema m20mauspuz1
 archetype AMB_M20
-volume -1250
-fade 500
+volume -750
+mono_loop 0 0
 delay 500
-mono_loop 1000 3000
-airtone3
+bridge1
 
 // Mausoleum puzzle sound 2
 schema m20mauspuz2
 archetype AMB_M20
-volume -1000
-fade 500
+volume -750
+mono_loop 0 0
 delay 500
-mono_loop 1000 3000
-airtone2
+bridge1
 
 // Mausoleum puzzle sound 3
 schema m20mauspuz3
 archetype AMB_M20
 volume -750
-fade 500
+mono_loop 0 0
 delay 500
-mono_loop 1000 3000
-airtone1
+bridge1
 
 // Mausoleum puzzle sound 4
 schema m20mauspuz4
 archetype AMB_M20
-volume -500
-fade 500
+volume -750
+mono_loop 0 0
 delay 500
-mono_loop 1000 3000
-airtone6
+bridge1
 
 // Mausoleum puzzle sound 5
 schema m20mauspuz5
 archetype AMB_M20
-volume -250
-fade 500
+volume -750
+mono_loop 0 0
 delay 500
-mono_loop 1000 3000
-airtone4
+bridge1
 
 // Mausoleum puzzle sound 6
 schema m20mauspuz6
 archetype AMB_M20
-volume -1
-fade 500
+volume -750
+mono_loop 0 0
 delay 500
-mono_loop 1000 3000
-airtone5
+bridge1
 
 // Mausoleum puzzle sound 7
 schema m20mauspuz7

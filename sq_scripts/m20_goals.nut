@@ -1138,6 +1138,48 @@ class GoalTerencesHammer extends SqRootScript
 /* ------------- */
 
 
+class GoalPayment extends SqRootScript
+{
+    /* Put this on a non-loot payment item. Its purchase price is taken to
+    be its value in gold. The name will be updated to show the sum of
+    prices when more payments are collected. */
+
+    function OnContained()
+    {
+        local player = Object.Named("Player");
+        if ((message().event != eContainsEvent.kContainRemove)
+            && (message().container == player))
+        {
+            // Play the loot sound
+            Sound.PlaySchemaAmbient(self, "pickup_loot");
+
+            // When adding, rename myself to show my price;
+            // Combine behaviour is handled from the Combine message.
+            if (message().event == eContainsEvent.kContainAdd) {
+                SetObjectNameFromSalePrice();
+            }
+        }
+    }
+
+    function OnCombine()
+    {
+        local price = Property.Get(self, "SalePrice", "").tointeger();
+        local incoming_price = Property.Get(message().combiner, "SalePrice", "").tointeger();
+        Property.SetSimple(self, "SalePrice", (price + incoming_price));
+        SetObjectNameFromSalePrice();
+    }
+
+    function SetObjectNameFromSalePrice()
+    {
+        local price = Property.Get(self, "SalePrice", "").tointeger();
+        local total = Data.GetString("misc", "Loot_total", "Gold", "intrface");
+        local description = Data.GetString("objnames", "Name_Payment", "Payment");
+        local name = ("@PAYMENT: \"" + description + "\n" + total + ": " + price + "\"");
+        Property.SetSimple(self, "GameName", name);
+    }
+}
+
+
 class GoalUpdateLootGoals extends SqRootScript
 {
     /* Put this on a loot item that has value, but shouldn't count towards loot

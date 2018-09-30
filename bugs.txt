@@ -35,8 +35,6 @@ FIX BEFORE BETA 2
 
 - Guards attacking are a problem for the Keeper intervention and the ending.
 
-- Payment+loot setup caused confusion.
-
 - Prophet apparitions usually misses you when you're crouched?
 
 - Broken hidden lever for the middle streets work station's secret door? So at least there's a lever to find? Or maybe just tweak its lighting so it's less visible.

@@ -5,13 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Conversation problems (reported by marbleman):
-    - Save and load just after the manor bowman conversation, and the guy who should continue patrolling to the back yard just stops where he is :(
-    - Check the servant conversation too
-    - Check the market guards conversation too
-    - GENERALLY it seems Returns to Origin should not be relied on. Instead I should probably DoesPatrol with a specific link to next patrol point.
-    - Make sure to test them all with save+load afterwards
-
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
 

@@ -18,6 +18,7 @@ INCLUDE = [
     'fm.cfg',
     'newbridge.gam',
     'miss20.mis',
+    'contest.txt',
     'readme.txt',
     ]
 

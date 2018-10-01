@@ -17,17 +17,9 @@ FIX BEFORE BETA 2
 - Can frob letter + tower key through safe door.
 
 - Out of bounds
-    - "Got out of bounds here [by canal]" - needs a little care to prevent accessing anything outwith canal zone after reaching there.
     - "And here" - above turbines by Argaux's, by mantling a shutter.
 
-- Room brushing
-    - "This apartment [Danno's] shares a room with the corridor outside, which is kind of a big deal since you have to jump over the mine and can alert the guard that way"
-
 - Misc
-    - "It's a bit difficult to drop here [fountain square balcony] without losing health"
-    - "Carts have wrong material metaprop: they sound like metal"
-    - "[in Warden's temp quarters] The footlocker is locked but empty. Dunno if that's intended. The barrels in the corner are not solid"
-    - "This barrel [upstairs in warehouse] is also not solid."
     - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
     - "Wrong texture? [bottom of window on middle street works station!]
     - "I don't think the blue bricks work well as the roof texture [east main street by hangman square]"
@@ -41,19 +33,11 @@ FIX BEFORE BETA 2
     - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.
     - Probably not worth it. He's meant to be scary, rather than actually deadly after all.
 
-- Broken hidden lever for the middle streets work station's secret door? So at least there's a lever to find? Or maybe just tweak its lighting so it's less visible.
-
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
-
-- Guard patrolling outside sanctuary gets stuck on lamppost if heading from one door to the other.
 
 - Market square conv should trigger from Eagle-Eyed Jack's perch.
 
 - When the intervention starts, destroy delivery di rupo and things.
-
-- Secret treasure door in mausoleum is silent
-
-- Wandering merchant (middle streets) is not knocked out easily (and he also doesn't flee when confronted)
 
 - Dump the canister troll chest in the manor. (but what to replace it with?)
 

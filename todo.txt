@@ -29,6 +29,12 @@ BETA 2 (October)
 
 - Something in the middle/west of market square to add shadow to allow another path across?
 
+- Add a few more G-man like Keeper sightings:
+    - Industrial area
+    - Argaux's rooftop, watching the fountain
+    - Watching the cemetery
+    - Watching Lady di Rupo's
+
 - Rich street: scatter loot And tulz!
 
 - Priceless hammer relic location should be randomized
@@ -40,6 +46,7 @@ BETA 2 (October)
 - Really need a bell pull in di Rupo's room that triggers the butler's bell.
 
 - Review how well Keeper intervention worked for people.
+    - Seems okay so far
 
 - Assign better room archetypes, taking into consideration:
     - Triggers
@@ -61,6 +68,13 @@ BETA 2 (October)
 - Proper VO
     - Process and normalise
     - Remove unused placeholder lines (mostly nb1xx)
+
+- Review which new strings need translating
+    - Name_Payment
+    - maus_plaque
+
+- NPC Names!
+    - And make sure they all have the script that BrotherLionel does that appends status
 
 
 RELEASE (November)

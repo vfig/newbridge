@@ -5,6 +5,8 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- Your map is from Argaux. Perhaps not clear though? Maybe add 'Garrett... - Argaux' or something.
+
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
 
@@ -36,6 +38,8 @@ FIX BEFORE BETA 2
 - Guards attacking are a problem for the Keeper intervention and the ending.
 
 - Prophet apparitions usually misses you when you're crouched?
+    - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.
+    - Probably not worth it. He's meant to be scary, rather than actually deadly after all.
 
 - Broken hidden lever for the middle streets work station's secret door? So at least there's a lever to find? Or maybe just tweak its lighting so it's less visible.
 

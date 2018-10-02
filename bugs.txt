@@ -14,8 +14,6 @@ FIX BEFORE BETA 2
     - Any way to make that more obvious, I wonder?
     - Removed the red herring feedback from sounds at least.
 
-- Can frob letter + tower key through safe door.
-
 - Out of bounds
     - "And here" - above turbines by Argaux's, by mantling a shutter.
 

@@ -70,6 +70,7 @@ BETA 2 (October)
 
 - Review which new strings need translating
     - Name_Payment
+    - Name_Powderkeg
     - maus_plaque
 
 - NPC Names!

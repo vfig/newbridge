@@ -10,12 +10,16 @@ BETA 2 (October)
 
 - Detail
     - Sanctuary basement rooms
+        - Storage room is the only one now
+    - Sanctuary upstairs generally needs a little sprucing up.
     - Sanctuary upstairs middle room.
+        - What is its purpose??
     - Upper street (windows & doors & buildings)
     - Upper street alley
     - Rich street (windows & doors & buildings)
     - Manor storage room.
-    - Manor pantry and misc Jorge.
+        - Shelves and stuff
+    - Manor pantry.
     - Manor: move carpet in gallery slightly so it's easier to jump to the table without strafing.
     - New manor windows (on hallway; and basement of old manor building)
     - Handoff behind fishmongers (windows etc on other buildings)

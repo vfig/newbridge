@@ -15,4 +15,4 @@ region 100: Manor
     id 4: Manor bedrooms key (Key1; not for player)
 
 region 1000:
-
+    id 1: Pickable-only

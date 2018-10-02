@@ -9,7 +9,6 @@ BETA 2 (October)
 - Review tulz totals and distribution
 
 - Detail
-    - Fountain square west alley
     - Sanctuary basement rooms
     - Sanctuary upstairs middle room.
     - Upper street (windows & doors & buildings)
@@ -22,6 +21,9 @@ BETA 2 (October)
     - Handoff behind fishmongers (windows etc on other buildings)
     - Caves and ritual chamber?
     - Tower entrance - rubbish and a few bones
+
+- Puzzle
+    - Add a flat ledge opposite the entrance: more easily jumpable, mantleable without new_mantle, and it's a place to stack an explosive barrel. Make the explosive barrels in the Hammerite sanctuary able to blow up the one gate, why the heck not!
 
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.

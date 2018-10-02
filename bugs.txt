@@ -22,6 +22,7 @@ FIX BEFORE BETA 2
     - "Wrong texture? [bottom of window on middle street works station!]
     - "I don't think the blue bricks work well as the roof texture [east main street by hangman square]"
     - "You might want to AlignExt textures in places like this" - textures in drunk archer's tower
+    - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
 
 - Double doors when unlocking: only one unlocks, but both open.
 

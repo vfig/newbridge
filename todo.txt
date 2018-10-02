@@ -9,11 +9,8 @@ BETA 2 (October)
 - Review tulz totals and distribution
 
 - Detail
-    - Sanctuary basement rooms
-        - Storage room is the only one now
-    - Sanctuary upstairs generally needs a little sprucing up.
     - Sanctuary upstairs middle room.
-        - What is its purpose??
+        - What is its purpose?? Armory + training room maybe?
     - Upper street (windows & doors & buildings)
     - Upper street alley
     - Rich street (windows & doors & buildings)

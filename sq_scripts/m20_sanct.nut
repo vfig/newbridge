@@ -519,7 +519,21 @@ class SlidingBanner extends SqRootScript {
 class FreeAsABirdNow extends SqRootScript
 {
     function OnTurnOn() {
-        Object.RemoveMetaProperty(self, "M-InStocks");
         AI.Signal(self, "FlyFreeLittleJailbird");
+        Object.RemoveMetaProperty(self, "M-InStocks");
+    }
+}
+
+class HeyIWasEatingThat extends SqRootScript
+{
+    function OnTurnOn() {
+        AI.Signal(self, "LikeTakingCandy");
+        Object.RemoveMetaProperty(self, "M-IAmEatingThat");
+    }
+
+    function OnAlertness() {
+        if (message().level >= 2) {
+            Object.RemoveMetaProperty(self, "M-IAmEatingThat");
+        }
     }
 }

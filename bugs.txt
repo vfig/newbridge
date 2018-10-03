@@ -5,18 +5,17 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-
 - Your map is from Argaux. Perhaps not clear though? Maybe add 'Garrett... - Argaux' or something.
 
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
+    - Move loot around so it's less hidden, add one or two more pieces.
+    - Maybe landmark the entrance/exit just a touch more.
 
 - People aren't making the connection between the plaque and the items around the room :(
     - Any way to make that more obvious, I wonder?
     - Removed the red herring feedback from sounds at least.
-
-- Out of bounds
-    - "And here" - above turbines by Argaux's, by mantling a shutter.
+    - Not sure if the lights are good or bad, will hear what people think in b2.
 
 - Misc
     - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
@@ -26,8 +25,11 @@ FIX BEFORE BETA 2
     - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
 
 - Double doors when unlocking: only one unlocks, but both open.
+    - Maybe use a single fnordlock for both of them?
 
 - Guards attacking are a problem for the Keeper intervention and the ending.
+    - Close the gates when stuff happens, but hold off tping the keeper in until there's no more attack (or high awareness? or investigate?) links to the player. Check on enter the room... maybe also spawn a timer when in the room?
+    - ending keeper might need slightly different handling, since he doesn't tp in behind you after all.
 
 - Prophet apparitions usually misses you when you're crouched?
     - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.
@@ -35,7 +37,7 @@ FIX BEFORE BETA 2
 
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
 
-- Market square conv should trigger from Eagle-Eyed Jack's perch.
+- Market square conv should maybe trigger from Eagle-Eyed Jack's perch.
 
 - When the intervention starts, destroy delivery di rupo and things.
 
@@ -79,8 +81,6 @@ FIX BEFORE BETA 2
 
 - Tower steps should have different texture, they're almost invisible.
 
-- Sanctuary basement isn't lit _at all_!!
-
 - Opera archer takes _way_ too long to turn.
 
 - Bugbeast seemed to come right for me (just east of steps) when searching... how? Is there a trol point down there? Review the search trol points.
@@ -88,8 +88,6 @@ FIX BEFORE BETA 2
 - Needs to be something to land on beside wall across from works station, so you don't hurt yourself leaving that way.
 
 - EscapeWithTheAnax doesn't trigger in the alley.
-
-- Hammerite sanctuary stairs are almost invisible... have something at the end of each hallway for visible contrast.
 
 
 

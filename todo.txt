@@ -17,9 +17,10 @@ BETA 2 (October)
     - Manor pantry.
     - Manor: move carpet in gallery slightly so it's easier to jump to the table without strafing.
     - New manor windows (on hallway; and basement of old manor building)
+    - Tower entrance - rubbish and a few bones
     - Handoff behind fishmongers (windows etc on other buildings)
     - Caves and ritual chamber?
-    - Tower entrance - rubbish and a few bones
+        - So far _nobody_ has noticed the alternative entrance.
 
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
@@ -41,7 +42,6 @@ BETA 2 (October)
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
     - Hmm.... maybe have the crystals affect the lights??? So you can frob or smash a crystal to disable it, to disable its lights, maybe temporarily? Hmm... Might add the ingredient I was missing. And then the one in the manor becomes a training one that shows you it can be frobbed and it goes quiet+dark temporarily.
-    - So far _nobody_ has noticed the alternative entrance.
 
 - Really need a bell pull in di Rupo's room that triggers the butler's bell.
 

@@ -9,11 +9,7 @@ BETA 2 (October)
 - Review tulz totals and distribution
 
 - Detail
-    - Manor storage room.
-        - Shelves and stuff
     - Manor pantry.
-    - Manor: move carpet in gallery slightly so it's easier to jump to the table without strafing.
-    - New manor windows (on hallway; and basement of old manor building)
 
     - Upper street (windows & doors & buildings)
     - Upper street alley

@@ -689,6 +689,10 @@ class GoalPullTheStrings extends SqRootScript
             SendMessage(door, "Open");
         }
 
+        // Turn on the tower lights
+        local lights = LinkDest(Link_GetOneScriptParams("Lights", self));
+        SendMessage(lights, "TurnOn");
+
         // And the keeper does his vanishing act
         SendMessage(self, "TurnOff");
     }

@@ -9,8 +9,6 @@ BETA 2 (October)
 - Review tulz totals and distribution
 
 - Detail
-    - Manor pantry.
-
     - Upper street (windows & doors & buildings)
     - Upper street alley
     - Rich street (windows & doors & buildings)

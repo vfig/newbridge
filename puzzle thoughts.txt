@@ -1,0 +1,28 @@
+The main problem is that because it's a single puzzle, I can't prime the player with simpler puzzles.
+
+ 
+So I'm introducing quite a lot of things all at once: seven levers that have to be pulled in a specific order; the association of the poem to the puzzle; the seven elements and their association to the puzzle via the poem; and the leap of illogic to realise which lever is associated with element.
+
+ 
+The first I think is adequately covered by the thief's note and the revised feedback when you pull the levers: a single sound starts playing and doesn't stop unless you reset the puzzle or finish pulling all the levers. (The faces behind the levers also light up slightly when their lever is on, so it's easier to see which ones are done)
+
+The second (the association of the poem to the puzzle) is hopefully a little clearer with the rewrite, now that there are seven lines. Still far from guaranteed of course.
+
+ 
+The third (the seven elements and their association to the puzzle via the poem) is a biggie: many players will know the four classical elements, but adding in creatures, plants, and darkness? Yes, they're the seven parts of the Trickster's chant at the end of The Dark Project, but I don't know how familiar most players will be with that. And right now the only other mention of these in the mission is in that Hammerite book, which the player might well not have read yet. So priming this knowledge somewhere earlier could be useful.
+
+ 
+The fourth (realise which lever is associated with element) is the crux of the eureka moment. And I don't know that priming it is possible without an actual puzzle earlier, which really won't fit. I _might_ be able to do a smaller four-lever puzzle somewhere, where the classical elements are clearly associated with the levers and the solution is written elsewhere. Perhaps as the means of accessing Argaux's secret room? I dunno.
+
+ 
+So if the player's seen and solved an earlier elements-lever puzzle, and they've read about the seven elements, then when they get to the mausoluem they'll more likely associate it with the earlier puzzle, and will hopefully be on the lookout for a sequence of elements when they read the poem
+
+(And that makes Argaux's key redundant, but I can lock some loot in his chest with it or something :)
+
+ 
+Not sure how to prime the knowledge of the seven elements though. Another readable is the obvious thing, but what, and where? And how to avoid it being interpreted as the sequence order?
+
+ 
+(And since the translators have nearly finished on the mission text, this means an update—well, I already had one for the poem, so figure this out fairly quick so it won't mean _two_ updates for the translators.)
+
+Gah

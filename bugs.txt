@@ -5,6 +5,7 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+
 - Your map is from Argaux. Perhaps not clear though? Maybe add 'Garrett... - Argaux' or something.
 
 - Catacombs is confusing to people. Maybe a couple more landmarks?

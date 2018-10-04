@@ -48,7 +48,7 @@ details of all the custom sound and image resources used:
         to modifying it!
 
     mesh/txt/hamanax.png
-        Custom skin for a unique Hammerite character. Combined from stock
+        Skin for a unique Hammerite character. Combined from stock
         mesh/txt16/hammer1h.gif and mesh/txt16/fire2.gif.
 
     movies/b20.avi
@@ -61,8 +61,19 @@ details of all the custom sound and image resources used:
         Unmodified copy of stock obj/opgesw.pcx.
 
     obj/hamanaxcarry.png
-        Custom carry image for the unique Hammerite character. Combined from
+        Carry image for the unique Hammerite character. Combined from
         stock obj/hamgca.pcx and obj/fmageca.pcx.
+
+    obj/txt/blustn.png
+        Cropped copy of stock obj/txt/wdplnks6.gif, so that the stock mis11sd
+        model appears to be made from wood, not stone.
+
+    obj/txt/elem0.png
+        Combined from stock obj/txt/wdplnks6.gif and obj/txt/water01.gif.
+
+    obj/txt/elem123.png
+        Combined from stock obj/txt/wdplnks6.gif, obj/txt/air01.gif,
+        obj/txt/earth01.gif, and obj/txt/fire01.gif.
 
     snd/*
         Custom voice lines for various characters.

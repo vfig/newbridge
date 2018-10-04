@@ -29,6 +29,12 @@ archetype AMB_M20
 volume -2000
 minearmg
 
+// Got Argaux's puzzle wrong
+schema m20argpuzfail
+archetype AMB_M20
+volume -1000
+buzzer
+
 
 // -------------------------- AMBIENCE ----------------------------
 

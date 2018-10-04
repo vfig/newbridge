@@ -68,6 +68,7 @@ BETA 2 (October)
     - city_argauxleverearth
     - city_argauxleverwater
     - maus_plaque
+    - Name_Board
     - Name_Payment
     - Name_Powderkeg
 

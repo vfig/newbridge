@@ -171,17 +171,3 @@ class ClearMyHead extends SqRootScript
         }
     }
 }
-
-class ArgauxBanner extends SqRootScript
-{
-    /* This is a stupid hack. When slaying a BlueBanner, its normal
-    CutBlueBanner corpse appears at the same origin. But CutBlueBanner
-    has different dimensions. We need the cut banner to visually appear
-    at the same location, cause it's covering something important. */
-    function OnSlain() {
-        local offset = vector(0, -0.7, -0.14);
-        local corpse = Object.BeginCreate(Object.Named("CutBlueBanner"));
-        Object.Teleport(corpse, offset, vector(), self);
-        Object.EndCreate(corpse);
-    }
-}

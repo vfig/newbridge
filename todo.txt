@@ -63,9 +63,9 @@ BETA 2 (October)
     - Remove unused placeholder lines (mostly nb1xx)
 
 - Review which new strings need translating
+    - maus_plaque
     - Name_Payment
     - Name_Powderkeg
-    - maus_plaque
 
 - NPC Names!
     - And make sure they all have the script that BrotherLionel does that appends status

@@ -63,6 +63,10 @@ BETA 2 (October)
     - Remove unused placeholder lines (mostly nb1xx)
 
 - Review which new strings need translating
+    - city_argauxleverair
+    - city_argauxleverfire
+    - city_argauxleverearth
+    - city_argauxleverwater
     - maus_plaque
     - Name_Payment
     - Name_Powderkeg

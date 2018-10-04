@@ -10,6 +10,7 @@ BETA 2 (October)
 
 - Detail
     - Upper street (windows & doors & buildings)
+        - Halfway? Maybe a touch more?
     - Upper street alley
     - Caves and ritual chamber?
         - So far _nobody_ has noticed the alternative entrance.

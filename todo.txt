@@ -11,8 +11,6 @@ BETA 2 (October)
 - Detail
     - Upper street (windows & doors & buildings)
     - Upper street alley
-    - Rich street (windows & doors & buildings)
-        - 1 more buildings.
     - Handoff behind fishmongers (windows etc on other buildings)
     - Caves and ritual chamber?
         - So far _nobody_ has noticed the alternative entrance.

@@ -151,7 +151,29 @@ class PleaseKillMe extends SqRootScript
 
 class WakeMeUpInside extends SqRootScript
 {
+    // Wake me up (I'm the guard that's sleeping standing up) if I am turned
+    // on for more than one second (no, not like that).
+    wakeup_timer = 0;
+
     function OnTurnOn() {
+        wakeup_timer = SetOneShotTimer("WakeMeUpInside", 1.0);
+    }
+
+    function OnTurnOff() {
+        if (wakeup_timer != 0) {
+            KillTimer(wakeup_timer);
+            wakeup_timer = 0;
+        }
+    }
+
+    function OnTimer() {
+        if (message().name == "WakeMeUpInside") {
+            wakeup_timer = 0;
+            CantWakeUp();
+        }
+    }
+
+    function CantWakeUp() {
         Object.AddMetaProperty(self, "M-StillGroggy");
         Object.RemoveMetaProperty(self, "M-SleepingStandingUp");
         AI.MakeGotoObjLoc(self, self, eAIScriptSpeed.kNormalSpeed, eAIActionPriority.kNormalPriorityAction, null);

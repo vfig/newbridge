@@ -11,7 +11,6 @@ BETA 2 (October)
 - Review tulz totals and distribution
 
 - Detail
-    - Upper street alley
     - Caves and ritual chamber?
         - So far _nobody_ has noticed the alternative entrance.
 

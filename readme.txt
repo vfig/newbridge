@@ -142,9 +142,11 @@ entire game and all fan missions.
 =============================================================================
 * Credits *
 
-Design and build        :  FIXME!
+FIXME! - some credits still missing.
 
-Story                   :
+Created by              : vfig
+
+Story                   : vfig & Aaron Dron
 
 Briefing art            :
 
@@ -157,21 +159,23 @@ Voice acting:
     Irate Sergeant      : MasterThief3
     Heathen guard       : Yandros
     Cowardly Hammerite  : McTaffer
-    Danno the meister   : Yandros
+    Danno the taffer    : Yandros
     Olver the digger    : McTaffer
     Morten the berk     : Nobody, cause he's dead
     Hammerite priest    : McTaffer
     Hammerite watchman  : Yandros
 
-Translation             :
+Translation:
+    Deutsch             : Baeuchlein
+    Italiano            : Piesel
                         :
                         :
 
-Beta testing            :
+Beta testing            : FIXME!
                         :
                         :
 
-Special thanks          :
+Special thanks          : FIXME!
                         :
                         :
 
@@ -182,5 +186,5 @@ This mission is ©2018 by Andy Durdin.
 
 Distribution of this mission is allowed as long as it is free and unmodified.
 
-This level was not made and is not supported by Looking Glass Studios or Eidos 
+This level was not made and is not supported by Looking Glass Studios or Eidos
 Interactive.

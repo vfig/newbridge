@@ -255,23 +255,22 @@ class MysticGauge extends SqRootScript
     /* The Mystic Gauge always points towards its target when dropped!
         Just give it a ControlDevice link to the target, and put the
         MysticGaugeTarget script onto the target too (if you want the
-        gauge to stop working when the target is picked up). */
+        gauge to stop working when the target is picked up).
 
-    target = 0;
-    wild_mode = false;
-    dead_mode = false;
+        If it has more than one ControlDevice link, it picks a random
+        one at the start, and destroys all the others. */
 
     function OnSim()
     {
         if (message().starting) {
-            // Find out what we're targeting
-            local link = Link.GetOne("ControlDevice", self);
-            target = LinkDest(link);
-            if (target == 0) {
-                SetDeadMode();
-            }
-
             Physics.SubscribeMsg(self, ePhysScriptMsgType.kFellAsleepMsg);
+            // // Pick a target next frame; if we destroy objects now, things break!
+            // PostMessage(self, "StartMysticality");
+
+            // Find out what we're targeting
+            SelectTarget();
+            Update();
+
         } else {
             Physics.UnsubscribeMsg(self, ePhysScriptMsgType.kFellAsleepMsg);
         }
@@ -291,29 +290,66 @@ class MysticGauge extends SqRootScript
     }
 
     function SetWildMode(wild) {
-        if (wild_mode != wild) {
-            wild_mode = wild;
-            if (wild) {
-                // No limits!
-                local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
-                Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC | 1));
-                local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
-                Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC & ~2));
-                // And spin wildly!
-                Property.Set(self, "CfgTweqJoints", "    rate-low-high", vector(160.0, 0.0, 360.0));
-            } else {
-                // Okay, we want limits, and we want jitter.
-                local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
-                Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC & ~1));
-                local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
-                Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC | 2));
+        if (wild) {
+            // No limits!
+            local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
+            Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC | 1));
+            local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
+            Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC & ~2));
+            // And spin wildly!
+            Property.Set(self, "CfgTweqJoints", "    rate-low-high", vector(160.0, 0.0, 360.0));
+        } else {
+            // Okay, we want limits, and we want jitter.
+            local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
+            Property.Set(self, "CfgTweqJoints", "Joint1AnimC", (animC & ~1));
+            local curveC = Property.Get(self, "CfgTweqJoints", "Joint1CurveC");
+            Property.Set(self, "CfgTweqJoints", "Joint1CurveC", (curveC | 2));
+        }
+    }
+
+    function GetTarget() {
+        if (IsDataSet("Target")) {
+            return GetData("Target");
+        } else {
+            return 0;
+        }
+    }
+
+    function SelectTarget() {
+        local candidates = [];
+        local links = Link.GetAll("ControlDevice", self);
+        foreach (link in links) {
+            candidates.append(LinkDest(link));
+        }
+        local count = candidates.len();
+        if (count == 0) {
+            SetDeadMode();
+        } else {
+            // Pick a random target
+            local index = Data.RandInt(0, (count - 1));
+            local target = candidates[index];
+            SetData("Target", target);
+
+            // Destroy the others
+            foreach (other in candidates) {
+                if (other != target) {
+                    Object.Destroy(other);
+                }
             }
         }
     }
 
+    function IsDeadMode() {
+        if (IsDataSet("DeadMode")) {
+            return GetData("DeadMode");
+        } else {
+            return false;
+        }
+    }
+
     function SetDeadMode() {
-        if (! dead_mode) {
-            dead_mode = true;
+        if (! IsDeadMode()) {
+            SetData("DeadMode", true);
 
             // Okay, we want limits, but no jitter
             local animC = Property.Get(self, "CfgTweqJoints", "Joint1AnimC");
@@ -327,12 +363,13 @@ class MysticGauge extends SqRootScript
 
     function Update()
     {
-        if (target == 0 || dead_mode) {
+        local target = GetTarget();
+        if ((target == 0) || IsDeadMode()) {
             return;
         }
 
         const max_distance = 512.0;
-        const min_distance = 48.0;
+        const min_distance = 8.0;
         local target_pos = Object.Position(target);
         local my_pos = Object.Position(self);
         local my_facing = Object.Facing(self);

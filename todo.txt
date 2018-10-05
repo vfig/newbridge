@@ -28,9 +28,6 @@ BETA 2 (October)
 
 - Rich street: scatter loot And tulz!
 
-- Priceless hammer relic location should be randomized
-    - And possibly it should be loot? So people look for it?
-
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
     - Hmm.... maybe have the crystals affect the lights??? So you can frob or smash a crystal to disable it, to disable its lights, maybe temporarily? Hmm... Might add the ingredient I was missing. And then the one in the manor becomes a training one that shows you it can be frobbed and it goes quiet+dark temporarily.

@@ -10,11 +10,6 @@ FIX BEFORE BETA 2
     - Move loot around so it's less hidden, add one or two more pieces.
     - Maybe landmark the entrance/exit just a touch more.
 
-- People aren't making the connection between the plaque and the items around the room :(
-    - Any way to make that more obvious, I wonder?
-    - Removed the red herring feedback from sounds at least.
-    - Not sure if the lights are good or bad, will hear what people think in b2.
-
 - Misc
     - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
     - "Wrong texture? [bottom of window on middle street works station!]

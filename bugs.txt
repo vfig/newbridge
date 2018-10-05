@@ -6,6 +6,7 @@ FIX BEFORE BETA 2
 =================
 
 - Your map is from Argaux. Perhaps not clear though? Maybe add 'Garrett... - Argaux' or something.
+    - Don't forget the localised versions! I'll have to add the "- Argaux" to them myself.
 
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.

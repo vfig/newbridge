@@ -165,6 +165,7 @@ Name_HammeriteMap: "Sketchy map"
 Name_LetterToDanno: "Letter"
 Name_HammerRelic: "Priceless Hammerite relic"
 Name_DeckOfCards: "Deck of cards"
+; Added in beta 2:
 Name_Payment: "Payment"
 Name_Powderkeg: "Powder keg"
 Name_Board: "Wooden board"

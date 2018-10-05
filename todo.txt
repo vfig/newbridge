@@ -72,6 +72,7 @@ BETA 2 (October)
     - Name_Board
     - Name_Payment
     - Name_Powderkeg
+    FREEZE! I've sent these to the translators, so change nothing more now unless it's critical.
 
 - NPC Names!
     - And make sure they all have the script that BrotherLionel does that appends status

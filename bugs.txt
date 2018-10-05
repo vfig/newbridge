@@ -40,8 +40,6 @@ FIX BEFORE BETA 2
 
 - Crypt doors disappeared for marbleman.
 
-- Gold trim on circular rich street building is ropable carpet.
-
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
@@ -64,17 +62,9 @@ FIX BEFORE BETA 2
 
 - Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
 
-- Give one of the thieves a purse.
-
-- (Why are there two guards patrolling outside the sanctuary? Is one the guard from Hammer square?? This makes three altogether, where's the difficulty variation?)
-
 - A few hammerites should have purses or healing potions
 
 - Warden's chest is locked but empty!?
-
-- Tower steps should have different texture, they're almost invisible.
-
-- Opera archer takes _way_ too long to turn.
 
 - Bugbeast seemed to come right for me (just east of steps) when searching... how? Is there a trol point down there? Review the search trol points.
 

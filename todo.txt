@@ -85,6 +85,7 @@ RELEASE (November)
     - City map (draw and scan)
         - Automap segments
         - Automap properties
+        - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
     - Hammerite map (draw and scan)
         - Scripting for finding & updating qvars and automap info
         - Automap segments

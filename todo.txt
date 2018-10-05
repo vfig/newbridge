@@ -5,6 +5,8 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
+- Update maus_thiefscroll for translations! Ensure the decal is appropriately placed, and there's no more hints than necessary.
+
 - Review loot totals and distribution
 - Review tulz totals and distribution
 

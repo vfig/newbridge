@@ -17,8 +17,8 @@
 
 Page_0: "Heres the noll ya wanted Morten, consernin the morsolyum in the graveyard: its got some kinda magic lockin its gates ta keep out the likes of you an me. Seven horns says digger Olver, an he'd be one ta know cuz he got it strait outta one of Lady di Rupo's own books. He says ya jus gotta pull them horns in the proper order, one afta the other, an them gatesll roll on open:
 
-Northeast, South
-and then East
+Northeast, S
+and then
 
 I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cake! An dont ferget we get forty persent of this haul for the trouble. Olver and me'll be waitin for ya.
 
@@ -26,4 +26,4 @@ I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cak
 
 
 ; Blood decal to cover the missing puzzle solution.
-page_0_decal_0: "1 169 157 decals\\blood2"
+page_0_decal_0: "1 136 128 decals\\blood2"

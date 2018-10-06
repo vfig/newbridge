@@ -5,6 +5,10 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- Remove sanctuary front secret door - it's now wooden :D
+
+- Priest's patrol path takes him out the hallway door of vestibule, I don't want that.
+
 - Picked up a quiver when had no broadheads, and All my broadhead arrows now looked like [i]quivers[/i] - while aiming (blocking out half of my vision), while shooting, and also if they stuck in wood after shooting.
 
 - "if I drop the Anax in [the delivery room], I can't pick him up and it unchecks the Anax objective." -- it shouldn't untick the objective at this point, since you've done the job.

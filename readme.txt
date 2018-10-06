@@ -7,6 +7,15 @@ Please visit the test forum at Shalebridge Cradle for the latest version
 and all discussion:
 
     http://shalebridgecradle.co.uk/testing/viewforum.php?f=405
+=============================================================================
+
+
+
+***********
+* ENGLISH *
+***********
+
+Bitte herunterscrollen für deutschen Text! (Please scroll down for German!)
 
 =============================================================================
 
@@ -191,3 +200,137 @@ Distribution of this mission is allowed as long as it is free and unmodified.
 
 This level was not made and is not supported by Looking Glass Studios or Eidos
 Interactive.
+
+
+
+***********
+* DEUTSCH *
+***********
+
+=============================================================================
+
+Autor                   : vfig (Andy Durdin)
+Kontakt                 : me@andy.durdin.net
+Homepage                : http://backslashn.com
+Version                 : Beta 1
+Datum                   : 26. September 2018
+
+Einführung:
+
+    Ein "Bekannter" von mir, Argaux, hat mir ein Angebot für einen Auftrag
+    in Newbridge verschafft. Er wollte mir keine Einzelheiten mitteilen -
+    vielleicht hat er Angst, dass ich es hinter seinem Rücken durchziehe?
+    Aber er sagt, es wäre eilig. Und die Bezahlung wäre es wert.
+
+    Ich war nie in Newbridge, aber ich habe gehört, es sei ein dunkler und
+    stiller kleiner Ort im Randbereich der Stadt. Lady di Rupo, eine reiche
+    Dame mit einem modischen Anwesen oben auf den Klippen, hat de facto das
+    Sagen in dieser Gegend. Ich muss auf ihre Wachen achtgeben, während ich
+    mich dort befinde; die sind nicht gerade begeistert von Dieben.
+
+    Die Hammeriten sollen seit kurzem versuchen, selber die Kontrolle über
+    den Bezirk zu übernehmen, und das hat Ärger ausgelöst. Man sagte mir,
+    di Rupo wäre dem Orden des Hammers nicht wohl gesonnen - aber gut, das
+    bin ich auch nicht, obwohl ich das ganze Gold, mit dem sie ihre Tempel
+    dekorieren, durchaus zu schätzen weiß.
+
+    Was auch immer sonst noch im Gefolge dieses Auftrags mitreisen mag,
+    ein Besuch in Newbridge wird eine willkommene Abwechslung sein.
+    Ich werde mich zum Brunnen begeben, dort Argaux treffen und hören, was
+    er zu sagen hat.
+
+=============================================================================
+* Spielinformationen *
+
+Spiel                   : Thief Gold, NewDark v1.26
+Missionsname            : Gewinn machen
+Missionsdatei           : miss20.mis
+Einführungsfilm         : ja
+Schwierigkeitsgrad      : Normal/Hart/Experte
+Ausrüstungsladen        : ja
+Karte                   : ja
+Automap                 : ja
+Neue Grafiken           : nein
+Neue Sounds             : nein
+Mehrsprachen-Unter-
+ stützung               : ja (Englisch, Deutsch, Italienisch)
+Bauzeit                 : 532 Stunden über 98 Kalendertage hinweg (bisher)
+
+=============================================================================
+* Danksagung usw. *
+
+Design und Baukunst     : FIXME ! Update credits
+
+Story                   :
+
+Briefing-Filme          :
+
+Stimmen:
+    Garrett             :
+    Lady di Rupo        : Shadow Creepr
+    Hüter               : Yandros
+    Prophet             :
+    Der Ewige Benny     : Yandros
+    Wütender Sergeant   : MasterThief3
+    Wache der Heiden    : Yandros
+    Feiger Hammerit     : McTaffer
+    Danno the meister   : Yandros
+    Olver               : McTaffer
+    Morten              : keiner, der ist tot!
+    Hammeritenpriester  : McTaffer
+    Hammeritenwache     : Yandros
+
+Übersetzung             : Deutsch - baeuchlein
+                        : Italienisch - piesel
+                        :
+
+Betatester              :
+                        :
+                        :
+
+Special thanks          :
+                        :
+                        :
+
+=============================================================================
+* Weitere Informationen *
+
+NewDark v1.26 (Patch) wird zum Spielen der Mission benötigt. Die GOG-Version
+von Thief Gold wird empfohlen, da sie schon die neueste NewDark-Version be-
+inhalted. Zu finden ist sie unter
+
+    https://www.gog.com/game/thief_gold
+
+Wer Thief Gold (deutsch: "Dark Projekt Directors Cut") aus einer anderen
+Quelle erhalten hat, muss den NewDark-Patch auf Version 1.26 entweder "von
+Hand" installieren (vgl. http://www.ttlg.com/forums/showthread.php?t=146448)
+oder aber TFix benutzen (siehe dazu
+http://www.ttlg.com/forums/showthread.php?t=134733).
+
+Diese Mission wurde unter Verwendung der ursprünglichen Texturen niedriger
+Auflösung erstellt, und das Benutzen von Verbesserungen wie dem "Enhancement
+pack" oder anderen Textur-Zusatzpaketen wird nicht empfohlen. Sie würden
+zwar vermutlich das Spiel nicht ernsthaft stören, aber könnten evtl. nicht
+zum restlichen Aussehen der Mission passen.
+
+Man sollte FM-Selektor zum Spielen dieser Mission benutzen. Man kann es z.B.
+mit dem Spiel starten, wenn man "-fm" als Kommandozeilen-Parameter an das
+Spiel übergibt:
+
+    THIEF.EXE -fm
+
+Mehr Informationen zu FM-Selektor enthält die Datei FMSel.pdf, die mit
+NewDark mitgeliefert wird. Diese Mission wurde nicht mit anderen FM-Ladepro-
+grammen, wie z.B. Dakloader, getestet, weswegen deren Gebrauch nicht empfoh-
+len wird.
+
+=============================================================================
+* Copyright *
+
+©2018 Andy Durdin.
+
+Die Weiterverbreitung dieser Mission ist erlaubt, solange
+das ohne Bezahlung passiert und die Mission nicht verändert wird.
+
+Diese Mission wurde nicht von Looking Glass Studios or Eidos Interactive er-
+stellt, und Support leisten sie daher auch nicht dafür.

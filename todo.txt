@@ -79,6 +79,7 @@ BETA 2 (October)
 
 - Test all books in Italian. Test the "if you play on Expert, you successfully stop the ritual, you find the bonus relic, and you attack the keeper by the canal at the end" scenario that objectives fit."
 
+- Review and update credits and so on in readme.
 
 RELEASE (November)
 ==================

@@ -159,7 +159,7 @@ Voice acting:
     Irate Sergeant      : MasterThief3
     Heathen guard       : Yandros
     Cowardly Hammerite  : McTaffer
-    Danno the taffer    : Yandros
+    Danno the meister   : Yandros
     Olver the digger    : McTaffer
     Morten the berk     : Nobody, cause he's dead
     Hammerite priest    : McTaffer
@@ -168,6 +168,9 @@ Voice acting:
 Translation:
     Deutsch             : Baeuchlein
     Italiano            : Piesel
+                        :
+                        :
+Proofreading            : Gnartsch
                         :
                         :
 

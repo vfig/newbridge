@@ -7,6 +7,8 @@ FIX BEFORE BETA 2
 
 - Picked up a quiver when had no broadheads, and All my broadhead arrows now looked like [i]quivers[/i] - while aiming (blocking out half of my vision), while shooting, and also if they stuck in wood after shooting.
 
+- Should the Warden's nameplate have a quotation or not?
+
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
     - Move loot around so it's less hidden, add one or two more pieces.

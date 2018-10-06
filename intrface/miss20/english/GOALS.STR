@@ -26,8 +26,8 @@ fiction_5: "(CUT) Banish the Prophet's apparition, just to be safe."
 text_5: "(CUT) Banish the Prophet's apparition, just to be safe."
 
 ; 6: DeliverTheItems
-fiction_6: "When you have both items, take them to the fishmongers for your payment."
-text_6: "When you have both items, take them to the fishmongers for your payment."
+fiction_6: "When you have both items, take them to the fishmonger's for your payment."
+text_6: "When you have both items, take them to the fishmonger's for your payment."
 
 ; 7: StopTheRitual
 fiction_7: "Find out where Lady di Rupo is performing the ritual, and stop it."

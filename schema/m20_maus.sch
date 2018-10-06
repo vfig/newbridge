@@ -3,13 +3,6 @@ schema doormaus_locked
 archetype DOORS
 hwoosto3
 
-// Mausoleum ambience 1 (room tone)
-schema m20maustone
-archetype AMB_M20
-volume -500
-mono_loop 0 0
-subson1
-
 // Mausoleum spooky torch dousing
 schema m20mausdous
 archetype AMB_M20
@@ -87,6 +80,44 @@ volume -1
 delay 3250
 whgasp
 
+// Catacombs ambience 5 (bells)
+schema m20catabells
+archetype AMB_M20
+volume -1500
+mono_loop 1000 3000
+no_repeat
+bells1 bells2 bells3 bells4
+
+// Catacombs bracelet sound
+schema m20catabrace
+archetype AMB_M20
+volume -1
+vbreath
+
+
+// -------------------------- AMBIENCE ----------------------------
+
+// Cemetery 1 ambience (room tone, creepy whispering)
+schema m20ceme1loop
+archetype AMB_M20
+volume -2000
+mono_loop 0 0
+egpedlp2
+
+// Mausoleum ambience 1 (room tone)
+schema m20maustone
+archetype AMB_M20
+volume -500
+mono_loop 0 0
+subson1
+
+// Mausoleum 1 ambience (mood)
+schema m20mausmood
+archetype AMB_M20
+volume -250
+mono_loop 8000 12000
+windele1 windele2 windele5
+
 // Catacombs ambience 1 (room tone)
 schema m20catatone
 archetype AMB_M20
@@ -117,17 +148,3 @@ archetype AMB_M20
 volume -1000
 mono_loop 0 0
 loloop2
-
-// Catacombs ambience 5 (bells)
-schema m20catabells
-archetype AMB_M20
-volume -1500
-mono_loop 1000 3000
-no_repeat
-bells1 bells2 bells3 bells4
-
-// Catacombs bracelet sound
-schema m20catabrace
-archetype AMB_M20
-volume -1
-vbreath

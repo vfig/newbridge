@@ -7,6 +7,8 @@ BETA 2 (October)
 
 - Integrate Italian translation into beta 2.
 
+- Change German title to "Ein netter Profit" (short, "Netter Profit")
+
 - Update maus_thiefscroll for translations! Ensure the decal is appropriately placed, and there's no more hints than necessary.
 
 - Review loot totals and distribution
@@ -83,6 +85,8 @@ BETA 2 (October)
 
 RELEASE (November)
 ==================
+
+- Memorial to Mara (MsLedd) in a small mausoleum in the cemetery.
 
 - Map
     - City map (draw and scan)

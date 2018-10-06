@@ -7,6 +7,8 @@ FIX BEFORE BETA 2
 
 - Picked up a quiver when had no broadheads, and All my broadhead arrows now looked like [i]quivers[/i] - while aiming (blocking out half of my vision), while shooting, and also if they stuck in wood after shooting.
 
+- "if I drop the Anax in [the delivery room], I can't pick him up and it unchecks the Anax objective." -- it shouldn't untick the objective at this point, since you've done the job.
+
 - Should the Warden's nameplate have a quotation or not?
 
 - Catacombs is confusing to people. Maybe a couple more landmarks?

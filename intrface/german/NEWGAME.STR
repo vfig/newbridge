@@ -2,7 +2,7 @@ difficulty: "Schwierigkeit:"
 ; We don't really want the training mission button.
 ; Easiest thing to do is leave it blank.
 start_training: ""
-skip_training: "Gewinn machen"
+skip_training: "Einen Gewinn machen"
 options: "Optionen"
 cancel: "Abbruch" 
 

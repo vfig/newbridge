@@ -154,6 +154,13 @@ volume -500
 mono_loop 0 0
 diffuse
 
+schema m20city5ten
+archetype AMB_M20
+volume -750
+mono_loop 3000 10000
+no_repeat
+fb5 fb6 fb7
+
 
 // 6. Keeper intervention
 

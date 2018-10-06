@@ -1,0 +1,3 @@
+; Shown when squirrel scripts don't load
+
+Page_0: "FEHLER: Diese Mission braucht die \"Squirrel-Skripte\" (SQUIRREL.OSM)!"

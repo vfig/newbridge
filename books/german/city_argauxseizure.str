@@ -1,0 +1,16 @@
+; Found in the city outside Argaux's bolt-hole.
+; Communicates both that this is Argaux's place, and that he was executed
+;
+; NOTE FOR TRANSLATORS:
+;
+; This is a formal proclamation. The idea is that it's a standard form that
+; has just had the name 'Argaux Deperrin' filled into the blanks.
+
+Page_0: "VOLLSTRECKUNG EINER HINRICHTUNG
+
+Hiermit sei verkÅndet, dass
+
+        ARGAUX DEPERRIN            ,
+
+ein vorheriger Bewohner dieses Hauses, krimineller Machenschaften ÅberfÅhrt und in öbereinstimmung mit Recht und Gesetz hingerichtet wurde. Der Besitz des Verstorbenen fÑllt der Gemeinde Newbridge zu und wird versteigert.
+    Verwandte, die ihre Familienzugehîrigkeit beweisen kînnen, kînnen sich beim Gerichtsdiener melden, um ErbstÅcke und weitere GegenstÑnde zu erhalten. Die Frist endet zwei Wochen nach Verîffentlichung dieser Nachricht."

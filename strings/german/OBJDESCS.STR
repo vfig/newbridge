@@ -1,0 +1,106 @@
+; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+; so you should hopefully have a translation already that you can copy paste.
+; All the new text from this FM is under the heading NEWBRIDGE at the end.
+
+use_blackjack: "Diese Waffe schl„gt einen ahnungslosen Gegner \
+fast ger„uschlos ohnm„chtig, ohne Blut zu hinterlassen."
+
+use_breath: "Dieser Trank verleiht Ihnen unter Wasser eine \
+zus„tzliche Luftreserve.  125."
+
+use_broadhead: "Ein spitzer Pfeil.  25"
+
+use_fire: "Dieser Pfeil explodiert beim Auftreffen, verletzt die \
+Zielperson und entzndet z.B. Fackeln.  \
+Pfeil fliegt zielgerade. Nehme den oberen Teil des Visiers als Anhalt. 300"
+
+use_flash: "Diese Granate produziert einen grellen Lichtblitz, der die \
+Gegner blendet.  200"
+
+use_gasarrow: "Pfeil produziert beim Auftreffen eine Wolke aus \
+K.o.-Gas. Fast alle Lebewesen in seiner N„he fallen in Tiefschlaf. \
+Pfeil fliegt zielgerade. Nehme oberen Teil des Visiers als Anhalt.  500"
+
+use_gasmine: "Diese Granate produziert bei Berhrung eine Wolke \
+aus K.o.-Gas, die fast alle Lebewesen in ihrer N„he in tiefen Schlaf \
+versetzt.  650"
+
+use_healing: "Dieser Trank ersetzt verlorene Lebenskraft.  250"
+
+use_holywater: "Diese Phiole enth„lt von den Hammeriten geweihtes \
+Wasser und bietet wirksamen Schutz gegen Untote, wenn Sie sie mit \
+Ihren Wasserpfeilen benutzen.  200"
+
+use_lockpick: "Mit diesen Hilfsmitteln und ein biáchen Arbeit k”nnen \
+Sie fast alle Schl”sser ”ffnen."
+
+use_pricey_lockpick: "Mit diesen Hilfsmitteln und ein biáchen Arbeit \
+k”nnen Sie fast alle Schl”sser ”ffnen.  Kosten: 4000 fr das Paar"
+
+use_mine: "Diese Granate produziert bei Berhrung eine feurige \
+Explosion.  350"
+
+use_moss: "Dieser Pfeil setzt beim Aufprall eine Mooswolke frei, \
+die am Boden einen weichen, schalld„mpfenden Teppich bildet. 125"
+
+use_noisemaker: "Beim Aufprall verursacht der Pfeil ein schritt„hnliches \
+Ger„usch.  250"
+
+use_rope: "Dieser Pfeil bohrt sich in Holz; ein Seil entrollt sich aus \
+ihm.  200"
+
+use_sword: "Schwerter richten nicht nur Schaden beim Gegner an, sondern \
+k”nnen auch dessen Angriffe abwehren."
+
+use_water: "Wasserpfeile richten wenig Schaden an, k”nnen aber Fackeln \
+und andere brennende Gegenst„nde l”schen.  50"
+
+
+use_m9papyrus: "Ein Bekannter m”chte einen Auftrag an Sie abtreten. \
+Es handelt sich um die Suche nach einigen Antiquit„ten in der \
+vergessenen Stadt. Preis: 150"
+
+use_m3holytip: "Ein ehemaliger Gefangener aus Cragscleft behauptet, \
+Informationen ber das Bergwerk zu besitzen, in dem es spukt. Preis: 100"
+
+use_m3cuttytip: "Ein paar gezielte Nachforschungen k”nnten Ihnen verraten, \
+wo die Hammeriten Cutty festhalten. Preis: 300"
+
+use_fakeeye: "Die Hammeriten haben diese Nachbildung des Auges angefertigt. \
+W„hrend Constantines Ritual mssen Sie es mit dem echten Auge vertauschen."
+
+use_hammertip: "Einer der Hammeriten ist bereit Dir einige Informationen \
+anzubieten, die er gefunden hat, aber er besteht darauf, daá Du dafr \
+bezahlst. Damit sich seine Seele nicht verdstert, wenn er Dieben hilft. \
+Kosten:100"
+
+use_consword: "Dieses fremdartige schwarze Schwert ist offenbar fr Ihre \
+Gegner unsichtbar. Sogar dann noch, wenn Sie damit schlagen."
+
+use_talismans: "Die Talismane von Luft, Erde, Wasser und Feuer erm”glichen Dir \
+die Wachen an der Kathedrale zu besiegen und die Tr aufzuschliessen."
+
+use_coins: "Die Mnzen fr das Grab des Wachtmanns"
+
+use_speed: "Dieser Trank wird Ihnen fr kurze Zeit zu groáer \
+Geschwindigkeit \
+verhelfen. Kosten: 500."
+
+use_hallpass: "Ein echtes Empfehlungsschreiben fr einen \
+Novizen der Hammeriten. Er wird Ihnen am Zaun ausgeh„ndigt."
+
+use_lckey: "Dieser Stein wird das Siegel der Hter zur verlorenen Stadt 
+”ffnen."
+
+use_pickhelp: "Seit Farkus einige Diebe ver„rgerte, weil er sein Werkzeug \
+ohne Gebrauchsanleitung verkaufte, \
+legt er seinen Waren eine kurze Anleitung bei."
+
+use_m7tip: "Ein Bekannter m”chte Ihnen einige Seiten aus dem Tagebuch eines \
+K„mpfers verkaufen, der vor vielen Jahren verstarb. Er war „uáerst \
+erfolgreich im Kampf gegen die Untoten und sein Buch kostet Sie: 200"
+
+
+;NEWBRIDGE
+
+Use_DeckOfCards: "Um unentdeckt zu bleiben, muss man oft viel Zeit mit Stillstehen und Beobachten verbringen. Diese 52 Freunde vertreiben Ihnen dabei die Zeit, fr nur 10 Goldstcke."

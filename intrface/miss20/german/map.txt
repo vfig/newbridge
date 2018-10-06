@@ -1,0 +1,43 @@
+; NOTE FOR TRANSLATORS: this is the text that is drawn on
+; the map, for translating. I only need the text translated,
+; and I'll update the images. Thanks!
+
+;--------------------------------------
+; Page 0
+
+"Meine Wohnung - der Engel bei der Taverne. Kannst dich da vor Wachen verstecken!"
+
+"Brunnen - wir treffen uns da!"
+
+"Fischhändler" [If you cannot produce that "a with dots above it", write "Fischhaendler" instead.]
+
+"Hammeriten"
+
+"Friedhof"
+
+"Lady di Rupo"
+
+;--------------------------------------
+; Page 1
+
+"Oberes Stockwerk"
+
+"Bibliothek"
+
+"Verwalter"
+
+"Priester"
+
+"Unteres Stockwerk"
+
+"Werkstatt"
+
+"Flur"
+
+"Kapelle"
+
+"Vestibule"
+
+"Lagerraum"
+
+"Keller & Krypta"

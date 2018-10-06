@@ -1,0 +1,87 @@
+; 0: MeetArgaux
+fiction_0: "Ihr Kontaktmann, Argaux, erwartet Sie am Brunnen. Treffen Sie sich dort mit ihm, um Genaueres Åber den Auftrag zu erfahren!"
+text_0: "Treffen Sie Argaux am Brunnen!"
+
+; 1: FindArgauxsInfauxs
+fiction_1: "Suchen Sie Argaux' Wohnung auf, um weitere Informationen zu finden!"
+text_1: "Suchen Sie Argaux' Wohnung auf, um weitere Informationen zu finden!"
+
+; 2: KidnapTheAnax
+fiction_2: "Erbeuten Sie das \"Anax von Easthart\" von den Hammeriten!"
+text_2: "Erbeuten Sie das \"Anax von Easthart\" von den Hammeriten!"
+
+; 3: BonusBurrickTrouble
+fiction_3: "(CUT) Lenken Sie die Hammeriten mit Hilfe ungewîhnlicher Freunde ab!"
+text_3: "(CUT) Lenken Sie die Hammeriten mit Hilfe ungewîhnlicher Freunde ab!"
+
+; 4: StealTheHand
+fiction_4: "Stehlen Sie die Hand des Propheten aus dem Mausoleum!"
+text_4: "Stehlen Sie die Hand des Propheten aus dem Mausoleum!"
+
+; 5: BonusBanishTheGhost
+fiction_5: "(CUT) Vetreiben Sie den Geist des Propheten - nur zur Sicherheit..."
+text_5: "(CUT) Vetreiben Sie den Geist des Propheten - nur zur Sicherheit..."
+
+; 6: DeliverTheItems
+fiction_6: "Wenn Sie beides haben, bringen Sie es beim FischhÑndler vorbei, um Ihr Geld einzustreichen!"
+text_6: "Wenn Sie beides haben, bringen Sie es beim FischhÑndler vorbei, um Ihr Geld einzustreichen!"
+
+; 7: StopTheRitual
+fiction_7: "Finden Sie heraus, wo Lady di Rupo das Ritual durchfÅhrt, und halten Sie sie auf!"
+text_7: "Finden Sie heraus, wo Lady di Rupo das Ritual durchfÅhrt, und halten Sie sie auf!"
+
+; 8: BonusSubvertTheRitual
+fiction_8: "(CUT) Das wird das Ritual bestimmt durchkreuzen. Ganz schîne Sauerei...!"
+text_8: "(CUT) Das wird das Ritual bestimmt durchkreuzen. Ganz schîne Sauerei...!"
+
+; 9: EscapeWithTheAnax
+fiction_9: "Bringen Sie den Anax sicher hier heraus!"
+text_9: "Bringen Sie den Anax sicher hier heraus!"
+
+; 10: ReturnTheAnax
+fiction_10: "Retten Sie den Anax, und bringen Sie ihn zurÅck zu den Hammeriten!"
+text_10: "Retten Sie den Anax, und bringen Sie ihn zurÅck zu den Hammeriten!"
+
+; 11: BonusTerencesHammer
+fiction_11: "Bonus: Dieser uralte juwelenbesetzte Hammer ist eine unbezahlbare Reliquie. Doch wie Ihr Hehler immer sagt: *Alles* hat seinen Preis..."
+text_11: "Bonus: Dieser uralte juwelenbesetzte Hammer ist eine unbezahlbare Reliquie. Doch wie Ihr Hehler immer sagt: *Alles* hat seinen Preis..."
+
+; 12: KeepTheAnaxAlive
+fiction_12: "Dem Anax darf kein Leid geschehen!"
+text_12: "Dem Anax darf kein Leid geschehen!"
+
+; 13: DontBiteTheHand
+fiction_13: "Bei·en Sie nicht die Hand, die Sie fÅttert! Wenn jemand auf Ihrer Seite steht, lassen Sie ihn in Ruhe!"
+text_13: "Bei·en Sie nicht die Hand, die Sie fÅttert! Wenn jemand auf Ihrer Seite steht, lassen Sie ihn in Ruhe!"
+
+; 14: LootNormal
+fiction_14: "Newbridge ist nicht gerade ein Nobelviertel, aber auch nicht unbedingt schwer bewacht. Da sollte es fÅr einen Dieb wie Sie einiges zu entdecken geben. Finden Sie Beute im Wert von 1000 GoldstÅcken und sacken Sie sie ein!"
+text_14: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 1000 GoldstÅcken ein!"
+
+; 15: LootHard
+fiction_15: "Newbridge ist nicht gerade ein Nobelviertel, aber ein paar Reiche und Hammeriten dÅrften hier schon leben. Sie kînnen deren ReichtÅmer besser gebrauchen als die! Finden Sie Beute im Wert von 1500 GoldstÅcken und sacken Sie sie ein!"
+text_15: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 1500 GoldstÅcken ein!"
+
+; 16: LootExpert
+fiction_16: "Was kînnte es Schîneres geben, wenn man einen neuen Stadtbezirk besucht, als mit den Einwohnern Bekanntschaft zu schlie·en... oder mit ihrem Geld! Nehmen Sie, was Sie kriegen kînnen! Mindestens 2000 GoldstÅcke sollte es wert sein."
+text_16: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 2000 GoldstÅcken ein!"
+
+; 17: BonusLootHard
+fiction_17: "FIXME: Spezialbeute 1 stehlen!"
+text_17: "FIXME: Spezialbeute 1 stehlen!"
+
+; 18: BonusLootExpert
+fiction_18: "FIXME: Spezialbeute 2 stehlen!"
+text_18: "FIXME: Spezialbeute 2 stehlen!"
+
+; 19: DontKillBystanders
+fiction_19: "Tîten Sie keine Unbewaffneten! Sie wollen deren Geld, nicht ihr Leben."
+text_19: "Tîten Sie keine Unbewaffneten!"
+
+; 20: DontKillHumans
+fiction_20: "Ein Dieb mit Ihren FÑhigkeiten sollte ohne Gewaltanwendung zurecht kommen. Tîten Sie niemanden!"
+text_20: "Tîten Sie niemanden!"
+
+; 21: ReturnToTheStart
+fiction_21: "Wenn alles erledigt ist, machen Sie sich durch den Kanal aus dem Staub!"
+text_21: "Wenn alles erledigt ist, gehen Sie zum Kanal am Startpunkt zurÅck!"

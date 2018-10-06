@@ -1,0 +1,270 @@
+SUB1
+
+// Scene 0: Garrett's inner monologue
+{
+    TYPE "player"
+    DESCR "Garrett"
+    SUB "nb000" { TEXT "Fest verschlossen. Ich muss einen anderen Weg hinein finden!" }
+    SUB "nb001" { TEXT "Komisch. Argaux ist nicht da. Ich sollte mich mal nach ihm umsehen!" }
+    SUB "nb002" { TEXT "Also dabei wollte Argaux meine Hilfe! Die Bezahlung ist gut. Ich glaube, ich mache es dann alleine..." }
+    SUB "nb003" { TEXT "Also ist dieses \"Anax\" ein Jemand, kein Etwas. Das ist... unpraktisch." }
+    SUB "nb004" { TEXT "Also dabei wollte Argaux meine Hilfe! Ich glaube, ich mache es dann alleine... dann muss ich das Geld mit niemandem teilen." }
+    SUB "nb005" { TEXT "Und nun muss ich das Anax finden - was auch immer das ist." }
+    SUB "nb006" { TEXT "Armer Argaux! Da geht sein Profit dahin. Ich sollte seine Wohnung nach Informationen durchsuchen." }
+    SUB "nb007" { TEXT "Verdammt, sie haben schon mit dem Ritual begonnen! Ich muss mich beeilen, um das noch zu druchkreuzen!" }
+    SUB "nb008" { TEXT "Das sieht nach dem öbergabepunkt aus." }
+    SUB "nb009" { TEXT "Verdammt... falsche Kombination!" }
+    SUB "nb010" { TEXT "Immer noch die falsche!" }
+    SUB "nb011" { Text "-Seufz- Ich lese nicht gern, aber vielleicht wÅrde es mir helfen, dieses RÑtsel zu knacken." }
+    SUB "nb012" { TEXT "Einer erledigt, einer noch Åbrig!" }
+    SUB "nb013" { TEXT "Jetzt muss ich das abliefern und mein Geld einstecken." }
+    SUB "nb014" { TEXT "Der Turm ist hell erleuchtet. Das ist neu..." }
+    SUB "nb016" { TEXT "Das gefÑllt mir nicht." }
+    SUB "nb022" { TEXT "Argaux' Karriere hat ein jÑhes Ende genommen. Jammerschade." }
+    SUB "nb023" { Text "Puh... Der Kerl wird mir langsam zu schwer! Ich glaube, hier ist er sicher genug!" }
+}
+
+// There is no Scene 1.
+
+// Scene 2: The briefing
+{
+    TYPE "movie"
+    SRTSUB "movie/b20" "b20.srt"
+}
+
+// Scene 3: The hand-off
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb300" { TEXT "Lady di Rupo, nehme ich an?" }
+    SUB "nb302" { TEXT "Garrett. Argaux ist ... na sagen wir mal, heute ist nicht sein Tag." }
+    SUB "nb304" { TEXT "FöNFtausend. Ich wei·, was Sie Argaux angeboten haben! Und eigentlich sollte ich mehr verlangen, weil ich diesen fetten Hammeriten hier 'rauf schleppen musste. Was haben Sie eigentlich mit ihm vor?" }
+    SUB "nb306" { TEXT "Na gut, das ist Ihre Sache. Ich werd' nicht in TrÑnen ausbrechen, weil ein paar Hammeriten weniger mich vom Geldverdienen abhalten. Und wo wir gerade dabei sind..." }
+}
+{
+    TYPE "convo"
+    DESCR "di Rupo"
+    SUB "nb301" { TEXT "In der Tat. Wie ich sehe, bringen Sie mir das GewÅnschte, Herr Argo." }
+    SUB "nb303" { TEXT "Zu schade. Aber gut, dann nehme ich mit Ihnen Vorlieb, Herr Garrett. Ich zahle Ihnen dreitausend--" }
+    SUB "nb305" { TEXT "Ach, der Anax! Wer hÑtte gedacht, dass ein solch hochrangiger Hammerit diesen kleinen Bezirk besuchen wÅrde? Aber die Hammeriten haben mir in letzter Zeit viel érger gemacht. Mit dem Anax wird das fÅr immer aufhîren!" }
+    SUB "nb307" { TEXT "Ja, Ihr Lohn. Hier, bitte! Leben Sie wohl, Herr Garrett!" }
+}
+
+// Scene 4: Intervention
+{
+    TYPE "convo"
+    DESCR "HÅter"
+    SUB "nb400" { TEXT "Garrett! Was hast du angerichtet?" }
+    SUB "nb402" { TEXT "Lady di Rupo will ein Ritual durchfÅhren, um den Propheten wiederzubeleben, wofÅr sie den Kîrper dieses Hammeriten braucht!" }
+    SUB "nb404" { TEXT "Bist du genauso blind wie dumm? Das wird Auswirkungen haben, die weit Åber diesen Bereich der Stadt hinaus gehen! Es muss verhindert werden!" }
+    SUB "nb406" { TEXT "Es kÅmmert dich also nicht - wie wir befÅrchtet haben. Daher hat der Rat der HÅter folgendes Angebot an dich: Noch einmal soviel Geld, wenn du uns hilfst." }
+    SUB "nb408" { TEXT "Gut. Ich kann dir nicht sagen, woher wir ihn haben, aber: Nimm diesen SchlÅssel! Du brauchst ihn vielleicht." }
+    SUB "nb410" { TEXT "Verhindere das Ritual. Ich erwarte Dich am Kanal, mit der Bezahlung." }
+}
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb401" { TEXT "HÅter!..." }
+}
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb403" { TEXT "Und?" }
+    SUB "nb405" { TEXT "Das ist dann wohl euer Problem, nicht meins." }
+    SUB "nb407" { TEXT "Nochmal 5000? Ihr mÅsst verzweifelt sein... aber ich kînnte das Geld gebrauchen." }
+}
+
+// Scene 5: The ritual
+{
+    TYPE "convo"
+    DESCR "di Rupo, singend"
+    SUB "nb500" { TEXT "Die Hand trÑgt das Wasser, um den schlafenden Propheten zu wecken." }
+    SUB "nb501" { TEXT "Die Knochen zum Fleisch, in seinen neuen Kîrper..." }
+    SUB "nb502" { TEXT "Auf den FÅ·en soll er stehen, darunter die Erde..." }
+    SUB "nb503" { TEXT "Wachsen wie die BÑume soll er, stark und grÅn..." }
+    SUB "nb504" { TEXT "Erwache in der Finsternis. Sei ein Diener der Nacht!" }
+    SUB "nb505" { TEXT "Die Luft fÅlle wieder seine Lungen..." }
+    SUB "nb506" { TEXT "Feuer, brenne! Flamme, spring' heraus! Und tîte die Hammeriten!" }
+}
+{
+    TYPE "convo"
+    DESCR "di Rupo"
+    SUB "nb508" { TEXT "Ja! Ja! Tîte sie alle! (Triumphierendes GelÑchter)" }
+    SUB "nb509" { TEXT "Nein!! Meine Hand! Wo ist meine Hand?! Findet den Dieb!" }
+    SUB "nb510" { TEXT "Wohin ist er verschwunden? NEIIIN! Verrat! Hilfe!" }
+}
+{
+    TYPE "convo"
+    DESCR "Der Prophet"
+    SUB "nb507" { TEXT "(bîses Lachen) Zerstîren! Vernichten! Die Hammeriten sollen sterben!" }
+}
+
+// Scene 6: Ending
+{
+    TYPE "convo"
+    DESCR "Garrett"
+    SUB "nb600" { TEXT "Es hat funktioniert. Das Ritual wurde abgebrochen." }
+    SUB "nb602" { TEXT "Ich glaube, er kommt wieder in Ordnung. Und wo kommt mein Geld?" }
+    SUB "nb605" { TEXT "Nein danke! Ich tat, was ihr wolltet. Jetzt lasst mich in Ruhe!" }
+}
+{
+    TYPE "convo"
+    DESCR "HÅter"
+    SUB "nb601" { TEXT "Und der Anax?" }
+    SUB "nb603" { TEXT "Hier. Und, Garrett - danke!" }
+    SUB "nb604" { TEXT "Du hast dieser Stadt einen grî·eren Dienst erwiesen, als du denkst. Dein Talent ist immer noch au·ergewîhnlich. Wir kînnten damit--" }
+}
+
+// Scene 7: Conversation, Guard and Hammerite
+{
+    TYPE "convo"
+    DESCR "Wache"
+    SUB "nb700" { TEXT "Wir sind also Heiden, ja? Und was geht es Euch an?" }
+    SUB "nb702" { TEXT "Ha! Drohungen gegen die Lady? Schaut Euch um, Hammerit! Alle Wachen hier bezahlt die Lady. Seid vorsichtig mit Euren Worten!" }
+    SUB "nb704" { TEXT "Ihr fÅrchtet uns nicht, sagt Ihr? Unsere Schwerter kînnen es mit Euren Fliegenklatschen aufnehmen! Hier kommt ein Kratzer, den Ihr Eurem hochheiligen Erbauer zeigen kînnt!" }
+}
+{
+    TYPE "convo"
+    DESCR "Hammerit"
+    SUB "nb701" { TEXT "'s geht jeden an, der dem Weg des Erbauers folgt, um die Wurzeln des Unkrauts auszurei·en, das der Schwindler verbreitet - von Gesindel wie Euch bis zu den Reichen, welche oben auf dem HÅgel wohnen!" }
+    SUB "nb703" { TEXT "Ihr und Euresgleichen seid eine Plage, die diese Stadt lang genug heimgesucht hat! Ich fÅrchte keine Kratzer von solchen wie Euch! Unser Weg ist rechtschaffen und vom Erbauer selbst gesegnet!" }
+    SUB "nb705" { TEXT "(Ñchzt) 's ist Euer GlÅck, dass ich mich dringenderen Aufgaben widmen muss, sonst wÅrdet Ihr an diesen Steinen zerschmettert werden! Doch ich werde den Verwalter davon wissen lassen!" }
+}
+
+// Scene 8: Conversation, Benny and Sergeant
+{
+    TYPE "convo"
+    DESCR "Wache"
+    SUB "nb800" { TEXT "Hallo, Wachtmeister! Haben Sie den bîsen Buben gesehen, den wir heute Nacht erwischt haben? Wir haben die Regeln befolgt, haben sein Haus durchsucht und ihn dann gehÑngt." }
+    SUB "nb802" { TEXT "Richtig, Wachtmeister! Er war dabei, am Brunnen 'rumzuhÑngen." }
+    SUB "nb804" { TEXT "Aber er hatte Bîses im Sinn! Das konnte man ihm ansehen! Vielleicht wollte er jemanden ermorden. Also war er dran, richtig?" }
+    SUB "nb806" { TEXT "Oh! ... Sie haben Recht! Der hÑngt ja immer noch 'rum! Ich sperr' ihn dann Åber Nacht in die Zelle!" }
+}
+{
+    TYPE "convo"
+    DESCR "Wachtmeister"
+    SUB "nb801" { TEXT "Ja, deswegen wollte ich dich sprechen. Es gibt da ein Problem... Im Bericht steht, er wurde wofÅr gehÑngt? HERUMLUNGERN?" }
+    SUB "nb803" { TEXT "'RumzuhÑngen? Du kannst nicht einfach einen hÑngen, blo· weil er herumhÑngt, Benny! Wir haben Regeln!" }
+    SUB "nb805" { TEXT "Wenn du weiter so einen Mist baust, sind WIR dran! FÅr's Herumlungern gibt's eine Nacht in den Zellen, nicht am Galgen! Ich werde den Bericht verschwinden lassen, und du lÑsst am Besten den Toten verschwinden! Den kînnen wir da nicht 'rumhÑngen lassen!" }
+    SUB "nb807" { TEXT "Nein, du Rindvieh!! Er ist TOT! Du musst - ach, vergiss es! Ich lass' es Davidson machen. Hau blo· ab! Dich will ich hier auch nicht mehr 'rumhÑngen sehen!" }
+}
+
+// Scene 9: Conversation, Thieves
+{
+    TYPE "convo"
+    DESCR "Erster Dieb"
+    SUB "nb900" { TEXT "Morten braucht ganz schîn lang' da drin. Ob ihm was passiert ist?" }
+    SUB "nb902" { TEXT "Ich? WÅrd' ich ja tun, aber du wei·t doch... ich hab' 'nen lahmen Fu·! Du kannst viel besser klettern - du gehst!" }
+    SUB "nb904" { TEXT "Bin ich nicht! Ich hab' keine Angst! Ich -- hast du das gehîrt? Ich glaub', er kommt 'raus!" }
+}
+{
+    TYPE "convo"
+    DESCR "Zweiter Dieb"
+    SUB "nb901" { TEXT "Kann sein. Vielleicht haben ihn die Fallen erwischt? Warum gehste nich' 'rein und schaust selber nach, wenn's dich so kÅmmert?" }
+    SUB "nb903" { TEXT "\"Ich hab' 'nen lahmen Fu·!\" Du hast blo· Schi·! Ein zitternder, rÅckgratloser Hosenschei·er bist du!" }
+}
+
+// Scene 10: Conversation, Priest and Hammerite
+{
+    TYPE "convo"
+    DESCR "Priester"
+    SUB "nb1000" { TEXT "Des Erbauers Segen sei mit Euch, Bruder! Wie war Eure Wache am Tor?" }
+    SUB "nb1002" { TEXT "Der Zusammensto· heute morgen hat den Wichten wohl eine Lektion erteilt. Doch fÅrchte ich, ihre öberreste verschandeln immer noch das Bildnis des Erbauers, nicht wahr?" }
+}
+{
+    TYPE "convo"
+    DESCR "Hammerit"
+    SUB "nb1001" { TEXT "Recht ruhig. Die Meisten zahlen den Zoll jetzt ohne Streit." }
+    SUB "nb1003" { TEXT "Leider. Ich werde Bruder Lionel um Hilfe bitten. Bis morgen wird das entfernt sein!" }
+}
+
+// Scene 11: Conversation, Benny and Guard
+{
+    TYPE "convo"
+    DESCR "Erste Wache"
+    SUB "nb1100" { TEXT "Also, wieso lÑsst uns die alte Dame denn nicht in den Turm? Von da oben kînnte man Pfeile meilenweit schie·en!" }
+    SUB "nb1102" { TEXT "Ja, das wÑr'... He, Moment mal! SO dick bin ich nun auch wieder nicht!" }
+}
+{
+    TYPE "convo"
+    DESCR "Zweite Wache"
+    SUB "nb1101" { TEXT "Befehle sind dazu da, um befolgt zu werden, Benny, nicht um sie zu hinterfragen. Au·erdem... der Turm ist Hunderte von Jahren alt. Der bricht vielleicht zusammen, wenn du nur einen Fu· hinein setzt." }
+}
+
+// OM Garrett lines
+{
+    TYPE "player"
+    DESCR "Garrett"
+    SUB    "garm0409" { TEXT "Geht ziemlich tief 'runter..." }
+    SUB    "garm0901" { TEXT "Was haben wir denn da?" }
+}
+
+// OM guard line
+{
+    TYPE "convo"
+    DESCR "Wachtmeister"
+    SUB "sg1c3701" { TEXT "Ich HASSE die Nachtwache!" }
+}
+
+// OM conv, servants
+{
+    TYPE "convo"
+    DESCR "Diener"
+    SUB    "sv1c0701" { TEXT "Heute frÅh auf dem Marktplatz war es *schrecklich*." }
+    SUB    "sv1c0703" { TEXT "Da hatte sich ein Haufen Hammeriten zusammengerottet. Die haben wie die Wîlfe einen Kerl umkreist..." }
+    SUB    "sv1c0705" { TEXT "Nein! Ich bin fortgelaufen! Ich will sie doch nicht auf mich aufmerksam machen! Hat ewig gedauert, den Markt zu umgehen." }
+}
+{
+    TYPE "convo"
+    DESCR "Dienerin"
+    SUB    "sv2c0702" { TEXT "Ich hab' gesehen, dass du ziemlich spÑt zurÅckgekommen bist." }
+    SUB    "sv2c0704" { TEXT "Bist du dort geblieben und hast es dir angesehen?" }
+}
+
+// OM conv, guards
+{
+    TYPE "convo"
+    DESCR "Wachtmeister"
+    SUB    "Sg2c2001" { TEXT "Also, wie ich dir gestern sagte: Du musst den Kerl verletzen! Nicht umhauen oder ihm den Kopf streicheln!" }
+    SUB    "Sg2c2003" { TEXT "Ihm nur auf die Schulter hauen, das hÑlt ihn hîchstens auf. Ziel' auf den Bauch oder tiefer, dort ist die RÅstung meistens schwÑcher!" }
+}
+{
+    TYPE "convo"
+    DESCR "Wache"
+    SUB    "Sg3c2002" { TEXT "*Was* soll ich nich' tun?" }
+    SUB    "Sg3c2004" { TEXT "Die Hammeriten haben's gut! Machen die Kerle mit den Dingern platt." }
+}
+
+// Significant sound effects
+{
+    // Mausoleum creaking
+    TYPE "fx"
+    DESCR "(lautes Knarren)"
+    SUB "squeaks1" {}
+}
+{
+    // Mausoleum wind
+    TYPE "fx"
+    DESCR "(ein Windsto·)"
+    SUB "wind1" {}
+    SUB "wind3" {}
+    SUB "wind4" {}
+}
+{
+    // Mausoleum sigh
+    TYPE "fx"
+    DESCR "(langgezogener Seufzer)"
+    SUB "whgasp" {}
+}
+{
+    // Catacombs sigh
+    TYPE "fx"
+    DESCR "(Seufzen)"
+    SUB "vbreath" {}
+}
+{
+    // Manor burrick
+    TYPE "fx"
+    DESCR "(ein Burrick schreit)"
+    SUB "bk1die_2" {}
+}

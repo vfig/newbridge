@@ -1,0 +1,10 @@
+; Sanctuary - sign beside the Warden's room (now occupied by the priest)
+
+no_trim: "1"
+
+Page_0:
+"         Bruder Darios
+Verwalter des Heiligtums
+
+Der Hammer ist das heiligste aller Werke des Erbauers:
+'s ist sowohl ein Werkzeug zum Bauen als auch eine Waffe gegen deine Feinde."

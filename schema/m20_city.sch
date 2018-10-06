@@ -38,47 +38,134 @@ buzzer
 
 // -------------------------- AMBIENCE ----------------------------
 
-// City streets ambience 1 (room tone)
-schema m20citytone
-archetype AMB_M20
-volume -3000
-mono_loop 0 0
-diffuse
-// -- I don't much like this as a tone... it's got a recurrent 'tick' that's distracting
+// 1. At mission start
 
-schema m20cityloop
+// City streets 1 outdoor room tone
+schema m20city1loop
+archetype AMB_M20
+volume -1000
+mono_loop 0 0
+lostcity
+
+// City streets 1 outdoor ambience (crickets)
+schema m20city1mood
+archetype AMB_M20
+volume -1500
+mono_loop 0 0
+cricket2
+
+// City streets 1 tension (organ)
+// At mission start.
+schema m20city1ten
+archetype AMB_M20
+volume -1000
+mono_loop 10000 20000
+delay 8000
+no_repeat
+organ1
+organ2
+
+// 2. After not finding Argaux at the fountain, or after learning he's dead.
+
+// City streets 2 tension (deep strings)
+schema m20city2ten
+archetype AMB_M20
+volume -500
+mono_loop 8000 12000
+no_repeat
+pascal1
+pascal2
+
+
+// - Inside Argaux's place -
+
+// Argaux's place indoor room tone
+schema m20argloop
+archetype AMB_M20
+volume -1000
+mono_loop 0 0
+subson2
+
+// Argaux's place indoor ambience
+schema m20argmood
+archetype AMB_M20
+volume -750
+mono_loop 5000 5000
+tonebend
+
+
+// 3. After getting your objectives
+
+// City streets 3 outdoor room tone
+schema m20city3loop
+archetype AMB_M20
+volume -1500
+mono_loop 0 0
+abyss2
+
+// City streets 3 outdoor ambience (crickets)
+schema m20city3mood
 archetype AMB_M20
 volume -2000
-mono_loop 30000 120000
+mono_loop 0 0
+cricket2
+
+// City streets 3 tension (strings)
+// At mission start.
+schema m20city3ten
+archetype AMB_M20
+volume -500
+poly_loop 2 3000 10000
+no_repeat
 fb1 fb2 fb3 fb4
 
-//// Catacombs ambience 1 (room tone)
-//schema m20catatone
-//archetype AMB_M20
-//volume -1000
-//mono_loop 0 0
-//cavetone
-//
-//// Catacombs ambience 2 (voices)
-//schema m20catavoice
-//archetype AMB_M20
-//volume -1500
-//mono_loop 10000 20000
-//delay 5000
-//no_repeat
-//pan_range 3000
-//mgbab1 mgbab2 mgbab3 mgbab4 mgbab5
-//
-//// Catacombs ambience 3 (nervous loop)
-//schema m20cataloop1
-//archetype AMB_M20
-//volume -1000
-//mono_loop 0 0
-//humfire
-//
-//// Catacombs ambience 4 (tension loop)
-//schema m20cataloop2
-//archetype AMB_M20
-//volume -1000
-//mono_loop 0 0
-//loloop2
+
+// 4. Going to the hand-off
+
+// City streets 4 outdoor ambience (wind)
+schema m20city4mood
+archetype AMB_M20
+volume -500
+mono_loop 1000 4000
+wind1 wind2 wind3
+
+
+// - Behind the fishmongers -
+
+// Fishmongers indoor room tone
+schema m20fishloop
+archetype AMB_M20
+volume -1000
+mono_loop 0 0
+subson2
+
+// Fishmongers indoor ambience
+schema m20fishmood
+archetype AMB_M20
+volume -750
+mono_loop 5000 5000
+tonebend
+
+
+// 5. Mission complete, right? ... right?
+schema m20city5loop
+archetype AMB_M20
+volume -500
+mono_loop 0 0
+diffuse
+
+
+// 6. Keeper intervention
+
+schema m20city6mood
+archetype AMB_M20
+volume -1000
+mono_loop 1000 4000
+wind1lo wind2lo wind3lo
+
+schema m20city6ten
+archetype AMB_M20
+volume -500
+mono_loop 8000 12000
+no_repeat
+m04cat1b m04cat1c m04cat2b

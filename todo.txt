@@ -5,7 +5,7 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-- Integrate German translation into beta 2.
+- Integrate Italian translation into beta 2.
 
 - Update maus_thiefscroll for translations! Ensure the decal is appropriately placed, and there's no more hints than necessary.
 

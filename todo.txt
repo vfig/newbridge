@@ -5,6 +5,12 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
+- Ambiences for:
+    - Manor grounds (plot variation)
+    - Manor interior
+    - Caves (during + after ritual)
+    - Ritual chamber (during + after)
+
 - Integrate Italian translation into beta 2.
 
 - Change German title to "Ein netter Profit" (short, "Netter Profit")

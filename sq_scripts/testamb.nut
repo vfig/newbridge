@@ -4,6 +4,10 @@ class TestAmbient extends SqRootScript
         return "silenc9s";
     }
 
+    function ShouldDestroy() {
+        return false;
+    }
+
     function OnTurnOn() {
         //local success = Sound.PlayEnvSchema(self, string Tags, object SourceObject = 0, object AgentObject = 0, eEnvSoundLoc loc = kEnvSoundOnObj);
         local schema = Schema();
@@ -21,6 +25,10 @@ class TestAmbient extends SqRootScript
         local schema = message().name;
         local pos = message().coordinates;
         print(">> finished " + schema + " at " + pos);
+        if (ShouldDestroy()) {
+            print(">> destroying " + self);
+            Object.Destroy(self);
+        }
     }
 }
 
@@ -49,5 +57,16 @@ class TestAmbient4 extends TestAmbient
 {
     function Schema() {
         return "m20city3ten";
+    }
+}
+
+class TestAmbientHit extends TestAmbient
+{
+    function Schema() {
+        return "nbritabort";
+    }
+
+    function ShouldDestroy() {
+        return true;
     }
 }

@@ -35,6 +35,13 @@ archetype AMB_M20
 volume -1000
 buzzer
 
+// Shrine
+schema m20shrine
+archetype AMB_M20
+volume -1000
+mono_loop 500 500
+no_repeat
+singing1 singing2
 
 // -------------------------- AMBIENCE ----------------------------
 

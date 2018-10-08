@@ -96,7 +96,7 @@ subson2
 // Argaux's place indoor ambience
 schema m20argmood
 archetype AMB_M20
-volume -750
+volume -1500
 mono_loop 5000 5000
 tonebend
 

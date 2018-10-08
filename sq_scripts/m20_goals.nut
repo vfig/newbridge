@@ -222,7 +222,6 @@ local Goal = {
     IsMonologueDone = function(monologue) {
         return (Quest.Get("mlog_done_" + monologue) == 1);
     }
-
 };
 
 
@@ -244,6 +243,11 @@ class GoalArgauxsBody extends SqRootScript
             Goal.Show(eGoals.kFindArgauxsInfauxs);
             Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
             Goal.CancelMonologue(eMonologues.kFoundArgauxsBodyLater);
+
+            local controller = Object.Named("AmbienceController");
+            if (controller != 0) {
+                PostMessage(controller, "ProgressChange", eAmbienceProgress.kWhereIsArgaux);
+            }
         } else {
             // If the player already knew Argaux is dead, just react verbally.
             Goal.CancelMonologue(eMonologues.kFoundArgauxsBody);
@@ -287,7 +291,14 @@ class GoalTheFountain extends SqRootScript
 
     function OnPlayerRoomEnter()
     {
-        Goal.SpeakMonologue(eMonologues.kWhereIsArgaux);
+        if (! Goal.IsMonologueDone(eMonologues.kWhereIsArgaux)) {
+            Goal.SpeakMonologue(eMonologues.kWhereIsArgaux);
+
+            local controller = Object.Named("AmbienceController");
+            if (controller != 0) {
+                PostMessage(controller, "ProgressChange", eAmbienceProgress.kWhereIsArgaux);
+            }
+        }
     }
 }
 
@@ -306,6 +317,11 @@ class GoalSeizureNotice extends SqRootScript
             Goal.Show(eGoals.kFindArgauxsInfauxs);
             Goal.SpeakMonologue(eMonologues.kFoundArgauxsBody);
             Goal.CancelMonologue(eMonologues.kFoundArgauxsBodyLater);
+
+            local controller = Object.Named("AmbienceController");
+            if (controller != 0) {
+                PostMessage(controller, "ProgressChange", eAmbienceProgress.kWhereIsArgaux);
+            }
         } else {
             // If the player already knew Argaux is dead, just react verbally.
             Goal.CancelMonologue(eMonologues.kFoundArgauxsBody);
@@ -334,6 +350,11 @@ class GoalArgauxsInfauxs extends SqRootScript
         Goal.Show(eGoals.kKidnapTheAnax);
         Goal.Show(eGoals.kStealTheHand);
         Goal.Show(eGoals.kDeliverTheItems);
+
+        local controller = Object.Named("AmbienceController");
+        if (controller != 0) {
+            PostMessage(controller, "ProgressChange", eAmbienceProgress.kGotTheJob);
+        }
     }
 }
 
@@ -363,6 +384,11 @@ class GoalDiRuposInfos extends SqRootScript
         Goal.Show(eGoals.kKidnapTheAnax);
         Goal.Show(eGoals.kStealTheHand);
         Goal.Show(eGoals.kDeliverTheItems);
+
+        local controller = Object.Named("AmbienceController");
+        if (controller != 0) {
+            PostMessage(controller, "ProgressChange", eAmbienceProgress.kGotTheJob);
+        }
     }
 }
 
@@ -440,8 +466,24 @@ class GoalKidnapTheAnax extends WhenPlayerCarrying
             // Tick this off even if these objectives aren't visible yet
             Goal.Complete(eGoals.kKidnapTheAnax);
         }
+
+        // Update the ambience when we have both items
+        if (Goal.IsVisible(eGoals.kKidnapTheAnax)
+            && Goal.IsComplete(eGoals.kKidnapTheAnax)
+            && Goal.IsVisible(eGoals.kStealTheHand)
+            && Goal.IsComplete(eGoals.kStealTheHand))
+        {
+            local controller = Object.Named("AmbienceController");
+            if (controller != 0) {
+                PostMessage(controller, "ProgressChange", eAmbienceProgress.kGotTheItems);
+            }
+        }
     }
 
+    /* Disabling this, cause for players with TFix it causes
+       a new "Objective Complete" ding every time they pick
+       him up. Ugh. */
+    /*
     function OnPlayerDropped()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
@@ -449,6 +491,7 @@ class GoalKidnapTheAnax extends WhenPlayerCarrying
             Goal.Activate(eGoals.kKidnapTheAnax);
         }
     }
+    */
 }
 
 
@@ -490,7 +533,8 @@ class GoalMausPuzzleFailure extends SqRootScript
             Goal.SpeakMonologue(eMonologues.kPuzzleFailed1);
         } else if (count == 2) {
             Goal.SpeakMonologue(eMonologues.kPuzzleFailed2);
-        } else if (count == 3) {
+        } else if (count == 4) {
+            // Yep, four. At three, Garrett is silent.
             Goal.SpeakMonologue(eMonologues.kPuzzleFailed3);
         }
     }
@@ -530,8 +574,24 @@ class GoalStealTheHand extends WhenPlayerCarrying
             // Tick this off even if these objectives aren't visible yet
             Goal.Complete(eGoals.kStealTheHand);
         }
+
+        // Update the ambience when we have both items
+        if (Goal.IsVisible(eGoals.kKidnapTheAnax)
+            && Goal.IsComplete(eGoals.kKidnapTheAnax)
+            && Goal.IsVisible(eGoals.kStealTheHand)
+            && Goal.IsComplete(eGoals.kStealTheHand))
+        {
+            local controller = Object.Named("AmbienceController");
+            if (controller != 0) {
+                PostMessage(controller, "ProgressChange", eAmbienceProgress.kGotTheItems);
+            }
+        }
     }
 
+    /* Disabling this, cause for players with TFix it causes
+       a new "Objective Complete" ding every time they pick
+       him up. Ugh. */
+    /*
     function OnPlayerDropped()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
@@ -539,6 +599,7 @@ class GoalStealTheHand extends WhenPlayerCarrying
             Goal.Activate(eGoals.kStealTheHand);
         }
     }
+    */
 }
 
 
@@ -645,6 +706,11 @@ class GoalDeliveryDiRupo extends SqRootScript
         Goal.Complete(eGoals.kKidnapTheAnax);
         Goal.Complete(eGoals.kStealTheHand);
         Goal.Complete(eGoals.kDeliverTheItems);
+
+        local controller = Object.Named("AmbienceController");
+        if (controller != 0) {
+            PostMessage(controller, "ProgressChange", eAmbienceProgress.kTimeToGoHome);
+        }
    }
 }
 
@@ -700,6 +766,11 @@ class GoalPullTheStrings extends SqRootScript
 
         // And the keeper does his vanishing act
         SendMessage(self, "TurnOff");
+    
+        local controller = Object.Named("AmbienceController");
+        if (controller != 0) {
+            PostMessage(controller, "ProgressChange", eAmbienceProgress.kStopTheRitual);
+        }
     }
 }
 
@@ -814,6 +885,13 @@ class GoalStopTheRitualByForce extends SqRootScript
             if (Goal.IsActive(eGoals.kStopTheRitual)) {
                 Goal.Complete(eGoals.kStopTheRitual);
                 Goal.Show(eGoals.kEscapeWithTheAnax);
+
+                Sound.PlaySchemaAmbient(0, "nbritabort");
+
+                local controller = Object.Named("AmbienceController");
+                if (controller != 0) {
+                    PostMessage(controller, "ProgressChange", eAmbienceProgress.kAllDoneNow);
+                }
             }
         }
     }
@@ -829,6 +907,13 @@ class GoalStopTheRitualByTheft extends WhenPlayerCarrying
         if (Goal.IsActive(eGoals.kStopTheRitual)) {
             Goal.Complete(eGoals.kStopTheRitual);
             Goal.Show(eGoals.kEscapeWithTheAnax);
+
+            Sound.PlaySchemaAmbient(0, "nbritabort");
+
+            local controller = Object.Named("AmbienceController");
+            if (controller != 0) {
+                PostMessage(controller, "ProgressChange", eAmbienceProgress.kAllDoneNow);
+            }
         }
     }
 }
@@ -911,23 +996,6 @@ class GoalEscapeWithTheAnax extends WatchForItems
             Goal.SpeakMonologue(eMonologues.kSafePlaceForAnax);
         }
     }
-}
-
-
-class GoalReturnTheAnax extends SqRootScript
-{
-    /* Put this on the concrete room where the Anax should be delivered to the sanctuary.
-
-       On the ritual Anax, put ItemToDeliver script, with a ScriptParams("DeliveryRoom") link
-       to the room. */
-
-    // CUT!
-    // function OnItemDelivered()
-    // {
-    //     local item = message().data;
-    //     Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
-    //     Goal.Complete(eGoals.kReturnTheAnax);
-    // }
 }
 
 

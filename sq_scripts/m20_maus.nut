@@ -399,3 +399,23 @@ class AutoRelight extends SqRootScript
         }
     }
 }
+
+class CatacombsAmbienceHack extends SqRootScript
+{
+    function OnTurnOn() {
+        SetAmbience("catacombs2");
+    }
+
+    function OnTurnOff() {
+        SetAmbience("catacombs");
+    }
+
+    function SetAmbience(region) {
+        local room = Object.Named("RoomCatacombs");
+        if (room == 0) { print("XXXXXX Can't find RoomCatacombs"); return; }
+        Property.Set(room, "Ambient", "Schema Name", region)
+        local controller = Object.Named("AmbienceController");
+        if (controller == 0) return;
+        PostMessage(controller, "RegionChange", region);
+    }
+}

@@ -5,12 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- The 1;255 thing in Argaux's secret room doesn't work until we pick up the map -- it highlights rich street east instead!
-    - Should remove default 0;255 / 1;255, and just have NO automap property on "default location" rooms
-        - Should probably actually add all "default location" rooms to the map, really. But that can wait until I do the proper map.
-    - Then frobbing the map should set map_cur_page 1 after it sets map_max_page, then I think
-      that'll show the right page?
-
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
 - Remove sanctuary front secret door - it's now wooden :D
@@ -18,8 +12,6 @@ FIX BEFORE BETA 2
 - Priest's patrol path takes him out the hallway door of vestibule, I don't want that.
 
 - Picked up a quiver when had no broadheads, and All my broadhead arrows now looked like [i]quivers[/i] - while aiming (blocking out half of my vision), while shooting, and also if they stuck in wood after shooting.
-
-- "if I drop the Anax in [the delivery room], I can't pick him up and it unchecks the Anax objective." -- it shouldn't untick the objective at this point, since you've done the job.
 
 - Should the Warden's nameplate have a quotation or not?
 

@@ -4,8 +4,7 @@ enum eAmbienceProgress {
     kMissionStart,
     kWhereIsArgaux,
     kGotTheJob,
-    kGotTheHand,
-    kGotThemBoth,
+    kGotTheItems,
     kTimeToGoHome,
     kStopTheRitual,
     kAllDoneNow,
@@ -22,7 +21,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20city1loop", "m20city1mood", "m20city1ten"],
             /* argaux? */  ["m20city1loop", "m20city1mood", "m20city2ten"],
             /* the job */  ["m20city3loop", "m20city3mood", "m20city3ten"],
-            /* got hand */ ["m20city3loop", "m20city3mood", "m20city3ten"],
             /* got both */ ["m20city3loop", "m20city4mood", "m20city3ten"],
             /* go home? */ ["m20city5loop", "m20city4mood", "m20city5ten"],
             /* ritual */   ["m20city5loop", "m20city6ten"],
@@ -32,7 +30,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20argloop", "m20argmood", "m20city1ten"],
             /* argaux? */  ["m20argloop", "m20argmood", "m20city2ten"],
             /* the job */  ["m20argloop", "m20argmood", "m20city3ten"],
-            /* got hand */ ["m20argloop", "m20argmood", "m20city3ten"],
             /* got both */ ["m20argloop", "m20argmood", "m20city3ten"],
             /* go home? */ ["m20argloop", "m20argmood", "m20city5ten"],
             /* ritual */   ["m20argloop", "m20argmood", "m20city6ten"],
@@ -42,7 +39,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20city1loop", "m20city1mood", "m20city1ten"],
             /* argaux? */  ["m20city1loop", "m20city1mood", "m20city2ten"],
             /* the job */  ["m20fishloop", "m20fishmood"],
-            /* got hand */ ["m20fishloop", "m20fishmood"],
             /* got both */ ["m20fishloop", "m20fishmood"],
             /* go home? */ ["m20fishloop", "m20fishmood"],
             /* ritual */   ["m20fishloop", "m20fishmood", "m20city6ten"],
@@ -52,7 +48,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20ceme1loop", "m20city1mood", "m20city1ten"],
             /* argaux? */  ["m20ceme1loop", "m20city1mood", "m20city2ten"],
             /* the job */  ["m20ceme1loop", "m20city3mood", "m20city3ten"],
-            /* got hand */ ["m20ceme1loop", "m20city3mood", "m20city3ten"],
             /* got both */ ["m20ceme1loop", "m20city4mood", "m20city3ten"],
             /* go home? */ ["m20ceme1loop", "m20city4mood", "m20city5ten"],
             /* ritual */   ["m20ceme1loop", "m20city6ten"],
@@ -62,7 +57,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20maustone", "m20mausmood"],
             /* argaux? */  ["m20maustone", "m20mausmood"],
             /* the job */  ["m20maustone", "m20mausmood"],
-            /* got hand */ ["m20maustone", "m20mausmood"],
             /* got both */ ["m20maustone", "m20mausmood"],
             /* go home? */ ["m20maustone", "m20mausmood"],
             /* ritual */   ["m20maustone", "m20mausmood"],
@@ -72,17 +66,24 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20catatone", "m20cataloop1", "m20catavoice"],
             /* argaux? */  ["m20catatone", "m20cataloop1", "m20catavoice"],
             /* the job */  ["m20catatone", "m20cataloop1", "m20catavoice"],
-            /* got hand */ ["m20catatone", "m20cataloop2"],
+            /* got both */ ["m20catatone", "m20cataloop1", "m20catavoice"],
+            /* go home? */ ["m20catatone", "m20cataloop1", "m20catavoice"],
+            /* ritual */   ["m20catatone", "m20cataloop1", "m20catavoice"],
+            /* all done */ ["m20catatone"],
+        ],
+        CATACOMBS2 = [
+            /* start */    ["m20catatone", "m20cataloop2"],
+            /* argaux? */  ["m20catatone", "m20cataloop2"],
+            /* the job */  ["m20catatone", "m20cataloop2"],
             /* got both */ ["m20catatone", "m20cataloop2"],
             /* go home? */ ["m20catatone", "m20cataloop2"],
             /* ritual */   ["m20catatone", "m20cataloop2"],
-            /* all done */ ["m20catatone", "m20cataloop1"],
+            /* all done */ ["m20catatone"],
         ],
         SANCT_EXT = [
             /* start */    ["m20city1loop", "m20city1mood", "m20sanct1ten"],
             /* argaux? */  ["m20city1loop", "m20city1mood", "m20sanct1ten"],
             /* the job */  ["m20city3loop", "m20city3mood", "m20sanct1ten"],
-            /* got hand */ ["m20city3loop", "m20city3mood", "m20sanct1ten"],
             /* got both */ ["m20city3loop", "m20city4mood", "m20sanct1ten"],
             /* go home? */ ["m20city5loop", "m20city4mood", "m20sanct1ten"],
             /* ritual */   ["m20city5loop", "m20city6ten", "m20sanct1ten"],
@@ -92,7 +93,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20sanct1loop", "m20sanct1ten"],
             /* argaux? */  ["m20sanct1loop", "m20sanct1ten"],
             /* the job */  ["m20sanct1loop", "m20sanct1ten"],
-            /* got hand */ ["m20sanct1loop", "m20sanct1ten"],
             /* got both */ ["m20sanct1loop", "m20sanct1ten"],
             /* go home? */ ["m20sanct1loop", "m20sanct1ten"],
             /* ritual */   ["m20sanct1loop", "m20sanct1ten"],
@@ -102,7 +102,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20sanct2loop", "m20sanct2ten"],
             /* argaux? */  ["m20sanct2loop", "m20sanct2ten"],
             /* the job */  ["m20sanct2loop", "m20sanct2ten"],
-            /* got hand */ ["m20sanct2loop", "m20sanct2ten"],
             /* got both */ ["m20sanct2loop", "m20sanct2ten"],
             /* go home? */ ["m20sanct2loop", "m20sanct2ten"],
             /* ritual */   ["m20sanct2loop", "m20sanct2ten"],
@@ -112,7 +111,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20sanct2loop", "m20sanct3ten"],
             /* argaux? */  ["m20sanct2loop", "m20sanct3ten"],
             /* the job */  ["m20sanct2loop", "m20sanct3ten"],
-            /* got hand */ ["m20sanct2loop", "m20sanct3ten"],
             /* got both */ ["m20sanct2loop", "m20sanct3ten"],
             /* go home? */ ["m20sanct2loop", "m20sanct3ten"],
             /* ritual */   ["m20sanct2loop", "m20sanct3ten"],
@@ -122,7 +120,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20man1loop", "m20city1mood", "m20city1ten"],
             /* argaux? */  ["m20man1loop", "m20city1mood", "m20city2ten"],
             /* the job */  ["m20man1loop", "m20city3mood", "m20city3ten"],
-            /* got hand */ ["m20man1loop", "m20city3mood", "m20city3ten"],
             /* got both */ ["m20man1loop", "m20city4mood", "m20city3ten"],
             /* go home? */ ["m20man5loop", "m20city4mood", "m20city5ten"],
             /* ritual */   ["m20man5loop", "m20city6ten"],
@@ -132,7 +129,6 @@ class AmbienceController extends SqRootScript
             /* start */    ["m20man1loop", "m20manintmood", "m20manintten"],
             /* argaux? */  ["m20man1loop", "m20manintmood", "m20manintten"],
             /* the job */  ["m20man1loop", "m20manintmood", "m20manintten"],
-            /* got hand */ ["m20man1loop", "m20manintmood", "m20manintten"],
             /* got both */ ["m20man1loop", "m20manintmood", "m20manintten"],
             /* go home? */ ["m20man1loop", "m20manintmood", "m20manintten"],
             /* ritual */   ["m20man5loop", "m20manintmood", "m20manintten"],
@@ -142,7 +138,6 @@ class AmbienceController extends SqRootScript
             /* start */    [],
             /* argaux? */  [],
             /* the job */  [],
-            /* got hand */ [],
             /* got both */ [],
             /* go home? */ [],
             /* ritual */   ["m20man5loop", "m20cave7mood", "m20city6ten"],
@@ -152,7 +147,6 @@ class AmbienceController extends SqRootScript
             /* start */    [],
             /* argaux? */  [],
             /* the job */  [],
-            /* got hand */ [],
             /* got both */ [],
             /* go home? */ [],
             /* ritual */   ["m20cave5loop", "m20cave5mood", "m20cave5ten"],
@@ -162,7 +156,6 @@ class AmbienceController extends SqRootScript
             /* start */    [],
             /* argaux? */  [],
             /* the job */  [],
-            /* got hand */ [],
             /* got both */ [],
             /* go home? */ [],
             /* ritual */   ["m20ritualloop", "m20cave5mood", "m20cave5ten"],
@@ -203,7 +196,7 @@ class AmbienceController extends SqRootScript
     }
 
     function OnRegionChange() {
-        local region = message().data;
+        local region = message().data.toupper();
         Fillip(region, CurrentProgress());
     }
 
@@ -215,19 +208,17 @@ class AmbienceController extends SqRootScript
     }
 
     function OnProgressChange() {
-        // FIXME: need another object to monitor quest vars
-        // and translate them into progress
-        // FIXME: just realised GotTheHand needs to be an
-        // orthogonal variable, since you _can_ go get it
-        // before you have any reason to--and we need the
-        // catacombs ambience to change accordingly.
-        // We _could_ just change the Ambience property on
-        // the Catacomb room and trigger a fillip?
-    }
-
-    function OnSchemaDone() {
-        // FIXME: remove me
-        print("Schema " + message().name + " stopped.");
+        local progress = message().data;
+        if (progress < eAmbienceProgress.kMissionStart) {
+            progress = eAmbienceProgress.kMissionStart;
+        }
+        if (progress > eAmbienceProgress.kAllDoneNow) {
+            progress = eAmbienceProgress.kAllDoneNow;
+        }
+        // Always forward, never left or right--let alone back!
+        if (progress > CurrentProgress()) {
+            Fillip(CurrentRegion(), progress);
+        }
     }
 
     function Fillip(region, progress) {
@@ -293,13 +284,11 @@ class AmbienceController extends SqRootScript
         }
         // Finally, stop samples that need stopping
         foreach (s, _ in stop_samples) {
-            local result = Sound.HaltSchema(self, s, self /* FIXME: remove callback */);
-            print("Stopping schema " + s + ": " + result);
+            local result = Sound.HaltSchema(self, s);
         }
         // And start those that need starting
         foreach (s, _ in start_samples) {
             local result = Sound.PlaySchemaAmbient(self, s);
-            print("Starting schema " + s + ": " + result);
         }
     }
 }
@@ -319,10 +308,9 @@ class PlayerAmbienceWatcher extends SqRootScript
         if ((room != 0) 
             && (Property.Possessed(room, "Ambient")))
         {
-            region = Property.Get(room, "Ambient", "Schema Name").toupper();
+            region = Property.Get(room, "Ambient", "Schema Name");
         }
 
-        print("Player did enter room " + Object_Description(room));
         PostMessage(controller, "RegionChange", region);
     }
 }

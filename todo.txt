@@ -7,8 +7,6 @@ BETA 2 (October)
 
 - Hammerite map is wrong: door for library should be on the North, and the armoury on the South.
 
--- need script on player, that when entering room checks newmap design note on new room, and sets it as automap property if max map page is in range
-
 - Integrate Italian translation into beta 2.
 
 - Change German title to "Ein netter Profit" (short, "Netter Profit")
@@ -23,6 +21,7 @@ BETA 2 (October)
 - Detail
     - Caves and ritual chamber?
         - So far _nobody_ has noticed the alternative entrance.
+            - that's okay, but maybe make it available on all difficulties?
 
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
@@ -57,9 +56,6 @@ BETA 2 (October)
 
 - Sounds
     - Incidental sounds (machinery, water, etc)
-    - Ambience plan
-    - Ambience schemas (test them with a tool? or just a new test map and reload_schemas?)
-    - Add Environmental AmbientHacked entities for ambiences
 
 - Proper VO
     - Process and normalise

@@ -1,0 +1,90 @@
+; NOTE FOR TRANSLATORS: the goals with '(CUT)' at the start were cut
+; from the mission and are no longer used. You can skip them.
+
+; 0: MeetArgaux
+fiction_0: "Il tuo contatto, Argaux, ti attende alla fontana. Incontralo li per scoprire di cosa si tratta."
+text_0: "Incontra Argaux alla fontana."
+
+; 1: FindArgauxsInfauxs
+fiction_1: "Vai a casa di Argaux e vedi cosa puoi scoprire."
+text_1: "Vai a casa di Argaux e vedi cosa puoi scoprire."
+
+; 2: KidnapTheAnax
+fiction_2: "Preleva l'Anax di Easthart dal Santuario Hammerita."
+text_2: "Preleva l'Anax di Easthart dal Santuario Hammerita."
+
+; 3: BonusBurrickTrouble
+fiction_3: "(CUT) Distract the Hammerites with the help of some unusual allies."
+text_3: "(CUT) Distract the Hammerites with the help of some unusual allies."
+
+; 4: StealTheHand
+fiction_4: "Ruba la Mano del Profeta dal mausoleo."
+text_4: "Ruba la Mano del Profeta dal mausoleo."
+
+; 5: BonusBanishTheGhost
+fiction_5: "(CUT) Banish the Prophet's apparition, just to be safe."
+text_5: "(CUT) Banish the Prophet's apparition, just to be safe."
+
+; 6: DeliverTheItems
+fiction_6: "Quando avrai entrambi gli oggetti, portali dal pescivendolo per il tuo pagamento."
+text_6: "Quando avrai entrambi gli oggetti, portali dal pescivendolo per il tuo pagamento."
+
+; 7: StopTheRitual
+fiction_7: "Scopri dove la Signora di Rupo sta compiendo il rituale, e fermalo."
+text_7: "Scopri dove la Signora di Rupo sta compiendo il rituale, e fermalo."
+
+; 8: BonusSubvertTheRitual
+fiction_8: "(CUT) That'll interrupt the ritual for sure. Shame about the mess."
+text_8: "(CUT) That'll interrupt the ritual for sure. Shame about the mess."
+
+; 9: EscapeWithTheAnax
+fiction_9: "Porta l'Anax al sicuro fuori dall'area."
+text_9: "Porta l'Anax al sicuro fuori dall'area."
+
+; 10: ReturnTheAnax
+fiction_10: "Salva l'Anax e riportalo al Santuario Hammerita."
+text_10: "Salva l'Anax e riportalo al Santuario Hammerita."
+
+; 11: BonusTerencesHammer
+fiction_11: "(Bonus) Questo antico martello ingioiellato e' una reliquia inestimabile. Ma come il tuo ricettatore sempre dice, qualsiasi cosa ha il suo prezzo."
+text_11: "(Bonus) Questo antico martello ingioiellato e' una reliquia inestimabile. Ma come il tuo ricettatore sempre dice, qualsiasi cosa ha il suo prezzo."
+
+; 12: KeepTheAnaxAlive
+fiction_12: "Non lasciare che l'Anax sia in pericolo."
+text_12: "Non lasciare che l'Anax sia in pericolo."
+
+; 13: DontBiteTheHand
+fiction_13: "Non mordere la mano che ti nutre. Se qualcuno ti deve pagare, proteggilo."
+text_13: "Non mordere la mano che ti nutre. Se qualcuno ti deve pagare, proteggilo."
+
+; 14: LootNormal
+fiction_14: "Newbridge non e' il quartiere piu' ricco, e neppure il piu' sorvegliato. Dovrebbero esserci molte opportunita' per un ladro come te. Trova un bottino di 1000 e fallo tuo."
+text_14: "Mentre sei nel quartiere, raccogli un bottino di 1000."
+
+; 15: LootHard
+fiction_15: "Newbridge non e' il quartiere piu' ricco, ma ci sono ancora facoltosi nobili ed Hammeriti in giro. Utilizzerai i loro preziosi meglio di quanto farebbero loro. Trova un bottino di 1500 e fallo tuo."
+text_15: "Mentre sei nel quartiere, raccogli un bottino di 1500."
+
+; 16: LootExpert
+fiction_16: "Quando visiti una nuova parte della citta' cosa c'e' di meglio che far conoscenza con il territorio... ed il bottino? Raccogli tutto cio' che trovi. Dev'esserci almeno un valore di 2000."
+text_16: "Mentre sei nel quartiere, raccogli un bottino di 2000."
+
+; 17: BonusLootHard
+fiction_17: "FIXME: Ruba un oggetto speciale 1"
+text_17: "FIXME: Ruba un oggetto speciale 1"
+
+; 18: BonusLootExpert
+fiction_18: "FIXME: Ruba un oggetto speciale"
+text_18: "FIXME: Ruba un oggetto speciale 2"
+
+; 19: DontKillBystanders
+fiction_19: "Non uccidere persone disarmate. Tu vuoi il loro denaro, non le loro vite."
+text_19: "Non uccidere persone disarmate."
+
+; 20: DontKillHumans
+fiction_20: "Un ladro della tua abilita' non dovrebbe aver bisogno di violenza per completare il lavoro. Non uccidere nessuno."
+text_20: "Non uccidere nessuno."
+
+; 21: ReturnToTheStart
+fiction_21: "Quando tutto sara' fatto, torna a casa attraverso il canale."
+text_21: "Quando tutto sara' fatto, ritorna al canale dal quale sei partito."

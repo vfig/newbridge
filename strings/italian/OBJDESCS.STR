@@ -1,0 +1,93 @@
+; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+; so you should hopefully have a translation already that you can copy paste.
+; All the new text from this FM is under the heading NEWBRIDGE at the end.
+
+use_blackjack: "Quest'arma mandera' al tappeto un ignaro bersaglio con \
+poco rumore ed alcun sangue."
+
+use_breath: "Questa pozione fornisce alcuni secondi d'aria aggiuntivi \
+mentre si nuota sott'acqua. Costo: 125"        
+
+use_broadhead: "Questa e' una freccia affilata. Costo:25"
+
+use_fire: "Questa freccia esplodera' all'impatto, danneggiando il suo obiettivo e \
+dando fuoco ad oggetti infiammabili come le torce. Non curva in volo, quindi mira \
+con la cima del mirino dell'arco. Costo: 300"
+
+use_flash: "Questa granata produrra' un breve lampo di luce, accecando i nemici \
+che lo guardano - o l'incauto ladro. Costo: 200" 
+
+use_gasarrow: "Questa freccia esplode all'impatto in una nube di gas stordente, facendo \
+addormentare le creature viventi nelle vicinanze. Non curva in volo, \
+quindi mira con la cima del mirino dell'arco. Costo: 500"
+
+use_gasmine: "Quando toccata questa granata esplodera' in una nube di gas stordente, \
+facendo addormentare le creature viventi nelle vicinanze. Costo: 650"
+
+use_healing: "Questa pozione rispristina la salute persa. Costo: 250"
+
+use_holywater: "Questa fiala di liquido consacrato e' una potente protezione \
+contro i morti viventi quando usata sulle tue frecce d'acqua. Costo: 200"
+
+use_lockpick: "Con poco lavoro, questi attrezzi ti faranno aprire molti lucchetti."
+
+use_pricey_lockpick: "Con poco lavoro, questi attrezzi ti faranno aprire molti lucchetti.  Costo: 4000 per la coppia."
+
+
+use_mine: "Quando toccata questa granata produrra' un'ardente esplosione. Costo: 350"
+
+use_moss: "All'impatto questa freccia produce una nube di muschio, che forma un \
+soffice e silenzioso tappeto. Costo: 125"
+
+use_noisemaker: "All' impatto il meccanismo di questa freccia produce uno strano \
+rumore, utile come distrazione. Cost: 250"
+
+use_rope: "Questa freccia si conficchera' nelle superfici legnose rilasciando una corda. \
+Costo: 200"
+
+use_sword: "Oltre a lasciare buchi nel nemico, una spada puo' bloccare \
+l'attacco del nemico."
+
+use_water: "La freccia all'acqua non procura danni, ma spegne le torce ed \
+altri oggetti ardenti. Costo: 50"
+
+use_m9papyrus: "Un conoscente ti vendera' una sua commissione, raccogliere \
+alcune antichita' che potrai trovare in giro per la Citta' Perduta.  Costo: 150"
+
+use_m3holytip: "Un ex-prigioniero di Gragsleft dice di avere delle \
+informazioni sulle miniere infestate. Costo: 100"
+
+use_m3cuttytip: "Qualche domanda ben posta potrebbe rivelare dove gli \
+Hammeritis tengono Cutty. Costo: 300"
+
+use_fakeeye: "Gli Hammeriti costruirono questa replica dell'Occhio come \
+sostituto per il rituale di Constantine."
+
+use_hammertip: "Uno degli Hammeriti vuole offrirti alcune \
+informazioni che ha trovato, ma insiste che tu le paghi - non vuole \
+sporcare la sua anima aiutando un ladro.  Costo: 100"
+
+use_consword: "Questa strana spada nera sembra impedire ad i tuoi nemici \
+di vedere quando l'hai estratta, anche quando stai per \
+colpire." 
+
+use_talismans: "I Talismani di Aria, Terra, Acqua e Fuoco \
+ti permetteranno di eliminare le protezioni della Cattedrale ed aprire la porta."
+
+use_coins: "Le monete per la Tomba del Guardiano."
+                                                                        
+use_speed: "Per un breve periodo questa pozione aumentera' la tua velocita'.  Costo: 500."
+
+use_hallpass: "Una vera lettera di presentazione per un novizio Hammerita, questa dovrebbe farti passare oltre la guardia al cancello."
+use_lckey: "Questa pietra deve aprire il sigillo dei Keeper sulla Citta' Perduta."
+
+use_pickhelp: "Dal momento che vendere attrezzi per ladri senza istruzioni puo' produrre \ ladri arrabbiati, Farkus fornisce un breve \"manuale dell'utente\" per i suoi articoli."
+
+use_m7tip: "Un conoscente vuole venderti alcune pagine di un \
+diario che lui dice appartenuto ad un combattente dei morti viventi.  \
+Costo:200"
+
+
+;NEWBRIDGE
+
+Use_DeckOfCards: "Essere furtivo prevede lunghi, noiosi periodi di immobilismo ed osservazione. Queste cinquantadue amiche ti terranno compagnia. Costo: 10"

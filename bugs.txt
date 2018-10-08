@@ -5,6 +5,11 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- AAAAAAAAAAAAH - somehow for malasdair, the VoiceOfGarrett for the delivery convo fell into the floor! How and why??
+    - And then the conversation doesn't play, and then things just don't work!
+    - perhaps I can simply script the other AI in the conversation to 'play' Garrett's lines for him instead? Would sidestep the need to understand the problem.
+    - alternatively, tp the garrett voice to the conversation when starting it, I suppose, for another workaround.
+
 - Remove sanctuary front secret door - it's now wooden :D
 
 - Priest's patrol path takes him out the hallway door of vestibule, I don't want that.

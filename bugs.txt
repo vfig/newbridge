@@ -10,6 +10,12 @@ FIX BEFORE BETA 2
     - perhaps I can simply script the other AI in the conversation to 'play' Garrett's lines for him instead? Would sidestep the need to understand the problem.
     - alternatively, tp the garrett voice to the conversation when starting it, I suppose, for another workaround.
 
+- The 1;255 thing in Argaux's secret room doesn't work until we pick up the map -- it highlights rich street east instead!
+    - Should remove default 0;255 / 1;255, and just have NO automap property on "default location" rooms
+        - Should probably actually add all "default location" rooms to the map, really. But that can wait until I do the proper map.
+    - Then frobbing the map should set map_cur_page 1 after it sets map_max_page, then I think
+      that'll show the right page?
+
 - Remove sanctuary front secret door - it's now wooden :D
 
 - Priest's patrol path takes him out the hallway door of vestibule, I don't want that.

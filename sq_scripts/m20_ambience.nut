@@ -145,7 +145,7 @@ class AmbienceController extends SqRootScript
             /* got hand */ [],
             /* got both */ [],
             /* go home? */ [],
-            /* ritual */   ["m20cave5loop", "m20cave5mood", "m20city6ten"],
+            /* ritual */   ["m20man5loop", "m20cave7mood", "m20city6ten"],
             /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
         ],
         CAVES = [

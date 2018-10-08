@@ -30,14 +30,14 @@ subson2
 // Manor 5 loop
 schema m20man5loop
 archetype AMB_M20
-volume -1000
+volume -2500
 mono_loop 0 0
 m13str
 
 // Interior mood
 schema m20manintmood
 archetype AMB_M20
-volume -1
+volume -1000
 mono_loop 6280 6280
 no_repeat
 btrem1 btrem3 btrem5

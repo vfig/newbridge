@@ -5,11 +5,7 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-- Ambiences for:
-    - Manor grounds (plot variation)
-    - Manor interior
-    - Caves (during + after ritual)
-    - Ritual chamber (during + after)
+-- need script on player, that when entering room checks newmap design note on new room, and sets it as automap property if max map page is in range
 
 - Integrate Italian translation into beta 2.
 
@@ -43,6 +39,7 @@ BETA 2 (October)
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
     - Hmm.... maybe have the crystals affect the lights??? So you can frob or smash a crystal to disable it, to disable its lights, maybe temporarily? Hmm... Might add the ingredient I was missing. And then the one in the manor becomes a training one that shows you it can be frobbed and it goes quiet+dark temporarily.
+    - Sounds!
 
 - Really need a bell pull in di Rupo's room that triggers the butler's bell.
 
@@ -62,15 +59,11 @@ BETA 2 (October)
     - Ambience schemas (test them with a tool? or just a new test map and reload_schemas?)
     - Add Environmental AmbientHacked entities for ambiences
 
-- City loot
-    - Build new interiors (full detail + room brush) as desired  }- (maybe post-beta)
-    - Randomised loot / difficulty variations?                   }
-
 - Proper VO
     - Process and normalise
     - Remove unused placeholder lines (mostly nb1xx)
 
-- Review which new strings need translating
+DONE. - Review which new strings need translating
     - city_argauxleverair
     - city_argauxleverfire
     - city_argauxleverearth
@@ -93,8 +86,6 @@ BETA 2 (October)
 
 RELEASE (November)
 ==================
-
-- Memorial to Mara (MsLedd) in a small mausoleum in the cemetery.
 
 - Map
     - City map (draw and scan)

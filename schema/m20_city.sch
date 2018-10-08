@@ -26,7 +26,7 @@ turb2lp
 // Mine softly arming
 schema mine_arm_quiet
 archetype AMB_M20
-volume -2000
+volume -1000
 minearmg
 
 // Got Argaux's puzzle wrong
@@ -65,7 +65,7 @@ cricket2
 // At mission start.
 schema m20city1ten
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 10000 20000
 delay 8000
 no_repeat
@@ -77,7 +77,7 @@ organ2
 // City streets 2 tension (deep strings)
 schema m20city2ten
 archetype AMB_M20
-volume -500
+volume -1000
 mono_loop 8000 12000
 no_repeat
 pascal1
@@ -121,7 +121,7 @@ cricket2
 // At mission start.
 schema m20city3ten
 archetype AMB_M20
-volume -500
+volume -2500
 poly_loop 2 3000 10000
 no_repeat
 fb1 fb2 fb3 fb4
@@ -132,7 +132,7 @@ fb1 fb2 fb3 fb4
 // City streets 4 outdoor ambience (wind)
 schema m20city4mood
 archetype AMB_M20
-volume -500
+volume -1500
 mono_loop 1000 4000
 wind1 wind2 wind3
 
@@ -157,13 +157,13 @@ tonebend
 // 5. Mission complete, right? ... right?
 schema m20city5loop
 archetype AMB_M20
-volume -500
+volume -1500
 mono_loop 0 0
 diffuse
 
 schema m20city5ten
 archetype AMB_M20
-volume -750
+volume -2000
 mono_loop 3000 10000
 no_repeat
 fb5 fb6 fb7
@@ -179,7 +179,7 @@ wind1lo wind2lo wind3lo
 
 schema m20city6ten
 archetype AMB_M20
-volume -500
+volume -1500
 mono_loop 8000 12000
 no_repeat
 m04cat1b m04cat1c m04cat2b

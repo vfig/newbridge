@@ -135,8 +135,53 @@ class ActivateMapPageOne extends SqRootScript
             Quest.Set("map_max_page", 1);
         }
 
-        // Show the map
+        // Select page 1, and show the map.
+        Quest.Set("map_cur_page", 1);
         Debug.Command("automap");
+    }
+}
+
+class UpdateAutomap extends SqRootScript
+{
+    /* Put this on a concrete room, or a room archetype. If it has a
+       "newmap" design note that's formatted as "page,location", then
+       it waits for the quest variable "map_max_page" to change. When
+       it does, if it's now >= the newmap page, then replace the
+       automap property with the newmap values.
+
+       Allows rooms to have an appropriate automap property to begin
+       with, then a more specific one as more map pages are found. */
+    function OnBeginScript() {
+        if ("newmap" in userparams()) {
+            Quest.SubscribeMsg(self, "map_max_page");
+        }
+    }
+
+    function OnEndScript() {
+        if ("newmap" in userparams()) {
+            Quest.UnsubscribeMsg(self, "map_max_page");
+        }
+    }
+
+    function OnQuestChange()
+    {
+        if ((message().m_pName == "map_max_page")
+            && (message().m_oldValue != message().m_newValue)
+            && ("newmap" in userparams())
+            && (! IsDataSet("AutomapUpdated")))
+        {
+            local raw = userparams().newmap;
+            local comma = raw.find(",");
+            if (comma != null) {
+                local page = raw.slice(0, comma).tointeger();
+                local loc = raw.slice(comma + 1).tointeger();
+                if (page <= message().m_newValue) {
+                    Property.Set(self, "Automap", "Page", page);
+                    Property.Set(self, "Automap", "Location", loc);
+                    SetData("AutomapUpdated", true);
+                }
+            }
+        }
     }
 }
 

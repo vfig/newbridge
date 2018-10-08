@@ -131,6 +131,11 @@ local Goal = {
     Fail = function(goal) {
         Quest.Set("goal_state_" + goal, 3);
     }
+    IsReverse = function(goal) {
+        local reverse_name = ("goal_reverse_" + goal);
+        return (Quest.Exists(reverse_name)
+            && (Quest.Get(reverse_name) == 1));
+    }
     IsVisible = function(goal) {
         return (Quest.Get("goal_visible_" + goal) == 1);
     }
@@ -734,14 +739,12 @@ class GoalDamnKeepers extends SqRootScript
             local patrol = LinkDest(Link_GetOneScriptParams("Patrol", self));
             local conv = LinkDest(Link_GetOneScriptParams("Conv", self));
             local keeper = LinkDest(Link_GetConversationActor(1, conv));
-            local garrett_voice = LinkDest(Link_GetConversationActor(2, conv));
 
             if (player == 0) { print("Failed to find player!"); return; }
             if (door == 0) { print("Failed to find door!"); return; }
             if (patrol == 0) { print("Failed to find patrol!"); return; }
             if (conv == 0) { print("Failed to find conv!"); return; }
             if (keeper == 0) { print("Failed to find keeper!"); return; }
-            if (garrett_voice == 0) { print("Failed to find garrett_voice!"); return; }
 
             local patrol_pos = Object.Position(patrol);
             local player_pos = Object.Position(player);
@@ -761,7 +764,6 @@ class GoalDamnKeepers extends SqRootScript
 
             // Teleport the actors to the patrol point, and make the keeper face the player.
             Object.Teleport(keeper, patrol_pos, facing);
-            Object.Teleport(garrett_voice, patrol_pos, facing);
 
             // Ensure the keeper will patrol away when the conversation is done
             Link_SetCurrentPatrol(keeper, patrol);
@@ -1045,11 +1047,14 @@ class GoalReturnToTheStart extends SqRootScript
             if ((goal != eGoals.kLootNormal)
                 && (goal != eGoals.kLootHard)
                 && (goal != eGoals.kLootExpert)
+                && (! Goal.IsReverse(goal))
                 && (Goal.IsVisible(goal)))
             {
                 Goal.Cancel(goal)
             }
         }
+        // But we have to complete the ritual to trigger the end.
+        Goal.Complete(eGoals.kStopTheRitual);
 
         // Create a coin for the loot goal
         local coin = Object.Create(Object.Named("GiantCoin"));
@@ -1073,21 +1078,16 @@ class GoalReturnToTheStart extends SqRootScript
             local player = Object.Named("Player");
             local conv = LinkDest(Link_GetOneScriptParams("Conv", self));
             local keeper = LinkDest(Link_GetConversationActor(1, conv));
-            local garrett_voice = LinkDest(Link_GetConversationActor(2, conv));
             local patrol = LinkDest(Link_GetOneScriptParams("Patrol", keeper));
 
             if (player == 0) { print("Failed to find player!"); return; }
             if (conv == 0) { print("Failed to find conv!"); return; }
             if (keeper == 0) { print("Failed to find keeper!"); return; }
-            if (garrett_voice == 0) { print("Failed to find garrett_voice!"); return; }
             if (patrol == 0) { print("Failed to find patrol!"); return; }
 
             local keeper_pos = Object.Position(keeper);
             local player_pos = Object.Position(player);
             local facing = Object.Facing(keeper);
-
-            // Teleport the garrett actors to where the keeper is.
-            Object.Teleport(garrett_voice, keeper_pos, facing);
 
             // Ensure the keeper will patrol away when the conversation is done
             Link_SetCurrentPatrol(keeper, patrol);

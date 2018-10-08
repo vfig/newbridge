@@ -7,13 +7,8 @@ FIX BEFORE BETA 2
 
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
-- Remove sanctuary front secret door - it's now wooden :D
-
-- Priest's patrol path takes him out the hallway door of vestibule, I don't want that.
-
-- Picked up a quiver when had no broadheads, and All my broadhead arrows now looked like [i]quivers[/i] - while aiming (blocking out half of my vision), while shooting, and also if they stuck in wood after shooting.
-
 - Should the Warden's nameplate have a quotation or not?
+    - I think, in the end, not.
 
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
@@ -26,6 +21,7 @@ FIX BEFORE BETA 2
     - "I don't think the blue bricks work well as the roof texture [east main street by hangman square]"
     - "You might want to AlignExt textures in places like this" - textures in drunk archer's tower
     - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
+    - Sky glitches visible from upper street looking towards hammer square.
 
 - Double doors when unlocking: only one unlocks, but both open.
     - Maybe use a single fnordlock for both of them?
@@ -40,11 +36,7 @@ FIX BEFORE BETA 2
 
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
 
-- Market square conv should maybe trigger from Eagle-Eyed Jack's perch.
-
 - When the intervention starts, destroy delivery di rupo and things.
-
-- Dump the canister troll chest in the manor. (but what to replace it with?)
 
 - Need to update ritual script so OnLastBlessing destroys the hand at the right moment.
 
@@ -70,11 +62,6 @@ FIX BEFORE BETA 2
 
 - A few hammerites should have purses or healing potions
 
-- EscapeWithTheAnax doesn't trigger in the alley.
-    - Fix this when doing room brushes.
-
-- Chest in manor library secret room is empty?
-
 - Sanctuary map doesn't show upper walkways
 - Sanctuary map doesn't show bell tower
 
@@ -94,6 +81,7 @@ ONLY IF I FEEL LIKE IT
 
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
+- hammerite sanctuary gate clips into ground.
 
 ----
 

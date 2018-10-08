@@ -78,6 +78,7 @@ FIX BEFORE BETA 2
 - EscapeWithTheAnax doesn't trigger in the alley.
     - Fix this when doing room brushes.
 
+- Chest in manor library secret room is empty?
 
 
 FIX BEFORE RELEASE

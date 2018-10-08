@@ -2,8 +2,15 @@
 
 enum eAmbienceProgress {
     kMissionStart,
-    //... one for each plot variable
-    kRitualStopped,
+    kWhereIsArgaux,
+    kGotTheJob,
+    kGotTheHand,
+    kGotThemBoth,
+    kTimeToGoHome,
+    kStopTheRitual,
+    kAllDoneNow,
+    // The number of progress states
+    kCount,
 }
 
 class AmbienceController extends SqRootScript
@@ -200,8 +207,22 @@ class AmbienceController extends SqRootScript
         Fillip(region, CurrentProgress());
     }
 
+    function OnDebugNextProgress() {
+        local progress = CurrentProgress();
+        progress = (progress + 1) % (eAmbienceProgress.kCount);
+        DarkUI.TextMessage("Ambience progress is now " + progress);
+        Fillip(CurrentRegion(), progress);
+    }
+
     function OnProgressChange() {
-        // FIXME
+        // FIXME: need another object to monitor quest vars
+        // and translate them into progress
+        // FIXME: just realised GotTheHand needs to be an
+        // orthogonal variable, since you _can_ go get it
+        // before you have any reason to--and we need the
+        // catacombs ambience to change accordingly.
+        // We _could_ just change the Ambience property on
+        // the Catacomb room and trigger a fillip?
     }
 
     function OnSchemaDone() {
@@ -303,5 +324,16 @@ class PlayerAmbienceWatcher extends SqRootScript
 
         print("Player did enter room " + Object_Description(room));
         PostMessage(controller, "RegionChange", region);
+    }
+}
+
+
+class DebugNextAmbience extends SqRootScript
+{
+    /* For a debug inv object that allows the player to change the progress. */
+    function OnFrobInvEnd() {
+        local controller = Object.Named("AmbienceController");
+        if (! controller) return;
+        SendMessage(controller, "DebugNextProgress");
     }
 }

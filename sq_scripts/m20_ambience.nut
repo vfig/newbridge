@@ -11,16 +11,156 @@ class AmbienceController extends SqRootScript
     /* Put this on a marker named 'AmbienceController'. */
 
     REGIONS = {
-        CANAL = [
-            ["dinner_bell", "dinner_bell", "dinner_bell"],
-            // ... one for each progress state;
-        ],
-
         STREETS = [
-            ["lostcity", "lostcity", "creaks1"],
-            // ... one for each progress state;
+            /* start */    ["m20city1loop", "m20city1mood", "m20city1ten"],
+            /* argaux? */  ["m20city1loop", "m20city1mood", "m20city2ten"],
+            /* the job */  ["m20city3loop", "m20city3mood", "m20city3ten"],
+            /* got hand */ ["m20city3loop", "m20city3mood", "m20city3ten"],
+            /* got both */ ["m20city3loop", "m20city4mood", "m20city3ten"],
+            /* go home? */ ["m20city5loop", "m20city4mood", "m20city5ten"],
+            /* ritual */   ["m20city5loop", "m20city6ten"],
+            /* all done */ ["m20city1loop", "m20city1mood"],
         ],
-        // ... one for each region
+        ARGAUXS = [
+            /* start */    ["m20argloop", "m20argmood", "m20city1ten"],
+            /* argaux? */  ["m20argloop", "m20argmood", "m20city2ten"],
+            /* the job */  ["m20argloop", "m20argmood", "m20city3ten"],
+            /* got hand */ ["m20argloop", "m20argmood", "m20city3ten"],
+            /* got both */ ["m20argloop", "m20argmood", "m20city3ten"],
+            /* go home? */ ["m20argloop", "m20argmood", "m20city5ten"],
+            /* ritual */   ["m20argloop", "m20argmood", "m20city6ten"],
+            /* all done */ ["m20argloop", "m20argmood"],
+        ],
+        FISHMONGERS = [
+            /* start */    ["m20city1loop", "m20city1mood", "m20city1ten"],
+            /* argaux? */  ["m20city1loop", "m20city1mood", "m20city2ten"],
+            /* the job */  ["m20fishloop", "m20fishmood"],
+            /* got hand */ ["m20fishloop", "m20fishmood"],
+            /* got both */ ["m20fishloop", "m20fishmood"],
+            /* go home? */ ["m20fishloop", "m20fishmood"],
+            /* ritual */   ["m20fishloop", "m20fishmood", "m20city6ten"],
+            /* all done */ ["m20fishloop", "m20fishmood"],
+        ],
+        CEMETERY = [
+            /* start */    ["m20ceme1loop", "m20city1mood", "m20city1ten"],
+            /* argaux? */  ["m20ceme1loop", "m20city1mood", "m20city2ten"],
+            /* the job */  ["m20ceme1loop", "m20city3mood", "m20city3ten"],
+            /* got hand */ ["m20ceme1loop", "m20city3mood", "m20city3ten"],
+            /* got both */ ["m20ceme1loop", "m20city4mood", "m20city3ten"],
+            /* go home? */ ["m20ceme1loop", "m20city4mood", "m20city5ten"],
+            /* ritual */   ["m20ceme1loop", "m20city6ten"],
+            /* all done */ ["m20ceme1loop", "m20city1mood"],
+        ],
+        MAUSOLEUM = [
+            /* start */    ["m20maustone", "m20mausmood"],
+            /* argaux? */  ["m20maustone", "m20mausmood"],
+            /* the job */  ["m20maustone", "m20mausmood"],
+            /* got hand */ ["m20maustone", "m20mausmood"],
+            /* got both */ ["m20maustone", "m20mausmood"],
+            /* go home? */ ["m20maustone", "m20mausmood"],
+            /* ritual */   ["m20maustone", "m20mausmood"],
+            /* all done */ ["m20maustone", "m20mausmood"],
+        ],
+        CATACOMBS = [
+            /* start */    ["m20catatone", "m20cataloop1", "m20catavoice"],
+            /* argaux? */  ["m20catatone", "m20cataloop1", "m20catavoice"],
+            /* the job */  ["m20catatone", "m20cataloop1", "m20catavoice"],
+            /* got hand */ ["m20catatone", "m20cataloop2"],
+            /* got both */ ["m20catatone", "m20cataloop2"],
+            /* go home? */ ["m20catatone", "m20cataloop2"],
+            /* ritual */   ["m20catatone", "m20cataloop2"],
+            /* all done */ ["m20catatone", "m20cataloop1"],
+        ],
+        SANCT_EXT = [
+            /* start */    ["m20city1loop", "m20city1mood", "m20sanct1ten"],
+            /* argaux? */  ["m20city1loop", "m20city1mood", "m20sanct1ten"],
+            /* the job */  ["m20city3loop", "m20city3mood", "m20sanct1ten"],
+            /* got hand */ ["m20city3loop", "m20city3mood", "m20sanct1ten"],
+            /* got both */ ["m20city3loop", "m20city4mood", "m20sanct1ten"],
+            /* go home? */ ["m20city5loop", "m20city4mood", "m20sanct1ten"],
+            /* ritual */   ["m20city5loop", "m20city6ten", "m20sanct1ten"],
+            /* all done */ ["m20city1loop", "m20city1mood", "m20sanct1ten"],
+        ],
+        SANCT_INT = [
+            /* start */    ["m20sanct1loop", "m20sanct1ten"],
+            /* argaux? */  ["m20sanct1loop", "m20sanct1ten"],
+            /* the job */  ["m20sanct1loop", "m20sanct1ten"],
+            /* got hand */ ["m20sanct1loop", "m20sanct1ten"],
+            /* got both */ ["m20sanct1loop", "m20sanct1ten"],
+            /* go home? */ ["m20sanct1loop", "m20sanct1ten"],
+            /* ritual */   ["m20sanct1loop", "m20sanct1ten"],
+            /* all done */ ["m20sanct1loop", "m20sanct1ten"],
+        ],
+        SANCT_BASE = [
+            /* start */    ["m20sanct2loop", "m20sanct2ten"],
+            /* argaux? */  ["m20sanct2loop", "m20sanct2ten"],
+            /* the job */  ["m20sanct2loop", "m20sanct2ten"],
+            /* got hand */ ["m20sanct2loop", "m20sanct2ten"],
+            /* got both */ ["m20sanct2loop", "m20sanct2ten"],
+            /* go home? */ ["m20sanct2loop", "m20sanct2ten"],
+            /* ritual */   ["m20sanct2loop", "m20sanct2ten"],
+            /* all done */ ["m20sanct2loop", "m20sanct2ten"],
+        ],
+        SANCT_CRYPT = [
+            /* start */    ["m20sanct2loop", "m20sanct3ten"],
+            /* argaux? */  ["m20sanct2loop", "m20sanct3ten"],
+            /* the job */  ["m20sanct2loop", "m20sanct3ten"],
+            /* got hand */ ["m20sanct2loop", "m20sanct3ten"],
+            /* got both */ ["m20sanct2loop", "m20sanct3ten"],
+            /* go home? */ ["m20sanct2loop", "m20sanct3ten"],
+            /* ritual */   ["m20sanct2loop", "m20sanct3ten"],
+            /* all done */ ["m20sanct2loop", "m20sanct3ten"],
+        ],
+        MANOR_EXT = [
+            /* start */    ["m20man1loop", "m20city1mood", "m20city1ten"],
+            /* argaux? */  ["m20man1loop", "m20city1mood", "m20city2ten"],
+            /* the job */  ["m20man1loop", "m20city3mood", "m20city3ten"],
+            /* got hand */ ["m20man1loop", "m20city3mood", "m20city3ten"],
+            /* got both */ ["m20man1loop", "m20city4mood", "m20city3ten"],
+            /* go home? */ ["m20man5loop", "m20city4mood", "m20city5ten"],
+            /* ritual */   ["m20man5loop", "m20city6ten"],
+            /* all done */ ["m20man1loop", "m20city1mood"],
+        ],
+        MANOR_INT = [
+            /* start */    ["m20man1loop", "m20manintmood", "m20manintten"],
+            /* argaux? */  ["m20man1loop", "m20manintmood", "m20manintten"],
+            /* the job */  ["m20man1loop", "m20manintmood", "m20manintten"],
+            /* got hand */ ["m20man1loop", "m20manintmood", "m20manintten"],
+            /* got both */ ["m20man1loop", "m20manintmood", "m20manintten"],
+            /* go home? */ ["m20man1loop", "m20manintmood", "m20manintten"],
+            /* ritual */   ["m20man5loop", "m20manintmood", "m20manintten"],
+            /* all done */ ["m20man1loop", "m20manintmood", "m20manintten"],
+        ],
+        TOWER = [
+            /* start */    [],
+            /* argaux? */  [],
+            /* the job */  [],
+            /* got hand */ [],
+            /* got both */ [],
+            /* go home? */ [],
+            /* ritual */   ["m20cave5loop", "m20cave5mood", "m20city6ten"],
+            /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
+        ],
+        CAVES = [
+            /* start */    [],
+            /* argaux? */  [],
+            /* the job */  [],
+            /* got hand */ [],
+            /* got both */ [],
+            /* go home? */ [],
+            /* ritual */   ["m20cave5loop", "m20cave5mood", "m20cave5ten"],
+            /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
+        ],
+        RITUAL = [
+            /* start */    [],
+            /* argaux? */  [],
+            /* the job */  [],
+            /* got hand */ [],
+            /* got both */ [],
+            /* go home? */ [],
+            /* ritual */   ["m20ritualloop", "m20cave5mood", "m20cave5ten"],
+            /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
+        ],
     }
 
     function CurrentRegion() {
@@ -162,6 +302,6 @@ class PlayerAmbienceWatcher extends SqRootScript
         }
 
         print("Player did enter room " + Object_Description(room));
-        SendMessage(controller, "RegionChange", region);
+        PostMessage(controller, "RegionChange", region);
     }
 }

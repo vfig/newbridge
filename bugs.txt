@@ -5,6 +5,8 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- Palette on stoned4a is wrong. Sometimes comes up completely bonkers
+
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
 - Should the Warden's nameplate have a quotation or not?
@@ -17,7 +19,6 @@ FIX BEFORE BETA 2
 
 - Misc
     - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
-    - "Wrong texture? [bottom of window on middle street works station!]
     - "I don't think the blue bricks work well as the roof texture [east main street by hangman square]"
     - "You might want to AlignExt textures in places like this" - textures in drunk archer's tower
     - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
@@ -29,10 +30,6 @@ FIX BEFORE BETA 2
 - Guards attacking are a problem for the Keeper intervention and the ending.
     - Close the gates when stuff happens, but hold off tping the keeper in until there's no more attack (or high awareness? or investigate?) links to the player. Check on enter the room... maybe also spawn a timer when in the room?
     - ending keeper might need slightly different handling, since he doesn't tp in behind you after all.
-
-- Prophet apparitions usually misses you when you're crouched?
-    - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.
-    - Probably not worth it. He's meant to be scary, rather than actually deadly after all.
 
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
 
@@ -82,6 +79,10 @@ ONLY IF I FEEL LIKE IT
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
 - hammerite sanctuary gate clips into ground.
+
+- Prophet apparitions usually misses you when you're crouched?
+    - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.
+    - Probably not worth it. He's meant to be scary, rather than actually deadly after all.
 
 ----
 

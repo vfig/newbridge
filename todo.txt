@@ -22,6 +22,7 @@ BETA 2 (October)
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.
+       - The new guard is kinda at the NE gate hard to hide from though :(
 
 - Something in the middle/west of market square to add shadow to allow another path across?
 
@@ -42,11 +43,6 @@ BETA 2 (October)
 
 - Review how well Keeper intervention worked for people.
     - Seems okay so far
-
-- Assign better room archetypes, taking into consideration:
-    - Triggers
-    - Automap
-    - EAX
 
 - Mountain visibility?
 

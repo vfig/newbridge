@@ -27,14 +27,14 @@ me1 me2 me3
 // Sanctuary 2 room tone
 schema m20sanct2loop
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 choirlo
 
 // Sanctuary 2 tension
 schema m20sanct2ten
 archetype AMB_M20
-volume -2000
+volume -2500
 mono_loop 3000 3000
 me1 me2 me3
 
@@ -43,6 +43,6 @@ me1 me2 me3
 // Sanctuary 3 tension
 schema m20sanct3ten
 archetype AMB_M20
-volume -1
+volume -500
 mono_loop 0 0
 thdown3

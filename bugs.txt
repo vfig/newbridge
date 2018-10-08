@@ -80,6 +80,8 @@ FIX BEFORE BETA 2
 
 - Chest in manor library secret room is empty?
 
+- Sanctuary map doesn't show upper walkways
+- Sanctuary map doesn't show bell tower
 
 FIX BEFORE RELEASE
 ==================

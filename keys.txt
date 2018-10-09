@@ -1,8 +1,8 @@
 region 1: Sanctuary
     id 1: Crypt
-    id 2: Priest's Key (Anax room)
-    id 3: Warden's Key (Priest room)
-    id 4: Tower key
+    id 2: Priest's bedroom Key (Anax room)
+    id 3: Warden's bedroom Key (Priest room)
+    id 4: Sanctuary key
 
 region 10: City
     id 1: Argaux's Lockbox
@@ -12,7 +12,7 @@ region 100: Manor
     id 1: Manor doors (Key2)
     id 2: Tower (Key5)
     id 3: Secret room safe (Key3)
-    id 4: Manor bedrooms key (Key1; not for player)
+:find_    id 4: Manor bedrooms key (Key1; not for player)
 
 region 1000:
-    id 1: Pickable-only
+    id 1: Pickable only (and holy debug master key)

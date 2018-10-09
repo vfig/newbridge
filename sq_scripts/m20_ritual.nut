@@ -2258,7 +2258,7 @@ class RitualMarkerJuggler extends SqRootScript
         local disabled_marker = message().from;
         SetData("DisabledMarker", disabled_marker);
         // Set a timer to reenable it.
-        local timer = SetOneShotTimer("Reenable", 10.0);
+        local timer = SetOneShotTimer("Reenable", 15.0);
         SetData("ReenableTimer", timer);
 
         // Enable all the other markers.

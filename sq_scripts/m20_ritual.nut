@@ -1951,10 +1951,6 @@ class RitualCrystal extends SqRootScript
         }
     }
 
-    function OnEndScript() {
-        Light.Unsubscribe(self);
-    }
-
     function OnTurnOn() {
         LightMode(ANIM_LIGHT_MODE_MAXIMUM);
         SetFlickering(false);
@@ -1994,7 +1990,7 @@ class RitualCrystal extends SqRootScript
         // Do nothing, we need more specific instructions.
     }
 
-    function OnSlain() {
+    function OnImDyingHere() {
         LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
         SetFlickering(false);
         Illuminate(0.0);
@@ -2176,17 +2172,21 @@ class RitualMarker extends RitualCrystal
         // Die
         SetData("State", 2);
 
+        // Do visual and audio effects
+        // This is a hack, but it'll have to do.
+        base.OnImDyingHere();
+
         // Become unrendered and nonphysical - we can't actually
         // let ourselves be destroyed, because that would break
         // the ritual controller!
         Property.SetSimple(self, "RenderType", 1);
         Property.Set(self, "CollisionType", "", 4);
 
-        // Then get the culprit to slay all our friends too.
-        local links = Link.GetAll("ControlDevice", self);
-        foreach (link in links) {
-            Damage.Slay(LinkDest(link), message().culprit);
-        }
+        // Tell all our friends (the juggler will ignore it, but the others will respond)
+        Link.BroadcastOnAllLinks(self, "ImDyingHere", "ControlDevice");
+
+        // And disown any of our friends that hang around
+        Link_DestroyAll("ControlDevice", self);
     }
 
     function IsEnabled() {
@@ -2246,9 +2246,8 @@ class RitualLight extends SqRootScript
         SendMessage(self, "TurnOff");
     }
 
-    function OnSlain() {
-        SendMessage(self, "TurnOff");
-        Object.Destroy(self);
+    function OnImDyingHere() {
+        Light.SetMode(self, ANIM_LIGHT_MODE_EXTINGUISH);
     }
 }
 

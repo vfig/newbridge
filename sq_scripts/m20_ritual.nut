@@ -178,7 +178,7 @@ class RitualController extends SqRootScript
             PerfRoundTrols();
             DownConvs();
             ExtraRoundTrols();
-            Lights();
+            Markers();
             Strips();
             Particles();
             // ... the last stage ...
@@ -202,9 +202,11 @@ class RitualController extends SqRootScript
             // at anything before the ritual begins.
             RitualLog(eRitualLog.kPerformer, "Starting trance");
             local performer = Performer();
-            Object.AddMetaProperty(performer, "M-RitualTrance");
-            if (DEBUG_GETONWITHIT) {
-                Object.AddMetaProperty(performer, "M-GetOnWithIt");
+            if (performer != 0) {
+                Object.AddMetaProperty(performer, "M-RitualTrance");
+                if (DEBUG_GETONWITHIT) {
+                    Object.AddMetaProperty(performer, "M-GetOnWithIt");
+                }
             }
 
             local extras = Extras();
@@ -312,15 +314,13 @@ class RitualController extends SqRootScript
 
         // Normal lighting is for normal stages, not the last stage.
         if (Status() == eRitualStatus.kInProgress) {
-            local light = Lights()[stage];
-            local prev_light = Lights()[PreviousStage()];
-            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(prev_light));
-            SendMessage(prev_light, "TurnOff");
-            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
-            SendMessage(light, "TurnOn");
+            local marker = Markers()[stage];
+            local prev_marker = Markers()[PreviousStage()];
+            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(prev_marker));
+            SendMessage(prev_marker, "TurnOff");
+            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(marker));
+            SendMessage(marker, "TurnOn");
 
-            // FIXME: - markers should allow ways to turn off lights temporarily, or
-            // permanently.
             ActivateStrip(stage_index);
         }
     }
@@ -339,6 +339,10 @@ class RitualController extends SqRootScript
         RitualLog(eRitualLog.kRitual, "Return " + stage_index + ", Stage " + stage);
 
         if (Status() == eRitualStatus.kInProgress) {
+            local next_marker = Markers()[NextStage()];
+            RitualLog(eRitualLog.kLighting, "Pulsing " + Object_Description(next_marker));
+            SendMessage(next_marker, "Pulse");
+
             ActivateParticles(stage_index);
         }
     }
@@ -362,26 +366,15 @@ class RitualController extends SqRootScript
 
             // Turn on the strobe lights (or substitute)
             local strobes = Strobes();
-            if (DEBUG_DISABLESTROBES || (strobes.len() == 0)) {
-                RitualLog(eRitualLog.kLighting, "Strobes are disabled.");
-                // Just turn on three lights.
-                local lights = Lights();
-                local three_lights = [lights[1], lights[4], lights[6]];
-                foreach (light in three_lights) {
-                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
-                    SendMessage(light, "TurnOn");
-                }
-            } else {
-                RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
-                // Make all the strobes flash horrendously
-                foreach (light in Lights()) {
-                    RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
-                    SendMessage(light, "TurnOff");
-                }
-                foreach (strobe in Strobes()) {
-                    RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strobe));
-                    SendMessage(strobe, "TurnOn");
-                }
+            RitualLog(eRitualLog.kLighting, "Strobes are enabled.");
+            // Make all the strobes flash horrendously
+            foreach (marker in Markers()) {
+                RitualLog(eRitualLog.kLighting, "Strobing " + Object_Description(marker));
+                SendMessage(marker, "Strobe");
+            }
+            foreach (strobe in Strobes()) {
+                RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strobe));
+                SendMessage(strobe, "TurnOn");
             }
 
             local stage_index = StageIndex();
@@ -931,6 +924,11 @@ class RitualController extends SqRootScript
         return stages[StageIndex()];
     }
 
+    function NextStage() {
+        local next_index = ((StageIndex() + 1) % 7);
+        return stages[next_index];
+    }
+
     function PreviousStage() {
         local prev_index = ((StageIndex() + 6) % 7);
         return stages[prev_index];
@@ -999,11 +997,11 @@ class RitualController extends SqRootScript
         return trols;
     }
 
-    function Lights()
+    function Markers()
     {
-        local lights = Link_GetAllParams("Light", self);
-        if (lights.len() != 7) { Die("need 7 Light(s)."); }
-        return lights;
+        local markers = Link_GetAllParams("Marker", self);
+        if (markers.len() != 7) { Die("need 7 Marker(s)."); }
+        return markers;
     }
 
     function Strips()
@@ -1957,16 +1955,214 @@ class RitualIlluminated extends SqRootScript
 
     function OnBeginScript()
     {
-        // Make sure we have the property
-        Property.Set(self, "ExtraLight", "Additive?", true);
-        Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
+        // Make sure we have the property set up the way we like
+        if (Property.Possessed(self, "ExtraLight")) {
+            Property.Set(self, "ExtraLight", "Additive?", true);
+            Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
+        }
     }
 
     function OnIlluminate()
     {
-        local amount = message().data.tofloat();
+    }
+}
+
+
+class RitualCrystal extends RitualIlluminated
+{
+    function OnBeginScript() {
+        // Start in the off state
+        PostMessage(self, "TurnOff");
+    }
+
+    function OnTurnOn() {
+        print(">> " + message().message);
+        LightMode(ANIM_LIGHT_MODE_MAXIMUM);
+        Illuminate(1.0);
+        AmbientHack(true);
+    }
+
+    function OnTurnOff() {
+        print(">> " + message().message);
+        LightMode(ANIM_LIGHT_MODE_MINIMUM);
+        Illuminate(0.5);
+        AmbientHack(true);
+    }
+
+    function OnPulse() {
+        print(">> " + message().message);
+        LightMode(ANIM_LIGHT_MODE_SMOOTH);
+        // FIXME: Activate the flickr tweq and illuminate
+        AmbientHack(true);
+    }
+
+    function OnStrobe() {
+        print(">> " + message().message);
+        LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
+        // FIXME: Activate the flickr tweq and illuminate
+        AmbientHack(true);
+    }
+
+    function OnDisable() {
+        print(">> " + message().message);
+        LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
+        Illuminate(0.0);
+        AmbientHack(false);
+    }
+
+    function OnEnable() {
+        print(">> " + message().message);
+        // Do nothing, we need more specific instructions.
+    }
+
+    function OnTweqComplete() {
+        // FIXME!
+    }
+
+    function LightMode(mode) {
+        if (Property.Possessed(self, "AnimLight")) {
+            Light.SetMode(self, mode);
+        }
+    }
+
+    function Illuminate(amount) {
         if (amount < 0.0) { amount = 0.0; }
         if (amount > 1.0) { amount = 1.0; }
-        Property.Set(self, "ExtraLight", "Amount (-1..1)", amount);
+
+        if (Property.Possessed(self, "SelfIllum")) {
+            Property.SetSimple(self, "SelfIllum", amount);
+        }
+
+        if (Property.Possessed(self, "ExtraLight")) {
+            Property.Set(self, "ExtraLight", "Amount (-1..1)", amount);
+        }
+    }
+
+    function AmbientHack(turned_on) {
+        if (Property.Possessed(self, "AmbientHacked")) {
+            local flags = Property.Get(self, "AmbientHacked", "Flags");
+            if (! turned_on) {
+                flags = (flags | AMBFLG_S_TURNEDOFF);
+            } else {
+                flags = (flags & ~AMBFLG_S_TURNEDOFF);
+            }
+            Property.Set(self, "AmbientHacked", "Flags", flags);
+        }
+    }
+}
+
+class RitualMarker extends RitualCrystal
+{
+    function OnBeginScript() {
+        if (! IsDataSet("Enabled")) {
+            SetData("Enabled", true);
+        }
+        if (! IsDataSet("SavedMessage")) {
+            SetData("SavedMessage", "TurnOff");
+        }
+
+        base.OnBeginScript();
+    }
+
+    function OnTurnOn() {
+        SaveMessage();
+        if (IsEnabled()) {
+            base.OnTurnOn();
+            ForwardMessage();
+        }
+    }
+
+    function OnTurnOff() {
+        SaveMessage();
+        if (IsEnabled()) {
+            base.OnTurnOff();
+            ForwardMessage();
+        }
+    }
+
+    function OnPulse() {
+        SaveMessage();
+        if (IsEnabled()) {
+            base.OnPulse();
+            ForwardMessage();
+        }
+    }
+
+    function OnStrobe() {
+        SaveMessage();
+        if (IsEnabled()) {
+            base.OnStrobe();
+            ForwardMessage();
+        }
+    }
+
+    function OnDisable() {
+        if (IsEnabled()) {
+            base.OnDisable();
+            ForwardMessage();
+            // Stop acting on messages
+            SetData("Enabled", false);
+            // FIXME - need a timer here
+        }
+    }
+
+    function OnEnable() {
+        if (IsEnabled()) {
+            base.OnEnable();
+            ForwardMessage();
+        } else {
+            // Resume acting on messages
+            SetData("Enabled", true);
+            // FIXME - Kill the timer (if any)
+
+            base.OnEnable();
+            ForwardMessage();
+            SendSavedMessage()
+        }
+    }
+
+    function IsEnabled() {
+        return GetData("Enabled");
+    }
+
+    function ForwardMessage() {
+        Link.BroadcastOnAllLinks(self, message().message, "ControlDevice");
+    }
+
+    function SaveMessage() {
+        SetData("SavedMessage", message().message);
+    }
+
+    function SendSavedMessage() {
+        local message = GetData("SavedMessage");
+        if (message != "") {
+            SendMessage(self, message);
+        }
+    }
+
+    // -- Handle specific stimuli
+
+    function OnWaterStimStimulus() {
+        // FIXME
+        print("" + Object_Description(self) + " received Water stim " + message().intensity);
+    }
+
+    function OnKnockoutStimulus() {
+        // FIXME
+        print("" + Object_Description(self) + " received Knockout stim " + message().intensity);
+    }
+
+    function OnKOGasStimulus() {
+        // FIXME
+        print("" + Object_Description(self) + " received Knockout stim " + message().intensity);
+    }
+}
+
+// FIXME - remove this and the testbed when I'm satisfied they're working properly.
+class DebugRitualMarker extends SqRootScript
+{
+    function OnTurnOn() {
+        local msg = userparams().msg;
+        Link.BroadcastOnAllLinks(self, msg, "ControlDevice");
     }
 }

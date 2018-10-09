@@ -1,7 +1,5 @@
-// FIXME: for the sake of saving, need to review everything here,
-// and might want to track more things with more links and/or SetData
-// instead of member variables.
-// Also need to consider OnSim() vs OnBeginScript().
+// This enormous pile of bad code controls the big ritual setpiece
+// at the end of the mission. Tread carefully, for here be jackals.
 
 const DEBUG_GETONWITHIT = false;
 const DEBUG_SKIPTOTHEEND = false;
@@ -165,9 +163,6 @@ class RitualController extends SqRootScript
             if (DEBUG_SKIPTOTHEEND) {
                 SetStageIndex(6);
             }
-
-            // FIXME: move all these to utility functions so we can get
-            // things as we need them.
 
             // Check linked objects needed for ...
             // ... the whole ritual ...
@@ -1946,34 +1941,14 @@ class RitualParticleHack extends SqRootScript
 }
 
 
-class RitualIlluminated extends SqRootScript
+class RitualCrystal extends SqRootScript
 {
-    // Uses 'Renderer > Extra Light' property to fake
-    // self-illumination. Responds to the Illuminate
-    // message with the parameter being the amount to
-    // (additively) illuminate.
-
-    function OnBeginScript()
-    {
-        // Make sure we have the property set up the way we like
-        if (Property.Possessed(self, "ExtraLight")) {
-            Property.Set(self, "ExtraLight", "Additive?", true);
-            Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
+    function OnSim() {
+        if (message().starting) {
+            // Start in the off state
+            // FIXME - does this break if I save & load??
+            PostMessage(self, "TurnOff");
         }
-    }
-
-    function OnIlluminate()
-    {
-    }
-}
-
-
-class RitualCrystal extends RitualIlluminated
-{
-    function OnBeginScript() {
-        // Start in the off state
-        // FIXME - does this break if I save & load??
-        PostMessage(self, "TurnOff");
     }
 
     function OnEndScript() {
@@ -1981,7 +1956,6 @@ class RitualCrystal extends RitualIlluminated
     }
 
     function OnTurnOn() {
-        print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_MAXIMUM);
         SetFlickering(false);
         Illuminate(1.0);
@@ -1989,31 +1963,27 @@ class RitualCrystal extends RitualIlluminated
     }
 
     function OnTurnOff() {
-        print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_MINIMUM);
         SetFlickering(false);
-        Illuminate(0.5);
+        Illuminate(0.3);
         AmbientHack(true);
     }
 
     function OnPulse() {
-        print(">> " + message().message);
+        LightSpeed(1000);
         LightMode(ANIM_LIGHT_MODE_SMOOTH);
         SetFlickering(true);
-        // FIXME: Activate the flickr tweq and illuminate
         AmbientHack(true);
     }
 
     function OnStrobe() {
-        print(">> " + message().message);
-        LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
+        LightSpeed(200);
+        LightMode(ANIM_LIGHT_MODE_MINIMUM);
         SetFlickering(true);
-        // FIXME: Activate the flickr tweq and illuminate
         AmbientHack(true);
     }
 
     function OnDisable() {
-        print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
         SetFlickering(false);
         Illuminate(0.0);
@@ -2021,63 +1991,28 @@ class RitualCrystal extends RitualIlluminated
     }
 
     function OnEnable() {
-        print(">> " + message().message);
         // Do nothing, we need more specific instructions.
     }
 
-    function OnLightChange() {
-        if (Object.GetName(self) == "DebugRitualMarker") {
-            local brightness = message().data;
-            local min_brightness = message().data2;
-            local max_brightness = message().data3;
-            print(">> Light brightness: " + brightness
-                + " (min " + min_brightness + ", max " + max_brightness + ")");
-            local range = (max_brightness - min_brightness).tofloat();
-            local intensity = ((range > 0)
-                ? ((brightness - min_brightness) / range)
-                : 0);
-            print(">> Intensity: " + intensity);
-            //Illuminate(intensity);
-
-            local rising = Property.Get(self, "AnimLight", "currently rising?");
-            local countdown = Property.Get(self, "AnimLight", "current countdown");
-            local inactive = Property.Get(self, "AnimLight", "inactive");
-            print(">> inactive? " + inactive
-                + ", rising? " + rising
-                + ", countdown: " + countdown);
-
-            // Keep the flicker tweq in sync
-            // SetData("LightChangeTime", GetTime());
-            // SetData("LightChangeValue", intensity);
-            // SetData("LightChangeRising", rising);
-            light_change_time = GetTime();
-            light_change_value = intensity;
-            light_change_rising = rising;
-        }
+    function OnSlain() {
+        LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
+        SetFlickering(false);
+        Illuminate(0.0);
+        AmbientHack(false);
     }
 
     function OnTweqComplete() {
-        // FIXME
-        if (Object.GetName(self) == "DebugRitualMarker") {
-
         if ((message().Type == eTweqType.kTweqTypeFlicker)
-            && Property.Possessed(self, "AnimLight"))
+            && (message().Op == eTweqOperation.kTweqOpFrameEvent))
         {
-            local inactive = Property.Get(self, "AnimLight", "inactive");
-            if (inactive) {
-                Illuminate(0);
-            } else {
-                Illuminate(GetAnimLightIntensity(false));
-            }
+            Illuminate(GetAnimLightIntensity(false));
         }
+    }
 
-        // FIXME
-        } else {
-            print(Object_Description(self) + " tweq complete from "
-                + Object_Description(message().from));
-            print("  Type: " + message().Type);
-            print("  Op: " + message().Op);
-            print("  Dir: " + message().Dir);
+    function LightSpeed(milliseconds) {
+        if (Property.Possessed(self, "AnimLight")) {
+            Property.Set(self, "AnimLight", "millisecs to brighten", milliseconds);
+            Property.Set(self, "AnimLight", "millisecs to dim", milliseconds);
         }
     }
 
@@ -2105,27 +2040,36 @@ class RitualCrystal extends RitualIlluminated
         // If relative_to_min_brightness, then 0.0 means the light is
         // at its min brightness; otherwise 0.0 means the light is at
         // zero brightness.
+        if (Property.Possessed(self, "AnimLight")) {
+            // We can still get a tweqcomplete after disable sometimes,
+            // so just double check the light is still on.
+            if (Light.GetMode(self) == ANIM_LIGHT_MODE_EXTINGUISH) {
+                return 0.0;
+            }
 
-        local rise_period = Property.Get(self, "AnimLight", "millisecs to brighten");
-        local fall_period = Property.Get(self, "AnimLight", "millisecs to dim");
-        local max_brightness = Property.Get(self, "AnimLight", "max brightness");
-        local min_brightness = Property.Get(self, "AnimLight", "min brightness");
-        local rising = Property.Get(self, "AnimLight", "currently rising?");
-        local countdown = Property.Get(self, "AnimLight", "current countdown");
+            local rise_period = Property.Get(self, "AnimLight", "millisecs to brighten");
+            local fall_period = Property.Get(self, "AnimLight", "millisecs to dim");
+            local max_brightness = Property.Get(self, "AnimLight", "max brightness");
+            local min_brightness = Property.Get(self, "AnimLight", "min brightness");
+            local rising = Property.Get(self, "AnimLight", "currently rising?");
+            local countdown = Property.Get(self, "AnimLight", "current countdown");
 
-        // Figure out how bright to appear from the light's brightness
-        local relative_intensity = (rising
-            ? ((rise_period - countdown).tofloat() / rise_period)
-            : (countdown.tofloat() / fall_period));
-        if (relative_to_min_brightness) {
-            local brightness_range = (max_brightness - min_brightness);
-            local brightness = (min_brightness + (relative_intensity * brightness_range));
-            local absolute_intensity = ((max_brightness > 0.0)
-                ? (brightness / max_brightness)
-                : 0.0);
-            return absolute_intensity;
+            // Figure out how bright to appear from the light's brightness
+            local relative_intensity = (rising
+                ? ((rise_period - countdown).tofloat() / rise_period)
+                : (countdown.tofloat() / fall_period));
+            if (relative_to_min_brightness) {
+                local brightness_range = (max_brightness - min_brightness);
+                local brightness = (min_brightness + (relative_intensity * brightness_range));
+                local absolute_intensity = ((max_brightness > 0.0)
+                    ? (brightness / max_brightness)
+                    : 0.0);
+                return absolute_intensity;
+            } else {
+                return relative_intensity;
+            }
         } else {
-            return relative_intensity;
+            return 0.0;
         }
     }
 
@@ -2142,10 +2086,12 @@ class RitualCrystal extends RitualIlluminated
     }
 
     function SetFlickering(on) {
-        // Turn on or off the flicker tweq
-        local animS = Property.Get(self, "StTweqBlink", "AnimS");
-        animS = (on ? (animS | TWEQ_AS_ONOFF) : (animS & ~TWEQ_AS_ONOFF));
-        Property.Set(self, "StTweqBlink", "AnimS", animS);
+        if (Property.Possessed(self, "StTweqBlink")) {
+            // Turn on or off the flicker tweq
+            local animS = Property.Get(self, "StTweqBlink", "AnimS");
+            animS = (on ? (animS | TWEQ_AS_ONOFF) : (animS & ~TWEQ_AS_ONOFF));
+            Property.Set(self, "StTweqBlink", "AnimS", animS);
+        }
     }
 }
 
@@ -2158,8 +2104,6 @@ class RitualMarker extends RitualCrystal
         if (! IsDataSet("SavedMessage")) {
             SetData("SavedMessage", "TurnOff");
         }
-
-        base.OnBeginScript();
     }
 
     function OnTurnOn() {
@@ -2200,7 +2144,6 @@ class RitualMarker extends RitualCrystal
             ForwardMessage();
             // Stop acting on messages
             SetData("Enabled", false);
-            // FIXME - need a timer here
         }
     }
 
@@ -2211,11 +2154,17 @@ class RitualMarker extends RitualCrystal
         } else {
             // Resume acting on messages
             SetData("Enabled", true);
-            // FIXME - Kill the timer (if any)
-
             base.OnEnable();
             ForwardMessage();
             SendSavedMessage()
+        }
+    }
+
+    function OnSlain() {
+        // Get the culprit to slay all our friends too.
+        local links = Link.GetAll("ControlDevice", self);
+        foreach (link in links) {
+            Damage.Slay(LinkDest(link), message().culprit);
         }
     }
 
@@ -2238,21 +2187,97 @@ class RitualMarker extends RitualCrystal
         }
     }
 
-    // -- Handle specific stimuli
+    // A marker can be disabled with water, a blackjack, or KO gas.
+    // Basically, reward the player for figuring it's part of the
+    // solution.
 
     function OnWaterStimStimulus() {
-        // FIXME
-        print("" + Object_Description(self) + " received Water stim " + message().intensity);
+        SendMessage(self, "Disable");
     }
 
     function OnKnockoutStimulus() {
-        // FIXME
-        print("" + Object_Description(self) + " received Knockout stim " + message().intensity);
+        SendMessage(self, "Disable");
     }
 
     function OnKOGasStimulus() {
-        // FIXME
-        print("" + Object_Description(self) + " received Knockout stim " + message().intensity);
+        SendMessage(self, "Disable");
+    }
+}
+
+class RitualLight extends SqRootScript
+{
+    // Just converts messages passed on from RitualMarker into
+    // TurnOns and TurnOffs as appropriate
+
+    function OnPulse() {
+        SendMessage(self, "TurnOff");
+    }
+
+    function OnStrobe() {
+        SendMessage(self, "TurnOff");
+    }
+
+    function OnDisable() {
+        SendMessage(self, "TurnOff");
+    }
+}
+
+class RitualMarkerJuggler extends SqRootScript
+{
+    // Create a ControlDevice link from each RitualMarker to this.
+    // When any ritual marker is disabled, this will enable all
+    // the others. And after a timeout, it will enable that marker
+    // again too.
+
+    function OnBeginScript() {
+        if (! IsDataSet("DisabledMarker")) {
+            SetData("DisabledMarker", 0);
+        }
+        if (! IsDataSet("ReenableTimer")) {
+            SetData("ReenableTimer", 0);
+        }
+    }
+
+    function OnDisable() {
+        // Keep track of which marker was disabled.
+        local disabled_marker = message().from;
+        SetData("DisabledMarker", disabled_marker);
+        // Set a timer to reenable it.
+        local timer = SetOneShotTimer("Reenable", 10.0);
+        SetData("ReenableTimer", timer);
+
+        // Enable all the other markers.
+        local links = Link.GetAll("~ControlDevice", self);
+        foreach (link in links) {
+            local marker = LinkDest(link);
+            if (marker != disabled_marker) {
+                PostMessage(marker, "Enable");
+            }
+        }
+    }
+
+    function OnEnable() {
+        // Only listen if the message is from the disabled marker.
+        local disabled_marker = GetData("DisabledMarker");
+        if (message().from == disabled_marker) {
+            // Kill the timer if it's still active.
+            local timer = GetData("ReenableTimer");
+            if (timer != 0) {
+                KillTimer(timer);
+                SetData("ReenableTimer", 0);
+            }
+            // And forget the disabled marker.
+            SetData("DisabledMarker", 0);
+        }
+    }
+
+    function OnTimer() {
+        if (message().name == "Reenable") {
+            local disabled_marker = GetData("DisabledMarker");
+            if (disabled_marker != 0) {
+                PostMessage(disabled_marker, "Enable");
+            }
+        }
     }
 }
 

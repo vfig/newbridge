@@ -545,17 +545,18 @@ class RitualController extends SqRootScript
     }
 
     function ActivateStrip(stage_index) {
+        // Turn on this strip (and anything it's controlling!)
+        local stage = stages[stage_index];
+        local strip = Strips()[stage];
+        RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strip));
+        SendMessage(strip, "TurnOn");
+
+        // For the last stage, make all the strips glow steadily
         if (stage_index == 6) {
-            // Make all the strips glow steadily
             foreach (strip in Strips()) {
                 RitualLog(eRitualLog.kLighting, "Turning fully on " + Object_Description(strip));
                 PostMessage(strip, "Fullbright");
             }
-        } else {
-            local stage = stages[stage_index];
-            local strip = Strips()[stage];
-            RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(strip));
-            SendMessage(strip, "TurnOn");
         }
     }
 
@@ -640,6 +641,12 @@ class RitualController extends SqRootScript
             local particles = Particles();
             foreach (particle in particles) {
                 SendMessage(particle, "TurnOff");
+            }
+
+            // Stop the strips and whatever they control
+            local strips = Strips();
+            foreach (strip in strips) {
+                SendMessage(strip, "TurnOff");
             }
 
             // Make the performer search for the player
@@ -1961,7 +1968,7 @@ class RitualCrystal extends SqRootScript
     function OnTurnOff() {
         LightMode(ANIM_LIGHT_MODE_MINIMUM);
         SetFlickering(false);
-        Illuminate(0.3);
+        Illuminate(0.15);
         AmbientHack(true);
     }
 
@@ -1982,7 +1989,10 @@ class RitualCrystal extends SqRootScript
     function OnDisable() {
         LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
         SetFlickering(false);
-        Illuminate(0.0);
+        // Ew gross. These numbers don't make sense, but
+        // this is as low as we can go without parts of
+        // us looking solid black!
+        Illuminate(-0.04);
         AmbientHack(false);
     }
 
@@ -1993,7 +2003,8 @@ class RitualCrystal extends SqRootScript
     function OnImDyingHere() {
         LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
         SetFlickering(false);
-        Illuminate(0.0);
+        // Ew gross. See OnDisable();
+        Illuminate(-0.04);
         AmbientHack(false);
     }
 
@@ -2019,12 +2030,12 @@ class RitualCrystal extends SqRootScript
     }
 
     function Illuminate(amount) {
-        if (amount < 0.0) { amount = 0.0; }
+        if (amount < -1.0) { amount = -1.0; }
         if (amount > 1.0) { amount = 1.0; }
 
-        if (Property.Possessed(self, "SelfIllum")) {
-            Property.SetSimple(self, "SelfIllum", amount);
-        }
+        // if (Property.Possessed(self, "SelfIllum")) {
+        //     Property.SetSimple(self, "SelfIllum", amount);
+        // }
 
         if (Property.Possessed(self, "ExtraLight")) {
             Property.Set(self, "ExtraLight", "Amount (-1..1)", amount);
@@ -2117,6 +2128,8 @@ class RitualMarker extends RitualCrystal
             SaveMessage();
             if (IsEnabled()) {
                 base.OnTurnOff();
+                // We want to be brighter than the fingers
+                Illuminate(0.3);
                 ForwardMessage();
             }
         }
@@ -2146,6 +2159,8 @@ class RitualMarker extends RitualCrystal
         if (IsAlive()) {
             if (IsEnabled()) {
                 base.OnDisable();
+                // We want to be brighter than the fingers
+                Illuminate(0.0);
                 ForwardMessage();
                 // Stop acting on messages
                 SetData("State", 0);
@@ -2338,5 +2353,23 @@ class RitualPylon extends SqRootScript
             animS = (on ? (animS | TWEQ_AS_ONOFF) : (animS & ~TWEQ_AS_ONOFF));
             Property.Set(self, "StTweqBlink", "AnimS", animS);
         }
+    }
+}
+
+class RitualBeamer extends SqRootScript
+{
+    function OnTurnOn() {
+        Illuminate(true);
+    }
+
+    function OnTurnOff() {
+        Illuminate(false);
+    }
+
+    function Illuminate(on) {
+        // Toggle self-illumination
+        local selfillum = Property.Get(self, "ExtraLight", "Amount (-1..1)");
+        selfillum = (on ? 0.8 : 0.25);
+        Property.Set(self, "ExtraLight", "Amount (-1..1)", selfillum);
     }
 }

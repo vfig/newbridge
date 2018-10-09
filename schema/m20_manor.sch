@@ -2,7 +2,7 @@
 schema alaspoorburrick
 archetype AMB_M20
 no_repeat
-volume -4000
+volume -3000
 bk1die_2
 
 

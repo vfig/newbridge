@@ -5,7 +5,6 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-- Hammerite map is wrong: door for library should be on the North, and the armoury on the South.
 
 - Update maus_thiefscroll for translations! Ensure the decal is appropriately placed, and there's no more hints than necessary.
 
@@ -39,10 +38,10 @@ BETA 2 (October)
     - Hmm.... maybe have the crystals affect the lights??? So you can frob or smash a crystal to disable it, to disable its lights, maybe temporarily? Hmm... Might add the ingredient I was missing. And then the one in the manor becomes a training one that shows you it can be frobbed and it goes quiet+dark temporarily.
     - Sounds!
 
-- Really need a bell pull in di Rupo's room that triggers the butler's bell.
-
 - Review how well Keeper intervention worked for people.
     - Seems okay so far
+    - Except for the attacking bit...
+        - Can I force a temporary level 1 alert cap and link killing on attacking guards?
 
 - Mountain visibility?
 
@@ -68,10 +67,6 @@ DONE. - Review which new strings need translating
 - NPC Names!
     - And make sure they all have the script that BrotherLionel does that appends status
 
-- Test all books in German. Test the "if you play on Expert, you successfully stop the ritual, you find the bonus relic, and you attack the keeper by the canal at the end" scenario that objectives fit."
-
-- Test all books in Italian. Test the "if you play on Expert, you successfully stop the ritual, you find the bonus relic, and you attack the keeper by the canal at the end" scenario that objectives fit."
-
 - Review and update credits and so on in readme.
 
 RELEASE (November)
@@ -79,17 +74,14 @@ RELEASE (November)
 
 - Map
     - City map (draw and scan)
-        - Automap segments
-        - Automap properties
-        - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
     - Hammerite map (draw and scan)
-        - Scripting for finding & updating qvars and automap info
-        - Automap segments
-        - Automap properties
+        - sketched Hammerite map is wrong: door for library should be on the North, and the armoury on the South.
+    - Text (draw and scan separately)
+    - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
+    - revise automap properties if the location assignment turns out differently (as it very well might!)
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
-
 
 - Survey all doors for:
     - if they can vanish

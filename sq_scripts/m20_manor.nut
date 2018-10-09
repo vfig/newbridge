@@ -55,7 +55,15 @@ class InfuriatingPainting extends SqRootScript
 
 class ButlerRoomBell extends SqRootScript
 {
+    function OnTurnOn() {
+        Activate();
+    }
+
     function OnFrobWorldEnd() {
+        Activate();
+    }
+
+    function Activate() {
         Sound.PlaySchemaAtObject(self, "dinner_bell", self);
         AI.Signal(Object.Named("Baltasar"), "WakeUp");
     }

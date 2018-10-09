@@ -33,7 +33,7 @@ RitualLogsEnabled <- function()
 //        | eRitualLog.kPerformer
 //        | eRitualLog.kExtra
 //        | eRitualLog.kVictim
-//        | eRitualLog.kLighting
+        | eRitualLog.kLighting
 //        | eRitualLog.kFinale
         // Contexts
 //        | eRitualLog.kPathing
@@ -313,9 +313,14 @@ class RitualController extends SqRootScript
         // Normal lighting is for normal stages, not the last stage.
         if (Status() == eRitualStatus.kInProgress) {
             local light = Lights()[stage];
+            local prev_light = Lights()[PreviousStage()];
+            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(prev_light));
+            SendMessage(prev_light, "TurnOff");
             RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(light));
             SendMessage(light, "TurnOn");
 
+            // FIXME: - markers should allow ways to turn off lights temporarily, or
+            // permanently.
             ActivateStrip(stage_index);
         }
     }
@@ -334,10 +339,6 @@ class RitualController extends SqRootScript
         RitualLog(eRitualLog.kRitual, "Return " + stage_index + ", Stage " + stage);
 
         if (Status() == eRitualStatus.kInProgress) {
-            local light = Lights()[stage];
-            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(light));
-            SendMessage(light, "TurnOff");
-
             ActivateParticles(stage_index);
         }
     }
@@ -928,6 +929,11 @@ class RitualController extends SqRootScript
 
     function Stage() {
         return stages[StageIndex()];
+    }
+
+    function PreviousStage() {
+        local prev_index = ((StageIndex() + 6) % 7);
+        return stages[prev_index];
     }
 
     function AwaitingExtras()

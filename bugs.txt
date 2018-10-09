@@ -19,9 +19,6 @@ FIX BEFORE BETA 2
     - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
     - Sky glitches visible from upper street looking towards hammer square.
 
-- Double doors when unlocking: only one unlocks, but both open.
-    - Maybe use a single fnordlock for both of them?
-
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
 
 - When the intervention starts, destroy delivery di rupo and things.

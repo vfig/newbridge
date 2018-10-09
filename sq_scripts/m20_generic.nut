@@ -690,3 +690,22 @@ class Illuminate extends SqRootScript
         Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
     }
 }
+
+class SynchLockedHack extends SqRootScript
+{
+    /* Thief 1/Gold: put this on the Door archetype so that the
+       locked state also syncs between double doors. */
+    function OnSynchUp() {
+        // Ripped from T2's GIZMO.SCR
+        local otherdoor = message().from;
+        if(Property.Possessed(otherdoor, "Locked")
+            && Property.Possessed(self, "Locked"))
+        {
+            local otherlock = Property.Get(otherdoor, "Locked");
+            local lock = Property.Get(self, "Locked");
+            if (lock != otherlock) {
+                Property.CopyFrom(self,"Locked", otherdoor);
+            }
+        }
+    }
+}

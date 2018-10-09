@@ -5,18 +5,12 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-
-- Update maus_thiefscroll for translations! Ensure the decal is appropriately placed, and there's no more hints than necessary.
-
 - Review loot totals and distribution
 - Review tulz totals and distribution
 
-- Change wood texture on building with rooftop access to Argaux's - it's not clear I think.
-
 - Detail
-    - Caves and ritual chamber?
-        - So far _nobody_ has noticed the alternative entrance.
-            - that's okay, but maybe make it available on all difficulties?
+    - Windows on buildings around the cemetery?
+        - I like that it's dark! So maybe just textured windows and no lights?
 
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.

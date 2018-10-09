@@ -1972,12 +1972,18 @@ class RitualCrystal extends RitualIlluminated
 {
     function OnBeginScript() {
         // Start in the off state
+        // FIXME - does this break if I save & load??
         PostMessage(self, "TurnOff");
+    }
+
+    function OnEndScript() {
+        Light.Unsubscribe(self);
     }
 
     function OnTurnOn() {
         print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_MAXIMUM);
+        SetFlickering(false);
         Illuminate(1.0);
         AmbientHack(true);
     }
@@ -1985,6 +1991,7 @@ class RitualCrystal extends RitualIlluminated
     function OnTurnOff() {
         print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_MINIMUM);
+        SetFlickering(false);
         Illuminate(0.5);
         AmbientHack(true);
     }
@@ -1992,6 +1999,7 @@ class RitualCrystal extends RitualIlluminated
     function OnPulse() {
         print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_SMOOTH);
+        SetFlickering(true);
         // FIXME: Activate the flickr tweq and illuminate
         AmbientHack(true);
     }
@@ -1999,6 +2007,7 @@ class RitualCrystal extends RitualIlluminated
     function OnStrobe() {
         print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
+        SetFlickering(true);
         // FIXME: Activate the flickr tweq and illuminate
         AmbientHack(true);
     }
@@ -2006,6 +2015,7 @@ class RitualCrystal extends RitualIlluminated
     function OnDisable() {
         print(">> " + message().message);
         LightMode(ANIM_LIGHT_MODE_EXTINGUISH);
+        SetFlickering(false);
         Illuminate(0.0);
         AmbientHack(false);
     }
@@ -2015,8 +2025,60 @@ class RitualCrystal extends RitualIlluminated
         // Do nothing, we need more specific instructions.
     }
 
+    function OnLightChange() {
+        if (Object.GetName(self) == "DebugRitualMarker") {
+            local brightness = message().data;
+            local min_brightness = message().data2;
+            local max_brightness = message().data3;
+            print(">> Light brightness: " + brightness
+                + " (min " + min_brightness + ", max " + max_brightness + ")");
+            local range = (max_brightness - min_brightness).tofloat();
+            local intensity = ((range > 0)
+                ? ((brightness - min_brightness) / range)
+                : 0);
+            print(">> Intensity: " + intensity);
+            //Illuminate(intensity);
+
+            local rising = Property.Get(self, "AnimLight", "currently rising?");
+            local countdown = Property.Get(self, "AnimLight", "current countdown");
+            local inactive = Property.Get(self, "AnimLight", "inactive");
+            print(">> inactive? " + inactive
+                + ", rising? " + rising
+                + ", countdown: " + countdown);
+
+            // Keep the flicker tweq in sync
+            // SetData("LightChangeTime", GetTime());
+            // SetData("LightChangeValue", intensity);
+            // SetData("LightChangeRising", rising);
+            light_change_time = GetTime();
+            light_change_value = intensity;
+            light_change_rising = rising;
+        }
+    }
+
     function OnTweqComplete() {
-        // FIXME!
+        // FIXME
+        if (Object.GetName(self) == "DebugRitualMarker") {
+
+        if ((message().Type == eTweqType.kTweqTypeFlicker)
+            && Property.Possessed(self, "AnimLight"))
+        {
+            local inactive = Property.Get(self, "AnimLight", "inactive");
+            if (inactive) {
+                Illuminate(0);
+            } else {
+                Illuminate(GetAnimLightIntensity(false));
+            }
+        }
+
+        // FIXME
+        } else {
+            print(Object_Description(self) + " tweq complete from "
+                + Object_Description(message().from));
+            print("  Type: " + message().Type);
+            print("  Op: " + message().Op);
+            print("  Dir: " + message().Dir);
+        }
     }
 
     function LightMode(mode) {
@@ -2038,6 +2100,35 @@ class RitualCrystal extends RitualIlluminated
         }
     }
 
+    function GetAnimLightIntensity(relative_to_min_brightness) {
+        // Returns the light intensity as a float between 0.0 and 1.0
+        // If relative_to_min_brightness, then 0.0 means the light is
+        // at its min brightness; otherwise 0.0 means the light is at
+        // zero brightness.
+
+        local rise_period = Property.Get(self, "AnimLight", "millisecs to brighten");
+        local fall_period = Property.Get(self, "AnimLight", "millisecs to dim");
+        local max_brightness = Property.Get(self, "AnimLight", "max brightness");
+        local min_brightness = Property.Get(self, "AnimLight", "min brightness");
+        local rising = Property.Get(self, "AnimLight", "currently rising?");
+        local countdown = Property.Get(self, "AnimLight", "current countdown");
+
+        // Figure out how bright to appear from the light's brightness
+        local relative_intensity = (rising
+            ? ((rise_period - countdown).tofloat() / rise_period)
+            : (countdown.tofloat() / fall_period));
+        if (relative_to_min_brightness) {
+            local brightness_range = (max_brightness - min_brightness);
+            local brightness = (min_brightness + (relative_intensity * brightness_range));
+            local absolute_intensity = ((max_brightness > 0.0)
+                ? (brightness / max_brightness)
+                : 0.0);
+            return absolute_intensity;
+        } else {
+            return relative_intensity;
+        }
+    }
+
     function AmbientHack(turned_on) {
         if (Property.Possessed(self, "AmbientHacked")) {
             local flags = Property.Get(self, "AmbientHacked", "Flags");
@@ -2048,6 +2139,13 @@ class RitualCrystal extends RitualIlluminated
             }
             Property.Set(self, "AmbientHacked", "Flags", flags);
         }
+    }
+
+    function SetFlickering(on) {
+        // Turn on or off the flicker tweq
+        local animS = Property.Get(self, "StTweqBlink", "AnimS");
+        animS = (on ? (animS | TWEQ_AS_ONOFF) : (animS & ~TWEQ_AS_ONOFF));
+        Property.Set(self, "StTweqBlink", "AnimS", animS);
     }
 }
 

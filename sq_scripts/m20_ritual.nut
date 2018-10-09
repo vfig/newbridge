@@ -2310,11 +2310,33 @@ class RitualMarkerJuggler extends SqRootScript
     }
 }
 
-// FIXME - remove this and the testbed when I'm satisfied they're working properly.
-class DebugRitualMarker extends SqRootScript
+class RitualPylon extends SqRootScript
 {
     function OnTurnOn() {
-        local msg = userparams().msg;
-        Link.BroadcastOnAllLinks(self, msg, "ControlDevice");
+        SetFlickering(true);
+    }
+
+    function OnTurnOff() {
+        SetFlickering(false);
+    }
+
+    function OnTweqComplete() {
+        if ((message().Type == eTweqType.kTweqTypeFlicker)
+            && (message().Op == eTweqOperation.kTweqOpFrameEvent))
+        {
+            // Toggle self-illumination
+            local selfillum = Property.Get(self, "ExtraLight", "Amount (-1..1)");
+            selfillum = ((selfillum == 0.4) ? 1.0 : 0.4);
+            Property.Set(self, "ExtraLight", "Amount (-1..1)", selfillum);
+        }
+    }
+
+    function SetFlickering(on) {
+        if (Property.Possessed(self, "StTweqBlink")) {
+            // Turn on or off the flicker tweq
+            local animS = Property.Get(self, "StTweqBlink", "AnimS");
+            animS = (on ? (animS | TWEQ_AS_ONOFF) : (animS & ~TWEQ_AS_ONOFF));
+            Property.Set(self, "StTweqBlink", "AnimS", animS);
+        }
     }
 }

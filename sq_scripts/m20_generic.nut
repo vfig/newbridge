@@ -678,19 +678,6 @@ class LockboxFrobSound extends SqRootScript
     }
 }
 
-class Illuminate extends SqRootScript
-{
-    function OnTurnOn()
-    {
-        Property.Set(self, "ExtraLight", "Amount (-1..1)", 1.0);
-    }
-
-    function OnTurnOff()
-    {
-        Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
-    }
-}
-
 class SynchLockedHack extends SqRootScript
 {
     /* Thief 1/Gold: put this on the Door archetype so that the

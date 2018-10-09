@@ -1946,3 +1946,27 @@ class RitualParticleHack extends SqRootScript
         }
     }
 }
+
+
+class RitualIlluminated extends SqRootScript
+{
+    // Uses 'Renderer > Extra Light' property to fake
+    // self-illumination. Responds to the Illuminate
+    // message with the parameter being the amount to
+    // (additively) illuminate.
+
+    function OnBeginScript()
+    {
+        // Make sure we have the property
+        Property.Set(self, "ExtraLight", "Additive?", true);
+        Property.Set(self, "ExtraLight", "Amount (-1..1)", 0.0);
+    }
+
+    function OnIlluminate()
+    {
+        local amount = message().data.tofloat();
+        if (amount < 0.0) { amount = 0.0; }
+        if (amount > 1.0) { amount = 1.0; }
+        Property.Set(self, "ExtraLight", "Amount (-1..1)", amount);
+    }
+}

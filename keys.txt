@@ -7,12 +7,13 @@ region 1: Sanctuary
 region 10: City
     id 1: Argaux's Lockbox
     id 2: Warehouse trapdoor
+    id 3: (internal) Keeper gate key
 
 region 100: Manor
     id 1: Manor doors (Key2)
     id 2: Tower (Key5)
     id 3: Secret room safe (Key3)
-:find_    id 4: Manor bedrooms key (Key1; not for player)
+    id 4: (internal) Manor bedrooms key
 
 region 1000:
     id 1: Pickable only (and holy debug master key)

@@ -19,8 +19,6 @@ FIX BEFORE BETA 2
     - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
     - Sky glitches visible from upper street looking towards hammer square.
 
-- Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
-
 - When the intervention starts, destroy delivery di rupo and things.
 
 - Need to update ritual script so OnLastBlessing destroys the hand at the right moment.

@@ -771,6 +771,9 @@ class GoalPullTheStrings extends SqRootScript
         if (controller != 0) {
             PostMessage(controller, "ProgressChange", eAmbienceProgress.kStopTheRitual);
         }
+
+        // And enemies are allowed to attack again
+        SendMessage(Object.Named("Player"), "GetBackInJailNow");
     }
 }
 
@@ -839,7 +842,10 @@ class GoalDamnKeepers extends SqRootScript
             // Ensure the keeper will patrol away when the conversation is done
             Link_SetCurrentPatrol(keeper, patrol);
             Object.AddMetaProperty(keeper, Object.Named("M-DoesPatrol"));
-            
+
+            // Send a message to the player to get any attackers off his back.
+            SendMessage(Object.Named("Player"), "GetOutOfJailFree");
+
             // And start the conversation (which should maybe start with a momentary Wait?)
             AI.StartConversation(conv);
         }
@@ -1065,6 +1071,12 @@ class GoalEffTheKeepers extends SqRootScript
         }
     }
 
+    function OnConversationStarted()
+    {
+        // Get any enemies off the player's back.
+        SendMessage(Object.Named("Player"), "GetOutOfJailFree");
+    }
+
     // Triggered by conversation
     function OnGivePayment()
     {
@@ -1088,6 +1100,10 @@ class GoalEffTheKeepers extends SqRootScript
 
         // And the keeper does his vanishing act
         SendMessage(self, "TurnOff");
+
+        // And enemies are allowed to attack again
+        // (for a few seconds before the mission ends I guess)
+        SendMessage(Object.Named("Player"), "GetBackInJailNow");
     }
 }
 
@@ -1295,5 +1311,50 @@ class GoalUpdateLootGoals extends SqRootScript
                 }
             }
         }
+    }
+}
+
+class GetOutOfJailFree extends SqRootScript
+{
+    /* Get enemies off the player's back while story(tm) happens. Put this
+       on the StartingPoint.
+
+       Does not kill Attack/Investigate/Awareness links, so enemies may resume
+       attacking immediately afterwards.
+
+       Send a GetOutOfJailFree message to the player when it should happen.
+       All nearby enemies (distance configurable with the ImNotHereStim source
+       on M-GetOutOfJailFree) will get the M-LookingTheOtherWayIntently metaproperty
+       which has a level 1 alert cap.
+
+       When a GetBackInJailNow message is received, the stim source will be removed,
+       and the M-LookingTheOtherWayIntently property will be removed from everything. */
+    function OnGetOutOfJailFree() {
+        local result;
+        // M-GetOutOfJailFree has a radial stim source
+        result = Object.AddMetaProperty(self, Object.Named("M-GetOutOfJailFree"));
+        // M-LookTheOtherWay has a receptron to the stim that adds M-LookingTheOtherWayIntently
+        result = Object.AddMetaPropertyToMany(Object.Named("M-LookTheOtherWay"), "@Creature");
+
+        // Make sure it times out even if something happens so we never get
+        // the GetBackInJailNow message. One minute ought to be enough.
+        SetOneShotTimer("GetOutOfJailFreeTimeout", 60.0);
+    }
+
+    function OnGetBackInJailNow() {
+        CleanUp();
+    }
+
+    function OnTimer() {
+        if (message().name == "GetOutOfJailFreeTimeout") {
+            CleanUp();
+        }
+    }
+
+    function CleanUp() {
+        local result;
+        result = Object.RemoveMetaProperty(self, Object.Named("M-GetOutOfJailFree"));
+        result = Object.RemoveMetaPropertyFromMany(Object.Named("M-LookTheOtherWay"), "@Creature");
+        result = Object.RemoveMetaPropertyFromMany(Object.Named("M-LookingTheOtherWayIntently"), "@Creature");
     }
 }

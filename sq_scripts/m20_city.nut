@@ -58,12 +58,11 @@ class VanishingAct extends SqRootScript
     // Alpha property. When it receives the TurnOff message,
     // it will disappear in 10 seconds and then destroy itself.
 
-    previous_time = 0;
     period = 10.0;
 
     function OnTurnOff()
     {
-        previous_time = message().time;
+        SetData("VanishingTime", message().time);
         SetFlickering(true);
     }
 
@@ -71,13 +70,14 @@ class VanishingAct extends SqRootScript
     {
         // Figure out how much time has passed since the last update
         local time = message().time
+        local previous_time = GetData("VanishingTime").tointeger();
         local elapsed = (time - previous_time) / 1000.0;
         if (elapsed < 0) {
             elapsed = 0;
         } else if (elapsed > period) {
             elapsed = period;
         }
-        previous_time = time;
+        SetData("VanishingTime", message().time);
 
         // Calculate the alpha change corresponding to the elapsed time
         local alpha = Property.Get(self, "RenderAlpha", "").tofloat();

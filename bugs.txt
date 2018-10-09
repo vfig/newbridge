@@ -27,10 +27,6 @@ FIX BEFORE BETA 2
 - Double doors when unlocking: only one unlocks, but both open.
     - Maybe use a single fnordlock for both of them?
 
-- Guards attacking are a problem for the Keeper intervention and the ending.
-    - Close the gates when stuff happens, but hold off tping the keeper in until there's no more attack (or high awareness? or investigate?) links to the player. Check on enter the room... maybe also spawn a timer when in the room?
-    - ending keeper might need slightly different handling, since he doesn't tp in behind you after all.
-
 - Civilians stop dead when keeper intervention gets in their way! Either give them internal keys to the gates, or modify their patrol routes for the duration of the intervention to turn back.
 
 - When the intervention starts, destroy delivery di rupo and things.
@@ -83,6 +79,8 @@ ONLY IF I FEEL LIKE IT
 - Prophet apparitions usually misses you when you're crouched?
     - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.
     - Probably not worth it. He's meant to be scary, rather than actually deadly after all.
+
+- BUG: you can kill the Canal keeper and (except on Expert) it doesn't matter :D
 
 ----
 

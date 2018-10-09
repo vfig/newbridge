@@ -38,11 +38,6 @@ BETA 2 (October)
     - Hmm.... maybe have the crystals affect the lights??? So you can frob or smash a crystal to disable it, to disable its lights, maybe temporarily? Hmm... Might add the ingredient I was missing. And then the one in the manor becomes a training one that shows you it can be frobbed and it goes quiet+dark temporarily.
     - Sounds!
 
-- Review how well Keeper intervention worked for people.
-    - Seems okay so far
-    - Except for the attacking bit...
-        - Can I force a temporary level 1 alert cap and link killing on attacking guards?
-
 - Mountain visibility?
 
 - Sounds

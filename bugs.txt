@@ -5,8 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Palette on stoned4a is wrong. Sometimes comes up completely bonkers
-
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
 - Catacombs is confusing to people. Maybe a couple more landmarks?

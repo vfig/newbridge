@@ -39,6 +39,15 @@ archetype AMB_M20
 volume -1
 tension7
 
+// Guess they don't expect you to hit ceramic things with the blackjack?
+// There wasn't a schema for it!
+schema blackjack_ceram
+// This archetype makes it a minor anomaly
+archetype HIT_MATERIAL
+volume -1
+ar_body1 ar_body2
+env_tag (Event Collision) (WeaponType Blackjack) (Material Ceramic)
+
 
 // -------------------------- AMBIENCE ----------------------------
 

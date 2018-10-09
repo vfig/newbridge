@@ -2098,8 +2098,8 @@ class RitualCrystal extends SqRootScript
 class RitualMarker extends RitualCrystal
 {
     function OnBeginScript() {
-        if (! IsDataSet("Enabled")) {
-            SetData("Enabled", true);
+        if (! IsDataSet("State")) {
+            SetData("State", 1);
         }
         if (! IsDataSet("SavedMessage")) {
             SetData("SavedMessage", "TurnOff");
@@ -2143,7 +2143,7 @@ class RitualMarker extends RitualCrystal
             base.OnDisable();
             ForwardMessage();
             // Stop acting on messages
-            SetData("Enabled", false);
+            SetData("State", 0);
         }
     }
 
@@ -2153,7 +2153,7 @@ class RitualMarker extends RitualCrystal
             ForwardMessage();
         } else {
             // Resume acting on messages
-            SetData("Enabled", true);
+            SetData("State", 1);
             base.OnEnable();
             ForwardMessage();
             SendSavedMessage()
@@ -2161,7 +2161,18 @@ class RitualMarker extends RitualCrystal
     }
 
     function OnSlain() {
-        // Get the culprit to slay all our friends too.
+        // Die
+        SetData("State", 2);
+        // Become unrendered and nonphysical - we can't actually
+        // let ourselves be destroyed, because that would break
+        // the ritual controller!
+        Property.SetSimple(self, "RenderType", 1);
+        Property.Set(self, "CollisionType", "", 4);
+
+        // Disable everything
+        Link.BroadcastOnAllLinks(self, "Disable", "ControlDevice");
+
+        // Then get the culprit to slay all our friends too.
         local links = Link.GetAll("ControlDevice", self);
         foreach (link in links) {
             Damage.Slay(LinkDest(link), message().culprit);
@@ -2169,7 +2180,11 @@ class RitualMarker extends RitualCrystal
     }
 
     function IsEnabled() {
-        return GetData("Enabled");
+        return (GetData("State") == 1);
+    }
+
+    function IsAlive() {
+        return (GetData("State") != 2);
     }
 
     function ForwardMessage() {

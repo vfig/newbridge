@@ -2107,70 +2107,80 @@ class RitualMarker extends RitualCrystal
     }
 
     function OnTurnOn() {
-        SaveMessage();
-        if (IsEnabled()) {
-            base.OnTurnOn();
-            ForwardMessage();
+        if (IsAlive()) {
+            SaveMessage();
+            if (IsEnabled()) {
+                base.OnTurnOn();
+                ForwardMessage();
+            }
         }
     }
 
     function OnTurnOff() {
-        SaveMessage();
-        if (IsEnabled()) {
-            base.OnTurnOff();
-            ForwardMessage();
+        if (IsAlive()) {
+            SaveMessage();
+            if (IsEnabled()) {
+                base.OnTurnOff();
+                ForwardMessage();
+            }
         }
     }
 
     function OnPulse() {
-        SaveMessage();
-        if (IsEnabled()) {
-            base.OnPulse();
-            ForwardMessage();
+        if (IsAlive()) {
+            SaveMessage();
+            if (IsEnabled()) {
+                base.OnPulse();
+                ForwardMessage();
+            }
         }
     }
 
     function OnStrobe() {
-        SaveMessage();
-        if (IsEnabled()) {
-            base.OnStrobe();
-            ForwardMessage();
+        if (IsAlive()) {
+            SaveMessage();
+            if (IsEnabled()) {
+                base.OnStrobe();
+                ForwardMessage();
+            }
         }
     }
 
     function OnDisable() {
-        if (IsEnabled()) {
-            base.OnDisable();
-            ForwardMessage();
-            // Stop acting on messages
-            SetData("State", 0);
+        if (IsAlive()) {
+            if (IsEnabled()) {
+                base.OnDisable();
+                ForwardMessage();
+                // Stop acting on messages
+                SetData("State", 0);
+            }
         }
     }
 
     function OnEnable() {
-        if (IsEnabled()) {
-            base.OnEnable();
-            ForwardMessage();
-        } else {
-            // Resume acting on messages
-            SetData("State", 1);
-            base.OnEnable();
-            ForwardMessage();
-            SendSavedMessage()
+        if (IsAlive()) {
+            if (IsEnabled()) {
+                base.OnEnable();
+                ForwardMessage();
+            } else {
+                // Resume acting on messages
+                SetData("State", 1);
+                base.OnEnable();
+                ForwardMessage();
+                SendSavedMessage()
+            }
         }
     }
 
     function OnSlain() {
         // Die
         SetData("State", 2);
+
         // Become unrendered and nonphysical - we can't actually
         // let ourselves be destroyed, because that would break
         // the ritual controller!
         Property.SetSimple(self, "RenderType", 1);
         Property.Set(self, "CollisionType", "", 4);
-
-        // Disable everything
-        Link.BroadcastOnAllLinks(self, "Disable", "ControlDevice");
 
         // Then get the culprit to slay all our friends too.
         local links = Link.GetAll("ControlDevice", self);
@@ -2204,7 +2214,7 @@ class RitualMarker extends RitualCrystal
 
     // A marker can be disabled with water, a blackjack, or KO gas.
     // Basically, reward the player for figuring it's part of the
-    // solution.
+    // solution, but don't be picky about their approach.
 
     function OnWaterStimStimulus() {
         SendMessage(self, "Disable");
@@ -2234,6 +2244,11 @@ class RitualLight extends SqRootScript
 
     function OnDisable() {
         SendMessage(self, "TurnOff");
+    }
+
+    function OnSlain() {
+        SendMessage(self, "TurnOff");
+        Object.Destroy(self);
     }
 }
 

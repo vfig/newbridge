@@ -54,8 +54,9 @@ RELEASE (November)
     - Text (draw and scan separately)
     - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
     - revise automap properties if the location assignment turns out differently (as it very well might!)
-    - German captions: "Anwesen der Lady di Rupo" (Manor of Lady di Rupo)
+    - German captions: "Anwesen von Lady di Rupo" (Manor of Lady di Rupo)
     - German captions: "Korridor" (for hall in Sanctuary)
+    - For the italian map please replace "Sala"(Hall) with "Corridoio".
 
 - Unload unused textures, if I _really_ care:
     "Texture RAM in use in WR ~2593Kb, ~3237Kb loaded but not in world"

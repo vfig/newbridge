@@ -7,9 +7,6 @@ FIX BEFORE BETA 2
 
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
-- It's possible to lean through the works station secret door and frob the lever :(
-    - make it locked until the ritual starts, just in case.
-
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
     - Move loot around so it's less hidden, add one or two more pieces.

@@ -2111,6 +2111,9 @@ class RitualMarker extends RitualCrystal
         if (! IsDataSet("SavedMessage")) {
             SetData("SavedMessage", "TurnOff");
         }
+        if (! IsDataSet("ReenableTimer")) {
+            SetData("ReenableTimer", 0);
+        }
     }
 
     function OnTurnOn() {
@@ -2165,6 +2168,8 @@ class RitualMarker extends RitualCrystal
                 // Stop acting on messages
                 SetData("State", 0);
             }
+            // If we're enabled we start it; if disabled we restart it.
+            RestartTimer();
         }
     }
 
@@ -2183,9 +2188,19 @@ class RitualMarker extends RitualCrystal
         }
     }
 
+    function OnTimer() {
+        if (message().name == "Reenable") {
+            SetData("ReenableTimer", 0);
+            PostMessage(self, "Enable");
+        }
+    }
+
     function OnSlain() {
         // Die
         SetData("State", 2);
+
+        // Kill the timer if it's there
+        StopTimer();
 
         // Do visual and audio effects
         // This is a hack, but it'll have to do.
@@ -2227,6 +2242,21 @@ class RitualMarker extends RitualCrystal
         }
     }
 
+    function RestartTimer() {
+        // Set a timer to reenable myself.
+        StopTimer();
+        local timer = SetOneShotTimer("Reenable", 15.0);
+        SetData("ReenableTimer", timer);
+    }
+
+    function StopTimer() {
+        local timer = GetData("ReenableTimer");
+        if (timer != 0) {
+            KillTimer(timer);
+            SetData("ReenableTimer", 0);
+        }
+    }
+
     // A marker can be disabled with water, a blackjack, or KO gas.
     // Basically, reward the player for figuring it's part of the
     // solution, but don't be picky about their approach.
@@ -2263,65 +2293,6 @@ class RitualLight extends SqRootScript
 
     function OnImDyingHere() {
         Light.SetMode(self, ANIM_LIGHT_MODE_EXTINGUISH);
-    }
-}
-
-class RitualMarkerJuggler extends SqRootScript
-{
-    // Create a ControlDevice link from each RitualMarker to this.
-    // When any ritual marker is disabled, this will enable all
-    // the others. And after a timeout, it will enable that marker
-    // again too.
-
-    function OnBeginScript() {
-        if (! IsDataSet("DisabledMarker")) {
-            SetData("DisabledMarker", 0);
-        }
-        if (! IsDataSet("ReenableTimer")) {
-            SetData("ReenableTimer", 0);
-        }
-    }
-
-    function OnDisable() {
-        // Keep track of which marker was disabled.
-        local disabled_marker = message().from;
-        SetData("DisabledMarker", disabled_marker);
-        // Set a timer to reenable it.
-        local timer = SetOneShotTimer("Reenable", 15.0);
-        SetData("ReenableTimer", timer);
-
-        // Enable all the other markers.
-        local links = Link.GetAll("~ControlDevice", self);
-        foreach (link in links) {
-            local marker = LinkDest(link);
-            if (marker != disabled_marker) {
-                PostMessage(marker, "Enable");
-            }
-        }
-    }
-
-    function OnEnable() {
-        // Only listen if the message is from the disabled marker.
-        local disabled_marker = GetData("DisabledMarker");
-        if (message().from == disabled_marker) {
-            // Kill the timer if it's still active.
-            local timer = GetData("ReenableTimer");
-            if (timer != 0) {
-                KillTimer(timer);
-                SetData("ReenableTimer", 0);
-            }
-            // And forget the disabled marker.
-            SetData("DisabledMarker", 0);
-        }
-    }
-
-    function OnTimer() {
-        if (message().name == "Reenable") {
-            local disabled_marker = GetData("DisabledMarker");
-            if (disabled_marker != 0) {
-                PostMessage(disabled_marker, "Enable");
-            }
-        }
     }
 }
 

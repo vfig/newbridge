@@ -20,11 +20,10 @@ BETA 2 (October)
     - Watching the cemetery
     - Watching Lady di Rupo's
 
-- Rich street: scatter loot And tulz!
-
 - Rooms:
     - change room archetype for outside gates, so Anax can't be dropped _right_ there.
     - new room archetype for works stations for the same reason
+        - anywhere else?
     - new room type + automap location for hammerite upper walkways
 
 - Mountain visibility?
@@ -35,18 +34,6 @@ BETA 2 (October)
 - Proper VO
     - Process and normalise
     - Remove unused placeholder lines (mostly nb1xx)
-
-DONE. - Review which new strings need translating
-    - city_argauxleverair
-    - city_argauxleverfire
-    - city_argauxleverearth
-    - city_argauxleverwater
-    - city_cemelements
-    - maus_plaque
-    - Name_Board
-    - Name_Payment
-    - Name_Powderkeg
-    FREEZE! I've sent these to the translators, so change nothing more now unless it's critical.
 
 - NPC Names!
     - And make sure they all have the script that BrotherLionel does that appends status
@@ -65,6 +52,8 @@ RELEASE (November)
     - Text (draw and scan separately)
     - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
     - revise automap properties if the location assignment turns out differently (as it very well might!)
+    - German captions: "Anwesen der Lady di Rupo" (Manor of Lady di Rupo)
+    - German captions: "Korridor" (for hall in Sanctuary)
 
 - Unload unused textures, if I _really_ care:
     "Texture RAM in use in WR ~2593Kb, ~3237Kb loaded but not in world"

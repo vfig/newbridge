@@ -156,15 +156,15 @@ FIXME! - some credits still missing.
 
 Created by              : vfig
 
-Story                   : vfig & Aaron Dron
+Story                   : vfig & tinyblob
 
-Briefing art            :
+Briefing art            : ...FIXME...
 
 Voice acting:
-    Garrett             :
+    Garrett             : ...FIXME...
     Lady di Rupo        : Shadow Creepr
     Keeper              : Yandros
-    Prophet             :
+    The Prophet         : ...FIXME...
     The Eternal Benny   : Yandros
     Irate Sergeant      : MasterThief3
     Heathen guard       : Yandros
@@ -179,16 +179,17 @@ Translation:
     Deutsch             : Baeuchlein
     Italiano            : Piesel
                         :
-                        :
+                        : ...FIXME...
+
 Proofreading            : Gnartsch
                         :
+                        : ...FIXME...
+
+Beta testing            : ...FIXME...
+                        :
                         :
 
-Beta testing            : FIXME!
-                        :
-                        :
-
-Special thanks          : FIXME!
+Special thanks          : ...FIXME...
                         :
                         :
 

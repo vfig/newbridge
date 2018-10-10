@@ -29,8 +29,10 @@ BETA 2 (October)
 
 - Ritual
     - (Double-check proper triggering of rescued Anax goal after room archetypes)
-    - Hmm.... maybe have the crystals affect the lights??? So you can frob or smash a crystal to disable it, to disable its lights, maybe temporarily? Hmm... Might add the ingredient I was missing. And then the one in the manor becomes a training one that shows you it can be frobbed and it goes quiet+dark temporarily.
-    - Sounds!
+    - Sounds! Have a sound effect when lights change, for feedback. Maybe even have the
+      ambience intensify during the ritual?
+    - Add one or two excursions on the west / north sides that allow the player to get up and a little further back (with some more cover). Just for variation really.
+    - See if there's any vegetation or similar models that can be draped over the stalagmites and stalactites.
 
 - Mountain visibility?
 

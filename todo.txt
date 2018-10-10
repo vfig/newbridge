@@ -32,9 +32,6 @@ BETA 2 (October)
     - new room archetype for works stations for the same reason
     - new room type + automap location for hammerite upper walkways
 
-- Ritual
-    - See if there's any vegetation or similar models that can be draped over the stalagmites and stalactites.
-
 - Mountain visibility?
 
 - Sounds

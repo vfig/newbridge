@@ -8,10 +8,6 @@ BETA 2 (October)
 - Review loot totals and distribution
 - Review tulz totals and distribution
 
-- Detail
-    - Windows on buildings around the cemetery?
-        - I like that it's dark! So maybe just textured windows and no lights?
-
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.

@@ -7,6 +7,8 @@ BETA 2 (October)
 
 - Review tulz totals and distribution
 
+- Detail priest's room staircase (just texture the stairs differently, and the ceiling)
+
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.

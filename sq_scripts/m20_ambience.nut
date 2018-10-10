@@ -179,6 +179,24 @@ class AmbienceController extends SqRootScript
             /* ritual */   ["m20ritualloop3", "m20cave5mood", "m20cave5ten"],
             /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
         ],
+        RITUAL4 = [
+            /* start */    [],
+            /* argaux? */  [],
+            /* the job */  [],
+            /* got both */ [],
+            /* go home? */ [],
+            /* ritual */   ["m20ritualloop3", "m20ritualmood4", "m20cave5ten"],
+            /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
+        ],
+        RITUAL5 = [
+            /* start */    [],
+            /* argaux? */  [],
+            /* the job */  [],
+            /* got both */ [],
+            /* go home? */ [],
+            /* ritual */   ["m20cave5loop", "m20ritualmood5", "m20cave7ten"],
+            /* all done */ ["m20cave5loop", "m20ritualmood5", "m20cave7ten"],
+        ],
     }
 
     function CurrentRegion() {

@@ -39,6 +39,18 @@ archetype AMB_M20
 volume -1
 tension7
 
+// Ritual summoning prophet
+schema nbritfinale1
+archetype AMB_M20
+volume -1
+egpedww
+
+// Ritual summoned prophet now
+schema nbritfinale2
+archetype AMB_M20
+volume -1
+egzap
+
 // Guess they don't expect you to hit ceramic things with the blackjack?
 // There wasn't a schema for it!
 schema blackjack_ceram
@@ -75,23 +87,37 @@ m02bs2a m02bs2b m02bs2c m02bs2d
 // Ritual loop
 schema m20ritualloop1
 archetype AMB_M20
-volume -2000
+volume -1500
 mono_loop 0 0
 eees1
 
 // Ritual loop
 schema m20ritualloop2
 archetype AMB_M20
-volume -1500
+volume -1000
 mono_loop 0 0
 eees2
 
 // Ritual loop
 schema m20ritualloop3
 archetype AMB_M20
-volume -1000
+volume -500
 mono_loop 0 0
 eees3
+
+// Ritual final stage mood
+schema m20ritualmood4
+archetype AMB_M20
+volume -1500
+mono_loop 0 0
+dronelp
+
+// Ritual failed mood
+schema m20ritualmood5
+archetype AMB_M20
+volume -1500
+mono_loop 0 0
+rising
 
 // Post-ritual cave mood
 schema m20cave7mood

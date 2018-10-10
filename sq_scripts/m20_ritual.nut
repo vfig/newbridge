@@ -317,6 +317,11 @@ class RitualController extends SqRootScript
             SendMessage(marker, "TurnOn");
 
             ActivateStrip(stage_index);
+
+            // Change the ambience for the final stage
+            if (stage_index == 6) {
+                ChangeAmbience("ritual4");
+            }
         }
     }
 
@@ -325,6 +330,11 @@ class RitualController extends SqRootScript
         local stage = Stage();
         local stage_index = StageIndex();
         RitualLog(eRitualLog.kRitual, "Bless " + stage_index + ", Stage " + stage);
+
+        // Play a sound that continues until the prophet appears
+        if (stage_index == 6) {
+            Sound.PlaySchemaAmbient(self, "nbritfinale1");
+        }
     }
 
     function StepReturn()
@@ -339,6 +349,13 @@ class RitualController extends SqRootScript
             SendMessage(next_marker, "Pulse");
 
             ActivateParticles(stage_index);
+
+            // Update the ambience
+            if (stage_index == 3) {
+                ChangeAmbience("ritual2");
+            } else if (stage_index == 5) {
+                ChangeAmbience("ritual3");
+            }
         }
     }
 
@@ -495,6 +512,11 @@ class RitualController extends SqRootScript
         // Make sure it's too late to rescue the Anax
         RitualLog(eRitualLog.kFinale, "Point of no return! You can't rescue the victim now.");
         Object_AddFrobAction(Victim(), eFrobAction.kFrobActionIgnore);
+
+        // Play a sound for the summoning of the prophet
+        Sound.PlaySchemaAmbient(self, "nbritfinale2");
+        // Also change the ambience
+        ChangeAmbience("ritual5");
 
         // Start pulling that Anax to pieces
         foreach (conv in FinaleConvs()) {
@@ -755,6 +777,15 @@ class RitualController extends SqRootScript
             }
         }
         return closest;
+    }
+
+    function ChangeAmbience(region) {
+        local room = Object.Named("RoomRitualChamber");
+        if (room == 0) { print("XXXXXX Can't find RoomRitualChamber"); return; }
+        Property.Set(room, "Ambient", "Schema Name", region)
+        local controller = Object.Named("AmbienceController");
+        if (controller == 0) return;
+        PostMessage(controller, "RegionChange", region);
     }
 
     // ---- Messages from performer, extras, and victims

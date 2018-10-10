@@ -593,7 +593,8 @@ class RitualController extends SqRootScript
             RitualLog(eRitualLog.kRitual, "End");
 
             // Begin the countdown to mission failure.
-            SendMessage(self, "RitualEnded");
+            // Seems maybe to crash less often with a PostMessage ;_;
+            PostMessage(self, "RitualEnded");
         }
     }
 
@@ -1942,7 +1943,10 @@ class RitualProphetSpawner extends SqRootScript
 {
     function OnTurnOn()
     {
-        SetOneShotTimer("Spawn", 2.0);
+        // Hack alert! This one-second delay mitigates a crash that
+        // otherwise happens. I don't know what causes it, but any
+        // less time and it still crashes about once in five.
+        SetOneShotTimer("Spawn", 1.0);
     }
 
     function OnTimer()

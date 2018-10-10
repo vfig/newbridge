@@ -1018,6 +1018,15 @@ class GoalEffTheKeepers extends SqRootScript
     function OnBeginScript()
     {
         SubscribeAll();
+        SetData("Subscribed", true);
+    }
+
+    function OnEndScript()
+    {
+        if (GetData("Subscribed")) {
+            UnsubscribeAll();
+            SetData("Subscribed", false);
+        }
     }
 
     function SubscribeAll()

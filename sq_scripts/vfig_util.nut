@@ -210,6 +210,16 @@ class DebugQuestVars extends SqRootScript
         //Display(DumpAllGoals());
     }
 
+    function OnEndScript()
+    {
+        for (local num = 0; num < 32; num += 1) {
+            if (GoalExists(num)) {
+                Quest.UnsubscribeMsg(self, "goal_state_" + num);
+                Quest.UnsubscribeMsg(self, "goal_visible_" + num);
+            }
+        }
+    }
+
     function OnQuestChange()
     {
         if (message().m_oldValue != message().m_newValue) {

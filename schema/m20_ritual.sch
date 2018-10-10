@@ -108,14 +108,14 @@ eees3
 // Ritual final stage mood
 schema m20ritualmood4
 archetype AMB_M20
-volume -1500
+volume -500
 mono_loop 0 0
 dronelp
 
 // Ritual failed mood
 schema m20ritualmood5
 archetype AMB_M20
-volume -1500
+volume -1
 mono_loop 0 0
 rising
 

@@ -31,7 +31,7 @@ RitualLogsEnabled <- function()
 //        | eRitualLog.kPerformer
 //        | eRitualLog.kExtra
 //        | eRitualLog.kVictim
-        | eRitualLog.kLighting
+//        | eRitualLog.kLighting
 //        | eRitualLog.kFinale
         // Contexts
 //        | eRitualLog.kPathing
@@ -189,10 +189,6 @@ class RitualController extends SqRootScript
             NoHandConv();
             NoVictimConv();
 
-            // FIXME: need to know if we're at the start of the mission,
-            // or just loading a save! We should only do the following
-            // at the start of a mission!
-
             // Start the performer in a trance so they won't spook
             // at anything before the ritual begins.
             RitualLog(eRitualLog.kPerformer, "Starting trance");
@@ -330,11 +326,6 @@ class RitualController extends SqRootScript
         local stage = Stage();
         local stage_index = StageIndex();
         RitualLog(eRitualLog.kRitual, "Bless " + stage_index + ", Stage " + stage);
-
-        // Play a sound that continues until the prophet appears
-        if (stage_index == 6) {
-            Sound.PlaySchemaAmbient(self, "nbritfinale1");
-        }
     }
 
     function StepReturn()
@@ -512,11 +503,6 @@ class RitualController extends SqRootScript
         // Make sure it's too late to rescue the Anax
         RitualLog(eRitualLog.kFinale, "Point of no return! You can't rescue the victim now.");
         Object_AddFrobAction(Victim(), eFrobAction.kFrobActionIgnore);
-
-        // Play a sound for the summoning of the prophet
-        Sound.PlaySchemaAmbient(self, "nbritfinale2");
-        // Also change the ambience
-        ChangeAmbience("ritual5");
 
         // Start pulling that Anax to pieces
         foreach (conv in FinaleConvs()) {
@@ -887,6 +873,11 @@ class RitualController extends SqRootScript
             RitualLog(eRitualLog.kFinale,
                 "Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
 
+            // Play a sound for the summoning of the prophet
+            Sound.PlaySchemaAmbient(self, "nbritfinale2");
+            // Also change the ambience
+            ChangeAmbience("ritual5");
+
             TearVictimApart();
             ExplodeVictim();
             SendMessage(ProphetSpawner(), "TurnOn");
@@ -1215,9 +1206,13 @@ class RitualPerformer extends SqRootScript
     function OnLastBlessingStart()
     {
         RitualLog(eRitualLog.kPerformer, "Last blessing starts.");
+
+        // Play a sound that continues until the prophet appears
+        Sound.PlaySchemaAmbient(self, "nbritfinale1");
+
         // The last blessing is happening. Start a timer for consuming the
         // hand, so it happens mid-motion.
-        SetOneShotTimer("ConsumeHand", 3.0);
+        SetOneShotTimer("ConsumeHand", 2.0);
     }
 
     function OnTimer()
@@ -1984,7 +1979,6 @@ class RitualCrystal extends SqRootScript
     function OnSim() {
         if (message().starting) {
             // Start in the off state
-            // FIXME - does this break if I save & load??
             PostMessage(self, "TurnOff");
         }
     }

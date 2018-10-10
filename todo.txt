@@ -33,8 +33,6 @@ BETA 2 (October)
     - new room type + automap location for hammerite upper walkways
 
 - Ritual
-    - Sounds! Have a sound effect when lights change, for feedback. Maybe even have the
-      ambience intensify during the ritual?
     - See if there's any vegetation or similar models that can be draped over the stalagmites and stalactites.
 
 - Mountain visibility?

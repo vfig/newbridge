@@ -24,8 +24,6 @@ FIX BEFORE BETA 2
 
 - When the intervention starts, destroy delivery di rupo and things.
 
-- Need to update ritual script so OnLastBlessing destroys the hand at the right moment.
-
 - Crypt doors disappeared for marbleman.
 
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:

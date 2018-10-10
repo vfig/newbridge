@@ -186,7 +186,7 @@ class AmbienceController extends SqRootScript
             /* got both */ [],
             /* go home? */ [],
             /* ritual */   ["m20ritualloop3", "m20ritualmood4", "m20cave5ten"],
-            /* all done */ ["m20cave5loop", "m20cave7mood", "m20cave7ten"],
+            /* all done */ ["m20cave5loop", "m20cave7mood"],
         ],
         RITUAL5 = [
             /* start */    [],
@@ -194,8 +194,8 @@ class AmbienceController extends SqRootScript
             /* the job */  [],
             /* got both */ [],
             /* go home? */ [],
-            /* ritual */   ["m20cave5loop", "m20ritualmood5", "m20cave7ten"],
-            /* all done */ ["m20cave5loop", "m20ritualmood5", "m20cave7ten"],
+            /* ritual */   ["m20cave5loop", "m20ritualmood5"],
+            /* all done */ ["m20cave5loop", "m20ritualmood5"],
         ],
     }
 

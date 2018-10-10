@@ -873,8 +873,6 @@ class RitualController extends SqRootScript
             RitualLog(eRitualLog.kFinale,
                 "Rip and tear! RIP AND TEAR!   ! ~  R I P  ~  A N D  ~  T E A R  ~ !");
 
-            // Play a sound for the summoning of the prophet
-            Sound.PlaySchemaAmbient(self, "nbritfinale2");
             // Also change the ambience
             ChangeAmbience("ritual5");
 
@@ -1950,6 +1948,9 @@ class RitualProphetSpawner extends SqRootScript
     function OnTimer()
     {
         if (message().name == "Spawn") {
+             // Play a sound for the summoning of the prophet
+            Sound.PlaySchemaAmbient(self, "nbritfinale2");
+
             // Teleport the Prophet here, dismiss the particles, and animate him.
             local prophet = Link_GetOneParam("Prophet", self);
             local particle_hack = Link_GetOneParam("ParticleHack", self);

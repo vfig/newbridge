@@ -5,8 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
-
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
     - Move loot around so it's less hidden, add one or two more pieces.
@@ -67,6 +65,8 @@ ONLY IF I FEEL LIKE IT
     - Probably not worth it. He's meant to be scary, rather than actually deadly after all.
 
 - BUG: you can kill the Canal keeper and (except on Expert) it doesn't matter :D
+
+- Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
 ----
 

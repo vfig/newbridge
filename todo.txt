@@ -67,6 +67,9 @@ RELEASE (November)
     - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
     - revise automap properties if the location assignment turns out differently (as it very well might!)
 
+- Unload unused textures, if I _really_ care:
+    "Texture RAM in use in WR ~2593Kb, ~3237Kb loaded but not in world"
+
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
 

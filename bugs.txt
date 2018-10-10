@@ -5,6 +5,9 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- StTerencesHammer5 is not in a room brush
+- StTerencesHammer7 is not in a room brush
+
 - Catacombs is confusing to people. Maybe a couple more landmarks?
     - Or not. So far nobody's reporting real difficulty.
     - Move loot around so it's less hidden, add one or two more pieces.

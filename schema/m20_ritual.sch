@@ -73,9 +73,23 @@ mono_loop 6000 8000
 m02bs2a m02bs2b m02bs2c m02bs2d
 
 // Ritual loop
-schema m20ritualloop
+schema m20ritualloop1
+archetype AMB_M20
+volume -2000
+mono_loop 0 0
+eees1
+
+// Ritual loop
+schema m20ritualloop2
 archetype AMB_M20
 volume -1500
+mono_loop 0 0
+eees2
+
+// Ritual loop
+schema m20ritualloop3
+archetype AMB_M20
+volume -1000
 mono_loop 0 0
 eees3
 

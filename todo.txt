@@ -27,11 +27,14 @@ BETA 2 (October)
 
 - Rich street: scatter loot And tulz!
 
+- Rooms:
+    - change room archetype for outside gates, so Anax can't be dropped _right_ there.
+    - new room archetype for works stations for the same reason
+    - new room type + automap location for hammerite upper walkways
+
 - Ritual
-    - (Double-check proper triggering of rescued Anax goal after room archetypes)
     - Sounds! Have a sound effect when lights change, for feedback. Maybe even have the
       ambience intensify during the ritual?
-    - Add one or two excursions on the west / north sides that allow the player to get up and a little further back (with some more cover). Just for variation really.
     - See if there's any vegetation or similar models that can be draped over the stalagmites and stalactites.
 
 - Mountain visibility?
@@ -67,6 +70,8 @@ RELEASE (November)
     - City map (draw and scan)
     - Hammerite map (draw and scan)
         - sketched Hammerite map is wrong: door for library should be on the North, and the armoury on the South.
+        - Sanctuary map doesn't show upper walkways, and it should - they'd be visible
+        - Sanctuary map doesn't show bell tower
     - Text (draw and scan separately)
     - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
     - revise automap properties if the location assignment turns out differently (as it very well might!)

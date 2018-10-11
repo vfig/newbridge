@@ -17,13 +17,13 @@ schema_voice normal1 1 nbwakeup
 schema m20pond
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 wtr__md3
 
 schema m20frogs
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 forest4
 
 

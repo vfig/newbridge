@@ -22,14 +22,14 @@ chain1 moan1 moan2 moan3 moan4
 // Distant burricks
 schema m20burricks
 archetype AMB_M20
-volume -1000
+volume -2500
 mono_loop 3000 7000
 bk1a0br1 bk1a0br2 bk1a0br3 bk1a0br4 bk1a1__1 bk1a1__2 bk1a1__3 bk1a1__4 bk1a1__5
 
 // Distant burrick footsteps
 schema m20burrfeet
 archetype AMB_M20
-volume -1000
+volume -2500
 mono_loop 300 500
 no_repeat
 ft_bur1 ft_bur2 ft_bur3 ft_bur4 silenc1s silenc3s silenc9s

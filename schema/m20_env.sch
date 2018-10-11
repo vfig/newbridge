@@ -49,7 +49,7 @@ mono_loop 0 0
 volume -1000
 printinr
 
-schema m20mach3
+schema m20mach4
 archetype DEVICES_M20
 mono_loop 0 0
 volume -1000
@@ -115,7 +115,7 @@ fan
 schema m20cauldron
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -500
 lavalp1
 
 schema m20gears1
@@ -151,19 +151,19 @@ pipelp3
 schema m20water1
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 wtr__sm1
 
 schema m20water2
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 wtr__sm2
 
 schema m20water3
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 wtr__sm3
 
 //-----------------------
@@ -187,13 +187,13 @@ crowdmed
 // (Loud wind)
 schema m20wind1
 archetype AMB_M20
-mono_loop 0 0
+mono_loop 4000 8000
 volume -1000
 wind4 wind5
 
 // (Quiet wind)
 schema m20wind1q
 archetype AMB_M20
-mono_loop 0 0
-volume -1000
+mono_loop 5000 10000
+volume -2000
 wind4 wind5

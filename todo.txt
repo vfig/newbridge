@@ -7,6 +7,9 @@ BETA 2 (October)
 
 - Review tulz totals and distribution
 
+- Try reducing _all_ ambience volumes by a little. Right now they're a little too overpowering.
+    (players can always turn it up! :)
+
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.

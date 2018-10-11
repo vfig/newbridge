@@ -18,14 +18,6 @@ BETA 2 (October)
     - Watching the cemetery
     - Watching Lady di Rupo's
 
-- Rooms:
-    - change room archetype for outside gates, so Anax can't be dropped _right_ there.
-    - new room archetype for works stations for the same reason
-        - anywhere else?
-    - new room type + automap location for hammerite upper walkways
-        - do a brand new rects image so it doesn't change the location numbers
-            - double check that it doesn't!
-
 - Should ritual markers react to moss arrows?
 
 - Sounds

@@ -14,7 +14,6 @@ FIX BEFORE BETA 2
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
     - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
-    - At -6.82,207,-276, can't hear the guard a few feet away! Bad propagation again, sigh. Possibly the weird overlap of square and diagonal rooms?
 
 - Sound issues:
     maus_dousesound (326) an Obj rad 80 with m20mausdous

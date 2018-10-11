@@ -24,6 +24,8 @@ BETA 2 (October)
         - anywhere else?
     - new room type + automap location for hammerite upper walkways
 
+- Should ritual markers react to moss arrows?
+
 - Sounds
     - Incidental sounds (machinery, water, etc)
 

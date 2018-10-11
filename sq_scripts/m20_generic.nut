@@ -696,3 +696,22 @@ class SynchLockedHack extends SqRootScript
         }
     }
 }
+
+class TrapFlipFlop extends SqRootScript
+{
+    /* When receiving TurnOn messages, passes on TurnOn, TurnOff, ...
+       alternating. Ignores TurnOff. */
+    function OnBeginScript() {
+        if (! IsDataSet("LastSentOn")) {
+            SetData("LastSentOn", false);
+        }
+    }
+
+    function OnTurnOn() {
+        local last_sent_on = GetData("LastSentOn");
+        local sending_on = (! last_sent_on);
+        SetData("LastSentOn", sending_on);
+        local message = (sending_on ? "TurnOn" : "TurnOff");
+        Link.BroadcastOnAllLinks(self, message, "ControlDevice");
+    }
+}

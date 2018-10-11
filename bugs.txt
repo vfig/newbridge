@@ -10,6 +10,10 @@ FIX BEFORE BETA 2
 
 - Crypt doors disappeared for marbleman.
 
+- Fountain alley sleeper doesn't snore
+
+- Danno's room: if mine is destroyed, its sound still plays!
+
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(

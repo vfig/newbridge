@@ -8,7 +8,7 @@ schema m20turb1
 archetype DEVICES_M20
 mono_loop 0 0
 volume -1000
-turbinelp
+turbinlp
 
 schema m20turb2
 archetype DEVICES_M20
@@ -19,10 +19,10 @@ turb2lp
 schema m20turb3
 archetype DEVICES_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 harsh2
 
-schema m20turb3
+schema m20turb4
 archetype DEVICES_M20
 mono_loop 0 0
 volume -1000
@@ -109,7 +109,7 @@ glowbal2
 schema m20fan1
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 fan
 
 schema m20cauldron
@@ -130,19 +130,19 @@ gears1r
 schema m20pipe1
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 pipelp1
 
 schema m20pipe2
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 pipelp2
 
 schema m20pipe3
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 pipelp3
 
 //-----------------------
@@ -172,13 +172,13 @@ wtr__sm3
 schema m20crowd1
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -2000
 crowdbar
 
 schema m20crowd2
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -3000
 crowdmed
 
 //-----------------------

@@ -52,14 +52,14 @@ singing1 singing2
 // City streets 1 outdoor room tone
 schema m20city1loop
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 lostcity
 
 // City streets 1 outdoor ambience (crickets)
 schema m20city1mood
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 0 0
 cricket2
 
@@ -67,7 +67,7 @@ cricket2
 // At mission start.
 schema m20city1ten
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 10000 20000
 delay 8000
 no_repeat
@@ -79,7 +79,7 @@ organ2
 // City streets 2 tension (deep strings)
 schema m20city2ten
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 8000 12000
 no_repeat
 pascal1
@@ -91,14 +91,14 @@ pascal2
 // Argaux's place indoor room tone
 schema m20argloop
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 subson2
 
 // Argaux's place indoor ambience
 schema m20argmood
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 5000 5000
 tonebend
 
@@ -108,14 +108,14 @@ tonebend
 // City streets 3 outdoor room tone
 schema m20city3loop
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 0 0
 abyss2
 
 // City streets 3 outdoor ambience (crickets)
 schema m20city3mood
 archetype AMB_M20
-volume -2000
+volume -2500
 mono_loop 0 0
 cricket2
 
@@ -123,7 +123,7 @@ cricket2
 // At mission start.
 schema m20city3ten
 archetype AMB_M20
-volume -2500
+volume -3000
 poly_loop 2 3000 10000
 no_repeat
 fb1 fb2 fb3 fb4
@@ -134,7 +134,7 @@ fb1 fb2 fb3 fb4
 // City streets 4 outdoor ambience (wind)
 schema m20city4mood
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 1000 4000
 wind1 wind2 wind3
 
@@ -144,14 +144,14 @@ wind1 wind2 wind3
 // Fishmongers indoor room tone
 schema m20fishloop
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 subson2
 
 // Fishmongers indoor ambience
 schema m20fishmood
 archetype AMB_M20
-volume -750
+volume -1250
 mono_loop 5000 5000
 tonebend
 
@@ -159,13 +159,13 @@ tonebend
 // 5. Mission complete, right? ... right?
 schema m20city5loop
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 0 0
 diffuse
 
 schema m20city5ten
 archetype AMB_M20
-volume -2000
+volume -2500
 mono_loop 3000 10000
 no_repeat
 fb5 fb6 fb7
@@ -175,13 +175,13 @@ fb5 fb6 fb7
 
 schema m20city6mood
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 1000 4000
 wind1lo wind2lo wind3lo
 
 schema m20city6ten
 archetype AMB_M20
-volume -1500
+volume -2000
 mono_loop 8000 12000
 no_repeat
 m04cat1b m04cat1c m04cat2b

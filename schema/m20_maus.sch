@@ -100,35 +100,35 @@ vbreath
 // Cemetery 1 ambience (room tone, creepy whispering)
 schema m20ceme1loop
 archetype AMB_M20
-volume -2000
+volume -2500
 mono_loop 0 0
 egpedlp2
 
 // Mausoleum ambience 1 (room tone)
 schema m20maustone
 archetype AMB_M20
-volume -500
+volume -1000
 mono_loop 0 0
 subson1
 
 // Mausoleum 1 ambience (mood)
 schema m20mausmood
 archetype AMB_M20
-volume -250
+volume -750
 mono_loop 8000 12000
 windele1 windele2 windele5
 
 // Catacombs ambience 1 (room tone)
 schema m20catatone
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 cavetone
 
 // Catacombs ambience 2 (voices)
 schema m20catavoice
 archetype AMB_M20
-volume -500
+volume -1000
 mono_loop 10000 20000
 delay 5000
 no_repeat
@@ -138,13 +138,13 @@ mgbab1 mgbab2 mgbab3 mgbab4 mgbab5
 // Catacombs ambience 3 (nervous loop)
 schema m20cataloop1
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 humfire
 
 // Catacombs ambience 4 (tension loop)
 schema m20cataloop2
 archetype AMB_M20
-volume -1000
+volume -1500
 mono_loop 0 0
 loloop2

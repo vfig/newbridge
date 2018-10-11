@@ -5,10 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Catacombs is confusing to people. Maybe a couple more landmarks?
-    - Or not. So far nobody's reporting real difficulty.
-    - Maybe landmark the entrance/exit just a touch more.
-
 - Misc
     - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
     - "I don't think the blue bricks work well as the roof texture [east main street by hangman square]"
@@ -36,10 +32,6 @@ FIX BEFORE BETA 2
     - More bad sound propagation at manor: standing in the secret room, can hear footsteps of guard on marble in long gallery.
 
 - various voids: fountain square blustone building, rich street
-
-- Prophet has trouble pathfinding in the catacombs -- seek out the problem areas and fix!
-
-- A few hammerites should have purses or healing potions
 
 
 FIX BEFORE RELEASE

@@ -12,19 +12,9 @@ FIX BEFORE BETA 2
 
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
-    - Hammer conversation is damn near inaudible! And you can't get close to eavesdrop better.
     - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
-    - Weird sound in the cemetery: can't hear locked gates when frobbing them from cemetry side until right up to them.
     - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
-    - Sound propagation into water room from hallway seems unmuted by the doors.
     - At -6.82,207,-276, can't hear the guard a few feet away! Bad propagation again, sigh. Possibly the weird overlap of square and diagonal rooms?
-    - In cave at 61.7, 247, -292 can hear guard outside walking on the gravel.
-
-- Other audio propagation issues:
-    - Bad sound propagation at manor: standing in the garden below the open window, can hear footsteps of guard on marble in long gallery.
-    - More bad sound propagation at manor: standing in the secret room, can hear footsteps of guard on marble in long gallery.
-
-- Maybe turn off second light in fainting man's dining room so windowsill is in shadow?
 
 - Sound issues:
     maus_dousesound (326) an Obj rad 80 with m20mausdous

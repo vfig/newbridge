@@ -13,6 +13,19 @@ volume -500
 sv1a0sn2
 schema_voice normal1 1 nbwakeup
 
+// The pond
+schema m20pond
+archetype AMB_M20
+mono_loop 0 0
+volume -1000
+wtr__md3
+
+schema m20frogs
+archetype AMB_M20
+mono_loop 0 0
+volume -1000
+forest4
+
 
 // -------------------------- AMBIENCE ----------------------------
 

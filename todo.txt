@@ -12,8 +12,6 @@ BETA 2 (October)
        I kind of like the variation. Get a breather on the way to di Rupo's.
        - The new guard is kinda at the NE gate hard to hide from though :(
 
-- Something in the middle/west of market square to add shadow to allow another path across?
-
 - Add a few more G-man like Keeper sightings:
     - Industrial area
     - Argaux's rooftop, watching the fountain
@@ -25,8 +23,6 @@ BETA 2 (October)
     - new room archetype for works stations for the same reason
         - anywhere else?
     - new room type + automap location for hammerite upper walkways
-
-- Mountain visibility?
 
 - Sounds
     - Incidental sounds (machinery, water, etc)

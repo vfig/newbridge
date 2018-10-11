@@ -5,13 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Misc
-    - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
-    - "I don't think the blue bricks work well as the roof texture [east main street by hangman square]"
-    - "You might want to AlignExt textures in places like this" - textures in drunk archer's tower
-    - Sky glitches visible above east fountain square buildings, from under sky bridge, from alley, from fountain square itself.
-    - Sky glitches visible from upper street looking towards hammer square.
-
 - When the intervention starts, destroy delivery di rupo and things.
     - Or better, when we close the door behind Garrett after the handoff
 
@@ -57,6 +50,8 @@ ONLY IF I FEEL LIKE IT
 - BUG: you can kill the Canal keeper and (except on Expert) it doesn't matter :D
 
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
+
+- "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
 
 ----
 

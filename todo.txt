@@ -46,6 +46,7 @@ RELEASE (November)
     - revise automap properties if the location assignment turns out differently (as it very well might!)
     - German captions: "Anwesen von Lady di Rupo" (Manor of Lady di Rupo)
     - German captions: "Korridor" (for hall in Sanctuary)
+    - German captions: "Vorraum" (for Vestibule)
     - For the italian map please replace "Sala"(Hall) with "Corridoio".
 
 - Unload unused textures, if I _really_ care:

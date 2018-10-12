@@ -10,8 +10,8 @@ SUB1
     SUB "nb003" { TEXT "Also ist dieses \"Anax\" ein Jemand, kein Etwas. Das ist... unpraktisch." }
     SUB "nb004" { TEXT "Also dabei wollte Argaux meine Hilfe! Ich glaube, ich mache es dann alleine... dann muss ich das Geld mit niemandem teilen." }
     SUB "nb005" { TEXT "Und nun muss ich das Anax finden - was auch immer das ist." }
-    SUB "nb006" { TEXT "Armer Argaux! Da geht sein Profit dahin. Ich sollte seine Wohnung nach Informationen durchsuchen." }
-    SUB "nb007" { TEXT "Verdammt, sie haben schon mit dem Ritual begonnen! Ich muss mich beeilen, um das noch zu druchkreuzen!" }
+    SUB "nb006" { TEXT "Armer Argaux! Er wird seinen Lohn nun wohl nicht mehr einstreichen kînnen. Ich sollte seine Wohnung nach Informationen durchsuchen." }
+    SUB "nb007" { TEXT "Verdammt, sie haben schon mit dem Ritual begonnen! Ich muss mich beeilen, um das noch zu durchkreuzen!" }
     SUB "nb008" { TEXT "Das sieht nach dem öbergabepunkt aus." }
     SUB "nb009" { TEXT "Verdammt... falsche Kombination!" }
     SUB "nb010" { TEXT "Immer noch die falsche!" }
@@ -169,7 +169,7 @@ SUB1
     TYPE "convo"
     DESCR "Priester"
     SUB "nb1000" { TEXT "Des Erbauers Segen sei mit Euch, Bruder! Wie war Eure Wache am Tor?" }
-    SUB "nb1002" { TEXT "Der Zusammensto· heute morgen hat den Wichten wohl eine Lektion erteilt. Doch fÅrchte ich, ihre öberreste verschandeln immer noch das Bildnis des Erbauers, nicht wahr?" }
+    SUB "nb1002" { TEXT "Der Zusammensto· heute morgen hat den Wichten wohl eine Lektion erteilt. Doch fÅrchte ich, die Reste ihrer Waren verschandeln immer noch das Bildnis des Erbauers, nicht wahr?" }
 }
 {
     TYPE "convo"
@@ -188,7 +188,7 @@ SUB1
 {
     TYPE "convo"
     DESCR "Zweite Wache"
-    SUB "nb1101" { TEXT "Befehle sind dazu da, um befolgt zu werden, Benny, nicht um sie zu hinterfragen. Au·erdem... der Turm ist Hunderte von Jahren alt. Der bricht vielleicht zusammen, wenn du nur einen Fu· hinein setzt." }
+    SUB "nb1101" { TEXT "Befehle sind dazu da, um befolgt zu werden, Benny, nicht um sie zu hinterfragen. Au·erdem... der Turm ist Hunderte von Jahren alt. Der bricht womîglich schon zusammen, wenn du nur einen Fu· hinein setzt." }
 }
 
 // OM Garrett lines

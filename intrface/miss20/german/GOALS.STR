@@ -19,8 +19,8 @@ fiction_4: "Stehlen Sie die Hand des Propheten aus dem Mausoleum!"
 text_4: "Stehlen Sie die Hand des Propheten aus dem Mausoleum!"
 
 ; 5: BonusBanishTheGhost
-fiction_5: "(CUT) Vetreiben Sie den Geist des Propheten - nur zur Sicherheit..."
-text_5: "(CUT) Vetreiben Sie den Geist des Propheten - nur zur Sicherheit..."
+fiction_5: "(CUT) Vertreiben Sie den Geist des Propheten - nur zur Sicherheit..."
+text_5: "(CUT) Vertreiben Sie den Geist des Propheten - nur zur Sicherheit..."
 
 ; 6: DeliverTheItems
 fiction_6: "Wenn Sie beides haben, bringen Sie es beim Fischh�ndler vorbei, um Ihr Geld einzustreichen!"
@@ -51,8 +51,8 @@ fiction_12: "Dem Anax darf kein Leid geschehen!"
 text_12: "Dem Anax darf kein Leid geschehen!"
 
 ; 13: DontBiteTheHand
-fiction_13: "Bei疇n Sie nicht die Hand, die Sie f》tert! Wenn jemand auf Ihrer Seite steht, lassen Sie ihn in Ruhe!"
-text_13: "Bei疇n Sie nicht die Hand, die Sie f》tert! Wenn jemand auf Ihrer Seite steht, lassen Sie ihn in Ruhe!"
+fiction_13: "Bei疇n Sie nicht die Hand, die Sie f》tert! Wenn jemand auf Ihrer Seite steht, dann besch》zen Sie ihn!"
+text_13: "Bei疇n Sie nicht die Hand, die Sie f》tert! Wenn jemand auf Ihrer Seite steht, dann besch》zen Sie ihn!"
 
 ; 14: LootNormal
 fiction_14: "Newbridge ist nicht gerade ein Nobelviertel, aber auch nicht unbedingt schwer bewacht. Da sollte es f〉 einen Dieb wie Sie einiges zu entdecken geben. Finden Sie Beute im Wert von 1500 Goldst…ken und sacken Sie sie ein!"
@@ -63,7 +63,7 @@ fiction_15: "Newbridge ist nicht gerade ein Nobelviertel, aber ein paar Reiche u
 text_15: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 2000 Goldst…ken ein!"
 
 ; 16: LootExpert
-fiction_16: "Was k馬nte es Sch馬eres geben, wenn man einen neuen Stadtbezirk besucht, als mit den Einwohnern Bekanntschaft zu schlie疇n... oder mit ihrem Geld! Nehmen Sie, was Sie kriegen k馬nen! Mindestens 2500 Goldst…ke sollte es wert sein."
+fiction_16: "Was k馬nte es beim Besuch eines neuen Stadtbezirks Besseres geben, als sich mit der Gegend vertraut zu machen... und mit ihren Reicht［ern! Nehmen Sie, was Sie kriegen k馬nen! Mindestens 2500 Goldst…ke sollte es wert sein."
 text_16: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 2500 Goldst…ken ein!"
 
 ; 17: BonusLootHard

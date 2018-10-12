@@ -176,12 +176,12 @@ Voice acting:
     Hammerite watchman  : Yandros
 
 Translation:
-    Deutsch             : Baeuchlein
-    Italiano            : Piesel
+    Deutsch             : baeuchlein
+    Italiano            : piesel
                         :
                         : ...FIXME...
 
-Proofreading            : Gnartsch
+Proofreading            : gnartsch
                         :
                         : ...FIXME...
 
@@ -210,6 +210,9 @@ Interactive.
 ***********
 
 =============================================================================
+ 26. September 2018
+ Ein netter Profit
+=============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
@@ -236,16 +239,16 @@ Einführung:
     bin ich auch nicht, obwohl ich das ganze Gold, mit dem sie ihre Tempel
     dekorieren, durchaus zu schätzen weiß.
 
-    Was auch immer sonst noch im Gefolge dieses Auftrags mitreisen mag,
-    ein Besuch in Newbridge wird eine willkommene Abwechslung sein.
-    Ich werde mich zum Brunnen begeben, dort Argaux treffen und hören, was
-    er zu sagen hat.
+    Welche weiteren Details dieser Auftrag auch noch bereithalten mag, ein
+    Besuch in Newbridge wird eine willkommene Abwechslung sein. Ich werde
+    mich zum Brunnen begeben, dort Argaux treffen und hören, was er zu sagen
+    hat.
 
 =============================================================================
 * Spielinformationen *
 
 Spiel                   : Thief Gold, NewDark v1.26
-Missionsname            : Gewinn machen
+Missionsname            : Ein netter Profit
 Missionsdatei           : miss20.mis
 Einführungsfilm         : ja
 Schwierigkeitsgrad      : Normal/Hart/Experte
@@ -256,12 +259,12 @@ Neue Grafiken           : nein
 Neue Sounds             : nein
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
-Bauzeit                 : 532 Stunden über 98 Kalendertage hinweg (bisher)
+Bauzeit                 : 532 Stunden über 98 Kalendertage hinweg (Beta1)
 
 =============================================================================
 * Danksagung usw. *
 
-Design und Baukunst     : FIXME ! Update credits
+Design und Baukunst     :
 
 Story                   :
 
@@ -276,21 +279,26 @@ Stimmen:
     Wütender Sergeant   : MasterThief3
     Wache der Heiden    : Yandros
     Feiger Hammerit     : McTaffer
-    Danno the meister   : Yandros
-    Olver               : McTaffer
-    Morten              : keiner, der ist tot!
+    Meister Danno       : Yandros
+    Hosenscheißer Olver : McTaffer
+    Glückloser Morten   : keiner, der ist tot!
     Hammeritenpriester  : McTaffer
     Hammeritenwache     : Yandros
 
-Übersetzung             : Deutsch - baeuchlein
-                        : Italienisch - piesel
+Übersetzung:
+    Deutsch             : baeuchlein
+    Italienisch         : piesel
+                        :
+
+Korrekturlesen          : gnartsch
+                        :
                         :
 
 Betatester              :
                         :
                         :
 
-Special thanks          :
+Besonderer Dank         :
                         :
                         :
 
@@ -299,7 +307,7 @@ Special thanks          :
 
 NewDark v1.26 (Patch) wird zum Spielen der Mission benötigt. Die GOG-Version
 von Thief Gold wird empfohlen, da sie schon die neueste NewDark-Version be-
-inhalted. Zu finden ist sie unter
+inhaltet. Zu finden ist sie unter
 
     https://www.gog.com/game/thief_gold
 
@@ -323,7 +331,7 @@ Spiel übergibt:
 
 Mehr Informationen zu FM-Selektor enthält die Datei FMSel.pdf, die mit
 NewDark mitgeliefert wird. Diese Mission wurde nicht mit anderen FM-Ladepro-
-grammen, wie z.B. Dakloader, getestet, weswegen deren Gebrauch nicht empfoh-
+grammen, wie z.B. Darkloader, getestet, weswegen deren Gebrauch nicht empfoh-
 len wird.
 
 =============================================================================
@@ -334,8 +342,8 @@ len wird.
 Die Weiterverbreitung dieser Mission ist erlaubt, solange
 das ohne Bezahlung passiert und die Mission nicht verändert wird.
 
-Diese Mission wurde nicht von Looking Glass Studios or Eidos Interactive er-
-stellt, und Support leisten sie daher auch nicht dafür.
+Diese Mission wurde nicht von Looking Glass Studios oder Eidos Interactive
+erstellt, und Support leisten sie daher auch nicht dafür.
 
 
 

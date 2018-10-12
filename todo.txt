@@ -5,15 +5,11 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-- Review tulz totals and distribution
-
-- Try reducing _all_ ambience volumes by a little. Right now they're a little too overpowering.
-    (players can always turn it up! :)
-
 - Rich Street Guards?
     -  There's no hiding places at the moment, so currently minimal.
        I kind of like the variation. Get a breather on the way to di Rupo's.
        - The new guard is kinda at the NE gate hard to hide from though :(
+            - Make him patrol forward and around the obelisk before heading back.
 
 - Add a few more G-man like Keeper sightings:
     - Industrial area

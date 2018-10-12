@@ -14,8 +14,10 @@ FIX BEFORE BETA 2
 - Put a smidgen of extra light on Danno's mine.
 
 - Middle street west guard is impossible to sneak by! D:
+    - move him to the wooden thing and make him face left/forward/right
 
 - Some of the Hammer Square north water arrows should be gone on Hard/Expert
+    - Ditto some of the Prophet Room's moss arrows.
 
 - Getting to faining guy's place is still too hard: noisy metal (and stone actually), and significant risk of hurt.
 
@@ -46,13 +48,13 @@ FIX BEFORE BETA 2
     - just keep a watch on his patrol points to remove the metaproperty, so he gets a chance for it to happen over and over?
 
 
-- Small old lampposts in front of Sanctuary don't have ambience!
+- Small old lampposts in front of Sanctuary don't have ambience! - give them the same as the spotlight streetlamps
 
 - Lamppost ambience should be a touch quieter.
 
 - Sanctuary front guard (Hard/Expert) stands in one doorway for _waaaaay_ too long.
 
-- Danno's room: if mine is destroyed, its sound still plays!
+- Danno's room: if mine is destroyed (by an arrow for example), its sound still plays!
 
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?

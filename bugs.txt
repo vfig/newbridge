@@ -5,12 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Can still hear fainting guy from the metal bit on argaux's rooftop path??
-    - ROOM BRUSHES
-
-- Crypt doors disappeared for marbleman.
-    - eh.
-
 - One of the rich street wanderers should have a different route, and not go all the way into Market square
     - PATROL PATH
 
@@ -26,26 +20,6 @@ FIX BEFORE BETA 2
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
     - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
-
-- Sound issues:
-    maus_dousesound (326) an Obj rad 80 with m20mausdous
-        > Controlled by ambient volume!
-    MausPuzzleSound1 (345) an Obj rad 100 with m20mauspuz1
-        > Controlled by ambient volume!
-    maus_bells (371) an Obj rad 80 with m20catabells
-        > Controlled by ambient volume!
-    MausPuzzleSound7 (449) an Obj rad 100 with m20mauspuz7
-        > Controlled by ambient volume!
-    A ProphetsFlamingHeart (543) an Obj rad 0 with 
-        > Delete property!
-    An ambientSound (1290) an Obj rad 40 with m02people1
-        > Controlled by ambient volume!
-    ERROR: A Colltower ball glow (1412) not in room DB
-        > The one by the sanctuary
-    MausWaterHint (2872) an Obj rad 15 with m20mauswater
-        > Subtitle this!
-    An ambientSound (3280) an Obj rad 10 with m20argpuzfail
-        > Controlled by ambient volume!
 
 
 FIX BEFORE RELEASE
@@ -75,6 +49,8 @@ ONLY IF I FEEL LIKE IT
 - Delivery di Rupo and Keepers freeze while Garrett is talking... are there tags for the standing idle motion I could use?
 
 - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
+
+- Crypt doors disappeared for marbleman.
 
 ----
 

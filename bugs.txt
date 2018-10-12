@@ -5,12 +5,52 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
+- Middle St West works station between serpent towers needs machinery ambience in its door.
+
+- Sleeping standing up guard needs to make spluttering sound the moment you enter his hitbox to warn you.
+
+- Can still hear fainting guy from the metal bit on argaux's rooftop path??
+
+- Put a smidgen of extra light on Danno's mine.
+
+- Middle street west guard is impossible to sneak by! D:
+
+- Some of the Hammer Square north water arrows should be gone on Hard/Expert
+
+- Getting to faining guy's place is still too hard: noisy metal (and stone actually), and significant risk of hurt.
+
 - When the intervention starts, destroy delivery di rupo and things.
     - Or better, when we close the door behind Garrett after the handoff
 
 - Crypt doors disappeared for marbleman.
 
+- South street merchant wanderer didn't run until I raised my weapon.
+
+- One of the rich street wanderers should have a different route, and not go all the way into Market square
+
+- Getting the priceless Hammerite Relic fucks up the loot objective! Either it has to go into the loot pile, or it shouldn't be loot. Can't have it both ways.
+
+- Frogs are slightly too quiet
+
+- Hammer south garden door opens inwards! As does the North one.
+
 - Fountain alley sleeper doesn't snore
+
+- Turbines on Argaux's roof are just a little too loud! One by Hammer walkways is okay now though
+
+- Hammers still get stuck on that dang lamppost
+    - Make all lamposts "repel" and AI don't collide!
+
+- Cowardly hammer sometimes doesn't stop running D:
+    - seems he misses the watchpoint or sth when saving and loading happens?
+    - just keep a watch on his patrol points to remove the metaproperty, so he gets a chance for it to happen over and over?
+
+
+- Small old lampposts in front of Sanctuary don't have ambience!
+
+- Lamppost ambience should be a touch quieter.
+
+- Sanctuary front guard (Hard/Expert) stands in one doorway for _waaaaay_ too long.
 
 - Danno's room: if mine is destroyed, its sound still plays!
 

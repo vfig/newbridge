@@ -268,7 +268,8 @@ Design und Baukunst     :
 
 Story                   :
 
-Briefing-Filme          :
+Illustrationen für den
+Einführungsfilm         :
 
 Stimmen:
     Garrett             :

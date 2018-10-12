@@ -17,7 +17,7 @@ RELEASE (November)
     - Remove unused placeholder lines (mostly nb1xx)
 
 - NPC Names!
-    - And make sure they all have the script that BrotherLionel does that appends status
+    - All the ones with "Name_Quintus" right now need new names! :)
 
 - Map
     - City map (draw and scan)

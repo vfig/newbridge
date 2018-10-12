@@ -5,11 +5,6 @@ FIX BEFORE BETA 1
 FIX BEFORE BETA 2
 =================
 
-- Audio propagation issues: probably related to room brushes that are too long in one dimension:
-    - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
-    - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(
-    - (sound propagation?) Ritual chant is inaudible from antechamber mouth.
-
 
 FIX BEFORE RELEASE
 ==================

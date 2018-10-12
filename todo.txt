@@ -17,8 +17,6 @@ BETA 2 (October)
     - Watching the cemetery
     - Watching Lady di Rupo's
 
-- Should ritual markers react to moss arrows?
-
 - Check pickpocket stats!
     - looks like all "Belt" or "Alt" contains count as pockets, even if there's no culpability D:
 

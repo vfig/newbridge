@@ -2287,11 +2287,15 @@ class RitualMarker extends RitualCrystal
         }
     }
 
-    // A marker can be disabled with water, a blackjack, or KO gas.
+    // A marker can be disabled with water, moss, a blackjack, or KO gas.
     // Basically, reward the player for figuring it's part of the
     // solution, but don't be picky about their approach.
 
     function OnWaterStimStimulus() {
+        SendMessage(self, "Disable");
+    }
+
+    function OnEarthStimStimulus() {
         SendMessage(self, "Disable");
     }
 

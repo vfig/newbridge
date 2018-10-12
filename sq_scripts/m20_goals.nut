@@ -642,6 +642,12 @@ class GoalNearTheFishmongers extends WatchForItems
             // Close the door to the fishmongers again when leaving.
             Link.BroadcastOnAllLinks(self, "Lock", "ControlDevice");
             Link.BroadcastOnAllLinks(self, "Close", "ControlDevice");
+
+            // And destroy things.
+            foreach (obj in Link_GetAllParams("Destroy", self)) {
+                print("D E S T R O Y I N G  " + Object_Description(obj));
+                Object.Destroy(obj);
+            }
         }
     }
 
@@ -668,6 +674,27 @@ class GoalDeliverTheItems extends MultipleDeliveries
        On The Anax and The Prophet's Hand put the ItemToDeliver script, with
        a ScriptParams("DeliveryRoom") link to this room.
        Give the room a ControlDevice link to the conversation to trigger. */
+
+    /*
+    // FIXME: enable this only for debugging this goal
+    function OnSim()
+    {
+        SetOneShotTimer("MoveMountains", 2.0);
+    }
+    function OnTimer() {
+        if (message().name == "MoveMountains") {
+            // TP the items to just in front of the player.
+            Goal.Show(eGoals.kDeliverTheItems);
+            local player = Object.Named("Player");
+            local anax = Object.Named("SanctuaryTheAnax");
+            local hand = Object.Named("MausoleumTheHand");
+            if (anax == 0) { print("Cannot find Anax!"); return; }
+            if (hand == 0) { print("Cannot find Hand!"); return; }
+            Object.Teleport(anax, vector(4, 0, 1), vector(), player);
+            Object.Teleport(hand, vector(4, 0, 1), vector(), player);
+        }
+    }
+    */
 
     function OnItemDelivered()
     {

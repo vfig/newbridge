@@ -8,10 +8,6 @@ FIX BEFORE BETA 2
 - Can still hear fainting guy from the metal bit on argaux's rooftop path??
     - ROOM BRUSHES
 
-- When the intervention starts, destroy delivery di rupo and things.
-    - Or better, when we close the door behind Garrett after the handoff
-    - SCRIPTING + DEBUGGING
-
 - Crypt doors disappeared for marbleman.
     - eh.
 

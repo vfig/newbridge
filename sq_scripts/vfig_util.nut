@@ -240,6 +240,75 @@ class DebugQuestVars extends SqRootScript
     }
 }
 
+class DebugPocketStats extends SqRootScript
+{
+    function OnSim() {
+        if (message().starting) {
+            DumpAllPockets();
+        }
+    }
+
+    function DumpAllPockets() {
+        local contains_kind = linkkind("Contains");
+        local belt_count = 0;
+        local alt_count = 0;
+        local dead_count = 0;
+        local slink = sLink();
+
+        local links = Link.GetAll(contains_kind);
+        foreach (link  in links) {
+            slink.LinkGet(link);
+
+            // Check if it's a dead or ignored AI
+            local ai_dead = false;
+            local ai_null = false;
+            if ((Property.Possessed(slink.source, "AI_Mode"))
+                && (Property.Get(slink.source, "AI_Mode") == eAIMode.kAIM_Dead))
+            {
+                ai_dead = true;
+            } else if ((Property.Possessed(slink.source, "AI"))
+                && (Property.Get(slink.source, "AI") == "null"))
+            {
+                ai_null = true;
+            }
+
+            local type = LinkTools.LinkGetData(link, "");
+            if (type == eDarkContainType.kContainTypeBelt) {
+                if(! ai_null) {
+                    if (! ai_dead) {
+                        ++belt_count;
+                    } else {
+                        ++dead_count;
+                    }
+                }
+                print("Belt: "
+                    + (ai_dead ? "[WARNING, dead!] " : "")
+                    + (ai_null ? "[ignored] " : "")
+                    + Object_Description(slink.source)
+                    + " -> " + Object_Description(slink.dest));
+            } else if (type == eDarkContainType.kContainTypeAlt) {
+                if(! ai_null) {
+                    if (! ai_dead) {
+                        ++alt_count;
+                    } else {
+                        ++dead_count;
+                    }
+                }
+                print("Alt:  "
+                    + (ai_dead ? "[WARNING, dead!] " : "")
+                    + (ai_null ? "[ignored] " : "")
+                    + Object_Description(slink.source)
+                    + " -> " + Object_Description(slink.dest));
+            }
+        }
+
+        print("Valid pockets:    " + (belt_count + alt_count));
+        print("  belts:          " + belt_count);
+        print("  alts:           " + alt_count);
+        print("  WARNING, dead!: " + dead_count);
+    }
+}
+
 class EditorOnly extends SqRootScript
 {
     function OnBeginScript()

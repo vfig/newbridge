@@ -1,6 +1,17 @@
 Object_Description <- function(obj)
 {
-    return (Object.GetName(obj) + " (" + obj + ")");
+    local name = Object.GetName(obj);
+    if (name == "") {
+        // Look up the archetype's name instead.
+        local archetype_name = Object.GetName(Object.Archetype(obj));
+        local first = archetype_name.slice(0, 1).toupper();
+        if (first == "A" || first == "E" || first == "I" || first == "O" || first == "U") {
+            name = "an " + archetype_name;
+        } else {
+            name = "a " + archetype_name;
+        }
+    }
+    return (name + " (" + obj + ")");
 }
 
 /* Get the ScriptParams link with the given data */

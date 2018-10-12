@@ -1,0 +1,9 @@
+// Player Hints strings
+// Currently, the only use of this is to hold the "New Objectives" string
+// we want to pop up when your goals change.  Any other such onscreen
+// hinty stuff would go here as well.
+NewGoal: "New Objectives"
+MantellInstruct: ""
+LookAtMap: ""
+PutAway: ""
+FoundSecret: "Found Secret!"

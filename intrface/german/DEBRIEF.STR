@@ -1,0 +1,85 @@
+menu: "MenÅ"
+continue: "Fortfahren"
+stats: "Statistik"
+goals: "Ziele"
+
+restart: "Wiederholung"
+
+hours: "Stunden"
+minutes: "Minuten"
+seconds: "Sekunden"
+hour: "Stunde"
+minute: "Minute"
+second: "Sekunde"
+true: "Richtig"
+false: "Falsch"
+some: "Einige"
+none: "Keine"
+
+stat_0: "DrSTime"
+text_0: "Gesamtzeit "
+format_0: "@t"
+
+stat_1: "TOTAL_LOOT"
+text_1: "Ihre Beute: "
+format_1: "@x@c%d"
+
+stat_2: "DrSLootTotal"
+text_2: " Beute im Level: "
+format_2: "%d" 
+
+stat_3: "DrSPocketOK"
+text_3: "Taschendiebstahl: "
+format_3: "@s%d"
+
+stat_4: "DrSPocketCnt"
+text_4: " von "
+format_4: "%d"
+
+stat_5: "DrSLockPick"
+text_5: "Schlîsser geknackt: "
+format_5: "%d"
+
+stat_6: "DrSBackStabs"
+text_6: "Meuchelmorde: "
+format_6: "@c%d"
+
+stat_7: "DrSKNockout"
+text_7: " BetÑubt: "
+format_7: "@c%d"
+
+stat_8: "DrSAerials"
+text_8: " im \"Luftkampf\" erzielt: "
+format_8: "@+%d"
+
+stat_9: "DrSDmgDealt"
+text_9: "Treffer: "
+format_9: "@c%d"
+
+stat_10: "DrSDmgTaken"
+text_10: " Wunden: "
+format_10: "@c%d"
+
+stat_11: "DrSHealing"
+text_11: " HeiltrÑnke: "
+format_11: "%d"
+
+stat_12: "DrSInnocent"
+text_12: "Getîtete Unschuldige: "
+format_12: "@c@q"
+
+stat_13: "DrSKills"
+text_13: ", und sonstige Tote: "
+format_13: "%d"
+
+stat_14: "DrSBodyFound"
+text_14: "Vom Gegner entdeckte Kîrper: "
+format_14: "@+%d"
+
+stat_15: "SecretsFound"
+text_15: "Secrets gefunden: "
+format_15: "@c%d"
+
+stat_16: "SecretsCount"
+text_16: " von "
+format_16: "%d"

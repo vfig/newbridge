@@ -8,14 +8,6 @@ FIX BEFORE BETA 2
 - One of the rich street wanderers should have a different route, and not go all the way into Market square
     - PATROL PATH
 
-- Getting the priceless Hammerite Relic fucks up the loot objective! Either it has to go into the loot pile, or it shouldn't be loot. Can't have it both ways. - make it not loot.
-    - I want a secondary reason for players to hunt it!
-    - Create a secrets script
-        - on sim it should set/increment the total secret count
-        - on world from it should (once only) increment the secrets found and notify the player
-        - see debrief.str and drkstats.* for showing it in endgame stats
-    - SCRIPTING + DEBUGGING
-
 - Audio propagation issues: probably related to room brushes that are too long in one dimension:
     - Odd audio in Fountain Square: couldn't hear both guards properly at the same time: is the room split badly?
     - di Rupo guard conversation is inaudible if you drop over the western end of the wall. :(

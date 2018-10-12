@@ -45,6 +45,14 @@ mono_loop 500 500
 no_repeat
 singing1 singing2
 
+// Sleeping guard being disturbed
+schema sg2splutter
+archetype AI_NONE
+volume -500
+no_repeat
+sg2a0co1 sg2a0co2 sg2a0co3 sg2a0th1 sg2a0th2 sg2a0th3 sg2a0th4
+schema_voice guard2 2 nbwakeup
+
 // -------------------------- AMBIENCE ----------------------------
 
 // 1. At mission start

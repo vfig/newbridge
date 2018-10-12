@@ -202,6 +202,7 @@ class WakeMeUpInside extends SqRootScript
 
     function OnTurnOn() {
         wakeup_timer = SetOneShotTimer("WakeMeUpInside", 1.0);
+        AI.Signal(self, "WakeUp");
     }
 
     function OnTurnOff() {

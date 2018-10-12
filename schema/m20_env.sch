@@ -94,13 +94,13 @@ tapping
 schema m20lamp1
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -1500
 glowball
 
 schema m20lamp2
 archetype AMB_M20
 mono_loop 0 0
-volume -1000
+volume -1500
 glowbal2
 
 //-----------------------

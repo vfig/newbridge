@@ -19,8 +19,14 @@ BETA 2 (October)
 
 - Should ritual markers react to moss arrows?
 
-- Sounds
-    - Incidental sounds (machinery, water, etc)
+- Check pickpocket stats!
+    - looks like all "Belt" or "Alt" contains count as pockets, even if there's no culpability D:
+
+RELEASE (November)
+==================
+
+- Review and update credits and so on in readme.
+    - include shadow and shalebridge in thanks
 
 - Proper VO
     - Process and normalise
@@ -28,12 +34,6 @@ BETA 2 (October)
 
 - NPC Names!
     - And make sure they all have the script that BrotherLionel does that appends status
-
-- Review and update credits and so on in readme.
-    - include shadow and shalebridge in thanks
-
-RELEASE (November)
-==================
 
 - Map
     - City map (draw and scan)

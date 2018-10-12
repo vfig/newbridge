@@ -23,7 +23,7 @@ wtr__md3
 schema m20frogs
 archetype AMB_M20
 mono_loop 0 0
-volume -2000
+volume -1500
 forest4
 
 

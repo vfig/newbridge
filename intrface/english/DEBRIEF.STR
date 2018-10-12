@@ -83,3 +83,31 @@ format_15: "@c%d"
 stat_16: "SecretsCount"
 text_16: " out of "
 format_16: "%d"
+
+stat_17: "FoodEatenAll"
+text_17: "\nFood eaten:"
+format_17: "@+"
+
+stat_18: "FoodEaten_Bread"
+text_18: "   "
+format_18: "@+@c%d loaves of bread."
+
+stat_19: "FoodEaten_Cheese"
+text_19: "   "
+format_19: "@+@c%d cheese wedges."
+
+stat_20: "FoodEaten_Apple"
+text_20: "   "
+format_20: "@+%d apples."
+
+stat_21: "FoodEaten_Cucumber"
+text_21: "   "
+format_21: "@+@c%d cucumbers."
+
+stat_22: "FoodEaten_Carrot"
+text_22: "  "
+format_22:  "@+@c%d carrots."
+
+stat_23: "FoodEaten_DeerLeg"
+text_23: "   "
+format_23: "@+%d legs of venison."

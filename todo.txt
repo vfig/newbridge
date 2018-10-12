@@ -5,12 +5,6 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-- Rich Street Guards?
-    -  There's no hiding places at the moment, so currently minimal.
-       I kind of like the variation. Get a breather on the way to di Rupo's.
-       - The new guard is kinda at the NE gate hard to hide from though :(
-            - Make him patrol forward and around the obelisk before heading back.
-
 - Add a few more G-man like Keeper sightings:
     - Industrial area
     - Argaux's rooftop, watching the fountain
@@ -46,6 +40,7 @@ RELEASE (November)
 
 - Unload unused textures, if I _really_ care:
     "Texture RAM in use in WR ~2593Kb, ~3237Kb loaded but not in world"
+    - More of an issue for HD packs, so I do kinda care.
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

@@ -178,52 +178,6 @@ garm0409
 
 
 //////////////////////////////////
-// 100: VARIOUS LINES
-
-// "My, that's a pretty prize indeed!"
-schema nb100
-archetype M20_CONV
-volume -1
-nb100
-schema_voice normal1 1 nbconv0 (LineNo 1 1)
-
-// "Alarm, brothers! To the crypts!..."
-schema nb101
-archetype M20_CONV
-volume -1
-nb101
-schema_voice hammer3  1 nbconv0 (LineNo 2 2)
-
-// "Vile, pestilent creatures!"
-schema nb102
-archetype M20_CONV
-volume -1
-nb102
-schema_voice hammer1 1 nbconv0 (LineNo 3 3)
-
-// "Not again!"
-schema nb103
-archetype M20_CONV
-volume -1
-nb103
-schema_voice hammer2 1 nbconv0 (LineNo 4 4)
-
-// "Builder protect us!"
-schema nb104
-archetype M20_CONV
-volume -1
-nb104
-schema_voice hammer3 1 nbconv0 (LineNo 5 5)
-
-// "Thou hast our Anax..."
-schema nb105
-archetype M20_CONV
-volume -1
-nb105
-schema_voice hammer2 1 nbconv0 (LineNo 6 6)
-
-
-//////////////////////////////////
 // 300: GARRETT and LADY DI RUPO
 
 // "Lady di Rupo, I presume?"

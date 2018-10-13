@@ -13,18 +13,20 @@ INCLUDE = [
     'snd',
     'sq_scripts',
     'strings',
+    'subtitles',
 
     # Files
     'fm.cfg',
     'newbridge.gam',
     'miss20.mis',
-    'contest.txt',
     'readme.txt',
+    'readme_contest.txt',
     ]
 
 # To exclude specific files from subdirs, put them here
 #
 EXCLUDE = [
+    'sq_scripts\\testamb.nut',
     ]
 
 def get_zipfile_name():

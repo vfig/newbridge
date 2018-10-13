@@ -1,6 +1,6 @@
 =============================================================================
- Sep 26, 2018
- Making a Profit - Beta 1
+ Oct 13, 2018
+ Making a Profit - Beta 2
 
 ! BETA FOR TESTING ONLY ! Please do not distribute this!
 Please visit the test forum at Shalebridge Cradle for the latest version
@@ -9,22 +9,21 @@ and all discussion:
     http://shalebridgecradle.co.uk/testing/viewforum.php?f=405
 =============================================================================
 
+Bitte herunterscrollen für deutschen Text! (Please scroll down for German!)
+(Please scroll down for Italian!)
 
 
 ***********
 * ENGLISH *
 ***********
 
-Bitte herunterscrollen für deutschen Text! (Please scroll down for German!)
-(Please scroll down for Italian!)
-
 =============================================================================
 
 Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 1
-Date of Release         : Sep 26, 2018
+Version                 : Beta 2
+Date of Release         : Oct 13, 2018
 
 Description:
 
@@ -62,7 +61,7 @@ Auto Map                : Yes
 New Graphics            : No
 New Sounds              : Yes
 Multi-Language Support  : Yes (English, German, Italian)
-Build Time              : 532 hours over 98 calendar days (so far)
+Build Time              : 654 hours over 115 calendar days (so far)
 
 =============================================================================
 * Installation *
@@ -126,12 +125,9 @@ below for more on configuring languages). Please see subtitles.txt in your
 NewDark distribution for more information on configuring font sizes and
 colours, and what kinds of subtitles are shown.
 
-Texts and subtitles in this mission are available in the following languages:
-
-    ...FIXME!
-
-The 'language' setting in INSTALL.CFG sets the languages used by the game.
-By default this is set to the language that your version of Thief uses.
+Texts and subtitles in this mission are available in English, German, and
+Italian. The 'language' setting in INSTALL.CFG sets the languages used by the
+game. By default this is set to the language that your version of Thief uses.
 If you prefer to have text and subtitles in a different language where
 available, you must edit INSTALL.CFG, and add your preferred language at
 the start of the setting, followed by a '+'.
@@ -158,7 +154,7 @@ Created by              : vfig
 
 Story                   : vfig & tinyblob
 
-Briefing art            : ...FIXME...
+Briefing illustrations  : ...FIXME...
 
 Voice acting:
     Garrett             : ...FIXME...
@@ -210,15 +206,15 @@ Interactive.
 ***********
 
 =============================================================================
- 26. September 2018
+ 13. October 2018
  Ein netter Profit
 =============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 1
-Datum                   : 26. September 2018
+Version                 : Beta 2
+Datum                   : 13. October 2018
 
 Einführung:
 
@@ -259,23 +255,23 @@ Neue Grafiken           : nein
 Neue Sounds             : nein
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
-Bauzeit                 : 532 Stunden über 98 Kalendertage hinweg (Beta1)
+Bauzeit                 : 654 Stunden über 115 Kalendertage hinweg (Beta2)
 
 =============================================================================
 * Danksagung usw. *
 
-Design und Baukunst     :
+Design und Baukunst     : vfig
 
-Story                   :
+Story                   : vfig & tinyblob
 
 Illustrationen für den
-Einführungsfilm         :
+Einführungsfilm         : ...FIXME...
 
 Stimmen:
-    Garrett             :
+    Garrett             : ...FIXME...
     Lady di Rupo        : Shadow Creepr
     Hüter               : Yandros
-    Prophet             :
+    Prophet             : ...FIXME...
     Der Ewige Benny     : Yandros
     Wütender Sergeant   : MasterThief3
     Wache der Heiden    : Yandros
@@ -295,11 +291,11 @@ Korrekturlesen          : gnartsch
                         :
                         :
 
-Betatester              :
+Betatester              : ...FIXME...
                         :
                         :
 
-Besonderer Dank         :
+Besonderer Dank         : ...FIXME...
                         :
                         :
 
@@ -353,12 +349,15 @@ erstellt, und Support leisten sie daher auch nicht dafür.
 ************
 
 =============================================================================
+ 13. October 2018
+ Trarre Profitto
+=============================================================================
 
 Autore                    : vfig (Andy Durdin)
 Informazioni sui contatti : me@andy.durdin.net
 Homepage                  : http://backslashn.com
-Versione                  : Beta 1
-Data di Pubblicazione     : Sep 26, 2018
+Versione                  : Beta 2
+Data di Pubblicazione     : Oct 13, 2018
 
 Descrizione:
 
@@ -387,7 +386,7 @@ Descrizione:
 * Informazioni di Gioco *
 
 Gioco                     : Thief Gold, NewDark 1.26
-Titolo della Missione     : Making a Profit
+Titolo della Missione     : Trarre Profitto
 Nome del File             : miss20.mis
 Briefing                  : Si
 Settaggi Difficoltà       : Normale/Difficile/Esperto
@@ -397,22 +396,22 @@ Auto-Mappa                : Si
 Nuove Grafiche            : No
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
-Tempo di Costruzione      : 532 ore in 98 giorni di calendario 
+Tempo di Costruzione      : 654 ore in 115 giorni di calendario 
 
 =============================================================================
 * Riconoscimenti *
 
-Ideazione e costruzione:
+Ideazione e costruzione : vfig
 
-Storia                  :
+Storia                  : vfig & tinyblob
 
-Arte del Briefing       :
+Arte del Briefing       : ...FIXME...
 
 Doppiaggio:
-    Garrett             :
+    Garrett             : ...FIXME...
     Lady di Rupo        : Shadow Creepr
     Keeper              : Yandros
-    Prophet             :
+    Prophet             : ...FIXME...
     The Eternal Benny   : Yandros
     Irate Sergeant      : MasterThief3
     Heathen guard       : Yandros
@@ -423,15 +422,19 @@ Doppiaggio:
     Hammerite priest    : McTaffer
     Hammerite watchman  : Yandros
 
-Traduzioni              :
+Traduzioni:
+    Italiano            : piesel
+    Tedesco             : baeuchlein
                         :
                         :
 
-Beta testing            :
+Correzione di bozze     : ...FIXME...
+
+Beta testing            : ...FIXME...
                         :
                         :
 
-Ringraziamenti Speciali :
+Ringraziamenti Speciali : ...FIXME...
                         :
                         :
 

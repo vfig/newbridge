@@ -5,16 +5,26 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
+- Packaging! (check file lists in case anything important is missed, or anything unimportant was included)
+- Download and known issues thread
+- Recruit more testers (check Yandros's list)
+- Update questions for post-beta 2!
 
 RELEASE (November)
 ==================
+
+- Add a small, neutral water-breathing frogbeast to the pond??
+
+- Maybe make the wandering merchant a pagan?
+- Maybe make one of the wandering rich street guys a woman?
 
 - Review and update credits and so on in readme.
     - include shadow and shalebridge in thanks
 
 - Proper VO
     - Process and normalise
-    - Remove unused placeholder lines (mostly nb1xx)
+    - Figure out what to do about the Prophet's voice! (maybe just cut?)
+    - Make sure no placeholder lines are left.
 
 - NPC Names!
     - All the ones with "Name_Quintus" right now need new names! :)

@@ -251,6 +251,14 @@ SUB1
     SUB "wind4" {}
 }
 {
+    // Mausoleum water dripping
+    TYPE "fx"
+    DESCR "(water dripping)"
+    SUB "drip1" {}
+    SUB "drip2" {}
+    SUB "drip3" {}
+}
+{
     // Mausoleum sigh
     TYPE "fx"
     DESCR "(un lungo sospiro)"

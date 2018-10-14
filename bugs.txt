@@ -9,12 +9,18 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
+Uuuuughh.... reloading the save made the "Heathens" conversation play again D: - or rather, the half of it that the guard patrolling Hangman's Square said that I could hear --- did it not actually finish??
+    - Make sure I kill conversation trigger links appropriately too, if they seem to be the issue.
+    - weird. It doesn't trigger a third time if I then save and load again. I wonder what's up?
 
+Footlocker in hammer square north triggers secret when frobbed, even if still locked! Should happen on open instead.
+
+- You can get onto the cemetery wall by mantling the crayman obelisk, and bypass the keeper that way. Either make it not mantleable, or relocate it.
+
+- Sanctuary front gate guard still stays waaaay too long, cause it makes it really hard to get in over the wall. Make it 30s.
 
 ONLY IF I FEEL LIKE IT
 ======================
-
-- You can get onto the cemetery wall by mantling the crayman obelisk. Probably don't care.
 
 - Con guard (sleeping standing up) giving off bad creature pos errors
 

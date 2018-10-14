@@ -13,6 +13,12 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
+- No windows on grey tower in SE streets, square tower east of marketplace (or the big grey building on east end of marketplace!).
+
+- Mention Thief Gold subtitles patch http://www.ttlg.com/forums/showthread.php?t=144354 in readme.
+
+- Subtitles for water dripping in mausoleum!
+
 - Add a small, neutral water-breathing frogbeast to the pond??
 
 - Maybe make the wandering merchant a pagan?

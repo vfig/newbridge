@@ -12,6 +12,7 @@ FIX BEFORE RELEASE
 Uuuuughh.... reloading the save made the "Heathens" conversation play again D: - or rather, the half of it that the guard patrolling Hangman's Square said that I could hear --- did it not actually finish??
     - Make sure I kill conversation trigger links appropriately too, if they seem to be the issue.
     - weird. It doesn't trigger a third time if I then save and load again. I wonder what's up?
+    - Oooookay. If the last step of the conversation kills all AIConversationActor links from it, then it won't refire regardless. So all I've got to do is do this for all of them! ;_l
 
 Footlocker in hammer square north triggers secret when frobbed, even if still locked! Should happen on open instead.
 

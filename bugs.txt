@@ -15,6 +15,15 @@ Footlocker in hammer square north triggers secret when frobbed, even if still lo
 
 - Sanctuary front gate guard still stays waaaay too long, cause it makes it really hard to get in over the wall. Make it 30s.
 
+- South courtyard and pend of market square should show where you are on automap--just the stairway shouldn't.
+
+- Can't hear lockpicks on fishmonger's door?
+
+- Barrel in gravekeeper's mission collision?
+
+- Make Argaux's shutters not mantleable with new_mantle
+
+
 ONLY IF I FEEL LIKE IT
 ======================
 
@@ -37,6 +46,8 @@ ONLY IF I FEEL LIKE IT
 - "You can kinda see the sky glitching out from here [beside tower, looking through fence]"
 
 - Crypt doors disappeared for marbleman.
+
+- Olver can get stuck along his patrol route, and stop moving... but the pathfinding looks fine, so I don't know why. Gonna let it be.
 
 ----
 

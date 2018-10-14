@@ -9,8 +9,6 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
-- South courtyard and pend of market square should show where you are on automap--just the stairway shouldn't.
-
 
 ONLY IF I FEEL LIKE IT
 ======================
@@ -22,6 +20,7 @@ ONLY IF I FEEL LIKE IT
 - Need to make buildings near Argaux's rooftop entrance taller by ~8, to block vis into fountain square.
 
 - hammerite sanctuary gate clips into ground.
+    - bigger problem is AIs don't know it's a door for pathing because it doesn't separate two rooms!
 
 - Prophet apparitions usually misses you when you're crouched?
     - Looks like I might have to edit the motion database to add a new tag for only the low attacks, just for him? Yikes.

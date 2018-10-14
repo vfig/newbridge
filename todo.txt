@@ -13,16 +13,11 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
-- Fainter should not investigate or be deaf -- or both? He can investigate and faint beside the wall and fall through it otherwise.
-
 - No windows on grey tower in SE streets, square tower east of marketplace (or the big grey building on east end of marketplace!).
 
 - Mention Thief Gold subtitles patch http://www.ttlg.com/forums/showthread.php?t=144354 in readme.
 
 - Add a small, neutral water-breathing frogbeast to the pond??
-
-- Maybe make the wandering merchant a pagan?
-- Maybe make one of the wandering rich street guys a woman?
 
 - Review and update credits and so on in readme.
     - include shadow and shalebridge in thanks

@@ -253,7 +253,7 @@ SUB1
 {
     // Mausoleum water dripping
     TYPE "fx"
-    DESCR "(water dripping)"
+    DESCR "(acqua gocciolante)"
     SUB "drip1" {}
     SUB "drip2" {}
     SUB "drip3" {}

@@ -9,11 +9,7 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
-- Sanctuary front gate guard still stays waaaay too long, cause it makes it really hard to get in over the wall. Make it 30s.
-
 - South courtyard and pend of market square should show where you are on automap--just the stairway shouldn't.
-
-- Barrel in gravekeeper's mission collision?
 
 
 ONLY IF I FEEL LIKE IT

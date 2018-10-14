@@ -9,8 +9,6 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
-Footlocker in hammer square north triggers secret when frobbed, even if still locked! Should happen on open instead.
-
 - You can get onto the cemetery wall by mantling the crayman obelisk, and bypass the keeper that way. Either make it not mantleable, or relocate it.
 
 - Sanctuary front gate guard still stays waaaay too long, cause it makes it really hard to get in over the wall. Make it 30s.

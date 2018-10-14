@@ -54,16 +54,34 @@ class BaseSecret extends SqRootScript
 class FrobSecret extends BaseSecret
 {
     // Put this on a secret object that counts as found when
-    // frobbed in the world. Make sure they have "Script" FrobInfo!
+    // frobbed in the world by the player. Make sure it has
+    // "Script" FrobInfo!
 
     function OnFrobWorldEnd() {
-        ActivateSecret();
+        if (message().Frobber == Object.Named("Player")) {
+            ActivateSecret();
+        }
     }
 }
 
 class TurnOnSecret extends BaseSecret
 {
+    // Put this on a secret object that counts as found when
+    // turned on.
+
     function OnTurnOn() {
         ActivateSecret();
+    }
+}
+
+class ContainerSecret extends BaseSecret
+{
+    // Put this on a secret container that counts as found when
+    // its contents are taken.
+
+    function OnContainer() {
+        if (message().event == eContainsEvent.kContainRemove) {
+            ActivateSecret();
+        }
     }
 }

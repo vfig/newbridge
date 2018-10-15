@@ -5,13 +5,13 @@ BETA 1 (September)
 BETA 2 (October)
 ================
 
-- Packaging! (check file lists in case anything important is missed, or anything unimportant was included)
-- Download and known issues thread
-- Recruit more testers (check Yandros's list)
-- Update questions for post-beta 2!
 
 RELEASE (November)
 ==================
+
+- Make "squirrel.osm" message also mention NewDark version, cause if on <1.25, it's misleading.
+
+- Mausoleum wind ambient might be too spaced apart, or too quiet (or both?)... wait for additional player feedback.
 
 - No windows on grey tower in SE streets, square tower east of marketplace (or the big grey building on east end of marketplace!).
 

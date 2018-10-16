@@ -419,3 +419,22 @@ class CatacombsAmbienceHack extends SqRootScript
         PostMessage(controller, "RegionChange", region);
     }
 }
+
+class BloodyInstructions extends SqRootScript
+{
+    // Manages the decals on maus_thiefscroll, hiding some on water stim
+    function OnSim() {
+        if (! Quest.Exists("book_decals_hidden0")) {
+            // Hide decal group 0, and show all others.
+            local hidden0 = 1;
+            Quest.Set("book_decals_hidden0", hidden0);
+        }
+    }
+
+    function OnWaterStimStimulus() {
+        local hidden0 = Quest.Get("book_decals_hidden0");
+        // Hide decal group 1, and show decal group 0
+        hidden0 = ((hidden0 & ~3) | 2);
+        Quest.Set("book_decals_hidden0", hidden0);
+    }
+}

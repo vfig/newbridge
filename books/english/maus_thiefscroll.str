@@ -20,10 +20,20 @@ Page_0: "Heres the noll ya wanted Morten, consernin the morsolyum in the graveya
 Northeast, S
 and then
 
-I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cake! An dont ferget we get forty persent of this haul for the trouble. Olver and me'll be waitin for ya.
-
--- Danno"
+I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cake! An dont ferget we get forty persent of this haul for the trouble. Olver and me'll be waitin for ya.  -- Danno"
 
 
-; Blood decal to cover the missing puzzle solution.
-page_0_decal_0: "1 136 128 decals\\blood2"
+; Blood decals to cover the missing puzzle solution.
+; Decals 0 and 1 are the lines of text that will be revealed.
+; Decals 2 and 3 are the removable blood layers.
+; Decal 4 is the remaining blood stain that is indelible.
+; See the BloodyInstructions script for more details.
+; Note: all theses positions need to be adjusted for each language.
+;
+page_0_decal_0: "#0 $ 1 203 257 350"
+page_0_decal_1: "#0 $ 1 187 281 350"
+page_0_decal_2: "#1 136 128 decals\\blood2"
+page_0_decal_3: "#1 1 136 128 decals\\blood2"
+page_0_decal_4: "1 136 128 decals\\blood2"
+page_0_decal_0_text: "outhwest, Southeast, Northwest,"
+page_0_decal_1_text: "East? or West? Ah, ye'll figger it out."

@@ -23,5 +23,17 @@ un dann
 Ich schÑtz so einer wie du hat damit nich viel Probleme. Fiel Erfolg! Un vergis nich, wir kriegn fierzich Prozend von dem Kram fÅr unsre MÅhen. Olver un ich erwartn dich schohn.  -- Danno"
 
 
-; Blood decal to cover the missing puzzle solution.
-page_0_decal_0: "1 136 128 decals\\blood2"
+; Blood decals to cover the missing puzzle solution.
+; Decals 0 and 1 are the lines of text that will be revealed.
+; Decals 2 and 3 are the removable blood layers.
+; Decal 4 is the remaining blood stain that is indelible.
+; See the BloodyInstructions script for more details.
+; Note: all theses positions need to be adjusted for each language.
+;
+page_0_decal_0: "#0 $ 1 232 257 350"
+page_0_decal_1: "#0 $ 1 176 281 350"
+page_0_decal_2: "#1 136 128 decals\\blood2"
+page_0_decal_3: "#1 1 136 128 decals\\blood2"
+page_0_decal_4: "1 136 128 decals\\blood2"
+page_0_decal_0_text: "XXXXX"
+page_0_decal_1_text: "YYYYY"

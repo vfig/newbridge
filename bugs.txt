@@ -11,6 +11,10 @@ FIX BEFORE RELEASE
 
 - prjames reports prisoner did not run away after being freed. Investigate.
 
+- AIs can run up the mountain that Garrett slides down. Spread some oversided block points around it.
+
+- Fixed crate under shelf in armoury has no collision
+
 
 ONLY IF I FEEL LIKE IT
 ======================

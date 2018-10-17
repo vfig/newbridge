@@ -9,26 +9,7 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
-- Fountain has no flow brush.
-
-- prjames: In the lady's manor, you can frob plates (in kitchen and pantry) and they go into your inventory.
-    - should be junk items
-
-- prjames: Getting into the mausoleum:… I first lobbed rubble at the partially damaged door to the small tomb that has the broken entrance…
-    - ooh, tempted to make this viable
-
-- prjames: Later, I did try dropping the [tomb robber's] note and shooting it with a water arrow to see if the blood would come out - no luck.
-    - ooh, tempted to make this viable
-        - It's only a few decals.... hmm.
-
 - prjames reports prisoner did not run away after being freed. Investigate.
-
-- two people now have failed to spot the lever in the bathroom. Maybe tweak it?
-
-- Does maus puzzle research comment trigger after 4 or 5 attempts? Should be 4 but prjames said 5 (though likely not counting carefully)
-    - Just checked it is 4.
-
-- Mantling the barrels to get over the manor wall? Hmmm... It's fine I suppose. That's not why they're there... maybe they should be small barrels (even then might be able to new_mantle it, which is okay I guess)?
 
 
 ONLY IF I FEEL LIKE IT

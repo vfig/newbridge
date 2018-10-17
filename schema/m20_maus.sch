@@ -12,8 +12,8 @@ squeaks1
 // Mausoleum wind ambience
 schema m20mauswind
 archetype AMB_M20
-volume -2000
-mono_loop 5000 10000
+volume -1000
+mono_loop 2000 6000
 no_repeat
 wind1 wind3 wind4
 

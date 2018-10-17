@@ -53,6 +53,20 @@ no_repeat
 sg2a0co1 sg2a0co2 sg2a0co3 sg2a0th1 sg2a0th2 sg2a0th3 sg2a0th4
 schema_voice guard2 2 nbwakeup
 
+// Cemetery door
+schema doorceme1_op_ai
+archetype NOISE
+volume -100
+doorws2
+env_tag (Event StateChange) (DoorType Wood1cem) (OpenState Opening) (OldOpenState Closed)
+
+schema doorceme1_cl_ai
+archetype NOISE
+volume -1
+hwoosto4
+env_tag (Event StateChange) (DoorType Wood1cem)  (OpenState Open) (OldOpenState Closed Opening Closing)
+
+
 // -------------------------- AMBIENCE ----------------------------
 
 // 1. At mission start

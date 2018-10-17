@@ -9,15 +9,7 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
-- Make "squirrel.osm" message also mention NewDark version, cause if on <1.25, it's misleading.
-
-- Mausoleum wind ambient might be too spaced apart, or too quiet (or both?)... wait for additional player feedback.
-
-- No windows on grey tower in SE streets, square tower east of marketplace (or the big grey building on east end of marketplace!).
-
 - Mention Thief Gold subtitles patch http://www.ttlg.com/forums/showthread.php?t=144354 in readme.
-
-- Add a small, neutral water-breathing frogbeast to the pond??
 
 - Review and update credits and so on in readme.
     - include shadow and shalebridge in thanks
@@ -47,6 +39,7 @@ RELEASE (November)
 - Unload unused textures, if I _really_ care:
     "Texture RAM in use in WR ~2593Kb, ~3237Kb loaded but not in world"
     - More of an issue for HD packs, so I do kinda care.
+        compress_family_all 
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

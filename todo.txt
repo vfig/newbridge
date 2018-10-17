@@ -36,11 +36,6 @@ RELEASE (November)
     - German captions: "Vorraum" (for Vestibule)
     - For the italian map please replace "Sala"(Hall) with "Corridoio".
 
-- Unload unused textures, if I _really_ care:
-    "Texture RAM in use in WR ~2593Kb, ~3237Kb loaded but not in world"
-    - More of an issue for HD packs, so I do kinda care.
-        compress_family_all 
-
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
 

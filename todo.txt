@@ -9,10 +9,7 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
-- Mention Thief Gold subtitles patch http://www.ttlg.com/forums/showthread.php?t=144354 in readme.
-
 - Review and update credits and so on in readme.
-    - include shadow and shalebridge in thanks
 
 - Proper VO
     - Process and normalise

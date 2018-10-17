@@ -125,6 +125,10 @@ below for more on configuring languages). Please see subtitles.txt in your
 NewDark distribution for more information on configuring font sizes and
 colours, and what kinds of subtitles are shown.
 
+If you want subtitles for all the stock dialog and sound effects in the game,
+you will have to install a Thief Gold subtitle pack. An English subtitle pack
+can be found at http://www.ttlg.com/forums/showthread.php?t=144354
+
 Texts and subtitles in this mission are available in English, German, and
 Italian. The 'language' setting in INSTALL.CFG sets the languages used by the
 game. By default this is set to the language that your version of Thief uses.
@@ -185,9 +189,15 @@ Beta testing            : ...FIXME...
                         :
                         :
 
-Special thanks          : ...FIXME...
-                        :
-                        :
+Special thanks:
+
+    To Skacky, Unna Oertdottir, and Yandros for their help when Dromed tried
+    to murder this mission in its infancy.
+
+    To Tannar and Dussander for providing the beta test forum over at
+    'Shalebridge Cradle' beta test forum.
+
+    To Athalle and Fortuni for the providing the translator's forum 'Shadow'.
 
 =============================================================================
 * Copyright Notice *

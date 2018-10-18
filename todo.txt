@@ -27,16 +27,6 @@ RELEASE (November)
 - NPC Names!
     - All the ones with "Name_Quintus" right now need new names! :)
 
-- Map
-    - Hammerite map (draw and scan)
-        - sketched Hammerite map is wrong: door for library should be on the North, and the armoury on the South.
-        - Sanctuary map doesn't show upper walkways, and it should - they'd be visible
-        - Sanctuary map doesn't show bell tower
-    - German captions: "Korridor" (for hall in Sanctuary)
-    - German captions: "Vorraum" (for Vestibule)
-    - For the italian map please replace "Sala"(Hall) with "Corridoio".
-    - update automap properties
-
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
 

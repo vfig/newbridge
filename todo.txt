@@ -9,29 +9,33 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
+- Get preferred crediting names from everyone I haven't yet.
+
 - Review and update credits and so on in readme.
 
 - Proper VO
     - Process and normalise
+        - Try Shadow Creepr's new vocals
+        - Treat Garrett's lines as three types: inner monologue, briefing, and conversation. Inner monologue should sound more in his head. Briefing should feel a little more directed at player, and conversation a little more directed outwards. If that makes sense.
+        - See what cleaning can be done to masterthief3's lines. If not suitable, try to get Yandros's lines to have similar reverb.
+        - Make sure everything is in mono! See if energy levels can't be normalised across all conversations.
+        - Check a bunch of original voice lines (both Garrett and others) to see what their environment feels like, and aim to match it.
     - Figure out what to do about the Prophet's voice! (maybe just cut?)
+        - Just cut
     - Make sure no placeholder lines are left.
 
 - NPC Names!
     - All the ones with "Name_Quintus" right now need new names! :)
 
 - Map
-    - City map (draw and scan)
     - Hammerite map (draw and scan)
         - sketched Hammerite map is wrong: door for library should be on the North, and the armoury on the South.
         - Sanctuary map doesn't show upper walkways, and it should - they'd be visible
         - Sanctuary map doesn't show bell tower
-    - Text (draw and scan separately)
-    - Don't forget localised versions! I'll have to add the "- Argaux" to them myself.
-    - revise automap properties if the location assignment turns out differently (as it very well might!)
-    - German captions: "Anwesen von Lady di Rupo" (Manor of Lady di Rupo)
     - German captions: "Korridor" (for hall in Sanctuary)
     - German captions: "Vorraum" (for Vestibule)
     - For the italian map please replace "Sala"(Hall) with "Corridoio".
+    - update automap properties
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
@@ -44,12 +48,17 @@ RELEASE (November)
 - Script & apply room EAXes
 
 - Translations & subtitles
+    - French?
+    - Russian?
 
 - Briefing video
 
 - Credits video
+    - Finalise credits.
+    - Revise effects. Consider backgrounds?
+    - Take audio into Audacity, get exact beat timings, tweak beatmatching
     - McTaffer's "filth.wav" as a stinger?
 
 - FM packaging
     - Test with fresh GOG, Steam releases
-    - Test with Darkloader?
+    - Test with NewDarkloader?

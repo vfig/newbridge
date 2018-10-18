@@ -13,7 +13,9 @@ FIX BEFORE RELEASE
 
 - AIs can run up the mountain that Garrett slides down. Spread some oversided block points around it.
 
-- Fixed crate under shelf in armoury has no collision
+- Immobile crate under shelf in armoury has no collision
+
+- di Rupo bedroom painting is slightly off wall.
 
 
 ONLY IF I FEEL LIKE IT

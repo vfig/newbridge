@@ -11,8 +11,6 @@ FIX BEFORE RELEASE
 
 - Hmm, maybe move Hammerite map into more hidden location in secret room? Dillon found it in Argaux's other room and assumed it (and the rune boards) were probably the thing he was after (even though they didn't relate to anything he already knew ¯\_(ツ)_/¯)
 
-- prjames reports prisoner did not run away after being freed. Investigate.
-
 
 ONLY IF I FEEL LIKE IT
 ======================

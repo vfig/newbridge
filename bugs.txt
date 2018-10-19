@@ -9,15 +9,9 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
+- Hmm, maybe move Hammerite map into more hidden location in secret room? Dillon found it in Argaux's other room and assumed it (and the rune boards) were probably the thing he was after (even though they didn't relate to anything he already knew ¯\_(ツ)_/¯)
+
 - prjames reports prisoner did not run away after being freed. Investigate.
-
-- AIs can run up the mountain that Garrett slides down. Spread some oversided block points around it.
-
-- Thieves are able to pathfind up the mountain too! Not always back down again. See ffox's screenshot of Danno (I think) on the mountainside above the ruined mausoleums.
-
-- Immobile crate under shelf in armoury has no collision
-
-- di Rupo bedroom painting is slightly off wall.
 
 
 ONLY IF I FEEL LIKE IT

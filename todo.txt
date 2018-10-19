@@ -10,6 +10,7 @@ RELEASE (November)
 ==================
 
 - Get preferred crediting names from everyone I haven't yet.
+    - partly done
 
 - Review and update credits and so on in readme.
 

@@ -9,6 +9,14 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
+- Bonus objective for getting the prisoner safely to his hut?
+
+- Bonus objective for stealing the diner's loot without frightening him?
+
+- Bonus objective for stealing the sleeping guard's coins without waking him?
+
+- Bonus objective for stealing the sleeping sitting down guy's loot without waking him?
+
 - Get preferred crediting names from everyone I haven't yet.
     - partly done
 

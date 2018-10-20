@@ -689,20 +689,69 @@ class LockboxFrobSound extends SqRootScript
     }
 }
 
-class SynchLockedHack extends SqRootScript
+class GoldDoorHack extends SqRootScript
 {
-    /* Thief 1/Gold: put this on the Door archetype so that the
-       locked state also syncs between double doors. */
+    /* Thief 1/Gold: put this script on the Door archetype.
+       It must come first in the list of scripts, before
+       StdDoor! It will fix two door problems:
+
+       1. If a door gets stuck while opening, frobbing it again
+          will make it close. This replicates Thief 2 behaviour
+          in this circumstance, where Thief 1/Gold would always
+          keep trying to open the door. This improves usability
+          and also prevents players getting stuck behind an
+          opening door.
+
+       2. If a door is part of a Double set, then they will now
+          synchronise their locked state. Unlocking one door
+          will unlock the other, and locking one door again will
+          lock the other also. This improves usability where one
+          door of a doubled pair could be locked while the other
+          was unlocked. This replicates Thief 2 behaviour in this
+          circumstance.
+     */
+    function OnDoorOpen() {
+        // Evidently we're no longer blocked from opening.
+        ClearData("BlockedFromOpening");
+    }
+
+    function OnDoorClose() {
+        // Evidently we're no longer blocked from opening.
+        ClearData("BlockedFromOpening");
+    }
+
+    function OnDoorHalt() {
+        if (message().PrevActionType == eDoorAction.kOpening) {
+            // If the door was blocked while opening, then remember
+            // this, so the next time it's frobbed it'll close instead.
+            SetData("BlockedFromOpening", true);
+        } else {
+            // Evidently we're no longer blocked from opening.
+            ClearData("BlockedFromOpening");
+        }
+    }
+
+    function OnFrobWorldEnd() {
+        if (IsDataSet("BlockedFromOpening")) {
+            ClearData("BlockedFromOpening");
+            // Don't pass this message on to StdDoor, or it'll keep
+            // trying to open the door!
+            BlockMessage();
+            // We want to close the door this time instead.
+            Door.CloseDoor(self);
+        }
+    }
+
     function OnSynchUp() {
-        // Ripped from T2's GIZMO.SCR
-        local otherdoor = message().from;
-        if(Property.Possessed(otherdoor, "Locked")
+        // This is just copied from T2's GIZMO.SCR
+        local other_door = message().from;
+        if(Property.Possessed(other_door, "Locked")
             && Property.Possessed(self, "Locked"))
         {
-            local otherlock = Property.Get(otherdoor, "Locked");
-            local lock = Property.Get(self, "Locked");
-            if (lock != otherlock) {
-                Property.CopyFrom(self,"Locked", otherdoor);
+            local other_locked = Property.Get(other_door, "Locked");
+            local locked = Property.Get(self, "Locked");
+            if (locked != other_locked) {
+                Property.CopyFrom(self, "Locked", other_door);
             }
         }
     }

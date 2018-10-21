@@ -9,6 +9,26 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
+- Thief scroll blood decal & text needs tweaking so there's only 50% guesswork (East should be unambiguous, guess is between south and west).
+    - see what it looks like if the blood decals vanish one at a time.
+
+- R Soul also reporting crypt doors disappearing (sigh, stupid Thief)
+
+- Mausoleum secret door can frob item through it.
+
+- Block pathfinding on manor kitchen table.
+
+- Everybody's rushing the ritual! Nobody seems to even be attempting to do it stealthily. That's okay, I can ship it this way, but it's definitely not ideal. Maybe I should cut the line to just "Damn, they've already started the ritual!"??
+
+- Entrance to Argaux's secret room should be just a touch bigger, so crouch-walking through it is okay. 4.5 or something.
+
+- Tweak the bedroom lever a little more -- three people now have missed it! Cut the whole tile out from the bath.
+
+- Adjust loot goals down a little.
+    - Check people's reports for final loot totals (I should've asked them to post their stats too!)
+
+- Should there be some kind of hint about the sharp-eyed archer?
+
 - Bonus objective for getting the prisoner safely to his hut?
 
 - Bonus objective for stealing the diner's loot without frightening him?

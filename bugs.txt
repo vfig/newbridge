@@ -9,6 +9,8 @@ FIX BEFORE BETA 2
 FIX BEFORE RELEASE
 ==================
 
+- Some beds still have wood material instead of carpet.
+
 
 ONLY IF I FEEL LIKE IT
 ======================

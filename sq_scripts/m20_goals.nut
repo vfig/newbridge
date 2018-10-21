@@ -44,7 +44,7 @@ enum eMonologues {
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
     kHammerTakenByBurricks  = 17, // CUT!
-    kGotTheFirstItem        = 12, // FIXME: script this
+    kGotTheFirstItem        = 12, // CUT!
     /* The Hand */
     kMausoleumLocked        = 0,
     kPuzzleFailed1          = 9,
@@ -52,12 +52,12 @@ enum eMonologues {
     kPuzzleFailed3          = 11,
     kEnteredTheProphetsRoom = 16,
     kBanishedTheGhost       = 18, // CUT!
-    kGotTheSecondItem       = 13, // FIXME: script this
+    kGotTheSecondItem       = 13, // CUT!
     kGonnaSellTheHand       = 20, // CUT!
     /* Delivery */
     kThisIsTheDeliverySpot  = 8,
     /* The Ritual */
-    kLookAtTheTower         = 14, // FIXME: script this
+    kLookAtTheTower         = 14, // CUT!
     kFoundTheRitual         = 7,
     kReleasedTheProphet     = 19, // CUT!
     kRescuingTheAnax        = 15, // CUT!

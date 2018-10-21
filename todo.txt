@@ -9,6 +9,26 @@ BETA 2 (October)
 RELEASE (November)
 ==================
 
+- Put a short delay before the "Hand carries water..." echoes through the caves.
+
+- Kill the "Uh oh!" line.
+
+- Kill the "scoffs" line from the Keeper conv, unless I've got one?
+
+- Reduce frob distance/priority on tower trapdoor so you don't grab it instead of the crates so easily.
+
+- Think about getting malasdair to record the "What have we here?" and "It's a long way down" lines. And a variant on the "better be quick" that sounds less urgent?
+
+- Can the lights go out just before the ritual pause? Then it should be visible that they're not permanently on.
+
+- Think about scripting the "One down..." and "Now to deliver..." lines, since I have audio for them. And the scripting should be easy now that the two item objectives don't cancel. Either line would fire off when you enter Hammer Square or the Mausoleum, and:
+    - the first line plays if only one of the two item objectives is done, or
+    - the second line plays if both item objectives are done.
+
+- Can I make the markers give 30 seconds of darkness on Normal, and 20 on Hard, or something like that? 15 is only just enough. 
+
+- change texture on walls (and floor?) of catacomb entrance so it's more visible, and move bone pile to just the other side of trap floor.
+
 - Thief scroll blood decal & text needs tweaking so there's only 50% guesswork (East should be unambiguous, guess is between south and west).
     - see what it looks like if the blood decals vanish one at a time.
 

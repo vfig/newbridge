@@ -5,6 +5,7 @@
 schema nb000
 archetype M20_CONV
 volume -1
+delay 500
 nb000
 schema_voice vgarrett 1 nbconv0 (LineNo 1 1)
 
@@ -12,13 +13,15 @@ schema_voice vgarrett 1 nbconv0 (LineNo 1 1)
 schema nb001
 archetype M20_CONV
 volume -1
+delay 1000
 nb001
 schema_voice vgarrett 1 nbconv0 (LineNo 2 2)
 
-// "...I think I'll do the job by myself..."
+// "So this is what Argaux wanted my help on... the money's good..."
 schema nb002
 archetype M20_CONV
 volume -1
+delay 2500
 nb002
 schema_voice vgarrett 1 nbconv0 (LineNo 3 3)
 
@@ -26,13 +29,15 @@ schema_voice vgarrett 1 nbconv0 (LineNo 3 3)
 schema nb003
 archetype M20_CONV
 volume -1
+delay 500
 nb003
 schema_voice vgarrett 1 nbconv0 (LineNo 4 4)
 
-// "So this is what Argaux wanted my help on..."
+// "So this is what Argaux wanted my help on... then I won't have to pay his finder's fee."
 schema nb004
 archetype M20_CONV
 volume -1
+delay 2500
 nb004
 schema_voice vgarrett 1 nbconv0 (LineNo 5 5)
 
@@ -40,13 +45,15 @@ schema_voice vgarrett 1 nbconv0 (LineNo 5 5)
 schema nb005
 archetype M20_CONV
 volume -1
+delay 1000
 nb005
 schema_voice vgarrett 1 nbconv0 (LineNo 6 6)
 
-// "Looks like Argaux's career... I'll take the job..."
+// "Poor Argaux... I should check his place..."
 schema nb006
 archetype M20_CONV
 volume -1
+delay 2500
 nb006
 schema_voice vgarrett 1 nbconv0 (LineNo 7 7)
 
@@ -61,6 +68,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 8 8)
 schema nb008
 archetype M20_CONV
 volume -1
+delay 500
 nb008
 schema_voice vgarrett 1 nbconv0 (LineNo 9 9)
 
@@ -68,6 +76,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 9 9)
 schema nb009
 archetype M20_CONV
 volume -1
+delay 1000
 nb009
 schema_voice vgarrett 1 nbconv0 (LineNo 10 10)
 
@@ -75,6 +84,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 10 10)
 schema nb010
 archetype M20_CONV
 volume -1
+delay 1000
 nb010
 schema_voice vgarrett 1 nbconv0 (LineNo 11 11)
 
@@ -82,31 +92,35 @@ schema_voice vgarrett 1 nbconv0 (LineNo 11 11)
 schema nb011
 archetype M20_CONV
 volume -1
+delay 1000
 nb011
 schema_voice vgarrett 1 nbconv0 (LineNo 12 12)
 
-// "One down, one to go."
+// "One down, one to go." (CUT)
 schema nb012
 archetype M20_CONV
 volume -1
+delay 3000
 nb012
 schema_voice vgarrett 1 nbconv0 (LineNo 13 13)
 
-// "Now to deliver all this..."
+// "Now to deliver all this..." (CUT)
 schema nb013
 archetype M20_CONV
 volume -1
+delay 3000
 nb013
 schema_voice vgarrett 1 nbconv0 (LineNo 14 14)
 
-// "The tower's all lit up..."
+// "The tower's all lit up..." (CUT)
 schema nb014
 archetype M20_CONV
 volume -1
+delay 4000
 nb014
 schema_voice vgarrett 1 nbconv0 (LineNo 15 15)
 
-// "I hope the Hammers appreciate..."
+// "I hope the Hammers appreciate..." (CUT)
 schema nb015
 archetype M20_CONV
 volume -1
@@ -117,48 +131,50 @@ schema_voice vgarrett 1 nbconv0 (LineNo 16 16)
 schema nb016
 archetype M20_CONV
 volume -1
+delay 500
 nb016
 schema_voice vgarrett 1 nbconv0 (LineNo 17 17)
 
-// "Hah, I guess the Burricks..."
+// "Hah, I guess the Burricks..." (CUT)
 schema nb017
 archetype M20_CONV
 volume -1
 nb017
 schema_voice vgarrett 1 nbconv0 (LineNo 18 18)
 
-// "Huh, I really didn't..."
+// "Huh, I really didn't..." (CUT)
 schema nb018
 archetype M20_CONV
 volume -1
 nb018
 schema_voice vgarrett 1 nbconv0 (LineNo 19 19)
 
-// "Heh heh. Sorry about the mess."
+// "Heh heh. Sorry about the mess." (CUT)
 schema nb019
 archetype M20_CONV
 volume -1
 nb019
 schema_voice vgarrett 1 nbconv0 (LineNo 20 20)
 
-// "Got this Hand here..."
+// "Got this Hand here..." (CUT)
 schema nb020
 archetype M20_CONV
 volume -1
 nb020
 schema_voice vgarrett 1 nbconv0 (LineNo 21 21)
 
-// "This looks old. ..."
+// "This looks old. ..." (CUT)
 schema nb021
 archetype M20_CONV
 volume -1
 nb021
 schema_voice vgarrett 1 nbconv0 (LineNo 22 22)
 
-// "Looks like Argaux's career ..."
+// "Looks like Argaux's career ... Poor Argaux"
 schema nb022
 archetype M20_CONV
 volume -1
+delay 500
 nb022
 schema_voice vgarrett 1 nbconv0 (LineNo 23 23)
 
@@ -166,6 +182,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 23 23)
 schema nb023
 archetype M20_CONV
 volume -1
+delay 3000
 nb023
 schema_voice vgarrett 1 nbconv0 (LineNo 24 24)
 

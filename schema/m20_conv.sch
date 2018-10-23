@@ -320,7 +320,7 @@ volume -1
 nb408
 schema_voice vkeeper1 1 nbconv4 (LineNo 9 9)
 
-// "(scoffs)"
+// "(scoffs)" (CUT!)
 schema nb409
 archetype M20_CONV
 volume -1
@@ -334,7 +334,7 @@ volume -1
 nb410
 schema_voice vkeeper1 1 nbconv4 (LineNo 11 11)
 
-// "Stop the ritual. And see to it..."
+// "Stop the ritual. And see to it..." (CUT!)
 schema nb411
 archetype M20_CONV
 volume -1
@@ -427,14 +427,14 @@ volume -1
 nb510
 schema_voice vdirupo 1 nbconv5 (LineNo 11 11)
 
-// "Aah! Who are you? ..."
+// "Aah! Who are you? ..." (CUT!)
 schema nb511
 archetype M20_CONV
 volume -1
 nb511
 schema_voice vdirupo 1 nbconv5 (LineNo 12 12)
 
-// "Thiefs! Took my hand! ..."
+// "Thiefs! Took my hand! ..." (CUT!)
 schema nb512
 archetype M20_CONV
 volume -1

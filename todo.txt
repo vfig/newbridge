@@ -15,8 +15,6 @@ Beta 3 (November)
 
 - Everybody's rushing the ritual! Nobody seems to even be attempting to do it stealthily. That's okay, I can ship it this way, but it's definitely not ideal. Maybe I should cut the line to just "Damn, they've already started the ritual!"??
 
-- Can I make the markers give 30 seconds of darkness on Normal, and 20 on Hard, or something like that? 15 is only just enough.
-
 - Think about scripting the "One down..." and "Now to deliver..." lines, since I have audio for them. And the scripting should be easy now that the two item objectives don't cancel. Either line would fire off when you enter Hammer Square or the Mausoleum, and:
     - the first line plays if only one of the two item objectives is done, or
     - the second line plays if both item objectives are done.

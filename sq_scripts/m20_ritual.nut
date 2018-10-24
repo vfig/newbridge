@@ -2279,7 +2279,16 @@ class RitualMarker extends RitualCrystal
     function RestartTimer() {
         // Set a timer to reenable myself.
         StopTimer();
-        local timer = SetOneShotTimer("Reenable", 15.0);
+        local difficulty = Quest.Get("difficulty");
+        local duration;
+        if (difficulty == 0) {
+            duration = 25.0; // Normal
+        } else if (difficulty == 1) {
+            duration = 20.0; // Hard
+        } else {
+            duration = 15.0; // Expert
+        }
+        local timer = SetOneShotTimer("Reenable", duration);
         SetData("ReenableTimer", timer);
     }
 

@@ -287,6 +287,13 @@ class RitualController extends SqRootScript
         local stage_index = StageIndex();
         RitualLog(eRitualLog.kRitual, "Pause " + stage_index + ", Stage " + stage);
 
+        // Normal lighting is for normal stages, not the last stage.
+        if (Status() == eRitualStatus.kInProgress) {
+            local prev_marker = Markers()[PreviousStage()];
+            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(prev_marker));
+            SendMessage(prev_marker, "TurnOff");
+        }
+
         // We call it a down, but really it's a system of a down.
         // The system drives all the facing, the downing, the
         // blessing, and the returning.
@@ -306,18 +313,15 @@ class RitualController extends SqRootScript
         // Normal lighting is for normal stages, not the last stage.
         if (Status() == eRitualStatus.kInProgress) {
             local marker = Markers()[stage];
-            local prev_marker = Markers()[PreviousStage()];
-            RitualLog(eRitualLog.kLighting, "Turning off " + Object_Description(prev_marker));
-            SendMessage(prev_marker, "TurnOff");
             RitualLog(eRitualLog.kLighting, "Turning on " + Object_Description(marker));
             SendMessage(marker, "TurnOn");
 
             ActivateStrip(stage_index);
+        }
 
-            // Change the ambience for the final stage
-            if (stage_index == 6) {
-                ChangeAmbience("ritual4");
-            }
+        // Change the ambience for the final stage
+        if (stage_index == 6) {
+            ChangeAmbience("ritual4");
         }
     }
 

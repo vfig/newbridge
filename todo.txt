@@ -15,16 +15,11 @@ Beta 3 (November)
 
 - Everybody's rushing the ritual! Nobody seems to even be attempting to do it stealthily. That's okay, I can ship it this way, but it's definitely not ideal. Maybe I should cut the line to just "Damn, they've already started the ritual!"??
 
-- Can the lights go out just before the ritual pause? Then it should be visible that they're not permanently on.
-
 - Can I make the markers give 30 seconds of darkness on Normal, and 20 on Hard, or something like that? 15 is only just enough.
 
 - Think about scripting the "One down..." and "Now to deliver..." lines, since I have audio for them. And the scripting should be easy now that the two item objectives don't cancel. Either line would fire off when you enter Hammer Square or the Mausoleum, and:
     - the first line plays if only one of the two item objectives is done, or
     - the second line plays if both item objectives are done.
-
-- Thief scroll blood decal & text needs tweaking so there's only 50% guesswork (East should be unambiguous, guess is between south and west).
-    - see what it looks like if the blood decals vanish one at a time.
 
 - R Soul also reporting crypt doors disappearing (sigh, stupid Thief)
     - their _centers_ get in the walls, not the center of their physbox.

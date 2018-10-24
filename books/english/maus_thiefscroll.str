@@ -28,12 +28,12 @@ I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cak
 ; Decals 2 and 3 are the removable blood layers.
 ; Decal 4 is the remaining blood stain that is indelible.
 ; See the BloodyInstructions script for more details.
-; Note: all theses positions need to be adjusted for each language.
+; Note: all these positions need to be adjusted for each language.
 ;
-page_0_decal_0: "#0 $ 1 203 257 350"
-page_0_decal_1: "#0 $ 1 187 281 350"
-page_0_decal_2: "#1 136 128 decals\\blood2"
+page_0_decal_0: "#0 $ 1 203 257 370"
+page_0_decal_1: "#0 $ 1 187 281 370"
+page_0_decal_2: "#1 1 136 128 decals\\blood2"
 page_0_decal_3: "#1 1 136 128 decals\\blood2"
 page_0_decal_4: "1 136 128 decals\\blood2"
 page_0_decal_0_text: "outhwest, Southeast, Northwest,"
-page_0_decal_1_text: "East? or West? Ah, ye'll figger it out."
+page_0_decal_1_text: "East, and then ...? Ah, ye'll figger it out."

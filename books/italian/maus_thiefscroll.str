@@ -12,12 +12,12 @@ Credo che anche un farabutto come te non avra' problemi. Gioco da ragazzi! E non
 ; Decals 2 and 3 are the removable blood layers.
 ; Decal 4 is the remaining blood stain that is indelible.
 ; See the BloodyInstructions script for more details.
-; Note: all theses positions need to be adjusted for each language.
+; Note: all these positions need to be adjusted for each language.
 ;
 page_0_decal_0: "#0 $ 1 215 233 350"
 page_0_decal_1: "#0 $ 1 170 257 350"
-page_0_decal_2: "#1 136 112 decals\\blood2"
+page_0_decal_2: "#1 1 136 112 decals\\blood2"
 page_0_decal_3: "#1 1 136 112 decals\\blood2"
 page_0_decal_4: "1 136 112 decals\\blood2"
 page_0_decal_0_text: "ud-ovest, Sud-est, Nord-ovest"
-page_0_decal_1_text: "Est? od Ovest? Ah, lo scoprirai da solo."
+page_0_decal_1_text: "Est, e poi ...? Ah, lo scoprirai da solo."

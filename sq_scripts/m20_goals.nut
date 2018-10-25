@@ -44,7 +44,7 @@ enum eMonologues {
     kEnteredTheSanctuary    = 5,
     kTheAnaxIsAPerson       = 3,
     kHammerTakenByBurricks  = 17, // CUT!
-    kGotTheFirstItem        = 12, // CUT!
+    kGotTheFirstItem        = 12,
     /* The Hand */
     kMausoleumLocked        = 0,
     kPuzzleFailed1          = 9,
@@ -52,7 +52,7 @@ enum eMonologues {
     kPuzzleFailed3          = 11,
     kEnteredTheProphetsRoom = 16,
     kBanishedTheGhost       = 18, // CUT!
-    kGotTheSecondItem       = 13, // CUT!
+    kGotTheSecondItem       = 13,
     kGonnaSellTheHand       = 20, // CUT!
     /* Delivery */
     kThisIsTheDeliverySpot  = 8,
@@ -204,7 +204,8 @@ local Goal = {
     SpeakMonologue = function(monologue) {
         if (Quest.Get("mlog_done_" + monologue) == 0) {
             local player = Object.Named("Player");
-            print("Speaking " + monologue + ": " + DebugMonologueText[monologue]);
+            print("Speaking " + monologue + ": " + DebugMonologueText[monologue]
+                + " (schema " + MonologueSchemas[monologue] + ")");
             Sound.PlayVoiceOver(player, MonologueSchemas[monologue]);
             Quest.Set("mlog_done_" + monologue, 1);
         } else {
@@ -479,19 +480,6 @@ class GoalKidnapTheAnax extends WhenPlayerCarrying
             }
         }
     }
-
-    /* Disabling this, cause for players with TFix it causes
-       a new "Objective Complete" ding every time they pick
-       him up. Ugh. */
-    /*
-    function OnPlayerDropped()
-    {
-        if (Goal.IsActive(eGoals.kDeliverTheItems)) {
-            // Untick it again
-            Goal.Activate(eGoals.kKidnapTheAnax);
-        }
-    }
-    */
 }
 
 
@@ -587,19 +575,25 @@ class GoalStealTheHand extends WhenPlayerCarrying
             }
         }
     }
+}
 
-    /* Disabling this, cause for players with TFix it causes
-       a new "Objective Complete" ding every time they pick
-       him up. Ugh. */
-    /*
-    function OnPlayerDropped()
+class GoalGotTheItems extends SqRootScript
+{
+    function OnPlayerRoomEnter()
     {
-        if (Goal.IsActive(eGoals.kDeliverTheItems)) {
-            // Untick it again
-            Goal.Activate(eGoals.kStealTheHand);
+        if (Goal.IsVisible(eGoals.kKidnapTheAnax)
+            && Goal.IsVisible(eGoals.kStealTheHand))
+        {
+            local got_count = ((Goal.IsComplete(eGoals.kKidnapTheAnax) ? 1 : 0)
+                + (Goal.IsComplete(eGoals.kStealTheHand) ? 1 : 0));
+            if (got_count == 1) {
+                Goal.SpeakMonologue(eMonologues.kGotTheFirstItem);
+            } else if (got_count == 2) {
+                Goal.CancelMonologue(eMonologues.kGotTheFirstItem);
+                Goal.SpeakMonologue(eMonologues.kGotTheSecondItem);
+            }
         }
     }
-    */
 }
 
 
@@ -684,6 +678,8 @@ class GoalDeliverTheItems extends MultipleDeliveries
     function OnTimer() {
         if (message().name == "MoveMountains") {
             // TP the items to just in front of the player.
+            Goal.Show(eGoals.kKidnapTheAnax);
+            Goal.Show(eGoals.kStealTheHand);
             Goal.Show(eGoals.kDeliverTheItems);
             local player = Object.Named("Player");
             local anax = Object.Named("SanctuaryTheAnax");

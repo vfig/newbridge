@@ -96,7 +96,7 @@ delay 1000
 nb011
 schema_voice vgarrett 1 nbconv0 (LineNo 12 12)
 
-// "One down, one to go." (CUT)
+// "One down, one to go."
 schema nb012
 archetype M20_CONV
 volume -1
@@ -104,7 +104,7 @@ delay 3000
 nb012
 schema_voice vgarrett 1 nbconv0 (LineNo 13 13)
 
-// "Now to deliver all this..." (CUT)
+// "Now to deliver all this..."
 schema nb013
 archetype M20_CONV
 volume -1

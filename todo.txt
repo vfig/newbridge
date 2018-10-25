@@ -9,20 +9,27 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
+- Cut the bit about the finder's fee from the briefing VO
+    - don't forget subtitles in all three languages!
+    - don't forget the book either!
+
 - Put a short delay before the "Hand carries water..." echoes through the caves.
 
-- Process and drop in malasdair's re-recoding of "Uh oh", "What have we here?" and "It's a long way down" lines. Make sure "What have we here" doesn't clash with the "found secret" sound.
+- Process and drop in malasdair's re-recoding of "Uh oh", "What have we here? (This looks valuable)" and "It's a long way down" lines. Make sure "What have we here" doesn't clash with the "found secret" sound.
+    - do these need translations/subtitles?
 
 - Everybody's rushing the ritual! Nobody seems to even be attempting to do it stealthily. That's okay, I can ship it this way, but it's definitely not ideal. Maybe I should cut the line to just "Damn, they've already started the ritual!"??
+    - don't forget subtitles in all three languages!
 
 - Think about scripting the "One down..." and "Now to deliver..." lines, since I have audio for them. And the scripting should be easy now that the two item objectives don't cancel. Either line would fire off when you enter Hammer Square or the Mausoleum, and:
     - the first line plays if only one of the two item objectives is done, or
     - the second line plays if both item objectives are done.
+    - do these need translations/subtitles?
+
+- Should holy water have an effect on the prophet's apparition? Just stun him or sth?
 
 - R Soul also reporting crypt doors disappearing (sigh, stupid Thief)
     - their _centers_ get in the walls, not the center of their physbox.
-
-- Need block pathfinding on manor kitchen table.
 
 - nightshifter encountered a Hammerite guard outside the sanctuary who was stopped dead, not moving and not apparently reacting to anything (is this the cowardly one - yes it is? is this their aiwatch pseudoscript fucking up? or an absolute-priority response, or what?)
     - was using TFix 1.26?
@@ -38,9 +45,9 @@ Beta 3 (November)
 
 - Entrance to Argaux's secret room should be just a touch bigger, so crouch-walking through it is okay. 4.5 or something.
 
-- Tweak the bedroom lever a little more -- three people now have missed it! Cut the whole tile out from the bath.
+- Tweak the bedroom lever a little more -- three people now have missed it! Cut the whole tile out from the bath. Add switchable lights maybe..? not a fan.
 
-- Adjust loot goals down a little.
+- Adjust loot goals down a little, maybe -300.
     - Check people's reports for final loot totals (I should've asked them to post their stats too!)
 
 - Should there be some kind of hint about the sharp-eyed archer?

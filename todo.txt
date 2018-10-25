@@ -26,8 +26,6 @@ Beta 3 (November)
     - the second line plays if both item objectives are done.
     - do these need translations/subtitles?
 
-- Should holy water have an effect on the prophet's apparition? Just stun him or sth?
-
 - R Soul also reporting crypt doors disappearing (sigh, stupid Thief)
     - their _centers_ get in the walls, not the center of their physbox.
 

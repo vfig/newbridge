@@ -59,12 +59,12 @@ fiction_14: "Newbridge ist nicht gerade ein Nobelviertel, aber auch nicht unbedi
 text_14: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 1500 Goldst…ken ein!"
 
 ; 15: LootHard
-fiction_15: "Newbridge ist nicht gerade ein Nobelviertel, aber ein paar Reiche und Hammeriten d〉ften hier schon leben. Sie k馬nen deren Reicht［er besser gebrauchen als die! Finden Sie Beute im Wert von 2000 Goldst…ken und sacken Sie sie ein!"
-text_15: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 2000 Goldst…ken ein!"
+fiction_15: "Newbridge ist nicht gerade ein Nobelviertel, aber ein paar Reiche und Hammeriten d〉ften hier schon leben. Sie k馬nen deren Reicht［er besser gebrauchen als die! Finden Sie Beute im Wert von 1900 Goldst…ken und sacken Sie sie ein!"
+text_15: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 1900 Goldst…ken ein!"
 
 ; 16: LootExpert
-fiction_16: "Was k馬nte es beim Besuch eines neuen Stadtbezirks Besseres geben, als sich mit der Gegend vertraut zu machen... und mit ihren Reicht［ern! Nehmen Sie, was Sie kriegen k馬nen! Mindestens 2500 Goldst…ke sollte es wert sein."
-text_16: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 2500 Goldst…ken ein!"
+fiction_16: "Was k馬nte es beim Besuch eines neuen Stadtbezirks Besseres geben, als sich mit der Gegend vertraut zu machen... und mit ihren Reicht［ern! Nehmen Sie, was Sie kriegen k馬nen! Mindestens 2200 Goldst…ke sollte es wert sein."
+text_16: "Wenn Sie schon mal hier sind, dann sacken Sie auch Beute im Wert von 2200 Goldst…ken ein!"
 
 ; 17: BonusLootHard
 fiction_17: "FIXME: Spezialbeute 1 stehlen!"

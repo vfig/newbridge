@@ -62,12 +62,12 @@ fiction_14: "Newbridge non e' il quartiere piu' ricco, e neppure il piu' sorvegl
 text_14: "Mentre sei nel quartiere, raccogli un bottino di 1500."
 
 ; 15: LootHard
-fiction_15: "Newbridge non e' il quartiere piu' ricco, ma ci sono ancora facoltosi nobili ed Hammeriti in giro. Utilizzerai i loro preziosi meglio di quanto farebbero loro. Trova un bottino di 2000 e fallo tuo."
-text_15: "Mentre sei nel quartiere, raccogli un bottino di 2000."
+fiction_15: "Newbridge non e' il quartiere piu' ricco, ma ci sono ancora facoltosi nobili ed Hammeriti in giro. Utilizzerai i loro preziosi meglio di quanto farebbero loro. Trova un bottino di 1900 e fallo tuo."
+text_15: "Mentre sei nel quartiere, raccogli un bottino di 1900."
 
 ; 16: LootExpert
-fiction_16: "Quando visiti una nuova parte della citta' cosa c'e' di meglio che far conoscenza con il territorio... ed il bottino? Raccogli tutto cio' che trovi. Dev'esserci almeno un valore di 2500."
-text_16: "Mentre sei nel quartiere, raccogli un bottino di 2500."
+fiction_16: "Quando visiti una nuova parte della citta' cosa c'e' di meglio che far conoscenza con il territorio... ed il bottino? Raccogli tutto cio' che trovi. Dev'esserci almeno un valore di 2200."
+text_16: "Mentre sei nel quartiere, raccogli un bottino di 2200."
 
 ; 17: BonusLootHard
 fiction_17: "FIXME: Ruba un oggetto speciale 1"

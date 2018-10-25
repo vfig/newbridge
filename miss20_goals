@@ -90,7 +90,7 @@ quest_create_mis goal_max_diff_14, 0
 quest_create_mis goal_state_15, 0
 quest_create_mis goal_visible_15, 1
 quest_create_mis goal_type_15, 3
-quest_create_mis goal_loot_15, 2000
+quest_create_mis goal_loot_15, 1900
 quest_create_mis goal_min_diff_15, 1
 quest_create_mis goal_max_diff_15, 1
 
@@ -98,7 +98,7 @@ quest_create_mis goal_max_diff_15, 1
 quest_create_mis goal_state_16, 0
 quest_create_mis goal_visible_16, 1
 quest_create_mis goal_type_16, 3
-quest_create_mis goal_loot_16, 2500
+quest_create_mis goal_loot_16, 2200
 quest_create_mis goal_min_diff_16, 2
 quest_create_mis goal_max_diff_16, 2
 

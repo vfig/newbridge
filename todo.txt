@@ -9,10 +9,6 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
-- Disappearing terrain:
-    - Between the fountain and the hangman's noose on the map there is a drunk archer in a tower. If you face NW, you can sometimes see a bit of terrain disappear.
-    - Standing on the east side of market square and heading west, can sometimes see the Sanctuary roof appear and disappear.
-
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
     - don't forget the book either!

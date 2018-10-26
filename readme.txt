@@ -150,6 +150,17 @@ Note that changes made to INSTALL.CFG and USER.CFG will take effect for the
 entire game and all fan missions.
 
 =============================================================================
+* Distant Buildings *
+
+This mission is quite aggressive on view distances, as the hilltop and some
+other parts of the city are visible from almost everywhere. From some vantage
+points, you may occasionally see distant buildings appear and vanish. If this
+bothers you, find and disable the 'wr_render_zcomp' setting in CAM_EXT.CFG.
+
+Note that changes made to CAM_EXT.CFG will take effect for the entire game
+and all fan missions.
+
+=============================================================================
 * Credits *
 
 FIXME! - some credits still missing.

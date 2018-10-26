@@ -17,6 +17,11 @@ FIX BEFORE RELEASE
 ONLY IF I FEEL LIKE IT
 ======================
 
+- Disappearing terrain:
+    - Between the fountain and the hangman's noose on the map there is a drunk archer in a tower. If you face NW, you can sometimes see a bit of terrain disappear.
+    - Standing on the east side of market square and heading west, can sometimes see the Sanctuary roof appear and disappear.
+
+
 - nightshifter encountered a Hammerite guard outside the sanctuary who was stopped dead, not moving and not apparently reacting to anything (is this the cowardly one - yes it is? is this their aiwatch pseudoscript fucking up? or an absolute-priority response, or what?)
     - He's stuck in: [AI(870) Watch: Flow] changed goal to "'Custom Goal' at priority 'Absolute'", ability "Converse"
         - Think this is due to the double-trigger I had in beta 2 but since removed. Come to think of it, the guard getting stuck in a running animation was probably the same thing too.

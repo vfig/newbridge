@@ -13,8 +13,6 @@ Beta 3 (November)
     - Between the fountain and the hangman's noose on the map there is a drunk archer in a tower. If you face NW, you can sometimes see a bit of terrain disappear.
     - Standing on the east side of market square and heading west, can sometimes see the Sanctuary roof appear and disappear.
 
-- Restore the second walkway guard on Normal (+Hard?). Make sure loot list is updated to reflect his purse.
-
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
     - don't forget the book either!
@@ -26,11 +24,6 @@ Beta 3 (November)
 
 - Everybody's rushing the ritual! Nobody seems to even be attempting to do it stealthily. That's okay, I can ship it this way, but it's definitely not ideal. Maybe I should cut the line to just "Damn, they've already started the ritual!"??
     - don't forget subtitles in all three languages!
-
-- nightshifter encountered a Hammerite guard outside the sanctuary who was stopped dead, not moving and not apparently reacting to anything (is this the cowardly one - yes it is? is this their aiwatch pseudoscript fucking up? or an absolute-priority response, or what?)
-    - was using TFix 1.26?
-    - He's stuck in: [AI(870) Watch: Flow] changed goal to "'Custom Goal' at priority 'Absolute'", ability "Converse"
-        - Review all Absolute priority pseudoscripts he's got (convo cancel?)
 
 - Maybe just make all convos remove their ~ControlDevice links at start, for stupid safeguard.
 

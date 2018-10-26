@@ -1,14 +1,23 @@
 Object_Description <- function(obj)
 {
-    local name = Object.GetName(obj);
-    if (name == "") {
-        // Look up the archetype's name instead.
-        local archetype_name = Object.GetName(Object.Archetype(obj));
-        local first = archetype_name.slice(0, 1).toupper();
-        if (first == "A" || first == "E" || first == "I" || first == "O" || first == "U") {
-            name = "an " + archetype_name;
-        } else {
-            name = "a " + archetype_name;
+    local name;
+    if (obj == 0) {
+        name = "[nothing]";
+    } else {
+        name = Object.GetName(obj);
+        if (name == "") {
+            // Look up the archetype's name instead.
+            local archetype_name = Object.GetName(Object.Archetype(obj));
+            if (archetype_name == "") {
+                name = "[unknown]";
+            } else {
+                local first = archetype_name.slice(0, 1).toupper();
+                if (first == "A" || first == "E" || first == "I" || first == "O" || first == "U") {
+                    name = "an " + archetype_name;
+                } else {
+                    name = "a " + archetype_name;
+                }
+            }
         }
     }
     return (name + " (" + obj + ")");
@@ -405,6 +414,15 @@ class ItemToDeliver extends SqRootScript
     }
 
     function CheckForDelivery()
+    {
+        // When trying to drop an item, if there's no space, it will get uncontained
+        // and immediately contained again. So we delay the actual delivery check until
+        // after that's had a chance to happen. This way a failed drop won't count as
+        // a delivery.
+        PostMessage(self, "_DelayedCheckForDelivery");
+    }
+
+    function On_DelayedCheckForDelivery()
     {
         local already_delivered = (GetData("ItemIsDelivered") == 1);
         local is_delivered = (IsInDeliveryRoom() && ! IsInContainer());

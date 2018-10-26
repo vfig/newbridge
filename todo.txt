@@ -9,6 +9,12 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
+- Disappearing terrain:
+    - Between the fountain and the hangman's noose on the map there is a drunk archer in a tower. If you face NW, you can sometimes see a bit of terrain disappear.
+    - Standing on the east side of market square and heading west, can sometimes see the Sanctuary roof appear and disappear.
+
+- Restore the second walkway guard on Normal (+Hard?). Make sure loot list is updated to reflect his purse.
+
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
     - don't forget the book either!
@@ -26,13 +32,7 @@ Beta 3 (November)
     - He's stuck in: [AI(870) Watch: Flow] changed goal to "'Custom Goal' at priority 'Absolute'", ability "Converse"
         - Review all Absolute priority pseudoscripts he's got (convo cancel?)
 
-- nightshifter reporting handoff conversation starting twice, or starting while Anax not properly dropped? (something about pressing "use item" multiple times?)
-    - was using TFix 1.26? bug no longer happens with TFix 1.26a?
-    - how did they get the convo to trigger without dropping the Anax??!?
-        - Eh. Maybe just make all convos remove their ~ControlDevice links at start, for stupid safeguard.
-
-- Adjust loot goals down a little, maybe -300.
-    - Check people's reports for final loot totals (I should've asked them to post their stats too!)
+- Maybe just make all convos remove their ~ControlDevice links at start, for stupid safeguard.
 
 - Should there be some kind of hint about the sharp-eyed archer?
 
@@ -54,6 +54,7 @@ Beta 3 (November)
 
 - NPC Names!
     - All the ones with "Name_Quintus" right now need new names! :)
+    - Don't forget Morten!
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

@@ -695,9 +695,15 @@ class GoalDeliverTheItems extends MultipleDeliveries
     function OnItemDelivered()
     {
         local item = message().data;
-        Object_SetFrobAction(item, eFrobAction.kFrobActionIgnore);
-
+        Object_SetFrobInert(item, true);
         base.OnItemDelivered();
+    }
+
+    function OnItemNotDelivered()
+    {
+        local item = message().data;
+        Object_SetFrobInert(item, false);
+        base.OnItemNotDelivered();
     }
 
     function OnAllItemsDelivered()

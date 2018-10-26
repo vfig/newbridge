@@ -219,6 +219,17 @@ Object_RemoveFrobAction <- function(obj, action, where = eFrobWhere.kFrobWorld)
     Object_SetFrobAction(obj, frob, where);
 }
 
+Object_SetFrobInert <- function(obj, inert)
+{
+    local metaprop = Object.Named("FrobInert");
+    local has_metaprop = Object.HasMetaProperty(obj, metaprop);
+    if (inert && (! has_metaprop)) {
+        Object.AddMetaProperty(obj, metaprop);
+    } else if ((! inert) && has_metaprop) {
+        Object.RemoveMetaProperty(obj, metaprop);
+    }
+}
+
 AI_AlertLevel <- function(ai)
 {
     return Property.Get(self, "AI_Alertness", "Level");

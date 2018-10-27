@@ -899,10 +899,13 @@ class GoalFoundTheRitual extends SqRootScript
             // Play the first line of the ritual
             // (it should be processed to sound echoey)
             Sound.PlaySchemaAmbient(self, "nb500");
+
+            // And before it finishes echoing, have Garrett respond
+            SetOneShotTimer("nb500", 7.0);
         }
     }
 
-    function OnSchemaDone()
+    function OnTimer()
     {
         if (message().name == "nb500") {
             Goal.SpeakMonologue(eMonologues.kFoundTheRitual);

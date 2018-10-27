@@ -9,11 +9,11 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
+- Canal keeper needs to be a little more visible -- either a few moments longer before disappearing, or visible from the start point.
+
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
     - don't forget the book either!
-
-- Put a short delay before the "Hand carries water..." echoes through the caves.
 
 - Process and drop in malasdair's re-recoding of "Uh oh", "What have we here? (This looks valuable)" and "It's a long way down" lines. Make sure "What have we here" doesn't clash with the "found secret" sound.
     - do these need translations/subtitles?
@@ -32,13 +32,8 @@ Beta 3 (November)
 
 - Proper VO
     - Process and normalise
-        - Try Shadow Creepr's new vocals
-        - Treat Garrett's lines as three types: inner monologue, briefing, and conversation. Inner monologue should sound more in his head. Briefing should feel a little more directed at player, and conversation a little more directed outwards. If that makes sense.
         - See what cleaning can be done to masterthief3's lines. If not suitable, try to get Yandros's lines to have similar reverb.
-        - Make sure everything is in mono! See if energy levels can't be normalised across all conversations.
-        - Check a bunch of original voice lines (both Garrett and others) to see what their environment feels like, and aim to match it.
-    - Figure out what to do about the Prophet's voice! (maybe just cut?)
-        - Just cut
+    - Cut the Prophet's voice!
     - Make sure no placeholder lines are left.
 
 - NPC Names!

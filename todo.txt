@@ -9,6 +9,8 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
+- So, what happens if you take the Anax and/or the Hand before getting the objective... does the corresponding "one down" / "now to deliver" line get cancelled?
+
 - Canal keeper needs to be a little more visible -- either a few moments longer before disappearing, or visible from the start point.
 
 - Cut the bit about the finder's fee from the briefing VO

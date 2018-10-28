@@ -187,11 +187,20 @@ nb023
 schema_voice vgarrett 1 nbconv0 (LineNo 24 24)
 
 // "It's a long way down" (with a delay)
-schema nb024
-archetype PLAYER_SPEECH
-play_once
+schema nb025
+archetype M20_CONV
+volume -1
 delay 3000
-garm0409
+nb025
+schema_voice vgarrett 1 nbconv0 (LineNo 26 26)
+
+// "Uh oh"
+schema nb026
+archetype M20_CONV
+volume -1
+delay 0
+nb026
+schema_voice vgarrett 1 nbconv0 (LineNo 27 27)
 
 
 //////////////////////////////////
@@ -399,11 +408,11 @@ schema_voice vdirupo 1 nbconv5 (LineNo 6 6)
 
 // Look, there's no LineNo 7. That's just how it is.
 
-// "Unbuild! Unmake!..."
+// "Unbuild! Unmake!..." -- or rather, nothing
 schema nb507
 archetype M20_CONV
 volume -1
-nb507
+empty
 schema_voice vprophet 1 nbconv5 (LineNo 8 8)
 
 // "Yes! Yes! Slay them all!..."

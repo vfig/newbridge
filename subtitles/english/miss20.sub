@@ -15,13 +15,14 @@ SUB1
     SUB "nb008" { TEXT "This looks like the hand-off point." }
     SUB "nb009" { TEXT "Damn, must be the wrong combination." }
     SUB "nb010" { TEXT "Still wrong!" }
-    SUB "nb011" { Text "(sigh) I've never liked reading, but maybe some research would help me figure this out." }
+    SUB "nb011" { TEXT "(sigh) I've never liked reading, but maybe some research would help me figure this out." }
     SUB "nb012" { TEXT "One down, one to go." }
     SUB "nb013" { TEXT "Now to deliver all this and get my money." }
     SUB "nb014" { TEXT "The tower's all lit up. That's new." }
     SUB "nb016" { TEXT "I don't like the look of this." }
     SUB "nb022" { TEXT "Looks like Argaux's career has come to a sudden stop. ... Poor Argaux." }
-    SUB "nb023" { Text "(phew) This guy's getting heavy! I figure he'll be safe enough here." }
+    SUB "nb023" { TEXT "(phew) This guy's getting heavy! I figure he'll be safe enough here." }
+    SUB "nb025" { TEXT "It's a long way down." }
 }
 
 // There is no Scene 1.
@@ -195,7 +196,6 @@ SUB1
 {
     TYPE "player"
     DESCR "Garrett to himself"
-    SUB    "garm0409" { TEXT "It's a long way down." }
     SUB    "garm0901" { TEXT "What have we here?" }
 }
 

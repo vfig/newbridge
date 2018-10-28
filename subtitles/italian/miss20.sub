@@ -15,13 +15,14 @@ SUB1
     SUB "nb008" { TEXT "Questo dev'essere il punto di consegna." }
     SUB "nb009" { TEXT "Dannazione, la combinazione dev'essere sbagliata." }
     SUB "nb010" { TEXT "Ancora sbagliata!" }
-    SUB "nb011" { Text "(sigh) Non mi e' mai piaciuto leggere, ma forse un po' di ricerca mi aiutera' a capire." }
+    SUB "nb011" { TEXT "(sigh) Non mi e' mai piaciuto leggere, ma forse un po' di ricerca mi aiutera' a capire." }
     SUB "nb012" { TEXT "Fatto uno, manca l'altro." }
     SUB "nb013" { TEXT "Ora devo consegnare la roba e riscuotere il mio denaro." }
     SUB "nb014" { TEXT "La torre e' illuminata. E' una novita'." }
     SUB "nb016" { TEXT "Non mi piace." }
     SUB "nb022" { TEXT "Sembra che la carriera di Argaux sia stata bruscamente interrotta. ... Povero Argaux." }
-    SUB "nb023" { Text "(uff) Il tipo sta diventando pesante! Qui sara' al sicuro." }
+    SUB "nb023" { TEXT "(uff) Il tipo sta diventando pesante! Qui sara' al sicuro." }
+    SUB "nb025" { TEXT "La strada e' lunga." }
 }
 
 // There is no Scene 1.
@@ -195,7 +196,6 @@ SUB1
 {
     TYPE "player"
     DESCR "Garrett to himself"
-    SUB    "garm0409" { TEXT "La strada e' lunga." }
     SUB    "garm0901" { TEXT "Che c'e' qui?" }
 }
 

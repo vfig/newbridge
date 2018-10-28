@@ -15,13 +15,14 @@ SUB1
     SUB "nb008" { TEXT "Das sieht nach dem öbergabepunkt aus." }
     SUB "nb009" { TEXT "Verdammt... falsche Kombination!" }
     SUB "nb010" { TEXT "Immer noch die falsche!" }
-    SUB "nb011" { Text "-Seufz- Ich lese nicht gern, aber vielleicht wÅrde es mir helfen, dieses RÑtsel zu knacken." }
+    SUB "nb011" { TEXT "-Seufz- Ich lese nicht gern, aber vielleicht wÅrde es mir helfen, dieses RÑtsel zu knacken." }
     SUB "nb012" { TEXT "Einer erledigt, einer noch Åbrig!" }
     SUB "nb013" { TEXT "Jetzt muss ich das abliefern und mein Geld einstecken." }
     SUB "nb014" { TEXT "Der Turm ist hell erleuchtet. Das ist neu..." }
     SUB "nb016" { TEXT "Das gefÑllt mir nicht." }
     SUB "nb022" { TEXT "Argaux' Karriere hat ein jÑhes Ende genommen. Jammerschade." }
-    SUB "nb023" { Text "Puh... Der Kerl wird mir langsam zu schwer! Ich glaube, hier ist er sicher genug!" }
+    SUB "nb023" { TEXT "Puh... Der Kerl wird mir langsam zu schwer! Ich glaube, hier ist er sicher genug!" }
+    SUB "nb025" { TEXT "Geht ziemlich tief 'runter..." }
 }
 
 // There is no Scene 1.
@@ -195,7 +196,6 @@ SUB1
 {
     TYPE "player"
     DESCR "Garrett"
-    SUB    "garm0409" { TEXT "Geht ziemlich tief 'runter..." }
     SUB    "garm0901" { TEXT "Was haben wir denn da?" }
 }
 

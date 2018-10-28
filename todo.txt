@@ -19,9 +19,6 @@ Beta 3 (November)
     - don't forget subtitles in all three languages!
     - don't forget the book either!
 
-- Make sure "What have we here" doesn't clash with the "found secret" sound.
-    - do these need translations/subtitles?
-
 - Everybody's rushing the ritual! Nobody seems to even be attempting to do it stealthily. That's okay, I can ship it this way, but it's definitely not ideal. Maybe I should cut the line to just "Damn, they've already started the ritual!"??
     - don't forget subtitles in all three languages!
 
@@ -33,9 +30,6 @@ Beta 3 (November)
     - partly done
 
 - Review and update credits and so on in readme.
-
-- Proper VO
-    - Make sure no placeholder lines are left.
 
 - NPC Names!
     - All the ones with "Name_Quintus" right now need new names! :)

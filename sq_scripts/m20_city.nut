@@ -100,6 +100,23 @@ class VanishingAct extends SqRootScript
     }
 }
 
+class VanishSoon extends VanishingAct
+{
+    // Begins vanishing after Script > Timing seconds
+    function OnSim() {
+        if (message().starting) {
+            local timing = Property.Get(self, "ScriptTiming").tofloat();
+            SetOneShotTimer("BeginVanishing", timing);
+        }
+    }
+
+    function OnTimer() {
+        if (message().name == "BeginVanishing") {
+            SendMessage(self, "TurnOff");
+        }
+    }
+}
+
 class SetIdlingDirections extends SqRootScript
 {
     // When a "SetIdlingDirection" message is received,

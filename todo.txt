@@ -9,8 +9,6 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
-- Canal keeper needs to be a little more visible -- either a few moments longer before disappearing, or visible from the start point.
-
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
     - don't forget the book either!

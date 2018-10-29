@@ -786,6 +786,33 @@ class GoldDoorHack extends SqRootScript
     }
 }
 
+class GoldSearchCorpseHack extends SqRootScript
+{
+    // This is all just copied from T2's AI.SCR
+
+    function GetCarriedObj() {
+        local candidate = self;
+        local contlinks = Link.GetAll("Contains", self);
+        foreach (curlink in contlinks) {
+            if (LinkTools.LinkGetData(curlink, "").tointeger() < 0) { //external carry
+                candidate = LinkDest(curlink);
+            }
+        }
+        return candidate;
+    }
+
+    function OnFrobWorldEnd() {
+        if (DarkGame.BindingGetFloat("auto_search") != 0.0) {
+            Debug.MPrint("Performing Loot And Lug");
+            local carriedobj = GetCarriedObj();
+            if (carriedobj != self) {
+                Container.Add(carriedobj, message().Frobber);
+                Reply(false);
+            }
+        }
+    }
+}
+
 class TrapFlipFlop extends SqRootScript
 {
     /* When receiving TurnOn messages, passes on TurnOn, TurnOff, ...

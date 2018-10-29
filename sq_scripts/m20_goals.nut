@@ -76,7 +76,7 @@ local DebugMonologueText = [
     "So this is the job Argaux wanted my help on. I think I'll do the job by myself: then I won't have to pay his finder's fee.",
     "Now to find the Anax, whatever that is.",
     "Poor Argaux. ... Guess he won't be collecting his finder's fee now. I should check his place for info on the job.",
-    "Damn, they've already started the ritual! Need to be quick if I'm gonna stop them.",
+    "Damn, they've already started the ritual!",
     "This looks like the hand-off point.",
     "Damn, must be the wrong combination.",
     "Still wrong!",

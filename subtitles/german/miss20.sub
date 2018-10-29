@@ -11,7 +11,7 @@ SUB1
     SUB "nb004" { TEXT "Also dabei wollte Argaux meine Hilfe! Ich glaube, ich mache es dann alleine... dann muss ich das Geld mit niemandem teilen." }
     SUB "nb005" { TEXT "Und nun muss ich das Anax finden - was auch immer das ist." }
     SUB "nb006" { TEXT "Armer Argaux! Er wird seinen Lohn nun wohl nicht mehr einstreichen k”nnen. Ich sollte seine Wohnung nach Informationen durchsuchen." }
-    SUB "nb007" { TEXT "Verdammt, sie haben schon mit dem Ritual begonnen! Ich muss mich beeilen, um das noch zu durchkreuzen!" }
+    SUB "nb007" { TEXT "Verdammt, sie haben schon mit dem Ritual begonnen!" }
     SUB "nb008" { TEXT "Das sieht nach dem šbergabepunkt aus." }
     SUB "nb009" { TEXT "Verdammt... falsche Kombination!" }
     SUB "nb010" { TEXT "Immer noch die falsche!" }

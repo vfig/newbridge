@@ -11,7 +11,7 @@ SUB1
     SUB "nb004" { TEXT "Ecco per cosa Argaux voleva il mio aiuto. Penso che faro' il lavoro per conto mio: cosi' non dovro' pagare la sua provvigione." }
     SUB "nb005" { TEXT "Ora a caccia dell'Anax, qualsiasi cosa sia." }
     SUB "nb006" { TEXT "Povero Argaux. ... Non avra' la sua provvigione ora. Dovro' controllare casa sua per trovare informazioni." }
-    SUB "nb007" { TEXT "Dannazione, il rituale e' gia' iniziato! Dovro' essere svelto se voglio fermarli." }
+    SUB "nb007" { TEXT "Dannazione, il rituale e' gia' iniziato!" }
     SUB "nb008" { TEXT "Questo dev'essere il punto di consegna." }
     SUB "nb009" { TEXT "Dannazione, la combinazione dev'essere sbagliata." }
     SUB "nb010" { TEXT "Ancora sbagliata!" }

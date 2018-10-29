@@ -11,7 +11,7 @@ SUB1
     SUB "nb004" { TEXT "So this is what Argaux wanted my help on. I think I'll do the job by myself: then I won't have to pay his finder's fee." }
     SUB "nb005" { TEXT "Now to find the Anax, whatever that is." }
     SUB "nb006" { TEXT "Poor Argaux. ... Guess he won't be collecting his finder's fee now. I should check his place for info on the job." }
-    SUB "nb007" { TEXT "Damn, they've already started the ritual! Need to be quick if I'm gonna stop them." }
+    SUB "nb007" { TEXT "Damn, they've already started the ritual!" }
     SUB "nb008" { TEXT "This looks like the hand-off point." }
     SUB "nb009" { TEXT "Damn, must be the wrong combination." }
     SUB "nb010" { TEXT "Still wrong!" }

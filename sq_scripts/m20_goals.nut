@@ -581,16 +581,24 @@ class GoalGotTheItems extends SqRootScript
 {
     function OnPlayerRoomEnter()
     {
+        local got_count = ((Goal.IsComplete(eGoals.kKidnapTheAnax) ? 1 : 0)
+            + (Goal.IsComplete(eGoals.kStealTheHand) ? 1 : 0));
         if (Goal.IsVisible(eGoals.kKidnapTheAnax)
             && Goal.IsVisible(eGoals.kStealTheHand))
         {
-            local got_count = ((Goal.IsComplete(eGoals.kKidnapTheAnax) ? 1 : 0)
-                + (Goal.IsComplete(eGoals.kStealTheHand) ? 1 : 0));
             if (got_count == 1) {
                 Goal.SpeakMonologue(eMonologues.kGotTheFirstItem);
             } else if (got_count == 2) {
                 Goal.CancelMonologue(eMonologues.kGotTheFirstItem);
                 Goal.SpeakMonologue(eMonologues.kGotTheSecondItem);
+            }
+        } else {
+            // If the player happens to pick up either item before getting
+            // the objectives, just cancel the dialog lines, cause otherwise
+            // they'll be wrong.
+            if (got_count > 0) {
+                Goal.CancelMonologue(eMonologues.kGotTheFirstItem);
+                Goal.CancelMonologue(eMonologues.kGotTheSecondItem);
             }
         }
     }

@@ -9,9 +9,6 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
-- "Didn't realise the entire place was the Sanctuary and got confused why that key opened a random door."
-    - Maybe have the Sanctuary map use the term?
-
 - So, what happens if you take the Anax and/or the Hand before getting the objective... does the corresponding "one down" / "now to deliver" line get cancelled?
     - Ugh, because it depends on the objectives being visible, this is kinda awkward.
     - So, if you pick up either item before the objective is visible, just cancel the two lines. Simplest solution.

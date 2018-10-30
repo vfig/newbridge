@@ -13,10 +13,15 @@ Beta 3 (November)
     - don't forget subtitles in all three languages!
     - don't forget the book either!
 
-- Get preferred crediting names from everyone I haven't yet.
-    - partly done
+- Replace cutscene book contents with credits.
 
 - Review and update credits and so on in readme.
+    - zajazd?
+    - Norgg?
+    - Nershly?
+    - Jasperstocker?
+
+- Update relevant parts of German and Italian readmes, before passing back to translators
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

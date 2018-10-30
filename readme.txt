@@ -165,50 +165,67 @@ and all fan missions.
 
 FIXME! - some credits still missing.
 
-Created by              : vfig
+Created by              : vfig (Andy Durdin)
 
-Story                   : vfig & tinyblob
+Story                   : Andy Durdin
+                        : Aaron Dron
 
-Briefing illustrations  : ...FIXME...
+Briefing illustrations  : ... FIXME ...
 
 Voice acting:
-    Garrett             : ...FIXME...
+    Garrett             : M. Alasdair MacKenzie
     Lady di Rupo        : Shadow Creepr
-    Keeper              : Yandros
-    The Prophet         : ...FIXME...
+    The Keeper          : Yandros
     The Eternal Benny   : Yandros
     Irate Sergeant      : MasterThief3
     Heathen guard       : Yandros
     Cowardly Hammerite  : McTaffer
     Danno the meister   : Yandros
     Olver the digger    : McTaffer
-    Morten the berk     : Nobody, cause he's dead
+    Morten the berk     : (Nobody, cause he's dead)
     Hammerite priest    : McTaffer
     Hammerite watchman  : Yandros
 
 Translation:
     Deutsch             : baeuchlein
     Italiano            : piesel
-                        :
-                        : ...FIXME...
 
 Proofreading            : gnartsch
-                        :
-                        : ...FIXME...
 
-Beta testing            : ...FIXME...
+Beta testing            : ... FIXME ...
                         :
-                        :
+                        : Alex Lemcovich
+                        : bob_doe_nz
+                        : Cardia
+                        : Dillon Rogers
+                        : Dr.Sahnebacke
+                        : Freddy Fox
+                        : Gloria Creep
+                        : itllrun10s
+                        : Justin Keverne
+                        : M. Alasdair MacKenzie
+                        : marbleman
+                        : nightshifter
+                        : prjames
+                        : R Soul
+                        : Ravenhook
 
 Special thanks:
 
     To Skacky, Unna Oertdottir, and Yandros for their help when Dromed tried
     to murder this mission in its infancy.
 
-    To Tannar and Dussander for providing the beta test forum over at
-    'Shalebridge Cradle' beta test forum.
+    To Athalle and Fortuni for putting me in touch with the translators and
+    giving me a place on the 'Shadow' forum.
 
-    To Athalle and Fortuni for the providing the translator's forum 'Shadow'.
+    To Tannar, Brethren, and Dussander for providing the 'Shalebridge Cradle'
+    and 'Southquarter' beta test forums.
+
+    To all the fan mission authors who came before me and inspired me to get
+    my hands dirty with Dromed.
+
+    To all you taffers out there, on TTLG and beyond, who have kept Thief
+    alive for the past twenty years!
 
 =============================================================================
 * Copyright Notice *
@@ -299,7 +316,7 @@ Stimmen:
     Feiger Hammerit     : McTaffer
     Meister Danno       : Yandros
     Hosenscheißer Olver : McTaffer
-    Glückloser Morten   : keiner, der ist tot!
+    Glückloser Morten   : (keiner, der ist tot!)
     Hammeritenpriester  : McTaffer
     Hammeritenwache     : Yandros
 

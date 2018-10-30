@@ -11,7 +11,8 @@ Beta 3 (November)
 
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
-    - don't forget the book either!
+    - don't forget the books either!
+    - don't forget the readme briefing either!
 
 - Replace cutscene book contents with credits.
 
@@ -25,6 +26,10 @@ Beta 3 (November)
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
+
+- Update build times in readme.
+
+- Compress audio files??
 
 
 RELEASE (mid-November)

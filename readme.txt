@@ -1,12 +1,12 @@
 =============================================================================
- Oct 13, 2018
- Making a Profit - Beta 2
+ Nov 1, 2018
+ Making a Profit - Beta 3
 
 ! BETA FOR TESTING ONLY ! Please do not distribute this!
-Please visit the test forum at Shalebridge Cradle for the latest version
+Please visit the test forum at Southquarter for the latest version
 and all discussion:
 
-    http://shalebridgecradle.co.uk/testing/viewforum.php?f=405
+    http://www.southquarter.com/beta/viewforum.php?f=11
 =============================================================================
 
 Bitte herunterscrollen für deutschen Text! (Please scroll down for German!)
@@ -22,8 +22,8 @@ Bitte herunterscrollen für deutschen Text! (Please scroll down for German!)
 Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 2
-Date of Release         : Oct 13, 2018
+Version                 : Beta 3
+Date of Release         : Nov 1, 2018
 
 Description:
 
@@ -58,7 +58,7 @@ Difficulty Settings     : Normal/Hard/Expert
 Equipment Store         : Yes
 Map                     : Yes
 Auto Map                : Yes
-New Graphics            : No
+New Graphics            : Yes
 New Sounds              : Yes
 Multi-Language Support  : Yes (English, German, Italian)
 Build Time              : 654 hours over 115 calendar days (so far)
@@ -66,17 +66,19 @@ Build Time              : 654 hours over 115 calendar days (so far)
 =============================================================================
 * Installation *
 
-The NewDark 1.26 patch is required to run this mission. The GOG release of
-Thief Gold is recommended, as it comes with the latest NewDark preinstalled:
+The NewDark 1.26 patch or later is required to run this mission. The GOG
+release of Thief Gold is recommended, as it comes with the latest NewDark
+preinstalled:
 
     https://www.gog.com/game/thief_gold
 
 If your Thief Gold comes from another source, you must apply the NewDark
 1.26 patch manually (http://www.ttlg.com/forums/showthread.php?t=146448)
-or using TFix (http://www.ttlg.com/forums/showthread.php?t=134733).
-This mission was designed with the original low-resolution textures and
-models in mind, and the use of any enhancement packs or texture packs is not
-recommended. They probably won't break anything, but might not look right.
+or using TFix (http://www.ttlg.com/forums/showthread.php?t=134733) version
+1.26a or later. This mission was designed with the original low-resolution
+textures and models in mind, and the use of any enhancement packs or texture
+packs is not recommended. They won't break anything, but parts of the mission
+might not look as intended.
 
 You should use NewDark's FMSel feature to run this mission. If you don't have
 one already, create a directory for mission zips, and move this zip file in
@@ -102,7 +104,7 @@ already know what to do.
 The 'new mantle' feature in NewDark makes climbing easier and significantly
 more reliable, so I recommend using it. However, the mission has been fully
 tested without it, so if you prefer the original climbing behaviour, you
-should be okay.
+will be fine.
 
 If you want to enable 'new mantle', edit USER.CFG in your Thief Gold
 directory and add the following line:
@@ -115,21 +117,22 @@ all fan missions.
 =============================================================================
 * Languages and Subtitles *
 
-This mission contains subtitles for all its original dialog. To enable them,
-edit USER.CFG in your Thief Gold directory and add the following line:
+This mission contains subtitles for all its new dialog. To enable them, edit
+USER.CFG in your Thief Gold directory and add the following line:
 
     enable_subtitles
 
 Subtitles will be shown in the same language as texts, where available (see
 below for more on configuring languages). Please see subtitles.txt in your
 NewDark distribution for more information on configuring font sizes and
-colours, and what kinds of subtitles are shown.
+colours, and what kinds of speech and sound effects subtitles will be shown
+for.
 
-If you want subtitles for all the stock dialog and sound effects in the game,
-you will have to install a Thief Gold subtitle pack. An English subtitle pack
-can be found at http://www.ttlg.com/forums/showthread.php?t=144354
+If you want subtitles for all the stock Thief dialog and sound effects, you
+will have to install a Thief Gold subtitle pack. An English subtitle pack can
+be found at http://www.ttlg.com/forums/showthread.php?t=144354
 
-Texts and subtitles in this mission are available in English, German, and
+Texts and subtitles for this mission are available in English, German, and
 Italian. The 'language' setting in INSTALL.CFG sets the languages used by the
 game. By default this is set to the language that your version of Thief uses.
 If you prefer to have text and subtitles in a different language where
@@ -163,7 +166,7 @@ and all fan missions.
 =============================================================================
 * Credits *
 
-FIXME! - some credits still missing.
+... FIXME ... some credits still missing.
 
 Created by              : vfig (Andy Durdin)
 
@@ -244,15 +247,15 @@ Interactive.
 ***********
 
 =============================================================================
- 13. October 2018
+ 1. November 2018
  Ein netter Profit
 =============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 2
-Datum                   : 13. October 2018
+Version                 : Beta 3
+Datum                   : 1. November 2018
 
 Einführung:
 
@@ -289,53 +292,11 @@ Schwierigkeitsgrad      : Normal/Hart/Experte
 Ausrüstungsladen        : ja
 Karte                   : ja
 Automap                 : ja
-Neue Grafiken           : nein
-Neue Sounds             : nein
+Neue Grafiken           : ja
+Neue Sounds             : ja
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
 Bauzeit                 : 654 Stunden über 115 Kalendertage hinweg (Beta2)
-
-=============================================================================
-* Danksagung usw. *
-
-Design und Baukunst     : vfig
-
-Story                   : vfig & tinyblob
-
-Illustrationen für den
-Einführungsfilm         : ...FIXME...
-
-Stimmen:
-    Garrett             : ...FIXME...
-    Lady di Rupo        : Shadow Creepr
-    Hüter               : Yandros
-    Prophet             : ...FIXME...
-    Der Ewige Benny     : Yandros
-    Wütender Sergeant   : MasterThief3
-    Wache der Heiden    : Yandros
-    Feiger Hammerit     : McTaffer
-    Meister Danno       : Yandros
-    Hosenscheißer Olver : McTaffer
-    Glückloser Morten   : (keiner, der ist tot!)
-    Hammeritenpriester  : McTaffer
-    Hammeritenwache     : Yandros
-
-Übersetzung:
-    Deutsch             : baeuchlein
-    Italienisch         : piesel
-                        :
-
-Korrekturlesen          : gnartsch
-                        :
-                        :
-
-Betatester              : ...FIXME...
-                        :
-                        :
-
-Besonderer Dank         : ...FIXME...
-                        :
-                        :
 
 =============================================================================
 * Weitere Informationen *
@@ -370,6 +331,72 @@ grammen, wie z.B. Darkloader, getestet, weswegen deren Gebrauch nicht empfoh-
 len wird.
 
 =============================================================================
+* Danksagung usw. *
+
+Design und Baukunst     : vfig (Andy Durdin)
+
+Story                   : Andy Durdin
+                        : Aaron Dron
+
+Illustrationen für den
+Einführungsfilm         : ...FIXME...
+
+Stimmen:
+    Garrett             : M. Alasdair MacKenzie
+    Lady di Rupo        : Shadow Creepr
+    Hüter               : Yandros
+    Der Ewige Benny     : Yandros
+    Wütender Sergeant   : MasterThief3
+    Wache der Heiden    : Yandros
+    Feiger Hammerit     : McTaffer
+    Meister Danno       : Yandros
+    Hosenscheißer Olver : McTaffer
+    Glückloser Morten   : (keiner, der ist tot!)
+    Hammeritenpriester  : McTaffer
+    Hammeritenwache     : Yandros
+
+Übersetzung:
+    Deutsch             : baeuchlein
+    Italienisch         : piesel
+
+Korrekturlesen          : gnartsch
+
+Betatester              : ...FIXME...
+                        :
+                        : Alex Lemcovich
+                        : bob_doe_nz
+                        : Cardia
+                        : Dillon Rogers
+                        : Dr.Sahnebacke
+                        : Freddy Fox
+                        : Gloria Creep
+                        : itllrun10s
+                        : Justin Keverne
+                        : M. Alasdair MacKenzie
+                        : marbleman
+                        : nightshifter
+                        : prjames
+                        : R Soul
+                        : Ravenhook
+
+Besonderer Dank:
+
+    To Skacky, Unna Oertdottir, and Yandros for their help when Dromed tried
+    to murder this mission in its infancy.
+
+    To Athalle and Fortuni for putting me in touch with the translators and
+    giving me a place on the 'Shadow' forum.
+
+    To Tannar, Brethren, and Dussander for providing the 'Shalebridge Cradle'
+    and 'Southquarter' beta test forums.
+
+    To all the fan mission authors who came before me and inspired me to get
+    my hands dirty with Dromed.
+
+    To all you taffers out there, on TTLG and beyond, who have kept Thief
+    alive for the past twenty years!
+
+=============================================================================
 * Copyright *
 
 ©2018 Andy Durdin.
@@ -387,15 +414,15 @@ erstellt, und Support leisten sie daher auch nicht dafür.
 ************
 
 =============================================================================
- 13. October 2018
+ 1. Novembre 2018
  Trarre Profitto
 =============================================================================
 
 Autore                    : vfig (Andy Durdin)
 Informazioni sui contatti : me@andy.durdin.net
 Homepage                  : http://backslashn.com
-Versione                  : Beta 2
-Data di Pubblicazione     : Oct 13, 2018
+Versione                  : Beta 3
+Data di Pubblicazione     : Nov 1, 2018
 
 Descrizione:
 
@@ -431,50 +458,10 @@ Settaggi Difficoltà       : Normale/Difficile/Esperto
 negozio d'Equipaggiamento : Si
 Mappa                     : Si
 Auto-Mappa                : Si
-Nuove Grafiche            : No
+Nuove Grafiche            : Si
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
 Tempo di Costruzione      : 654 ore in 115 giorni di calendario 
-
-=============================================================================
-* Riconoscimenti *
-
-Ideazione e costruzione : vfig
-
-Storia                  : vfig & tinyblob
-
-Arte del Briefing       : ...FIXME...
-
-Doppiaggio:
-    Garrett             : ...FIXME...
-    Lady di Rupo        : Shadow Creepr
-    Keeper              : Yandros
-    Prophet             : ...FIXME...
-    The Eternal Benny   : Yandros
-    Irate Sergeant      : MasterThief3
-    Heathen guard       : Yandros
-    Cowardly Hammerite  : McTaffer
-    Danno the meister   : Yandros
-    Olver the digger    : McTaffer
-    Morten the berk     : Nobody, cause he's dead
-    Hammerite priest    : McTaffer
-    Hammerite watchman  : Yandros
-
-Traduzioni:
-    Italiano            : piesel
-    Tedesco             : baeuchlein
-                        :
-                        :
-
-Correzione di bozze     : ...FIXME...
-
-Beta testing            : ...FIXME...
-                        :
-                        :
-
-Ringraziamenti Speciali : ...FIXME...
-                        :
-                        :
 
 =============================================================================
 * Informazioni di Caricamento *
@@ -485,10 +472,10 @@ versione di NewDark:
 
     https://www.gog.com/game/thief_gold
 
-Se il tuo Thief Gold arriva da un'altra fonte, dovrai applicare il patch 1.26 
+Se il tuo Thief Gold arriva da un'altra fonte, dovrai applicare il patch 1.26
 manualmente (http://www.ttlg.com/forums/showthread.php?t=146448)
 od usare TFix (http://www.ttlg.com/forums/showthread.php?t=134733).
-Questa missione è stata ideata con in mente gli originali modelli e texture 
+Questa missione è stata ideata con in mente gli originali modelli e texture
 a bassa risoluzione, l'utilizzo di qualsiasi pacchetto di miglioramento o
 pacchetto di texture è sconsigliato. Probabilmente non danneggerebbero nulla,
 ma non apparirebbe in modo corretto.
@@ -501,6 +488,71 @@ partire il gioco con il comando -fm per lanciare il selettore di FM:
 Pef favore leggere FMSel.pdf nel pacchetto di NewDark per maggiori
 informazioni sull'utilizzo di FMSel. Questa missione non è stata testata con
 DarkLoader, quindi il suo utilizzo è sconsigliato.
+
+=============================================================================
+* Riconoscimenti *
+
+Ideazione e costruzione : vfig (Andy Durdin)
+
+Storia                  : Andy Durdin
+                        : Aaron Dron
+
+Arte del Briefing       : ...FIXME...
+
+Doppiaggio:
+    Garrett             : M. Alasdair MacKenzie
+    Lady di Rupo        : Shadow Creepr
+    Keeper              : Yandros
+    The Eternal Benny   : Yandros
+    Irate Sergeant      : MasterThief3
+    Heathen guard       : Yandros
+    Cowardly Hammerite  : McTaffer
+    Danno the meister   : Yandros
+    Olver the digger    : McTaffer
+    Morten the berk     : (Nobody, cause he's dead)
+    Hammerite priest    : McTaffer
+    Hammerite watchman  : Yandros
+
+Traduzioni:
+    Italiano            : piesel
+    Tedesco             : baeuchlein
+
+Correzione di bozze     : gnartsch
+
+Beta testing            : ...FIXME...
+                        :
+                        : Alex Lemcovich
+                        : bob_doe_nz
+                        : Cardia
+                        : Dillon Rogers
+                        : Dr.Sahnebacke
+                        : Freddy Fox
+                        : Gloria Creep
+                        : itllrun10s
+                        : Justin Keverne
+                        : M. Alasdair MacKenzie
+                        : marbleman
+                        : nightshifter
+                        : prjames
+                        : R Soul
+                        : Ravenhook
+
+Ringraziamenti Speciali:
+                        
+    To Skacky, Unna Oertdottir, and Yandros for their help when Dromed tried
+    to murder this mission in its infancy.
+
+    To Athalle and Fortuni for putting me in touch with the translators and
+    giving me a place on the 'Shadow' forum.
+
+    To Tannar, Brethren, and Dussander for providing the 'Shalebridge Cradle'
+    and 'Southquarter' beta test forums.
+
+    To all the fan mission authors who came before me and inspired me to get
+    my hands dirty with Dromed.
+
+    To all you taffers out there, on TTLG and beyond, who have kept Thief
+    alive for the past twenty years!
 
 =============================================================================
 * Informazioni sui Diritti d'Autore *

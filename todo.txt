@@ -21,8 +21,6 @@ Beta 3 (November)
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/
 
-- Script & apply room EAXes
-
 
 RELEASE (mid-November)
 ======================

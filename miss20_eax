@@ -1,0 +1,172 @@
+; Assigns  for Newbridge mission. Run this from Dromed: "run_cmd_script miss20_eax"
+;
+; ---- EAX settings ----
+; 
+;  0 - Generic
+;  1 - Small Dead
+;  2 - Small Normal
+;  3 - Type 3
+;  4 - Type 4
+;  5 - Large Normal
+;  6 - Type 6
+;  7 - Type 7
+;  8 - Large Live
+;  9 - Caverns
+; 10 - Type 10
+; 11 - Dead Hallway
+; 12 - Normal Hallway
+; 13 - Live Hallway
+; 14 - Tunnels
+; 15 - Outside
+; 16 - Type 16
+; 17 - Type 17
+; 18 - Type 18
+; 19 - Large Dead
+; 20 - Small Live
+; 21 - Sewers
+; 
+; ---- Room plan ----
+; 
+; Default Room (170):                     0 - Generic
+; RoomArgauxsFlat (2604):                 1 - Small Dead
+; RoomOutsideFishmongers (1057):          15 - Outside
+; RoomInsideFishmongers (1060):           2 - Small Normal
+; RoomCanal (3371):                       6 - Type 6
+;     RoomMissionEnd (1053):              
+;     RoomMissionStart (2867):            
+;     RoomWarehouse (13):                 5 - Large Normal
+; RoomHangmansSquare (3390):              7 - Type 7
+; RoomSoutheastStreet (3391):             8 - Large Live
+; RoomFountainSquare (3416):              15 - Outside
+; RoomSouthwestStreet (3417):             8 - Large Live
+; RoomMiddleStreetEast (3418):            14 - Tunnels
+; RoomMiddleStreetWest (3419):            14 - Tunnels
+; RoomFork (3420):                        8 - Large Live
+;     RoomForkPassage (14):               13 - Live Hallway
+;     RoomArgauxsBuilding (3421):         12 - Normal Hallway
+;         RoomDannosFlat (2624):          1 - Small Dead
+;         RoomArgauxsRooftop (1050):      18 - Type 18
+; RoomCemetery (3424):                    15 - Outside
+;     RoomMausoleum (1065):               10 - Type 10
+;     RoomCemeteryKeeper (1067):          
+; RoomCatacombs (3428):                   9 - Caverns
+;     RoomProphetsChamber (452):          
+; RoomHammerSquare (3429):                18 - Type 18
+; RoomSanctuarySurrounds (3430):          18 - Type 18
+;     RoomSanctuaryGrounds (3431):        19 - Large Dead
+; RoomSanctuaryInterior (3432):           5 - Large Normal
+;     RoomSanctUpperStairs (3446):        13 - Live Hallway
+;     RoomSanctArmoury (3447):            8 - Large Live
+;     RoomSanctLibrary (3448):            19 - Large Dead
+;     RoomSanctWarden (3449):             5 - Large Normal
+;     RoomSanctPriest (3450):             8 - Large Live
+;     RoomSanctLowerStairs (3451):        13 - Live Hallway
+;     RoomSanctBasementStairs (3452):     13 - Live Hallway
+;     RoomSanctWorkroom (3454):           6 - Type 6
+;     RoomSanctHall (3456):               13 - Live Hallway
+;     RoomSanctChapel (3457):             6 - Type 6
+;     RoomSanctVestibule (3458):          5 - Large Normal
+;     RoomSanctStorage (3459):            19 - Large Dead
+;     RoomSanctBasement (3460):           8 - Large Live
+;         RoomSanctCell (15):             3 - Type 3
+;         RoomSanctBasementHall (16):     13 - Live Hallway
+;     RoomSanctCrypt (3461):              7 - Type 7
+;         RoomSanctCryptEast (2449):      
+;     RoomSanctTower (3576):              7 - Type 7
+;     RoomSanctWalkway (3941):            15 - Outside
+; RoomUpperStreet (3462):                 8 - Large Live
+;     RoomUpperStreetKeeper (1055):       
+; RoomUpperAlley (3463):                  14 - Tunnels
+;     RoomUpperAlleyKeeper (1058):        
+; RoomMarketSquare (3464):                15 - Outside
+;     RoomMarketPassage (12):             12 - Normal Hallway
+; RoomRichStreetWest (3465):              15 - Outside
+;     RoomRichStreetKeeper (1054):        
+; RoomRichStreetEast (3466):              15 - Outside
+;     RoomRichStreetAlley (22):           14 - Tunnels
+;     RoomRichStreetWorks (23):           20 - Small Live
+; RoomManorGroundsNorth (3467):           19 - Large Dead
+; RoomManorInterior (3468):               5 - Large Normal (wooden rooms)
+;     RoomManorTiled (18):                8 - Large Live (tiled/stone rooms)
+;     RoomManorCarpeted (17):             19 - Large Dead (carpeted rooms)
+;     RoomManorHall (20):                 12 - Normal Hallway (wooden hallways)
+;     RoomManorTiledHall (21):            13 - Live Hallway (tiled/stone hallways)
+;     RoomManorGallery (19):              6 - Type 6
+; RoomManorGroundsSouth (3474):           19 - Large Dead
+; RoomTower (3476):                       7 - Type 7
+; RoomCave (3477):                        9 - Caverns
+;     RoomRitualChamber (453):            10 - Type 10
+;     RoomAntechamber (2359):             9 - Caverns
+; RoomMarketAlley (785):                  13 - Live Hallway
+; RoomMarketSide (2753):                  15 - Outside
+; RoomMiddleStreetWorks (3578):           20 - Small Live
+; RoomManorOutsideGates (3577):           8 - Large Live
+; 
+; ---- The actual commands ----
+; 
+eax_set_archetype 170,0
+eax_set_archetype 2604,1
+eax_set_archetype 1057,15
+eax_set_archetype 1060,2
+eax_set_archetype 3371,6
+eax_set_archetype 13,5
+eax_set_archetype 3390,7
+eax_set_archetype 3391,8
+eax_set_archetype 3416,15
+eax_set_archetype 3417,8
+eax_set_archetype 3418,14
+eax_set_archetype 3419,14
+eax_set_archetype 3420,8
+eax_set_archetype 14,13
+eax_set_archetype 3421,12
+eax_set_archetype 2624,1
+eax_set_archetype 1050,18
+eax_set_archetype 3424,15
+eax_set_archetype 1065,10
+eax_set_archetype 3428,9
+eax_set_archetype 3429,18
+eax_set_archetype 3430,18
+eax_set_archetype 3431,19
+eax_set_archetype 3432,5
+eax_set_archetype 3446,13
+eax_set_archetype 3447,8
+eax_set_archetype 3448,19
+eax_set_archetype 3449,5
+eax_set_archetype 3450,8
+eax_set_archetype 3451,13
+eax_set_archetype 3452,13
+eax_set_archetype 3454,6
+eax_set_archetype 3456,13
+eax_set_archetype 3457,6
+eax_set_archetype 3458,5
+eax_set_archetype 3459,19
+eax_set_archetype 3460,8
+eax_set_archetype 15,3
+eax_set_archetype 16,13
+eax_set_archetype 3461,7
+eax_set_archetype 3576,7
+eax_set_archetype 3941,15
+eax_set_archetype 3462,8
+eax_set_archetype 3463,14
+eax_set_archetype 3464,15
+eax_set_archetype 12,12
+eax_set_archetype 3465,15
+eax_set_archetype 3466,15
+eax_set_archetype 22,14
+eax_set_archetype 23,20
+eax_set_archetype 3467,19
+eax_set_archetype 3468,5
+eax_set_archetype 18,8
+eax_set_archetype 17,19
+eax_set_archetype 20,12
+eax_set_archetype 21,13
+eax_set_archetype 19,6
+eax_set_archetype 3474,19
+eax_set_archetype 3476,7
+eax_set_archetype 3477,9
+eax_set_archetype 453,10
+eax_set_archetype 2359,9
+eax_set_archetype 785,13
+eax_set_archetype 2753,15
+eax_set_archetype 3578,20
+eax_set_archetype 3577,8

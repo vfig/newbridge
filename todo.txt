@@ -13,18 +13,10 @@ Beta 3 (November)
     - don't forget subtitles in all three languages!
     - don't forget the book either!
 
-- Maybe just make all convos remove their ~ControlDevice links at start, for stupid safeguard.
-
-- Should there be some kind of hint about the sharp-eyed archer?
-
 - Get preferred crediting names from everyone I haven't yet.
     - partly done
 
 - Review and update credits and so on in readme.
-
-- NPC Names!
-    - All the ones with "Name_Quintus" right now need new names! :)
-    - Don't forget Morten!
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

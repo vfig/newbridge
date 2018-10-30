@@ -14,15 +14,11 @@ Beta 3 (November)
     - don't forget the books either!
     - don't forget the readme briefing either!
 
-- Replace cutscene book contents with credits.
-
-- Review and update credits and so on in readme.
+- Review and update credits and so on in readme, movie, and cs20.str.
     - zajazd?
     - Norgg?
     - Nershly?
     - Jasperstocker?
-
-- Update relevant parts of German and Italian readmes, before passing back to translators
 
 - Test mission scripting permutations without hacks
     - On all difficulties! :-/

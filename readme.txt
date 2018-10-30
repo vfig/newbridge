@@ -209,6 +209,7 @@ Beta testing            : ... FIXME ...
                         : M. Alasdair MacKenzie
                         : marbleman
                         : nightshifter
+                        : Norgg
                         : prjames
                         : R Soul
                         : Rachel Crawford
@@ -376,6 +377,7 @@ Betatester              : ...FIXME...
                         : M. Alasdair MacKenzie
                         : marbleman
                         : nightshifter
+                        : Norgg
                         : prjames
                         : R Soul
                         : Rachel Crawford
@@ -535,6 +537,7 @@ Beta testing            : ...FIXME...
                         : M. Alasdair MacKenzie
                         : marbleman
                         : nightshifter
+                        : Norgg
                         : prjames
                         : R Soul
                         : Rachel Crawford

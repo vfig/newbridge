@@ -4,11 +4,11 @@ rules, the mission is almost entirely stock resources. Here is a list and
 details of all the custom sound and image resources used:
 
     books/decals
-        Custom book decal art, being a bloodstain that obscures crucial text
-        on a note.
+        Custom book art #1, being a bloodstain decal that obscures crucial
+        text on a note.
 
     books/paganbk
-        Custom book art, representing an ancient pagan tome written in an
+        Custom book art #2, representing an ancient pagan tome written in an
         unknown language.
 
     books/parch
@@ -16,9 +16,9 @@ details of all the custom sound and image resources used:
         be shown if the movie is missing or disabled.
 
     books/stoned4a
-        Copy of stock 'stoned4' art, but with the font size reduced from 45
-        pixels high to 30 pixels high, so that a little more text can fit.
-        Stone plaques, after all, don't normally have pages.
+        Copy of stock 'stoned4' art, unmodified except for reducing the font
+        size from 45 pixels high to 30 pixels high, so that the crucial text
+        can fit. (Stone plaques, after all, don't normally have pages.)
 
     fam/nubrij/grav2.pcx
         Unmodified copy of stock obj/txt/grav2.gif for use on world brushes.
@@ -54,8 +54,11 @@ details of all the custom sound and image resources used:
     movies/b20.avi
         Custom briefing movie.
 
+    movies/credits.avi
+        Custom credits movie.
+
     movies/cs20.avi
-        Custom post-misssion credits movie.
+        Duplicate of credits movie, so it will play when the mission ends.
 
     obj/dirupocarry.png
         Unmodified copy of stock obj/opgesw.pcx.

@@ -211,6 +211,7 @@ Beta testing            : ... FIXME ...
                         : nightshifter
                         : prjames
                         : R Soul
+                        : Rachel Crawford
                         : Ravenhook
 
 Special thanks:
@@ -377,6 +378,7 @@ Betatester              : ...FIXME...
                         : nightshifter
                         : prjames
                         : R Soul
+                        : Rachel Crawford
                         : Ravenhook
 
 Besonderer Dank:
@@ -535,6 +537,7 @@ Beta testing            : ...FIXME...
                         : nightshifter
                         : prjames
                         : R Soul
+                        : Rachel Crawford
                         : Ravenhook
 
 Ringraziamenti Speciali:

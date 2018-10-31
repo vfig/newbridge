@@ -16,8 +16,6 @@ Beta 3 (November)
 
 - Review and update credits and so on in readme, movie, and cs20.str.
     - zajazd?
-    - Norgg?
-    - Nershly?
     - Jasperstocker?
 
 - Test mission scripting permutations without hacks

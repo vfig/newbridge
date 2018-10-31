@@ -9,8 +9,8 @@ and all discussion:
     http://www.southquarter.com/beta/viewforum.php?f=11
 =============================================================================
 
-Bitte herunterscrollen für deutschen Text! (Please scroll down for German!)
-(Please scroll down for Italian!)
+Bitte herunterscrollen für deutschen Text!
+Per favore scrollare in basso per l'Italiano.
 
 
 ***********
@@ -465,33 +465,111 @@ Auto-Mappa                : Si
 Nuove Grafiche            : Si
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
-Tempo di Costruzione      : 654 ore in 115 giorni di calendario 
+Tempo di Costruzione      : 654 ore in 115 giorni di calendario
 
 =============================================================================
 * Informazioni di Caricamento *
 
 La patch 1.26 di NewDark è richiesta per utilizzare questa missione. E'
-raccomandata la versione GOG di Thief Gold, è già aggiornata all'ultima
+raccomandata la versione GOG di Thief Gold, già  aggiornata all'ultima
 versione di NewDark:
 
     https://www.gog.com/game/thief_gold
 
 Se il tuo Thief Gold arriva da un'altra fonte, dovrai applicare il patch 1.26
-manualmente (http://www.ttlg.com/forums/showthread.php?t=146448)
-od usare TFix (http://www.ttlg.com/forums/showthread.php?t=134733).
-Questa missione è stata ideata con in mente gli originali modelli e texture
-a bassa risoluzione, l'utilizzo di qualsiasi pacchetto di miglioramento o
-pacchetto di texture è sconsigliato. Probabilmente non danneggerebbero nulla,
-ma non apparirebbe in modo corretto.
+di NewDark manualmente (http://www.ttlg.com/forums/showthread.php?t=146448)
+od usare TFix (http://www.ttlg.com/forums/showthread.php?t=134733) versione
+1.26a o successive. Questa missione è stata ideata con in mente gli originali
+modelli e texture a bassa risoluzione, l'utilizzo di qualsiasi pacchetto di
+miglioramento o pacchetto di texture è sconsigliato. Probabilmente non
+danneggerebbero nulla, ma parti della missione non apparirebbero in modo
+corretto.
 
-Dovresti utilizzare NewDark's FMSel per far partire questa missione. Puoi far
-partire il gioco con il comando -fm per lanciare il selettore di FM:
+Dovresti utilizzare NewDark's FMSel per far partire questa missione. Se già
+non ne hai una, crea una directory per gli zip delle missioni e mettici dentro
+questo pacchetto, senza scompattarlo. Quando lancerai FMSel per la prima
+volta, ti chiederà se vuoi configurare un percorso epr gli archivi: rispondi
+si, e seleziona questa directory. A questo punto FMSel scompatterà ed
+installerà la missione per te.
+
+Per lanciare il selettore di FM, fai partire il gioco con il comando:
 
     THIEF.EXE -fm
 
-Pef favore leggere FMSel.pdf nel pacchetto di NewDark per maggiori
-informazioni sull'utilizzo di FMSel. Questa missione non è stata testata con
-DarkLoader, quindi il suo utilizzo è sconsigliato.
+Alternativamente puoi editare CAM_MOD.INI per far partire sempre il selettore
+di FM; le relative istruzioni sono nel file. Per favore consulta FMSel.pdf nel
+tuo pacchetto di NewDark per maggiori informazioni sull'utilizzo di FMSel.
+
+Se preferissi un differente caricatore di missioni, come NewDarkLoader, allora
+sai già cosa fare.
+
+=============================================================================
+* Configurazione *
+
+La funzione 'new mantle' di Newdark rende l'arrampicarsi più semplice e
+decisamente più affidabile, quindi raccomando di utilizzarla. In ogni caso la
+missione è stata completamente testata senza, quindi se preferissi le
+originali meccaniche di arrampicata, non avrai problemi.
+
+Se volessi attivare 'new mantle', edita USER.CFG nella tua directory di Thief
+Gold ed aggiungi la seguente linea:
+
+      new_mantle
+
+Nota che le modifiche apportate ad USER.CFG avranno effetto sull'intero gioco
+e tutte le missioni.
+
+=============================================================================
+* Linguaggi e Sottotitoli *
+
+Questa missione contiene sottotitoli per tutti i nuovi dialoghi. Per
+attivarli, edita USER.CFG nella tua directory di Thief Gold ed aggiungi la
+seguente linea:
+
+      enable_subtitles
+
+Se disponibili, i sottotitoli appariranno nella stessa lingua dei testi (leggi
+sotto per come configurare i linguaggi). Per favore leggi subtitles.txt nel
+tuo pacchetto NewDark per maggiori informazioni sul come configurare la
+dimensione ed il colore dei caratteri, e quali tipi di parlato e sottotitoli
+degli effetti sonori verranno mostrati.
+
+Se desideri i sottotitoli per tutti i dialoghi ed effetti sonori originali di
+Thief, dovrai installare il pacchetto di sottotitoli di Thief Gold. Un
+pacchetto di sottotitoli in Inglese è disponibile a:
+http://www.ttlg.com/forums/showthread.php?t=144354
+
+Testi e sottotitoli per questa missione sono disponibili in Inglese, Tedesco
+ed Italiano. Il settaggio 'language' in INSTALL.CFG seleziona la lingua
+utilizzata dal gioco. Di default corrisponde a quella utilizzata dalla tua
+versione di Thief. Se preferissi avere testi e sottotitoli in una lingua
+differente, dovrai editare INSTALL.CFG ed aggiungere la tua lingua preferita
+all'inizio del settaggio, seguito da un '+'.
+
+Ad esempio, se stessi giocando la versione Inglese di Thief, ma preferissi
+vedere testi in Italiano nella missione, dovrai editare INSTALL.CFG e
+modificare la linea:
+
+       language english
+
+In:
+
+       language italian+english
+
+Nota che modifiche apportate ad INSTALL.CFG ed USER.CFG avranno effetto
+sull'intero gioco e tutte le missioni.
+
+=============================================================================
+* Edifici Distanti *
+
+Questa missione è piuttosto aggressiva sulla distanza delle visuali, visto che
+la cima della collina ed altre parti della città sono visibili da quasi
+ovunque. Da alcuni punti privilegiati, potresti occasionalmente vedere edifici
+diatanti apparire e scomparire. Se ciò ti disturbasse, trova e disattiva il
+settaggio 'wr_render_zcomp' in CAM_EXT.CFG.
+
+Nota che modifiche apportate a CAM_EXT.CFG avranno effetto sull'intero gioco e
+tutte le missioni.
 
 =============================================================================
 * Riconoscimenti *
@@ -505,17 +583,17 @@ Arte del Briefing       : ...FIXME...
 
 Doppiaggio:
     Garrett             : M. Alasdair MacKenzie
-    Lady di Rupo        : Shadow Creepr
+    Signora di Rupo     : Shadow Creepr
     Keeper              : Yandros
-    The Eternal Benny   : Yandros
-    Irate Sergeant      : MasterThief3
-    Heathen guard       : Yandros
-    Cowardly Hammerite  : McTaffer
-    Danno the meister   : Yandros
-    Olver the digger    : McTaffer
-    Morten the berk     : (Nobody, cause he's dead)
-    Hammerite priest    : McTaffer
-    Hammerite watchman  : Yandros
+    L'Eterno Benny      : Yandros
+    Sergente Irato      : MasterThief3
+    Guardia pagana      : Yandros
+    Hammerita Codardo   : McTaffer
+    Danno il campione   : Yandros
+    Olver lo scavatore  : McTaffer
+    Morten il fesso     : (Nobody, cause he's dead)
+    Prelato hammerita   : McTaffer
+    Sentinella Hammerita: Yandros
 
 Traduzioni:
     Italiano            : piesel
@@ -544,21 +622,21 @@ Beta testing            : ...FIXME...
                         : Ravenhook
 
 Ringraziamenti Speciali:
-                        
-    To Skacky, Unna Oertdottir, and Yandros for their help when Dromed tried
-    to murder this mission in its infancy.
 
-    To Athalle and Fortuni for putting me in touch with the translators and
-    giving me a place on the 'Shadow' forum.
+    A Skacky, Unna Oertdottir, e Yandros per il loro aiuto quando Dromed ha
+    provato ad uccidere questa missione nella sua infanzia.
 
-    To Tannar, Brethren, and Dussander for providing the 'Shalebridge Cradle'
-    and 'Southquarter' beta test forums.
+    Ad Athalle e Fortuni per avermi messo in contatto con i traduttori ed
+    avermi ospitato nello 'Shadow' forum.
 
-    To all the fan mission authors who came before me and inspired me to get
-    my hands dirty with Dromed.
+    A Tannar, Brethren, e Dussander per aver reso disponibili i forum di beta
+    testing 'Shalebridge Cradle' e 'Southquarter'.
 
-    To all you taffers out there, on TTLG and beyond, who have kept Thief
-    alive for the past twenty years!
+    A tutti gli autori di missioni che son venuti prima di me e che mi hanno
+    ispirato a sporcarmi le mani con Dromed.
+
+    A tutti i taffers in giro, su TTLG ed oltre, che hanno tenuto Thief in
+    vita per gli ultimi venti anni!
 
 =============================================================================
 * Informazioni sui Diritti d'Autore *

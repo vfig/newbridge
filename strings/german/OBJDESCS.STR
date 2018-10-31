@@ -1,6 +1,6 @@
-; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
-; so you should hopefully have a translation already that you can copy paste.
-; All the new text from this FM is under the heading NEWBRIDGE at the end.
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// so you should hopefully have a translation already that you can copy paste.
+// All the new text from this FM is under the heading NEWBRIDGE at the end.
 
 use_blackjack: "Diese Waffe schlÑgt einen ahnungslosen Gegner \
 fast gerÑuschlos ohnmÑchtig, ohne Blut zu hinterlassen."
@@ -101,6 +101,6 @@ KÑmpfers verkaufen, der vor vielen Jahren verstarb. Er war Ñu·erst \
 erfolgreich im Kampf gegen die Untoten und sein Buch kostet Sie: 200"
 
 
-;NEWBRIDGE
+//NEWBRIDGE
 
 Use_DeckOfCards: "Um unentdeckt zu bleiben, muss man oft viel Zeit mit Ausharren und Beobachten verbringen. Diese 52 Freunde vertreiben Ihnen dabei die Zeit, fÅr nur 10 GoldstÅcke."

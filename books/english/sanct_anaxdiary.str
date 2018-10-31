@@ -1,7 +1,7 @@
-; Sanctuary - in the Priest's room. The Anax's personal diary.
-; Reveals that the Anax is in the crypt.
-; Also hints at more info on the Prophet to be found in the Hammer library
-; Story-wise, sets up the Prophet as the reason the Anax is here.
+// Sanctuary - in the Priest's room. The Anax's personal diary.
+// Reveals that the Anax is in the crypt.
+// Also hints at more info on the Prophet to be found in the Hammer library
+// Story-wise, sets up the Prophet as the reason the Anax is here.
 
 Page_0: "St. Arun's Day
 Eventide

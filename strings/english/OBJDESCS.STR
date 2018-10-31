@@ -1,6 +1,6 @@
-; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
-; so you should hopefully have a translation already that you can copy paste.
-; All the new text from this FM is under the heading NEWBRIDGE at the end.
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// so you should hopefully have a translation already that you can copy paste.
+// All the new text from this FM is under the heading NEWBRIDGE at the end.
 
 use_blackjack: "This weapon will knock out an unsuspecting target with \
 little noise and no blood."
@@ -89,6 +89,6 @@ journal that he claims belonged to a long-ago fighter of the undead.  \
 Cost: 200"
 
 
-;NEWBRIDGE
+//NEWBRIDGE
 
 Use_DeckOfCards: "Being stealthy can involve long, boring periods of staying still and watching. These fifty-two friends will keep you entertained instead. Cost: 10"

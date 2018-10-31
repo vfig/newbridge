@@ -1,6 +1,6 @@
-; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
-; so you should hopefully have a translation already that you can copy paste.
-; All the new text from this FM is under the heading NEWBRIDGE at the end.
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// so you should hopefully have a translation already that you can copy paste.
+// All the new text from this FM is under the heading NEWBRIDGE at the end.
 
 use_blackjack: "Quest'arma mandera' al tappeto un ignaro bersaglio con \
 poco rumore ed alcun sangue."
@@ -88,6 +88,6 @@ diario che lui dice appartenuto ad un combattente dei morti viventi.  \
 Costo:200"
 
 
-;NEWBRIDGE
+//NEWBRIDGE
 
 Use_DeckOfCards: "Essere furtivo prevede lunghi, noiosi periodi di immobilismo ed osservazione. Queste cinquantadue amiche ti terranno compagnia. Costo: 10"

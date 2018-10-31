@@ -7,13 +7,13 @@ Ecco cio' che volevi sapere Morten, a riguardo del mausoleo nel cimitero: le por
 Credo che anche un farabutto come te non avra' problemi. Gioco da ragazzi! E non dimenticare che per il disturbo prendiamo il quaranta percento del totale. Io ed Olver ti aspetteremo.  -- Danno"
 
 
-; Blood decals to cover the missing puzzle solution.
-; Decals 0 and 1 are the lines of text that will be revealed.
-; Decals 2 and 3 are the removable blood layers.
-; Decal 4 is the remaining blood stain that is indelible.
-; See the BloodyInstructions script for more details.
-; Note: all these positions need to be adjusted for each language.
-;
+// Blood decals to cover the missing puzzle solution.
+// Decals 0 and 1 are the lines of text that will be revealed.
+// Decals 2 and 3 are the removable blood layers.
+// Decal 4 is the remaining blood stain that is indelible.
+// See the BloodyInstructions script for more details.
+// Note: all these positions need to be adjusted for each language.
+//
 page_0_decal_0: "#0 $ 1 215 233 350"
 page_0_decal_1: "#0 $ 1 170 257 350"
 page_0_decal_2: "#1 1 136 112 decals\\blood2"

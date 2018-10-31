@@ -1,3 +1,7 @@
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// except the "FoundSecret" string from Thief II, so you should hopefully
+// have a translation already that you can copy paste.
+//
 // Player Hints strings
 // Currently, the only use of this is to hold the "New Objectives" string
 // we want to pop up when your goals change.  Any other such onscreen

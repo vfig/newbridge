@@ -1,90 +1,90 @@
-; NOTE FOR TRANSLATORS: the goals with '(CUT)' at the start were cut
-; from the mission and are no longer used. You can skip them.
+// NOTE FOR TRANSLATORS: the goals with '(CUT)' were cut
+// from the mission and are no longer used. Please ignore them.
 
-; 0: MeetArgaux
+// 0: MeetArgaux
 fiction_0: "Your contact, Argaux, will be waiting for you at the fountain. Meet him there to find out what's up."
 text_0: "Meet Argaux at the fountain."
 
-; 1: FindArgauxsInfauxs
+// 1: FindArgauxsInfauxs
 fiction_1: "Go to Argaux's place and see what you can find out."
 text_1: "Go to Argaux's place and see what you can find out."
 
-; 2: KidnapTheAnax
+// 2: KidnapTheAnax
 fiction_2: "Take the Anax of Easthart from the Hammer Sanctuary."
 text_2: "Take the Anax of Easthart from the Hammer Sanctuary."
 
-; 3: BonusBurrickTrouble
-fiction_3: "(CUT) Distract the Hammerites with the help of some unusual allies."
-text_3: "(CUT) Distract the Hammerites with the help of some unusual allies."
+// 3: BonusBurrickTrouble
+fiction_3: "(CUT)"
+text_3: "(CUT)"
 
-; 4: StealTheHand
+// 4: StealTheHand
 fiction_4: "Steal the Prophet's Hand from the mausoleum."
 text_4: "Steal the Prophet's Hand from the mausoleum."
 
-; 5: BonusBanishTheGhost
-fiction_5: "(CUT) Banish the Prophet's apparition, just to be safe."
-text_5: "(CUT) Banish the Prophet's apparition, just to be safe."
+// 5: BonusBanishTheGhost
+fiction_5: "(CUT)"
+text_5: "(CUT)"
 
-; 6: DeliverTheItems
+// 6: DeliverTheItems
 fiction_6: "When you have both items, take them to the fishmonger's for your payment."
 text_6: "When you have both items, take them to the fishmonger's for your payment."
 
-; 7: StopTheRitual
+// 7: StopTheRitual
 fiction_7: "Find out where Lady di Rupo is performing the ritual, and stop it."
 text_7: "Find out where Lady di Rupo is performing the ritual, and stop it."
 
-; 8: BonusSubvertTheRitual
-fiction_8: "(CUT) That'll interrupt the ritual for sure. Shame about the mess."
-text_8: "(CUT) That'll interrupt the ritual for sure. Shame about the mess."
+// 8: BonusSubvertTheRitual
+fiction_8: "(CUT)"
+text_8: "(CUT)"
 
-; 9: EscapeWithTheAnax
+// 9: EscapeWithTheAnax
 fiction_9: "Get the Anax safely out of the area."
 text_9: "Get the Anax safely out of the area."
 
-; 10: ReturnTheAnax
-fiction_10: "Rescue the Anax and bring him back to the Hammerite Sanctuary."
-text_10: "Rescue the Anax and bring him back to the Hammerite Sanctuary."
+// 10: ReturnTheAnax
+fiction_10: "(CUT)"
+text_10: "(CUT)"
 
-; 11: BonusTerencesHammer
+// 11: BonusTerencesHammer
 fiction_11: "(Bonus) This ancient jeweled hammer is a priceless relic. But as your fence always says, everything has its price."
 text_11: "(Bonus) This ancient jeweled hammer is a priceless relic. But as your fence always says, everything has its price."
 
-; 12: KeepTheAnaxAlive
+// 12: KeepTheAnaxAlive
 fiction_12: "Don't let the Anax come to any harm."
 text_12: "Don't let the Anax come to any harm."
 
-; 13: DontBiteTheHand
+// 13: DontBiteTheHand
 fiction_13: "Don't bite the hand that feeds. If someone's paying you, you protect them."
 text_13: "Don't bite the hand that feeds. If someone's paying you, you protect them."
 
-; 14: LootNormal
+// 14: LootNormal
 fiction_14: "Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1500 loot and make it yours."
 text_14: "While you're in the neighbourhood, pick up 1500 loot."
 
-; 15: LootHard
+// 15: LootHard
 fiction_15: "Newbridge isn't the richest neighbourhood, but there's still wealthy nobles and Hammers around. You'll put their valuables to better use than they will. Find 1900 loot and make it yours."
 text_15: "While you're in the neighbourhood, pick up 1900 loot."
 
-; 16: LootExpert
+// 16: LootExpert
 fiction_16: "What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and the loot. Take everything you find. There's got to be at least 2200 worth."
 text_16: "While you're in the neighbourhood, pick up 2200 loot."
 
-; 17: BonusLootHard
-fiction_17: "FIXME: steal special loot 1"
-text_17: "FIXME: steal special loot 1"
+// 17: BonusLootHard
+fiction_17: "(CUT)"
+text_17: "(CUT)"
 
-; 18: BonusLootExpert
-fiction_18: "FIXME: steal special loot 2"
-text_18: "FIXME: steal special loot 2"
+// 18: BonusLootExpert
+fiction_18: "(CUT)"
+text_18: "(CUT)"
 
-; 19: DontKillBystanders
+// 19: DontKillBystanders
 fiction_19: "Don't kill any unarmed people. It's their money that you want, not their lives."
 text_19: "Don't kill any unarmed people."
 
-; 20: DontKillHumans
+// 20: DontKillHumans
 fiction_20: "A thief with your skills shouldn't need to employ violence to get the job done. Don't kill anyone."
 text_20: "Don't kill anyone."
 
-; 21: ReturnToTheStart
+// 21: ReturnToTheStart
 fiction_21: "When everything's done, make your way back home via the canal."
 text_21: "When everything's done, return to the canal where you started."

@@ -1,6 +1,6 @@
 difficulty: "Schwierigkeit:"
-; We don't really want the training mission button.
-; Easiest thing to do is leave it blank.
+// We don't really want the training mission button.
+// Easiest thing to do is leave it blank.
 start_training: ""
 skip_training: "Ein netter Profit"
 options: "Optionen"

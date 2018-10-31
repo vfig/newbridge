@@ -5,7 +5,7 @@
 ;--------------------------------------
 ; Page 0
 
-"My place - the angel near the pub. Hole up here if you have any guard trouble."
+"My place - the angel near the pub. Hole up here if you have any guard trouble. -- Argaux"
 
 "Fountain - meet me here!"
 
@@ -20,7 +20,7 @@
 ;--------------------------------------
 ; Page 1
 
-"Upper floor"
+"Hammerite Sanctuary"
 
 "Library"
 
@@ -28,16 +28,8 @@
 
 "Priest"
 
-"Lower floor"
-
 "Work room"
 
-"Hall"
-
 "Chapel"
-
-"Vestibule"
-
-"Storage"
 
 "Basement & crypt"

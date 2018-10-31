@@ -1,6 +1,6 @@
-; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
-; so you should hopefully have a translation already that you can copy paste.
-; All the new text from this FM is under the heading NEWBRIDGE at the end.
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// so you should hopefully have a translation already that you can copy paste.
+// All the new text from this FM is under the heading NEWBRIDGE at the end.
 
 
 Name_AirPotion: "Pozione del Respiro"
@@ -113,7 +113,7 @@ Name_compass: "Bussola"
 Name_pickhelp: "Istruzioni per scassinare"
 Name_ktkey: "Chiave della Cucina"
 
-;THIEF GOLD
+//THIEF GOLD
 
 Name_Spectacles: "Occhiali dell'arcimago"
 Name_MageMedal2: "Medaglione di St. Burringden"
@@ -141,7 +141,7 @@ Name_trkey:  "Chiave del tesoro"
 
 
 
-;NEWBRIDGE
+//NEWBRIDGE
 
 Name_ProphetsHand: "La Mano del Profeta"
 Name_MausThiefScroll: "Nota del Ladro di tombe"
@@ -185,7 +185,7 @@ Name_Benny: "Benny"
 Name_Benni: "Benni"
 Name_BrotherMilton: "Fratello Milton"
 Name_TheProphet: "Profeta"
-; Added in beta 3:
+// Added in beta 3:
 Name_Rootsoil: "Rootsoil"
 Name_BrotherFersengeld: "Fratello Fersengeld"
 Name_Parris: "Parris"

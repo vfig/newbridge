@@ -1,10 +1,10 @@
-; Found in the city outside Argaux's bolt-hole.
-; Communicates both that this is Argaux's place, and that he was executed
-;
-; NOTE FOR TRANSLATORS:
-;
-; This is a formal proclamation. The idea is that it's a standard form that
-; has just had the name 'Argaux Deperrin' filled into the blanks.
+// Found in the city outside Argaux's bolt-hole.
+// Communicates both that this is Argaux's place, and that he was executed
+//
+// NOTE FOR TRANSLATORS:
+//
+// This is a formal proclamation. The idea is that it's a standard form that
+// has just had the name 'Argaux Deperrin' filled into the blanks.
 
 Page_0: "VOLLSTRECKUNG EINER HINRICHTUNG
 

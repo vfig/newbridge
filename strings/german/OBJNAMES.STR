@@ -1,6 +1,6 @@
-; NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
-; so you should hopefully have a translation already that you can copy paste.
-; All the new text from this FM is under the heading NEWBRIDGE at the end.
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// so you should hopefully have a translation already that you can copy paste.
+// All the new text from this FM is under the heading NEWBRIDGE at the end.
 
 Name_AirPotion: "Lufttrank"
 Name_AirTalisman: "Lufttalisman"
@@ -110,7 +110,7 @@ Name_crkey: "KellerschlÅssel"
 Name_compass: "Kompa·"
 Name_pickhelp: "Anleitung fÅr den Gebrauch der Dietriche"
 
-;THIEF GOLD
+//THIEF GOLD
 
 
 Name_Spectacles: "Erzmagierbrille"
@@ -132,7 +132,7 @@ Name_safekey:  "SicherheitsschlÅssel"
 Name_frkey:   "VordertÅrschlÅssel"
 Name_trkey:  "SchatzschlÅssel"
 
-;NEWBRIDGE
+//NEWBRIDGE
 
 Name_ProphetsHand: "Die Hand des Propheten"
 Name_MausThiefScroll: "Zettel eines GrabrÑubers"
@@ -164,11 +164,11 @@ Name_HammeriteMap: "Grobe Karte"
 Name_LetterToDanno: "Brief"
 Name_HammerRelic: "Unbezahlbare Reliquie"
 Name_DeckOfCards: "Kartenspiel"
-; Added in beta 2:
+// Added in beta 2:
 Name_Payment: "Bezahlung"
 Name_Powderkeg: "Pulverfass"
 Name_Board: "Holzbrett"
-; New NPC names for beta 2:
+// New NPC names for beta 2:
 Name_Keeper: "HÅter Guillemot"
 Name_Argaux: "Argaux"
 Name_Baltasar: "Baltasar"
@@ -176,7 +176,7 @@ Name_Benny: "Benny"
 Name_Benni: "Benni"
 Name_BrotherMilton: "Bruder Milton"
 Name_TheProphet: "Prophet"
-; Added in beta 3:
+// Added in beta 3:
 Name_Rootsoil: "Rootsoil"
 Name_BrotherFersengeld: "Bruder Fersengeld"
 Name_Parris: "Parris"

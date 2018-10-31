@@ -1,4 +1,4 @@
-; In the NE streets works station. Describes the power switches for the street lights.
+// In the NE streets works station. Describes the power switches for the street lights.
 
 Page_0: "STRASSENBELEUCHTUNG
 NORD  -  SšD"

@@ -1,18 +1,18 @@
-; Found in the catacombs, alongside a skeleton with a valuable bracelet.
-; A pagan parent's prayer to the Prophet for protection for their dead child.
-;
-; NOTE FOR TRANSLATORS:
-;
-; This is written by a pagan, in their dialect. It's a poem that is
-; rhythmic, but does not rhyme. A rough version in plain English
-; (considering meaning only, not its poetry) would be something like:
-;
-;     May the Prophet's eyes watch you
-;     and keep you safe from thieving men.
-;     May the Prophet's hand protect
-;     your bones from the Jackal's teeth.
-;     May you dance here forever
-;     in the Prophet's sleep-home.
+// Found in the catacombs, alongside a skeleton with a valuable bracelet.
+// A pagan parent's prayer to the Prophet for protection for their dead child.
+//
+// NOTE FOR TRANSLATORS:
+//
+// This is written by a pagan, in their dialect. It's a poem that is
+// rhythmic, but does not rhyme. A rough version in plain English
+// (considering meaning only, not its poetry) would be something like:
+//
+//     May the Prophet's eyes watch you
+//     and keep you safe from thieving men.
+//     May the Prophet's hand protect
+//     your bones from the Jackal's teeth.
+//     May you dance here forever
+//     in the Prophet's sleep-home.
 
 Page_0: "possano gli occhi del profeta guardarti
   e tenerti al sicuro dai ladri 

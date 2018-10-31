@@ -1,19 +1,19 @@
-; Found in the mausoleum, in the hands of the dead thief.
-; Written by Danno the thief in reply to Morten's letter 'city_thiefscroll'.
-; This gives corroboration for the first two levers in the lever puzzle.
-; Also hints towards more clues that can be found in the di Rupo manor library.
-;
-; NOTE FOR TRANSLATORS:
-;
-; (1) the lines beginning with "Northeast..." are cut off because they're covered
-; in blood. The "South" after it should be ambiguous as to whether the word was South,
-; or Southeast, or Southwest before being half-covered in blood.
-;
-; (2) this style is meant to be both semi-literate and using thieves' slang:
-;       noll = knowledge
-;       digger = someone who's knowledgable, with more brains than the typical thief
-;       berk = a lowlife. Among thieves it's a friendly epithet.
-;       Morten, Olver, Danno = names of the three thieves.
+// Found in the mausoleum, in the hands of the dead thief.
+// Written by Danno the thief in reply to Morten's letter 'city_thiefscroll'.
+// This gives corroboration for the first two levers in the lever puzzle.
+// Also hints towards more clues that can be found in the di Rupo manor library.
+//
+// NOTE FOR TRANSLATORS:
+//
+// (1) the lines beginning with "Northeast..." are cut off because they're covered
+// in blood. The "South" after it should be ambiguous as to whether the word was South,
+// or Southeast, or Southwest before being half-covered in blood.
+//
+// (2) this style is meant to be both semi-literate and using thieves' slang:
+//       noll = knowledge
+//       digger = someone who's knowledgable, with more brains than the typical thief
+//       berk = a lowlife. Among thieves it's a friendly epithet.
+//       Morten, Olver, Danno = names of the three thieves.
 
 Page_0: "Hier is das was du wissen wolltest, Morten. öber das MausolÑum aufm Friedhof. Hat so ne Magie, damit so welche wie du un ich nich rein kommen. Sieben Hîrner, sacht Olver, un der muss es ja wissn weil ers aus nem Buch von der Lady di Rupo hat. Er sacht man zieht in der richtigen Reihenfolge an den Hîrnern, eins nach'm andern, un dann gehn die Tore auf:
 
@@ -23,13 +23,13 @@ un dann
 Ich schÑtz so einer wie du hat damit nich viel Probleme. Fiel Erfolg! Un vergis nich, wir kriegn fierzich Prozend von dem Kram fÅr unsre MÅhen. Olver un ich erwartn dich schohn.  -- Danno"
 
 
-; Blood decals to cover the missing puzzle solution.
-; Decals 0 and 1 are the lines of text that will be revealed.
-; Decals 2 and 3 are the removable blood layers.
-; Decal 4 is the remaining blood stain that is indelible.
-; See the BloodyInstructions script for more details.
-; Note: all these positions need to be adjusted for each language.
-;
+// Blood decals to cover the missing puzzle solution.
+// Decals 0 and 1 are the lines of text that will be revealed.
+// Decals 2 and 3 are the removable blood layers.
+// Decal 4 is the remaining blood stain that is indelible.
+// See the BloodyInstructions script for more details.
+// Note: all these positions need to be adjusted for each language.
+//
 page_0_decal_0: "#0 $ 1 232 257 350"
 page_0_decal_1: "#0 $ 1 176 281 350"
 page_0_decal_2: "#1 1 136 128 decals\\blood2"

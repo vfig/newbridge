@@ -354,6 +354,42 @@ class TheProphet extends SqRootScript
         // Wake the prophet up!
         Object.RemoveMetaProperty(self, "M-InactiveProphet");
     }
+
+    function OnFireStimStimulus()
+    {
+        print("Fire: " + message().intensity);
+        if (message().intensity >= 5.0) {
+            print("Signalling...");
+            AI.Signal(self, "CantHurtMe");
+        }
+    }
+
+    function OnHolyStimStimulus()
+    {
+        print("Holy: " + message().intensity);
+        if (message().intensity >= 5.0) {
+            print("Signalling...");
+            AI.Signal(self, "CantHurtMe");
+        }
+    }
+
+    function OnKOGasStimulus()
+    {
+        print("KOGas: " + message().intensity);
+        if (message().intensity >= 5.0) {
+            print("Signalling...");
+            AI.Signal(self, "CantHurtMe");
+        }
+    }
+
+    function OnLightBrightStimulus()
+    {
+        print("LightBright: " + message().intensity);
+        if (message().intensity >= 5.0) {
+            print("Signalling...");
+            AI.Signal(self, "CantHurtMe");
+        }
+    }
 }
 
 class MausDouse extends SqRootScript

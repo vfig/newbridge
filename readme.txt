@@ -61,7 +61,7 @@ Auto Map                : Yes
 New Graphics            : Yes
 New Sounds              : Yes
 Multi-Language Support  : Yes (English, German, Italian)
-Build Time              : 654 hours over 115 calendar days (so far)
+Build Time              : 668 Dromed hours / 134 calendar days.
 
 =============================================================================
 * Installation *
@@ -298,7 +298,7 @@ Neue Grafiken           : ja
 Neue Sounds             : ja
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
-Bauzeit                 : 654 Stunden über 115 Kalendertage hinweg (Beta2)
+Bauzeit                 : 668 Stunden im Dromed / 134 Kalendertage.
 
 =============================================================================
 * Weitere Informationen *
@@ -465,7 +465,7 @@ Auto-Mappa                : Si
 Nuove Grafiche            : Si
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
-Tempo di Costruzione      : 654 ore in 115 giorni di calendario
+Tempo di Costruzione      : 686 ore in Dromed / 134 giorni di calendario
 
 =============================================================================
 * Informazioni di Caricamento *

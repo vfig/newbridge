@@ -9,6 +9,22 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
+- Test mission scripting permutations without hacks
+    - On all difficulties! :-/
+
+
+RELEASE (mid-November)
+======================
+
+- Make sure all text files use CRLF!!
+- Double-check encoding of all text files!
+- Double check beta tester credits in all translations of readme, and cs20.
+
+- Translations & subtitles
+    - French?
+    - Russian?
+    - Update credits in readme, cs20, video
+
 - Cut the bit about the finder's fee from the briefing VO
     - don't forget subtitles in all three languages!
     - don't forget the books either!
@@ -18,23 +34,7 @@ Beta 3 (November)
     - zajazd?
     - Jasperstocker?
 
-- Test mission scripting permutations without hacks
-    - On all difficulties! :-/
-
 - Update build times in readme.
-
-- Make sure all text files use CRLF!!
-- Double-check encoding of all text files!
-- Double check beta tester credits in all translations of readme, and cs20.
-
-
-RELEASE (mid-November)
-======================
-
-- Translations & subtitles
-    - French?
-    - Russian?
-    - Update credits in readme, cs20, video
 
 - Briefing video
 

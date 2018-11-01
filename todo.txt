@@ -23,6 +23,10 @@ Beta 3 (November)
 
 - Update build times in readme.
 
+- Make sure all text files use CRLF!!
+- Double-check encoding of all text files!
+- Double check beta tester credits in all translations of readme, and cs20.
+
 
 RELEASE (mid-November)
 ======================
@@ -30,6 +34,7 @@ RELEASE (mid-November)
 - Translations & subtitles
     - French?
     - Russian?
+    - Update credits in readme, cs20, video
 
 - Briefing video
 

@@ -19,12 +19,6 @@ FIX BEFORE RELEASE
 
 - Argaux's rope is probably a little too loud.
 
-- Danno didn't appear after teleporting for marbleman (teleported into the ground?? raise the TP a bit)
-
-- The moneybox and the book can be frobbed through the lid.
-
-- Prisoner sometimes doesn't flee; can't replicate (put the metaprop changes before the wait in his response script, so if something interrupts, he'll still have them?)
-
 
 ONLY IF I FEEL LIKE IT
 ======================

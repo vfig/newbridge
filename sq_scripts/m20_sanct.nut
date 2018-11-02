@@ -556,8 +556,8 @@ class SlidingBanner extends SqRootScript {
 class FreeAsABirdNow extends SqRootScript
 {
     function OnTurnOn() {
-        AI.Signal(self, "FlyFreeLittleJailbird");
         Object.RemoveMetaProperty(self, "M-InStocks");
+        AI.Signal(self, "FlyFreeLittleJailbird");
     }
 }
 

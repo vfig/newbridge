@@ -202,12 +202,50 @@ class UpdateAutomap extends SqRootScript
     }
 }
 
-class PleaseKillMe extends SqRootScript
+class CardTrick extends SqRootScript
 {
+    function OnSim() {
+        if (! IsDataSet("CardCount")) {
+            SetData("CardCount", 52);
+        }
+    }
+
     function OnFrobInvEnd() {
-        Container.Remove(self);
-        Object.Teleport(self, vector(2, 0, 2), vector(), Object.Named("Player"));
-        Damage.Slay(self, 0);
+        local player = Object.Named("Player");
+        local count = GetData("CardCount");
+        local bad_luck = (Data.RandFlt0to1() > 0.90);
+        if (bad_luck || (count <= 42)) {
+            // Explode the pack
+            Container.Remove(self);
+            Object.Teleport(self, vector(2, 0, 2), vector(), player);
+            Damage.Slay(self, 0);
+        } else {
+            // Launch a single card
+            SetData("CardCount", (count - 1));
+            local archetype = Object.Archetype(self);
+            local link = Link.GetOne("Flinderize", archetype);
+            if (link) {
+                local flinder = LinkDest(link);
+                // (270, 0, 90) puts the card in portrait orientation, with its
+                // back facing the player.
+                local variation = Data.RandFltNeg1to1();
+                local facing = vector(
+                    270 + 20.0 * variation,
+                    0 + 20.0 * variation,
+                    90.0 + 45.0 * variation);
+                // Launch the card from just below the camera location.
+                local offset = vector(0, 0, -1.0);
+                local pos = (offset + Camera.GetPosition() - Object.Position(player));
+                local card = Object.Create(flinder);
+                Object.Teleport(card, pos, facing, player);
+                // Launch the card forward and a little bit up. We don't use
+                // Physics.LaunchProjectile, because it reorients the card!
+                local vel = vector(45.0, 0, 5.0);
+                local world_vel = (Camera.CameraToWorld(vel) - Camera.GetPosition());
+                Physics.SetGravity(card, 1.0);
+                Physics.SetVelocity(card, world_vel);
+            }
+        }
     }
 }
 

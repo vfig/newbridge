@@ -19,6 +19,20 @@ FIX BEFORE RELEASE
 
 - Argaux's rope is probably a little too loud.
 
+- When reading Argaux's letter from Lady di Rupo (in the secret room) I think there needs to be a delay before the VO plays, otherwise the 'new objective' sound obscures the beginning of it.
+
+- It appears that picking up the Anax immediately fulfils the objective, but that feels too early. It's not like a regular quest object. Getting hold of the Anax is just the start. Perhaps the goal should remain incomplete until the player leaves the sanctuary. Same goes for the VO 'One down, one to go'.
+
+- The fainting nobleman (Sven) has a Thief carry body icon.
+
+- In the Hammerites' library, their book on pagans tries to stand upright when dropped, which contradicts the physics model.
+
+- I experienced one disappearing door in the barracks (near the cells).
+
+- Lady di Rupo's butler (Baltasar) has the wrong carry body icon (not sure if a matching one exists).
+
+- The thieves in the graveyard don't have names.
+
 
 ONLY IF I FEEL LIKE IT
 ======================

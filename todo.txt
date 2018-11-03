@@ -41,8 +41,8 @@ RELEASE (mid-November)
 - Credits video
     - Finalise credits.
     - Revise effects. Consider backgrounds?
-    - Take audio into Audacity, get exact beat timings, tweak beatmatching
-    - McTaffer's "filth.wav" as a stinger?
+    - McTaffer's "filth.wav" as a stinger? "What is a taffer, anyway"?
+    - Review with default crop options on (right now we're still a bit over the edge)
 
 - FM packaging
     - Test with fresh GOG, Steam releases

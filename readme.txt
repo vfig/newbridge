@@ -261,7 +261,7 @@ Datum                   : 1. November 2018
 
 Einführung:
 
-    Ein "Bekannter" von mir, Argaux, hat mir ein Angebot für einen Auftrag
+    Ein Bekannter von mir, Argaux, hat mir ein Angebot für einen Auftrag
     in Newbridge verschafft. Er wollte mir keine Einzelheiten mitteilen -
     vielleicht hat er Angst, dass ich es hinter seinem Rücken durchziehe?
     Aber er sagt, es wäre eilig. Und die Bezahlung wäre es wert.

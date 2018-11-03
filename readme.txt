@@ -284,7 +284,7 @@ Einführung:
     hat.
 
 =============================================================================
-* Spielinformationen *
+* Informationen zur Mission *
 
 Spiel                   : Thief Gold, NewDark v1.26
 Missionsname            : Ein netter Profit
@@ -298,7 +298,7 @@ Neue Grafiken           : ja
 Neue Sounds             : ja
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
-Bauzeit                 : 668 Stunden im Dromed / 134 Kalendertage.
+Bauzeit                 : 668 Stunden im Dromed / 134 Kalendertage
 
 =============================================================================
 * Weitere Informationen *
@@ -312,7 +312,7 @@ inhaltet. Zu finden ist sie unter
 Wer Thief Gold (deutsch: "Dark Projekt Directors Cut") aus einer anderen
 Quelle erhalten hat, muss den NewDark-Patch auf Version 1.26 entweder "von
 Hand" installieren (vgl. http://www.ttlg.com/forums/showthread.php?t=146448)
-oder aber TFix benutzen (siehe dazu
+oder aber TFix Version 1.26a oder neuer benutzen (siehe dazu
 http://www.ttlg.com/forums/showthread.php?t=134733).
 
 Diese Mission wurde unter Verwendung der ursprünglichen Texturen niedriger
@@ -321,16 +321,105 @@ pack" oder anderen Textur-Zusatzpaketen wird nicht empfohlen. Sie würden
 zwar vermutlich das Spiel nicht ernsthaft stören, aber könnten evtl. nicht
 zum restlichen Aussehen der Mission passen.
 
-Man sollte FM-Selektor zum Spielen dieser Mission benutzen. Man kann es z.B.
-mit dem Spiel starten, wenn man "-fm" als Kommandozeilen-Parameter an das
-Spiel übergibt:
+Man sollte den FM-Selektor von NewDark zum Spielen dieser Mission benutzen.
+Dazu muss man die Zip- oder 7Zip-Dateien, die die Missionen enthalten, in
+einen Ordner speichern; den Ordner erstellt man, wenn man noch keinen hat.
+Die Missionsdateien braucht man nicht zu entpacken, das macht der FM-Selektor
+automatisch. Wenn man den FM-Selektor zum ersten Mal startet, fragt er, ob
+man einen "FM Archive path" (das ist der Ordner mit den Missionsdateien)
+einstellen will. Man sollte dann "yes" wählen und danach denjenigen Ordner
+angeben, in den man die Missionsdateien speichert. Der FM-Selektor kümmert
+sich dann selbst um das Entpacken und Installieren von Missionen.
+Man kann den FM-Selektor mit dem Spiel starten, wenn man "-fm" als
+Kommandozeilen-Parameter an das Spiel übergibt:
 
     THIEF.EXE -fm
 
+Man kann stattdessen aber auch die Datei CAM_MOD.INI im Ordner des Spiels
+ändern. Nähere Informationen dazu stehen in dieser Datei.
+
 Mehr Informationen zu FM-Selektor enthält die Datei FMSel.pdf, die mit
-NewDark mitgeliefert wird. Diese Mission wurde nicht mit anderen FM-Ladepro-
-grammen, wie z.B. Darkloader, getestet, weswegen deren Gebrauch nicht empfoh-
-len wird.
+NewDark mitgeliefert wird.
+
+Wer ein anderes Programm zum Starten der Missionen vorzieht, wie z.B.
+NewDarkLoader, weiß vermutlich schon, wie er dieses dann benutzt.
+
+=============================================================================
+* Einstellungen für das Spielen der Mission *
+
+Die Funktion "new mantle" von NewDark macht das Klettern im Spiel einfacher,
+und es funktioniert auch viel zuverlässiger damit, daher empfiehlt der Autor,
+"new mantle" zu benutzen. Die Mission wurde aber auch ohne "new mantle"
+getestet; wer das Klettern ohne diese Funktion vorzieht, sollte keine
+Probleme haben.
+
+Um "new mantle" einzuschalten, kann man die Datei USER.CFG im Ordner von
+"Thief Gold" ("Der Meisterdieb - Directors Cut") öffnen und folgende Zeile
+hinzufügen:
+
+    new_mantle
+
+Beachten Sie bitte, dass Änderungen an USER.CFG auch für andere Missionen
+sowie das Originalspiel wirksam werden.
+
+=============================================================================
+* Sprache und Untertitel *
+
+Diese Mission enthält Untertitel für neue Dialoge. Um diese Untertitel
+sichtbar zu machen, muss man in die Datei USER.CFG im Ordner des Spiels
+folgende Zeile eintragen:
+
+    enable_subtitles
+
+Untertitel, sofern vorhanden, werden in derselben Sprache wie die übrigen
+Texte angezeigt; zur Einstellung der Sprache siehe den übernächsten Abschnitt
+dieses Texts. Mehr Informationen über Einstellungen zu den Untertiteln
+(Farben, Größe der verwendeten Schrift, Auswahl der angezeigten Untertitel)
+findet man in der Datei subtitles.txt im Ordner DOC innerhalb des
+NewDark-Ordners.
+
+Wer Untertitel für die vom Originalspiel stammenden Gespräche und
+Soundeffekte haben möchte, muss nach solchen Untertiteln suchen und sie
+installieren. Eine Zusammenstellung von Untertiteln auf Englisch gibt es
+unter http://www.ttlg.com/forums/showthread.php?t=144354 ; falls es eine
+deutsche Zusammenstellung dafür geben sollte, erfährt man davon
+wahrscheinlich auf https://www.ttlg.de.
+
+Texte und Untertitel für diese Mission sind in Englisch, Deutsch und
+Italienisch vorhanden. Die Einstellung "language" in der Datei INSTALL.CFG
+im NewDark-Verzeichnis bestimmt, welche Sprachen im Spiel benutzt werden.
+Normalerweise ist hier die Sprache eingestellt, die das Originalspiel
+nutzt. Wer Texte und Untertitel in einer anderen als dieser Sprache
+angezeigt haben will, muss INSTALL.CFG öffnen und die gewünschte Sprache
+vor die eingestellte schreiben, gefolgt von einem Plus-Zeichen ("+").
+
+Wenn man also eine englische Version des Spiels besitzt, aber lieber Texte
+auf Deutsch liest, muss man INSTALL.CFG öffnen und nach einer Zeile suchen,
+die
+
+    language english
+
+lautet. Die ändert man dann in
+
+    language german+english
+
+und speichert INSTALL.CFG. Denken Sie daran, dass Änderungen in INSTALL.CFG
+und USER.CFG sich auch auf andere Fan-Missionen sowie das Originalspiel
+auswirken.
+
+=============================================================================
+* Anzeige weit entfernter Gebäude *
+
+In dieser Mission sind zum Teil weit entfernte Dinge zu sehen; die Spitze des
+Hügels und einige andere Teile der Stadt können von fast überall im Spiel
+gesehen werden. Von einigen Punkten aus kann man manchmal weit entfernte
+Gebäude erscheinen und wieder verschwinden sehen. Falls Sie das stört, können
+Sie die Einstellung "wr_render_zcomp" in der Datei CAM_EXT.CFG suchen und
+ausschalten.
+
+Bedenken Sie, dass Änderungen in CAM_EXT.CFG auch in anderen Fan-Missionen
+sowie im Originalspiel wirksam werden.
+
 
 =============================================================================
 * Danksagung usw. *
@@ -383,22 +472,22 @@ Betatester              : ...FIXME...
                         : Rachel Crawford
                         : Ravenhook
 
-Besonderer Dank:
+Besonderer Dank gebührt:
 
-    To Skacky, Unna Oertdottir, and Yandros for their help when Dromed tried
-    to murder this mission in its infancy.
+    Skacky, Unna Oertdottir und Yandros für ihre Hilfe, als Dromed versuchte,
+    diese Mission in ihrer Kindheit zu ermorden.
 
-    To Athalle and Fortuni for putting me in touch with the translators and
-    giving me a place on the 'Shadow' forum.
+    Athalle und Fortuni, die mich in Kontakt mit den Übersetzern und dem
+    'Shadow'-Forum brachten.
 
-    To Tannar, Brethren, and Dussander for providing the 'Shalebridge Cradle'
-    and 'Southquarter' beta test forums.
+    Tannar, Brethren und Dussander, die die Betatest-Foren 'Shalebridge
+    Cradle' und 'Southquarter' betreiben.
 
-    To all the fan mission authors who came before me and inspired me to get
-    my hands dirty with Dromed.
+    Allen Autoren von Fan-Missionen, die vor mir aktiv waren und mich dazu
+    inspirierten, mir selbst mit Dromed die Hände schmutzig zu machen.
 
-    To all you taffers out there, on TTLG and beyond, who have kept Thief
-    alive for the past twenty years!
+    Allen von euch "Dieben", auf TTLG und anderswo. Ihr habt "Thief" in den
+    vergangenen zwanzig Jahren am Leben erhalten!
 
 =============================================================================
 * Copyright *

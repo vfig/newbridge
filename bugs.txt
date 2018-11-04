@@ -13,10 +13,6 @@ FIX BEFORE BETA 3
 FIX BEFORE RELEASE
 ==================
 
----- AAAAH ----
-
-Can pick up the Anax, like, what?!? https://youtu.be/6VFVBjXA1J0
-
 ---- SOUND ----
 
 - Garrett's in-game lines are a bit too loud.

@@ -700,17 +700,30 @@ class GoalDeliverTheItems extends MultipleDeliveries
     }
     */
 
+    function IsActiveAI(obj)
+    {
+        return (Property.Possessed(obj, "AI_Mode")
+            && (Property.Get(obj, "AI_Mode", "") != eAIMode.kAIM_Dead));
+    }
+
     function OnItemDelivered()
     {
         local item = message().data;
-        Object_SetFrobInert(item, true);
+        if (! IsActiveAI(item)) {
+            Object_SetFrobInert(item, true);
+        }
         base.OnItemDelivered();
     }
 
     function OnItemNotDelivered()
     {
         local item = message().data;
-        Object_SetFrobInert(item, false);
+        // Whoops! This was making the Anax frobbable while still alive (because
+        // it was removing the FrobInert added by CorpseFrobHack). Let's not
+        // taff with AIs that are still active, eh?
+        if (! IsActiveAI(item)) {
+            Object_SetFrobInert(item, false);
+        }
         base.OnItemNotDelivered();
     }
 

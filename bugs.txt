@@ -13,6 +13,12 @@ FIX BEFORE BETA 3
 FIX BEFORE RELEASE
 ==================
 
+---- AAAAH ----
+
+Can pick up the Anax, like, what?!? https://youtu.be/6VFVBjXA1J0
+
+---- SOUND ----
+
 - Garrett's in-game lines are a bit too loud.
 
 - Mine arming is a little too quiet.
@@ -21,17 +27,25 @@ FIX BEFORE RELEASE
 
 - When reading Argaux's letter from Lady di Rupo (in the secret room) I think there needs to be a delay before the VO plays, otherwise the 'new objective' sound obscures the beginning of it.
 
+---- OBJECTIVES ----
+
 - It appears that picking up the Anax immediately fulfils the objective, but that feels too early. It's not like a regular quest object. Getting hold of the Anax is just the start. Perhaps the goal should remain incomplete until the player leaves the sanctuary. Same goes for the VO 'One down, one to go'.
 
-- The fainting nobleman (Sven) has a Thief carry body icon.
+- You could trigger the Anax objective at the top of the stairs up from the crypt.  That should suit most people.
 
-- In the Hammerites' library, their book on pagans tries to stand upright when dropped, which contradicts the physics model.
+---- BAD DOORS ----
 
 - I experienced one disappearing door in the barracks (near the cells).
 
+---- MISC ---
+
+- Make sure Delivery di Rupo has no efficiency.
+
+- The fainting nobleman (Sven) has a Thief carry body icon.
+
 - Lady di Rupo's butler (Baltasar) has the wrong carry body icon (not sure if a matching one exists).
 
-- The thieves in the graveyard don't have names.
+- In the Hammerites' library, their book on pagans tries to stand upright when dropped, which contradicts the physics model.
 
 
 ONLY IF I FEEL LIKE IT

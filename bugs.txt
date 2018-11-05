@@ -35,8 +35,6 @@ FIX BEFORE RELEASE
 
 ---- MISC ---
 
-- Make sure Delivery di Rupo has no efficiency.
-
 - The fainting nobleman (Sven) has a Thief carry body icon.
 
 - Lady di Rupo's butler (Baltasar) has the wrong carry body icon (not sure if a matching one exists).

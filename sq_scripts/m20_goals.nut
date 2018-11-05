@@ -803,11 +803,13 @@ class GoalPullTheStrings extends SqRootScript
 
         // Open the door again. Unlock it if it has a linked lock.
         local door = LinkDest(Link_GetOneScriptParams("Door", self));
-        local lock_link = Link.GetOne("Lock", door);
-        if (lock_link != 0) {
-            SendMessage(LinkDest(lock_link), "Unlock");
-        } else {
-            SendMessage(door, "Open");
+        if (door != 0) {
+            local lock_link = Link.GetOne("Lock", door);
+            if (lock_link != 0) {
+                SendMessage(LinkDest(lock_link), "Unlock");
+            } else {
+                SendMessage(door, "Open");
+            }
         }
 
         // Turn on the tower lights
@@ -865,7 +867,6 @@ class GoalDamnKeepers extends SqRootScript
             local keeper = LinkDest(Link_GetConversationActor(1, conv));
 
             if (player == 0) { print("Failed to find player!"); return; }
-            if (door == 0) { print("Failed to find door!"); return; }
             if (patrol == 0) { print("Failed to find patrol!"); return; }
             if (conv == 0) { print("Failed to find conv!"); return; }
             if (keeper == 0) { print("Failed to find keeper!"); return; }
@@ -874,17 +875,19 @@ class GoalDamnKeepers extends SqRootScript
             local player_pos = Object.Position(player);
             local facing = Object.Facing(patrol);
 
-            // Close the door in front of the player. Lock it if it has a linked lock.
-            local lock_link = Link.GetOne("Lock", door);
-            if (lock_link != 0) {
-                SendMessage(LinkDest(lock_link), "Lock");
-            } else {
-                SendMessage(door, "Close");
-            }
+            if (door != 0) {
+                // Close the door in front of the player. Lock it if it has a linked lock.
+                local lock_link = Link.GetOne("Lock", door);
+                if (lock_link != 0) {
+                    SendMessage(LinkDest(lock_link), "Lock");
+                } else {
+                    SendMessage(door, "Close");
+                }
 
-            // Make sure the Keeper can find the door again when the conversation ends.
-            local keeper_door_link = Link.Create("ScriptParams", keeper, door);
-            LinkTools.LinkSetData(keeper_door_link, "", "Door");
+                // Make sure the Keeper can find the door again when the conversation ends.
+                local keeper_door_link = Link.Create("ScriptParams", keeper, door);
+                LinkTools.LinkSetData(keeper_door_link, "", "Door");
+            }
 
             // Teleport the actors to the patrol point, and make the keeper face the player.
             Object.Teleport(keeper, patrol_pos, facing);

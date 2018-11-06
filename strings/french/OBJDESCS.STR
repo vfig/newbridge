@@ -1,0 +1,94 @@
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// so you should hopefully have a translation already that you can copy paste.
+// All the new text from this FM is under the heading NEWBRIDGE at the end.
+
+use_blackjack: "This weapon will knock out an unsuspecting target with \
+little noise and no blood."
+
+use_breath: "This potion will provide you an extra few seconds of air \
+when swimming underwater. Cost:125"        
+
+use_broadhead: "This is a sharp arrow. Cost:25"
+
+use_fire: "This arrow will explode on impact, damaging its target and setting \
+burnables such as torches on fire. It does not arc in flight, so aim on \
+the top of the bow sight. Cost:300"
+
+use_flash: "This grenade will produce a bright flash of light, blinding enemies \
+who are looking at it - or the unwary thief. Cost:200" 
+
+use_gasarrow: "This arrow explodes on impact into a cloud of knockout gas, putting \
+most living creatures inside its area to sleep. It does not arc in flight, \
+so aim on the top of the bow sight. Cost:500"
+
+use_gasmine: "This grenade will explode when touched into a cloud of knockout gas, \
+putting most living creatures inside its area to sleep. Cost:650"
+
+use_healing: "This potion restores lost health. Cost:250"
+
+use_holywater: "This vial of Hammer-sanctified liquid is potent protection \
+against the undead when used on your water arrows. Cost:200"
+
+use_lockpick: "These tools will let you unlock most locks, with a little work."
+
+use_pricey_lockpick: "These tools will let you unlock most locks, with a little work.  Cost: 4000 for the pair."
+
+
+use_mine: "This grenade will produce a fiery explosion when touched. Cost:350"
+
+use_moss: "This arrow sends out a cloud of moss upon impact, which settles into a \
+soft and silent carpet. Cost:125"
+
+use_noisemaker: "The mechanism in this arrow produces a strange noise upon \
+impact, useful as a distraction. Cost:250"
+
+use_rope: "This arrow will stick into wooden surfaces and deploy a hanging rope. \
+Cost:200"
+
+use_sword: "In addition to putting holes in the enemy, a sword can block a foe's \
+attack."
+
+use_water: "The water arrow does not do any damage, but it douses torches and \
+other burning objects. Cost:50"
+
+use_m9papyrus: "An acquaintance will sell you a commission he has to \
+pick up some antiquities which you may be able to find around the Lost \
+City.  Cost:150"
+
+use_m3holytip: "A former prisoner of Cragscleft says he has info about \
+the haunted mines. Cost:100"
+
+use_m3cuttytip: "A few well-placed inquiries might reveal where the \
+Hammers are keeping Cutty. Cost:300"
+
+use_fakeeye: "The Hammers constructed this replica of the Eye to \
+substitute into Constantine's ritual."
+
+use_hammertip: "One of the Hammerites is willing to offer you some \
+information he found, but insists that you pay for it - something \
+about not sullying his soul by helping thieves.  Cost:100"
+
+use_consword: "This strange black sword seems to prevent your foes \
+from noticing that you have it drawn, even when you're about to \
+strike." 
+
+use_talismans: "The Talismans of Air, Earth, Water, and Fire \
+will allow you to defeat the wards on the cathedral and unlock the door."
+
+use_coins: "The coins for the Watchman's Grave."
+                                                                        
+use_speed: "This potion will greatly increase your speed for a little while.  Cost: 500."
+
+use_hallpass: "A genuine letter of introduction for a Hammerite novice, this should get you past the guard at the gate."
+use_lckey: "This stone ought to unlock the Keeper's seal on the Lost City."
+
+use_pickhelp: "Since selling thief-tools with no instructions can produce angry thieves, Farkus provides a brief \"owner's manual\" for his wares."
+
+use_m7tip: "An acquaintance is willing to sell you some pages from a \
+journal that he claims belonged to a long-ago fighter of the undead.  \
+Cost: 200"
+
+
+//NEWBRIDGE
+
+Use_DeckOfCards: "Being stealthy can involve long, boring periods of staying still and watching. These fifty-two friends will keep you entertained instead. Cost: 10"

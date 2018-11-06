@@ -1,0 +1,23 @@
+Page_0: "V'la le tuyau qu'tu voulais Morten, pour le mosol‚ dans l'cimetiŠre: y'a une espŠce d'serrure magic pour l'gard‚ de mecs comme toi et moi. Sept cornes l'a dit Olver, lui le sait, l'a lu dans un livre de Lady di Rupo. Y dit que tu dois tirer sur les cornes dans l'bon ordre, l'une ap‚s l'aut, et les portes s'ouvriron:
+
+
+Nord-Est, S
+et ensuite
+
+Chuis sur qu'un gars comme toi va pas avoir d'problŠme avec ‡a. C'est du gƒteau! Oublie pas nos quarant pourcen pour les risques qu'on na pris. Olver et moi on t'attendra.  -- Danno"
+
+
+; Blood decals to cover the missing puzzle solution.
+; Decals 0 and 1 are the lines of text that will be revealed.
+; Decals 2 and 3 are the removable blood layers.
+; Decal 4 is the remaining blood stain that is indelible.
+; See the BloodyInstructions script for more details.
+; Note: all theses positions need to be adjusted for each language.
+;
+page_0_decal_0: "#0 $ 1 203 257 350"
+page_0_decal_1: "#0 $ 1 187 281 350"
+page_0_decal_2: "#1 136 128 decals\\blood2"
+page_0_decal_3: "#1 1 136 128 decals\\blood2"
+page_0_decal_4: "1 136 128 decals\\blood2"
+page_0_decal_0_text: "ud-ouest, Sud-est, Nord-ouest,"
+page_0_decal_1_text: "Est? ou Ouest? Ah, tu trouv'ras bien."

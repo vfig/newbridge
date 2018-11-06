@@ -1,0 +1,89 @@
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// except the "Secrets" text that I have taken from Thief II, so you should
+// hopefully have a translation already that you can copy paste.
+
+menu: "Menu"
+continue: "Continuer"
+stats: "Stats"
+goals: "Objectifs"
+
+restart: "Rejouer"
+
+hours: "Heures"
+minutes: "Minutes"
+seconds: "Secondes"
+hour: "Heure"
+minute: "Minute"
+second: "Seconde"
+true: "Vrai"
+false: "Faux"
+some: "Certains"
+none: "Aucun"
+
+stat_0: "DrSTime"
+text_0: "Temps total : "
+format_0: "@t"
+
+stat_1: "TOTAL_LOOT"
+text_1: "Butin trouv‚ : "
+format_1: "@x@c%d"
+
+stat_2: "DrSLootTotal"
+text_2: " Butin total : "
+format_2: "%d" 
+
+stat_3: "DrSPocketOK"
+text_3: "Vols discrets : "
+format_3: "@s%d"
+
+stat_4: "DrSPocketCnt"
+text_4: " sur "
+format_4: "%d"
+
+stat_5: "DrSLockPick"
+text_5: "Serrures crochet‚es : "
+format_5: "%d"
+
+stat_6: "DrSBackStabs"
+text_6: "Frappes discrŠtes : "
+format_6: "@c%d"
+
+stat_7: "DrSKNockout"
+text_7: " KO : "
+format_7: "@c%d"
+
+stat_8: "DrSAerials"
+text_8: " en sautant : "
+format_8: "@+%d"
+
+stat_9: "DrSDmgDealt"
+text_9: "D‚gƒts caus‚s : "
+format_9: "@c%d"
+
+stat_10: "DrSDmgTaken"
+text_10: " D‚gƒts pris : "
+format_10: "@c%d"
+
+stat_11: "DrSHealing"
+text_11: " Potion de sant‚ : "
+format_11: "%d"
+
+stat_12: "DrSInnocent"
+text_12: " Innocents tu‚s : "
+format_12: "@c@q"
+
+stat_13: "DrSKills"
+text_13: " autres morts : "
+format_13: "%d"
+
+stat_14: "DrSBodyFound"
+text_14: "Corps d‚couverts par ennemis : "
+format_14: "@+%d"
+
+stat_15: "SecretsFound"
+text_15: "Secrets d‚couverts: "
+format_15: "@c%d"
+
+stat_16: "SecretsCount"
+text_16: " sur "
+format_16: "%d"

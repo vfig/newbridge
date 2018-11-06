@@ -1,0 +1,90 @@
+// NOTE FOR TRANSLATORS: the goals with '(CUT)' were cut
+// from the mission and are no longer used. Please ignore them.
+
+// 0: MeetArgaux
+fiction_0: "Votre contact, Argaux, vous attendra … la fontaine. Allez le retrouver pour entendre ce qu'il a … vous proposer."
+text_0: "Rencontrez Argaux … la fontaine."
+
+// 1: FindArgauxsInfauxs
+fiction_1: "Allez chez Argaux et voyez ce que vous pourrez y trouver."
+text_1: "Allez chez Argaux et voyez ce que vous pourrez y trouver."
+
+// 2: KidnapTheAnax
+fiction_2: "Prenez l'Anax de Easthart dans le sanctuaire Marteleur."
+text_2: "Prenez l'Anax de Easthart dans le sanctuaire Marteleur."
+
+// 3: BonusBurrickTrouble
+fiction_3: "(CUT)"
+text_3: "(CUT)"
+
+// 4: StealTheHand
+fiction_4: "Volez la Main du ProphŠte au mausol‚e."
+text_4: "Volez la Main du ProphŠte au mausol‚e."
+
+// 5: BonusBanishTheGhost
+fiction_5: "(CUT)"
+text_5: "(CUT)"
+
+// 6: DeliverTheItems
+fiction_6: "Une fois les deux items en votre possession, apportez-les chez le poissonnier pour paiement."
+text_6: "Une fois les deux items en votre possession, apportez-les chez le poissonnier pour paiement."
+
+// 7: StopTheRitual
+fiction_7: "D‚couvrez o— Lady di Rupo ex‚cute le rituel et mettez-y fin."
+text_7: "D‚couvrez o— Lady di Rupo ex‚cute le rituel et mettez-y fin."
+
+// 8: BonusSubvertTheRitual
+fiction_8: "(CUT)"
+text_8: "(CUT)"
+
+// 9: EscapeWithTheAnax
+fiction_9: "Allez placer l'Anax en s‚curit‚ hors de la zone."
+text_9: "Allez placer l'Anax en s‚curit‚ hors de la zone."
+
+// 10: ReturnTheAnax
+fiction_10: "(CUT)"
+text_10: "(CUT)"
+
+// 11: BonusTerencesHammer
+fiction_11: "(Bonus) Cet ancient marteau orn‚ est une relique inestimable. Mais comme votre receleur le dit, toute chose a un prix."
+text_11: "(Bonus) Cet ancient marteau orn‚ est une relique inestimable. Mais comme votre receleur le dit, toute chose a un prix."
+
+// 12: KeepTheAnaxAlive
+fiction_12: "Veillez … ce que l'Anax ne subisse aucun dommage."
+text_12: "Veillez … ce que l'Anax ne subisse aucun dommage."
+
+// 13: DontBiteTheHand
+fiction_13: "Ne mordez pas la main qui vous nourrit. Si quelqu'un vous paye, prot‚gez-le."
+text_13: "Ne mordez pas la main qui vous nourrit. Si quelqu'un vous paye, prot‚gez-le."
+
+// 14: LootNormal
+fiction_14: "Newbridge n'est pas le quartier le plus riche, mais il n'est pas non plus le mieux gard‚. Il devrait y avoir pas mal d'opportunit‚s pour un voleur comme vous. Trouvez et faites v“tre un butin de 1500."
+text_14: "Pendant que vous ˆtes dans le coin, ramassez un butin de 1500."
+
+// 15: LootHard
+fiction_15: "Newbridge n'est pas le quartier le plus riche, mais il y a toujours des nobles fortun‚s et des Marteleurs aux alentours. Vous ferez bien meilleur usage de leurs biens qu'ils ne l'auraient fait. Trouvez et faites v“tre un butin de 1900."
+text_15: "Pendant que vous ˆtes dans le coin, ramassez un butin de 1900."
+
+// 16: LootExpert
+fiction_16: "Quoi de mieux, durant votre visite d'une partie de la ville, que d'y ‚tudier la nature... et les r‚coltes. Prenez tout ce que vous trouverez. Il doit au moins y en avoir pour 2200."
+text_16: "Pendant que vous ˆtes dans le coin, ramassez un butin de 2200."
+
+// 17: BonusLootHard
+fiction_17: "(CUT)"
+text_17: "(CUT)"
+
+// 18: BonusLootExpert
+fiction_18: "(CUT)"
+text_18: "(CUT)"
+
+// 19: DontKillBystanders
+fiction_19: "Ne tuez aucune personne d‚sarm‚e. C'est leur argent que vous voulez, pas leur vie."
+text_19: "Ne tuez aucune personne d‚sarm‚e."
+
+// 20: DontKillHumans
+fiction_20: "Un voleur avec vos comp‚tences ne devrait pas avoir … employer la violence pour faire son travail. Ne tuez personne."
+text_20: "Ne tuez personne."
+
+// 21: ReturnToTheStart
+fiction_21: "Quand tout est fait, retournez … votre maison par le canal."
+text_21: "Quand tout est fait, retournez au canal l… o— vous avez commenc‚."

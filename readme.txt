@@ -11,6 +11,8 @@ and all discussion:
 
 Bitte herunterscrollen für deutschen Text!
 Per favore scrollare in basso per l'Italiano.
+Faire défiler vers le bas pour le français!
+
 
 
 ***********
@@ -736,4 +738,240 @@ La distribuzione di questa missione è autorizzata fin quando sia gratuita e
 non modificata.
 
 Qusto livello non è stato fatto e non è supportato da Looking Glass Studios o
+Eidos Interactive.
+
+
+
+***********
+* FRANCAIS *
+***********
+
+=============================================================================
+
+Auteur                  : vfig (Andy Durdin)
+Contact Info            : me@andy.durdin.net
+Homepage                : http://backslashn.com
+Version                 : Beta 1
+Date de Sortie          : Novembre 2018
+
+Description:
+
+    L'une de mes relations professionnelles a pris contact avec moi pour me 
+    proposer un boulot à Newbridge. Il ne me donnera aucun détail--peut-être
+    a-t-il peur que je le fasse en douce et il perdrait alors ses honoraires? 
+    Mais il a dit que c'était urgent. Et cela paye généreusement.
+
+    Je ne suis jamais allé à Newbridge auparavant, mais j'ai entendu dire que
+    c'était un coin mort, sombre et calme à la périphérie de la ville. La zone
+    est sous la coupe de Lady di Rupo, une personne influente avec un hôtel
+    particulier sur les hauteurs de Cliffside. Je devrais garder à l'oeil ses
+    gardes pendant que je serais dans les parages: ils ne sont pas
+    particulièrement accueillants avec les voleurs.
+
+    Selon certaines sources, les marteleurs auraient récemment commencé à
+    tenter de prendre le contrôle du district, ce qui a causé des problèmes.
+    Des gens m'ont dit que di Rupo n'aimait pas l'Ordre du Marteau--alors moi
+    non plus. Même si j'aime tout l'or qu'ils utilisent pour décorer leurs
+    temples.
+
+    Quoique ce travail implique, visiter Newbridge sera un dépaysement
+    intéressant. J'irai à la rencontre d'Argaux à la fontaine afin d'écouter
+    ce qu'il a à me dire.
+
+=============================================================================
+* Informations de Jeu *
+
+Jeu                     : Thief Gold, NewDark 1.26
+Titre de la Mission     : Faire un Profit
+Nom du Fichier          : miss20.mis
+Briefing                : Yes
+Niveaux de Difficulté   : Normal/Difficile/Expert
+Magasin d'Équipment     : Oui
+Carte                   : Oui
+Auto Map                : Oui
+Nouveaux Graphiques     : Non
+Nouveaux Sons           : Oui
+Multi-Language Support  : Oui (Anglais, Allemand, Français, Italien, Russe)
+Temps de Construction   : 668 heures à Dromed / 134 jours
+
+=============================================================================
+* Installation *
+
+NewDark 1.26 ou supérieur est requis pour faire fonctionner cette mission.
+La version Thief Gold de GOG est recommendée, car elle est mise à jour avec
+la dernière version de NewDark préinstallée:
+
+    https://www.gog.com/game/thief_gold
+
+Si votre Thief Gold vient d'une autre source, vous devrez installer le patch
+NewDark 1.26 manuellement (http://www.ttlg.com/forums/showthread.php?t=146448)
+ou utiliser TFix (http://www.ttlg.com/forums/showthread.php?t=134733) version
+1.26a ou supérieure. Cette mission a été créée avec les textures et modèles
+basse résolution, et l'utilisation des packs d'amélioration n'est pas 
+recommandé. Ils ne casseront rien mais certaines parties de la mission
+pourraient ne pas apparaître comme voulu.
+
+Vous devriez utiliser FMSel (de Newdark) pour lancer cette mission. Si vous
+ne l'avez pas encore installé, créé un répertoire pour les zips des missions
+et déplacez ce zip à l'intérieur sans le décompresser. Quand vous lancez
+FMSel la première fois, il sera demandé si vous voulez configurez le chemin
+pour les archives: dites oui et selectionnez le répertoire que vous avez créé.
+FMSel se chargera alors d'installer et de décompresser les missions pour vous.
+
+Pour lancer FMSel, lancer le jeu avec l'argument -fm:
+
+    THIEF.EXE -fm
+
+Vous pouvez aussi éditer CAM_MOD.INI pour toujours lancer les missions avec
+le lanceur de FM: les instructions pour le faire sont dans le fichier.
+Veuillez consulter FMSel.pdf dans votre zip de Newdark pour plus
+d'information.
+
+Si vous préférez un autre lanceur de Fm, comme NewDarkLoader, alors vous savez
+déjà comment faire.
+
+=============================================================================
+* Configuration *
+
+L'option 'new mantle' de NewDark permet d'escalader beaucoup plus facilement
+aussi je vous recommande de l'utiliser. Quoiqu'il en soit, la mission a été
+testée sans, alors si vous préférez le style original pour escalader, cela
+fonctionnera également.
+
+Si vous voulez activer 'new mantle', éditer USER.CFG dans votre répertoire de
+Thief Gold et ajouter la ligne:
+
+    new_mantle
+
+Notez que ce changement dans USER.CFG affectera tout le jeu ainsi que toutes
+les fans missions.
+
+=============================================================================
+* Langages and Sous-titres *
+
+Cette mission contient des sous-titres pour tous les nouveaux dialogues.
+Pour les activer, éditer USER.CFG dans votre répertoire de Thief Gold et 
+ajoutez la ligne suivante:
+
+    enable_subtitles
+
+Les sous-titres apparaîtront dans la même langue disponible que les textes, 
+(voir ci-dessous pour configurer les langues). Référez-vous à subtitles.txt de
+votre archive NewDark pour plus d'information concernant la taille et la 
+couleur des polices, ainsi que les autres options des sous-titres.
+
+Si vous voulez des sous-titres pour tous les dialogues de Thief, vous devrez
+installer Thief Gold subtitle pack. Une version anglaise du pack peut être
+trouvée ici: http://www.ttlg.com/forums/showthread.php?t=144354
+
+Les textes et sous-titres pour cette mission seront disponibles en anglais,
+allemand, français, italien et russe. Le paramêtre de 'langue' dans
+INSTALL.CFG affiche les langues utilisées par le jeu. Par défaut, il est
+configuré sur la langue utilisée par votre version de Thief.
+Si vous préférez avoir les textes et sous-titres dans une autre langue
+disponible, vous devez éditer INSTALL.CFG, et ajouter votre langage au début,
+suivi par un '+'.
+
+Par exemple, si vous jouez à une version anglaise de Thief, mais préférez voir
+les textes italiens dans cette mission, vous devez éditer INSTALL.CFG et 
+changer la ligne:
+
+    language english
+
+par celle-ci:
+
+    language italian+english
+
+Notez que les changements effectués dans INSTALL.CFG et USER.CFG affecteront
+tout le jeu ainsi que les fans missions.
+
+=============================================================================
+* Bâtiments distants *
+
+Cette mission est plutôt agressive sur les distances de vue, comme le sommet
+des collines et certaines autres parties de la ville sont visible de quasiment
+partout. Selon votre position, pour pourriez occasionnellement voir les
+bâtiments distants apparaître ou disparaître. Si cela vous gêne, trouvez et
+désactivez dans CAM_EXT.CFG la ligne 'wr_render_zcomp'.
+
+Notez que les changements effectués dans INSTALL.CFG et USER.CFG affecteront
+tout le jeu ainsi que les fans missions.
+
+=============================================================================
+Créée par               : vfig (Andy Durdin)
+
+Histoire                : Andy Durdin
+                        : Aaron Dron
+
+Briefing illustrations  : ... FIXME ...
+
+Doublage Voix:
+    Garrett             : M. Alasdair MacKenzie
+    Lady di Rupo        : Shadow Creepr
+    Gardien             : Yandros
+    L'éternel Benny     : Yandros
+    Le Sergent énervé   : MasterThief3
+    Garde païen         : Yandros
+    Marteleur lâche     : McTaffer
+    Danno the meister   : Yandros
+    Olver the digger    : McTaffer
+    Morten the berk     : Personne, parcequ'il est mort
+    Prêtre Marteleur    : McTaffer
+    Gardien Marteleur   : Yandros
+
+Traduction:
+    Allemand            : baeuchlein
+    Italien             : piesel
+    Français            : Athalle
+    Russe               : MoroseTroll
+
+Relecture (Allemand)    : gnartsch
+
+Beta testing            : ... FIXME ...
+                        :
+                        : Alex Lemcovich
+                        : bob_doe_nz
+                        : Cardia
+                        : Dillon Rogers
+                        : Dr.Sahnebacke
+                        : Freddy Fox
+                        : Gloria Creep
+                        : itllrun10s
+                        : Justin Keverne
+                        : M. Alasdair MacKenzie
+                        : marbleman
+                        : nightshifter
+                        : Norgg
+                        : prjames
+                        : R Soul
+                        : Rachel Crawford
+                        : Ravenhook
+
+Remerciements spéciaux:
+
+    A Skacky, Unna Oertdottir, et Yandros pour leur aide lorsque Dromed a
+    tenté d'assassiner cette mission à ses débuts.
+
+    A Athalle and Fortuni pour m'avoir mis en contact avec les traducteurs
+    et fait une place sur le forum 'Shadow'.
+
+    A Tannar, Brethren, et Dussander pour fournir les forums de béta-test de
+    'Shalebridge Cradle' et 'Southquarter'.
+
+    A tous les auteurs de fan missions qui ont oeuvré avant moi et m'ont
+    donné l'envie de me salir les mains avec Dromed.
+
+    A vous tous, sur TTLG et au-delà, qui avez gardé vivant Thief tout au 
+    long de ces vingt dernières années!
+
+
+=============================================================================
+* Information de Droits d'Auteur*
+
+Cette mission est ©2018 par Andy Durdin.
+
+La distribution de cette mission est autorisée tant qu'elle reste gratuite et
+que le zip n'est pas modifié.
+
+Ce niveau n'est pas supporté et n'a pas été créé par Looking Glass Studios ou
 Eidos Interactive.

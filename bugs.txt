@@ -23,6 +23,9 @@ FIX BEFORE RELEASE
 
 - When reading Argaux's letter from Lady di Rupo (in the secret room) I think there needs to be a delay before the VO plays, otherwise the 'new objective' sound obscures the beginning of it.
 
+- Guard conversation is inaudible after hopping over wall by work station. (nightshifter)
+- Nightshifter also reports that the market square convo starts too soon, but not that it is inaudible.
+
 ---- OBJECTIVES ----
 
 - It appears that picking up the Anax immediately fulfils the objective, but that feels too early. It's not like a regular quest object. Getting hold of the Anax is just the start. Perhaps the goal should remain incomplete until the player leaves the sanctuary. Same goes for the VO 'One down, one to go'.
@@ -31,7 +34,9 @@ FIX BEFORE RELEASE
 
 ---- BAD DOORS ----
 
-- I experienced one disappearing door in the barracks (near the cells).
+- disappearing door in the barracks (near the cells).
+
+- Market tower door, Hammerite training room doors have incorrect joint positions on Normal (cause they're locked on higher difficulties). See if the interplay of Engine Features > Locked and Difficulty: Locked (Unlocked) properties should be different.
 
 ---- MISC ---
 

@@ -63,7 +63,7 @@ Auto Map                : Yes
 New Graphics            : Yes
 New Sounds              : Yes
 Multi-Language Support  : Yes (English, German, Italian)
-Build Time              : 668 Dromed hours / 134 calendar days.
+Build Time              : 668 Dromed hours / 134 days
 
 =============================================================================
 * Installation *
@@ -300,7 +300,7 @@ Neue Grafiken           : ja
 Neue Sounds             : ja
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
-Bauzeit                 : 668 Stunden im Dromed / 134 Kalendertage
+Bauzeit                 : 668 Stunden im Dromed / 134 Tage
 
 =============================================================================
 * Weitere Informationen *
@@ -556,7 +556,7 @@ Auto-Mappa                : Si
 Nuove Grafiche            : Si
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
-Tempo di Costruzione      : 686 ore in Dromed / 134 giorni di calendario
+Tempo di Costruzione      : 686 ore in Dromed / 134 giorni
 
 =============================================================================
 * Informazioni di Caricamento *
@@ -751,26 +751,26 @@ Eidos Interactive.
 Auteur                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 1
+Version                 : Beta 3
 Date de Sortie          : Novembre 2018
 
 Description:
 
-    L'une de mes relations professionnelles a pris contact avec moi pour me 
-    proposer un boulot à Newbridge. Il ne me donnera aucun détail--peut-être
-    a-t-il peur que je le fasse en douce et il perdrait alors ses honoraires? 
-    Mais il a dit que c'était urgent. Et cela paye généreusement.
+    Argaux, l'une de mes relations professionnelles, a pris contact avec moi
+    pour me proposer un boulot à Newbridge. Il ne me donnera aucun détail -
+    peut-être a-t-il peur que je le fasse en douce et il perdrait alors ses
+    honoraires? Mais il a dit que c'était urgent. Et cela paye généreusement.
 
     Je ne suis jamais allé à Newbridge auparavant, mais j'ai entendu dire que
     c'était un coin mort, sombre et calme à la périphérie de la ville. La zone
     est sous la coupe de Lady di Rupo, une personne influente avec un hôtel
-    particulier sur les hauteurs de Cliffside. Je devrais garder à l'oeil ses
-    gardes pendant que je serais dans les parages: ils ne sont pas
+    particulier sur les hauteurs au bord de la falaise. Je devrais garder à
+    l'oeil ses gardes pendant que je serais dans les parages: ils ne sont pas
     particulièrement accueillants avec les voleurs.
 
     Selon certaines sources, les marteleurs auraient récemment commencé à
     tenter de prendre le contrôle du district, ce qui a causé des problèmes.
-    Des gens m'ont dit que di Rupo n'aimait pas l'Ordre du Marteau--alors moi
+    Des gens m'ont dit que di Rupo n'aimait pas l'Ordre du Marteau - alors moi
     non plus. Même si j'aime tout l'or qu'ils utilisent pour décorer leurs
     temples.
 
@@ -784,7 +784,7 @@ Description:
 Jeu                     : Thief Gold, NewDark 1.26
 Titre de la Mission     : Faire un Profit
 Nom du Fichier          : miss20.mis
-Briefing                : Yes
+Briefing                : Oui
 Niveaux de Difficulté   : Normal/Difficile/Expert
 Magasin d'Équipment     : Oui
 Carte                   : Oui
@@ -814,7 +814,7 @@ pourraient ne pas apparaître comme voulu.
 Vous devriez utiliser FMSel (de Newdark) pour lancer cette mission. Si vous
 ne l'avez pas encore installé, créé un répertoire pour les zips des missions
 et déplacez ce zip à l'intérieur sans le décompresser. Quand vous lancez
-FMSel la première fois, il sera demandé si vous voulez configurez le chemin
+FMSel la première fois, il sera demandé si vous voulez configurer le chemin
 pour les archives: dites oui et selectionnez le répertoire que vous avez créé.
 FMSel se chargera alors d'installer et de décompresser les missions pour vous.
 
@@ -847,10 +847,10 @@ Notez que ce changement dans USER.CFG affectera tout le jeu ainsi que toutes
 les fans missions.
 
 =============================================================================
-* Langages and Sous-titres *
+* Langages et Sous-titres *
 
 Cette mission contient des sous-titres pour tous les nouveaux dialogues.
-Pour les activer, éditer USER.CFG dans votre répertoire de Thief Gold et 
+Pour les activer, éditez USER.CFG dans votre répertoire de Thief Gold et
 ajoutez la ligne suivante:
 
     enable_subtitles
@@ -867,20 +867,19 @@ trouvée ici: http://www.ttlg.com/forums/showthread.php?t=144354
 Les textes et sous-titres pour cette mission seront disponibles en anglais,
 allemand, français, italien et russe. Le paramêtre de 'langue' dans
 INSTALL.CFG affiche les langues utilisées par le jeu. Par défaut, il est
-configuré sur la langue utilisée par votre version de Thief.
-Si vous préférez avoir les textes et sous-titres dans une autre langue
-disponible, vous devez éditer INSTALL.CFG, et ajouter votre langage au début,
-suivi par un '+'.
+configuré sur la langue utilisée par votre version de Thief. Si vous préférez
+avoir les textes et sous-titres dans une autre langue disponible, vous devez
+éditer INSTALL.CFG, et ajouter votre langage au début, suivi par un '+'.
 
 Par exemple, si vous jouez à une version anglaise de Thief, mais préférez voir
-les textes italiens dans cette mission, vous devez éditer INSTALL.CFG et 
+les textes français dans cette mission, vous devez éditer INSTALL.CFG et
 changer la ligne:
 
     language english
 
 par celle-ci:
 
-    language italian+english
+    language french+english
 
 Notez que les changements effectués dans INSTALL.CFG et USER.CFG affecteront
 tout le jeu ainsi que les fans missions.
@@ -889,10 +888,10 @@ tout le jeu ainsi que les fans missions.
 * Bâtiments distants *
 
 Cette mission est plutôt agressive sur les distances de vue, comme le sommet
-des collines et certaines autres parties de la ville sont visible de quasiment
-partout. Selon votre position, pour pourriez occasionnellement voir les
-bâtiments distants apparaître ou disparaître. Si cela vous gêne, trouvez et
-désactivez dans CAM_EXT.CFG la ligne 'wr_render_zcomp'.
+des collines et certaines autres parties de la ville sont visibles de
+quasiment partout. Selon votre position, pour pourriez occasionnellement voir
+les bâtiments distants apparaître ou disparaître. Si cela vous gêne, trouvez
+et désactivez dans CAM_EXT.CFG la ligne 'wr_render_zcomp'.
 
 Notez que les changements effectués dans INSTALL.CFG et USER.CFG affecteront
 tout le jeu ainsi que les fans missions.
@@ -913,9 +912,9 @@ Doublage Voix:
     Le Sergent énervé   : MasterThief3
     Garde païen         : Yandros
     Marteleur lâche     : McTaffer
-    Danno the meister   : Yandros
-    Olver the digger    : McTaffer
-    Morten the berk     : Personne, parcequ'il est mort
+    Danno le boss       : Yandros
+    Olver le terrassier : McTaffer
+    Morten le connard   : Personne, parcequ'il est mort
     Prêtre Marteleur    : McTaffer
     Gardien Marteleur   : Yandros
 
@@ -927,7 +926,7 @@ Traduction:
 
 Relecture (Allemand)    : gnartsch
 
-Beta testing            : ... FIXME ...
+Béta-testeurs           : ... FIXME ...
                         :
                         : Alex Lemcovich
                         : bob_doe_nz
@@ -952,7 +951,7 @@ Remerciements spéciaux:
     A Skacky, Unna Oertdottir, et Yandros pour leur aide lorsque Dromed a
     tenté d'assassiner cette mission à ses débuts.
 
-    A Athalle and Fortuni pour m'avoir mis en contact avec les traducteurs
+    A Athalle et Fortuni pour m'avoir mis en contact avec les traducteurs
     et fait une place sur le forum 'Shadow'.
 
     A Tannar, Brethren, et Dussander pour fournir les forums de béta-test de

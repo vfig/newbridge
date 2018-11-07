@@ -43,12 +43,14 @@ RELEASE (mid-November)
 
 - Briefing video
     - Update subtitle timing!
+    - Adjust for actual crop position
+    - Add another .5 to 1 second of black at the end
 
 - Credits video
     - Finalise credits.
-    - Revise effects. Consider backgrounds?
-    - McTaffer's "filth.wav" as a stinger? "What is a taffer, anyway"?
-    - Review with default crop options on (right now we're still a bit over the edge)
+    - Volume is a touch too loud
+    - Volume of music starts fading way too early
+    - Adjust for actual crop position
 
 - FM packaging
     - Test with fresh GOG, Steam releases

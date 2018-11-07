@@ -27,30 +27,26 @@ RELEASE (mid-November)
 
 - Translations & subtitles
     - French?
+        - test French translations in game!
     - Russian?
     - Update credits in readme, cs20, video
-
-- Cut the bit about the finder's fee from the briefing VO
-    - don't forget subtitles in all three languages!
-    - don't forget the books either!
-    - don't forget the readme briefing either!
 
 - Review and update credits and so on in readme, movie, and cs20.str.
     - zajazd?
     - Jasperstocker?
+    - StinkyKitty?
+    - Double check they're all the same regardless.
 
 - Update build times in readme.
 
 - Briefing video
     - Update subtitle timing!
-    - Adjust for actual crop position
-    - Add another .5 to 1 second of black at the end
+    - Tweak volume of paper sound
+    - Pan wind gusts l->r
+    - Pan fountain water r<-l with camera
 
 - Credits video
-    - Finalise credits.
-    - Volume is a touch too loud
-    - Volume of music starts fading way too early
-    - Adjust for actual crop position
+    - Double check all names
 
 - FM packaging
     - Test with fresh GOG, Steam releases

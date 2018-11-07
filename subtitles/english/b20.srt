@@ -1,63 +1,63 @@
 1
-00:00:00,000 --> 00:00:01,000
-Seven time roundsy and seven time downsy
+00:00:03,366 --> 00:00:08,833
+Seven time roundsie and seven time downsie
 
 2
-00:00:01,000 --> 00:00:02,000
+00:00:09,166 --> 00:00:14,833
 Dances and sings we and bless with them hand
 
 3
-00:00:02,000 --> 00:00:03,000
+00:00:15,166 --> 00:00:20,833
 Tears pridesy builderfools flesh for our banquets
 
 4
-00:00:03,000 --> 00:00:04,000
+00:00:21,166 --> 00:00:26,166
 And wakers dead prophet from ravenous sleeps
 
 5
-00:00:04,000 --> 00:00:05,000
+00:00:26,500 --> 00:00:31,833
 -- Anonymous, poem on birch bark
 
 6
-00:00:05,000 --> 00:00:06,000
+00:00:38,033 --> 00:00:44,100
 A professional acquaintance of mine, Argaux, got in touch with an offer of a job in Newbridge.
 
 7
-00:00:06,000 --> 00:00:07,000
-He won't give me any details--maybe he's afraid I'll do it on the sly and he'll lose out on his fee?--but he says it's urgent.
+00:00:45,000 --> 00:00:50,166
+He won't give me the details yet - maybe he's afraid I'll do it on the sly and he'll lose out on his fee?
 
 8
-00:00:07,000 --> 00:00:08,000
-And it pays generously.
+00:00:51,166 --> 00:00:53,733
+But he says it's urgent. And it pays generously.
 
 9
-00:00:08,000 --> 00:00:09,000
+00:00:57,333 --> 00:01:03,000
 I've never been to Newbridge before, but I hear it's a dark, quiet little backwater on the outskirts of the city.
 
 10
-00:00:09,000 --> 00:00:10,000
-The area's under the thumb of Lady di Rupo, a wealthy grandee with a fancy mansion up on the cliffside.
+00:01:03,500 --> 00:01:09,166
+The whole area's under the thumb of Lady di Rupo, a wealthy grandee with a fancy mansion up on the cliffside.
 
 11
-00:00:10,000 --> 00:00:11,000
-I'll need to keep an eye open for her guards while I'm in the neighbourhood: they're not exactly welcoming to thieves.
+00:01:09,766 --> 00:01:16,300
+I'll need to keep an eye out for her guards while I'm in the neighbourhood: they're not exactly welcoming to thieves.
 
 12
-00:00:11,000 --> 00:00:12,000
+00:01:21,533 --> 00:01:29,033
 Reportedly the Hammers have recently started trying to wrestle control of the district for themselves, and this has been causing trouble.
 
 13
-00:00:12,000 --> 00:00:13,000
-People tell me di Rupo has no love for the Order of the Hammer--but then neither do I.
+00:01:29,666 --> 00:01:34,833
+People tell me di Rupo has no love for the Order of the Hammer - but then neither do I.
 
 14
-00:00:13,000 --> 00:00:14,000
+00:01:35,333 --> 00:01:39,333
 Although I do like all the gold they use to decorate their temples.
 
 15
-00:00:14,000 --> 00:00:15,000
+00:01:41,800 --> 00:01:47,300
 Whatever else this job entails, visiting Newbridge will be an interesting change of scene.
 
 16
-00:00:15,000 --> 00:00:16,000
+00:01:47,866 --> 00:01:51,833
 I'll go along and meet Argaux by the fountain, and hear what he has to say.

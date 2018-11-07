@@ -1,63 +1,63 @@
 1
-00:00:00,000 --> 00:00:01,000
-Sept fois et sept fois plus bas
+00:00:03,366 --> 00:00:08,833
+Sept fois autour et sept fois en bas
 
 2
-00:00:01,000 --> 00:00:02,000
+00:00:09,166 --> 00:00:14,833
 Dansons et chantons, et nous les b‚nissons avec la main
 
 3
-00:00:02,000 --> 00:00:03,000
+00:00:15,166 --> 00:00:20,833
 D‚chirez les chairs des fiers bƒtisseurs fous pour nos banquets
 
 4
-00:00:03,000 --> 00:00:04,000
+00:00:21,166 --> 00:00:26,166
 Et sortez de son sommeil avide le prophŠte mort
 
 5
-00:00:04,000 --> 00:00:05,000
+00:00:26,500 --> 00:00:31,833
 -- PoŠme sur une ‚corce d'arbre, auteur inconnu
 
 6
-00:00:05,000 --> 00:00:06,000
+00:00:38,033 --> 00:00:44,100
 Argaux, l'une de mes relations professionnelles a pris contact avec moi pour me proposer un boulot … Newbridge.
 
 7
-00:00:06,000 --> 00:00:07,000
-Il ne me donnera aucun d‚tail - peut-ˆtre a-t-il peur que je le fasse en douce et il perdrait alors ses honoraires? Mais il a dit que c'‚tait urgent.
+00:00:45,000 --> 00:00:50,166
+Il ne me donnera aucun d‚tail - peut-ˆtre a-t-il peur que je le fasse en douce et il perdrait alors ses honoraires?
 
 8
-00:00:07,000 --> 00:00:08,000
-Et cela paye g‚n‚reusement.
+00:00:51,166 --> 00:00:53,733
+Mais il a dit que c'‚tait urgent. Et cela paye g‚n‚reusement.
 
 9
-00:00:08,000 --> 00:00:09,000
+00:00:57,333 --> 00:01:03,000
 Je ne suis jamais all‚ … Newbridge auparavant, mais j'ai entendu dire que c'‚tait un coin mort, sombre et calme … la p‚riph‚rie de la ville.
 
 10
-00:00:09,000 --> 00:00:10,000
+00:01:03,500 --> 00:01:09,166
 La zone est sous la coupe de Lady di Rupo, une personne influente avec un h“tel particulier sur les hauteurs au bord de la falaise.
 
 11
-00:00:10,000 --> 00:00:11,000
+00:01:09,766 --> 00:01:16,300
 Je devrais garder … l'oeil ses gardes pendant que je serais dans les parages: ils ne sont pas particuliŠrement accueillants avec les voleurs.
 
 12
-00:00:11,000 --> 00:00:12,000
-Selon certaines sources, les marteleurs auraient r‚cemment commenc‚ … tenter de prendre le contr“le du district, ce qui a caus‚ des problŠmes.
+00:01:21,533 --> 00:01:29,033
+Selon certaines sources, les Marteleurs auraient r‚cemment commenc‚ … tenter de prendre le contr“le du district, ce qui a caus‚ des problŠmes.
 
 13
-00:00:12,000 --> 00:00:13,000
+00:01:29,666 --> 00:01:34,833
 Des gens m'ont dit que di Rupo n'aimait pas l'Ordre du Marteau - alors moi non plus.
 
 14
-00:00:13,000 --> 00:00:14,000
+00:01:35,333 --> 00:01:39,333
 Mˆme si j'aime tout l'or qu'ils utilisent pour d‚corer leurs temples.
 
 15
-00:00:14,000 --> 00:00:15,000
+00:01:41,800 --> 00:01:47,300
 Quoique ce travail implique, visiter Newbridge sera un d‚paysement int‚ressant.
 
 16
-00:00:15,000 --> 00:00:16,000
+00:01:47,866 --> 00:01:51,833
 J'irai … la rencontre d'Argaux … la fontaine afin d'‚couter ce qu'il a … me dire.

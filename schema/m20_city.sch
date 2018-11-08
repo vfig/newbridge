@@ -1,3 +1,9 @@
+// Start mission
+schema m20start
+archetype AMB_M01
+volume -500
+keehit_s
+
 // Clock tower gears
 schema m20cityclock
 archetype AMB_M20
@@ -28,7 +34,7 @@ bowpull
 // Mine softly arming
 schema mine_arm_quiet
 archetype AMB_M20
-volume -1000
+volume -500
 minearmg
 
 // Got Argaux's puzzle wrong

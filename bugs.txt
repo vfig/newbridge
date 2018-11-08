@@ -15,14 +15,6 @@ FIX BEFORE RELEASE
 
 ---- SOUND ----
 
-- Does it start with a keehit_s?
-
-- Garrett's in-game lines are a bit too loud.
-
-- Mine arming is a little too quiet.
-
-- Argaux's rope is probably a little too loud.
-
 - When reading Argaux's letter from Lady di Rupo (in the secret room) I think there needs to be a delay before the VO plays, otherwise the 'new objective' sound obscures the beginning of it.
 
 - Guard conversation is inaudible after hopping over wall by work station. (nightshifter)
@@ -52,7 +44,6 @@ ONLY IF I FEEL LIKE IT
 
 - Disappearing terrain:
     - Between the fountain and the hangman's noose on the map there is a drunk archer in a tower. If you face NW, you can sometimes see a bit of terrain disappear.
-    - Standing on the east side of market square and heading west, can sometimes see the Sanctuary roof appear and disappear.
 
 - Should there be some kind of hint about the sharp-eyed archer?
 

@@ -12,7 +12,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 1 1)
 // "Strange that Argaux's not here..."
 schema nb001
 archetype M20_CONV
-volume -1
+volume -250
 delay 1000
 nb001
 schema_voice vgarrett 1 nbconv0 (LineNo 2 2)
@@ -28,7 +28,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 3 3)
 // "So the Anax is a person..."
 schema nb003
 archetype M20_CONV
-volume -1
+volume -250
 delay 500
 nb003
 schema_voice vgarrett 1 nbconv0 (LineNo 4 4)
@@ -36,7 +36,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 4 4)
 // "So this is what Argaux wanted my help on... then I won't have to pay his finder's fee."
 schema nb004
 archetype M20_CONV
-volume -1
+volume -250
 delay 2500
 nb004
 schema_voice vgarrett 1 nbconv0 (LineNo 5 5)
@@ -44,7 +44,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 5 5)
 // "Now to find the Anax, whatever that is."
 schema nb005
 archetype M20_CONV
-volume -1
+volume -250
 delay 1000
 nb005
 schema_voice vgarrett 1 nbconv0 (LineNo 6 6)
@@ -52,7 +52,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 6 6)
 // "Poor Argaux... I should check his place..."
 schema nb006
 archetype M20_CONV
-volume -1
+volume -500
 delay 2500
 nb006
 schema_voice vgarrett 1 nbconv0 (LineNo 7 7)
@@ -60,14 +60,14 @@ schema_voice vgarrett 1 nbconv0 (LineNo 7 7)
 // "Damn, they've already started..."
 schema nb007
 archetype M20_CONV
-volume -1
+volume -250
 nb007
 schema_voice vgarrett 1 nbconv0 (LineNo 8 8)
 
 // "This looks like the hand-off point."
 schema nb008
 archetype M20_CONV
-volume -1
+volume -500
 delay 500
 nb008
 schema_voice vgarrett 1 nbconv0 (LineNo 9 9)
@@ -75,7 +75,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 9 9)
 // "Damn, must be the wrong combination."
 schema nb009
 archetype M20_CONV
-volume -1
+volume -250
 delay 1000
 nb009
 schema_voice vgarrett 1 nbconv0 (LineNo 10 10)
@@ -83,7 +83,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 10 10)
 // "Still wrong!"
 schema nb010
 archetype M20_CONV
-volume -1
+volume -250
 delay 1000
 nb010
 schema_voice vgarrett 1 nbconv0 (LineNo 11 11)
@@ -91,7 +91,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 11 11)
 // "I hate to say it, but maybe some research..."
 schema nb011
 archetype M20_CONV
-volume -1
+volume -500
 delay 1000
 nb011
 schema_voice vgarrett 1 nbconv0 (LineNo 12 12)
@@ -99,7 +99,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 12 12)
 // "One down, one to go."
 schema nb012
 archetype M20_CONV
-volume -1
+volume -250
 delay 3000
 nb012
 schema_voice vgarrett 1 nbconv0 (LineNo 13 13)
@@ -107,7 +107,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 13 13)
 // "Now to deliver all this..."
 schema nb013
 archetype M20_CONV
-volume -1
+volume -500
 delay 3000
 nb013
 schema_voice vgarrett 1 nbconv0 (LineNo 14 14)
@@ -115,7 +115,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 14 14)
 // "The tower's all lit up..." (CUT)
 schema nb014
 archetype M20_CONV
-volume -1
+volume -500
 delay 4000
 nb014
 schema_voice vgarrett 1 nbconv0 (LineNo 15 15)
@@ -123,14 +123,14 @@ schema_voice vgarrett 1 nbconv0 (LineNo 15 15)
 // "I hope the Hammers appreciate..." (CUT)
 schema nb015
 archetype M20_CONV
-volume -1
+volume -500
 nb015
 schema_voice vgarrett 1 nbconv0 (LineNo 16 16)
 
 // "I don't like the look of this."
 schema nb016
 archetype M20_CONV
-volume -1
+volume -500
 delay 500
 nb016
 schema_voice vgarrett 1 nbconv0 (LineNo 17 17)
@@ -138,35 +138,35 @@ schema_voice vgarrett 1 nbconv0 (LineNo 17 17)
 // "Hah, I guess the Burricks..." (CUT)
 schema nb017
 archetype M20_CONV
-volume -1
+volume -500
 nb017
 schema_voice vgarrett 1 nbconv0 (LineNo 18 18)
 
 // "Huh, I really didn't..." (CUT)
 schema nb018
 archetype M20_CONV
-volume -1
+volume -500
 nb018
 schema_voice vgarrett 1 nbconv0 (LineNo 19 19)
 
 // "Heh heh. Sorry about the mess." (CUT)
 schema nb019
 archetype M20_CONV
-volume -1
+volume -500
 nb019
 schema_voice vgarrett 1 nbconv0 (LineNo 20 20)
 
 // "Got this Hand here..." (CUT)
 schema nb020
 archetype M20_CONV
-volume -1
+volume -500
 nb020
 schema_voice vgarrett 1 nbconv0 (LineNo 21 21)
 
 // "This looks old. ..." (CUT)
 schema nb021
 archetype M20_CONV
-volume -1
+volume -500
 nb021
 schema_voice vgarrett 1 nbconv0 (LineNo 22 22)
 
@@ -181,7 +181,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 23 23)
 // "This guy's getting heavy. ..."
 schema nb023
 archetype M20_CONV
-volume -1
+volume -250
 delay 3000
 nb023
 schema_voice vgarrett 1 nbconv0 (LineNo 24 24)
@@ -189,7 +189,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 24 24)
 // "It's a long way down" (with a delay)
 schema nb025
 archetype M20_CONV
-volume -1
+volume -250
 delay 3000
 nb025
 schema_voice vgarrett 1 nbconv0 (LineNo 26 26)
@@ -197,7 +197,7 @@ schema_voice vgarrett 1 nbconv0 (LineNo 26 26)
 // "Uh oh"
 schema nb026
 archetype M20_CONV
-volume -1
+volume -500
 delay 0
 nb026
 schema_voice vgarrett 1 nbconv0 (LineNo 27 27)
@@ -209,56 +209,56 @@ schema_voice vgarrett 1 nbconv0 (LineNo 27 27)
 // "Lady di Rupo, I presume?"
 schema nb300
 archetype M20_CONV
-volume -1
+volume -500
 nb300
 schema_voice vgarrett 1 nbconv3 (LineNo 1 1)
 
 // "Indeed. I see..."
 schema nb301
 archetype M20_CONV
-volume -1
+volume -250
 nb301
 schema_voice vdirupo 1 nbconv3 (LineNo 2 2)
 
 // "Garrett. ..."
 schema nb302
 archetype M20_CONV
-volume -1
+volume -500
 nb302
 schema_voice vgarrett 1 nbconv3 (LineNo 3 3)
 
 // "Oh that's too bad..."
 schema nb303
 archetype M20_CONV
-volume -1
+volume -250
 nb303
 schema_voice vdirupo 1 nbconv3 (LineNo 4 4)
 
 // "Five thousand. ..."
 schema nb304
 archetype M20_CONV
-volume -1
+volume -500
 nb304
 schema_voice vgarrett 1 nbconv3 (LineNo 5 5)
 
 // "Ah, the Anax! ..."
 schema nb305
 archetype M20_CONV
-volume -1
+volume -250
 nb305
 schema_voice vdirupo 1 nbconv3 (LineNo 6 6)
 
 // "Well, I guess..."
 schema nb306
 archetype M20_CONV
-volume -1
+volume -500
 nb306
 schema_voice vgarrett 1 nbconv3 (LineNo 7 7)
 
 // "Yes, your payment. ..."
 schema nb307
 archetype M20_CONV
-volume -1
+volume -250
 nb307
 schema_voice vdirupo 1 nbconv3 (LineNo 8 8)
 
@@ -276,7 +276,7 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 1 1)
 // "Keepers."
 schema nb401
 archetype M20_CONV
-volume -1
+volume -500
 nb401
 schema_voice vgarrett 1 nbconv4 (LineNo 2 2)
 
@@ -290,7 +290,7 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 3 3)
 // "And?"
 schema nb403
 archetype M20_CONV
-volume -1
+volume -500
 nb403
 schema_voice vgarrett 1 nbconv4 (LineNo 4 4)
 
@@ -304,7 +304,7 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 5 5)
 // "This is still sounding..."
 schema nb405
 archetype M20_CONV
-volume -1
+volume -500
 nb405
 schema_voice vgarrett 1 nbconv4 (LineNo 6 6)
 
@@ -318,7 +318,7 @@ schema_voice vkeeper1 1 nbconv4 (LineNo 7 7)
 // "Another five thousand? ..."
 schema nb407
 archetype M20_CONV
-volume -1
+volume -500
 nb407
 schema_voice vgarrett 1 nbconv4 (LineNo 8 8)
 
@@ -457,7 +457,7 @@ schema_voice vprophet 1 nbconv5 (LineNo 13 13)
 // "It's done..."
 schema nb600
 archetype M20_CONV
-volume -1
+volume -250
 nb600
 schema_voice vgarrett 1 nbconv6 (LineNo 1 1)
 
@@ -471,7 +471,7 @@ schema_voice vkeeper1 1 nbconv6 (LineNo 2 2)
 // "I think he'll be okay..."
 schema nb602
 archetype M20_CONV
-volume -1
+volume -500
 nb602
 schema_voice vgarrett 1 nbconv6 (LineNo 3 3)
 
@@ -492,7 +492,7 @@ schema_voice vkeeper1 1 nbconv6 (LineNo 5 5)
 // "No. I did what you wanted..."
 schema nb605
 archetype M20_CONV
-volume -1
+volume -500
 nb605
 schema_voice vgarrett 1 nbconv6 (LineNo 6 6)
 

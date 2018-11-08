@@ -38,8 +38,6 @@ FIX BEFORE RELEASE
 
 - disappearing door in the barracks (near the cells).
 
-- Market tower door, Hammerite training room doors have incorrect joint positions on Normal (cause they're locked on higher difficulties). See if the interplay of Engine Features > Locked and Difficulty: Locked (Unlocked) properties should be different.
-
 ---- MISC ---
 
 - The fainting nobleman (Sven) has a Thief carry body icon.

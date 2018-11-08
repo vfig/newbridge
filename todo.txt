@@ -26,8 +26,6 @@ RELEASE (mid-November)
 - Double check beta tester credits in all translations of readme, and cs20.
 
 - Translations & subtitles
-    - French?
-        - test French translations in game!
     - Russian?
     - Update credits in readme, cs20, video
 

@@ -1,6 +1,5 @@
 Page_0: "V'la le tuyau qu'tu voulais Morten, pour le mosol‚ dans l'cimetiŠre: y'a une espŠce d'serrure magic pour l'gard‚ de mecs comme toi et moi. Sept cornes l'a dit Olver, lui le sait, l'a lu dans un livre de Lady di Rupo. Y dit que tu dois tirer sur les cornes dans l'bon ordre, l'une ap‚s l'aut, et les portes s'ouvriron:
 
-
 Nord-Est, S
 et ensuite
 
@@ -14,10 +13,10 @@ Chuis sur qu'un gars comme toi va pas avoir d'problŠme avec ‡a. C'est du gƒteau!
 ; See the BloodyInstructions script for more details.
 ; Note: all theses positions need to be adjusted for each language.
 ;
-page_0_decal_0: "#0 $ 1 203 257 350"
-page_0_decal_1: "#0 $ 1 187 281 350"
-page_0_decal_2: "#1 136 128 decals\\blood2"
-page_0_decal_3: "#1 1 136 128 decals\\blood2"
-page_0_decal_4: "1 136 128 decals\\blood2"
+page_0_decal_0: "#0 $ 1 198 209 350"
+page_0_decal_1: "#0 $ 1 197 233 350"
+page_0_decal_2: "#1 136 78 decals\\blood2"
+page_0_decal_3: "#1 1 136 78 decals\\blood2"
+page_0_decal_4: "1 136 78 decals\\blood2"
 page_0_decal_0_text: "ud-ouest, Sud-est, Nord-ouest,"
 page_0_decal_1_text: "Est et puis...? Ah, tu trouv'ras bien."

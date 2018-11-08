@@ -13,8 +13,6 @@ FIX BEFORE BETA 3
 FIX BEFORE RELEASE
 ==================
 
-- disappearing door in the barracks (near the cells).
-
 
 ONLY IF I FEEL LIKE IT
 ======================

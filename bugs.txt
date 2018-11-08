@@ -13,34 +13,22 @@ FIX BEFORE BETA 3
 FIX BEFORE RELEASE
 ==================
 
----- SOUND ----
-
-- When reading Argaux's letter from Lady di Rupo (in the secret room) I think there needs to be a delay before the VO plays, otherwise the 'new objective' sound obscures the beginning of it.
-
-- Guard conversation is inaudible after hopping over wall by work station. (nightshifter)
-- Nightshifter also reports that the market square convo starts too soon, but not that it is inaudible.
-
----- OBJECTIVES ----
-
-- It appears that picking up the Anax immediately fulfils the objective, but that feels too early. It's not like a regular quest object. Getting hold of the Anax is just the start. Perhaps the goal should remain incomplete until the player leaves the sanctuary. Same goes for the VO 'One down, one to go'.
-
-- You could trigger the Anax objective at the top of the stairs up from the crypt.  That should suit most people.
-
----- BAD DOORS ----
-
 - disappearing door in the barracks (near the cells).
-
----- MISC ---
-
-- The fainting nobleman (Sven) has a Thief carry body icon.
-
-- Lady di Rupo's butler (Baltasar) has the wrong carry body icon (not sure if a matching one exists).
-
-- In the Hammerites' library, their book on pagans tries to stand upright when dropped, which contradicts the physics model.
 
 
 ONLY IF I FEEL LIKE IT
 ======================
+
+- Guard conversation is inaudible after hopping over wall by work station. (nightshifter)
+- Nightshifter also reports that the market square convo starts too soon, but not that it is inaudible.
+
+- In the Hammerites' library, their book on pagans tries to stand upright when dropped, which contradicts the physics model.
+
+- When reading Argaux's letter from Lady di Rupo (in the secret room) I think there needs to be a delay before the VO plays, otherwise the 'new objective' sound obscures the beginning of it.
+
+- It appears that picking up the Anax immediately fulfils the objective, but that feels too early. It's not like a regular quest object. Getting hold of the Anax is just the start. Perhaps the goal should remain incomplete until the player leaves the sanctuary. Same goes for the VO 'One down, one to go'.
+
+- You could trigger the Anax objective at the top of the stairs up from the crypt.  That should suit most people.
 
 - Disappearing terrain:
     - Between the fountain and the hangman's noose on the map there is a drunk archer in a tower. If you face NW, you can sometimes see a bit of terrain disappear.

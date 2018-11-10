@@ -23,11 +23,10 @@ RELEASE (mid-November)
 
 - Make sure all text files use CRLF!!
 - Double-check encoding of all text files!
-- Double check beta tester credits in all translations of readme, and cs20.
 
 - Translations & subtitles
     - Russian?
-    - Update credits in readme, cs20, video
+    - Update credits in readme, cs20, video (all languages)
 
 - Review and update credits and so on in readme, movie, and cs20.str.
     - zajazd?
@@ -35,16 +34,17 @@ RELEASE (mid-November)
     - StinkyKitty?
     - Double check they're all the same regardless.
 
-- Update build times in readme.
+- Update build times in readme (all languages).
 
 - Briefing video
-    - Update subtitle timing!
-    - Tweak volume of paper sound
-    - Pan wind gusts l->r
-    - Pan fountain water r<-l with camera
+    - Final city illustration
+    - Final Hammerite illustration
+    - Final fountain illustration
+    - Render out at 512kbps
 
 - Credits video
-    - Double check all names
+    - Double check all credits & names
+    - Render out at ???kbps
 
 - FM packaging
     - Test with fresh GOG, Steam releases

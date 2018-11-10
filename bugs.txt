@@ -17,6 +17,8 @@ FIX BEFORE RELEASE
 ONLY IF I FEEL LIKE IT
 ======================
 
+- warden's footlocker should lock & unlock with sanctuary key, for sneakiness
+
 - Guard conversation is inaudible after hopping over wall by work station. (nightshifter)
 - Nightshifter also reports that the market square convo starts too soon, but not that it is inaudible.
 

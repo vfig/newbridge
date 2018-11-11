@@ -52,10 +52,11 @@ details of all the custom sound and image resources used:
         mesh/txt16/hammer1h.gif and mesh/txt16/fire2.gif.
 
     movies/b20.avi
-        Custom briefing movie.
+        Custom briefing movie. All music and sound effects are stock.
+        Illustrations and voiceover are custom.
 
     movies/credits.avi
-        Custom credits movie.
+        Custom credits movie. All music and sound effects are stock.
 
     movies/cs20.avi
         Duplicate of credits movie, so it will play when the mission ends.

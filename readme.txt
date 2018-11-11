@@ -762,11 +762,11 @@ Description:
     honoraires? Mais il a dit que c'était urgent. Et cela paye généreusement.
 
     Je ne suis jamais allé à Newbridge auparavant, mais j'ai entendu dire que
-    c'était un coin mort, sombre et calme à la périphérie de la ville. La zone
-    est sous la coupe de Lady di Rupo, une personne influente avec un hôtel
-    particulier sur les hauteurs au bord de la falaise. Je devrais garder à
-    l'oeil ses gardes pendant que je serais dans les parages: ils ne sont pas
-    particulièrement accueillants avec les voleurs.
+    c'était un coin sombre, calme et mortel à la périphérie de la ville. La
+    zone est sous la coupe de Lady di Rupo, une personne influente avec un
+    hôtel particulier sur les hauteurs au bord de la falaise. Je devrais
+    garder à l'oeil ses gardes pendant que je serais dans les parages: ils ne
+    sont pas particulièrement accueillants avec les voleurs.
 
     Selon certaines sources, les marteleurs auraient récemment commencé à
     tenter de prendre le contrôle du district, ce qui a causé des problèmes.

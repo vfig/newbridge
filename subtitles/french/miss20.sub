@@ -11,7 +11,7 @@ SUB1
     SUB "nb004" { TEXT "Voici donc pourquoi Argaux voulait mon aide. Je pense que je vais faire le boulot moi-mˆme: ainsi je n'aurais pas … payer les honoraires." }
     SUB "nb005" { TEXT "Maintenant, allons trouver l'Anax, quoique ce soit." }
     SUB "nb006" { TEXT "Pauvre Argaux. ... Je suppose qu'il ne percevra pas ses honoraires maintenant. Je devrais fouiller la place pour trouver des informations sur le boulot." }
-    SUB "nb007" { TEXT "Bon sang, Ils ont d‚j… commenc‚ le rituel!" }
+    SUB "nb007" { TEXT "Bon sang, ils ont d‚j… commenc‚ le rituel!" }
     SUB "nb008" { TEXT "Cela semble ˆtre le point de transfert." }
     SUB "nb009" { TEXT "Bougre, cela doit ˆtre une mauvaise combination." }
     SUB "nb010" { TEXT "Toujours incorrecte!" }
@@ -47,7 +47,7 @@ SUB1
     DESCR "di Rupo"
     SUB "nb301" { TEXT "Effectivement. Je vois que vous avez apporter mes biens monsieur Argo." }
     SUB "nb303" { TEXT "Oh, c'est dommage. Mais je peux travailler … la place avec vous monsieur Garrett. Je peux vous payer 3000--" }
-    SUB "nb305" { TEXT "Ah, l'Anax! Qui aurait pu imaginer qu'un haut responsable Marteleur viendrait dans cette petite province." }
+    SUB "nb305" { TEXT "Ah, l'Anax! Qui aurait pu imaginer qu'un haut responsable Marteleur viendrait dans cette petite province? Mais les Marteleurs ont caus‚ pas mal de problŠmes ces derniers temps et l'Anax m'aiderait … stopper cela d‚finitivement." }
     SUB "nb307" { TEXT "Oui, votre paiement. Voici, c'est parfait monsieur Garrett." }
 }
 

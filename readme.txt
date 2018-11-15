@@ -168,14 +168,12 @@ and all fan missions.
 =============================================================================
 * Credits *
 
-... FIXME ... some credits still missing.
-
 Created by              : vfig (Andy Durdin)
 
-Story                   : Andy Durdin
+Story                   : vfig
                         : Aaron Dron
 
-Briefing illustrations  : ... FIXME ...
+Briefing illustrations  : Kayleigh Boyd
 
 Voice acting:
     Garrett             : M. Alasdair MacKenzie
@@ -192,14 +190,14 @@ Voice acting:
     Hammerite watchman  : Yandros
 
 Translation:
-    Deutsch             : baeuchlein
-    Italiano            : piesel
+    French              : Athalle
+    German              : baeuchlein
+    Italian             : piesel
+    Russian             : MoroseTroll
 
 Proofreading            : gnartsch
 
-Beta testing            : ... FIXME ...
-                        :
-                        : Alex Lemcovich
+Beta testing            : Alex Lemcovich
                         : bob_doe_nz
                         : Cardia
                         : Dillon Rogers
@@ -430,11 +428,11 @@ sowie im Originalspiel wirksam werden.
 
 Design und Baukunst     : vfig (Andy Durdin)
 
-Story                   : Andy Durdin
+Story                   : vfig
                         : Aaron Dron
 
 Illustrationen für den
-Einführungsfilm         : ...FIXME...
+Einführungsfilm         : Kayleigh Boyd
 
 Stimmen:
     Garrett             : M. Alasdair MacKenzie
@@ -451,14 +449,14 @@ Stimmen:
     Hammeritenwache     : Yandros
 
 Übersetzung:
+    Französisch         : Athalle
     Deutsch             : baeuchlein
     Italienisch         : piesel
+    Russisch            : MoroseTroll
 
 Korrekturlesen          : gnartsch
 
-Betatester              : ...FIXME...
-                        :
-                        : Alex Lemcovich
+Betatester              : Alex Lemcovich
                         : bob_doe_nz
                         : Cardia
                         : Dillon Rogers
@@ -671,10 +669,10 @@ tutte le missioni.
 
 Ideazione e costruzione : vfig (Andy Durdin)
 
-Storia                  : Andy Durdin
+Storia                  : vfig
                         : Aaron Dron
 
-Arte del Briefing       : ...FIXME...
+Arte del Briefing       : Kayleigh Boyd
 
 Doppiaggio:
     Garrett             : M. Alasdair MacKenzie
@@ -691,14 +689,14 @@ Doppiaggio:
     Sentinella Hammerita: Yandros
 
 Traduzioni:
+    Francese            : Athalle
     Italiano            : piesel
     Tedesco             : baeuchlein
+    Russo               : MoroseTroll
 
 Correzione di bozze     : gnartsch
 
-Beta testing            : ...FIXME...
-                        :
-                        : Alex Lemcovich
+Beta testing            : Alex Lemcovich
                         : bob_doe_nz
                         : Cardia
                         : Dillon Rogers
@@ -905,10 +903,10 @@ tout le jeu ainsi que les fans missions.
 =============================================================================
 Créée par               : vfig (Andy Durdin)
 
-Histoire                : Andy Durdin
+Histoire                : vfig
                         : Aaron Dron
 
-Briefing illustrations  : ... FIXME ...
+Briefing illustrations  : Kayleigh Boyd
 
 Doublage Voix:
     Garrett             : M. Alasdair MacKenzie
@@ -932,9 +930,7 @@ Traduction:
 
 Relecture (Allemand)    : gnartsch
 
-Béta-testeurs           : ... FIXME ...
-                        :
-                        : Alex Lemcovich
+Béta-testeurs           : Alex Lemcovich
                         : bob_doe_nz
                         : Cardia
                         : Dillon Rogers

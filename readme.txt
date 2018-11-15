@@ -228,6 +228,8 @@ Special thanks:
     To Tannar, Brethren, and Dussander for providing the 'Shalebridge Cradle'
     and 'Southquarter' beta test forums.
 
+    To 'Le Corbeau', for NewDark.
+
     To all the fan mission authors who came before me and inspired me to get
     my hands dirty with Dromed.
 
@@ -485,6 +487,8 @@ Besonderer Dank gebührt:
     Tannar, Brethren und Dussander, die die Betatest-Foren 'Shalebridge
     Cradle' und 'Southquarter' betreiben.
 
+    'Le Corbeau', für NewDark.
+
     Allen Autoren von Fan-Missionen, die vor mir aktiv waren und mich dazu
     inspirierten, mir selbst mit Dromed die Hände schmutzig zu machen.
 
@@ -723,6 +727,8 @@ Ringraziamenti Speciali:
     A Tannar, Brethren, e Dussander per aver reso disponibili i forum di beta
     testing 'Shalebridge Cradle' e 'Southquarter'.
 
+    A Le Corbeau, per NewDark.
+
     A tutti gli autori di missioni che son venuti prima di me e che mi hanno
     ispirato a sporcarmi le mani con Dromed.
 
@@ -956,6 +962,8 @@ Remerciements spéciaux:
 
     A Tannar, Brethren, et Dussander pour fournir les forums de béta-test de
     'Shalebridge Cradle' et 'Southquarter'.
+
+    A 'Le Corbeau', pour NewDark.
 
     A tous les auteurs de fan missions qui ont oeuvré avant moi et m'ont
     donné l'envie de me salir les mains avec Dromed.

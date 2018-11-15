@@ -16,10 +16,11 @@ Beta 3 (November)
 RELEASE (mid-November)
 ======================
 
-- add readme section just below the briefing about Thief Gold in French: https://www.dxm.be/navigator.php5?lang=fr&content=204
-- ditto for Italian: http://www.oldgamesitalia.net/traduzioni/thief-gold
-- ditto for German: https://www.validstrategies.com/files/file/48-thief-gold-german-language-pack/
-- ditto for Russian: https://darkfate.org/view/details/translates/thief1
+- Nah:
+    - add readme section just below the briefing about Thief Gold in French: https://www.dxm.be/navigator.php5?lang=fr&content=204
+    - ditto for Italian: http://www.oldgamesitalia.net/traduzioni/thief-gold
+    - ditto for German: https://www.validstrategies.com/files/file/48-thief-gold-german-language-pack/
+    - ditto for Russian: https://darkfate.org/view/details/translates/thief1
 
 - Make sure all text files use CRLF!!
 - Double-check encoding of all text files!

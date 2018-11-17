@@ -1,6 +1,6 @@
 =============================================================================
- Nov 1, 2018
- Making a Profit - Beta 3
+ Nov 17, 2018
+ Making a Profit - Release Candidate 1
 
 ! BETA FOR TESTING ONLY ! Please do not distribute this!
 Please visit the test forum at Southquarter for the latest version
@@ -24,8 +24,8 @@ Faire défiler vers le bas pour le français!
 Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 3
-Date of Release         : Nov 1, 2018
+Version                 : RC1
+Date of Release         : Nov 17, 2018
 
 Description:
 
@@ -63,7 +63,7 @@ Auto Map                : Yes
 New Graphics            : Yes
 New Sounds              : Yes
 Multi-Language Support  : Yes (English, German, Italian)
-Build Time              : 668 Dromed hours / 134 days
+Build Time              : 671 Dromed hours / 146 days
 
 =============================================================================
 * Installation *
@@ -251,15 +251,15 @@ Interactive.
 ***********
 
 =============================================================================
- 1. November 2018
+ 17. November 2018
  Ein netter Profit
 =============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 3
-Datum                   : 1. November 2018
+Version                 : RC1
+Datum                   : 17. November 2018
 
 Einführung:
 
@@ -300,7 +300,7 @@ Neue Grafiken           : ja
 Neue Sounds             : ja
 Mehrsprachen-Unter-
  stützung               : ja (Englisch, Deutsch, Italienisch)
-Bauzeit                 : 668 Stunden im Dromed / 134 Tage
+Bauzeit                 : 671 Stunden im Dromed / 146 Tage
 
 =============================================================================
 * Weitere Informationen *
@@ -511,15 +511,15 @@ erstellt, und Support leisten sie daher auch nicht dafür.
 ************
 
 =============================================================================
- 1. Novembre 2018
+ 17. Novembre 2018
  Trarre Profitto
 =============================================================================
 
 Autore                    : vfig (Andy Durdin)
 Informazioni sui contatti : me@andy.durdin.net
 Homepage                  : http://backslashn.com
-Versione                  : Beta 3
-Data di Pubblicazione     : Nov 1, 2018
+Versione                  : RC1
+Data di Pubblicazione     : Nov 17, 2018
 
 Descrizione:
 
@@ -558,7 +558,7 @@ Auto-Mappa                : Si
 Nuove Grafiche            : Si
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
-Tempo di Costruzione      : 686 ore in Dromed / 134 giorni
+Tempo di Costruzione      : 671 ore in Dromed / 146 giorni
 
 =============================================================================
 * Informazioni di Caricamento *
@@ -751,12 +751,15 @@ Eidos Interactive.
 ***********
 
 =============================================================================
+ 17 Novembre 2018
+ Faire un Profit
+=============================================================================
 
 Auteur                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : Beta 3
-Date de Sortie          : Novembre 2018
+Version                 : RC1
+Date de Sortie          : 17 Novembre 2018
 
 Description:
 
@@ -796,7 +799,7 @@ Auto Map                : Oui
 Nouveaux Graphiques     : Non
 Nouveaux Sons           : Oui
 Multi-Language Support  : Oui (Anglais, Allemand, Français, Italien, Russe)
-Temps de Construction   : 668 heures à Dromed / 134 jours
+Temps de Construction   : 671 heures à Dromed / 146 jours
 
 =============================================================================
 * Installation *

@@ -27,6 +27,7 @@ RELEASE (mid-November)
 
 - Translations & subtitles
     - Russian?
+        - need to package Russian fonts in the mission, or not?
     - Update credits in readme, cs20, video (all languages)
 
 - Review and update credits and so on in readme, movie, and cs20.str.
@@ -38,36 +39,18 @@ RELEASE (mid-November)
 - Update build times in readme (all languages).
 
 - Briefing video
-    - Final city illustration
     - Final Hammerite illustration
-    - Final fountain illustration
-    - Render out at 512kbps
+    - Render out at 768kbps
 
 - Credits video
     - Double check all credits & names
-    - Render out at ???kbps
+    - Render out at 512kbps
 
 - FM packaging
     - Test with fresh GOG, Steam releases
     - Test with NewDarkloader?
 
+SUBMISSION
+==========
 
-GOODIES
-=======
-
-https://www.moo.com/uk/products/postcards/original-postcards.html
-    for 25/50 Medium (178x127mm) postcards, 8g ea, £18/£29
-    for 25/50 A6 (148x105mm) postcards, 5.5g ea, £16/£27
-
-https://camaloon.co.uk/personalised-keyrings/synthetic-leather-key-rings
-    for 25 synthetic leather keyrings, 9g ea, £54
-
-Letter to USA, via Royal Mail website:
-    Max size: 240x165x5mm, weight 11g-20g
-        £1.10 intl. economy 42 days
-        £1.45 intl. standard 5-7 days.
-    Max size: 240x165x5mm, weight 21g-100g
-        £1.45 intl. economy 42 days
-        £2.25 intl. standard 5-7 days.
-
-C/0 padded envelopes (210x150mm), 100x, £9
+The archive must be named TDP20AC_yourmissionname.zip

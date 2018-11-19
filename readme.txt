@@ -1,6 +1,6 @@
 =============================================================================
- Nov 17, 2018
- Making a Profit - Release Candidate 1
+ Nov 19, 2018
+ Making a Profit - Release Candidate 2
 
 ! BETA FOR TESTING ONLY ! Please do not distribute this!
 Please visit the test forum at Southquarter for the latest version
@@ -24,8 +24,8 @@ Faire défiler vers le bas pour le français!
 Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : RC1
-Date of Release         : Nov 17, 2018
+Version                 : RC2
+Date of Release         : Nov 19, 2018
 
 Description:
 
@@ -251,15 +251,15 @@ Interactive.
 ***********
 
 =============================================================================
- 17. November 2018
+ 19. November 2018
  Ein netter Profit
 =============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : RC1
-Datum                   : 17. November 2018
+Version                 : RC2
+Datum                   : 19. November 2018
 
 Einführung:
 
@@ -511,15 +511,15 @@ erstellt, und Support leisten sie daher auch nicht dafür.
 ************
 
 =============================================================================
- 17. Novembre 2018
+ 19. Novembre 2018
  Trarre Profitto
 =============================================================================
 
 Autore                    : vfig (Andy Durdin)
 Informazioni sui contatti : me@andy.durdin.net
 Homepage                  : http://backslashn.com
-Versione                  : RC1
-Data di Pubblicazione     : Nov 17, 2018
+Versione                  : RC2
+Data di Pubblicazione     : Nov 19, 2018
 
 Descrizione:
 
@@ -751,15 +751,15 @@ Eidos Interactive.
 ***********
 
 =============================================================================
- 17 Novembre 2018
+ 19 Novembre 2018
  Faire un Profit
 =============================================================================
 
 Auteur                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : RC1
-Date de Sortie          : 17 Novembre 2018
+Version                 : RC2
+Date de Sortie          : 19 Novembre 2018
 
 Description:
 

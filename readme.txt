@@ -62,7 +62,7 @@ Map                     : Yes
 Auto Map                : Yes
 New Graphics            : Yes
 New Sounds              : Yes
-Multi-Language Support  : Yes (English, German, Italian)
+Multi-Language Support  : Yes (English, French, German, Italian, Russian)
 Build Time              : 671 Dromed hours / 146 days
 
 =============================================================================
@@ -134,11 +134,11 @@ If you want subtitles for all the stock Thief dialog and sound effects, you
 will have to install a Thief Gold subtitle pack. An English subtitle pack can
 be found at http://www.ttlg.com/forums/showthread.php?t=144354
 
-Texts and subtitles for this mission are available in English, German, and
-Italian. The 'language' setting in INSTALL.CFG sets the languages used by the
-game. By default this is set to the language that your version of Thief uses.
-If you prefer to have text and subtitles in a different language where
-available, you must edit INSTALL.CFG, and add your preferred language at
+Texts and subtitles for this mission are available in English, French, German,
+Italian, and Russian. The 'language' setting in INSTALL.CFG sets the languages
+used by the game. By default this is set to the language that your version of
+Thief uses. If you prefer to have text and subtitles in a different language
+where available, you must edit INSTALL.CFG, and add your preferred language at
 the start of the setting, followed by a '+'.
 
 For example, if you are playing the English version of Thief, but would
@@ -299,7 +299,8 @@ Automap                 : ja
 Neue Grafiken           : ja
 Neue Sounds             : ja
 Mehrsprachen-Unter-
- stützung               : ja (Englisch, Deutsch, Italienisch)
+ stützung               : ja (Deutsch, Englisch, Französisch, Italienisch,
+                              Russisch)
 Bauzeit                 : 671 Stunden im Dromed / 146 Tage
 
 =============================================================================
@@ -387,10 +388,10 @@ unter http://www.ttlg.com/forums/showthread.php?t=144354 ; falls es eine
 deutsche Zusammenstellung dafür geben sollte, erfährt man davon
 wahrscheinlich auf https://www.ttlg.de.
 
-Texte und Untertitel für diese Mission sind in Englisch, Deutsch und
-Italienisch vorhanden. Die Einstellung "language" in der Datei INSTALL.CFG
-im NewDark-Verzeichnis bestimmt, welche Sprachen im Spiel benutzt werden.
-Normalerweise ist hier die Sprache eingestellt, die das Originalspiel
+Texte und Untertitel für diese Mission sind in Englisch, Deutsch, Französisch,
+Italienisch und Russisch vorhanden. Die Einstellung "language" in der Datei
+INSTALL.CFG im NewDark-Verzeichnis bestimmt, welche Sprachen im Spiel benutzt
+werden. Normalerweise ist hier die Sprache eingestellt, die das Originalspiel
 nutzt. Wer Texte und Untertitel in einer anderen als dieser Sprache
 angezeigt haben will, muss INSTALL.CFG öffnen und die gewünschte Sprache
 vor die eingestellte schreiben, gefolgt von einem Plus-Zeichen ("+").
@@ -449,8 +450,8 @@ Stimmen:
     Hammeritenwache     : Yandros
 
 Übersetzung:
-    Französisch         : Athalle
     Deutsch             : baeuchlein
+    Französisch         : Athalle
     Italienisch         : piesel
     Russisch            : MoroseTroll
 
@@ -557,7 +558,7 @@ Mappa                     : Si
 Auto-Mappa                : Si
 Nuove Grafiche            : Si
 Nuovi Suoni               : Si
-Supporto Multi-Lingua     : Si (Inglese, Tedesco, Italiano)
+Supporto Multi-Lingua     : Si (Francese, Inglese, Italiano, Russo, Tedesco)
 Tempo di Costruzione      : 671 ore in Dromed / 146 giorni
 
 =============================================================================
@@ -632,12 +633,12 @@ Thief, dovrai installare il pacchetto di sottotitoli di Thief Gold. Un
 pacchetto di sottotitoli in Inglese è disponibile a:
 http://www.ttlg.com/forums/showthread.php?t=144354
 
-Testi e sottotitoli per questa missione sono disponibili in Inglese, Tedesco
-ed Italiano. Il settaggio 'language' in INSTALL.CFG seleziona la lingua
-utilizzata dal gioco. Di default corrisponde a quella utilizzata dalla tua
-versione di Thief. Se preferissi avere testi e sottotitoli in una lingua
-differente, dovrai editare INSTALL.CFG ed aggiungere la tua lingua preferita
-all'inizio del settaggio, seguito da un '+'.
+Testi e sottotitoli per questa missione sono disponibili in Inglese, Francese,
+Italiano, Russo, ed Tedesco. Il settaggio 'language' in INSTALL.CFG seleziona
+la lingua utilizzata dal gioco. Di default corrisponde a quella utilizzata
+dalla tua versione di Thief. Se preferissi avere testi e sottotitoli in una
+lingua differente, dovrai editare INSTALL.CFG ed aggiungere la tua lingua
+preferita all'inizio del settaggio, seguito da un '+'.
 
 Ad esempio, se stessi giocando la versione Inglese di Thief, ma preferissi
 vedere testi in Italiano nella missione, dovrai editare INSTALL.CFG e
@@ -691,8 +692,8 @@ Doppiaggio:
 Traduzioni:
     Francese            : Athalle
     Italiano            : piesel
-    Tedesco             : baeuchlein
     Russo               : MoroseTroll
+    Tedesco             : baeuchlein
 
 Correzione di bozze     : gnartsch
 
@@ -798,7 +799,7 @@ Carte                   : Oui
 Auto Map                : Oui
 Nouveaux Graphiques     : Non
 Nouveaux Sons           : Oui
-Multi-Language Support  : Oui (Anglais, Allemand, Français, Italien, Russe)
+Multi-Language Support  : Oui (Allemand, Anglais, Français, Italien, Russe)
 Temps de Construction   : 671 heures à Dromed / 146 jours
 
 =============================================================================
@@ -927,8 +928,8 @@ Doublage Voix:
 
 Traduction:
     Allemand            : baeuchlein
-    Italien             : piesel
     Français            : Athalle
+    Italien             : piesel
     Russe               : MoroseTroll
 
 Relecture (Allemand)    : gnartsch

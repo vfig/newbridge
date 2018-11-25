@@ -17,6 +17,10 @@ FIX BEFORE RELEASE
 ONLY IF I FEEL LIKE IT
 ======================
 
+- fix_my_locks (again) (but it won't fix the vase footlocker?!?)
+
+- reduce rope arrow price
+
 - warden's footlocker should lock & unlock with sanctuary key, for sneakiness
 
 - Guard conversation is inaudible after hopping over wall by work station. (nightshifter)

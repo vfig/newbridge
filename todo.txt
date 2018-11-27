@@ -9,9 +9,6 @@ BETA 2 (October)
 Beta 3 (November)
 ==================
 
-- Test mission scripting permutations without hacks
-    - On all difficulties! :-/
-
 
 RELEASE (mid-November)
 ======================
@@ -21,34 +18,6 @@ RELEASE (mid-November)
     - ditto for Italian: http://www.oldgamesitalia.net/traduzioni/thief-gold
     - ditto for German: https://www.validstrategies.com/files/file/48-thief-gold-german-language-pack/
     - ditto for Russian: https://darkfate.org/view/details/translates/thief1
-
-- Make sure all text files use CRLF!!
-- Double-check encoding of all text files!
-
-- Translations & subtitles
-    - Russian?
-        - need to package Russian fonts in the mission, or not?
-    - Update credits in readme, cs20, video (all languages)
-
-- Review and update credits and so on in readme, movie, and cs20.str.
-    - zajazd?
-    - Jasperstocker?
-    - StinkyKitty?
-    - Double check they're all the same regardless.
-
-- Update build times in readme (all languages).
-
-- Briefing video
-    - Final Hammerite illustration
-    - Render out at 768kbps
-
-- Credits video
-    - Double check all credits & names
-    - Render out at 512kbps
-
-- FM packaging
-    - Test with fresh GOG, Steam releases
-    - Test with NewDarkloader?
 
 SUBMISSION
 ==========

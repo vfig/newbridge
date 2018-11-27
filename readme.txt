@@ -64,7 +64,7 @@ Auto Map                : Yes
 New Graphics            : Yes
 New Sounds              : Yes
 Multi-Language Support  : Yes (English, French, German, Italian, Russian)
-Build Time              : 671 Dromed hours / 146 days
+Build Time              : 670 Dromed hours / 150 days
 
 =============================================================================
 * Installation *
@@ -302,7 +302,7 @@ Neue Sounds             : ja
 Mehrsprachen-Unter-
  stützung               : ja (Deutsch, Englisch, Französisch, Italienisch,
                               Russisch)
-Bauzeit                 : 671 Stunden im Dromed / 146 Tage
+Bauzeit                 : 670 Stunden im Dromed / 150 Tage
 
 =============================================================================
 * Weitere Informationen *
@@ -560,7 +560,7 @@ Auto-Mappa                : Si
 Nuove Grafiche            : Si
 Nuovi Suoni               : Si
 Supporto Multi-Lingua     : Si (Francese, Inglese, Italiano, Russo, Tedesco)
-Tempo di Costruzione      : 671 ore in Dromed / 146 giorni
+Tempo di Costruzione      : 670 ore in Dromed / 150 giorni
 
 =============================================================================
 * Informazioni di Caricamento *
@@ -801,7 +801,7 @@ Auto Map                : Oui
 Nouveaux Graphiques     : Non
 Nouveaux Sons           : Oui
 Multi-Language Support  : Oui (Allemand, Anglais, Français, Italien, Russe)
-Temps de Construction   : 671 heures à Dromed / 146 jours
+Temps de Construction   : 670 heures à Dromed / 150 jours
 
 =============================================================================
 * Installation *
@@ -1038,7 +1038,7 @@ New Graphics            : Да
 New Sounds              : Да
 Multi-Language Support  : Да (английский, французский, немецкий, итальянский
                               и русский)
-Потрачено времени       : 671 часов в Dromed / 146 дней
+Потрачено времени       : 670 часов в Dromed / 150 дней
 
 =============================================================================
 * Устанока *

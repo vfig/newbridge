@@ -11,7 +11,7 @@ details of all the custom sound and image resources used:
         Custom book art #2, representing an ancient pagan tome written in an
         unknown language.
 
-    books/parch, books/english/parch
+    books/parch/book.pcx
         Unmodified copy of stock 'parch' art, so that the briefing book can
         be shown if the movie is missing or disabled.
 

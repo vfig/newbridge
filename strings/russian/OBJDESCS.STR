@@ -34,7 +34,7 @@ use_gasarrow: "ѕри попадании в цель выпускает облако усыпл€ющего газа, действующ
 // so aim on the top of the bow sight. Cost:500"
 
 
-use_gasmine: "ѕри достаточно близком приближении выпускает облако усыпл€ющего газа, действующего на большинство живых существ. ¬зведенную мину можно обезвредить отмычками. ÷ена: 650"
+use_gasmine: "ѕри достаточно близком приближении выпускает облако усыпл€ющего газа, действующего на большинство живых существ. ÷ена: 650"
 // use_gasmine: "This grenade will explode when touched into a cloud of knockout gas, \
 // putting most living creatures inside its area to sleep. Cost:650"
 
@@ -57,7 +57,7 @@ use_pricey_lockpick: "Ёти инструменты позвол€т тебе открыть большинство замков б
 // Cost: 4000 for the pair."
 
 
-use_mine: "ѕри достаточно близком приближении взрываетс€ с большой силой. ¬зведенную мину можно обезвредить отмычками. ÷ена: 350"
+use_mine: "ѕри достаточно близком приближении взрываетс€ с большой силой. ÷ена: 350"
 // use_mine: "This grenade will produce a fiery explosion when touched. Cost:350"
 
 

@@ -26,7 +26,7 @@ format_0: "@t"
 
 stat_1: "TOTAL_LOOT"
 text_1: "Найдено "
-format_1: "@x@=01@c%d"
+format_1: "@x@c%d"
 
 stat_2: "DrSLootTotal"
 text_2: " добычи из "
@@ -42,7 +42,7 @@ format_4: "%d"
 
 stat_5: "DrSLockPick"
 text_5: "Вскрыто замков: "
-format_5: "@<05%d"
+format_5: "%d"
 
 stat_6: "DrSBackStabs"
 text_6: "Ударов со спины: "

@@ -1,0 +1,46 @@
+// Found in the mausoleum, in the hands of the dead thief.
+// Written by Danno the thief in reply to Morten's letter 'city_thiefscroll'.
+// This gives corroboration for the first two levers in the lever puzzle.
+// Also hints towards more clues that can be found in the di Rupo manor library.
+//
+// NOTE FOR TRANSLATORS:
+//
+// (1) the lines beginning with "Northeast..." are cut off because they're covered
+// in blood. The "South" after it should be ambiguous as to whether the word was South,
+// or Southeast, or Southwest before being half-covered in blood.
+//
+// (2) this style is meant to be both semi-literate and using thieves' slang:
+//       noll = knowledge
+//       digger = someone who's knowledgable, with more brains than the typical thief
+//       berk = a lowlife. Among thieves it's a friendly epithet.
+//       Morten, Olver, Danno = names of the three thieves.
+
+Page_0: "Кароч, вот чо ты хотел узнать, Мортен, касательна мывзалея на клатбище: он как-та магией заблакирован чтоп не пускать таких как мы с табой. Семь рожков, говорит Олвер-копатель, и ему-та уж точна видней потомушто он прачол эт в одной книжке госпожи ди Рупо. Говорит что те нада лиш дёрнуть рожки в нужно порядке, адин за другим, и тада ворота откроюца:
+
+Северовосток, ю
+и потом
+
+Сдаёца мне мудила вродь тибя справица с этим. Лехко! И низабудь што нам причетаеца сорк працентоф за всю суету. Мы с Олвером бум ждать тя. -- Данно."
+
+"Heres the noll ya wanted Morten, consernin the morsolyum in the graveyard: its got some kinda magic lockin its gates ta keep out the likes of you an me. Seven horns says digger Olver, an he'd be one ta know cuz he got it strait outta one of Lady di Rupo's own books. He says ya jus gotta pull them horns in the proper order, one afta the other, an them gatesll roll on open:
+
+Northeast, S
+and then
+
+I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cake! An dont ferget we get forty persent of this haul for the trouble. Olver and me'll be waitin for ya.  -- Danno"
+
+
+// Blood decals to cover the missing puzzle solution.
+// Decals 0 and 1 are the lines of text that will be revealed.
+// Decals 2 and 3 are the removable blood layers.
+// Decal 4 is the remaining blood stain that is indelible.
+// See the BloodyInstructions script for more details.
+// Note: all these positions need to be adjusted for each language.
+//
+page_0_decal_0: "#0 $ 1 203 257 370"
+page_0_decal_1: "#0 $ 1 187 281 370"
+page_0_decal_2: "#1 1 136 128 decals\\blood2"
+page_0_decal_3: "#1 1 136 128 decals\\blood2"
+page_0_decal_4: "1 136 128 decals\\blood2"
+page_0_decal_0_text: "гозапад, юговосток, северозапад,"
+page_0_decal_1_text: "восток, а потом ...? А-а, сам разбирёшся."

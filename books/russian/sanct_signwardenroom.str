@@ -1,0 +1,10 @@
+// Sanctuary - sign beside the Warden's room (now occupied by the priest)
+
+no_trim: "1"
+
+Page_0: 
+"       Брат Дариос
+Смотритель Обители"
+
+"         Brother Darios
+Warden of the Sanctuary"

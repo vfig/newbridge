@@ -1,0 +1,89 @@
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// except the "Secrets" text that I have taken from Thief II, so you should
+// hopefully have a translation already that you can copy paste.
+
+menu: "Меню"
+continue: "Продолжить"
+stats: "Статистика"
+goals: "Задания"
+
+restart: "Переиграть"
+
+hours: "час(а,ов)"
+minutes: "мин."
+seconds: "сек."
+hour: "час"
+minute: "минута"
+second: "секунда"
+true: "да"
+false: "нет"
+some: "есть"
+none: "нет"
+
+stat_0: "DrSTime"
+text_0: "Общее время: "
+format_0: "@t"
+
+stat_1: "TOTAL_LOOT"
+text_1: "Найдено "
+format_1: "@x@=01@c%d"
+
+stat_2: "DrSLootTotal"
+text_2: " добычи из "
+format_2: "%d"
+
+stat_3: "DrSPocketOK"
+text_3: "Обчищено карманов: "
+format_3: "@s%d"
+
+stat_4: "DrSPocketCnt"
+text_4: " из "
+format_4: "%d"
+
+stat_5: "DrSLockPick"
+text_5: "Вскрыто замков: "
+format_5: "@<05%d"
+
+stat_6: "DrSBackStabs"
+text_6: "Ударов со спины: "
+format_6: "@c%d"
+
+stat_7: "DrSKNockout"
+text_7: " Оглушено: "
+format_7: "@c%d"
+
+stat_8: "DrSAerials"
+text_8: " В прыжке: "
+format_8: "@+%d"
+
+stat_9: "DrSDmgDealt"
+text_9: "Нанесено урона: "
+format_9: "@c%d"
+
+stat_10: "DrSDmgTaken"
+text_10: " Получено урона: "
+format_10: "@c%d"
+
+stat_11: "DrSHealing"
+text_11: " Излечено: "
+format_11: "%d"
+
+stat_12: "DrSInnocent"
+text_12: "Убито безоружных: "
+format_12: "@c@q"
+
+stat_13: "DrSKills"
+text_13: ", и других убито: "
+format_13: "%d"
+
+stat_14: "DrSBodyFound"
+text_14: "Найдено врагом тел: "
+format_14: "@+%d"
+
+stat_15: "SecretsFound"
+text_15: "Найдено секретов: "
+format_15: "@c%d"
+
+stat_16: "SecretsCount"
+text_16: " из "
+format_16: "%d"

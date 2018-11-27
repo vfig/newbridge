@@ -1,0 +1,42 @@
+// In di Rupo's secret room, on the desk.
+// Describes the job in vague terms, enough to trigger the objective
+// if they player never read Argaux's notes.
+
+Page_0: "Старые тексты предельно ясно утверждают, что важны оба артефакта. Шансов на то, что я смогу обойтись их заменителями, дающими нужный мне результат, нет.
+
+Местонахождение первого хорошо известно: мавзолей Пророка содержит его останки, а значит, и его кисть тоже.
+
+Но что насчёт второго артефакта?"
+
+"The old texts are clear that both artifacts are essential. No chance of lesser substitutes producing the result I need, then.
+
+The location of the first is known well enough: the Prophet's mausoleum contains his remains, and so surely the Hand is there also.
+
+But what of the second artifact?"
+
+
+Page_1: "Послала Алфера в мавзолей за Кистью, но тот вернулся ни с чем. То место всё ещё запечатано, а двери не открываются даже под напором. Сдаётся мне, было просто глупо с моей стороны посылать его. Обычно-то он надёжен, но вот для таких вещей у него кишка тонка."
+
+"Sent Alfer to the mausoleum for the Hand, but he failed. The place is still sealed, and the doors would not open whatever force he applied. Perhaps I was foolish to send him at all. He's usually reliable, but has no skill with such things."
+
+
+Page_2: "Хорошие новости! Джиоррад доложил, что Анакс Истхарта будет в пределах досягаемости через несколько дней. Лучшего времени и быть не могло: без сомнений, это тот самый второй артефакт.
+
+Хаммериты, безусловно, выставят серьёзную охрану. Но мне нельзя развязывать войну, посылая своих людей в их 'святилище'. Придётся получить его каким-то другим способом."
+
+"Fortuitous news! Giorrad reports that the the Anax of Easthart will be in my reach within days. The timing could not be clearer: this is without doubt the second artifact.
+
+The Hammers will surely keep a close guard. But can't risk open war by sending my men into their 'sanctuary'. Will have to obtain by other means."
+
+
+Page_3: "Вышла на посредника по имени Аргоъ. Он утверждает, что сможет достать мне оба артефакта, но за приличную цену. Но что мне деньги, когда на кону нечто, куда большее!
+
+Заключила контракт:
+
+Аргоъ принесёт Кисть и Анакса завтра ночью, на склад, что за рыбным магазином, а после этого я выплачу ему пять тысяч. Специально подчеркнула, чтобы с этими предметами обращались очень бережно, потому как испорченные они мне ни к чему."
+
+"Made contact with broker named Argo. He guarantees he can get me both artifacts - for a price. But what does price matter after all?  I have greater things at stake.
+
+Agreed contract:
+
+Argo will bring the Hand and the Anax tomorrow night, to the old store behind the fishmonger, and I will pay five thousand on delivery. Stressed the importance of careful handling, as they will be useless to me if damaged."

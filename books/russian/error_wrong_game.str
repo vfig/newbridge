@@ -1,0 +1,5 @@
+// Shown when the player has loaded the mission into the wrong game.
+
+Page_0: "Ошибка: эта миссия требует Thief Gold!"
+
+"Error: this mission requires Thief Gold"

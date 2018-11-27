@@ -1,0 +1,15 @@
+// NOTE FOR TRANSLATORS: Most of this is the original text from Thief Gold,
+// except the mission title. So you should hopefully have a translation
+// already that you can copy paste.
+
+difficulty: "Сложность:"
+// We don't really want the training mission button.
+// Easiest thing to do is leave it blank.
+start_training: ""
+skip_training: "Про судьбу и рок"
+options: "Настройки"
+cancel: "Отмена" 
+
+diff_0:  "Нормально"
+diff_1:  "Тяжело"
+diff_2:  "Эксперт"

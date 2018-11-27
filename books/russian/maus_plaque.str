@@ -1,0 +1,59 @@
+// Found in the mausoleum, on a plaque under the statue of The Prophet.
+// This is the primary clue for solving the lever puzzle to open the tomb:
+// Weeps (water), dead fleshes (flesh), stones (earth), trees (plants),
+// darkness (darkness), storms (air), flames (fire).
+//
+// NOTE FOR TRANSLATORS
+//
+// This is a pagan poem with a very rough rhythm and no rhyme.
+// As described above, it includes seven key words associated
+// with the seven elements, one on each line, in a specific order.
+// There are seven lines, because there are seven levers.
+// It is important that the key words or phrases appear in this
+// specific order, and that each line of the poem refers to one
+// and only one of the key words.
+
+// The rest of the poem, half elegy and half prophecy, is really
+// just there to obscure the clues a little. If it was rewritten
+// in plain English (to clarify the meaning), it'd go something
+// like this:
+//
+//     You weep, sadly for the death of the Prophet.
+//     Dead flesh now is all that I [the Prophet] am.
+//     Now I lie, buried deep beneath stones,
+//     My blood feeds the roots of the trees.
+//     I wait until the Woodsie Lord brings back the darkness,
+//     and brings the storms, and devours the manfools--
+//     Then I will come back with fire and flames!
+
+no_trim: "1"
+
+Page_0:
+"        плачешь горько ты из-за смерти пророка
+
+            плоть мертва моя - вот кем я стал
+
+           и лежу теперь похоронен за камушком
+
+             кровь моя стала соком для древ
+
+          жду пока лорд древесный тьму возвернёт
+
+         и придёт буря что проглотит людишек глупых
+
+          лишь тогда я вернусь в огне и пламени!"
+
+"
+          weeps you sad at prophet's passing
+
+              dead fleshes now is all I bes
+
+         lies I now buried deep under stones
+
+        feeders my blood the roots of the trees
+
+  waits I til woodsie lord bringers back darkness
+
+        bringers the storms devours the fools
+
+      then comesie back I with fire and flames!"

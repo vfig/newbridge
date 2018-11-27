@@ -1,0 +1,5 @@
+// Shown when the player has loaded the mission into the wrong version of NewDark.
+
+Page_0: "Ошибка: эта миссия требует наличия NewDark 1.26 или выше!"
+
+"Error: this mission requires NewDark 1.26 or newer"

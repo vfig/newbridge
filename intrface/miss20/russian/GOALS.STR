@@ -1,0 +1,121 @@
+// NOTE FOR TRANSLATORS: the goals with '(CUT)' were cut
+// from the mission and are no longer used. Please ignore them.
+
+// 0: MeetArgaux
+fiction_0: "Твой контакт, Арго, будет ждать тебя у фонтана. Встреться с ним, чтобы выяснить, что да как."
+"Your contact, Argaux, will be waiting for you at the fountain. Meet him there to find out what's up."
+text_0: "Встреть Арго у фонтана."
+"Meet Argaux at the fountain."
+
+// 1: FindArgauxsInfauxs
+fiction_1: "Двигай к месту жительства Арго и разузнай подробности."
+"Go to Argaux's place and see what you can find out."
+text_1: "Двигай к месту жительства Арго и разузнай подробности."
+"Go to Argaux's place and see what you can find out."
+
+// 2: KidnapTheAnax
+fiction_2: "Забери Анакс Истхарта из хаммеритской обители."
+"Take the Anax of Easthart from the Hammer Sanctuary."
+text_2: "Забери Анакс Истхарта из хаммеритской обители."
+"Take the Anax of Easthart from the Hammer Sanctuary."
+
+// 3: BonusBurrickTrouble
+fiction_3: "(CUT)"
+text_3: "(CUT)"
+
+// 4: StealTheHand
+fiction_4: "Стяни кисть Пророка из его мавзолея."
+"Steal the Prophet's Hand from the mausoleum."
+text_4: "Стяни кисть Пророка из его мавзолея."
+"Steal the Prophet's Hand from the mausoleum."
+
+// 5: BonusBanishTheGhost
+fiction_5: "(CUT)"
+text_5: "(CUT)"
+
+// 6: DeliverTheItems
+fiction_6: "Как получишь оба искомых, бери их с собой, на встречу у рыбного магазина, чтобы получить вознаграждение."
+"When you have both items, take them to the fishmonger's for your payment."
+text_6: "Как получишь оба искомых, бери их с собой, на встречу у рыбного магазина, чтобы получить вознаграждение."
+"When you have both items, take them to the fishmonger's for your payment."
+
+// 7: StopTheRitual
+fiction_7: "Узнай, где леди ди Рупо проводит свой ритуал, и останови его."
+"Find out where Lady di Rupo is performing the ritual, and stop it."
+text_7: "Узнай, где леди ди Рупо проводит свой ритуал, и останови его."
+"Find out where Lady di Rupo is performing the ritual, and stop it."
+
+// 8: BonusSubvertTheRitual
+fiction_8: "(CUT)"
+text_8: "(CUT)"
+
+// 9: EscapeWithTheAnax
+fiction_9: "Унеси Анакса отсюда, от греха подальше."
+"Get the Anax safely out of the area."
+text_9: "Унеси Анакса отсюда, от греха подальше."
+"Get the Anax safely out of the area."
+
+// 10: ReturnTheAnax
+fiction_10: "(CUT)"
+text_10: "(CUT)"
+
+// 11: BonusTerencesHammer
+fiction_11: "(Дополнительно) Этот украшенный драгоценностями молот бесценен. Но, как всегда говорит твой скупщик краденого, всё имеет свою цену."
+"(Bonus) This ancient jeweled hammer is a priceless relic. But as your fence always says, everything has its price."
+text_11: "(Дополнительно) Этот украшенный драгоценностями молот бесценен. Но, как всегда говорит твой скупщик краденого, всё имеет свою цену."
+"(Bonus) This ancient jeweled hammer is a priceless relic. But as your fence always says, everything has its price."
+
+// 12: KeepTheAnaxAlive
+fiction_12: "Не дай Анаксу пострадать как-либо."
+"Don't let the Anax come to any harm."
+text_12: "Не дай Анаксу пострадать как-либо."
+"Don't let the Anax come to any harm."
+
+// 13: DontBiteTheHand
+fiction_13: "Не кусай руку, что кормит тебя. Если кто-то тебе платит, ты его защищаешь."
+"Don't bite the hand that feeds. If someone's paying you, you protect them."
+text_13: "Не кусай руку, что кормит тебя. Если кто-то тебе платит, ты его защищаешь."
+"Don't bite the hand that feeds. If someone's paying you, you protect them."
+
+// 14: LootNormal
+fiction_14: "Нью-Бридж - не самый богатый район, но он же и не самый охраняемый. Здесь должно быть много чего ценного для такого вора, как ты. Собери 1 500."
+"Newbridge isn't the richest neighbourhood, but it's not the most well-guarded either. There should be plenty of pickings for a thief such as yourself. Find 1500 loot and make it yours."
+text_14: "Раз уж ты здесь, то собери 1 500."
+"While you're in the neighbourhood, pick up 1500 loot."
+
+// 15: LootHard
+fiction_15: "Нью-Бридж - не самый богатый район, но даже здесь есть богатенькие аристократы и хаммериты. Найди их драгоценностям лучшее применение. Собери 1 900."
+"Newbridge isn't the richest neighbourhood, but there's still wealthy nobles and Hammers around. You'll put their valuables to better use than they will. Find 1900 loot and make it yours."
+text_15: "Раз уж ты здесь, то собери 1 900."
+"While you're in the neighbourhood, pick up 1900 loot."
+
+// 16: LootExpert
+fiction_16: "Что надо будет сделать по прибытии в новый район города? Хорошенько ознакомиться с расположением местных достопримечательностей... и добычи. Забери всё, что найдёшь. Должно быть хотя бы 2 200."
+"What better to do when visiting a new part of the city than to make yourself thoroughly acquainted with the lay of the land... and the loot. Take everything you find. There's got to be at least 2200 worth."
+text_16: "Раз уж ты здесь, то собери 2 200."
+
+// 17: BonusLootHard
+fiction_17: "(CUT)"
+text_17: "(CUT)"
+
+// 18: BonusLootExpert
+fiction_18: "(CUT)"
+text_18: "(CUT)"
+
+// 19: DontKillBystanders
+fiction_19: "Не убивай безоружных. Тебе нужны их деньги, а не жизнь."
+"Don't kill any unarmed people. It's their money that you want, not their lives."
+text_19: "Не убивай безоружных."
+"Don't kill any unarmed people."
+
+// 20: DontKillHumans
+fiction_20: "Вору с твоими навыками нет нужды устраивать бойню, чтобы сделать дело. Не убивай вообще никого."
+"A thief with your skills shouldn't need to employ violence to get the job done. Don't kill anyone."
+text_20: "Не убивай вообще никого."
+"Don't kill anyone."
+
+// 21: ReturnToTheStart
+fiction_21: "Как всё сделаешь, возвращайся домой через канал."
+"When everything's done, make your way back home via the canal."
+text_21: "Как всё сделаешь, возвращайся домой через канал."
+"When everything's done, return to the canal where you started."

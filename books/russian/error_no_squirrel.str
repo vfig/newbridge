@@ -1,0 +1,5 @@
+// Shown when squirrel scripts don't load
+
+Page_0: "Ошибка: эта миссия требует наличия NewDark 1.26 или выше, а также SQUIRREL.OSM!"
+
+"Error: this mission requires NewDark 1.26 or newer, and must have SQUIRREL.OSM"

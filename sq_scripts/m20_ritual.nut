@@ -999,7 +999,8 @@ class RitualController extends SqRootScript
     function Extras()
     {
         local extras = Link_GetAllParams("Extra", self);
-        if (extras.len() == 0) { Die("no Extra(s)."); }
+        // The ritual doesn't _require_ extras. And if you KO or kill them
+        // all, it shouldn't just abort here either!
         return extras;
     }
 

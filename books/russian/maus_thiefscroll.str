@@ -37,8 +37,8 @@ I reckn a berk such as yerself aint gonna have much trouble with it. Peace a cak
 // See the BloodyInstructions script for more details.
 // Note: all these positions need to be adjusted for each language.
 //
-page_0_decal_0: "#0 $ 1 203 257 370"
-page_0_decal_1: "#0 $ 1 187 281 370"
+page_0_decal_0: "#0 $ 1 238 257 370"
+page_0_decal_1: "#0 $ 1 180 281 370"
 page_0_decal_2: "#1 1 136 128 decals\\blood2"
 page_0_decal_3: "#1 1 136 128 decals\\blood2"
 page_0_decal_4: "1 136 128 decals\\blood2"

@@ -464,7 +464,10 @@ class GoalKidnapTheAnax extends WhenPlayerCarrying
     function OnPlayerPickedUp()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
-            // Tick this off even if these objectives aren't visible yet
+            // Tick this off even if these objectives aren't visible yet.
+            // This ensures that the objective is marked as complete if the
+            // player is already carrying the Anax when they learn about the
+            // quest.
             Goal.Complete(eGoals.kKidnapTheAnax);
         }
 
@@ -478,6 +481,20 @@ class GoalKidnapTheAnax extends WhenPlayerCarrying
             if (controller != 0) {
                 PostMessage(controller, "ProgressChange", eAmbienceProgress.kGotTheItems);
             }
+        }
+    }
+
+    /* For players with TFix this causes a new "Objective Complete"
+       ding every time they pick him up. Ugh. So in 1.0 I had disabled
+       it. But that was worse: it got ticked off if someone picked up
+       the Anax just to move him (and because of the overall scripting
+       around these two goals, that could happen before they were aware
+       of the objective!). So for 1.1 I'm bringing this back. */
+    function OnPlayerDropped()
+    {
+        if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+            // Untick it again
+            Goal.Activate(eGoals.kKidnapTheAnax);
         }
     }
 }
@@ -559,7 +576,10 @@ class GoalStealTheHand extends WhenPlayerCarrying
     function OnPlayerPickedUp()
     {
         if (Goal.IsActive(eGoals.kDeliverTheItems)) {
-            // Tick this off even if these objectives aren't visible yet
+            // Tick this off even if these objectives aren't visible yet.
+            // This ensures that the objective is marked as complete if the
+            // player is already carrying the Hand when they learn about the
+            // quest.
             Goal.Complete(eGoals.kStealTheHand);
         }
 
@@ -573,6 +593,20 @@ class GoalStealTheHand extends WhenPlayerCarrying
             if (controller != 0) {
                 PostMessage(controller, "ProgressChange", eAmbienceProgress.kGotTheItems);
             }
+        }
+    }
+
+    /* For players with TFix this causes a new "Objective Complete"
+       ding every time they pick it up. Ugh. So in 1.0 I had disabled
+       it. But for 1.1 I'm bringing this back. Technically the same
+       bug could have occurred as with the Anax, although the player
+       is much less likely to randomly drop the Hand as to want to
+       put down the unconscious Anax. */
+    function OnPlayerDropped()
+    {
+        if (Goal.IsActive(eGoals.kDeliverTheItems)) {
+            // Untick it again
+            Goal.Activate(eGoals.kStealTheHand);
         }
     }
 }

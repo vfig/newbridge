@@ -1,5 +1,5 @@
 ﻿=============================================================================
- Nov 27, 2018
+ Apr 20, 2020
  Making a Profit
 =============================================================================
 
@@ -19,8 +19,8 @@ Faire défiler vers le bas pour le français!
 Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : 1.0
-Date of Release         : Nov 27, 2018
+Version                 : 1.1
+Date of Release         : Apr 20, 2020
 
 Description:
 
@@ -230,9 +230,24 @@ Special thanks:
     alive for the past twenty years!
 
 =============================================================================
+* Version history *
+
+Apr 20, 2020 (1.1):
+
+    Fixed "Take the Anax" objective being ticked off too early if the player
+    had KO'd the Anax and picked him up before learning about the quest.
+
+    Fixed readables sometimes being unreadable due to mismatch between font
+    and book image palettes with books/parch.
+
+Nov 27, 2018 (1.0):
+
+    Initial release.
+
+=============================================================================
 * Copyright Notice *
 
-This mission is ©2018 by Andy Durdin.
+This mission is ©2018-2020 by Andy Durdin.
 
 Distribution of this mission is allowed as long as it is free and unmodified.
 
@@ -246,15 +261,15 @@ Interactive.
 ***********
 
 =============================================================================
- 27. November 2018
+ 20. April 2020
  Ein netter Profit
 =============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : 1.0
-Datum                   : 27. November 2018
+Version                 : 1.1
+Datum                   : 20. April 2020
 
 Einführung:
 
@@ -490,9 +505,25 @@ Besonderer Dank gebührt:
     vergangenen zwanzig Jahren am Leben erhalten!
 
 =============================================================================
+* Version history *
+
+Apr 20, 2020 (1.1):
+
+    Fixed "Erbeuten Sie das Anax" objective being ticked off too early if the
+    player had KO'd the Anax and picked him up before learning about the
+    quest.
+
+    Fixed readables sometimes being unreadable due to mismatch between font
+    and book image palettes with books/parch.
+
+Nov 27, 2018 (1.0):
+
+    Initial release.
+
+=============================================================================
 * Copyright *
 
-©2018 Andy Durdin.
+©2018-2020 Andy Durdin.
 
 Die Weiterverbreitung dieser Mission ist erlaubt, solange
 das ohne Bezahlung passiert und die Mission nicht verändert wird.
@@ -507,15 +538,15 @@ erstellt, und Support leisten sie daher auch nicht dafür.
 ************
 
 =============================================================================
- 27. Novembre 2018
+ 20. Aprile 2020
  Trarre Profitto
 =============================================================================
 
 Autore                    : vfig (Andy Durdin)
 Informazioni sui contatti : me@andy.durdin.net
 Homepage                  : http://backslashn.com
-Versione                  : 1.0
-Data di Pubblicazione     : Nov 27, 2018
+Versione                  : 1.1
+Data di Pubblicazione     : Apr 20, 2020
 
 Descrizione:
 
@@ -730,9 +761,24 @@ Ringraziamenti Speciali:
     vita per gli ultimi venti anni!
 
 =============================================================================
+* Version history *
+
+Apr 20, 2020 (1.1):
+
+    Fixed "Preleva l'Anax" objective being ticked off too early if the player
+    had KO'd the Anax and picked him up before learning about the quest.
+
+    Fixed readables sometimes being unreadable due to mismatch between font
+    and book image palettes with books/parch.
+
+Nov 27, 2018 (1.0):
+
+    Initial release.
+
+=============================================================================
 * Informazioni sui Diritti d'Autore *
 
-Questa missione è ©2018 di Andy Durdin.
+Questa missione è ©2018-2020 di Andy Durdin.
 
 La distribuzione di questa missione è autorizzata fin quando sia gratuita e
 non modificata.
@@ -747,15 +793,15 @@ Eidos Interactive.
 ***********
 
 =============================================================================
- 27 Novembre 2018
+ 20 Avril 2020
  Faire un Profit
 =============================================================================
 
 Auteur                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : 1.0
-Date de Sortie          : 27 Novembre 2018
+Version                 : 1.1
+Date de Sortie          : 20 Avril 2020
 
 Description:
 
@@ -968,9 +1014,24 @@ Remerciements spéciaux:
 
 
 =============================================================================
+* Version history *
+
+Apr 20, 2020 (1.1):
+
+    Fixed "Prenez l'Anax" objective being ticked off too early if the player
+    had KO'd the Anax and picked him up before learning about the quest.
+
+    Fixed readables sometimes being unreadable due to mismatch between font
+    and book image palettes with books/parch.
+
+Nov 27, 2018 (1.0):
+
+    Initial release.
+
+=============================================================================
 * Information de Droits d'Auteur*
 
-Cette mission est ©2018 par Andy Durdin.
+Cette mission est ©2018-2020 par Andy Durdin.
 
 La distribution de cette mission est autorisée tant qu'elle reste gratuite et
 que le zip n'est pas modifié.
@@ -985,15 +1046,15 @@ Eidos Interactive.
 ***********
 
 =============================================================================
- 27 ноября 2018 г.
+ 20 апрель 2020 г.
  Про судьбу и рок
 =============================================================================
 
 Автор                   : vfig (Andy Durdin / Энди Дёрдин)
 Контакт                 : me@andy.durdin.net
 Домашняя страницы       : http://backslashn.com
-Версия                  : 1.0
-Дата выхода             : 27 ноября 2018 г.
+Версия                  : 1.1
+Дата выхода             : 20 апрель 2020 г.
 
 Описание:
 
@@ -1199,9 +1260,24 @@ subtitles.txt в NewDark, если хотите получить больше и
     вот уже двадцать лет!
 
 =============================================================================
+* Version history *
+
+Apr 20, 2020 (1.1):
+
+    Fixed "Забери Анакс" objective being ticked off too early if the player
+    had KO'd the Anax and picked him up before learning about the quest.
+
+    Fixed readables sometimes being unreadable due to mismatch between font
+    and book image palettes with books/parch.
+
+Nov 27, 2018 (1.0):
+
+    Initial release.
+
+=============================================================================
 * Авторское право *
 
-Эта миссия ©2018 Энди Дёрдин.
+Эта миссия ©2018-2020 Энди Дёрдин.
 
 Распространение этой миссии разрешено до тех лишь пор, пока это делается бесплатно,
 а она сама остаётся нетронутой.

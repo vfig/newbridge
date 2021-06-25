@@ -1,5 +1,5 @@
 ﻿=============================================================================
- Apr 20, 2020
+ Jun 25, 2021
  Making a Profit
 =============================================================================
 
@@ -19,8 +19,8 @@ Faire défiler vers le bas pour le français!
 Author                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : 1.1
-Date of Release         : Apr 20, 2020
+Version                 : 1.2
+Date of Release         : Jun 25, 2021
 
 Description:
 
@@ -232,6 +232,32 @@ Special thanks:
 =============================================================================
 * Version history *
 
+Jun 25, 2021 (1.2):
+
+    Expert difficulty has 300 more starting cash, to compensate for the lack of
+    starting equipment.
+
+    Eating food now has a small chance of healing, as in Thief 2.
+
+    Southern works station switch will now turn off street lights in the
+    square.
+
+    Added more fire arrows and powder kegs, for the convenience of pyromaniacs.
+
+    "G-man" Keeper remains visible slightly longer, so people will maybe notice
+    him now.
+
+    Moved four coin stacks (100 loot) to new location, to better reward
+    explorers.
+
+    The "Sanctuary key" now opens more doors, as it always ought to have done.
+
+    Fixed pathfinding for Milton in the Hammerite library.
+
+    Added a glowing mushroom to the caves for slightly better visibility.
+
+    Buckets can now be frobbed, mostly.
+
 Apr 20, 2020 (1.1):
 
     Fixed "Take the Anax" objective being ticked off too early if the player
@@ -247,7 +273,7 @@ Nov 27, 2018 (1.0):
 =============================================================================
 * Copyright Notice *
 
-This mission is ©2018-2020 by Andy Durdin.
+This mission is ©2018-2021 by Andy Durdin.
 
 Distribution of this mission is allowed as long as it is free and unmodified.
 
@@ -261,15 +287,15 @@ Interactive.
 ***********
 
 =============================================================================
- 20. April 2020
+ 25. Juni 2021
  Ein netter Profit
 =============================================================================
 
 Autor                   : vfig (Andy Durdin)
 Kontakt                 : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : 1.1
-Datum                   : 20. April 2020
+Version                 : 1.2
+Datum                   : 25. Juni 2021
 
 Einführung:
 
@@ -507,6 +533,33 @@ Besonderer Dank gebührt:
 =============================================================================
 * Version history *
 
+Jun 25, 2021 (1.2):
+
+    Expert difficulty has 300 more starting cash, to compensate for the lack of
+    starting equipment.
+
+    Eating food now has a small chance of healing, as in Thief 2.
+
+    Southern works station switch will now turn off street lights in the
+    square.
+
+    Added more fire arrows and powder kegs, for the convenience of pyromaniacs.
+
+    "G-man" Keeper remains visible slightly longer, so people will maybe notice
+    him now.
+
+    Moved four coin stacks (100 loot) to new location, to better reward
+    explorers.
+
+    The "Schlüssel zum Heiligtum" now opens more doors, as it always ought to
+    have done.
+
+    Fixed pathfinding for Milton in the Hammerite library.
+
+    Added a glowing mushroom to the caves for slightly better visibility.
+
+    Buckets can now be frobbed, mostly.
+
 Apr 20, 2020 (1.1):
 
     Fixed "Erbeuten Sie das Anax" objective being ticked off too early if the
@@ -523,7 +576,7 @@ Nov 27, 2018 (1.0):
 =============================================================================
 * Copyright *
 
-©2018-2020 Andy Durdin.
+©2018-2021 Andy Durdin.
 
 Die Weiterverbreitung dieser Mission ist erlaubt, solange
 das ohne Bezahlung passiert und die Mission nicht verändert wird.
@@ -538,15 +591,15 @@ erstellt, und Support leisten sie daher auch nicht dafür.
 ************
 
 =============================================================================
- 20. Aprile 2020
+ 25. Giugno 2021
  Trarre Profitto
 =============================================================================
 
 Autore                    : vfig (Andy Durdin)
 Informazioni sui contatti : me@andy.durdin.net
 Homepage                  : http://backslashn.com
-Versione                  : 1.1
-Data di Pubblicazione     : Apr 20, 2020
+Versione                  : 1.2
+Data di Pubblicazione     : 25. Giugno 2021
 
 Descrizione:
 
@@ -763,6 +816,33 @@ Ringraziamenti Speciali:
 =============================================================================
 * Version history *
 
+Jun 25, 2021 (1.2):
+
+    Expert difficulty has 300 more starting cash, to compensate for the lack of
+    starting equipment.
+
+    Eating food now has a small chance of healing, as in Thief 2.
+
+    Southern works station switch will now turn off street lights in the
+    square.
+
+    Added more fire arrows and powder kegs, for the convenience of pyromaniacs.
+
+    "G-man" Keeper remains visible slightly longer, so people will maybe notice
+    him now.
+
+    Moved four coin stacks (100 loot) to new location, to better reward
+    explorers.
+
+    The "Clé du Bastion" now opens more doors, as it always ought to
+    have done.
+
+    Fixed pathfinding for Milton in the Hammerite library.
+
+    Added a glowing mushroom to the caves for slightly better visibility.
+
+    Buckets can now be frobbed, mostly.
+
 Apr 20, 2020 (1.1):
 
     Fixed "Preleva l'Anax" objective being ticked off too early if the player
@@ -778,7 +858,7 @@ Nov 27, 2018 (1.0):
 =============================================================================
 * Informazioni sui Diritti d'Autore *
 
-Questa missione è ©2018-2020 di Andy Durdin.
+Questa missione è ©2018-2021 di Andy Durdin.
 
 La distribuzione di questa missione è autorizzata fin quando sia gratuita e
 non modificata.
@@ -793,15 +873,15 @@ Eidos Interactive.
 ***********
 
 =============================================================================
- 20 Avril 2020
+ 25 Juin 2021
  Faire un Profit
 =============================================================================
 
 Auteur                  : vfig (Andy Durdin)
 Contact Info            : me@andy.durdin.net
 Homepage                : http://backslashn.com
-Version                 : 1.1
-Date de Sortie          : 20 Avril 2020
+Version                 : 1.2
+Date de Sortie          : 25 Juin 2021
 
 Description:
 
@@ -856,7 +936,7 @@ Si votre Thief Gold vient d'une autre source, vous devrez installer le patch
 NewDark 1.26 manuellement (http://www.ttlg.com/forums/showthread.php?t=146448)
 ou utiliser TFix (http://www.ttlg.com/forums/showthread.php?t=134733) version
 1.26a ou supérieure. Cette mission a été créée avec les textures et modèles
-basse résolution, et l'utilisation des packs d'amélioration n'est pas 
+basse résolution, et l'utilisation des packs d'amélioration n'est pas
 recommandé. Ils ne casseront rien mais certaines parties de la mission
 pourraient ne pas apparaître comme voulu.
 
@@ -904,9 +984,9 @@ ajoutez la ligne suivante:
 
     enable_subtitles
 
-Les sous-titres apparaîtront dans la même langue disponible que les textes, 
+Les sous-titres apparaîtront dans la même langue disponible que les textes,
 (voir ci-dessous pour configurer les langues). Référez-vous à subtitles.txt de
-votre archive NewDark pour plus d'information concernant la taille et la 
+votre archive NewDark pour plus d'information concernant la taille et la
 couleur des polices, ainsi que les autres options des sous-titres.
 
 Si vous voulez des sous-titres pour tous les dialogues de Thief, vous devrez
@@ -1009,12 +1089,39 @@ Remerciements spéciaux:
     A tous les auteurs de fan missions qui ont oeuvré avant moi et m'ont
     donné l'envie de me salir les mains avec Dromed.
 
-    A vous tous, sur TTLG et au-delà, qui avez gardé vivant Thief tout au 
+    A vous tous, sur TTLG et au-delà, qui avez gardé vivant Thief tout au
     long de ces vingt dernières années!
 
 
 =============================================================================
 * Version history *
+
+Jun 25, 2021 (1.2):
+
+    Expert difficulty has 300 more starting cash, to compensate for the lack of
+    starting equipment.
+
+    Eating food now has a small chance of healing, as in Thief 2.
+
+    Southern works station switch will now turn off street lights in the
+    square.
+
+    Added more fire arrows and powder kegs, for the convenience of pyromaniacs.
+
+    "G-man" Keeper remains visible slightly longer, so people will maybe notice
+    him now.
+
+    Moved four coin stacks (100 loot) to new location, to better reward
+    explorers.
+
+    The "Chiave del Santuario" now opens more doors, as it always ought to
+    have done.
+
+    Fixed pathfinding for Milton in the Hammerite library.
+
+    Added a glowing mushroom to the caves for slightly better visibility.
+
+    Buckets can now be frobbed, mostly.
 
 Apr 20, 2020 (1.1):
 
@@ -1031,7 +1138,7 @@ Nov 27, 2018 (1.0):
 =============================================================================
 * Information de Droits d'Auteur*
 
-Cette mission est ©2018-2020 par Andy Durdin.
+Cette mission est ©2018-2021 par Andy Durdin.
 
 La distribution de cette mission est autorisée tant qu'elle reste gratuite et
 que le zip n'est pas modifié.
@@ -1046,15 +1153,15 @@ Eidos Interactive.
 ***********
 
 =============================================================================
- 20 апрель 2020 г.
+ 25 июнь 2021 г.
  Про судьбу и рок
 =============================================================================
 
 Автор                   : vfig (Andy Durdin / Энди Дёрдин)
 Контакт                 : me@andy.durdin.net
 Домашняя страницы       : http://backslashn.com
-Версия                  : 1.1
-Дата выхода             : 20 апрель 2020 г.
+Версия                  : 1.2
+Дата выхода             : 25 июнь 2021 г.
 
 Описание:
 
@@ -1262,6 +1369,33 @@ subtitles.txt в NewDark, если хотите получить больше и
 =============================================================================
 * Version history *
 
+Jun 25, 2021 (1.2):
+
+    Expert difficulty has 300 more starting cash, to compensate for the lack of
+    starting equipment.
+
+    Eating food now has a small chance of healing, as in Thief 2.
+
+    Southern works station switch will now turn off street lights in the
+    square.
+
+    Added more fire arrows and powder kegs, for the convenience of pyromaniacs.
+
+    "G-man" Keeper remains visible slightly longer, so people will maybe notice
+    him now.
+
+    Moved four coin stacks (100 loot) to new location, to better reward
+    explorers.
+
+    The "Ключ от святилища" now opens more doors, as it always ought to
+    have done.
+
+    Fixed pathfinding for Milton in the Hammerite library.
+
+    Added a glowing mushroom to the caves for slightly better visibility.
+
+    Buckets can now be frobbed, mostly.
+
 Apr 20, 2020 (1.1):
 
     Fixed "Забери Анакс" objective being ticked off too early if the player
@@ -1277,7 +1411,7 @@ Nov 27, 2018 (1.0):
 =============================================================================
 * Авторское право *
 
-Эта миссия ©2018-2020 Энди Дёрдин.
+Эта миссия ©2018-2021 Энди Дёрдин.
 
 Распространение этой миссии разрешено до тех лишь пор, пока это делается бесплатно,
 а она сама остаётся нетронутой.

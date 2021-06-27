@@ -234,7 +234,7 @@ class M20HotPlateController extends SqRootScript
         local heat = Object.Named("HotPlateHeat");
 
         foreach (link in links) {
-            local hotplate = LinkDest(link);            
+            local hotplate = LinkDest(link);
 
             // Self-illuminate according to the intensity
             Property.Set(hotplate, "ExtraLight", "Amount (-1..1)", intensity);
@@ -398,7 +398,7 @@ class MysticGaugeTarget extends SqRootScript
         if ((message().container == Object.Named("Player"))
             && (message().event == eContainsEvent.kContainAdd)) {
             Link.BroadcastOnAllLinks(self, "TargetPickedUp", "~ControlDevice");
-        }   
+        }
     }
 }
 
@@ -571,6 +571,48 @@ class HeyIWasEatingThat extends SqRootScript
     function OnAlertness() {
         if (message().level >= 2) {
             Object.RemoveMetaProperty(self, "M-IAmEatingThat");
+        }
+    }
+}
+
+/* Reward the player for defacing the statue of the Builder again. */
+class DukeOfWellington extends SqRootScript
+{
+    function OnBeginScript() {
+        Physics.SubscribeMsg(self, ePhysScriptMsgType.kEnterExitMsg);
+    }
+
+    function OnEndScript() {
+        Physics.UnsubscribeMsg(self, ePhysScriptMsgType.kEnterExitMsg);
+    }
+
+    function OnPhysEnter() {
+        local thing = message().transObj;
+        local link = Link_GetOneScriptParams("Bucket", self);
+        if (link == 0) {
+            // Teleport the thing to the bucket pos
+            Link_CreateScriptParams("Bucket", self, thing);
+            local pos = Link_GetOneParam("Pos", self);
+            Object.Teleport(thing, Object.Position(pos), Object.Facing(pos));
+            Property.Set(thing, "PhysControl", "Controls Active", 24);
+            Sound.PlaySchemaAtObject(0, "hwoosto", thing);
+            //Sound.PlayEnvSchema(0, "Event Collision" thing);
+            SetOneShotTimer("Bullseye", 0.5);
+        }
+    }
+
+    function OnTimer() {
+        if (message().name == "Bullseye") {
+            Sound.PlayVoiceOver(0, "gar004");
+        }
+    }
+}
+
+class LordBucketHead extends SqRootScript {
+    function OnFrobWorldEnd() {
+        local link = Link_GetOneInverseScriptParams("Bucket", self);
+        if (link != 0) {
+            Link.Destroy(link);
         }
     }
 }

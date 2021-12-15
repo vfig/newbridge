@@ -257,6 +257,12 @@ class AmbienceController extends SqRootScript
         }
     }
 
+    function OnRegionAndProgress() {
+        local region = message().data.toupper();
+        local progress = message().data2;
+        Fillip(region, progress);
+    }
+
     function Fillip(region, progress) {
         local current_region = CurrentRegion();
         local current_progress = CurrentProgress();
@@ -331,7 +337,7 @@ class AmbienceController extends SqRootScript
 
 class PlayerAmbienceWatcher extends SqRootScript
 {
-    /* Put this script on the StartingPoint, together with a 
+    /* Put this script on the StartingPoint, together with a
        ScriptParams("AmbienceControl") link to the AmbienceController */
     function OnObjRoomTransit() {
         if (message().ObjType != eObjType.kPlayer) return;
@@ -341,7 +347,7 @@ class PlayerAmbienceWatcher extends SqRootScript
 
         local room = message().ToObjId;
         local region = "";
-        if ((room != 0) 
+        if ((room != 0)
             && (Property.Possessed(room, "Ambient")))
         {
             region = Property.Get(room, "Ambient", "Schema Name");
@@ -359,5 +365,16 @@ class DebugNextAmbience extends SqRootScript
         local controller = Object.Named("AmbienceController");
         if (! controller) return;
         SendMessage(controller, "DebugNextProgress");
+    }
+}
+
+class CommSetAmbience extends SqRootScript
+{
+    /* Set the ambience to the region and progress defined in Design Note */
+    function OnTurnOn() {
+        local params = userparams();
+        local controller = Object.Named("AmbienceController");
+        if (! controller) return;
+        SendMessage(controller, "RegionAndProgress", params.AmbRegion, params.AmbProgress);
     }
 }

@@ -5,7 +5,7 @@
 // no_loadout   Skip the loadout
 // cutscene     Play a cutscene immediately afterward
 // end          End the game when this mission is completed
-// 
+//
 
 miss_1: "skip"
 miss_2: "skip"
@@ -27,3 +27,5 @@ miss_17: "skip"
 miss_18: "skip"
 miss_19: "skip"
 miss_20: "cutscene,end"
+miss_21: "skip"
+miss_22: "no_briefing,no_loadout"

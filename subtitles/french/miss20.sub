@@ -4,25 +4,25 @@ SUB1
 {
     TYPE "player"
     DESCR "Garrett to himself"
-    SUB "nb000" { TEXT "C'est fermÇ! Je vais devoir trouvÇ un autre moyen." }
+    SUB "nb000" { TEXT "C'est fermÇ ! Je vais devoir trouver un autre moyen d'entrer." }
     SUB "nb001" { TEXT "êtrange qu'Argaux ne soit pas lÖ. Je devrais faire un tour pour voir s'il est dans les parages." }
-    SUB "nb002" { TEXT "Voici donc pourquoi Argaux voulait mon aide. C'est bon l'argent. Je pense que je vais faire le boulot moi-màme." }
-    SUB "nb003" { TEXT "Donc l'Anax est une personne, pas un objet. C'est ... gànant." }
+    SUB "nb002" { TEXT "VoilÖ donc pourquoi Argaux voulait mon aide. Tout argent est bonne Ö prendre. Je pense que je vais faire le boulot moi-màme." }
+    SUB "nb003" { TEXT "Donc l'Anax est une personne, pas un objet. C'est... gànant." }
     SUB "nb004" { TEXT "Voici donc pourquoi Argaux voulait mon aide. Je pense que je vais faire le boulot moi-màme: ainsi je n'aurais pas Ö payer les honoraires." }
     SUB "nb005" { TEXT "Maintenant, allons trouver l'Anax, quoique ce soit." }
-    SUB "nb006" { TEXT "Pauvre Argaux. ... Je suppose qu'il ne percevra pas ses honoraires maintenant. Je devrais fouiller la place pour trouver des informations sur le boulot." }
-    SUB "nb007" { TEXT "Bon sang, ils ont dÇjÖ commencÇ le rituel!" }
+    SUB "nb006" { TEXT "Pauvre Argaux... Je suppose qu'il ne percevra pas ses honoraires maintenant. Je devrais fouiller la place pour trouver des informations sur le boulot." }
+    SUB "nb007" { TEXT "Bon sang, ils ont dÇjÖ commencÇ le rituel !" }
     SUB "nb008" { TEXT "Cela semble àtre le point de transfert." }
-    SUB "nb009" { TEXT "Bougre, cela doit àtre une mauvaise combination." }
-    SUB "nb010" { TEXT "Toujours incorrecte!" }
+    SUB "nb009" { TEXT "Bon sang, áa doit àtre une mauvaise combinaison." }
+    SUB "nb010" { TEXT "Toujours incorrecte !" }
     SUB "nb011" { TEXT "(ouch) Je n'ai jamais aimÇ lire, mais quelques recherches devrait m'aider Ö rÇsoudre áa." }
-    SUB "nb012" { TEXT "Un en bas, un Ö l'avant." }
+    SUB "nb012" { TEXT "Un de trouvÇ, au suivant." }
     SUB "nb013" { TEXT "Maintenant, aller livrer tout áa et encaisser mon argent." }
     SUB "nb014" { TEXT "La tour est allumÇe. C'est nouveau." }
     SUB "nb016" { TEXT "Je n'aime pas áa." }
-    SUB "nb022" { TEXT "On dirait que la carriäre d'Argaux s'est arràtÇe brusquement. ... Pauvre Argaux." }
-    SUB "nb023" { TEXT "(pff) Ce gars päse son poids! Je pense qu'il sera en sÇcuritÇ ici." }
-    SUB "nb025" { TEXT "C'est un long chemin." }
+    SUB "nb022" { TEXT "On dirait que la carriäre d'Argaux s'est arràtÇe brusquement... Pauvre Argaux." }
+    SUB "nb023" { TEXT "(pff) Ce gars päse son poids ! Je pense qu'il sera en sÇcuritÇ ici." }
+    SUB "nb025" { TEXT "Une belle descente." }
 }
 
 // There is no Scene 1.
@@ -37,17 +37,17 @@ SUB1
 {
     TYPE "convo"
     DESCR "Garrett"
-    SUB "nb300" { TEXT "Lady di Rupo je suppose?" }
-    SUB "nb302" { TEXT "Garrett. Argaux est ... et bien, disons simplement qu'il n'a pas passÇ une bonne journÇe." }
-    SUB "nb304" { TEXT "Cinq milles. Oui, Je connais les conditions que vous aviez avec Argaux. Et je devrais vous payer un bonus pour trimballer ce gros Marteleur ici. Qu'est-ce que vous lui voulez en fait?" }
+    SUB "nb300" { TEXT "Lady di Rupo je suppose ?" }
+    SUB "nb302" { TEXT "Garrett. Argaux est... et bien, disons simplement qu'il n'a pas passÇ une bonne journÇe." }
+    SUB "nb304" { TEXT "Cinq milles. Oui, Je connais les conditions que vous aviez avec Argaux. Et je devrais vous payer un bonus pour trimballer ce gros Marteleur ici. Qu'est-ce que vous lui voulez en fait ?" }
     SUB "nb306" { TEXT "Bien, Je suppose que ce sont vos affaires. Mais je ne pleurerais pas si moins de marteleurs Çtaient derriäre moi et mon argent. En parlant de áa...?" }
 }
 {
     TYPE "convo"
     DESCR "di Rupo"
-    SUB "nb301" { TEXT "Effectivement. Je vois que vous avez apporter mes biens monsieur Argo." }
+    SUB "nb301" { TEXT "Effectivement. Je vois que vous avez apportÇ mes biens monsieur Argo." }
     SUB "nb303" { TEXT "Oh, c'est dommage. Mais je peux travailler Ö la place avec vous monsieur Garrett. Je peux vous payer 3000--" }
-    SUB "nb305" { TEXT "Ah, l'Anax! Qui aurait pu imaginer qu'un haut responsable Marteleur viendrait dans cette petite province? Mais les Marteleurs ont causÇ pas mal de problämes ces derniers temps et l'Anax m'aiderait Ö stopper cela dÇfinitivement." }
+    SUB "nb305" { TEXT "Ah, l'Anax ! Qui aurait pu imaginer qu'un haut responsable Marteleur viendrait dans cette petite province ? Mais les Marteleurs ont causÇ pas mal de problämes ces derniers temps et l'Anax m'aiderait Ö stopper cela dÇfinitivement." }
     SUB "nb307" { TEXT "Oui, votre paiement. Voici, c'est parfait monsieur Garrett." }
 }
 
@@ -55,10 +55,10 @@ SUB1
 {
     TYPE "convo"
     DESCR "Keeper"
-    SUB "nb400" { TEXT "Garrett! Qu'avez-vous fait?" }
+    SUB "nb400" { TEXT "Garrett ! Qu'avez-vous fait ?" }
     SUB "nb402" { TEXT "Lady di Rupo prÇpare un rituel utilisant le corps de ce Marteleur pour ressusciter le Prophäte." }
-    SUB "nb404" { TEXT "Etes-vous aveugle et stupide? Cet acte aura des rÇpercutions bien au-delÖ de ce quartier de la ville. Il faut l'empàcher." }
-    SUB "nb406" { TEXT "Vous interàt ne nous surprend pas. Ainsi le Conclave m'a authorisÇ Ö vous offrir ce que vous voulez: le màme tarif si vous nous aidez." }
+    SUB "nb404" { TEXT "Etes-vous aveugle et stupide ? Cet acte aura des rÇpercutions bien au-delÖ de ce quartier de la ville. Il faut l'empàcher." }
+    SUB "nb406" { TEXT "Votre intÇràt ne nous surprend pas. Ainsi le Conclave m'a autorisÇ Ö vous offrir ce que vous voulez: le màme tarif si vous nous aidez." }
     SUB "nb408" { TEXT "Bien. Je ne peux vous dire comment nous avons mis la main dessus mais prenez cette clÇ. Vous pourriez en avoir besoin." }
     SUB "nb410" { TEXT "Arràtez le rituel. Je vous attendrez au canal avec votre paiement." }
 }
@@ -70,9 +70,9 @@ SUB1
 {
     TYPE "convo"
     DESCR "Garrett"
-    SUB "nb403" { TEXT "Et?" }
+    SUB "nb403" { TEXT "Et ?" }
     SUB "nb405" { TEXT "Cela semble àtre ton probläme, pas le mien." }
-    SUB "nb407" { TEXT "Cinq mille de plus? Ce ne serait pas un peu dÇsespÇrÇ? ... Mais je pourrait utiliser l'argent." }
+    SUB "nb407" { TEXT "Cinq mille de plus ? Ce ne serait pas un peu dÇsespÇrÇ ?... Mais je pourrais utiliser l'argent." }
 }
 
 // Scene 5: The ritual
@@ -82,22 +82,22 @@ SUB1
     SUB "nb500" { TEXT "La Main porte de l'eau pour rÇveiller le Prophäte endormi." }
     SUB "nb501" { TEXT "Reliez les os en un nouveau corps bien en chair." }
     SUB "nb502" { TEXT "Debout sur ses pieds avec la terre dessous." }
-    SUB "nb503" { TEXT "Croåssez comme les arbres le font, fort, grand et vert." }
-    SUB "nb504" { TEXT "RÇveillez-vous dans les tÇnäbres. Soyer un serviteur de la nuit!" }
-    SUB "nb505" { TEXT "Emplissez d'air Ö nouveau vos poumons!" }
-    SUB "nb506" { TEXT "Mettez le feu! Que les flammes bondissent! Et tuez les Marteaux!" }
+    SUB "nb503" { TEXT "Croissez comme les arbres le font, fort, grand et vert." }
+    SUB "nb504" { TEXT "RÇveillez-vous dans les tÇnäbres. Soyer un serviteur de la nuit !" }
+    SUB "nb505" { TEXT "Emplissez d'air Ö nouveau vos poumons !" }
+    SUB "nb506" { TEXT "Mettez le feu ! Que les flammes bondissent ! Et tuez les Marteaux !" }
 }
 {
     TYPE "convo"
     DESCR "di Rupo"
-    SUB "nb508" { TEXT "Oui! Oui! Tuez-les tous! (Rire triomphant)" }
-    SUB "nb509" { TEXT "Non! Ma main! Oó est ma main?! Trouvez le voleur!" }
-    SUB "nb510" { TEXT "Oó est-il?! Non! Traitrise! Aidez-moi!" }
+    SUB "nb508" { TEXT "Oui ! Oui ! Tuez-les tous ! (Rire triomphant)" }
+    SUB "nb509" { TEXT "Non ! Ma main ! Oó est ma main ?! Trouvez le voleur !" }
+    SUB "nb510" { TEXT "Oó est-il ?! Non ! Traitrise ! Aidez-moi !" }
 }
 {
     TYPE "convo"
     DESCR "The Prophet"
-    SUB "nb507" { TEXT "(rire diabolique) DÇmolissez! DÇtruisez! Mourrez les fous du Marteau!" }
+    SUB "nb507" { TEXT "(rire diabolique) DÇmolissez ! DÇtruisez ! Mourrez les fous du Marteau !" }
 }
 
 // Scene 6: Ending
@@ -105,13 +105,13 @@ SUB1
     TYPE "convo"
     DESCR "Garrett"
     SUB "nb600" { TEXT "C'est fait. Le rituel a ÇtÇ arràtÇ." }
-    SUB "nb602" { TEXT "Je pense qu'il ira bien. Alors, oó est mon argent?" }
+    SUB "nb602" { TEXT "Je pense qu'il ira bien. Alors, oó est mon argent ?" }
     SUB "nb605" { TEXT "Non. J'ai fait ce que vous vouliez, maintenant laissez-moi tranquille." }
 }
 {
     TYPE "convo"
     DESCR "Keeper"
-    SUB "nb601" { TEXT "Et l'Anax?" }
+    SUB "nb601" { TEXT "Et l'Anax ?" }
     SUB "nb603" { TEXT "Ici. Et merci Garrett." }
     SUB "nb604" { TEXT "Vous avez rendu Ö cette ville un plus grand service que vous ne croyiez. Votre talent est toujours aussi exceptionnel. Nous pourrions l'utiliser--" }
 }
@@ -120,71 +120,71 @@ SUB1
 {
     TYPE "convo"
     DESCR "Guard"
-    SUB "nb700" { TEXT "Paãens, n'est-ce pas? Et quel est ton boulot?" }
-    SUB "nb702" { TEXT "Ha! tu menaces la Lady maintenant? Regarde autour de toi petit marteau. Tous les gardes sont Ö sa botte. Tu devrais faire attention Ö ce que tu dis." }
-    SUB "nb704" { TEXT "Tu dis que tu n'as pas peur? Nos ÇpÇes valent plus que vos tapettes. Allez, une petite Çgratignure que vous pourrez rapporter Ö votre prÇcieux CrÇteur!" }
+    SUB "nb700" { TEXT "Paãens, n'est-ce pas ? Et quel est ton boulot ?" }
+    SUB "nb702" { TEXT "Ha ! Tu menaces la Lady maintenant ? Regarde autour de toi petit marteau. Tous les gardes sont Ö sa botte. Tu devrais faire attention Ö ce que tu dis." }
+    SUB "nb704" { TEXT "Tu dis que tu n'as pas peur ? Nos ÇpÇes valent plus que vos tapettes. Allez, une petite Çgratignure que vous pourrez rapporter Ö votre prÇcieux CrÇateur !" }
 }
 {
     TYPE "convo"
     DESCR "Hammerite"
     SUB "nb701" { TEXT "C'est le boulot de tous ceux qui suivent le CrÇateur, de dÇraciner les mauvaises herbes du maudit Malin, des brutes comme toi jusqu'aux riches nobles qui habitent au sommet de la colline." }
-    SUB "nb703" { TEXT "Toi et ton espäce àtes un flÇau qui a infectÇ cette ville depuis bien trop longtemps! Je ne crains pas les Çgratignures causÇes par une vermine telle que toi. Notre cause est juste et lÇgitimÇ par le CrÇateur lui-màme." }
-    SUB "nb705" { TEXT "(halätements) 'C'est une chance pour toi que j'ai d'autres tÉches urgentes qui m'attendent, sinon tu serais dÇjÖ aplati contre ces pierres! Mais fais attention, l'Administrateur entendra parler de áa." }
+    SUB "nb703" { TEXT "Toi et ton espäce àtes un flÇau qui a infectÇ cette ville depuis bien trop longtemps ! Je ne crains pas les Çgratignures causÇes par une vermine telle que toi. Notre cause est juste et lÇgitimÇ par le CrÇateur lui-màme." }
+    SUB "nb705" { TEXT "(halätements) 'C'est une chance pour toi que j'ai d'autres tÉches urgentes qui m'attendent, sinon tu serais dÇjÖ aplati contre ces pierres ! Mais fais attention, l'Administrateur entendra parler de áa." }
 }
 
 // Scene 8: Conversation, Benny and Sergeant
 {
     TYPE "convo"
     DESCR "Guard"
-    SUB "nb800" { TEXT "Salut Sarge. Tu as vu le malfaiteur qu'on a attrapÇ cette nuit? ProcÇdure suivie Ö la lettre! On a fouillÇ sa maison puis on l'a pendu!" }
-    SUB "nb802" { TEXT "C'est vrai Sarge. Il trainait lÖ-bas, Ö cìtÇ de la fontaine." }
-    SUB "nb804" { TEXT "C'Çtait un bon Ö rien! Ca se voyait juste en le regardant! Devait certainement àtre en train de planifier un meurtre. Ca valait le coup, pas vrai?" }
-    SUB "nb806" { TEXT "Oh! ... T'as raison! Il est toujours lÖ-haut... Ö flÉner! Je lui donnerai une cellule pour la nuit alors!" }
+    SUB "nb800" { TEXT "Salut Sergent. T'as vu le malfaiteur qu'on a attrapÇ cette nuit ? ProcÇdure suivie Ö la lettre ! On a fouillÇ sa maison puis on l'a pendu !" }
+    SUB "nb802" { TEXT "C'est vrai Sergent. Il trainait lÖ-bas, Ö cìtÇ de la fontaine." }
+    SUB "nb804" { TEXT "C'Çtait un bon Ö rien ! Ca se voyait juste en le regardant ! Devait certainement àtre en train de planifier un meurtre. Ca valait le coup, pas vrai ?" }
+    SUB "nb806" { TEXT "Oh !... T'as raison ! Il est toujours lÖ-haut... Ö flÉner ! Je lui donnerai une cellule pour la nuit alors !" }
 }
 {
     TYPE "convo"
     DESCR "Sergeant"
-    SUB "nb801" { TEXT "Oui, c'est pour cela que je suis ici. Il y a un probläme. Votre rapport. Il dit qu'il a ÇtÇ exÇcutÇ pour.... vagabondage?" }
-    SUB "nb803" { TEXT "FlÉnerie? Vous ne pouvez pas pendre un gars juste parce qu'il se promenait Benny. Nous avons des rägles." }
-    SUB "nb805" { TEXT "Ce sera bientìt nous qui seront pendus si vous continuez Ö bosser comme áa! Le vagabondage c'est une nuit en cellule, pas la potence! Je vais perdre ce rapport et vous feriez mieux de vous dÇbarrasser du corps. C'est pas possible de le laisser pendre lÖ." }
-    SUB "nb807" { TEXT "Non crÇtin! Il est mort! Vous devez-- Oh sortez! Je demanderai Ö Davidson de le faire. Maintenant hors de ma vue! Je ne veux plus non plus vous voir traåner ici." }
+    SUB "nb801" { TEXT "Oui, c'est pour áa que je suis ici. Il y a un probläme. Ton rapport. Il dit qu'il a ÇtÇ exÇcutÇ pour... vagabondage ?" }
+    SUB "nb803" { TEXT "FlÉnerie ? Tu ne peux pas pendre un gars juste parce qu'il se promenait Benny. Nous avons des rägles." }
+    SUB "nb805" { TEXT "Ce sera bientìt nous qui seront pendus si tu continues Ö bosser comme áa ! Le vagabondage c'est une nuit en cellule, pas la potence ! Je vais perdre ce rapport et tu ferais mieux de te dÇbarrasser du corps. C'est pas possible de le laisser pendre lÖ." }
+    SUB "nb807" { TEXT "Non crÇtin ! Il est mort ! Tu dois... Oh sors ! Je demanderai Ö Davidson de le faire. Maintenant hors de ma vue ! Je ne veux plus te voir traåner ici non plus." }
 }
 
 // Scene 9: Conversation, Thieves
 {
     TYPE "convo"
     DESCR "First thief"
-    SUB "nb900" { TEXT "Sñr, Morten prend son temps lÖ-bas. Tu penses que quelque chose est arrivÇ?" }
-    SUB "nb902" { TEXT "Moi? je le ferais bien, mais tu sais que j'ai un pied boiteux! Tu arriveras bien mieux Ö grimper. Vas-y!" }
-    SUB "nb904" { TEXT "J'peux pas! J'ai pas peur. Je-- attends, Tu entends áa? Je pense qu'il reviens!" }
+    SUB "nb900" { TEXT "Sñr, Morten prend son temps lÖ-bas. Tu penses que quelque chose est arrivÇ ?" }
+    SUB "nb902" { TEXT "Moi ? je le ferais bien, mais tu sais que j'ai un pied boiteux ! Tu arriveras bien mieux Ö grimper. Vas-y !" }
+    SUB "nb904" { TEXT "J'peux pas ! J'ai pas peur. Je-- attends, T'entends áa ? Je pense qu'il revient !" }
 }
 {
     TYPE "convo"
     DESCR "Second thief"
-    SUB "nb901" { TEXT "Ca se pourrait. Peut-àtre les piäges en ont fait de lui? ... Pourquoi t'y va pas pour voir si t'es si inquiet?" }
-    SUB "nb903" { TEXT "\"Tu sais que j'ai un pied boiteux!\" Ah, t'as juste peur! T'es juste une fillette." }
+    SUB "nb901" { TEXT "Ca se pourrait. Peut-àtre les piäges en ont fait de lui ?... Pourquoi t'y va pas pour voir si t'es si inquiet ?" }
+    SUB "nb903" { TEXT "\"Tu sais que j'ai un pied boiteux !\" Ah, t'as juste peur ! T'es juste une fillette." }
 }
 
 // Scene 10: Conversation, Priest and Hammerite
 {
     TYPE "convo"
     DESCR "Priest"
-    SUB "nb1000" { TEXT "Que le CrÇateur te bÇnisse mon fräre. Comment s'est passÇe ta garde Ö l'entrÇe?" }
-    SUB "nb1002" { TEXT "L'escarmouche de ce matin a donc portÇ ses fruits ce matin avec les fripouilles. Mais je crains que leurs ruines nuisent Ö l'image du CrÇateur?" }
+    SUB "nb1000" { TEXT "Que le CrÇateur te bÇnisse mon fräre. Comment s'est passÇe ta garde Ö l'entrÇe ?" }
+    SUB "nb1002" { TEXT "L'escarmouche de ce matin a donc portÇ ses fruits ce matin avec les fripouilles. Mais je crains que leurs ruines nuisent Ö l'image du CrÇateur ?" }
 }
 {
     TYPE "convo"
     DESCR "Hammerite"
     SUB "nb1001" { TEXT "C'est assez calme. La plupart des charretiers paient le pÇage sans discuter."}
-    SUB "nb1003" { TEXT "Malheureusement. Je demanderai de l'aide Ö Fräre Lionel. Soyez assurez que ce sera enlevÇ dans la matinÇe." }
+    SUB "nb1003" { TEXT "Malheureusement. Je demanderai de l'aide Ö Fräre Lionel. Soyez assurÇ que ce sera enlevÇ dans la matinÇe." }
 }
 
 // Scene 11: Conversation, Benny and Guard
 {
     TYPE "convo"
     DESCR "First guard"
-    SUB "nb1100" { TEXT "Alors, pourquoi la vieille Lady nous laisse pas entrer dans la tour? Tu pourrais aller tout en haut et tirer des fläches Ö des kilomätres!" }
-    SUB "nb1102" { TEXT "Ouais, ce serait-- HÇ!! j'suis pas si gros!" }
+    SUB "nb1100" { TEXT "Alors, pourquoi la vieille Lady nous laisse pas entrer dans la tour ? Tu pourrais aller tout en haut et tirer des fläches Ö des kilomätres !" }
+    SUB "nb1102" { TEXT "Ouais, ce serait-- HÇ !! j'suis pas si gros !" }
 }
 {
     TYPE "convo"
@@ -196,43 +196,43 @@ SUB1
 {
     TYPE "player"
     DESCR "Garrett to himself"
-    SUB    "garm0901" { TEXT "Qu'est-ce qu'on a lÖ?" }
+    SUB    "garm0901" { TEXT "Qu'a-t-on ici ?" }
 }
 
 // OM guard line
 {
     TYPE "convo"
     DESCR "Sergeant"
-    SUB "sg1c3701" { TEXT "Je dÇteste la garde." }
+    SUB "sg1c3701" { TEXT "Je dÇteste les gardes de nuit." }
 }
 
 // OM conv, servants
 {
     TYPE "convo"
     DESCR "First servant"
-    SUB    "sv1c0701" { TEXT "Au marchÇ ce matin, c'Çtait l'horreur!" }
-    SUB    "sv1c0703" { TEXT "Il y avait une foule de Marteleurs, encerclant un gars comme des loups." }
-    SUB    "sv1c0705" { TEXT "Non, j'ai couru! Je ne voulais pas qu'ils me voient. Il m'a fallu une ÇternitÇ pour faire le tour." }
+    SUB    "sv1c0701" { TEXT "C'Çtait affreux en revenant du marchÇ ce matin !" }
+    SUB    "sv1c0703" { TEXT "Il y avait ce groupe de Marteleurs qui tournaient comme des loups autour d'un type." }
+    SUB    "sv1c0705" { TEXT "Non, je me suis enfui ! Je ne voulais pas qu'ils me voient. J'ai mis des heures Ö les Çviter." }
 }
 {
     TYPE "convo"
     DESCR "Second servant"
-    SUB    "sv2c0702" { TEXT "Je t'ai vu rentrer tard." }
-    SUB    "sv2c0704" { TEXT "Donc tu es restÇ et tu as regardÇ?" }
+    SUB    "sv2c0702" { TEXT "T'es rentrÇ plutìt tard." }
+    SUB    "sv2c0704" { TEXT "Et t'es restÇ pour le spectacle ?" }
 }
 
 // OM conv, guards
 {
     TYPE "convo"
     DESCR "Sergeant"
-    SUB    "Sg2c2001" { TEXT "Alors, comme je te le disais hier, tu veux blesser le gars, pas l'assommer ni lui tapoter la tàte." }
-    SUB    "Sg2c2003" { TEXT "Frappe-le sur l'Çpaule et áa va le ralentir! Vise l'estomac ou plus bas. L'armure est gÇnÇralement plus faible Ö cet endroit." }
+    SUB    "Sg2c2001" { TEXT "Alors, comme j'te disais hier, on veux faire mal au gars, pas l'assommer ni lui fracasser le crÉne." }
+    SUB    "Sg2c2003" { TEXT "Vise-le dans l'Çpaule, áa va juste le calmer ! Et puis l'estomac ou plus bas. LÖ oó áa fait mal." }
 }
 {
     TYPE "convo"
     DESCR "Guard"
-    SUB    "Sg3c2002" { TEXT "Qu'est-ce que je fais mal?" }
-    SUB    "Sg3c2004" { TEXT "Le marteleur a raison. Il suffit de les aplatir avec ces trucs." }
+    SUB    "Sg3c2002" { TEXT "Bah quoi c'est pas ce que j'fais ?" }
+    SUB    "Sg3c2004" { TEXT "Les marteleurs ont la belle vie. T'as qu'Ö lui aplatir ces machins." }
 }
 
 // Significant sound effects

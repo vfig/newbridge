@@ -1,0 +1,34 @@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                     Auteur, titre et fiche de la mission
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Auteur de la mission : vfig (Andy Durdin)
+Titre  de la mission : Making a Profit
+Fiche  de la mission : http://ladyjo1.free.fr/thief/spip.php?article2500
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                     Installer le patch correctif en français
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Installer la Fan Mission avec FmSel de préférence
+- Ne pas lancer la mission tout de suite
+- Copier tous les fichiers contenus dans ce fichier zip dans le répertoire suivant :
+
+  - si vous utilisez FmSel, le répertoire cible est le répertoire 
+    où est installé LA MISSION, exemple : C:\jeux\dark1\Fms\TDP20AC_MakingAProfit
+
+  - si vous utilisez darkloader, le répertoire cible est le répertoire 
+    où est installé LE JEU, exemple : C:\jeux\dark1  
+
+- Il ne vous reste plus qu'à lancer et à profiter de ce merveilleux jeu qu'est Thief.
+  Que le Créateur vous protège :)
+
+ (pour signaler tout problème ou erreurs éventuelles, contacter "Apiai" sur 
+ le forum de feu LadyJo : http://ariane4ever.free.fr/ariane4ever/index.php ou sur
+ le forum TTLG : http://www.ttlg.com/forums/forum.php)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Remarques du traducteur
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Ceci est un patch qui corrige quelques textes et sous-titres ayant des erreurs d'orthographe, de ponctuation.
